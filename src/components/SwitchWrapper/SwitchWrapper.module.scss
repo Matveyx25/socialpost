@@ -1,0 +1,95 @@
+@import '/src/styles/variables.scss';
+
+.wrapper{
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+	background-repeat: no-repeat;
+	background-size: cover;
+	transition: .4s background-color;
+	position: fixed;
+	z-index: 0;
+	h1{
+		text-align: center;
+		font-size: 5.55556rem;
+		font-family: 'SF Bold';
+		font-style: normal;
+		font-weight: 700;
+		line-height: normal;
+		margin-top: 2.22rem;
+		max-width: 61rem;
+	}
+	&.seller{
+		background-color: $seller-bg-color;
+		background-image: url('~/public/images/sellerBG.svg');
+	}
+	&.publisher{
+		background-color: $publisher-bg-color;
+		background-image: url('~/public/images/publisherBG.svg');
+	}
+	.switchWrapper{
+		border-radius: 2.22222rem;
+		background: $white-color;
+		box-shadow: 0px 4px 20px 0px rgba(212, 217, 222, 0.25);
+		display: inline-flex;
+		padding: 1.77778rem 2.22222rem;
+		flex-direction: column;
+		align-items: center;
+		gap: 1.77778rem;
+		margin-top: 9rem;
+		height: fit-content;
+		p{
+			color: $mute-color;
+			font-size: 1.11111rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: normal;
+		}
+		.switchFlex{
+			display: flex;
+			align-items: center;
+			gap: 2.22222rem;
+			h2{
+				margin: 0;
+				padding: 0;
+				color: $mute-color;
+				cursor: pointer;
+				&.active{
+					color: $text-color;
+				}
+			}
+			.switch{
+				display: flex;
+				width: 4.88889rem;
+				padding: 0.11111rem;
+				align-items: flex-start;
+				gap: 0.55556rem;
+				border-radius: 3.33333rem;
+				transition: .4s;
+				span{
+					width: 2rem;
+					height: 2rem;
+					flex-shrink: 0;
+					border-radius: 2rem;
+					background: $white-color;
+					transform: translateX(0);
+					transition: .4s;
+				}
+				&.seller{
+					span{
+						transform: translateX(2.88889rem);
+					}
+				}
+				&.publisher{
+					background: $main-blue-color;
+				}
+				&.seller{
+					background: $main-red-color;
+				}
+			}
+		}
+	}
+}

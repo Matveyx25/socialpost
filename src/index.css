@@ -1,0 +1,58 @@
+@font-face {
+	font-family: 'SF Black';
+	src: url('~/public/fonts/SF-Compact-Display-Black.otf');
+}
+@font-face {
+	font-family: 'SF Bold';
+	src: url('~/public/fonts/SF-Compact-Display-Bold.otf');
+}
+@font-face {
+	font-family: 'SF Heavy';
+	src: url('~/public/fonts/SF-Compact-Display-Heavy.otf');
+}
+@font-face {
+	font-family: 'SF Light';
+	src: url('~/public/fonts/SF-Compact-Display-Light.otf');
+}
+@font-face {
+	font-family: 'SF Medium';
+	src: url('~/public/fonts/SF-Compact-Display-Medium.otf');
+}
+@font-face {
+	font-family: 'SF Regular';
+	src: url('~/public/fonts/SF-Compact-Display-Regular.otf');
+}
+@font-face {
+	font-family: 'SF Semibold';
+	src: url('~/public/fonts/SF-Compact-Display-Semibold.otf');
+}
+@font-face {
+	font-family: 'SF Thin';
+	src: url('~/public/fonts/SF-Compact-Display-Thin.otf');
+}
+@font-face {
+	font-family: 'SF Ultralight';
+	src: url('~/public/fonts/SF-Compact-Display-Ultralight.otf');
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, 'SF Regular',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.space{
+	height: 100vh;
+	pointer-events: none;
+}
+
+.container{
+	padding: 0 5.55556rem;
+}

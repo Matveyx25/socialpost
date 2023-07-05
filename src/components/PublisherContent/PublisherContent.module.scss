@@ -1,0 +1,10 @@
+@import '~/src/styles/variables.scss';
+
+.wrapper{
+	width: 100vw;
+	height: 100vh;
+	border-radius: 4.44444rem 4.44444rem 0rem 0rem;
+	background: $white-color;
+	z-index: 10;
+	position: relative;
+}

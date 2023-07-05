@@ -1,0 +1,48 @@
+@import '~/src/styles/variables.scss';
+
+.header{
+	width: 100vw;
+	padding: 0.88889rem 0;
+	position: fixed;
+	background: $white-color;
+	z-index: 20;
+	top: 0;
+	.flex{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		a{
+			text-decoration: none;
+			display: block;
+		}
+		.logo img{
+			width: 12.5rem;
+		}
+		ul{
+			display: flex;
+			align-items: flex-end;
+			gap: 3.77778rem;
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			a{
+				color: $text-color;
+				font-size: 1.11111rem;
+				&.active{
+					color: $main-blue-color;
+				}
+			}
+		}
+		.btn{
+			display: flex;
+			padding: 0.88889rem 3.33333rem;
+			align-items: flex-start;
+			gap: 0.55556rem;
+			border-radius: 2.22222rem;
+			background: $text-color;
+			color: $white-color;
+			font-size: 1.11111rem;
+			font-family: 'SF Medium';
+		}
+	}
+}
