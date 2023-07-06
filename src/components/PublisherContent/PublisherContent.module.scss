@@ -2,9 +2,34 @@
 
 .wrapper{
 	width: 100vw;
-	height: 100vh;
 	border-radius: 4.44444rem 4.44444rem 0rem 0rem;
 	background: $white-color;
 	z-index: 10;
 	position: relative;
+	.flex{
+		display: flex;
+		flex-direction: column;
+		padding-top: 11.3rem;
+		padding-bottom: 4.1rem;
+		.info{
+			font-size: 2rem;
+			font-weight: 400;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			gap: 1.1rem;
+			align-self: flex-start;
+			img{
+				width: 15rem;
+				height: 15rem;
+			}
+			&:nth-child(2){
+				align-self: flex-end;
+				flex-direction: row-reverse;
+				text-align: right;
+				margin-top: 18.9rem;
+				margin-bottom: 16.2rem;
+			}
+		}
+	}
 }
