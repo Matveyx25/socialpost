@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Stars = () => {
+export const Stars = () => {	
 	return (
 		<g>
 			<g className="star1">

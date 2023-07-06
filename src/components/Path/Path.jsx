@@ -1,29 +1,29 @@
 import { gsap } from "gsap";
 import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "./Path.module.scss";
 import { Stars } from "./Stars";
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
-export const Path = ({start}) => {
+export const Path = () => {
 	let star = useRef(null)
 	let path = useRef(null)
+	const [progress, setProgress] = useState(0)
 
 	useEffect(() => {
-		if(path){
-			const length = path.getTotalLength();
+		const length = path.getTotalLength();
 	
-			path.style.strokeDasharray = length + 6;
-			path.style.strokeDashoffset = length + 6;
-			
-			window.addEventListener("scroll", function () {
-				const scrollpercent = (document.body.scrollTop + document.documentElement.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight)
-				const draw = length * scrollpercent;
-				path.style.strokeDashoffset = length - draw > 0 ? length - draw : 0;
-			});
-
+		path.style.strokeDasharray = length + 6;
+		path.style.strokeDashoffset = length + 6;
+	
+		var draw = length * progress
+		path.style.strokeDashoffset = length - draw > 0 ? length - draw : 0;	
+	}, [progress])
+	
+	useEffect(() => {
+		if(path){
 			gsap.to(star, {
 				scrollTrigger: {
 					trigger: ".motion-section",
@@ -39,11 +39,10 @@ export const Path = ({start}) => {
 					alignOrigin: [0.5, 0.5],
 					// autoRotate: 90,
 				},
+				onUpdate: function() {
+					setProgress(this.progress())
+				}
 			})
-		}
-
-		return () => {
-			window.removeEventListener('scroll')
 		}
 	}, [path])
 
@@ -69,7 +68,7 @@ export const Path = ({start}) => {
           stroke-dasharray="6 6"
 					stroke-width="6px" 
         />
-				<g ref={ref => star = ref}>
+				<g ref={ref => star = ref} className="motion-star">
 					<path
 						d="M526.889 291.263L507.865 270.762L511.033 268.116L511.148 268.404L531.631 250.53C531.881 250.3 531.669 249.897 531.343 249.955L518.078 252.716C518.078 252.716 517.924 252.621 517.848 252.582L494.274 241.325C493.064 240.75 491.874 239.618 491.126 238.333L487.958 232.887L488.188 233.194L493.928 227.133L482.257 200.822C482.161 200.611 481.892 200.553 481.719 200.707L470.623 210.391C470.412 210.583 470.239 210.833 470.143 211.159L465.229 225.868L449.545 216.49C449.334 216.356 449.065 216.394 448.892 216.547L438.603 225.523L437.758 226.271C436.702 227.21 436.99 229.531 438.853 231.621L458.721 254.001C459.739 255.152 460.391 256.533 460.43 257.683L461.178 279.968C461.274 282.864 464.845 286.277 467.225 285.74L485.501 281.579C486.442 281.368 487.709 281.79 488.88 282.729L511.551 300.871C513.183 302.175 514.68 302.329 515.544 301.696L526.832 291.877C527.024 291.724 527.024 291.436 526.87 291.263H526.889Z"
 						fill="#7C99FF"

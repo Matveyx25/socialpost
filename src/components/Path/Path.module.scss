@@ -8,9 +8,10 @@
 	transform: translateX(-50%);
 	svg{
 		height: 100%;
+		overflow: visible;
 		path{
-			transition: .1s stroke-dasharray;
-			transition: .1s stroke-dashoffset;
+			// transition: .1s stroke-dasharray;
+			// transition: .1s stroke-dashoffset;
 		}
 	}
 }

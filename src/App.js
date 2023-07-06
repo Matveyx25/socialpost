@@ -4,6 +4,7 @@ import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { SellerContent } from './components/SellerContent/SellerContent';
 import { Header } from "./components/Header.jsx/Header";
 import { Route, Routes } from "react-router";
+import "animate.css";
 
 function App() {
 	const [role, setRole] = useState('publisher')
