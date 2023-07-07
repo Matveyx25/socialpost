@@ -7,9 +7,9 @@ export const Header = ({role, setRole}) => {
 		<div className={s.header}>
 			<div className="container">
 				<div className={s.flex}>
-					<a href="#" className={s.logo}>
+					<NavLink to="/" className={s.logo}>
 						<img src="/images/logo.png" alt="" />
-					</a>
+					</NavLink>
 					<ul>
 						<li>
 							<NavLink to="/"  onClick={() => setRole('seller')}

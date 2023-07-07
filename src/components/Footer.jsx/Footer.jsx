@@ -14,9 +14,9 @@ export const Footer = () => (
 		<div className={s.footer}>
 			<div className="container">
 				<div className={s.flex}>
-					<a href="#" className={s.logo}>
+					<NavLink to="/"  className={s.logo}>
 						<img src="/images/logo-footer.png" alt="" />
-					</a>
+					</NavLink>
 					<ul>
 						{links.map((link, index) => (
 							<li key={index}>
@@ -25,7 +25,7 @@ export const Footer = () => (
 							</li>
 						))}
 					</ul>
-					<a hreg="https://tg.me" target='_blank' className={s.btn}>
+					<a href="https://tg.me" target='_blank' className={s.btn}>
 						<img src="/images/icons/tg.svg" alt="" />
 					</a>
 				</div>
