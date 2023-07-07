@@ -19,6 +19,8 @@
 			align-items: center;
 			gap: 1.1rem;
 			align-self: flex-start;
+			opacity: 0;
+			transform: translateX(-100%);
 			img{
 				width: 15rem;
 				height: 15rem;
@@ -29,6 +31,7 @@
 				text-align: right;
 				margin-top: 18.9rem;
 				margin-bottom: 16.2rem;
+				transform: translateX(100%);
 			}
 		}
 	}
