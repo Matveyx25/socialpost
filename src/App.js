@@ -5,6 +5,7 @@ import { SellerContent } from './components/SellerContent/SellerContent';
 import { Header } from "./components/Header.jsx/Header";
 import { Route, Routes } from "react-router";
 import "animate.css";
+import { Footer } from "./components/Footer.jsx/Footer";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -24,6 +25,7 @@ function App() {
 				</>}/>
 				<Route path="/contact" element={<>Contact</>}/>
 			</Routes>
+			<Footer/>
     </>
   );
 }

@@ -6,6 +6,7 @@
 	background: $white-color;
 	z-index: 10;
 	position: relative;
+	overflow-x: hidden;
 	.flex{
 		display: flex;
 		flex-direction: column;
