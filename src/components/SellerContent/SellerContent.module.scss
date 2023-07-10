@@ -1,0 +1,93 @@
+@import '~/src/styles/variables.scss';
+
+.wrapper{
+	width: 100vw;
+	border-radius: 4.44444rem 4.44444rem 0rem 0rem;
+	background: $white-color;
+	z-index: 10;
+	position: relative;
+	.circle{
+		position: sticky;
+		height: calc(100vh - 10rem);
+		padding-top: 8.28rem;
+		top: 0;
+		margin-bottom: calc(-100vh + 10rem);
+		svg{
+			height: 100%;
+			position: relative;
+			aspect-ratio: 1;
+			width: auto;
+			max-width: 48.33333rem;
+			circle{
+				transition: .6s;
+				&.active{
+					fill: #fff;
+					stroke: #EE1F1F;
+					stroke-width: 4px;
+				}
+				&.empty{
+					fill: #fff;
+					stroke: #A7A8AB;
+					stroke-width: 2px;
+				}
+				&.fill{
+					fill: #EDF1FF;
+					stroke: #A1B6FF;
+					stroke-width: 4px;
+				}
+			}
+		}
+	}
+	.scroll {
+		height: 700vh;
+		overflow-y: scroll;
+		display: flex;
+		justify-content: flex-end;
+		flex-wrap: wrap;
+		width: 40%;
+		margin-left: auto;
+		margin-right: 0;
+		scroll-snap-type: y mandatory;
+		section{
+			scroll-snap-align: start;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			text-align: center;
+			width: 100%;
+			margin-left: auto;
+			margin-right: 0;
+			height: 100vh;
+			h2{
+				color: #E9EAEA;
+				font-family: 'SF Black';
+				font-size: 7.11111rem;
+				font-style: normal;
+				line-height: normal;
+				margin: 0;
+				padding: 0;
+			}
+			h5{
+				color: $text-color;
+				text-align: center;
+				font-family: 'SF Semibold';
+				font-size: 3.55556rem;
+				font-style: normal;
+				font-weight: 600;
+				line-height: normal;
+				margin: 0;
+				padding: 0;
+				margin-top: 1.56rem;
+				&.small{
+					font-size: 2.2rem;
+				}
+			}
+			img{
+				width: 15.77778rem;
+				height: 15.77778rem;
+				margin-top: 3.11rem;
+			}
+		}
+	}
+}

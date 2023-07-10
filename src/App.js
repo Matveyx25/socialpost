@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PublisherContent } from "./components/PublisherContent/PublisherContent";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { SellerContent } from './components/SellerContent/SellerContent';
@@ -8,13 +8,18 @@ import "animate.css";
 import { Footer } from "./components/Footer.jsx/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
 
+
 function App() {
 	const [role, setRole] = useState('publisher')
 
+	useEffect(() => {
+		
+	}, [])
+
   return (
-    <>
+    <div id="smooth-wrapper">
 			<Header {...{role, setRole}}/>
-			<div style={{minHeight: '100vh'}}>
+			<div style={{minHeight: '100vh'}} id="smooth-content">
 				<Routes>
 					<Route path="/" element={
 					<>
@@ -30,7 +35,7 @@ function App() {
 				</Routes>
 			</div>
 			<Footer/>
-    </>
+    </div>
   );
 }
 
