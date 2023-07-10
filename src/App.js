@@ -7,7 +7,9 @@ import { Route, Routes } from "react-router";
 import "animate.css";
 import { Footer } from "./components/Footer.jsx/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
+import Lenis from "@studio-freight/lenis";
 
+const lenis = new Lenis()
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -15,6 +17,17 @@ function App() {
 	useEffect(() => {
 		
 	}, [])
+
+	function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+  }
+
+  requestAnimationFrame(raf)
+
+  const clickHandlerToScroll = () => {
+    lenis.scrollTo('bottom')
+  }
 
   return (
     <div id="smooth-wrapper">

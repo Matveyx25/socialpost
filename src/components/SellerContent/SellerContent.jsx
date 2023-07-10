@@ -77,6 +77,7 @@ export const SellerContent = () => {
 					</section>
 				</div>
 			</div>
+			
 		</div>
 	)
 }
