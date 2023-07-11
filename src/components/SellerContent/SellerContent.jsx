@@ -3,6 +3,8 @@ import s from './SellerContent.module.scss'
 import { Circle } from './Circle';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Path } from './Path';
+import { Counter } from './Counter';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -77,7 +79,28 @@ export const SellerContent = () => {
 					</section>
 				</div>
 			</div>
-			
+			<div className={s.pathWrapper}>
+				<h2 className='motion-section__seller'>3 причины быть с нами:</h2>
+				<Path/>
+				<div className={s.messages}>
+					<div className={s.message} id="message_1">
+						<p>Крупнейшие каналы <br/> работают с нами</p>
+						<img src="/images/seller/message.svg" alt="" className={s.chevron} />
+						<img src="/images/seller/star.svg" alt="" className={s.star} />
+					</div>
+					<div className={s.message} id="message_2">
+						<p>Низкая комиссия <br/> за размещение</p>
+						<img src="/images/seller/message.svg" alt="" className={s.chevron} />
+						<img src="/images/seller/star.svg" alt="" className={s.star} />
+					</div>
+					<div className={s.message} id="message_3">
+						<p>Все необходимые <br/> юридические документы</p>
+						<img src="/images/seller/message.svg" alt="" className={s.chevron} />
+						<img src="/images/seller/star.svg" alt="" className={s.star} />
+					</div>
+				</div>
+				<Counter/>
+			</div>
 		</div>
 	)
 }

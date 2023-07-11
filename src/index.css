@@ -58,3 +58,7 @@ code {
 	box-sizing: border-box;
 	width: 100%;
 }
+
+.shu_1, .shu_2, .shu_3{
+	opacity: 0;
+}

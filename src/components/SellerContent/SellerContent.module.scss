@@ -91,3 +91,150 @@
 		}
 	}
 }
+
+.pathWrapper{
+	width: 100vw;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	background-color: $seller-bg-color;
+	background-image: url('~/public/images/sellerBG.svg');
+	padding-top: 5.56rem;
+	margin-top: 5.56rem;
+	position: relative;
+	h2{
+		text-align: center;
+		font-family: 'SF Semibold';
+		font-size: 2.66667rem;
+		color: $text-color;
+	}
+	.messages{
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		gap: 2.78rem;
+		margin-top: 5.56rem;
+		position: relative;
+		z-index: 100;
+		.message{
+			width: fit-content;
+			border-radius: 3.33333rem;
+			background: #F8A5A5;
+			padding: 1.77778rem 3.33333rem;
+			color: $white-color;
+			position: relative;
+			font-size: 2rem;
+			opacity: 0;
+			p{
+				margin: 0;
+				padding: 0;
+			}
+			.chevron{
+				width: 1.77778rem;
+				height: 1.55556rem;
+				position: absolute;
+				left: 2.77778rem;
+				bottom: -1.55556rem;
+			}
+			.star{
+				width: 4.44444rem;
+				height: 4.71639rem;
+				position: absolute;
+				left: -1.55556rem;
+				top: -1.55556rem;
+			}
+			&:nth-child(1){
+				margin-left: 13.72rem;
+			}
+			&:nth-child(2){
+				align-self: flex-end;
+				margin-right: 13.72rem;
+				img{
+					transform: scaleX(-1);
+				}
+				.chevron{
+					left: auto;
+					right: 2.77778rem;
+				}
+				.star{
+					left: auto;
+					right: -1.55556rem;
+				}
+			}
+			&:nth-child(3){
+				margin-left: 30rem;
+			}
+		}
+	}
+}
+
+.pathContainer{
+	position: absolute;
+	top: 0;
+	left: 13.3rem;
+	width: fit-content;
+	z-index: 10;
+	svg{
+		height: 100%;
+		overflow: visible;
+	}
+}
+
+.counterWrapper{
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 4.44rem;
+	h2{
+		text-align: center;
+		font-family: "SF Semibold";
+		font-size: 2.66667rem;
+		color: $text-color;
+		margin: 0;
+		padding: 0;
+	}
+	.counters{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2.22222rem;
+		div{
+			display: flex;
+			width: 28.88889rem;
+			flex-direction: column;
+			align-items: center;
+			gap: 1.11111rem;
+			h5{
+				color: #F57878;
+				text-align: center;
+				font-family: "SF Black";
+				font-size: 5.33333rem;
+				margin: 0;
+				padding: 0;
+			}
+			p{
+				margin: 0;
+				padding: 0;
+				color:  $text-color;
+				text-align: center;
+				font-family: "SF Light";
+				font-size: 1.77778rem;
+			}
+		}
+	}
+	.btnSubmit{
+		display: flex;
+		padding: 1.33333rem 3.33333rem;
+		align-items: flex-start;
+		gap: 0.55556rem;
+		border-radius: 2.22222rem;
+		background: #698AFF;
+		color: #FFF;
+		font-family: "SF Medium";
+		font-size: 1.33333rem;
+		width: fit-content;
+		text-decoration: none;
+	}
+}
