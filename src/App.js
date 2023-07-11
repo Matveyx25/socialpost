@@ -8,6 +8,7 @@ import "animate.css";
 import { Footer } from "./components/Footer.jsx/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
 import Lenis from "@studio-freight/lenis";
+import { Contacts } from "./components/Contacts/Contacts";
 
 const lenis = new Lenis()
 
@@ -43,7 +44,7 @@ function App() {
 							'seller': <SellerContent/>
 						}[role]}
 					</>}/>
-					<Route path="/contact" element={<>Contact</>}/>
+					<Route path="/contact" element={<Contacts/>}/>
 					<Route path="*" element={<NotFound/>}/>
 				</Routes>
 			</div>
