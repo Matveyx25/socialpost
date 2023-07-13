@@ -45,17 +45,46 @@
 			.smInput{
 				width: 23.05556rem;
 			}
+			.counter{
+				display: flex;
+				gap: 0.44444rem;
+				font-size: 0.66667rem;
+				margin-top: 0.11rem;
+			}
 			.lgInput, .smInput{
-				display: flex;
-				align-items: center;
-				display: flex;
-				height: 3.22222rem;
-				gap: 0.22222rem;
-				border-radius: 0.44444rem;
-				border: 1px solid  #919396;
-				background: #FFF;
-				overflow: hidden;
-				box-sizing: border-box;
+				.inputWrapper{
+					display: flex;
+					align-items: center;
+					display: flex;
+					height: 3.22222rem;
+					gap: 0.67rem;
+					border-radius: 0.44444rem;
+					border: 1px solid  #919396;
+					background: #FFF;
+					overflow: hidden;
+					box-sizing: border-box;
+					&.error{
+						border-color: #EE1F1F;
+						.img{
+							background: #FEE9E9;
+						}
+					}
+				}
+				.error{
+					display: flex;
+					align-items: center;
+					gap: 0.44444rem;
+					margin-top: 0.33rem;
+					img{
+						width: 1.33333rem;
+						height: 1.33333rem;
+					}
+					color: #EE1F1F;
+					font-size: 0.66667rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 0.88889rem; 
+				}
 				input{
 					width: 100%;
 					height: 100%;
@@ -126,6 +155,21 @@
 			}
 			.textarea{
 				width: 100%;
+				.error{
+					display: flex;
+					align-items: center;
+					gap: 0.44444rem;
+					margin-top: 0.33rem;
+					img{
+						width: 1.33333rem;
+						height: 1.33333rem;
+					}
+					color: #EE1F1F;
+					font-size: 0.66667rem;
+					font-style: normal;
+					font-weight: 400;
+					line-height: 0.88889rem; 
+				}
 				textarea{
 					border-radius: 0.44444rem;
 					border: 1px solid #919396;
