@@ -45,7 +45,7 @@ export const Contacts = () => {
 										<div className={s.lgInput}>
 											<div className={`${s.inputWrapper} ${(errors.fullName && touched.fullName) && s.error}`}>
 												<label className={s.img} for="fullName">
-													<img src="/images/icons/ic/user.svg" alt="" />
+													<img src={(errors.fullName && touched.fullName) ? "/images/icons/ic/user-error.svg" : "/images/icons/ic/user.svg"} alt="" />
 												</label>
 												<Field id="fullName" name="fullName" placeholder="Введите ФИО" />
 											</div>
@@ -59,7 +59,7 @@ export const Contacts = () => {
 										<div className={s.smInput}>
 											<div className={`${s.inputWrapper} ${(errors.phone && touched.phone) && s.error}`}>
 												<label className={s.img} for="phone">
-													<img src="/images/icons/ic/phone.svg" alt="" />
+													<img src={(errors.phone && touched.phone) ? "/images/icons/ic/phone-error.svg" : "/images/icons/ic/phone.svg"} alt="" />
 												</label>
 												<Field id="phone" name="phone" placeholder="Введите номер телефона" />
 											</div>
@@ -73,7 +73,7 @@ export const Contacts = () => {
 										<div className={s.smInput}>
 											<div className={`${s.inputWrapper} ${(errors.email && touched.email) && s.error}`}>
 												<label className={s.img} for="email">
-													<img src="/images/icons/ic/email.svg" alt="" />
+													<img src={(errors.email && touched.email) ? "/images/icons/ic/email-error.svg" : "/images/icons/ic/email.svg"} alt="" />
 												</label>
 												<Field id="email" name="email" placeholder='Введите email'/>
 											</div>
@@ -103,7 +103,7 @@ export const Contacts = () => {
 										</button>
 										<a href="https://t.me" className={s.link}>
 											Написать в Телеграм
-											<img src="/images/icons/tg.svg" alt="" />
+											<img src="/images/icons/ic/tg.svg" alt="" />
 										</a>
 									</div>
 								</Form>)}

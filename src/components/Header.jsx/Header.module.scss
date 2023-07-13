@@ -43,6 +43,15 @@
 			color: $white-color;
 			font-size: 1.11111rem;
 			font-family: 'SF Medium';
+			transition: .4s background-color;
+			cursor: pointer;
+			&:hover{	
+				background-color: #436CFF;
+			}
+			&:disabled{
+				background-color: #E9EAEA;
+				color: #A7A8AB;
+			}
 		}
 	}
 }

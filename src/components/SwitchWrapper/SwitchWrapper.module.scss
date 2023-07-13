@@ -79,11 +79,17 @@
 					transition: .4s;
 				}
 				&.seller{
+					&:hover{
+						background-color: #F78F8F;
+					}
 					span{
 						transform: translateX(2.88889rem);
 					}
 				}
 				&.publisher{
+					&:hover{
+						background-color: #A1B6FF;
+					}
 					background: $main-blue-color;
 				}
 				&.seller{

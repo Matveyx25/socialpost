@@ -236,5 +236,14 @@
 		font-size: 1.33333rem;
 		width: fit-content;
 		text-decoration: none;
+		transition: .4s background-color;
+		cursor: pointer;
+		&:hover{	
+			background-color: #436CFF;
+		}
+		&:disabled{
+			background-color: #E9EAEA;
+			color: #A7A8AB;
+		}
 	}
 }
