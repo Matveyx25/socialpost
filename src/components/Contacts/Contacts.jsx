@@ -98,7 +98,7 @@ export const Contacts = () => {
 										</div>
 									</div>
 									<div className={s.btns}>
-										<button type='submit'>
+										<button type='submit' disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}>
 											Отправить
 										</button>
 										<a href="https://t.me" className={s.link}>

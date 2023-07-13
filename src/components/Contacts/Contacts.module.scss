@@ -63,11 +63,18 @@
 					background: #FFF;
 					overflow: hidden;
 					box-sizing: border-box;
-					&.error{
+					transition: .2s border-color;
+					&.error:not(:focus-within){
 						border-color: #EE1F1F;
 						.img{
 							background: #FEE9E9;
 						}
+					}
+					&:hover{
+						border-color: #4F5157;
+					}
+					&:focus-within{
+						border-color: #436CFF;
 					}
 				}
 				.error{
@@ -95,7 +102,7 @@
 					line-height: 1rem;
 					outline: none;
 					border: none;
-					background: none;
+					background: none; 
 				}
 				.img{
 					display: flex;
@@ -132,9 +139,14 @@
 				font-style: normal;
 				font-weight: 500;
 				line-height: normal;
+				transition: .4s background-color;
 				cursor: pointer;
-				&:hover{
-
+				&:hover{	
+					background-color: #436CFF;
+				}
+				&:disabled{
+					background-color: #E9EAEA;
+					color: #A7A8AB;
 				}
 			}
 			.link{
@@ -184,6 +196,13 @@
 					width: 100%;
 					box-sizing: border-box;
 					outline: none;
+					transition: .2s border-color;
+					&:hover{
+						border-color: #4F5157;
+					}
+					&:focus{
+						border-color: #436CFF;
+					}
 				}
 			}
 		}
