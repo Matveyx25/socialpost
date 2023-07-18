@@ -15,10 +15,10 @@ export const SwitchWrapper = ({role, setRole}) => {
 					<h2 className={role === 'seller' && s.active} onClick={() => setRole('seller')}>Рекламодатель</h2>
 				</div>
 			</div>
-			<h1>{{
-				'publisher': 'Монетизация ваших Telegram каналов',
-				'seller': 'Быстрый запуск рекламных кампаний',
-				}[role]}
+			<h1 dangerouslySetInnerHTML={{__html: {
+				'publisher': 'Монетизация ваших <span><img src="/images/publisher/Telegram.svg"/><span>Telegram</span></span> каналов',
+				'seller': 'Быстрый запуск <span><img src="/images/publisher/ad.svg"/><span>рекламных</span></span> кампаний',
+				}[role]}}>
 			</h1>
 		</div>
 	)

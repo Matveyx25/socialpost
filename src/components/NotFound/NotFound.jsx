@@ -1,5 +1,6 @@
 import React from 'react'
 import s from './NotFound.module.scss'
+import { Player } from '@lottiefiles/react-lottie-player'
 
 export const NotFound = () => {
 	return (
@@ -14,7 +15,13 @@ export const NotFound = () => {
 						<p>Пожалуйста, зайдите позже</p>
 					</div>
 					<div className={s.img}>
-						<img src="/images/indev.svg" alt="" />
+						<Player
+							autoplay
+							loop
+							src="/lotties/not-found.json"
+							style={{ height: '100%', width: '100%', objectFit:'contain' }}
+						/>
+						{/* <img src="/images/indev.svg" alt="" /> */}
 					</div>
 				</div>
 			</div>

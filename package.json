@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fullpage/react-fullpage": "^0.1.40",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@studio-freight/lenis": "^1.0.16",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

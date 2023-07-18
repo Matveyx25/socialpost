@@ -21,14 +21,43 @@
 		line-height: normal;
 		margin-top: 2.22rem;
 		max-width: 61rem;
+		span{
+			position: relative;
+			span{
+				position: relative;
+				z-index: 5;
+			}
+			img{
+				position: absolute;
+				z-index: 0 !important;
+			}
+		}
 	}
 	&.seller{
 		background-color: $seller-bg-color;
 		background-image: url('~/public/images/sellerBG.svg');
+		h1{
+			span{
+				img{
+					height: 4.16rem;
+					bottom: 0;
+					left: .22rem;
+				}
+			}
+		}
 	}
 	&.publisher{
 		background-color: $publisher-bg-color;
 		background-image: url('~/public/images/publisherBG.svg');
+		h1{
+			span{
+				img{
+					height: 5.24rem;
+					bottom: 0;
+					left: .22rem;
+				}
+			}
+		}
 	}
 	.switchWrapper{
 		border-radius: 2.22222rem;

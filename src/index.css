@@ -1,38 +1,38 @@
 @font-face {
 	font-family: 'SF Black';
-	src: url('~/public/fonts/SF-Compact-Display-Black.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Black.otf');
 }
 @font-face {
 	font-family: 'SF Bold';
-	src: url('~/public/fonts/SF-Compact-Display-Bold.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Bold.otf');
 }
 @font-face {
 	font-family: 'SF Heavy';
-	src: url('~/public/fonts/SF-Compact-Display-Heavy.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Heavy.otf');
 }
 @font-face {
 	font-family: 'SF Light';
-	src: url('~/public/fonts/SF-Compact-Display-Light.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Light.otf');
 }
 @font-face {
 	font-family: 'SF Medium';
-	src: url('~/public/fonts/SF-Compact-Display-Medium.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Medium.otf');
 }
 @font-face {
 	font-family: 'SF Regular';
-	src: url('~/public/fonts/SF-Compact-Display-Regular.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Regular.otf');
 }
 @font-face {
 	font-family: 'SF Semibold';
-	src: url('~/public/fonts/SF-Compact-Display-Semibold.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Semibold.otf');
 }
 @font-face {
 	font-family: 'SF Thin';
-	src: url('~/public/fonts/SF-Compact-Display-Thin.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Thin.otf');
 }
 @font-face {
 	font-family: 'SF Ultralight';
-	src: url('~/public/fonts/SF-Compact-Display-Ultralight.otf');
+	src: url('~/public/fonts/SF-Pro-Display-Ultralight.otf');
 }
 
 body {
