@@ -14,9 +14,9 @@ export const SellerContent = () => {
 
 	useEffect(() => {
 		if(scroller){
-			ScrollTrigger.create({
-				scroller,
-			});
+			// ScrollTrigger.create({
+			// 	scroller,
+			// });
 			gsap.utils.toArray(".box.reveal").forEach((box, i) => {
 				ScrollTrigger.create({
 					trigger: box,
@@ -29,7 +29,8 @@ export const SellerContent = () => {
 						delay: 0.1,
 						ease: "none"
 					},
-					onSnapComplete: (e) => setProgress(+e.trigger.dataset.number + (+e.direction === 1 && 1))
+					onEnter: (e) => setProgress(+e.trigger.dataset.number + (+e.direction === 1 && 1)),
+					onEnterBack: (e) => setProgress(+e.trigger.dataset.number + (+e.direction === 1 && 1))
 				});
 			});
 		}

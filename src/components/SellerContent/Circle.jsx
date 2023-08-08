@@ -2,7 +2,7 @@ import React from "react";
 import s from './SellerContent.module.scss'
 
 export const Circle = ({step}) => {
-	const isEnd = step === 7
+	const isEnd = step >= 7
 
   return (
     <svg
