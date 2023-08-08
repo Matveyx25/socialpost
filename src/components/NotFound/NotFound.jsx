@@ -21,7 +21,6 @@ export const NotFound = () => {
 							src="/lotties/not-found.json"
 							style={{ height: '100%', width: '100%', objectFit:'contain' }}
 						/>
-						{/* <img src="/images/indev.svg" alt="" /> */}
 					</div>
 				</div>
 			</div>

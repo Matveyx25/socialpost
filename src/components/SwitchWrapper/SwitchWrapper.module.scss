@@ -12,6 +12,104 @@
 	transition: .4s background-color;
 	position: fixed;
 	z-index: 0;
+	.publisher{
+		&__bgScene{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transform: scale(0);
+			transition: .4s;
+			pointer-events: none;
+		}
+		&__leftBg{
+			position: absolute;
+			height: calc(100vh - 7rem);
+			left: 0;
+			top: 5rem;
+			width: 100%;
+			transform: translateX(-38%);
+			pointer-events: none;
+			z-index: 15;
+			[class="lf-player-container"]{
+				height: 100%;
+			}
+		}
+		&__rightBg{
+			position: absolute;
+			height: calc(100vh - 7rem);
+			right: 0;
+			top: 5rem;
+			width: 100%;
+			transform: translateX(43%);
+			pointer-events: none;
+			z-index: 15;
+			[class="lf-player-container"]{
+				height: 100%;
+			}
+		}
+		&__plane{
+			position: absolute;
+			height: 13rem;
+			left: 50%;
+			bottom: 3.3rem;
+			width: 100%;
+			transform: translateX(-38%);
+			pointer-events: none;
+			z-index: 10;
+			[class="lf-player-container"]{
+				height: 100%;
+			}
+		}
+		&__planeRight{
+			height: calc(100vh - 15rem);
+			position: absolute;
+			top: 5rem;
+			right: 17rem;
+			z-index: 5;
+		}
+		&__planeLeft{
+			height: 60%;
+			position: absolute;
+			bottom: 8rem;
+			left: 24rem;
+			z-index: 5;
+		}
+	}
+
+	.seller{
+		&__bgScene{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			transform: scale(0);
+			transition: .4s;
+			pointer-events: none;
+		}
+		&__lottie{
+			position: absolute;
+			height: 80%;
+			right: 0;
+			left: auto;
+			bottom: 0;
+			width: 100%;
+			pointer-events: none;
+			[class="lf-player-container"]{
+				height: 100%;
+			}
+		}
+		&__right{
+			height: calc(50vh - 7rem);
+			position: absolute;
+			top: 5rem;
+			right: 12rem;
+		}
+		&__left{
+			height: 40%;
+			position: absolute;
+			bottom: 18rem;
+			left: 20rem;
+		}
+	}
 	h1{
 		text-align: center;
 		font-size: 5.55556rem;
@@ -45,6 +143,9 @@
 				}
 			}
 		}
+		.seller__bgScene{
+			transform: scale(1);
+		}
 	}
 	&.publisher{
 		background-color: $publisher-bg-color;
@@ -57,6 +158,9 @@
 					left: .22rem;
 				}
 			}
+		}
+		.publisher__bgScene{
+			transform: scale(1);
 		}
 	}
 	.switchWrapper{
@@ -78,13 +182,15 @@
 			line-height: normal;
 		}
 		.switchFlex{
-			display: flex;
+			display: grid;
+			grid-template-columns: 1fr auto 1fr;
 			align-items: center;
 			gap: 2.22222rem;
 			h2{
 				margin: 0;
 				padding: 0;
 				color: $mute-color;
+				text-align: center;
 				cursor: pointer;
 				&.active{
 					color: $text-color;

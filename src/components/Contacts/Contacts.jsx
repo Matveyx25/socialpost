@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './Contacts.module.scss'
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import { NavLink } from 'react-router-dom';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 export const Contacts = () => {
 	const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
+
+	const [isSended, setIsSended] = useState(false)
 
 	const validator = Yup.object().shape({
 		fullName: Yup.string()
@@ -20,7 +24,23 @@ export const Contacts = () => {
 	});
 	
 	return (
-		<div className={s.wrapper}>
+		<div className={`${s.wrapper} ${isSended && s.sended}`}>
+			{isSended ? 
+			<div className={s.successWrapper}>
+				<h2>Письмо успешно отправлено и <br/> скоро прибудет к нам. </h2>
+				<p>А пока...</p>
+				<NavLink to="/">Вернуться на главную</NavLink>
+				<img src="/images/contacts-path.svg" alt="" />
+				<div className={s.plane}>
+						<Player
+							autoplay
+							loop
+							src="/lotties/Plane.json"
+							style={{ height: '100%', objectFit:'cover'}}
+						/>
+				</div>
+			</div>
+			:
 			<div className="container">
 				<div className={s.flex}>
 					<div>
@@ -98,7 +118,10 @@ export const Contacts = () => {
 										</div>
 									</div>
 									<div className={s.btns}>
-										<button type='submit' disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}>
+										<button type='submit' 
+										onClick={() => setIsSended(true)}
+										// disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}
+										>
 											Отправить
 										</button>
 										<a href="https://t.me" className={s.link}>
@@ -110,10 +133,15 @@ export const Contacts = () => {
 						</Formik>
 					</div>
 					<div className={s.img}>
-						<img src="/images/contacts.svg" alt="" />
+						<Player
+							autoplay
+							loop
+							src="/lotties/contacts.json"
+							style={{ height: '100%', width: '100%', objectFit:'contain' }}
+						/>
 					</div>
 				</div>
-			</div>
+			</div>}
 		</div>
 	)
 }
