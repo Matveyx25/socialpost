@@ -109,6 +109,30 @@
 			bottom: 18rem;
 			left: 20rem;
 		}
+		&__static_cloud{
+			width: 8%;
+			position: absolute;
+			top: 38%;
+			left: 4rem;
+		}
+		&__static_switcher{
+			width: 12%;
+			position: absolute;
+			bottom: 6rem;
+			left: 37%;
+		}
+		&__static_profile{
+			width: 8%;
+			position: absolute;
+			bottom: 6rem;
+			right: 6%;
+		}
+		&__static_notes{
+			width: 8%;
+			position: absolute;
+			bottom: 10rem;
+			left: 6%;
+		}
 	}
 	h1{
 		text-align: center;

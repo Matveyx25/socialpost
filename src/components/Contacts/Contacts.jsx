@@ -36,6 +36,7 @@ export const Contacts = () => {
 							autoplay
 							loop
 							src="/lotties/Plane.json"
+							speed={.7}
 							style={{ height: '100%', objectFit:'cover'}}
 						/>
 				</div>
@@ -137,6 +138,7 @@ export const Contacts = () => {
 							autoplay
 							loop
 							src="/lotties/contacts.json"
+							speed={.7}
 							style={{ height: '100%', width: '100%', objectFit:'contain' }}
 						/>
 					</div>

@@ -19,6 +19,7 @@ export const SwitchWrapper = ({role, setRole}) => {
 							autoplay
 							loop
 							src="/lotties/Plane.json"
+							speed={.7}
 							style={{ height: '100%', objectFit:'cover'}}
 						/>
 				</div>
@@ -50,9 +51,14 @@ export const SwitchWrapper = ({role, setRole}) => {
 							autoplay
 							loop
 							src="/lotties/seller.json"
+							speed={.7}
 							style={{ height: '100%', objectFit:'cover'}}
 						/>
 				</div>
+				<img src="/images/seller/cloud.png" alt="" className={s.seller__static_cloud}/>
+				<img src="/images/seller/profile.png" alt="" className={s.seller__static_profile}/>
+				<img src="/images/seller/notes.png" alt="" className={s.seller__static_notes}/>
+				<img src="/images/seller/switcher.png" alt="" className={s.seller__static_switcher}/>
 				<img src="/images/seller/bg-arrow-right.svg" alt="" className={s.seller__right}/>
 				<img src="/images/seller/bg-arrow-left.svg" alt="" className={s.seller__left}/>
 			</div>

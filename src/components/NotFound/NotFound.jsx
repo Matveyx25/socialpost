@@ -19,6 +19,7 @@ export const NotFound = () => {
 							autoplay
 							loop
 							src="/lotties/not-found.json"
+							speed={.7}
 							style={{ height: '100%', width: '100%', objectFit:'contain' }}
 						/>
 					</div>
