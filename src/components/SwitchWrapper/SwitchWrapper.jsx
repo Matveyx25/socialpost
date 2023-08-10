@@ -31,7 +31,7 @@ export const SwitchWrapper = ({role, setRole}) => {
 							autoplay={false}
 							loop
 							src="/lotties/publisher-left.json"
-							speed={.7}
+							speed={.5}
 							style={{ height: '100%',objectFit:'contain' }}
 						/>
 				</div>
@@ -40,7 +40,7 @@ export const SwitchWrapper = ({role, setRole}) => {
 							autoplay
 							loop
 							src="/lotties/publisher-right.json"
-							speed={.7}
+							speed={.5}
 							style={{ height: '100%',objectFit:'contain' }}
 						/>
 				</div>
