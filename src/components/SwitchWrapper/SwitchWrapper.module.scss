@@ -71,7 +71,8 @@
 			height: 60%;
 			position: absolute;
 			bottom: 8rem;
-			left: 24rem;
+			left: 50%;
+			transform: translateX(-100%);
 			z-index: 5;
 		}
 	}
@@ -107,7 +108,8 @@
 			height: 40%;
 			position: absolute;
 			bottom: 18rem;
-			left: 20rem;
+			left: 50%;
+			transform: translateX(-250%);
 		}
 		&__static_cloud{
 			width: 8%;
@@ -145,6 +147,7 @@
 		max-width: 61rem;
 		span{
 			position: relative;
+			display: inline-block;
 			span{
 				position: relative;
 				z-index: 5;
@@ -164,6 +167,7 @@
 					height: 4.16rem;
 					bottom: 0;
 					left: .22rem;
+					max-width: 100%;
 				}
 			}
 		}
@@ -180,6 +184,7 @@
 					height: 5.24rem;
 					bottom: 0;
 					left: .22rem;
+					max-width: 100%;
 				}
 			}
 		}

@@ -24,6 +24,21 @@
 			align-self: flex-start;
 			opacity: 0;
 			transform: translateX(-100%);
+			position: relative;
+			z-index: 10;
+			&::before{
+				content: '';
+				display: block;
+				width: calc(100% + 20px);
+				height: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+				background-color: rgba(255, 255, 255, 0.3);
+				z-index: -1;
+				backdrop-filter: blur(2px);
+				border-radius: 10px;
+			}
 			img{
 				width: 15rem;
 				height: 15rem;
