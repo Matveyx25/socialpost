@@ -12,6 +12,8 @@
 		flex-direction: column;
 		padding-top: 11.3rem;
 		padding-bottom: 4.1rem;
+		position: relative;
+		z-index: 20;
 		.info{
 			font-size: 2rem;
 			font-weight: 400;

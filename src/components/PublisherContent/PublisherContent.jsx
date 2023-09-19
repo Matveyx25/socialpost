@@ -17,7 +17,7 @@ export const PublisherContent = () => {
 					<div className={s.info} id="publisher_info2">
 						<img src="/images/publisher/img2.svg" alt="" />
 						Работа в соответствии с законом о<br/>
-						рекламе - регистрируем а ОРД все<br/>
+						рекламе - регистрируем в ОРД все<br/>
 						необходимы данные за Вас 
 					</div>
 					<div className={s.info} id="publisher_info3">

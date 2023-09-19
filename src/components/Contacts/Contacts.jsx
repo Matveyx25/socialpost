@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './Contacts.module.scss'
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
+import emailjs from '@emailjs/browser';
 
 export const Contacts = () => {
 	const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/
@@ -22,6 +23,21 @@ export const Contacts = () => {
 		message: Yup.string()
 			.max(500, 'Максимум 500 символов')
 	});
+
+	const sendEmail = (values) => {
+    emailjs.send('service_rgqkma5', 'template_3dbg9ge', 
+		{user_name: values.fullName,
+		user_phone: values.phone,
+		user_email: values.email,
+		message: values.message,
+		},
+		 '-y8sIbyiQNpb85idG')
+      .then((result) => {
+				setIsSended(true)
+      }, (error) => {
+          console.log(error.text);
+      });
+  };
 	
 	return (
 		<div className={`${s.wrapper} ${isSended && s.sended}`}>
@@ -55,9 +71,10 @@ export const Contacts = () => {
 								message: '',
 							}}
 							validationSchema={validator}
-							onSubmit={async (values) => {
-								await new Promise((r) => setTimeout(r, 500));
-								alert(JSON.stringify(values, null, 2));
+							onSubmit={(values) => {
+								setTimeout(() => {
+									sendEmail(values)
+								}, 1000)
 							}}
 						>
 							{({ errors, touched, values }) => (
@@ -65,7 +82,7 @@ export const Contacts = () => {
 									<div className={s.formFlex}>
 										<div className={s.lgInput}>
 											<div className={`${s.inputWrapper} ${(errors.fullName && touched.fullName) && s.error}`}>
-												<label className={s.img} for="fullName">
+												<label className={s.img} htmlFor="fullName">
 													<img src={(errors.fullName && touched.fullName) ? "/images/icons/ic/user-error.svg" : "/images/icons/ic/user.svg"} alt="" />
 												</label>
 												<Field id="fullName" name="fullName" placeholder="Введите ФИО" />
@@ -79,7 +96,7 @@ export const Contacts = () => {
 										</div>
 										<div className={s.smInput}>
 											<div className={`${s.inputWrapper} ${(errors.phone && touched.phone) && s.error}`}>
-												<label className={s.img} for="phone">
+												<label className={s.img} htmlFor="phone">
 													<img src={(errors.phone && touched.phone) ? "/images/icons/ic/phone-error.svg" : "/images/icons/ic/phone.svg"} alt="" />
 												</label>
 												<Field id="phone" name="phone" placeholder="Введите номер телефона" />
@@ -93,7 +110,7 @@ export const Contacts = () => {
 										</div>
 										<div className={s.smInput}>
 											<div className={`${s.inputWrapper} ${(errors.email && touched.email) && s.error}`}>
-												<label className={s.img} for="email">
+												<label className={s.img} htmlFor="email">
 													<img src={(errors.email && touched.email) ? "/images/icons/ic/email-error.svg" : "/images/icons/ic/email.svg"} alt="" />
 												</label>
 												<Field id="email" name="email" placeholder='Введите email'/>
@@ -119,10 +136,9 @@ export const Contacts = () => {
 										</div>
 									</div>
 									<div className={s.btns}>
-										<button type='submit' 
-										onClick={() => setIsSended(true)}
-										// disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}
-										>
+										<button 
+											type='submit'
+											disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}>
 											Отправить
 										</button>
 										<a href="https://t.me" className={s.link}>
