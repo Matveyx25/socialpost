@@ -1,0 +1,47 @@
+@import '~/src/styles/variables.scss';
+
+@keyframes spin {
+	0%{transform: rotate(0deg);}
+	100%{transform: rotate(360deg);}
+}
+
+.loader{
+	animation: spin 1s infinite;
+}
+
+.wrapper{
+	cursor: pointer;
+	display: flex;
+	background: none;
+	border: none;
+	width: 18.75rem;
+	height: 3rem;
+	padding: 1rem 3.75rem;
+	justify-content: center;
+	align-items: center;
+	gap: 0.625rem;
+	flex-shrink: 0;
+	border-radius: 2.5rem;
+	transition: .4s;
+	font-family: 'SF Medium';
+	font-size: 1rem;
+	&.primary{
+		background: $main-blue-color;
+		color: $white-color;
+		&:hover{
+			background: #698AFF;
+		}
+		&:disabled{
+			background: #A1B6FF;
+			cursor: default;
+		}
+	}
+	&.secondary{
+		background: #fff;
+		color: $gray-800;
+		border: 1px solid $gray-100;
+		&:disabled{
+			cursor: default;
+		}
+	}
+}
