@@ -1,9 +1,52 @@
 import React, { useState } from 'react'
 import s from './Filters.module.scss'
-import MultiRangeSlider from "multi-range-slider-react";
 import { RangeInputs } from './RangeInputs';
 import { Button } from '../Shared/Button/Button';
 import { IconReload } from '@tabler/icons-react';
+import { RangeSlider } from './RangeSlider';
+
+const scales = [
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+	{value: 1000},
+	{value: 1200},
+	{value: 1420},
+	{value: 1620},
+	{value: 1620},
+	{value: 1420},
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+	{value: 1000},
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+	{value: 1000},
+	{value: 1200},
+	{value: 1420},
+	{value: 1620},
+	{value: 1620},
+	{value: 1420},
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+	{value: 1140},
+	{value: 1000},
+	{value: 1000},
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+	{value: 1000},
+	{value: 1200},
+	{value: 1420},
+	{value: 1620},
+	{value: 1620},
+	{value: 1420},
+	{value: 1256},
+	{value: 1140},
+	{value: 1000},
+]
 
 export const Filters = () => {
 	const [minSubscribers, set_minSubscribers] = useState(0);
@@ -14,10 +57,26 @@ export const Filters = () => {
 	const [maxCPV, set_maxCPV] = useState();
 	const [minPrice, set_minPrice] = useState();
 	const [maxPrice, set_maxPrice] = useState();
-	const handleInput = (e) => {
-		set_minSubscribers(e.minValue);
-		set_maxSubscribers(e.maxValue);
-	};
+
+	const [isSended, set_isSended] = useState(false)
+
+	const reset = () => {
+		set_minSubscribers(null)
+		set_maxSubscribers(null)
+		set_minPostReach('')
+		set_maxPostReach('')
+		set_minCPV('')
+		set_maxCPV('')
+		set_minPrice('')
+		set_maxPrice('')
+	}
+
+	const submitHandler = () => {
+		set_isSended(true)
+		setTimeout(() => {
+			set_isSended(false)
+		}, 2000)
+	}
 
 	return (
 		<div className={s.wrapper}>
@@ -25,19 +84,7 @@ export const Filters = () => {
 			<span className={s.line}></span>
 			<div className={s.inputsGroup}>
 				<h5>Подписчики</h5>
-				<MultiRangeSlider
-					min={0}
-					max={100000}
-					step={1}
-					ruler={false}
-					label={false}
-					minValue={minSubscribers}
-					maxValue={maxSubscribers}
-					baseClassName={`multi-range-slider ${s.slider}`}
-					onInput={(e) => {
-						handleInput(e);
-					}}
-				/>
+				<RangeSlider scales={scales} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
 				<RangeInputs minValue={minSubscribers} maxValue={maxSubscribers} minOnChange={set_minSubscribers} maxOnChange={set_maxSubscribers}/>
 			</div>
 			<div className={s.inputsGroup}>
@@ -53,8 +100,8 @@ export const Filters = () => {
 				<RangeInputs minValue={minPrice} maxValue={maxPrice} minOnChange={set_minPrice} maxOnChange={set_maxPrice}/>
 			</div>
 			<span className={s.line}></span>
-			<Button className={s.resetBtn} label={'Сбросить'} theme='secondary' leftIcon={<IconReload size={18}/>}/>
-			<Button className={s.btn} label={'Применить'}/>
+			<Button className={s.resetBtn} label={'Сбросить'} theme='secondary' leftIcon={<IconReload size={18}/>} onClick={reset}/>
+			<Button className={s.btn} label={'Применить'} fetching={isSended} onClick={submitHandler}/>
 		</div>
 	)
 }

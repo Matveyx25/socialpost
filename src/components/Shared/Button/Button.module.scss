@@ -5,8 +5,19 @@
 	100%{transform: rotate(360deg);}
 }
 
+@keyframes fadeIn {
+	0%{transform: scale(0.4); opacity: 0;}
+	100%{transform: scale(1); opacity: 1;}
+}
+
 .loader{
 	animation: spin 1s infinite;
+}
+
+.fetching{
+	.iconWrapper{
+		animation: fadeIn .4s;
+	}
 }
 
 .wrapper{

@@ -7,11 +7,11 @@ export const RangeInputs = ({minValue, maxValue, minOnChange, maxOnChange}) => {
 			<span>
 				от
 			</span>
-			<input type="text" placeholder='-' value={minValue} onChange={(e) => minOnChange(+e.target.value)}/>
+			<input type="text" placeholder='-' value={minValue} onChange={(e) => minOnChange(+e.target.value.replace(/\D/,''))}/>
 			<span>
 				до
 			</span>
-			<input type="text" placeholder='-' value={maxValue} onChange={(e) => maxOnChange(+e.target.value)}/>
+			<input type="text" placeholder='-' value={maxValue} onChange={(e) => maxOnChange(+e.target.value.replace(/\D/,''))}/>
 		</div>
 	)
 }
