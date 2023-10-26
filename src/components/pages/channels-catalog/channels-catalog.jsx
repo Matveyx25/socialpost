@@ -8,7 +8,17 @@ import { ChannelCard } from '../../ChannelCard/ChannelCard';
 const options = [
   { value: 'subscribers more', label: 'Подписчиков: Больше' },
   { value: 'subscribers less', label: 'Подписчиков: Меньше' },
+  { value: 'post reach more', label: 'Охват поста: Больше' },
+  { value: 'post reach less', label: 'Охват поста: Меньше' },
+  { value: 'price more', label: 'Цена: Больше' },
+  { value: 'price less', label: 'Цена: Меньше' },
 ];
+
+const formats = [
+	'нативный',
+	'стандартный',
+	'без удаления',
+]
 
 export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(null);
@@ -68,19 +78,23 @@ export const ChannelsCatalog = () => {
 						<ChannelCard  img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuK21PMfMcKphNlwfyUbDoCCZyGxH-a9gnfA&usqp=CAU" 
 													title="Marvel / DC: Geek Movies" type="Фильмы и сериалы" 
 													desc="Обновлён рекламный контакт: @paprikamedia <br> Мы на YT - https://www.youtube.com/@MarvelDCRU" 
-													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={['Нативная', 'Нативная']}/>
+													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={formats}/>
 						<ChannelCard  img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuK21PMfMcKphNlwfyUbDoCCZyGxH-a9gnfA&usqp=CAU" 
 													title="Marvel / DC: Geek Movies" type="Фильмы и сериалы" 
 													desc="Обновлён рекламный контакт: @paprikamedia <br> Мы на YT - https://www.youtube.com/@MarvelDCRU" 
-													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={['Нативная', 'Нативная']}/>
+													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={formats}/>
 						<ChannelCard  img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuK21PMfMcKphNlwfyUbDoCCZyGxH-a9gnfA&usqp=CAU" 
 													title="Marvel / DC: Geek Movies" type="Фильмы и сериалы" 
 													desc="Обновлён рекламный контакт: @paprikamedia <br> Мы на YT - https://www.youtube.com/@MarvelDCRU" 
-													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={['Нативная', 'Нативная']}/>
+													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={formats}/>
 						<ChannelCard  img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuK21PMfMcKphNlwfyUbDoCCZyGxH-a9gnfA&usqp=CAU" 
 													title="Marvel / DC: Geek Movies" type="Фильмы и сериалы" 
 													desc="Обновлён рекламный контакт: @paprikamedia <br> Мы на YT - https://www.youtube.com/@MarvelDCRU" 
-													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={['Нативная', 'Нативная']}/>
+													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={formats}/>
+						<ChannelCard  img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuK21PMfMcKphNlwfyUbDoCCZyGxH-a9gnfA&usqp=CAU" 
+													title="Marvel / DC: Geek Movies" type="Фильмы и сериалы" 
+													desc="Обновлён рекламный контакт: @paprikamedia <br> Мы на YT - https://www.youtube.com/@MarvelDCRU" 
+													subscribers="35500" postReach="12551" er="36" cpv="19" price={8500} formats={formats}/>
 					</div>
 				</div>
 			</div>

@@ -20,6 +20,10 @@ export const Header = ({role, setRole}) => {
 							className={({ isActive }) => (isActive && role === 'publisher') && s.active}>Паблишерам</NavLink>
 						</li>
 						<li>
+							<NavLink to="/channels-catalog" 
+							className={({ isActive }) => isActive && s.active}>Коталог каналов</NavLink>
+						</li>
+						<li>
 							<NavLink to="/contact" 
 							className={({ isActive }) => isActive && s.active}>Контакты</NavLink>
 						</li>
