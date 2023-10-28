@@ -1,0 +1,122 @@
+@import '~/src/styles/variables.scss';
+
+.form{
+	padding: 1rem 0;
+	display: flex;
+	width: 28.4375rem;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 1rem;
+	& > *{
+		width: 100%;
+	}
+	& > p{
+		text-align: center;
+		color: $gray-500;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+	}
+}
+
+.rememberMe{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 0.5rem;
+	a{
+		color: $gray-500;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+		text-decoration: none;
+	}
+}
+
+.checkbox{
+	input{
+		display: none;
+		&:checked + label{
+			.checkboxIcon{
+				&:first-child{
+					display: block;
+				}
+				&:last-child{
+					display: none;
+				}
+			}
+		}
+	}
+	label{
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: $gray-800;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+		cursor: pointer;
+		.checkboxIcon{
+			&:first-child{
+				display: none;
+				color: $gray-500;
+			}
+			&:last-child{
+				display: block;
+				color: #436CFF;
+			}
+		}
+		&:hover{
+			transition: .4s color;
+			color: $gray-700;
+			.checkboxIcon{
+				&:first-child{
+					transition: .4s color;
+					color: $gray-400;
+				}
+				&:last-child{
+					transition: .4s color;
+					color: #698AFF;
+				}
+			}
+		}
+	}
+}
+
+.btns{
+	display: flex;
+	flex-direction: column;
+	gap: .5rem;
+	& > * {
+		width: 100%;
+	}
+}
+
+.footer{
+	padding-top: 1rem;
+	border-top: 1px solid $gray-100;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: $gray-500;
+	text-align: center;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.5rem; /* 150% */
+	letter-spacing: 0.02rem;
+	a{
+		text-decoration: none;
+		color: #436CFF;
+		font-weight: 500;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+	}
+}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PublisherContent } from "./components/PublisherContent/PublisherContent";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { SellerContent } from './components/SellerContent/SellerContent';
@@ -10,15 +10,14 @@ import { NotFound } from "./components/NotFound/NotFound";
 import Lenis from "@studio-freight/lenis";
 import { Contacts } from "./components/Contacts/Contacts";
 import { ChannelsCatalog } from "./components/pages/channels-catalog/channels-catalog";
+import './styles/reset.scss'
+import { AuthModals } from './components/AuthModals/AuthModals';
 
 const lenis = new Lenis()
 
 function App() {
 	const [role, setRole] = useState('publisher')
-
-	useEffect(() => {
-		
-	}, [])
+	const [modal, setModal] = useState('')
 
 	function raf(time) {
     lenis.raf(time)
@@ -33,7 +32,8 @@ function App() {
 
   return (
     <div id="smooth-wrapper">
-			<Header {...{role, setRole}}/>
+			<AuthModals isOpen={modal} setOpen={setModal}/>
+			<Header {...{role, setRole}} onModalOpen={() => setModal('login')}/>
 			<div style={{minHeight: '100vh'}} id="smooth-content">
 				<Routes>
 					<Route path="/" element={

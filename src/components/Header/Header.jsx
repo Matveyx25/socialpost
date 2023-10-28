@@ -2,7 +2,7 @@ import React from 'react'
 import s from './Header.module.scss'
 import { NavLink } from 'react-router-dom'
 
-export const Header = ({role, setRole}) => {
+export const Header = ({role, setRole, onModalOpen}) => {
 	return (
 		<div className={s.header}>
 			<div className="container">
@@ -32,7 +32,7 @@ export const Header = ({role, setRole}) => {
 							className={({ isActive }) => isActive && s.active}>FAQ</NavLink>
 						</li>
 					</ul>
-					<NavLink to="contact" className={s.btn}>
+					<NavLink className={s.btn} onClick={() => onModalOpen()}>
 						Войти
 					</NavLink>
 				</div>
