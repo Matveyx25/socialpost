@@ -18,7 +18,7 @@ export const Button = ({theme = 'primary', fetching, rightIcon, leftIcon, label,
 		<button onClick={onClick} className={`${className} ${s.wrapper} ${themes[theme].className} ${fetching && s.fetching}`} disabled={disabled}>
 			{fetching ? 
 				<div className={s.iconWrapper}>
-					<IconLoader2 color={themes[theme].color} className={s.loader}/>
+					<IconLoader2 color={themes[theme].color} className={s.loader} />
 				</div>
 				: 
 				<>

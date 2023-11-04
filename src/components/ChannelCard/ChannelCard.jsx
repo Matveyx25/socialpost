@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import s from './ChannelCard.module.scss'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
-import { IconChevronDown, IconChevronUp, IconShoppingCart } from '@tabler/icons-react'
+import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler/icons-react'
 import { Button } from '../Shared/Button/Button';
 
 export const ChannelCard = ({formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+	const [inCart, set_inCart] = useState(false)
+	
 	return (
 		<div className={s.wrapper}>
 			<div className={s.flex}>
@@ -25,7 +27,9 @@ export const ChannelCard = ({formats, title, type, desc, subscribers, postReach,
 				options={formats} className={s.formats} 
 				arrowClosed={<IconChevronDown size={18}/>}
   			arrowOpen={<IconChevronUp size={18}/>}/>
-				<Button className={s.button} label={(price + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} theme='secondary' leftIcon={<IconShoppingCart size={18}/>}/>
+				{inCart ?
+				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={() => set_inCart(false)}/>: 
+				<Button className={s.button} label={(price + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={() => set_inCart(true)}/>}
 			</div>
 			<div className={s.stats}>
 				<div>
