@@ -21,7 +21,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 						</li>
 						<li>
 							<NavLink to="/channels-catalog" 
-							className={({ isActive }) => isActive && s.active}>Коталог каналов</NavLink>
+							className={({ isActive }) => isActive && s.active}>Каталог каналов</NavLink>
 						</li>
 						<li>
 							<NavLink to="/contact" 

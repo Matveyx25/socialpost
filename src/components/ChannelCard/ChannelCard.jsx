@@ -5,7 +5,7 @@ import 'react-dropdown/style.css';
 import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler/icons-react'
 import { Button } from '../Shared/Button/Button';
 
-export const ChannelCard = ({formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+export const ChannelCard = ({link, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
 	const [inCart, set_inCart] = useState(false)
 	
 	return (
@@ -29,16 +29,16 @@ export const ChannelCard = ({formats, title, type, desc, subscribers, postReach,
   			arrowOpen={<IconChevronUp size={18}/>}/>
 				{inCart ?
 				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={() => set_inCart(false)}/>: 
-				<Button className={s.button} label={(price + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={() => set_inCart(true)}/>}
+				<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={() => set_inCart(true)}/>}
 			</div>
 			<div className={s.stats}>
 				<div>
 					<span>Подписчики</span>
-					<p>{subscribers.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}</p>
+					<p>{subscribers.replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}</p>
 				</div>
 				<div>
 					<span>Средний охват поста</span>
-					<p>{postReach.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}</p>
+					<p>{postReach.replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}</p>
 				</div>
 				<div>
 					<span>ER</span>

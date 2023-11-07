@@ -48,7 +48,7 @@ const scales = [
 	{value: 1000},
 ]
 
-export const Filters = () => {
+export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [minSubscribers, set_minSubscribers] = useState(0);
 	const [maxSubscribers, set_maxSubscribers] = useState(35000);
 	const [minPostReach, set_minPostReach] = useState();
@@ -71,11 +71,30 @@ export const Filters = () => {
 		set_maxPrice('')
 	}
 
+	const filterFunction = (el) => {
+		const subscribers = +el.subscribers.replace(/\s/g, '');
+		const postReach = +el.postReach.replace(/\s/g, '');
+		const cpv = +el.cpv.replace(/\s/g, '');
+		const price = +el.price.replace(/\s/g, '');
+
+		return (
+			(minSubscribers === undefined || subscribers >= +minSubscribers) &&
+			(maxSubscribers === undefined || subscribers <= +maxSubscribers) &&
+			(minPostReach === undefined || postReach >= +minPostReach) &&
+			(maxPostReach === undefined || postReach <= +maxPostReach) &&
+			(minCPV === undefined || cpv >= +minCPV) &&
+			(maxCPV === undefined || cpv <= +maxCPV) &&
+			(minPrice === undefined || price >= +minPrice) &&
+			(maxPrice === undefined || price <= +maxPrice)
+		);
+	}
+
 	const submitHandler = () => {
 		set_isSended(true)
 		setTimeout(() => {
 			set_isSended(false)
 		}, 2000)
+		onFilterSubmit(filterFunction)
 	}
 
 	return (
@@ -84,7 +103,7 @@ export const Filters = () => {
 			<span className={s.line}></span>
 			<div className={s.inputsGroup}>
 				<h5>Подписчики</h5>
-				<RangeSlider scales={scales} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
+				<RangeSlider scales={scales} maxSubscribersNumber={maxSubscribersNumber} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
 				<RangeInputs minValue={minSubscribers} maxValue={maxSubscribers} minOnChange={set_minSubscribers} maxOnChange={set_maxSubscribers}/>
 			</div>
 			<div className={s.inputsGroup}>

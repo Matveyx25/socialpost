@@ -129,16 +129,22 @@
 			border: 1px solid $gray-100;
 		}
 		.Dropdown-menu{
-			border-radius: 1.5rem;
+			border-radius: 0.5rem;
 			border: 1px solid $gray-100;
 			background: #fff;
 			top: 115%;
 		}
 		.Dropdown-option, .Dropdown-option.is-selected{
 			background-color: #fff;
-			padding: 1rem 1.5rem;
-			&:not(:last-child){
-				border-bottom: 1px solid $gray-100;
+			padding: .75rem;
+			color: $gray-800;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem; /* 150% */
+			letter-spacing: 0.02rem;
+			&:hover{
+				background: #EDF1FF;
 			}
 		}
 		.Dropdown-placeholder{

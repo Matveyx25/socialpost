@@ -3,7 +3,7 @@ import MultiRangeSlider from 'multi-range-slider-react';
 import s from './Filters.module.scss'
 
 
-export const RangeSlider = ({minValue, maxValue, set_minValue, set_maxValue, scales}) => {
+export const RangeSlider = ({minValue, maxValue, set_minValue, set_maxValue, scales, maxSubscribersNumber}) => {
 
 	const maxScale = Math.max(...scales.map(obj => obj.value));
 
@@ -11,6 +11,8 @@ export const RangeSlider = ({minValue, maxValue, set_minValue, set_maxValue, sca
 		set_minValue(e.minValue);
 		set_maxValue(e.maxValue);
 	};
+
+	console.log(maxSubscribersNumber);
 
 	return (
 		<>
@@ -21,7 +23,7 @@ export const RangeSlider = ({minValue, maxValue, set_minValue, set_maxValue, sca
 			</div>
 			<MultiRangeSlider
 				min={0}
-				max={100000}
+				max={maxSubscribersNumber}
 				step={1}
 				ruler={false}
 				label={false}
