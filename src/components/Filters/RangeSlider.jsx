@@ -4,15 +4,12 @@ import s from './Filters.module.scss'
 
 
 export const RangeSlider = ({minValue, maxValue, set_minValue, set_maxValue, scales, maxSubscribersNumber}) => {
-
 	const maxScale = Math.max(...scales.map(obj => obj.value));
 
 	const handleInput = (e) => {
 		set_minValue(e.minValue);
 		set_maxValue(e.maxValue);
 	};
-
-	console.log(maxSubscribersNumber);
 
 	return (
 		<>

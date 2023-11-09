@@ -50,7 +50,7 @@ const scales = [
 
 export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [minSubscribers, set_minSubscribers] = useState(0);
-	const [maxSubscribers, set_maxSubscribers] = useState(35000);
+	const [maxSubscribers, set_maxSubscribers] = useState(maxSubscribersNumber);
 	const [minPostReach, set_minPostReach] = useState();
 	const [maxPostReach, set_maxPostReach] = useState();
 	const [minCPV, set_minCPV] = useState();
@@ -61,14 +61,14 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [isSended, set_isSended] = useState(false)
 
 	const reset = () => {
-		set_minSubscribers(null)
-		set_maxSubscribers(null)
-		set_minPostReach('')
-		set_maxPostReach('')
-		set_minCPV('')
-		set_maxCPV('')
-		set_minPrice('')
-		set_maxPrice('')
+		set_minSubscribers(0)
+		set_maxSubscribers(maxSubscribersNumber)
+		set_minPostReach(undefined)
+		set_maxPostReach(undefined)
+		set_minCPV(undefined)
+		set_maxCPV(undefined)
+		set_minPrice(undefined)
+		set_maxPrice(undefined)
 	}
 
 	const filterFunction = (el) => {
