@@ -1,0 +1,39 @@
+@import '~/src/styles/variables.scss';
+
+.inputGroup{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	.inputWrapper{
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		align-self: stretch;
+		transition: .4s;
+		width: fit-content;
+		overflow: hidden;
+		button{
+			border-radius: 0.25rem;
+			background: #EDF1FF;
+			padding: 0.25rem 0.5rem;
+			border: none;
+			cursor: pointer;
+			color: #436CFF;
+			font-size: 0.875rem;
+			font-style: normal;
+			font-weight: 500;
+			line-height: 1.375rem; /* 157.143% */
+			letter-spacing: 0.0175rem;
+			&:hover:not(:disabled){
+				transition: .3s;
+				color: #fff;
+				background: #7C99FF;
+			}
+			&:disabled{
+				opacity: 0.4;
+				cursor: default;
+			}
+		}
+	}
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './channels-catalog.module.scss'
 import { Filters } from '../../Filters/Filters'
 import Select from 'react-select'
@@ -25,6 +25,16 @@ export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(options[0]);
 	const [filtered, setFiltered] = useState([...channels]);
 
+	const [cart, set_cart] = useState(() => {
+		const saved = localStorage.getItem("cart");
+		const initialValue = JSON.parse(saved);
+		return initialValue || "";
+	});
+
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart])
+
 	const onFilterSubmit = (filter) => {
 		setFiltered([...channels].filter(filter))
 	}
@@ -36,17 +46,17 @@ export const ChannelsCatalog = () => {
 
 		switch(selectedOption.value){
 			case 'subscribers more': 
-				return array.sort((a, b) => subscribers(a) - subscribers(b))
-			case 'subscribers less': 
 				return array.sort((a, b) => subscribers(b) - subscribers(a))
+			case 'subscribers less': 
+				return array.sort((a, b) => subscribers(a) - subscribers(b))
 			case 'post-reach more': 
-				return array.sort((a, b) => postReach(a) - postReach(b))
-			case 'post-reach less': 
 				return array.sort((a, b) => postReach(b) - postReach(a))
+			case 'post-reach less': 
+				return array.sort((a, b) => postReach(a) - postReach(b))
 			case 'price more': 
-				return array.sort((a, b) => price(a) - price(b))
-			case 'price less': 
 				return array.sort((a, b) => price(b) - price(a))
+			case 'price less': 
+				return array.sort((a, b) => price(a) - price(b))
 			default: 
 				break
 		}
@@ -105,9 +115,8 @@ export const ChannelsCatalog = () => {
 								Найдено: {(filtered.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
 							</span>
 						</div>
-						{sortChannels(filtered).map(chennel => (
-							<ChannelCard link={chennel.link} img={chennel.img} title={chennel.title} type={chennel.type} desc={chennel.desc} 
-								subscribers={chennel.subscribers} postReach={chennel.postReach} er={chennel.er} cpv={chennel.cpv} price={chennel.price} formats={formats}/>
+						{sortChannels(filtered).map(channel => (
+							<ChannelCard  updateCart={set_cart} formats={formats} cart={cart} {...channel}/>
 						))}
 					</div>
 				</div>

@@ -5,9 +5,19 @@ import 'react-dropdown/style.css';
 import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler/icons-react'
 import { Button } from '../Shared/Button/Button';
 
-export const ChannelCard = ({link, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
-	const [inCart, set_inCart] = useState(false)
+export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
+
+	const addToCart = () => {
+		set_inCart(true)
+		updateCart([...cart, {id, count: 1, format: ''}])
+	}
 	
+	const removeFromCart = () => {
+		set_inCart(false)
+		updateCart(cart.filter(el => el.id !== id))
+	}
+
 	return (
 		<div className={s.wrapper}>
 			<div className={s.flex}>
@@ -28,8 +38,8 @@ export const ChannelCard = ({link, formats, title, type, desc, subscribers, post
 				arrowClosed={<IconChevronDown size={18}/>}
   			arrowOpen={<IconChevronUp size={18}/>}/>
 				{inCart ?
-				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={() => set_inCart(false)}/>: 
-				<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={() => set_inCart(true)}/>}
+				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
+				<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
 			</div>
 			<div className={s.stats}>
 				<div>

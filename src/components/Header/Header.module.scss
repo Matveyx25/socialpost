@@ -33,6 +33,16 @@
 				}
 			}
 		}
+		.btns{
+			display: flex;
+			align-items: center;
+			gap: 1rem;
+		}
+		.cartBtn{
+			width: fit-content;
+			padding: 1rem;
+			gap: 0;
+		}
 		.btn{
 			display: flex;
 			padding: 0.88889rem 3.33333rem;

@@ -1,8 +1,12 @@
 import React from 'react'
 import s from './Header.module.scss'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { Button } from '../Shared/Button/Button'
+import { IconShoppingCart } from '@tabler/icons-react'
 
 export const Header = ({role, setRole, onModalOpen}) => {
+	const navigate = useNavigate()
+
 	return (
 		<div className={s.header}>
 			<div className="container">
@@ -32,9 +36,12 @@ export const Header = ({role, setRole, onModalOpen}) => {
 							className={({ isActive }) => isActive && s.active}>FAQ</NavLink>
 						</li>
 					</ul>
-					<NavLink className={s.btn} onClick={() => onModalOpen()}>
-						Войти
-					</NavLink>
+					<div className={s.btns}>
+						<Button onClick={() => navigate('cart')} className={s.cartBtn} leftIcon={<IconShoppingCart/>}/>
+						<NavLink className={s.btn} onClick={() => onModalOpen()}>
+							Войти
+						</NavLink>
+					</div>
 				</div>
 			</div>
 		</div>

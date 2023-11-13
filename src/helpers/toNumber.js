@@ -1,0 +1,1 @@
+export const toNumber = (a) => +toString(a).replace(/\s/g, '')

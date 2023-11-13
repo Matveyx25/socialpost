@@ -7,34 +7,21 @@ import { Route, Routes } from "react-router";
 import "animate.css";
 import { Footer } from "./components/Footer/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
-import Lenis from "@studio-freight/lenis";
 import { Contacts } from "./components/Contacts/Contacts";
 import { ChannelsCatalog } from "./components/pages/channels-catalog/channels-catalog";
 import './styles/reset.scss'
 import { AuthModals } from './components/AuthModals/AuthModals';
-
-const lenis = new Lenis()
+import { Cart } from './components/pages/cart/cart';
 
 function App() {
 	const [role, setRole] = useState('publisher')
 	const [modal, setModal] = useState('')
 
-	function raf(time) {
-    lenis.raf(time)
-    requestAnimationFrame(raf)
-  }
-
-  requestAnimationFrame(raf)
-
-  const clickHandlerToScroll = () => {
-    lenis.scrollTo('bottom')
-  }
-
   return (
-    <div id="smooth-wrapper">
+    <div>
 			<AuthModals isOpen={modal} setOpen={setModal}/>
 			<Header {...{role, setRole}} onModalOpen={() => setModal('login')}/>
-			<div style={{minHeight: '100vh'}} id="smooth-content">
+			<div style={{minHeight: '100vh'}}>
 				<Routes>
 					<Route path="/" element={
 					<>
@@ -47,6 +34,7 @@ function App() {
 					</>}/>
 					<Route path="/contact" element={<Contacts/>}/>
 					<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
+					<Route path="/cart" element={<Cart/>}/>
 					<Route path="*" element={<NotFound/>}/>
 				</Routes>
 			</div>

@@ -1,0 +1,194 @@
+@import '~/src/styles/variables.scss';
+
+
+.screen{
+	.successWrapper{
+		height: 100vh;
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		gap: 1.44rem;
+		opacity: 0;
+		animation: opacity 1s ease-in;
+		h2{
+			color: $text-color;
+			text-align: center;
+			font-family: "SF Semibold";
+			font-size: 2.22222rem;
+			font-weight: 600;
+			padding: 0;
+			margin: 0;
+			margin-top: -14rem;
+		}
+		p{
+			font-size: 1.11111rem;
+			padding: 0;
+			margin: 0;
+		}
+		a{
+			position: relative;
+			text-decoration: none;
+			width: fit-content;
+			border-radius: 2.22222rem;
+			background: $text-color;
+			display: flex;
+			padding: 0.88889rem 3.33333rem;
+			align-items: flex-start;
+			gap: 0.55556rem;
+			color: #FFF;
+			font-family: "SF Medium";
+			font-size: 1.11111rem;
+			transition: .4s background-color;
+			cursor: pointer;
+			&:hover{	
+				background-color: #436CFF;
+			}
+		}
+		img{
+			width: 100%;
+			position: absolute;
+			bottom: 14rem;
+			left: 0;
+			right: 0;
+			pointer-events: none;
+		}
+		.plane{
+			position: absolute;
+			height: 13rem;
+			left: 50%;
+			bottom: 10rem;
+			width: 100%;
+			transform: translateX(-38%);
+			pointer-events: none;
+			animation: fromLeft 1s ease-in;
+			[class="lf-player-container"]{
+				height: 100%;
+			}
+		}
+	}
+	&.sended{
+		.successWrapper{
+			transition: opacity .5s;
+			opacity: 1;
+		}
+	}
+}
+
+.wrapper{
+	padding-bottom: 2rem;
+	padding-top: 9.5rem;
+}
+
+.title{
+	margin: 0;
+	color: $gray-900;
+	font-size: 2.25rem;
+	font-weight: 600;
+}
+.subtitle{
+	margin: 0;
+	color: $gray-500;
+	font-size: 1.25rem;
+	font-weight: 400;
+	margin-top: 0.75rem;
+}
+.flex{
+	display: flex;
+	gap: 1.25rem;
+	margin-top: 2rem;
+}
+
+.table{
+	width: 100%;
+	box-sizing: border-box;
+	background: #FFF;
+	border-radius: 1rem;
+	background: #FFF;
+	box-shadow: 0px 4px 20px 0px rgba(212, 217, 222, 0.25);
+	height: fit-content;
+	padding: 0.5rem 0;
+	border-radius: .5rem;
+	overflow: hidden;
+	thead th{
+		text-align: left;
+		padding: 0.75rem 1rem;
+		background: #F4F8FE;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+	}
+	tbody td{
+		padding: 0.75rem 1rem;
+	}
+	tbody tr{
+		border-top: 1px solid $gray-100;
+	}
+	.resultPrice td{
+		padding: 1rem;
+	}
+	.removeBtn{
+		border: none;
+		background: none;
+		cursor: pointer;
+		
+	}
+}
+
+.cardWrapper{
+	height: fit-content;
+	display: flex;
+	max-width: 25.9375rem;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 1rem;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+	border-radius: 1rem;
+	background: #FFF;
+	box-shadow: 0px 4px 20px 0px rgba(212, 217, 222, 0.25);
+	position: sticky;
+	top: 7rem;
+	h2{
+		color: $gray-900;
+		font-size: 1.25rem;
+		font-weight: 500;
+		line-height: normal;
+		margin: 0;
+		padding: 0;
+	}
+	.line{
+		width: 100%;
+		height: 1px;
+		background: $gray-100;
+		display: block;
+		margin: 1rem 0;
+	}
+	.price{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 1.5rem;
+		font-weight: 500;
+		span:first-child{
+			color: #888;
+		}
+	}
+	.btn{
+		width: 100%;
+	}
+	.input{
+		width: 100%;
+	}
+	.formFlex{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		gap: 1rem;
+	}
+}
