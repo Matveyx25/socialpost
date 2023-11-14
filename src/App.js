@@ -12,6 +12,7 @@ import { ChannelsCatalog } from "./components/pages/channels-catalog/channels-ca
 import './styles/reset.scss'
 import { AuthModals } from './components/AuthModals/AuthModals';
 import { Cart } from './components/pages/cart/cart';
+import { Policy } from "./components/pages/policy/policy";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -32,6 +33,7 @@ function App() {
 							'seller': <SellerContent/>
 						}[role]}
 					</>}/>
+					<Route path="/policy" element={<Policy/>}/>
 					<Route path="/contact" element={<Contacts/>}/>
 					<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
 					<Route path="/cart" element={<Cart/>}/>

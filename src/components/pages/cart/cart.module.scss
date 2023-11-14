@@ -77,6 +77,66 @@
 	}
 }
 
+
+.checkbox{
+	margin-bottom: 1rem;
+	input{
+		display: none;
+		&:checked + label{
+			.checkboxIcon{
+				&:first-child{
+					display: none;
+				}
+				&:nth-child(2){
+					display: block;
+				}
+			}
+		}
+	}
+	label{
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: $gray-800;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+		cursor: pointer;
+		a{
+			text-decoration: none;
+			color: $main-blue-color;
+		}
+		.checkboxIcon{
+			min-width: 20px;
+			min-height: 20px;
+			&:first-child{
+				display: block;
+				color: $gray-500;
+			}
+			&:nth-child(2){
+				display: none;
+				color: #436CFF;
+			}
+		}
+		&:hover{
+			transition: .4s color;
+			color: $gray-700;
+			.checkboxIcon{
+				&:first-child{
+					transition: .4s color;
+					color: $gray-400;
+				}
+				&:last-child{
+					transition: .4s color;
+					color: #698AFF;
+				}
+			}
+		}
+	}
+}
+
 .wrapper{
 	padding-bottom: 2rem;
 	padding-top: 9.5rem;

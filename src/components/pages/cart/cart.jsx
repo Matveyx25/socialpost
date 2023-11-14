@@ -2,13 +2,12 @@ import React, { useEffect, useState } from 'react'
 import s from './cart.module.scss'
 import channels from '../../../data/channels.json'
 import { Counter } from '../../Shared/Counter/Counter';
-import { IconTrash } from '@tabler/icons-react';
+import { IconSquare, IconSquareCheckFilled, IconTrash } from '@tabler/icons-react';
 import emailjs from '@emailjs/browser';
-import { Field, Form, Formik } from 'formik';
+import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../Shared/Button/Button';
 import { InputField } from '../../Shared/Input/Input';
-import { CartEmail } from '../../Shared/Email/cart-email';
 import ReactDomServer from 'react-dom/server';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -18,7 +17,10 @@ export const Cart = () => {
   return !cart.length || cart.map(el => ({ ...channels.find(e => e.id === el.id), count: el.count }))
     .reduce((a, b) =>
       a + (b.price?.replace(/\s/g, '') || 0) * b.count, 0);
-};
+	};
+
+	const [payingNotice, set_payingNotice] = useState(false)
+	const [policy, set_policy] = useState(false)
 	
 	const [cart, set_cart] = useState(() => {
 		const saved = localStorage.getItem("cart");
@@ -231,8 +233,28 @@ export const Cart = () => {
 											<span>{cart.length ? (sum + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,') : '0'} ₽</span>
 										</p>
 										<span className={s.line}></span>
+										<div className={s.checkbox}>	
+											<input type="checkbox" name="payingNotice" id="payingNotice" checked={payingNotice} onChange={() => set_payingNotice(prev => !prev)}/>
+											<label htmlFor="payingNotice">
+												<IconSquare className={s.checkboxIcon} size={20}/>
+												<IconSquareCheckFilled className={s.checkboxIcon} size={20}/>
+												<span>
+													Обращаем ваше вниманием, что до момента оплаты администраторы каналов вправе отказаться от размещения или изменить его стоимость в зависимости от поста.
+												</span>
+											</label>
+										</div>
+										<div className={s.checkbox}>	
+											<input type="checkbox" name="policy" id="policy" checked={policy} onChange={() => set_policy(prev => !prev)}/>
+											<label htmlFor="policy">
+												<IconSquare className={s.checkboxIcon} size={20}/>
+												<IconSquareCheckFilled className={s.checkboxIcon} size={20}/>
+												<span>
+													Принимаю <NavLink to={'/policy'}>политику конфидециальности</NavLink>
+												</span>
+											</label>
+										</div>
 										<div className={s.btns}>
-											<Button label="Оформить заказ" disabled={!values.fullName || !values.email || !cart.length || Object.values(errors).length} className={s.btn}/> 
+											<Button label="Оформить заказ" disabled={!values.fullName || !values.email || !policy || !payingNotice || !cart.length || Object.values(errors).length} className={s.btn}/> 
 										</div>
 									</Form>)}
 							</Formik>
