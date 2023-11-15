@@ -15,6 +15,7 @@ import { Cart } from './components/pages/cart/cart';
 import { Policy } from "./components/pages/policy/policy";
 import { MainLayout } from "./components/Layouts/MainLayout";
 import { DashboardLayout } from "./components/Layouts/DashboardLayout";
+import { MainDashboard } from "./components/pages/dashboard/main";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -41,7 +42,7 @@ function App() {
 					<Route path="*" element={<NotFound/>}/>
 				</Route>
 				<Route element={<DashboardLayout/>}>
-					<Route path="/dashboard/" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/" element={<MainDashboard/>}/>
 					<Route path="/dashboard/my-channels" element={<div>Dashboard</div>}/>
 					<Route path="/dashboard/placement-appointments" element={<div>Dashboard</div>}/>
 					<Route path="/dashboard/payments" element={<div>Dashboard</div>}/>

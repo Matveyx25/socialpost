@@ -13,9 +13,14 @@ const themes = {
 	}
 }
 
-export const Button = ({theme = 'primary', fetching, rightIcon, leftIcon, label, className, onClick, disabled}) => {
+export const Button = ({theme = 'primary', size = 'normal', fetching, rightIcon, leftIcon, label, className, onClick, disabled}) => {
 	return (
-		<button onClick={onClick} className={`${className} ${s.wrapper} ${themes[theme].className} ${fetching && s.fetching}`} disabled={disabled}>
+		<button 
+		onClick={onClick} 
+		className={`${className} ${s.wrapper}
+								${themes[theme].className} 
+								${fetching && s.fetching} 
+								${size === 'small' && s.small}`} disabled={disabled}>
 			{fetching ? 
 				<div className={s.iconWrapper}>
 					<IconLoader2 color={themes[theme].color} className={s.loader} />
