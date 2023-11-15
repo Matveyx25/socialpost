@@ -3,7 +3,7 @@ import { PublisherContent } from "./components/PublisherContent/PublisherContent
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { SellerContent } from './components/SellerContent/SellerContent';
 import { Header } from "./components/Header/Header";
-import { Route, Routes } from "react-router";
+import { Route, Routes, Outlet } from "react-router";
 import "animate.css";
 import { Footer } from "./components/Footer/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
@@ -13,6 +13,8 @@ import './styles/reset.scss'
 import { AuthModals } from './components/AuthModals/AuthModals';
 import { Cart } from './components/pages/cart/cart';
 import { Policy } from "./components/pages/policy/policy";
+import { MainLayout } from "./components/Layouts/MainLayout";
+import { DashboardLayout } from "./components/Layouts/DashboardLayout";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -21,9 +23,8 @@ function App() {
   return (
     <div>
 			<AuthModals isOpen={modal} setOpen={setModal}/>
-			<Header {...{role, setRole}} onModalOpen={() => setModal('login')}/>
-			<div style={{minHeight: '100vh'}}>
-				<Routes>
+			<Routes>
+				<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
 					<Route path="/" element={
 					<>
 						<SwitchWrapper {...{role, setRole}}/>
@@ -38,9 +39,17 @@ function App() {
 					<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
 					<Route path="/cart" element={<Cart/>}/>
 					<Route path="*" element={<NotFound/>}/>
-				</Routes>
-			</div>
-			<Footer/>
+				</Route>
+				<Route element={<DashboardLayout/>}>
+					<Route path="/dashboard/" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/my-channels" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/placement-appointments" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/payments" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/requisites" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/faq" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/support" element={<div>Dashboard</div>}/>
+				</Route>
+			</Routes>
     </div>
   );
 }

@@ -1,0 +1,70 @@
+@import '~/src/styles/variables.scss';
+
+.wrapper{
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	width: 19.8125rem;
+	background: #fff;
+	border-right: 1px solid $gray-100;
+	.logoWrapper{
+		width: 100%;
+		padding: 1.75rem 1.25rem;
+		img{
+			width: 10.04463rem;
+		}
+	}
+	.itemWrapper{
+		width: 100%;
+		padding: 0rem 1.25rem;
+		gap: 0.75rem;
+		height: 3rem;
+		display: flex;
+		align-items: center;
+		color: $gray-800;
+		text-decoration: none;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; 
+		letter-spacing: 0.02rem;
+		transition: .2s;
+		svg{
+			width: 24px;
+			height: 24px;
+			color: $gray-500;
+		}
+		.count{
+			color: $main-blue-color;
+			font-size: 0.875rem;
+			font-style: normal;
+			font-weight: 500;
+			line-height: 1.375rem;
+			letter-spacing: 0.0175rem;
+			display: flex;
+			height: 1.5rem;
+			padding: 0.25rem 0.5rem;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 0.625rem;
+			border-radius: 0.25rem;
+			background: #EDF1FF;
+			margin-left: auto;
+		}
+		&:hover{
+			background: #EDF1FF;
+		}
+		&.active{
+			background: $main-blue-color;
+			color: #fff;
+			svg{
+				color: #fff;
+			}
+			.count{
+				background: #7C99FF;
+				color: #fff;
+			}
+		}
+	}
+}

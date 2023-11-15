@@ -204,7 +204,7 @@ export const Cart = () => {
 								</tbody>
 						</table>
 						<div className={s.cardWrapper}>
-							<h5>Оформить заказ</h5>
+							<h5>Ваш заказ</h5>
 							<Formik
 								initialValues={{
 									fullName: '',
@@ -229,11 +229,11 @@ export const Cart = () => {
 										</div>
 										<span className={s.line}></span>
 										<p className={s.price}>
-											<span>Итого: </span> 
+											<span>Итого </span> 
 											<span>{cart.length ? (sum + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,') : '0'} ₽</span>
 										</p>
 										<span className={s.line}></span>
-										<div className={s.checkbox}>	
+										<div className={`${s.checkbox + ' ' + s.sm}`}>	
 											<input type="checkbox" name="payingNotice" id="payingNotice" checked={payingNotice} onChange={() => set_payingNotice(prev => !prev)}/>
 											<label htmlFor="payingNotice">
 												<IconSquare className={s.checkboxIcon} size={20}/>
@@ -243,7 +243,7 @@ export const Cart = () => {
 												</span>
 											</label>
 										</div>
-										<div className={s.checkbox}>	
+										<div className={`${s.checkbox + ' ' + s.sm}`}>	
 											<input type="checkbox" name="policy" id="policy" checked={policy} onChange={() => set_policy(prev => !prev)}/>
 											<label htmlFor="policy">
 												<IconSquare className={s.checkboxIcon} size={20}/>
