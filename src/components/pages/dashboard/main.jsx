@@ -6,6 +6,7 @@ import { IconPlus } from '@tabler/icons-react';
 import { ChannelItem } from './channel-item';
 import { Tabs } from '../../Shared/Tabs/Tabs';
 import { ReportItem } from './report-item/report-item';
+import { useOutletContext } from 'react-router-dom';
 
 const tabs = [
 	{label: 'Запросы', count: 4, id: 5},
@@ -19,6 +20,8 @@ const tabs = [
 export const MainDashboard = () => {
 	const [tab, setTab] = useState(tabs[0].id)
 
+	const [setModal] = useOutletContext()
+
 	return (
 		<div className={s.grid}>
 			<div className={s.colSm}>
@@ -31,12 +34,12 @@ export const MainDashboard = () => {
 				<DashboardCard className={s.fullHeight}>
 					<div className={s.cardHeader}>
 						<span>Список каналов</span>
-						<Button size="small" label={"Добавить"} leftIcon={<IconPlus size={18}/>}/>
+						<Button size="small" label={"Добавить"} leftIcon={<IconPlus size={18}/>} onClick={() => setModal('add-channel')}/>
 					</div>
 					<div className={s.line}></div>
 					<div className={s.channelsWrapper}>
-						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}/>
-						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}/>
+						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}  onClick={() => setModal('remove-channel')}/>
+						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}  onClick={() => setModal('remove-channel')}/>
 					</div>
 				</DashboardCard>
 			</div>

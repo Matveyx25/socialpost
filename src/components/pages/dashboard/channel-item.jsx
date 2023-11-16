@@ -3,7 +3,7 @@ import s from './dashboard.module.scss'
 import { Button } from '../../Shared/Button/Button';
 import { IconX } from '@tabler/icons-react';
 
-export const ChannelItem = ({title, img, link}) => {
+export const ChannelItem = ({title, img, link, onClick}) => {
 	return (
 		<div className={s.channelItem}>
 			<div className={s.img}>
@@ -12,7 +12,7 @@ export const ChannelItem = ({title, img, link}) => {
 			<a href={link}>
 				{title}
 			</a>
-			<Button size='small' label={'Убрать'} leftIcon={<IconX size={18}/>} theme='secondary'/>
+			<Button size='small' label={'Убрать'} leftIcon={<IconX size={18}/>} theme='secondary' onClick={onClick}/>
 		</div>
 	)
 }

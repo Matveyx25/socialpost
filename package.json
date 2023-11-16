@@ -33,7 +33,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build-host": "PUBLIC_URL=http://socialpost.ru react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -230,7 +230,7 @@ export const Cart = () => {
 										<span className={s.line}></span>
 										<p className={s.price}>
 											<span>Итого </span> 
-											<span>{cart.length ? (sum + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,') : '0'} ₽</span>
+											<span>{cart.length ? sum : '0'} ₽</span>
 										</p>
 										<span className={s.line}></span>
 										<div className={`${s.checkbox + ' ' + s.sm}`}>	

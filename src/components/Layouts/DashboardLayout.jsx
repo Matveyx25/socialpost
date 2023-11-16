@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
 import s from './Layouts.module.scss'
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
+import { DashboardModals } from "../DashboardModals/DashboardModals";
 
 const routesTitle = {
 	'/dashboard/': 'Дашборд',
@@ -23,22 +24,26 @@ const dropdown = [
 
 export const DashboardLayout = ({}) => {
 	const { pathname } = useLocation()
+	const [modal, setModal] = useState('')
 
   return (
-		<div className={s.wrapper}>
-			<Sidebar/>
-			<div className={s.content}>
-				<div className={s.header}>
-					{routesTitle[pathname]}
-					<Dropdown 
-					options={dropdown} label={<img src="https://st.adda247.com/https://adda247-wp-multisite-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/multisite/sites/5/2023/08/03164553/mukesh-ambani-e1691061413489.png"/>}
-					arrowClosed={<IconChevronDown size={18}/>}
-					arrowOpen={<IconChevronUp size={18}/>}/>
-				</div>
-				<div className={s.scroll}>
-					<Outlet />
+		<>
+			<DashboardModals isOpen={modal} setOpen={setModal}/>
+			<div className={s.wrapper}>
+				<Sidebar/>
+				<div className={s.content}>
+					<div className={s.header}>
+						{routesTitle[pathname]}
+						<Dropdown 
+						options={dropdown} label={<img src="https://st.adda247.com/https://adda247-wp-multisite-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/multisite/sites/5/2023/08/03164553/mukesh-ambani-e1691061413489.png"/>}
+						arrowClosed={<IconChevronDown size={18}/>}
+						arrowOpen={<IconChevronUp size={18}/>}/>
+					</div>
+					<div className={s.scroll}>
+						<Outlet context={[setModal]}/>
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
   );
 };

@@ -1,0 +1,99 @@
+@import '~/src/styles/variables.scss';
+
+.form{
+	padding: 1rem 0;
+	display: flex;
+	width: 28.4375rem;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	gap: 1rem;
+	.removeText{
+		color: $gray-800;
+		font-size: 1rem;
+		text-align: left;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+	}
+	& > *{
+		width: 100%;
+	}
+	& > p{
+		text-align: center;
+		color: $gray-500;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+	}
+}
+
+.checkbox{
+	input{
+		display: none;
+		&:checked + label{
+			.checkboxIcon{
+				&:first-child{
+					display: block;
+				}
+				&:last-child{
+					display: none;
+				}
+			}
+		}
+	}
+	label{
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		color: $gray-800;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+		cursor: pointer;
+		.checkboxIcon{
+			&:first-child{
+				display: none;
+				color: $gray-500;
+			}
+			&:last-child{
+				display: block;
+				color: #436CFF;
+			}
+		}
+		&:hover{
+			transition: .4s color;
+			color: $gray-700;
+			.checkboxIcon{
+				&:first-child{
+					transition: .4s color;
+					color: $gray-400;
+				}
+				&:last-child{
+					transition: .4s color;
+					color: #698AFF;
+				}
+			}
+		}
+	}
+}
+
+.rowBtns{
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	align-self: stretch;
+	padding-top: 1rem;
+	border-top: 1px solid $gray-100;
+	.btnHalf{
+		flex-grow: 1;
+		width: calc((100% - .5rem) / 2);
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
