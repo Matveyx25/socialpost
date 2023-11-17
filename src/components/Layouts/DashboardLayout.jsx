@@ -8,6 +8,7 @@ import { DashboardModals } from "../DashboardModals/DashboardModals";
 
 const routesTitle = {
 	'/dashboard/': 'Дашборд',
+	'/dashboard': 'Дашборд',
 	'/dashboard/my-channels': 'Мои каналы',
 	'/dashboard/placement-appointments': 'Заявки на размещение',
 	'/dashboard/payments': 'Выплаты',
