@@ -17,6 +17,7 @@ import { MainLayout } from "./components/Layouts/MainLayout";
 import { DashboardLayout } from "./components/Layouts/DashboardLayout";
 import { MainDashboard } from "./components/pages/dashboard/main";
 import { MyChannels } from "./components/pages/dashboard/my-channels/my-channels";
+import { Reports } from "./components/pages/dashboard/reports/reports";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -45,7 +46,7 @@ function App() {
 				<Route element={<DashboardLayout/>}>
 					<Route path="/dashboard/" element={<MainDashboard/>}/>
 					<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
-					<Route path="/dashboard/placement-appointments" element={<div>Dashboard</div>}/>
+					<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
 					<Route path="/dashboard/payments" element={<div>Dashboard</div>}/>
 					<Route path="/dashboard/requisites" element={<div>Dashboard</div>}/>
 					<Route path="/dashboard/faq" element={<div>Dashboard</div>}/>

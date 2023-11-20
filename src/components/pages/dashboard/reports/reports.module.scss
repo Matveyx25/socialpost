@@ -1,0 +1,109 @@
+@import '~/src/styles/variables.scss';
+
+.grid{
+	display: flex;
+	flex-direction: column;
+	gap: 1.25rem;
+	height: 100%;
+}
+.tableCard{
+	height: 100%;
+	border-radius: 1rem;
+	border: 1px solid $gray-100;
+	background: #FFF;
+	.filters{
+		display: flex;
+		padding: 1rem;
+		align-items: center;
+		gap: 0.75rem;
+		align-self: stretch;
+	}
+	table{
+		width: 100%;
+		box-sizing: border-box;
+		background: #FFF;
+		height: fit-content;
+		overflow: hidden;
+		.preview{
+			display: flex;
+			align-items: center;
+			gap: .62rem;
+			.img{
+				width: 5.25rem;
+				height: 3rem;
+				flex-shrink: 0;
+				border-radius: 0.5rem;
+				border: 1px solid $gray-100;
+				overflow: hidden;
+				img{
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+			p{
+				max-width: 15.5rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				color: $gray-800;
+				font-size: 1rem;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 1.5rem; /* 150% */
+				letter-spacing: 0.02rem;
+			}
+		}
+		thead th{
+			text-align: left;
+			padding: 0.75rem 1rem;
+			color: $gray-500;
+			background: #F4F8FE;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem;
+			letter-spacing: 0.02rem;
+			.flex{
+				display: flex;
+				align-items: center;
+				gap: 0.625rem;
+			}
+		}
+		tbody td{
+			color: $gray-800;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem; /* 150% */
+			letter-spacing: 0.02rem;
+			padding: 0.75rem 1rem;
+			vertical-align: middle;
+			.center{
+				display: flex;
+				align-items: center;
+			}
+		}
+		tbody tr{
+			border-top: 1px solid $gray-100;
+		}
+		thead{
+			border-bottom: 1px solid $gray-100;
+			border-top: 1px solid $gray-100;
+		}
+	}
+}
+
+// .calendar{
+// 	position: relative;
+// 	:global(.rdrMonthAndYearWrapper){
+// 		position: absolute;
+// 		background: #fff;
+// 		bottom: -60px;
+// 	}
+// 	:global(.rdrMonthsVertical){
+// 		position: absolute;
+// 		background: #fff;
+// 		bottom: -60px;
+// 		transform: translateY(100%);
+// 	}
+// }

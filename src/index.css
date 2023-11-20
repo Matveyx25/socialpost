@@ -37,8 +37,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, 'SF Regular',
-    sans-serif;
+  font-family: 'SF Regular';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import s from './channels-catalog.module.scss'
 import { Filters } from '../../Filters/Filters'
-import Select from 'react-select'
-import { IconChevronDown } from '@tabler/icons-react';
 import { ChannelCard } from '../../ChannelCard/ChannelCard';
 import channels from '../../../data/channels.json'
+import { Select } from '../../Shared/Select/Select';
 
 const options = [
   { value: 'subscribers more', label: 'Подписчиков: Больше' },
@@ -76,41 +75,7 @@ export const ChannelsCatalog = () => {
 						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>
 					<div className={s.content}>
 						<div className={s.header}>
-							<Select
-								defaultValue={options[0]}
-								onChange={setSelectedOption}
-								options={options}
-								isSearchable={false}
-								components={{
-									DropdownIndicator: () => <IconChevronDown size={18}/>
-								}}
-								styles={{
-									control: (baseStyles) => ({
-										...baseStyles,
-										borderColor: '#E9EAEA',
-										borderRadius: 8,
-										minHeight: 48,
-										paddingLeft: 16,
-										paddingRight: 16
-									}),
-									singleValue: (baseStyles) => ({
-										...baseStyles,
-										padding: 0
-									}),
-									valueContainer: (baseStyles)=> ({
-										...baseStyles,
-										padding: 0,
-										paddingRight: 8
-									}),
-									indicatorSeparator: () => ({
-										display: 'none',
-									}),
-									dropdownIndicator: (baseStyles) => ({
-										...baseStyles,
-										padding: 0,
-									}),
-								}}
-							/>
+							<Select defaultValue={options[0]} options={options} setSelectedOption={setSelectedOption}/>
 							<span>
 								Найдено: {(filtered.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
 							</span>
