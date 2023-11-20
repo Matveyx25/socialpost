@@ -11,18 +11,38 @@
 	border-radius: 1rem;
 	border: 1px solid $gray-100;
 	background: #FFF;
+	display: flex;
+	flex-direction: column;
 	.filters{
+		width: 100%;
 		display: flex;
 		padding: 1rem;
 		align-items: center;
 		gap: 0.75rem;
 		align-self: stretch;
+		border-bottom: 1px solid $gray-100;
+		color: $gray-700;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+		.refreshBtn{
+			width: fit-content;
+			padding: 1rem 1.5rem;
+			margin-left: auto;
+		}
+	}
+	.tableWrapper{
+		width: 100%;
+		height: 100%;
+
 	}
 	table{
+		height: 100%;
 		width: 100%;
 		box-sizing: border-box;
 		background: #FFF;
-		height: fit-content;
 		overflow: hidden;
 		.preview{
 			display: flex;
@@ -68,6 +88,30 @@
 				align-items: center;
 				gap: 0.625rem;
 			}
+			&:nth-child(1){
+				width: calc(340/1563 * 100%);
+			}
+			&:nth-child(2){
+				width: calc(220/1563 * 100%);
+			}
+			&:nth-child(3){
+				width: calc(194/1563 * 100%);
+			}
+			&:nth-child(4){
+				width: calc(200/1563 * 100%);
+			}
+			&:nth-child(5){
+				width: calc(190/1563 * 100%);
+			}
+			&:nth-child(6){
+				width: calc(190/1563 * 100%);
+			}
+			&:nth-child(7){
+				width: calc(141/1563 * 100%);
+			}
+			&:nth-child(8){
+				width: calc(88/1563 * 100%);
+			}
 		}
 		tbody td{
 			color: $gray-800;
@@ -84,26 +128,53 @@
 			}
 		}
 		tbody tr{
-			border-top: 1px solid $gray-100;
+			display: table;
+			width: 100%;
+			transition: .3s;
+			&:hover{
+				background: #F4F8FE;
+			}
+			&:not(:first-child){
+				border-top: 1px solid $gray-100;
+			}
+			td{
+				&:nth-child(1){
+					width: calc(340/1563 * 100%);
+				}
+				&:nth-child(2){
+					width: calc(220/1563 * 100%);
+				}
+				&:nth-child(3){
+					width: calc(194/1563 * 100%);
+				}
+				&:nth-child(4){
+					width: calc(200/1563 * 100%);
+				}
+				&:nth-child(5){
+					width: calc(190/1563 * 100%);
+				}
+				&:nth-child(6){
+					width: calc(190/1563 * 100%);
+				}
+				&:nth-child(7){
+					width: calc(141/1563 * 100%);
+				}
+				&:nth-child(8){
+					width: calc(88/1563 * 100%);
+				}
+			}
 		}
 		thead{
 			border-bottom: 1px solid $gray-100;
-			border-top: 1px solid $gray-100;
+			display: table;
+			width: 100%;
+		}
+		tbody{
+			width: 100%;
+			overflow-y: auto;
+			display: block;
+			height: calc(100% - 80px);
+			overflow: auto;
 		}
 	}
 }
-
-// .calendar{
-// 	position: relative;
-// 	:global(.rdrMonthAndYearWrapper){
-// 		position: absolute;
-// 		background: #fff;
-// 		bottom: -60px;
-// 	}
-// 	:global(.rdrMonthsVertical){
-// 		position: absolute;
-// 		background: #fff;
-// 		bottom: -60px;
-// 		transform: translateY(100%);
-// 	}
-// }

@@ -1,0 +1,132 @@
+.paginationWrapper{
+	display: flex;
+	padding: 1rem 1rem 0.75rem 1rem;
+	justify-content: space-between;
+	align-items: center;
+	border-top: 1px solid var(--grey-100, #E9EAEA);
+	box-shadow: 0px 4px 20px 0px rgba(212, 217, 222, 0.25);
+	background: #fff;
+}
+.paginationContainer {
+  display: flex;
+  list-style-type: none;
+  .paginationItem {
+    display: flex;
+		width: 3rem;
+		padding: 0.75rem 1rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		color: #4F5157;
+		text-align: center;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+		border-radius: 0.5rem;
+
+    &.dots:hover {
+      background-color: transparent;
+      cursor: default;
+    }
+    &:hover {
+			background: #EDF1FF;
+      cursor: pointer;
+    }
+
+    &.selected {
+			border: 1px solid #436CFF;
+			color: #436CFF;
+			background: #EDF1FF;
+    }
+
+    &.disabled {
+      pointer-events: none;
+
+			.arrow{
+				color: #919396;
+			}
+
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+	.arrow {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+		color: #65686C;
+		text-align: center;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+		padding: 0.75rem 1rem;
+		border-radius: .5rem;
+		&:hover {
+			background: #EDF1FF;
+			cursor: pointer;
+		}
+
+		&.disabled {
+			color: #919396;
+
+			&:hover {
+				background-color: transparent;
+				cursor: default;
+			}
+		}
+	}
+}
+
+.pageSizeWrapper {
+  display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: #919396;
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.25rem; /* 125% */
+	letter-spacing: 0.02rem;
+  ul{
+		display: flex;
+		list-style-type: none;
+	}
+  .pageSizeItem {
+    display: flex;
+		width: 3rem;
+		padding: 0.75rem 1rem;
+		justify-content: center;
+		align-items: center;
+		gap: 0.75rem;
+		color: #4F5157;
+		text-align: center;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 500;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+		border-radius: 0.5rem;
+    &:hover {
+			background: #EDF1FF;
+      cursor: pointer;
+    }
+    &.selected {
+			border: 1px solid #436CFF;
+			color: #436CFF;
+			background: #EDF1FF;
+    }
+    &.disabled {
+      pointer-events: none;
+      &:hover {
+        background-color: transparent;
+        cursor: default;
+      }
+    }
+  }
+}
