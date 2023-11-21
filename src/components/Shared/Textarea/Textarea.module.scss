@@ -1,0 +1,77 @@
+@import '~/src/styles/variables.scss';
+
+.textareaGroup{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	.header{
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.375rem;
+		letter-spacing: 0.0175rem;
+		color: $gray-800;
+		svg{
+			width: 1.125rem;
+			height: 1.125rem;
+		}
+		.star{
+			color: #EE1F1F;
+		}
+	}
+	.textareaWrapper{
+		display: flex;
+		padding: 0.75rem;
+		align-items: center;
+		gap: 0.5rem;
+		align-self: stretch;
+		border-radius: 0.5rem;
+		border: 1px solid $gray-100;
+		transition: .4s;
+		textarea{
+			color: $gray-800;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem;
+			letter-spacing: 0.02rem;
+			border: none;
+			background: none;
+			outline: none !important;
+			width: 100%;
+			height: 9rem;
+			resize: vertical;
+		}
+		&:has(textarea:focus){
+			border-color: $main-blue-color;
+		}
+	}
+	.error{
+		color: $main-red-color;
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.375rem; 
+		letter-spacing: 0.0175rem;
+	}
+	&.error{
+		.textareaWrapper{
+			border-color: $main-red-color;
+		}
+	}
+	&.disabled{
+		.header{
+			color: $gray-400;
+		}
+		.textareaWrapper{
+			input{
+				color: $gray-200;
+			}
+		}
+	}
+}

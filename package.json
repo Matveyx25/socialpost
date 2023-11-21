@@ -25,10 +25,12 @@
     "react-full-page": "^0.1.12",
     "react-html-email": "^3.0.0",
     "react-input-slider": "^6.0.1",
+    "react-markdown": "^9.0.1",
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "react-select": "^5.7.7",
+    "remark-gfm": "^4.0.0",
     "sass": "^1.63.6",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
