@@ -32,6 +32,7 @@ export const Cart = () => {
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 		set_sum(getSum())
+		window.dispatchEvent(new Event("cart-changed"));
 	}, [cart])
 
 

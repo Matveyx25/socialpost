@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './Header.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../Shared/Button/Button'
@@ -6,6 +6,28 @@ import { IconShoppingCart } from '@tabler/icons-react'
 
 export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
+
+	const getSum = () => {
+		return !cart.length || cart.reduce((a, b) =>
+				a + b.count, 0);
+	};
+
+	const [cart, set_cart] = useState(() => {
+		const saved = localStorage.getItem("cart");
+		const initialValue = JSON.parse(saved);
+		return initialValue || "";
+	});
+
+	useEffect(() => {
+		localStorage.setItem("cart", JSON.stringify(cart));
+	}, [cart])
+
+	window.addEventListener('cart-changed', () => {
+		const saved = localStorage.getItem("cart");
+		const initialValue = JSON.parse(saved);
+		set_cart(initialValue || "")
+	})
+
 
 	return (
 		<div className={s.header}>
@@ -37,7 +59,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 						</li>
 					</ul>
 					<div className={s.btns}>
-						<Button onClick={() => navigate('cart')} className={s.cartBtn} leftIcon={<IconShoppingCart/>}/>
+						<Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
 						<NavLink className={s.btn} onClick={() => onModalOpen()}>
 							Войти
 						</NavLink>

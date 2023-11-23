@@ -2,13 +2,15 @@ import { Modal } from "../Shared/Modal/Modal";
 import s from './LoginModal.module.scss'
 import { Input } from '../Shared/Input/Input';
 import { useState } from "react";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
 import { Button } from '../Shared/Button/Button';
 
 export const LoginModal = ({isOpen, setOpen}) => {
 	const [login, set_login] = useState('')
 	const [password, set_password] = useState('')
+
+	const navigate = useNavigate()
 
   return (
 		<Modal {...{isOpen, setOpen}} title={'Вход'} name={'login'}>
@@ -28,7 +30,8 @@ export const LoginModal = ({isOpen, setOpen}) => {
 						<NavLink onClick={() => setOpen('forget')}>Забыли пароль?</NavLink>
 					</div>
 				</div>
-				<Button label="Войти" disabled={!password || !login}/>
+				<Button label="Войти" onClick={() => navigate('/dashboard')}/>
+				{/* <Button label="Войти" disabled={!password || !login}/> */}
 				<p>Или</p>
 				<div className={s.btns}>
 					<Button theme="secondary" label="Вконтакте" leftIcon={<img src="./images/icons/vk.png"/>}/>

@@ -3,14 +3,17 @@ import s from './faq.module.scss'
 import { DashboardCard } from '../dashboard-card';
 import { Button } from '../../../Shared/Button/Button';
 import { Accordion } from '../../../Shared/Accordion/Accordion';
+import { useNavigate, useNavigation } from 'react-router-dom';
 
 export const FAQ = () => {
+	const navigation = useNavigate()
+
 	return (
 		<div className={s.grid}>
 			<DashboardCard>
 				<div className={s.cardHeader}>
 					Часто задаваемые вопросы
-					<Button label={"Написать в поддержку"} className={s.btn}/>
+					<Button label={"Написать в поддержку"} className={s.btn} onClick={() =>  window.open('https://t.me', '_blank')}/>
 				</div>
 			</DashboardCard>
 			<div className={s.questions}>

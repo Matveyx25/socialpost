@@ -25,7 +25,7 @@ export const Footer = () => (
 							</li>
 						))}
 					</ul>
-					<a href="https://tg.me" target='_blank' className={s.btn}>
+					<a href="https://t.me" target='_blank' className={s.btn}>
 						<img src="/images/icons/tg.svg" alt="" />
 					</a>
 				</div>

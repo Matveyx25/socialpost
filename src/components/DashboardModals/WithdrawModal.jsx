@@ -18,7 +18,7 @@ export const WithdrawModal = ({isOpen, setOpen}) => {
 		<Modal {...{isOpen, setOpen}} title={'Вывести средства'} name={'withdraw-modal'}>
 			<form className={s.form}>
 				<Input label={'Сумма вывода (мин. 1,000 ₽)'} value={price} onChange={(e) => set_price(e.target.value)}/>
-				<Select label="Способ оплаты" options={types} defaultValue={types[0]} setSelectedOption={set_type}/>
+				<Select label="Способ оплаты" fullWidth options={types} defaultValue={types[0]} setSelectedOption={set_type}/>
 				<div className={s.rowBtns}>
 					<Button label="Вывести" disabled={!price} className={s.fullBtn}/>
 				</div>

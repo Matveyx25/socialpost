@@ -32,6 +32,7 @@ export const ChannelsCatalog = () => {
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
+		window.dispatchEvent(new Event("cart-changed"));
 	}, [cart])
 
 	const onFilterSubmit = (filter) => {

@@ -2,10 +2,8 @@ import { useState } from "react";
 import { PublisherContent } from "./components/PublisherContent/PublisherContent";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { SellerContent } from './components/SellerContent/SellerContent';
-import { Header } from "./components/Header/Header";
-import { Route, Routes, Outlet } from "react-router";
+import { Route, Routes } from "react-router";
 import "animate.css";
-import { Footer } from "./components/Footer/Footer";
 import { NotFound } from "./components/NotFound/NotFound";
 import { Contacts } from "./components/Contacts/Contacts";
 import { ChannelsCatalog } from "./components/pages/channels-catalog/channels-catalog";
@@ -23,6 +21,7 @@ import { NavLink } from "react-router-dom";
 import { Payments } from "./components/pages/dashboard/payments/payments";
 import { FAQ } from "./components/pages/dashboard/faq/faq";
 import { Requisites } from "./components/pages/dashboard/requisites/requisites";
+import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -31,6 +30,7 @@ function App() {
   return (
     <div>
 			<AuthModals isOpen={modal} setOpen={setModal}/>
+			<ScrollToTop />
 			<Routes>
 				<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
 					<Route path="/" element={
@@ -49,7 +49,7 @@ function App() {
 					<Route path="*" element={<NotFound/>}/>
 				</Route>
 				<Route element={<DashboardLayout/>}>
-					<Route path="/dashboard/" element={<MainDashboard/>} handle={{
+					<Route path="/dashboard" element={<MainDashboard/>} handle={{
 						crumb: () => <span>Дашборд</span>,
 					}}/>
 					<Route path="/dashboard/my-channels" element={<MyChannels/>} 
