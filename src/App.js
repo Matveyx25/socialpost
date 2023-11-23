@@ -20,6 +20,7 @@ import { MyChannels } from "./components/pages/dashboard/my-channels/my-channels
 import { Reports } from "./components/pages/dashboard/reports/reports";
 import { Report } from "./components/pages/dashboard/report/report";
 import { NavLink } from "react-router-dom";
+import { Payments } from "./components/pages/dashboard/payments/payments";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -61,7 +62,7 @@ function App() {
 					handle={{
 						crumb: () => <span><NavLink to={'/dashboard/placement-appointments'}>Заявки на размещени</NavLink>/</span>,
 					}}/>
-					<Route path="/dashboard/payments" element={<div>Dashboard</div>} 
+					<Route path="/dashboard/payments" element={<Payments/>} 
 					handle={{
 						crumb: () => <span>Выплаты</span>,
 					}}/>

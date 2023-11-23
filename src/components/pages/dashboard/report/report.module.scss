@@ -57,6 +57,20 @@
 	gap: 0.75rem;
 	color: $gray-800;
 	align-self: stretch;
+	p{
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.125rem; /* 128.571% */
+		letter-spacing: 0.0175rem;
+	}	
+	strong{
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 600;
+		line-height: 1.125rem; /* 128.571% */
+		letter-spacing: 0.0175rem;
+	}
 }
 .btn{
 	width: 100%;

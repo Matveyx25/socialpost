@@ -4,6 +4,7 @@ import { RemoveChannelModal } from './RemoveChannelModal'
 import { EditChannelModal } from './EditChannelModal'
 import { RemoveReportModal } from './RemoveReportModal'
 import { ApproveReportModal } from './ApproveReportModal'
+import { WithdrawModal } from './WithdrawModal'
 
 export const DashboardModals = ({isOpen, setOpen}) => {
 	return (
@@ -13,6 +14,7 @@ export const DashboardModals = ({isOpen, setOpen}) => {
 			<EditChannelModal {...{isOpen, setOpen}}/>
 			<RemoveReportModal {...{isOpen, setOpen}}/>
 			<ApproveReportModal {...{isOpen, setOpen}}/>
+			<WithdrawModal {...{isOpen, setOpen}}/>
 		</div>
 	)
 }

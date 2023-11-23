@@ -69,7 +69,7 @@ export const Pagination = props => {
 					<IconChevronRight/>
 				</li>
 			</ul>
-			<div className={s.pageSizeWrapper}>
+			{totalCount > 30 && <div className={s.pageSizeWrapper}>
 				<p>
 					Элементов на странице:
 				</p>
@@ -77,17 +77,17 @@ export const Pagination = props => {
 					<li className={classNames(s.pageSizeItem, pageSize === 30 && s.selected)} onClick={() => setSize(30)}>
 						30
 					</li>
-					<li className={classNames(s.pageSizeItem, pageSize === 60 && s.selected)} onClick={() => setSize(60)}>
+					{totalCount > 60 && <li className={classNames(s.pageSizeItem, pageSize === 60 && s.selected)} onClick={() => setSize(60)}>
 						60
-					</li>
-					<li className={classNames(s.pageSizeItem, pageSize === 90 && s.selected)} onClick={() => setSize(90)}>
+					</li>}
+					{totalCount > 90 && <li className={classNames(s.pageSizeItem, pageSize === 90 && s.selected)} onClick={() => setSize(90)}>
 						90
-					</li>
-					<li className={classNames(s.pageSizeItem, pageSize === 120 && s.selected)} onClick={() => setSize(120)}>
+					</li>}
+					{totalCount > 120 && <li className={classNames(s.pageSizeItem, pageSize === 120 && s.selected)} onClick={() => setSize(120)}>
 						120
-					</li>
+					</li>}
 				</ul>
-			</div>
+			</div>}
 		</div>
   );
 };
