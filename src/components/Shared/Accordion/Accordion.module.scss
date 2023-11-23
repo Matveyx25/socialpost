@@ -1,0 +1,63 @@
+@import '~/src/styles/variables.scss';
+
+.wrapper{
+	border-radius: 1rem;
+	border: 1px solid $gray-100;
+	background: #FFF;
+	display: flex;
+	width: 100%;
+	padding: 1rem;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	transition: .3s;
+	.title{
+		color: $gray-800;
+		font-size: 1rem;
+		font-style: normal;
+		font-family: 'SF Medium';
+		font-weight: 500;
+		line-height: 1.5rem;
+		letter-spacing: 0.02rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		cursor: pointer;
+		.chevronUp{
+			display: none;
+		}
+	}
+	.content{
+		color: $gray-800;
+		font-size: 1rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.5rem; /* 150% */
+		letter-spacing: 0.02rem;
+		padding-top: 0;
+		margin-top: 0;
+		border-top: 0;
+		width: 100%;
+		height: 0;
+		overflow: hidden;
+		transition: .3s;
+	}
+	&.open{
+		border-color: #A1B6FF;
+		.title{
+			.chevronUp{
+				display: block;
+			}
+			.chevronDown{
+				display: none;
+			}
+		}
+		.content{
+			padding-top: 1rem;
+			margin-top: 1rem;
+			border-top: 1px solid $gray-100;
+			height: fit-content;
+		}
+	}
+}

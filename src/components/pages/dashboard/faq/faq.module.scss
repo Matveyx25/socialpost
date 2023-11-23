@@ -1,0 +1,25 @@
+@import '~/src/styles/variables.scss';
+
+.cardHeader{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: $gray-800;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: 0.025rem;
+	.btn{
+		padding: 1rem 1.5rem;
+		width: fit-content;
+	}
+}
+
+.questions{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.5rem;
+	margin-top: 1.25rem;
+}
