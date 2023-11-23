@@ -1,0 +1,50 @@
+@import '~/src/styles/variables.scss';
+
+
+.cardHeader{
+	display: flex;
+	align-items: center;
+	color: $gray-800;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: 0.025rem;
+	gap: .5rem;
+	.btns{
+		display: flex;
+		gap: 0.5rem;
+		margin-left: auto;
+	}
+}
+
+.formsWrapper{
+	display: flex;
+	gap: 1.25rem;
+	height: 100%;
+	margin-top: 1.25rem;
+}
+
+.line{
+	width: 100%;
+	height: 1px;
+	background: $gray-100;
+	margin: 1rem 0;
+}
+
+.formCard{
+	max-width: 36.3125rem;
+	.formRow{
+		display: flex;
+		align-items: flex-start;
+		gap: 0.5rem;
+		align-self: stretch;
+		margin-bottom: 1rem;
+	}
+	.input, .select, .calendar{
+		width: 100%;
+	}
+	.btn{
+		width: 100%;
+	}
+}

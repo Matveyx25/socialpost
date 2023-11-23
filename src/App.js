@@ -22,6 +22,7 @@ import { Report } from "./components/pages/dashboard/report/report";
 import { NavLink } from "react-router-dom";
 import { Payments } from "./components/pages/dashboard/payments/payments";
 import { FAQ } from "./components/pages/dashboard/faq/faq";
+import { Requisites } from "./components/pages/dashboard/requisites/requisites";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -67,7 +68,7 @@ function App() {
 					handle={{
 						crumb: () => <span>Выплаты</span>,
 					}}/>
-					<Route path="/dashboard/requisites" element={<div>Dashboard</div>} 
+					<Route path="/dashboard/requisites" element={<Requisites/>} 
 					handle={{
 						crumb: () => <span>Реквизиты</span>,
 					}}/>

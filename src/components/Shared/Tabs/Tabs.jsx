@@ -7,7 +7,7 @@ export const Tabs = ({tabs, setTab, tab}) => {
 			{tabs?.map(el => (
 				<div className={`${s.tab} ${tab === el.id && s.active}`} onClick={() => setTab(el.id)}>
 					<span>{el.label}</span>
-					<span className={s.count}>{el.count}</span>
+					{typeof el.count !== 'undefined' && <span className={s.count}>{el.count}</span>}
 				</div>
 			))}
 		</div>
