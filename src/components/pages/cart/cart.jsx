@@ -80,7 +80,7 @@ export const Cart = () => {
 								return ( 
 										<tr key={channel.id}>
 											<td style={{ border: '1px solid black', padding: '8px' }}>{channel.title}</td>
-											<td style={{ border: '1px solid black', padding: '8px' }}>Нативный</td>
+											<td style={{ border: '1px solid black', padding: '8px' }}>{el.format}</td>
 											<td style={{ border: '1px solid black', padding: '8px' }}>{el.count}</td>
 											<td style={{ border: '1px solid black', padding: '8px' }}>{+channel?.price.replace(/\s/g, '') * +el.count}₽</td>
 										</tr>
@@ -157,7 +157,7 @@ export const Cart = () => {
 														</td>
 														<td>
 															<div>
-																Нативный
+																{el.format}
 															</div>
 														</td>
 														<td>

@@ -44,13 +44,17 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					...baseStyles,
 					padding: 0
 				}),
-				option: (baseStyles) => ({
+				option: (baseStyles, {isSelected}) => ({
 					...baseStyles,
 					padding: '0.5rem 0.75rem',
 					color: '#4F5157',
 					fontFamily: 'SF Regular',
 					fontSize: '1rem',
-					lineHeight: '1.5rem'
+					lineHeight: '1.5rem',
+					background: isSelected ? 'rgba(237, 241, 255, 1)' : 'none', 
+					"&:hover": {
+						background: 'rgba(237, 241, 255, 1)'
+					}
 				}),
 				multiValue: (styles, { data }) => {
 					return {

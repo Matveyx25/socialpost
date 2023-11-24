@@ -8,10 +8,11 @@ import { NavLink } from 'react-router-dom';
 
 export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
+	const [selectedFormat, setSelectedFormat] = useState(inCart ? cart?.find(el => el.id === id).format : formats[0])
 
 	const addToCart = () => {
 		set_inCart(true)
-		updateCart([...cart, {id, count: 1, format: ''}])
+		updateCart([...cart, {id, count: 1, format: selectedFormat.value}])
 	}
 	
 	const removeFromCart = () => {
@@ -20,24 +21,27 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 	}
 
 	return (
-		<NavLink className={s.wrapper} to={'/channel/' + id}>
+		<div className={s.wrapper}>
 			<div className={s.flex}>
-				<div className={s.img}>
+				<NavLink className={s.img}  to={'/channel/' + id}>
 					<img src={img}/>
-				</div>
+				</NavLink>
 				<div className={s.content}>
-					<h2>
-						{title}
+					<div className={s.titleFlex}>
+						<NavLink className={s.title}  to={'/channel/' + id}>
+							{title}
+						</NavLink>
 						<span>
 							{type}
 						</span>
-					</h2>
+					</div>
 					<p dangerouslySetInnerHTML={{__html: desc}}></p>
 				</div>
-				<Dropdown value={formats[0]}
-				options={formats} className={s.formats} 
-				arrowClosed={<IconChevronDown size={18}/>}
-  			arrowOpen={<IconChevronUp size={18}/>}/>
+				<Dropdown value={selectedFormat}
+									options={formats} className={s.formats} 
+									onChange={setSelectedFormat}
+									arrowClosed={<IconChevronDown size={18}/>}
+									arrowOpen={<IconChevronUp size={18}/>}/>
 				{inCart ?
 				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
 				<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
@@ -60,6 +64,6 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 					<p>{cpv}₽</p>
 				</div>
 			</div>
-		</NavLink>
+		</div>
 	)
 }
