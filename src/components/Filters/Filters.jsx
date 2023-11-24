@@ -4,6 +4,7 @@ import { RangeInputs } from './RangeInputs';
 import { Button } from '../Shared/Button/Button';
 import { IconReload } from '@tabler/icons-react';
 import { RangeSlider } from './RangeSlider';
+import { Select } from '../Shared/Select/Select';
 
 const scales = [
 	{value: 1256},
@@ -48,6 +49,19 @@ const scales = [
 	{value: 1000},
 ]
 
+const types = [
+	{value: 0, label: "Юмор и развлечения"},
+	{value: 1, label: "Шок-контент"},
+	{value: 2, label: "Видео и фильмы"},
+	{value: 3, label: "Экономика"},
+	{value: 4, label: "Познавательное"},
+	{value: 5, label: "Транспорт"},
+	{value: 6, label: "Технологии"},
+	{value: 7, label: "Лингвистика"},
+	{value: 8, label: "Дизайн"},
+	{value: 9, label: "Картинки и фото"},
+]
+
 export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [minSubscribers, set_minSubscribers] = useState(0);
 	const [maxSubscribers, set_maxSubscribers] = useState(maxSubscribersNumber);
@@ -59,6 +73,7 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [maxPrice, set_maxPrice] = useState();
 
 	const [isSended, set_isSended] = useState(false)
+	const [selectedTypes, set_selectedTypes] = useState([])
 
 	const reset = () => {
 		set_minSubscribers(0)
@@ -76,6 +91,9 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 		const postReach = +el.postReach.replace(/\s/g, '');
 		const cpv = +el.cpv.replace(/\s/g, '');
 		const price = +el.price.replace(/\s/g, '');
+		const type = el.type;
+
+		console.log(selectedTypes, type, selectedTypes.findIndex(i => i.value === type) !== -1);
 
 		return (
 			(minSubscribers === undefined || subscribers >= +minSubscribers) &&
@@ -85,7 +103,8 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 			(minCPV === undefined || cpv >= +minCPV) &&
 			(maxCPV === undefined || cpv <= +maxCPV) &&
 			(minPrice === undefined || price >= +minPrice) &&
-			(maxPrice === undefined || price <= +maxPrice)
+			(maxPrice === undefined || price <= +maxPrice) &&
+			(selectedTypes.length === 0 || selectedTypes.findIndex(i => i.label === type) !== -1)
 		);
 	}
 
@@ -106,6 +125,7 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 				<RangeSlider scales={scales} maxSubscribersNumber={maxSubscribersNumber} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
 				<RangeInputs minValue={minSubscribers} maxValue={maxSubscribers} minOnChange={set_minSubscribers} maxOnChange={set_maxSubscribers}/>
 			</div>
+			<Select className={s.select} options={types} setSelectedOption={set_selectedTypes} isMulti closeMenuOnSelect={false} fullWidth placeholder="Тематика канала"/>
 			<div className={s.inputsGroup}>
 				<h5>Средний охват поста</h5>
 				<RangeInputs minValue={minPostReach} maxValue={maxPostReach} minOnChange={set_minPostReach} maxOnChange={set_maxPostReach}/>
