@@ -4,6 +4,7 @@ import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
 import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler/icons-react'
 import { Button } from '../Shared/Button/Button';
+import { NavLink } from 'react-router-dom';
 
 export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
@@ -19,7 +20,7 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 	}
 
 	return (
-		<div className={s.wrapper}>
+		<NavLink className={s.wrapper} to={'/channel/' + id}>
 			<div className={s.flex}>
 				<div className={s.img}>
 					<img src={img}/>
@@ -59,6 +60,6 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 					<p>{cpv}₽</p>
 				</div>
 			</div>
-		</div>
+		</NavLink>
 	)
 }

@@ -28,9 +28,9 @@ export const Calendar = ({placeholder, className, label}) => {
 
 	return (
 		<div className={`${className} ${s.calendarGroup}`}>
-			<div className={s.header}>
+			{label && <div className={s.header}>
 				<span>{label}</span>
-			</div>
+			</div>}
 			 <ReactDatePicker
 					selected={date}
 					ref={calendar}

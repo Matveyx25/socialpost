@@ -17,11 +17,11 @@ import { MainDashboard } from "./components/pages/dashboard/main";
 import { MyChannels } from "./components/pages/dashboard/my-channels/my-channels";
 import { Reports } from "./components/pages/dashboard/reports/reports";
 import { Report } from "./components/pages/dashboard/report/report";
-import { NavLink } from "react-router-dom";
 import { Payments } from "./components/pages/dashboard/payments/payments";
 import { FAQ } from "./components/pages/dashboard/faq/faq";
 import { Requisites } from "./components/pages/dashboard/requisites/requisites";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
+import { Channel } from "./components/pages/channel/channel";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -34,52 +34,30 @@ function App() {
 			<Routes>
 				<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
 					<Route path="/" element={
-					<>
-						<SwitchWrapper {...{role, setRole}}/>
-						<div className="space"></div>
-								{{
-							'publisher': <PublisherContent/>,
-							'seller': <SellerContent/>
-						}[role]}
-					</>}/>
+						<>
+							<SwitchWrapper {...{role, setRole}}/>
+							<div className="space"></div>
+									{{
+								'publisher': <PublisherContent/>,
+								'seller': <SellerContent/>
+							}[role]}
+						</>}/>
 					<Route path="/policy" element={<Policy/>}/>
 					<Route path="/contact" element={<Contacts/>}/>
 					<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
+					<Route path="/channel/:channelId" element={<Channel/>}/>
 					<Route path="/cart" element={<Cart/>}/>
 					<Route path="*" element={<NotFound/>}/>
 				</Route>
 				<Route element={<DashboardLayout/>}>
-					<Route path="/dashboard" element={<MainDashboard/>} handle={{
-						crumb: () => <span>Дашборд</span>,
-					}}/>
-					<Route path="/dashboard/my-channels" element={<MyChannels/>} 
-					handle={{
-						crumb: () => <span>Мои каналы</span>,
-					}}/>
-					<Route path="/dashboard/placement-appointments" element={<Reports/>} 
-					handle={{
-						crumb: () => <span>Заявки на размещение</span>,
-					}}/>
-					<Route path="/dashboard/appointment" element={<Report/>} 
-					handle={{
-						crumb: () => <span><NavLink to={'/dashboard/placement-appointments'}>Заявки на размещени</NavLink>/</span>,
-					}}/>
-					<Route path="/dashboard/payments" element={<Payments/>} 
-					handle={{
-						crumb: () => <span>Выплаты</span>,
-					}}/>
-					<Route path="/dashboard/requisites" element={<Requisites/>} 
-					handle={{
-						crumb: () => <span>Реквизиты</span>,
-					}}/>
-					<Route path="/dashboard/faq" element={<FAQ/>} 
-					handle={{
-						crumb: () => <span>FAQ</span>,
-					}}/>
-					<Route path="/dashboard/support" element={<div>Dashboard</div>} 
-					handle={{
-						crumb: () => <span>Поддержка</span>,
-					}}/>
+					<Route path="/dashboard" element={<MainDashboard/>}/>
+					<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
+					<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
+					<Route path="/dashboard/appointment" element={<Report/>}/>
+					<Route path="/dashboard/payments" element={<Payments/>}/>
+					<Route path="/dashboard/requisites" element={<Requisites/>}/>
+					<Route path="/dashboard/faq" element={<FAQ/>} />
+					<Route path="/dashboard/support" element={<div>Dashboard</div>}/>
 				</Route>
 			</Routes>
     </div>

@@ -6,10 +6,10 @@ import { IconInfoCircleFilled } from '@tabler/icons-react';
 
 export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
-		<div className={s.header}>
+		{label && <div className={s.header}>
 			<span>{label}</span>
 			{withInfo && <IconInfoCircleFilled color='#BDBEC0' />}
-		</div>
+		</div>}
 		<SelectElement
 			defaultValue={defaultValue}
 			onChange={setSelectedOption}
