@@ -25,6 +25,8 @@
     "react-dom": "^18.2.0",
     "react-dropdown": "^1.11.0",
     "react-full-page": "^0.1.12",
+    "react-helmet": "^6.1.0",
+    "react-helmet-async": "^2.0.1",
     "react-html-email": "^3.0.0",
     "react-input-slider": "^6.0.1",
     "react-markdown": "^9.0.1",

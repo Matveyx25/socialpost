@@ -7,6 +7,7 @@ import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { DashboardCard } from '../dashboard-card';
+import channelsJson from '../../../../data/channels.json'
 
 const payments = [
 	{
@@ -45,14 +46,7 @@ const payments = [
 		price: '2400',
 	},
 ]
-
-const channels = [
-  { value: 'all-channels', label: 'Все каналы' },
-  { value: 'channel-1', label: 'Канал 1' },
-  { value: 'channel-2', label: 'Канал 2' },
-  { value: 'channel-3', label: 'Канал 3' },
-  { value: 'channel-4', label: 'Канал 4' },
-];
+const channels = [{label: 'Все каналы', value: 'all'} ,...channelsJson.map(el => ({label: el.title, value: el.id}))]
 
 export const Payments = () => {
 	const [selectedChannel, setSelectedChannel] = useState()

@@ -7,6 +7,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { IconEdit } from '@tabler/icons-react';
 
 const counties = [
   { value: 'belarus', label: 'Беларусь' },
@@ -15,6 +16,8 @@ const counties = [
 
 export const SelfEmployed = () => {
 	const [selectedCountry, setSelectedCountry] = useState(counties[0])
+	const [filledForm1, setFilledForm1] = useState(false)
+	const [filledForm2, setFilledForm2] = useState(false)
 
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
 
@@ -30,7 +33,7 @@ export const SelfEmployed = () => {
 			.required('Введите город рождения'),
 		address: Yup.string()
 			.required('Введите адрес'),
-		cnils: Yup.string()
+		snils: Yup.string()
 			.required('Введите СНИЛС'),
 		inn: Yup.string()
 			.required('Введите ИНН'),
@@ -62,15 +65,15 @@ export const SelfEmployed = () => {
 							numberPassport: '',
 							city: '',
 							address: '',
-							cnils: '',
+							snils: '',
 							inn: ''
 						}}
 						validationSchema={validator}
 						onSubmit={(values) => {
-							
+							setFilledForm1(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<Select fullWidth label="Страна гражданства" options={counties} defaultValue={selectedCountry} setSelectedOption={setSelectedCountry} className={s.select}/>
@@ -94,7 +97,8 @@ export const SelfEmployed = () => {
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+								{filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>
@@ -112,11 +116,11 @@ export const SelfEmployed = () => {
 							correspondentAccount: '',
 						}}
 						validationSchema={validator2}
-						onSubmit={(values) => {
-							
+						onSubmit={() => {
+							setFilledForm2(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
@@ -125,14 +129,15 @@ export const SelfEmployed = () => {
 									<InputField label={'В'} name='b' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'БИК'} name='city' placeholder='12345' className={s.input}/>
+									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'Корреспондентский счет'} name='correspondentAccount' placeholder='30101' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+									{filledForm2 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+										<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>

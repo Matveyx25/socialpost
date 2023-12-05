@@ -7,6 +7,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { IconEdit } from '@tabler/icons-react';
 
 const tax = [
   { value: 'OSN', label: 'ОСН' },
@@ -15,6 +16,8 @@ const tax = [
 
 export const IndividualEntrepreneur = () => {
 	const [selectedTax, setSelectedTax] = useState(tax[0])
+	const [filledForm1, setFilledForm1] = useState(false)
+	const [filledForm2, setFilledForm2] = useState(false)
 
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
 
@@ -53,11 +56,11 @@ export const IndividualEntrepreneur = () => {
 							address: '',
 						}}
 						validationSchema={validator}
-						onSubmit={(values) => {
-							
+						onSubmit={() => {
+							setFilledForm1(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ isValid, dirty }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'ИНН'} name='inn' placeholder='12345' className={s.input}/>
@@ -69,11 +72,12 @@ export const IndividualEntrepreneur = () => {
 									<InputField label={'ОГРН'} name='OGRN' placeholder='Иванов Иван Иванович' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'Адрес'} name='adress' placeholder='Железнодорожная 21А' className={s.input}/>
+									<InputField label={'Адрес'} name='address' placeholder='Железнодорожная 21А' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+									{filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!isValid || !dirty}/>}
 								</div>
 							</Form>)}
 					</Formik>
@@ -92,10 +96,10 @@ export const IndividualEntrepreneur = () => {
 						}}
 						validationSchema={validator2}
 						onSubmit={(values) => {
-							
+							setFilledForm2(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
@@ -104,14 +108,15 @@ export const IndividualEntrepreneur = () => {
 									<InputField label={'В'} name='b' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'БИК'} name='city' placeholder='12345' className={s.input}/>
+									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'Корреспондентский счет'} name='correspondentAccount' placeholder='30101' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+								{filledForm2 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>

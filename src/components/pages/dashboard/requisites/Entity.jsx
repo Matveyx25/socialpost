@@ -7,6 +7,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { IconEdit } from '@tabler/icons-react';
 
 const tax = [
   { value: 'OSN', label: 'ОСН' },
@@ -15,6 +16,8 @@ const tax = [
 
 export const Entity = () => {
 	const [selectedTax, setSelectedTax] = useState(tax[0])
+	const [filledForm1, setFilledForm1] = useState(false)
+	const [filledForm2, setFilledForm2] = useState(false)
 
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
 
@@ -57,10 +60,10 @@ export const Entity = () => {
 						}}
 						validationSchema={validator}
 						onSubmit={(values) => {
-							
+							setFilledForm1(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'ИНН'} name='inn' placeholder='12345' className={s.input}/>
@@ -79,7 +82,8 @@ export const Entity = () => {
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+								{filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>
@@ -97,11 +101,11 @@ export const Entity = () => {
 							correspondentAccount: '',
 						}}
 						validationSchema={validator2}
-						onSubmit={(values) => {
-							
+						onSubmit={() => {
+							setFilledForm2(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
@@ -110,14 +114,15 @@ export const Entity = () => {
 									<InputField label={'В'} name='b' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'БИК'} name='city' placeholder='12345' className={s.input}/>
+									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'Корреспондентский счет'} name='correspondentAccount' placeholder='30101' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+									{filledForm2 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+										<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>

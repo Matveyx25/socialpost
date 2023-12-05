@@ -7,6 +7,7 @@ import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { IconEdit } from '@tabler/icons-react';
 
 const crypto = [
   { value: 'USDT (TRC20)', label: 'USDT (TRC20)' },
@@ -18,6 +19,7 @@ const crypto = [
 
 export const Crypto = () => {
 	const [selectedCrypto, setSelectedCrypto] = useState(crypto[0])
+	const [filledForm, setFilledForm] = useState(false)
 
 	const validator = Yup.object().shape({
 		address: Yup.string()
@@ -36,11 +38,11 @@ export const Crypto = () => {
 							address: ''
 						}}
 						validationSchema={validator}
-						onSubmit={(values) => {
-							
+						onSubmit={() => {
+							setFilledForm(true)
 						}}
 					>
-						{({ errors, touched, values }) => (
+						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<Select fullWidth label="Криптовалюта" options={crypto} defaultValue={selectedCrypto} setSelectedOption={setSelectedCrypto} className={s.select}/>
@@ -50,7 +52,8 @@ export const Crypto = () => {
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn}/> 
+								{filledForm ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
 								</div>
 							</Form>)}
 					</Formik>

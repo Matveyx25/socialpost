@@ -1,58 +1,50 @@
-import React, { useEffect, useRef } from 'react'
+import React, { memo, useEffect, useRef } from 'react'
 import s from './SwitchWrapper.module.scss'
 import { Player } from '@lottiefiles/react-lottie-player'
 
-export const SwitchWrapper = ({role, setRole}) => {
-	let publisherPlayRef = useRef(null)
-
-	useEffect(() => {
-		setTimeout(() => {
-			publisherPlayRef?.current?.play();
-		}, 800)
-	}, [])
+export const SwitchWrapper = memo(({role, setRole}) => {
 
 	return (
 		<div className={`${s.wrapper} ${s[role]}`}>
 			<div className={s.publisher__bgScene}>
 				<div className={s.publisher__plane}>
 						<Player
-							autoplay
+							autoplay={true}
 							loop
 							src="/lotties/Plane.json"
 							speed={.7}
-							style={{ height: '100%', objectFit:'cover'}}
+							style={{ height: '100%', objectFit:'cover', visibility: role === 'publisher' ? 'visible' : 'hidden' }}
 						/>
 				</div>
 				<img src="/images/plane-arrow-right.svg" alt="" className={s.publisher__planeRight}/>
 				<img src="/images/plane-arrow-left.svg" alt="" className={s.publisher__planeLeft}/>
 				<div className={s.publisher__leftBg}>
 						<Player
-							ref={publisherPlayRef}
-							autoplay={false}
+							autoplay={true}
 							loop
 							src="/lotties/publisher-left.json"
 							speed={.5}
-							style={{ height: '100%',objectFit:'contain' }}
+							style={{ height: '100%',objectFit:'contain', visibility: role === 'publisher' ? 'visible' : 'hidden'  }}
 						/>
 				</div>
 				<div className={s.publisher__rightBg}>
 						<Player
-							autoplay
+							autoplay={true}
 							loop
 							src="/lotties/publisher-right.json"
 							speed={.5}
-							style={{ height: '100%',objectFit:'contain' }}
+							style={{ height: '100%',objectFit:'contain', visibility: role === 'publisher' ? 'visible' : 'hidden'  }}
 						/>
 				</div>
 			</div>
 			<div className={s.seller__bgScene}>
 				<div className={s.seller__lottie}>
 						<Player
-							autoplay
+							autoplay={true}
 							loop
 							src="/lotties/seller.json"
 							speed={.7}
-							style={{ height: '100%', objectFit:'cover'}}
+							style={{ height: '100%', objectFit:'cover', visibility: role === 'seller' ? 'visible' : 'hidden' }}
 						/>
 				</div>
 				<img src="/images/seller/cloud.png" alt="" className={s.seller__static_cloud}/>
@@ -80,4 +72,4 @@ export const SwitchWrapper = ({role, setRole}) => {
 			</h1>
 		</div>
 	)
-}
+})

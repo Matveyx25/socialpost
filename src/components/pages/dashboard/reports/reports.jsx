@@ -8,6 +8,7 @@ import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
 import { useNavigate } from 'react-router-dom'
+import channelsJson from '../../../../data/channels.json'
 
 const tabs = [
 	{label: 'Запросы', count: 4, id: 5},
@@ -74,14 +75,7 @@ const reports = [
 	},
 ]
 
-
-const channels = [
-  { value: 'all-channels', label: 'Все каналы' },
-  { value: 'channel-1', label: 'Канал 1' },
-  { value: 'channel-2', label: 'Канал 2' },
-  { value: 'channel-3', label: 'Канал 3' },
-  { value: 'channel-4', label: 'Канал 4' },
-];
+const channels = [{label: 'Все каналы', value: 'all'} ,...channelsJson.map(el => ({label: el.title, value: el.id}))]
 
 const options = [
   { value: 'all', label: 'Все' },
