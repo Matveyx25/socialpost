@@ -66,7 +66,6 @@ function App() {
 						<Route path="/dashboard/payments" element={<Payments/>}/>
 						<Route path="/dashboard/requisites" element={<Requisites/>}/>
 						<Route path="/dashboard/faq" element={<FAQ/>} />
-						<Route path="/dashboard/support" element={<div>Dashboard</div>}/>
 					</Route>
 				</Routes>
 			</div>

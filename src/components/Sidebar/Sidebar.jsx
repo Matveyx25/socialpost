@@ -19,7 +19,7 @@ export const Sidebar = () => {
 				<SidebarItem label="Выплаты" icon={<IconMoneybag/>} to={'/dashboard/payments'}/>
 				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/dashboard/requisites'}/>
 				<SidebarItem label="FAQ" icon={<IconHelp/>} to={'/dashboard/faq'}/>
-				<SidebarItem label="Поддержка" icon={<IconLifebuoy/>} to={'https://t.me'} target="_blank"/>
+				<SidebarItem label="Поддержка" icon={<IconLifebuoy/>} to={'https://t.me/socialpost_support'} target="_blank"/>
 			</div>
 		</div>
 	)

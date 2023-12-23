@@ -146,3 +146,76 @@
 		background: #D9E2FF;
 	}
 }
+
+@media (max-width: 1260px) {	
+	.slider{
+		margin-top: 2rem;
+		:global{
+			.thumb::before{
+				width: 12px !important;
+				height: 12px !important;
+				border: 3px solid $main-blue-color !important;
+				margin: -5px -5px !important;
+			}
+			.caption{
+				bottom: 16px !important;
+				span{
+					padding: 0.25rem !important;
+					line-height: 0.75 !important;
+					font-size: 0.625rem !important;
+				}
+			}
+			.bar-right, .bar-left{
+				background-color: #EDF1FF !important;
+				border: none !important;
+				box-shadow: none !important;
+				padding: 2px 0 !important;
+			}
+		}
+	}
+
+	.inputsWrapper{
+		input{
+			padding: 0.5rem;
+			font-size: .75rem;
+			line-height: 1rem; /* 150% */
+		}
+		span{
+			font-size: .75rem;
+			line-height: 1rem; /* 150% */
+			padding: 0.5rem;
+		}
+	}
+
+	.inputsGroup{
+		h5{
+			font-size: 0.625rem;
+			line-height: .75rem; /* 157.143% */
+		}
+	}
+
+	.wrapper{
+		max-width: 16.8125rem;
+		padding: .75rem;
+		gap: .5rem;
+		top: 4rem;
+		h2{
+			font-size: .875rem;
+		}
+	}
+
+	.resetBtn{
+		svg{
+			width: 14px;
+			height: 14px;
+		}
+	}
+	
+	.graphLines{
+		height: 1.5rem;
+		margin-bottom: -2.25rem;
+		span{
+			width: 0.13rem;
+		}
+	}
+}	

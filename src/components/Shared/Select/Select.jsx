@@ -28,13 +28,21 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					borderRadius: 8,
 					minHeight: 48,
 					paddingLeft: 16,
-					paddingRight: 16
+					paddingRight: 16,
+					"@media (max-width: 1260px)": {
+						padding: 8,
+						minHeight: 32,
+						fontSize: 12
+					}
 				}),
 				menu: (baseStyles) => ({
 					...baseStyles,
 					border: '1px solid #BDBEC0',
 					borderRadius: 8,
-					boxShadow: '0px 4px 20px 0px rgba(212, 217, 222, 0.25)'
+					boxShadow: '0px 4px 20px 0px rgba(212, 217, 222, 0.25)',
+					"@media (max-width: 1260px)": {
+						fontSize: 12
+					}
 				}),
 				container: (baseStyles) => ({
 					...baseStyles,
@@ -42,7 +50,10 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 				}),
 				singleValue: (baseStyles) => ({
 					...baseStyles,
-					padding: 0
+					padding: 0,
+					"@media (max-width: 1260px)": {
+						fontSize: 12
+					}
 				}),
 				option: (baseStyles, {isSelected}) => ({
 					...baseStyles,
@@ -54,6 +65,9 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					background: isSelected ? 'rgba(237, 241, 255, 1)' : 'none', 
 					"&:hover": {
 						background: 'rgba(237, 241, 255, 1)'
+					},
+					"@media (max-width: 1260px)": {
+						fontSize: 12
 					}
 				}),
 				multiValue: (styles, { data }) => {
@@ -64,13 +78,40 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 						fontFamily: 'SF Regular',
 						padding: '1px 4px',
 						lineHeight: '1.5rem',
-						color: '#4F5157'
+						marginTop: 0,
+						marginBottom: 3,
+						color: '#4F5157',
+						"@media (max-width: 1260px)": {
+							fontSize: 12,
+							padding: '2px 4px',
+							lineHeight: '1rem',
+						}
 					};
 				},
+				multiValueLabel: (baseStyles) => ({
+					...baseStyles,
+					paddingTop: 0,
+					paddingBottom: 0 
+				}),
 				valueContainer: (baseStyles)=> ({
 					...baseStyles,
 					padding: 0,
-					paddingRight: 8
+					paddingRight: 8,
+					minHeight: 0
+				}),
+				indicatorsContainer: (baseStyles) => ({
+					...baseStyles,
+					"@media (max-width: 1260px)": {
+						height: 20
+					}
+				}),
+				multiValueContainer: (baseStyles) => ({
+					...baseStyles,
+					height: 20
+				}),
+				clearIndicator: (baseStyles) => ({
+					...baseStyles, 
+					padding: 0
 				}),
 				indicatorSeparator: () => ({
 					display: 'none',
@@ -78,6 +119,10 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 				dropdownIndicator: (baseStyles) => ({
 					...baseStyles,
 					padding: 0,
+					"@media (max-width: 1260px)": {
+						width: 14,
+						height: 14
+					}
 				}),
 			}}
 		/>

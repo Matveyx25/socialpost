@@ -167,7 +167,7 @@
 }
 
 .table{
-	width: 100%;
+	flex-grow: 1;
 	box-sizing: border-box;
 	background: #FFF;
 	border-radius: 1rem;
@@ -258,5 +258,89 @@
 		flex-direction: row;
 		flex-wrap: wrap;
 		gap: 1rem;
+	}
+}
+
+
+@media (max-width: 1440px) {
+	.wrapper{
+		padding-top: 5.13rem;
+	}
+	.flex{
+		margin-top: 1rem;
+	}
+	.title{
+		font-size: 1.25rem;
+	}
+	.cardWrapper{
+		max-width: 16.8125rem;
+		padding: .75rem;
+		gap: .5rem;
+		top: 4rem;
+		h2{
+			font-size: .875rem;
+		}
+		.input{
+			gap: .25rem;
+			input{
+				font-size: .75rem;
+				line-height: 1rem; /* 150% */
+			}
+			span{
+				font-size: .75rem;
+				line-height: 1rem; /* 150% */
+				padding: 0.5rem;
+			}
+		}
+		.price{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			font-size: 1rem;
+			font-weight: 500;
+			span:first-child{
+				color: #888;
+			}
+		}
+	}	
+
+	.table{
+		thead th{
+			text-align: left;
+			padding: 0.5rem;
+			font-size: .75rem;
+			line-height: 1rem;
+		}
+		tbody td{
+			padding: 0.5rem;
+			font-size: 0.75rem;
+			line-height: 1rem;
+		}
+	}
+}
+
+
+@media (max-width: 1260px){
+	.successWrapper{
+		gap: 1rem;
+		h2{
+			font-size: 1.5rem;
+		}
+		p{
+			font-size: .75rem;
+		}
+		a{
+			border-radius: 2.5rem;
+			padding: 0.5rem 2rem;
+			font-size: 1rem;
+			line-height: 1.5rem;
+		}
+		img{
+			bottom: 7rem;
+		}
+		.plane{
+			height: 9.33563rem;
+			bottom: 3.25rem;
+		}
 	}
 }

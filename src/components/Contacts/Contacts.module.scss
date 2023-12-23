@@ -303,4 +303,114 @@
 			}
 		}
 	}
+
+	@media (max-width: 1260px){
+		.successWrapper{
+			gap: 1rem;
+			h2{
+				font-size: 1.5rem;
+			}
+			p{
+				font-size: .75rem;
+			}
+			a{
+				border-radius: 2.5rem;
+				padding: 0.5rem 2rem;
+				font-size: 1rem;
+				line-height: 1.5rem;
+			}
+			img{
+				bottom: 7rem;
+			}
+			.plane{
+				height: 9.33563rem;
+				bottom: 3.25rem;
+			}
+		}
+		.flex{
+			h2{
+				font-size: 1.5rem;
+			}
+			p{
+				font-size: .75rem;
+				margin-top: 0.5rem;
+			}
+			form{
+				margin-top: 1rem;
+				.formFlex{
+					width: 25.6rem;
+					gap: 1.25rem 1rem;
+				}
+				.smInput{
+					width: 12.1875rem;
+				}
+				.counter{
+					font-size: 0.75rem;
+					margin-top: 0.13rem;
+				}
+				.lgInput, .smInput{
+					.inputWrapper{
+						height: 2.5rem;
+						border-radius: 0.5rem;
+					}
+					.error{
+						gap: 0.25rem;
+						margin-top: 0.13rem;
+						img{
+							width: 1rem;
+							height: 1rem;
+						}
+						font-size: 0.625rem;
+						line-height: 0.75rem; 
+					}
+					input{
+						padding: .5rem 0;
+						font-size: 0.75rem;
+					}
+					.img{
+						img{
+							width: 1rem;
+							height: 1rem;
+						}
+					}
+				}
+				.btns{
+					gap: 1rem;
+					margin-top: 1rem;
+				}
+				button{
+					width: 9rem;
+					padding: 0.5rem 2rem;
+					border-radius: 2.5rem;
+					font-size: 1rem;
+				}
+				.link{
+					gap: 0.5rem;
+					font-size: .75rem;
+					img{
+						width: 1rem;
+						height: 1rem;
+					}
+				}
+				.textarea{
+					.error{
+						gap: 0.25rem;
+						margin-top: 0.13rem;
+						img{
+							width: 1rem;
+							height: 1rem;
+						}
+						font-size: 0.625rem;
+						line-height: 0.75rem; 
+					}
+					textarea{
+						border-radius: 0.5rem;
+						padding: 0.59rem 0.62rem;
+						font-size: 0.627rem;
+						height: 7.5rem;
+					}
+				}
+			}
+		}
+	}
 }

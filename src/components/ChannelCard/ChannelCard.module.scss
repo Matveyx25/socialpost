@@ -169,3 +169,79 @@
 		}
 	}
 }
+
+@media (max-width: 1260px) {
+	.wrapper{
+		padding: .75rem;
+		gap: .75rem;
+	}
+	.img{
+		min-width: 2.875rem;
+		width: 2.875rem;
+		height: 2.875rem;
+	}
+	.flex{
+		gap: .5rem;
+	}
+	.content{
+		p{
+			font-size: 0.625rem;
+			line-height: .75rem; /* 128.571% */
+		}
+		.titleFlex{
+			gap: 0.125rem;
+			flex-direction: column-reverse;
+			align-items: start;
+			.title{
+				font-size: .875rem;
+				line-height: 1.125rem;
+			}
+			span{
+				padding: 0.125rem 0.25rem;
+				font-size: 0.625rem;
+				line-height: .75rem;
+			}
+		}
+	}
+	.stats{
+		gap: .75rem;
+		padding-top: .75rem;
+		div{
+			padding: 0.25rem 1rem;
+			span{
+				font-size: 0.625rem;
+				line-height: .75rem; /* 114.286% */
+			}
+			p{
+				font-size: 1rem;
+				line-height: 1.25rem;
+			}
+		}
+	}
+	.button, .removeBtn{
+		padding: 0.5rem 0.75rem;
+		height: 2.25rem;
+	}
+	.formats{
+		:global{
+			.Dropdown-control{
+				height: 2.25rem;
+				padding: 0.25rem 0.75rem;
+			}
+			.Dropdown-option, .Dropdown-option.is-selected{
+				padding: .5rem;
+				font-size: .75rem;
+				line-height: 1rem; /* 125% */
+			}
+			.Dropdown-placeholder{
+				font-size: .75rem;
+				line-height: 1rem; /* 125% */
+				min-width: 4.75rem;
+				&::before{
+					font-size: 0.625rem;
+					line-height: 0.75rem; /* 116.667% */
+				}
+			}
+		}
+	}	
+}

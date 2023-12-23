@@ -47,4 +47,15 @@
 			object-fit: cover;
 		}
 	}
+	@media (max-width: 1260px) {
+		.flex{
+			h2{
+				font-size: 2.75rem;
+			}
+			p{
+				font-size: 1.25rem;
+				margin-top: 1.5rem;
+			}
+		}
+	}
 }

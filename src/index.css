@@ -71,6 +71,9 @@ code {
 	padding: 0 5.55556rem;
 	box-sizing: border-box;
 	width: 100%;
+	@media (max-width: 1400px) {
+		padding: 0 2.5rem;
+	}
 }
 
 .shu_1, .shu_2, .shu_3{

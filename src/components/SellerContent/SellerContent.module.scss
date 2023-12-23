@@ -247,3 +247,113 @@
 		}
 	}
 }
+
+@media (max-width: 1260px) {
+	.wrapper{
+		border-radius: 2.5rem 2.5rem 0rem 0rem;
+		.circle{
+			position: sticky;
+			height: calc(100vh - 4.9675rem);
+			padding-top: 8.47rem;
+		}
+		.scroll {
+			margin-top: calc(-100vh + 35rem);
+			section{
+				h2{
+					font-size: 3.5rem;
+				}
+				h5{
+					font-size: 1.75rem;
+					margin-top: 1rem;
+					&.small{
+						font-size: 1.75rem;
+					}
+				}
+				img{
+					width: 8.75rem;
+					height: 8.75rem;
+					margin-top: 1rem;
+				}
+			}
+		}
+	}
+
+	.pathWrapper{
+		h2{
+			font-size: 1.75rem;
+		}
+		.messages{
+			gap: .94rem;
+			margin-top: 4.06rem;
+			.message{
+				border-radius: 3.75rem;
+				padding: 0.75rem 1.5rem;
+				font-size: 1rem;
+				.chevron{
+					width: 1.125rem;
+					height: 0.875rem;
+					left: 2.3125rem;
+					bottom: -0.875rem;
+				}
+				.star{
+					width: 2.74994rem;
+					height: 2.91825rem;
+					left: -0.75rem;
+					top: -0.75rem;
+				}
+				&:nth-child(1){
+					margin-left: 11.44rem;
+				}
+				&:nth-child(2){
+					margin-right: 9.19rem;
+					.chevron{
+						left: auto;
+						right: 2.77778rem;
+					}
+					.star{
+						left: auto;
+						right: -1.55556rem;
+					}
+				}
+				&:nth-child(3){
+					margin-left: 16rem;
+				}
+			}
+		}
+	}
+
+	.pathContainer{
+		left: 7.56rem;
+		max-width: calc(100vw - 16.81rem);
+		max-height: 100vh;
+		svg{
+			max-width: 100% !important;
+		}
+	}
+
+	.counterWrapper{
+		gap: 2rem;
+		h2{
+			font-size: 1.75rem;
+		}
+		.counters{
+			gap: 2.5rem;
+			div{
+				display: flex;
+				width: 17.52083rem;
+				gap: .5rem;
+				h5{
+					font-size: 3.5rem;
+				}
+				p{
+					font-size: 1.25rem;
+				}
+			}
+		}
+		.btnSubmit{
+			padding: .5rem 2rem;
+			border-radius: 2.5rem;
+			font-size: 1rem;
+		}
+	}
+}

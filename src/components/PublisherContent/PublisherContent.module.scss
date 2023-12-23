@@ -56,4 +56,24 @@
 			}
 		}
 	}
+	@media (max-width: 1260px){
+		border-radius: 2.5rem 2.5rem 0rem 0rem;
+		.flex{
+			padding-top: 9.69rem;
+			padding-bottom: 6.94rem;
+			.info{
+				font-size: 1.25rem;
+				gap: 1.25rem;
+				img{
+					width: 9.06238rem;
+					height: 9.6875rem;
+				}
+				&:nth-child(2){
+					margin-top: 14.75rem;
+					margin-bottom: 14.75rem;
+				}
+			}
+		}
+
+	}
 }

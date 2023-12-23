@@ -63,4 +63,11 @@
 		font-size: .875rem;
 		width: fit-content;
 	}
+	@media (max-width: 1260px) {
+		height: 2rem;
+		padding: 0.5rem 0rem;
+		font-size: 0.75rem;
+		line-height: 1rem;
+		gap: .25rem;
+	}
 }

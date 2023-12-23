@@ -67,4 +67,39 @@
 			}
 		}
 	}
+	@media (max-width: 1260px) {
+		padding: 0.5rem 0;
+		.flex{
+			.logo img{
+				width: 8.75rem;
+			}
+			ul{
+				gap: 2rem;
+				a{
+					font-size: .75rem;
+				}
+			}
+			.btns{
+				display: flex;
+				align-items: center;
+				gap: 1rem;
+			}
+			.cartBtn{
+				padding: 0.5rem;
+				border-radius: 2.5rem;
+				font-size: .75rem;
+				height: 1.75rem;
+			}
+			.cartIcon{
+				margin-right: .3rem;
+				width: 12px;
+				height: 12px;
+			}
+			.btn{
+				padding: 0.5rem 2rem;
+				border-radius: 2.5rem;
+				font-size: .75rem;
+			}
+		}
+	}
 }

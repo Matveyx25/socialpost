@@ -42,3 +42,30 @@
 		}
 	}
 }
+
+@media (max-width: 1260px) {
+	.wrapper{
+		padding-top: 5.13rem;
+	}
+	
+	.title{
+		font-size: 1.25rem;
+	}
+	.subtitle{
+		font-size: .75rem;
+		margin-top: 0.25rem;
+	}
+	.flex{
+		margin-top: 1rem;
+		gap: 1rem;
+	}
+	
+	.content{
+		.header{
+			gap: .75rem;
+			span{
+				font-size: .75rem;
+			}
+		}
+	}	
+}
