@@ -11,6 +11,7 @@ import { InputField } from '../../Shared/Input/Input';
 import ReactDomServer from 'react-dom/server';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { useMediaQuery } from 'react-responsive';
 
 export const Cart = () => {
 	const getSum = () => {
@@ -18,6 +19,9 @@ export const Cart = () => {
     .reduce((a, b) =>
       a + (b.price?.replace(/\s/g, '') || 0) * b.count, 0);
 	};
+	const isMobile = useMediaQuery({
+		query: '(max-width: 620px)'
+	})
 
 	const [payingNotice, set_payingNotice] = useState(false)
 	const [policy, set_policy] = useState(false)
@@ -135,75 +139,42 @@ export const Cart = () => {
 						Корзина
 					</h2>
 					<div className={s.flex}>
-						<table className={s.table}>
-								<thead>
-										<tr>
-												<th>Название постов</th>
-												<th>Формат размещений</th>
-												<th>Кол-во размещений</th>
-												<th>Общая стоимость размещений</th>
-												<th></th>
-										</tr>
-								</thead>
-								<tbody>
-										{cart.length ? cart.map((el) => {
-											const channel = channels.find(e => e.id === el.id)
-											return (
-												<tr key={'row-in-cart-' + channel.id}>
-														<td>
-															<div>
-																{channel?.title}
-															</div>
-														</td>
-														<td>
-															<div>
-																{el.format}
-															</div>
-														</td>
-														<td>
+					<div className={s.cardsWrapper}>
+						{cart.length ? cart.map((el) => {
+							const channel = channels.find(e => e.id === el.id)
+							return (
+								<div key={'card-in-cart-' + channel.id} className={s.productCard}>
+									<div className={s.productTitle}>
+										{channel?.title}
+									</div>
+									<div className={s.productFormat}>
+										<span>Формат размещения</span>
+										{el.format}
+									</div>
+										<div className={s.productPrice}>
+											<span>Общая стоимость</span>
+											{+channel?.price.replace(/\s/g, '') * +el.count}₽
+										</div>
+										<div className={s.productBtns}>
+											<button className={s.removeBtn}>
+												<IconTrash size={24} color='#436CFF' onClick={() => removeFromCart(channel.id)}/>
+											</button>
+											<Counter value={el.count} min={1} max={Infinity} onChange={(value) => {
+													const newState = cart.map(obj => {
+														if (obj.id === el.id) {
+															return {...obj, count: value};
+														}
 
-															<Counter value={el.count} min={1} max={Infinity} onChange={(value) => {
-																	const newState = cart.map(obj => {
-																		if (obj.id === el.id) {
-																			return {...obj, count: value};
-																		}
-
-																		return obj;
-																	});
-															
-																	set_cart(newState)
-																}}/>
-														</td>
-														<td>
-															<div>
-																{+channel?.price.replace(/\s/g, '') * +el.count}₽
-															</div>
-														</td>
-														<td>
-															<div>
-																<button className={s.removeBtn}>
-																	<IconTrash size={24} color='#436CFF' onClick={() => removeFromCart(channel.id)}/>
-																</button>
-															</div>
-														</td>
-												</tr>
-											)
-										}) : <tr>
-											<td></td>
-											<td></td>
-											<td>
-												<p>
-													<br />
-														Корзина пуста
-													<br />
-													<br />
-												</p>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>}
-								</tbody>
-						</table>
+														return obj;
+													});
+											
+													set_cart(newState)
+												}}/>
+										</div>
+								</div>
+							)
+						}) : <div className={s.empty}>Корзина пуста</div>}
+						</div> 
 						<div className={s.cardWrapper}>
 							<h5>Ваш заказ</h5>
 							<Formik

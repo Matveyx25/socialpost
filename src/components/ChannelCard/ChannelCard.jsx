@@ -8,7 +8,7 @@ import { NavLink } from 'react-router-dom';
 
 export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
-	const [selectedFormat, setSelectedFormat] = useState(inCart ? cart?.find(el => el.id === id).format : formats[0])
+	const [selectedFormat, setSelectedFormat] = useState(inCart ? cart?.find(el => el.id === id).format : {value: formats[0], label: formats[0]})
 
 	const addToCart = () => {
 		set_inCart(true)
@@ -23,28 +23,32 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 	return (
 		<div className={s.wrapper}>
 			<div className={s.flex}>
-				<NavLink className={s.img}  to={'/channel/' + id}>
-					<img src={img}/>
-				</NavLink>
-				<div className={s.content}>
-					<div className={s.titleFlex}>
-						<NavLink className={s.title}  to={'/channel/' + id}>
-							{title}
-						</NavLink>
-						<span>
-							{type}
-						</span>
+				<div className={s.mobileFlex}>
+					<NavLink className={s.img}  to={'/channel/' + id}>
+						<img src={img}/>
+					</NavLink>
+					<div className={s.content}>
+						<div className={s.titleFlex}>
+							<NavLink className={s.title}  to={'/channel/' + id}>
+								{title}
+							</NavLink>
+							<span>
+								{type}
+							</span>
+						</div>
+						<p dangerouslySetInnerHTML={{__html: desc}}></p>
 					</div>
-					<p dangerouslySetInnerHTML={{__html: desc}}></p>
 				</div>
-				<Dropdown value={selectedFormat}
-									options={formats} className={s.formats} 
-									onChange={setSelectedFormat}
-									arrowClosed={<IconChevronDown size={18}/>}
-									arrowOpen={<IconChevronUp size={18}/>}/>
-				{inCart ?
-				<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
-				<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
+				<div className={s.mobileBtns}>
+					<Dropdown value={selectedFormat}
+										options={formats} className={s.formats} 
+										onChange={setSelectedFormat}
+										arrowClosed={<IconChevronDown size={18}/>}
+										arrowOpen={<IconChevronUp size={18}/>}/>
+					{inCart ?
+					<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
+					<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
+				</div>
 			</div>
 			<div className={s.stats}>
 				<div>

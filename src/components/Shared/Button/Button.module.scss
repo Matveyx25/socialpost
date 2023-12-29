@@ -70,4 +70,10 @@
 		line-height: 1rem;
 		gap: .25rem;
 	}
+	@media (max-width: 768px) {
+		height: 3.5rem;
+		padding: 1rem 0rem;
+		font-size: 1rem;
+		line-height: 1.25rem;
+	}
 }

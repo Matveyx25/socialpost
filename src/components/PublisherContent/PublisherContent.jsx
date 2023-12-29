@@ -1,12 +1,18 @@
 import React, { useEffect, useRef } from 'react'
 import s from './PublisherContent.module.scss'
 import { Path } from '../Path/Path';
+import { useMediaQuery } from 'react-responsive';
 
 export const PublisherContent = () => {
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)'
+	})
+
 	return (
     <div className={s.wrapper}>
 			<div className="container">
-				<Path/>
+				{isMobile ? <img src="/images/publisher-path-mobile.svg" alt="" className={s.pathMobile}/> :
+				<Path/>}
 				<div className={s.flex} id="start-path">
 					<div className={s.info} id="publisher_info1">
 						<img src="/images/publisher/img1.svg" alt="" className='motion-section'/>

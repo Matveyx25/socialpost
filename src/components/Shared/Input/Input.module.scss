@@ -80,4 +80,36 @@
 			}
 		}
 	}
+	@media (max-width: 1260px) {
+		.header{
+			font-size: 0.625rem;
+			line-height: 0.625rem;
+		}
+		.inputWrapper{
+			padding: 0.5rem;
+			input{
+				font-size: .75rem;
+				line-height: 1rem;
+			}
+		}
+		.error{
+			font-size: 0.75rem;
+		}
+	}
+	@media (max-width: 768px) {
+		.header{
+			font-size: 1rem;
+			line-height: 1.25rem;
+		}
+		.inputWrapper{
+			padding: 1rem;
+			input{
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+			}
+		}
+		.error{
+			font-size: 1.25rem;
+		}
+	}
 }

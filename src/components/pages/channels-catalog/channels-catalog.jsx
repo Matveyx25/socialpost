@@ -4,6 +4,8 @@ import { Filters } from '../../Filters/Filters'
 import { ChannelCard } from '../../ChannelCard/ChannelCard';
 import channels from '../../../data/channels.json'
 import { Select } from '../../Shared/Select/Select';
+import { useMediaQuery } from 'react-responsive';
+import { FilterModal } from '../../Filters/FilterModal';
 
 const options = [
   { value: 'subscribers more', label: 'Подписчиков: Больше' },
@@ -23,6 +25,11 @@ const formats = [
 export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(options[0]);
 	const [filtered, setFiltered] = useState([...channels]);
+	const [modalIsOpen, setModalIsOpen] = useState('')
+	const isMobile = useMediaQuery({
+		query: '(max-width: 820px)'
+	})
+
 
 	const [cart, set_cart] = useState(() => {
 		const saved = localStorage.getItem("cart");
@@ -62,8 +69,11 @@ export const ChannelsCatalog = () => {
 		}
 	}
 
+
 	return (
 		<div className={s.wrapper}>
+			{isMobile && <FilterModal isOpen={modalIsOpen} setOpen={setModalIsOpen} onFilterSubmit={onFilterSubmit} maxSubscribersNumber={
+						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>}
 			<div className="container">
 				<h2 className={s.title}>
 					Каталог каналов
@@ -72,10 +82,11 @@ export const ChannelsCatalog = () => {
 					{(channels.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
 				</p>
 				<div className={s.flex}>
-					<Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={
-						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>
+					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={
+						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>}
 					<div className={s.content}>
 						<div className={s.header}>
+							{isMobile && <button className={s.filterBtn} onClick={() => setModalIsOpen('filter-modal')}>Фильтры</button>}
 							<Select defaultValue={options[0]} options={options} setSelectedOption={setSelectedOption}/>
 							<span>
 								Найдено: {(filtered.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}

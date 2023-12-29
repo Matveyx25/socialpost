@@ -80,4 +80,32 @@
 			}
 		}
 	}
+	@media (max-width: 768px) {
+		padding: 1rem 0;
+		.flex{
+			flex-wrap: wrap;
+			gap: 1rem;
+			.logo {
+				order: 1;
+					img{
+					width: 7.5rem;
+				}
+			}
+			ul{
+				order: 0;
+				gap: 1rem 2rem;
+				flex-wrap: wrap;
+				width: 100%;
+				justify-content: center;
+				a{
+					white-space: nowrap;
+					font-size: 1rem;
+				}
+			}
+			.btn{
+				order: 2;
+				width: 1.5rem;
+			}
+		}
+	}
 }

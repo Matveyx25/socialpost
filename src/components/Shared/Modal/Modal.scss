@@ -16,6 +16,7 @@
 		top: 50% !important;
 		height: fit-content;
 		transform: translate(-50%, -50%);
+		max-width: calc(100% - 2rem);
 	}
 	&__Header{
 		display: flex;
@@ -45,6 +46,11 @@
 				transition: .4s color;
 				color: #000;
 			}
+		}
+	}
+	@media (max-width: 768px) {	
+		&__Content {
+			width: calc(100% - 2rem);
 		}
 	}
 }

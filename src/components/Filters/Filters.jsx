@@ -6,7 +6,7 @@ import { IconReload } from '@tabler/icons-react';
 import { RangeSlider } from './RangeSlider';
 import { Select } from '../Shared/Select/Select';
 
-const scales = [
+export const filterSubsScales = [
 	{value: 1256},
 	{value: 1140},
 	{value: 1000},
@@ -49,7 +49,7 @@ const scales = [
 	{value: 1000},
 ]
 
-const types = [
+export const filterChannelTypes = [
 	{value: 0, label: "Юмор и развлечения"},
 	{value: 1, label: "Шок-контент"},
 	{value: 2, label: "Видео и фильмы"},
@@ -122,10 +122,10 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 			<span className={s.line}></span>
 			<div className={s.inputsGroup}>
 				<h5>Подписчики</h5>
-				<RangeSlider scales={scales} maxSubscribersNumber={maxSubscribersNumber} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
+				<RangeSlider scales={filterSubsScales} maxSubscribersNumber={maxSubscribersNumber} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
 				<RangeInputs minValue={minSubscribers} maxValue={maxSubscribers} minOnChange={set_minSubscribers} maxOnChange={set_maxSubscribers}/>
 			</div>
-			<Select className={s.select} options={types} setSelectedOption={set_selectedTypes} isMulti closeMenuOnSelect={false} fullWidth placeholder="Тематика канала"/>
+			<Select className={s.select} options={filterChannelTypes} setSelectedOption={set_selectedTypes} isMulti closeMenuOnSelect={false} fullWidth placeholder="Тематика канала"/>
 			<div className={s.inputsGroup}>
 				<h5>Средний охват поста</h5>
 				<RangeInputs minValue={minPostReach} maxValue={maxPostReach} minOnChange={set_minPostReach} maxOnChange={set_maxPostReach}/>

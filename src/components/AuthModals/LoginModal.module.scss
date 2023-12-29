@@ -120,3 +120,71 @@
 		letter-spacing: 0.02rem;
 	}
 }
+
+@media (max-width: 1260px) {	
+	.form{
+		padding: 0;
+		padding-top: 0.75rem;
+		width: 15.375rem;
+		& > p{
+			font-size: .75rem;
+			line-height: 1rem; /* 150% */
+		}
+	}
+
+	.rememberMe{
+		a{
+			font-size: .75rem;
+			line-height: 1rem;
+		}
+	}
+
+	.checkbox{
+		label{
+			gap: 0.25rem;
+			font-size: .75rem;
+			line-height: 1rem;
+		}
+	}
+
+	.footer{
+		padding-top: .75rem;
+		font-size: .75rem;
+		line-height: 1rem; /* 150% */
+		a{
+			text-decoration: none;
+			color: #436CFF;
+			font-weight: 500;
+			line-height: 1.5rem;
+			letter-spacing: 0.02rem;
+		}
+	}
+}
+
+@media (max-width: 768px) {	
+	.form{
+		padding: 1.5rem 0;
+		width: 100%;
+	}
+
+	.rememberMe{
+		a{
+			font-size: 1rem;
+			line-height: 1.25rem;
+		}
+	}
+
+	.checkbox{
+		label{
+			gap: 0.5rem;
+			font-size: 1rem;
+			line-height: 1.25rem;
+		}
+	}
+
+	.footer{
+		padding-top: 1.5rem;
+		font-size: 1.25rem;
+		line-height: 1.5rem; /* 150% */
+	}
+}

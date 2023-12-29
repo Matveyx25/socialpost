@@ -33,7 +33,17 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 						padding: 8,
 						minHeight: 32,
 						fontSize: 12
-					}
+					},
+					"@media (max-width: 820px)": {
+						padding: 16,
+						minHeight: 52,
+						fontSize: 16
+					},
+					"@media (max-width: 420px)": {
+						padding: '12px 16px',
+						minHeight: 40,
+						fontSize: 14
+					},
 				}),
 				menu: (baseStyles) => ({
 					...baseStyles,
@@ -42,6 +52,12 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					boxShadow: '0px 4px 20px 0px rgba(212, 217, 222, 0.25)',
 					"@media (max-width: 1260px)": {
 						fontSize: 12
+					},
+					"@media (max-width: 820px)": {
+						fontSize: 16
+					},
+					"@media (max-width: 420px)": {
+						fontSize: 14
 					}
 				}),
 				container: (baseStyles) => ({
@@ -53,6 +69,12 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					padding: 0,
 					"@media (max-width: 1260px)": {
 						fontSize: 12
+					},
+					"@media (max-width: 820px)": {
+						fontSize: 16
+					},
+					"@media (max-width: 420px)": {
+						fontSize: 14
 					}
 				}),
 				option: (baseStyles, {isSelected}) => ({
@@ -68,6 +90,12 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					},
 					"@media (max-width: 1260px)": {
 						fontSize: 12
+					},
+					"@media (max-width: 820px)": {
+						fontSize: 16
+					},
+					"@media (max-width: 420px)": {
+						fontSize: 14
 					}
 				}),
 				multiValue: (styles, { data }) => {
@@ -122,6 +150,14 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 					"@media (max-width: 1260px)": {
 						width: 14,
 						height: 14
+					},
+					"@media (max-width: 820px)": {
+						width: 20,
+						height: 20
+					},
+					"@media (max-width: 420px)": {
+						width: 16,
+						height: 16
 					}
 				}),
 			}}

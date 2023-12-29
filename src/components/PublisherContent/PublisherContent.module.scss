@@ -74,6 +74,48 @@
 				}
 			}
 		}
-
+	}
+	@media (max-width: 768px) {
+		.flex{
+			padding-top: 4.91rem;
+			padding-bottom: 1rem;
+			.info{
+				font-size: 0.875rem;
+				gap: 1.25rem;
+				transform: translateX(0);
+				opacity: 1;
+				img{
+					width: 6.25rem;
+					height: 6.68113rem;
+				}
+				&:nth-child(2){
+					margin-top: 12.35rem;
+					margin-bottom: 10.06rem;
+					transform: translateX(0);
+				}
+			}
+		}
+		.pathMobile{
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	@media (max-width: 420px) {
+		.flex{
+			padding-top: 4.72rem;
+			padding-bottom: 1rem;
+			.info{
+				img{
+					width: 5rem;
+				}
+				&:nth-child(2){
+					margin-top: 7.94rem;
+					margin-bottom: 10.7rem;
+				}
+			}
+		}
 	}
 }

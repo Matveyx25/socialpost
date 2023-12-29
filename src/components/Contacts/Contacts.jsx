@@ -5,10 +5,14 @@ import * as Yup from 'yup';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
 import emailjs from '@emailjs/browser';
+import { useMediaQuery } from 'react-responsive';
 
 export const Contacts = () => {
 	const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
+	const isMobile = useMediaQuery({
+    query: '(max-width: 756px)'
+  })
 
 	const [isSended, setIsSended] = useState(false)
 
@@ -81,7 +85,7 @@ export const Contacts = () => {
 								<Form>
 									<div className={s.formFlex}>
 										<div className={s.lgInput}>
-											<div className={`${s.inputWrapper} ${(errors.fullName && touched.fullName) && s.error}`}>
+											<div className={`${s.inputWrapper} ${(errors.fullName && touched.fullName) && s.errorWrapper}`}>
 												<label className={s.img} htmlFor="fullName">
 													<img src={(errors.fullName && touched.fullName) ? "/images/icons/ic/user-error.svg" : "/images/icons/ic/user.svg"} alt="" />
 												</label>
@@ -95,7 +99,7 @@ export const Contacts = () => {
 											) : null}
 										</div>
 										<div className={s.smInput}>
-											<div className={`${s.inputWrapper} ${(errors.phone && touched.phone) && s.error}`}>
+											<div className={`${s.inputWrapper} ${(errors.phone && touched.phone) && s.errorWrapper}`}>
 												<label className={s.img} htmlFor="phone">
 													<img src={(errors.phone && touched.phone) ? "/images/icons/ic/phone-error.svg" : "/images/icons/ic/phone.svg"} alt="" />
 												</label>
@@ -109,7 +113,7 @@ export const Contacts = () => {
 											) : null}
 										</div>
 										<div className={s.smInput}>
-											<div className={`${s.inputWrapper} ${(errors.email && touched.email) && s.error}`}>
+											<div className={`${s.inputWrapper} ${(errors.email && touched.email) && s.errorWrapper}`}>
 												<label className={s.img} htmlFor="email">
 													<img src={(errors.email && touched.email) ? "/images/icons/ic/email-error.svg" : "/images/icons/ic/email.svg"} alt="" />
 												</label>
@@ -122,7 +126,7 @@ export const Contacts = () => {
 												</div>
 											) : null}
 										</div>
-										<div className={`${s.textarea} ${(errors.message && touched.message) && s.error}`}>
+										<div className={`${s.textarea} ${(errors.message && touched.message) && s.errorWrapper}`}>
 											<Field name="message" as="textarea" placeholder='Введите сообщение'/>
 											<div className={s.counter}>
 												{values.message.trim().length}/500
@@ -141,7 +145,7 @@ export const Contacts = () => {
 											disabled={!values.fullName || !values.phone || !values.email || Object.values(errors).length}>
 											Отправить
 										</button>
-										<a href="https://t.me" className={s.link}>
+										<a href='https://t.me/socialpost_support' target='_blank' className={s.link}> 
 											Написать в Телеграм
 											<img src="/images/icons/ic/tg.svg" alt="" />
 										</a>
@@ -149,7 +153,7 @@ export const Contacts = () => {
 								</Form>)}
 						</Formik>
 					</div>
-					<div className={s.img}>
+					{isMobile || <div className={s.img}>
 						<Player
 							autoplay
 							loop
@@ -157,7 +161,7 @@ export const Contacts = () => {
 							speed={.7}
 							style={{ height: '100%', width: '100%', objectFit:'contain' }}
 						/>
-					</div>
+					</div>}
 				</div>
 			</div>}
 		</div>

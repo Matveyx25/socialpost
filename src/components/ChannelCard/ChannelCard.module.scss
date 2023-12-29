@@ -15,6 +15,12 @@
 		text-decoration: none;
 	}
 }
+.mobileFlex{
+	display: contents;
+}
+.mobileBtns{
+	display: contents;
+}
 .img{
 	min-width: 4.25rem;
 	width: 4.25rem;
@@ -240,6 +246,134 @@
 				&::before{
 					font-size: 0.625rem;
 					line-height: 0.75rem; /* 116.667% */
+				}
+			}
+		}
+	}	
+}
+
+@media (max-width: 620px) {
+	.flex{
+		display: contents;
+	}
+	.mobileFlex{
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		align-self: stretch;
+		order: 0;
+	}
+	.mobileBtns{
+		display: flex;
+		align-items: center;
+		gap: .5rem;
+		align-self: stretch;
+		order: 2;
+		width: 100%;
+	}
+	.content{
+		p{
+			font-size: 1rem;
+			line-height: 1.25rem; /* 128.571% */
+		}
+		.titleFlex{
+			.title{
+				font-size: 1.25rem;
+				line-height: 1.5rem;
+			}
+			span{
+				padding: 0.25rem 0.5rem;
+				font-size: 1rem;
+				line-height: 1.25rem;
+			}
+		}
+	}
+	.stats{
+		order: 1;
+		flex-wrap: wrap;
+		div{
+			padding: 0.5rem 1rem;
+			min-width: calc(50% - .75rem);
+			span{
+				font-size: 0.875rem;
+				line-height: 1rem; /* 114.286% */
+			}
+		}
+	}
+	.button, .removeBtn{
+		padding: 1rem 2rem;
+		height: 3.25rem;
+		font-size: 1rem;
+	}
+	.formats{
+		flex-grow: 1;
+		:global{
+			.Dropdown-control{
+				height: 3.25rem;
+				padding: 0.5rem 1.5rem;
+			}
+			.Dropdown-option, .Dropdown-option.is-selected{
+				padding: .5rem;
+				font-size: .75rem;
+				line-height: 1rem; /* 125% */
+			}
+			.Dropdown-placeholder{
+				font-size: 1rem;
+				line-height: 1.25rem; /* 125% */
+				flex-grow: 1;
+				&::before{
+					font-size: 0.875rem;
+					line-height: 1; /* 116.667% */
+				}
+			}
+		}
+	}	
+}
+
+@media (max-width: 420px) {
+	.content{
+		p{
+			font-size: .875rem;
+			line-height: 1rem;
+		}
+		.titleFlex{
+			.title{
+				font-size: 1rem;
+				line-height: 1.25rem;
+			}
+			span{
+				padding: 0.25rem 0.5rem;
+				font-size: .75rem;
+				line-height: 0.875rem;
+			}
+		}
+	}
+	.stats{
+		div{
+			span{
+				font-size: 0.75rem;
+				line-height: .875rem; /* 114.286% */
+			}
+			p{
+				font-size: 0.875rem;
+				line-height: 1rem; 
+			}
+		}
+	}
+	.button, .removeBtn{
+		font-size: .875rem;
+	}
+	.formats{
+		:global{
+			.Dropdown-control{
+				padding: 0.69rem 1.5rem;
+			}
+			.Dropdown-placeholder{
+				font-size: .875rem;
+				line-height: 1rem; /* 125% */
+				&::before{
+					font-size: 0.75rem;
+					line-height: .875rem; /* 116.667% */
 				}
 			}
 		}

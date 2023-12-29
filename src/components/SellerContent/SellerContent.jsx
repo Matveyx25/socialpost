@@ -5,12 +5,20 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Path } from './Path';
 import { Counter } from './Counter';
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export const SellerContent = () => {
 	let scroller = useRef(null)
 	const [progress, setProgress] = useState(1)
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)'
+	})
+	
+	const smMobile = useMediaQuery({
+		query: '(max-width: 420px)'
+	})
 
 	useEffect(() => {
 		if(scroller){
@@ -82,7 +90,7 @@ export const SellerContent = () => {
 			</div>
 			<div className={s.pathWrapper}>
 				<h2 className='motion-section__seller'>3 причины быть с нами:</h2>
-				<Path/>
+				{isMobile ? <img src={smMobile ? '/images/seller-path-mobile-375.svg' : '/images/seller-path-mobile.svg'} alt='' className={s.pathMobile}/> : <Path/>}
 				<div className={s.messages}>
 					<div className={s.message} id="message_1">
 						<p>Крупнейшие каналы <br/> работают с нами</p>

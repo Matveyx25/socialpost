@@ -146,7 +146,7 @@
 					overflow: hidden;
 					box-sizing: border-box;
 					transition: .2s border-color;
-					&.error:not(:focus-within){
+					&.errorWrapper:not(:focus-within){
 						border-color: #EE1F1F;
 						.img{
 							background: #FEE9E9;
@@ -356,6 +356,7 @@
 					.error{
 						gap: 0.25rem;
 						margin-top: 0.13rem;
+						margin-bottom: -1.13rem;
 						img{
 							width: 1rem;
 							height: 1rem;
@@ -396,6 +397,7 @@
 					.error{
 						gap: 0.25rem;
 						margin-top: 0.13rem;
+						margin-bottom: -1.13rem;
 						img{
 							width: 1rem;
 							height: 1rem;
@@ -407,7 +409,236 @@
 						border-radius: 0.5rem;
 						padding: 0.59rem 0.62rem;
 						font-size: 0.627rem;
-						height: 7.5rem;
+						min-height: 7.5rem;
+					}
+				}
+			}
+		}
+	}
+	@media (max-width: 756px) {
+		height: 100vh;
+		width: 100vw;
+		.successWrapper{
+			gap: 1rem;
+			h2{
+				font-size: 1.75rem;
+			}
+			p{
+				font-size: 1rem;
+			}
+			a{
+				border-radius: 2.5rem;
+				padding: 0.5rem 2rem;
+				font-size: 1.25rem;
+				width: 22.56rem;
+				height: 3.5rem;
+				align-items: center;
+				justify-content: center;
+			}
+			img{
+				bottom: 14.94rem;
+				width: 57.5rem;
+				left: 40%;
+				transform: translateX(-50%);
+			}
+			.plane{
+				height: 9.33563rem;
+				bottom: 10.56rem;
+			}
+		}
+		.flex{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			h2{
+				font-family: 'SF Regular';
+				font-size: 1.75rem;
+				text-align: center;
+				max-width: 20rem;
+				margin: 0 auto;
+			}
+			p{
+				font-size: 1rem;
+				text-align: center;
+				width: 100%;
+				margin-top: 1rem;
+			}
+			form{
+				margin-top: 1.5rem;
+				.formFlex{
+					width: 100%;
+					gap: 2.25rem;
+				}
+				.smInput{
+					width: 100%;
+				}
+				.counter{
+					font-size: 0.625rem;
+					margin-top: 0.5rem;
+				}
+				.lgInput, .smInput{
+					.inputWrapper{
+						height: 3.5rem;
+					}
+					.error{
+						gap: 0.5rem;
+						margin-top: 0.37rem;
+						margin-bottom: -1.62rem;
+						img{
+							width: 1.25rem;
+							height: 1.25rem;
+						}
+						font-size: 1rem;
+						line-height: 1.25rem;
+					}
+					input{
+						padding: 1rem 0;
+						font-size: 1rem;
+					}
+					.img{
+						img{
+							width: 1.5rem;
+							height: 1.5rem;
+						}
+					}
+				}
+				.btns{
+					gap: 1rem;
+					margin-top: 2.25rem;
+					flex-direction: column;
+				}
+				button{
+					width: 100%;
+					padding: 1rem 2rem;
+					border-radius: 2.5rem;
+					font-size: 1rem;
+				}
+				.link{
+					gap: 0.5rem;
+					font-size: 1rem;
+					img{
+						width: 1.5rem;
+						height: 1.5rem;
+					}
+				}
+				.textarea{
+					.error{
+						gap: 0.5rem;
+						margin-top: 0.37rem;
+						margin-bottom: -1.62rem;
+
+						img{
+							width: 1.25rem;
+							height: 1.25rem;
+						}
+						font-size: 1rem;
+						line-height: 1.25rem;
+					}
+					textarea{
+						padding: 1rem;
+						font-size: 1rem;
+						min-height: 7.5rem;
+					}
+				}
+			}
+		}
+	}
+
+	@media (max-width: 420px) {
+		.successWrapper{
+			gap: .5rem;
+			h2{
+				font-size: 1.25rem;
+				margin-top: -7rem;
+			}
+			p{
+				font-size: 0.875rem;
+			}
+			a{
+				padding: 0.75rem 1.5rem;
+				font-size: 1rem;
+				width: fit-content;
+				height: fit-content;
+				margin-top: 1rem;
+			}
+			img{
+				top: 50%;
+				width: 36.25rem;
+				left: 40%;
+				transform: translateX(-50%);
+			}
+			.plane{
+				height: 5.8855rem;
+				top: 50%;
+				transform: translate(-30%, 3rem);
+			}
+		}
+
+		.flex{
+			h2{
+				font-size: 1.25rem;
+				max-width: 15rem;
+				margin: 0 auto;
+			}
+			p{
+				font-size: 0.875rem;
+				max-width: 13rem;
+				margin: 0 auto;
+				margin-top: .5rem;
+			}
+			form{
+				.formFlex{
+					gap: 1.5rem;
+				}
+				.lgInput, .smInput{
+					.inputWrapper{
+						height: 3rem;
+					}
+					.error{
+						gap: 0.25rem;
+						margin-top: 0.25rem;
+						margin-bottom: -1.125rem;
+						img{
+							width: 0.875rem;
+							height: 0.875rem;
+						}
+						font-size: 0.75rem;
+						line-height: 0.875rem;
+					}
+					input{
+						font-size: 0.875rem
+					}
+				}
+				.btns{
+					gap: 1rem;
+					margin-top: 2.25rem;
+					flex-direction: column;
+				}
+				button{
+					padding: 0.75rem 1.5rem;
+					font-size: 0.875rem;
+				}
+				.link{
+					font-size: 0.875rem;
+					img{
+						width: 1.25rem;
+						height: 1.25rem;
+					}
+				}
+				.textarea{
+					.error{
+						gap: 0.25rem;
+						margin-top: 0.25rem;
+						margin-bottom: -1.125rem;
+						img{
+							width: 0.875rem;
+							height: 0.875rem;
+						}
+						font-size: 0.75rem;
+						line-height: 0.875rem;
+					}
+					textarea{
+						font-size: 0.875rem;
 					}
 				}
 			}

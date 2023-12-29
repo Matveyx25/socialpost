@@ -1,5 +1,40 @@
 @import '~/src/styles/variables.scss';
 
+.overlay{
+	top: 4rem;
+	max-height: calc(100vh - 4rem);
+}
+:global(.bm-menu-wrap){
+	height: calc(100% - 4rem);
+	top: 4rem;
+}
+.burgerBtnDefault{
+	display: none;
+}
+.burgerMenu{
+	height: 100%;
+	background: #fff;
+	width: 27.5625rem;
+	padding: 1.5rem 1rem;
+	flex-shrink: 0;
+	ul{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 1.5rem;
+		list-style: none;
+		a{
+			color: $text-color;
+			font-size: 1.5rem;
+			font-family: 'SF Semibold';
+			text-decoration: none;
+			&.active{
+				color: $main-blue-color;
+			}
+		}
+	}
+}
+
 .header{
 	width: 100vw;
 	padding: 0.88889rem 0;
@@ -102,4 +137,83 @@
 			}
 		}
 	}
+
+	@media (max-width: 768px) {
+		padding: 0.75rem 0;
+		.flex{
+			position: relative;
+			.logo img{
+				position: absolute;
+				width: 7.5rem;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
+			}
+			.cartBtn{
+				padding: 0.75rem;
+				font-size: 1rem;
+				height: fit-content;
+			}
+			.cartIcon{
+				margin-right: .3rem;
+				width: 16px;
+				height: 16px;
+			}
+			.btn{
+				padding: 0.75rem 2rem;
+				font-size: 1rem;
+			}
+		}
+		.burgerBtn{
+			width: 2rem;
+			height: 2rem;
+			background: none;
+			border: none;
+			outline: none;
+			cursor: pointer;
+		}
+	}
 }
+
+
+	@media (max-width: 420px) {
+		.overlay{
+			top: 3rem;
+			max-height: calc(100vh - 3rem);
+		}
+		:global(.bm-menu-wrap){
+			height: calc(100% - 3rem);
+			top: 3rem;
+		}
+		.burgerMenu{
+			width: 17.9375rem;
+			ul{
+				a{
+					font-size: 1rem;
+				}
+			}
+		}
+		.header{
+			padding: 0.5rem 0;
+			.flex{
+				.btn{
+					padding: 0.5rem 1rem;
+					font-size: 0.875rem;
+				}
+				.cartBtn{
+					padding: 0.5rem;
+					font-size: 0.875rem;
+					height: fit-content;
+				}
+				.cartIcon{
+					margin-right: .3rem;
+					width: 14px;
+					height: 14px;
+				}
+			}
+			.burgerBtn{
+				width: 1.5rem;
+				height: 1.5rem;
+			}
+		}
+	}
