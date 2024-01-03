@@ -58,7 +58,7 @@ export const Channel = () => {
 			<div className="container">
 				<div className={s.flex}>
 					<div className={s.content}>
-						<DashboardCard>
+						<DashboardCard className={s.mainInfo}>
 							<div className={s.preview}>
 								<div className={s.img}>
 									<img src={img}/>
@@ -120,7 +120,7 @@ export const Channel = () => {
 								<LineChart data={subscribersData.data} labels={subscribersData.labels} borderColor={'#436CFF'} startColor={'rgba(67, 108, 255, .34)'} endColor={'rgba(255, 255, 255, .34)'}/>
 							</DashboardCard>
 						</div>
-						<DashboardCard>
+						<DashboardCard className={s.otherStats}>
 							<div className={s.cardHeader}>
 								Остальная стаитистика
 							</div>

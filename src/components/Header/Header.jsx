@@ -10,7 +10,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
 	const [burgerOpen, setBurgerOpen] = useState(false)
 	const isMobile = useMediaQuery({
-		query: '(max-width: 768px)'
+		query: '(max-width: 840px)'
 	})
 	const smMobile = useMediaQuery({
 		query: '(max-width: 420px)'

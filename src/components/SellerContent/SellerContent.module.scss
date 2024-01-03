@@ -362,9 +362,10 @@
 	.wrapper{
 		.circle{
 			position: sticky;
-			width: 22.625rem;
-			height: 33.375rem;
-			padding-top: 10.75rem;
+			width: 20rem;
+			height: 30.75rem;
+			padding-top: 6.75rem;
+			padding-bottom: 4rem;
 			margin: 0 auto;
 		}
 		.scroll {
@@ -473,7 +474,7 @@
 		.circle{
 			width: 21.4375rem;
 			height: 28.9375rem;
-			padding-top: 7.5rem;
+			padding-top: 3.5rem;
 		}
 		.scroll {
 			margin-top: calc(-100vh + 24rem);

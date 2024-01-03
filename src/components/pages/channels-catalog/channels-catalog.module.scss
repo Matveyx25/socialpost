@@ -34,6 +34,7 @@
 	.header{
 		display: flex;
 		align-items: center;
+		white-space: nowrap;
 		gap: 1.25rem;
 		span{
 			color: $gray-500;
