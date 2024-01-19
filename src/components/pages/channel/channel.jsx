@@ -9,16 +9,15 @@ import { Button } from '../../Shared/Button/Button';
 import { IconX } from '@tabler/icons-react';
 import LineChart from '../../Shared/LineChart/LineChart';
 
-const formats = [
-	{value: 'Нативный', label: 'Нативный'},
-	{value: 'Стандартный', label: 'Стандартный'},
-	{value: 'Без удаления', label: 'Без удаления'},
-]
-
 export const Channel = () => {
 	const { channelId } = useParams()
 	const channel = channels.find(el => el.id === channelId)
 	const {img, title, type, desc, cpv, er, postReach, subscribers, price} = channel
+
+	const	formats = Object.keys(price).map(el => ({
+		label: el,
+		value: el
+	}))
 	
 	const [cart, set_cart] = useState(() => {
 		const saved = localStorage.getItem("cart");
@@ -146,10 +145,10 @@ export const Channel = () => {
 							Купить рекламу
 						</div>
 						<div className={s.line}></div>
-						<Select label={'Формат поста'} options={formats} defaultValue={selectedFormat} setSelectedOption={setSelectedFormat} fullWidth={true}/>
+						<Select label={'Формат размещения'} options={formats} defaultValue={selectedFormat} setSelectedOption={setSelectedFormat} fullWidth={true}/>
 						{inCart ?
 							<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
-							<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
+							<Button className={s.button} label={(price[selectedFormat.value] + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
 					</DashboardCard>
 				</div>
 			</div>

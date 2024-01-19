@@ -11,18 +11,14 @@ import { InputField } from '../../Shared/Input/Input';
 import ReactDomServer from 'react-dom/server';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
-import { useMediaQuery } from 'react-responsive';
 
 export const Cart = () => {
 	const getSum = () => {
-  return !cart.length || cart.map(el => ({ ...channels.find(e => e.id === el.id), count: el.count }))
-    .reduce((a, b) =>
-      a + (b.price?.replace(/\s/g, '') || 0) * b.count, 0);
+  	return !cart.length || cart.map(el => ({ ...channels.find(e => e.id === el.id), count: el.count, format: el.format }))
+			.reduce((a, b) =>
+				a + (b.price[b.format] !== 'договорная' ? b.price[b.format]?.replace(/\s/g, '') : 0) * b.count, 0);
 	};
-	const isMobile = useMediaQuery({
-		query: '(max-width: 620px)'
-	})
-
+	
 	const [payingNotice, set_payingNotice] = useState(false)
 	const [policy, set_policy] = useState(false)
 	
@@ -86,7 +82,9 @@ export const Cart = () => {
 											<td style={{ border: '1px solid black', padding: '8px' }}>{channel.title}</td>
 											<td style={{ border: '1px solid black', padding: '8px' }}>{el.format}</td>
 											<td style={{ border: '1px solid black', padding: '8px' }}>{el.count}</td>
-											<td style={{ border: '1px solid black', padding: '8px' }}>{+channel?.price.replace(/\s/g, '') * +el.count}₽</td>
+											<td style={{ border: '1px solid black', padding: '8px' }}>
+												{(channel?.price[el.format] !== 'договорная' ? +channel?.price[el.format]?.replace(/\s/g, '') : 0) * +el.count}₽
+											</td>
 										</tr>
 									)
 								})}
@@ -153,7 +151,7 @@ export const Cart = () => {
 									</div>
 										<div className={s.productPrice}>
 											<span>Общая стоимость</span>
-											{+channel?.price.replace(/\s/g, '') * +el.count}₽
+											{(channel?.price[el.format] !== 'договорная' ? +channel?.price[el.format]?.replace(/\s/g, '') * +el.count + '₽' : 'договорная') }
 										</div>
 										<div className={s.productBtns}>
 											<button className={s.removeBtn}>

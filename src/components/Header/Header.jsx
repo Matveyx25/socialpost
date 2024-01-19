@@ -71,9 +71,6 @@ export const Header = ({role, setRole, onModalOpen}) => {
 						</ul>}
 						<div className={s.btns}>
 							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
-							 {!isMobile &&<NavLink className={s.btn} onClick={() => onModalOpen()}>
-								Войти
-							</NavLink>}
 						</div>
 					</div>
 				</div>
@@ -112,13 +109,6 @@ export const Header = ({role, setRole, onModalOpen}) => {
 								setBurgerOpen(false)
 							}}
 							className={({ isActive }) => isActive && s.active}>FAQ</NavLink>
-						</li>
-						<li>
-							<NavLink onClick={() => {
-								setBurgerOpen(false)
-								onModalOpen()
-							}}
-							className={({ isActive }) => isActive && s.active}>Войти</NavLink>
 						</li>
 					</ul>
 				</div>

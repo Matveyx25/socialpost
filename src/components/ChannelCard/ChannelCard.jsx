@@ -6,7 +6,9 @@ import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler
 import { Button } from '../Shared/Button/Button';
 import { NavLink } from 'react-router-dom';
 
-export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+export const ChannelCard = ({link, updateCart, id, cart, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+	const	formats = Object.keys(price)
+	
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
 	const [selectedFormat, setSelectedFormat] = useState(inCart ? cart?.find(el => el.id === id).format : {value: formats[0], label: formats[0]})
 
@@ -46,8 +48,8 @@ export const ChannelCard = ({link, updateCart, id, cart, formats, title, type, d
 										arrowClosed={<IconChevronDown size={18}/>}
 										arrowOpen={<IconChevronUp size={18}/>}/>
 					{inCart ?
-					<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/>: 
-					<Button className={s.button} label={(price + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
+					<Button className={s.removeBtn} label={'Убрать'} leftIcon={<IconX size={18}/>} onClick={removeFromCart}/> : 
+					<Button className={s.button} label={(price[selectedFormat.value] + '').replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} leftIcon={<IconShoppingCart size={18}/>} onClick={addToCart}/>}
 				</div>
 			</div>
 			<div className={s.stats}>

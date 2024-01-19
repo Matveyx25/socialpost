@@ -16,12 +16,6 @@ const options = [
   { value: 'price less', label: 'Цена: Меньше' },
 ];
 
-const formats = [
-	'Нативный',
-	'Стандартный',
-	'Без удаления',
-]
-
 export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(options[0]);
 	const [filtered, setFiltered] = useState([...channels]);
@@ -93,7 +87,7 @@ export const ChannelsCatalog = () => {
 							</span>
 						</div>
 						{sortChannels(filtered).map(channel => (
-							<ChannelCard  updateCart={set_cart} formats={formats} cart={cart} {...channel}/>
+							<ChannelCard  updateCart={set_cart} cart={cart} {...channel}/>
 						))}
 					</div>
 				</div>

@@ -11,7 +11,7 @@ export const Counter = () => {
 	useEffect(() => {
 		if(counter){
 				gsap.to("#counter_1", { 
-					innerText: 567,
+					innerText: 29,
 					duration: 1, 
 					ease: "power1.in",
 					snap: {
@@ -23,7 +23,7 @@ export const Counter = () => {
 					}
 				});
 				gsap.to("#counter_2", { 
-					innerText: 1234567,
+					innerText: 5148728,
 					duration: 1, 
 					ease: "power1.in",
 					snap: {
@@ -35,7 +35,7 @@ export const Counter = () => {
 					}
 				});
 				gsap.to("#counter_3", { 
-					innerText: 24567,
+					innerText: 2873,
 					duration: 1, 
 					ease: "power1.in",
 					snap: {

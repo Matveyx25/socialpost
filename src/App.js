@@ -58,7 +58,7 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
-					<Route element={<DashboardLayout/>}>
+					{/* <Route element={<DashboardLayout/>}>
 						<Route path="/dashboard" element={<MainDashboard/>}/>
 						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
 						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
@@ -66,7 +66,7 @@ function App() {
 						<Route path="/dashboard/payments" element={<Payments/>}/>
 						<Route path="/dashboard/requisites" element={<Requisites/>}/>
 						<Route path="/dashboard/faq" element={<FAQ/>} />
-					</Route>
+					</Route> */}
 				</Routes>
 			</div>
 		</HelmetProvider>
