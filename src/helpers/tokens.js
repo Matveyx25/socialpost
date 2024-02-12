@@ -7,11 +7,3 @@ export const setAuthToken = token => {
    else
        delete axios.defaults.headers.common["Authorization"];
 }
- 
-export const setBasicAuth = payload => {
-   if (payload) {
-       axios.defaults.headers.common["Authorization"] = `Basic ${'admin@example.com'}:${'qwerty12'}`;
-   }
-   else
-       delete axios.defaults.headers.common["Authorization"];
-}

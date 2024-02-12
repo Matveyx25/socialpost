@@ -1,6 +1,6 @@
 import axios from "axios";
 import {toast} from "react-toastify";
-import { setAuthToken, setBasicAuth } from "../helpers/tokens";
+import { setAuthToken } from "../helpers/tokens";
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_API_URL
@@ -24,13 +24,9 @@ function getAccessToken() {
 	return localStorage.getItem('token');
 }
 
-function getBasicAuthString() {
-	return `${'admin@example.com'}:${'qwerty12'}`;
-}
-
 instance.interceptors.request.use((request) => {
 	if (!request.headers['Authorization']){
-		request.headers['Authorization'] = `Basic ${getBasicAuthString()}`;
+		request.headers['Authorization'] = `Bearer ${getAccessToken()}`;
 	}
 	return request;
 });
@@ -38,8 +34,8 @@ instance.interceptors.request.use((request) => {
 export const auth = {
 	login(data) {
 		return instance.get("/login", {...data}).then(response => {
-				debugger
 				setAuthToken(response.accessToken);
+				localStorage.setItem('token', response.accessToken)
 				window.location.href = '/'
 			}).catch(err => {
 				console.log(err);
@@ -49,9 +45,7 @@ export const auth = {
 		return instance.get("/users/current")
 	},
 	logout() {
-		localStorage.removeItem("username");
-		localStorage.removeItem("password");
-		setBasicAuth();
+		setAuthToken();
 		window.location.href = '/'
 	}
 }
