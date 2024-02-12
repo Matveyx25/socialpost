@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './ChannelCard.module.scss'
 import Dropdown from 'react-dropdown'
 import 'react-dropdown/style.css';
@@ -6,11 +6,11 @@ import { IconChevronDown, IconChevronUp, IconShoppingCart, IconX } from '@tabler
 import { Button } from '../Shared/Button/Button';
 import { NavLink } from 'react-router-dom';
 
-export const ChannelCard = ({link, updateCart, id, cart, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
+export const ChannelCard = ({link, key, updateCart, id, cart, title, type, desc, subscribers, postReach, cpv, er, img, price}) => {
 	const	formats = Object.keys(price)
 	
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === id))
-	const [selectedFormat, setSelectedFormat] = useState(inCart ? cart?.find(el => el.id === id).format : {value: formats[0], label: formats[0]})
+	const [selectedFormat, setSelectedFormat] = useState(inCart ? {value: inCart.format, label: inCart.format} : {value: formats[0], label: formats[0]})
 
 	const addToCart = () => {
 		set_inCart(true)
@@ -22,8 +22,16 @@ export const ChannelCard = ({link, updateCart, id, cart, title, type, desc, subs
 		updateCart(cart.filter(el => el.id !== id))
 	}
 
+	useEffect(() => {
+		set_inCart(cart && cart?.find(el => el.id === id))
+	}, [cart])
+	
+	useEffect(() => {
+		setSelectedFormat(inCart ? {value: inCart.format, label: inCart.format} : {value: formats[0], label: formats[0]})
+	}, [inCart])
+
 	return (
-		<div className={s.wrapper}>
+		<div className={s.wrapper} key={key}>
 			<div className={s.flex}>
 				<div className={s.mobileFlex}>
 					<NavLink className={s.img}  to={'/channel/' + id}>

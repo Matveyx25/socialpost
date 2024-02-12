@@ -36,6 +36,12 @@ export const ChannelsCatalog = () => {
 		window.dispatchEvent(new Event("cart-changed"));
 	}, [cart])
 
+	useEffect(() => {
+		const saved = localStorage.getItem("cart");
+		const initialValue = JSON.parse(saved);
+		set_cart(initialValue || '')
+	}, [filtered])
+
 	const onFilterSubmit = (filter) => {
 		setFiltered([...channels].filter(filter))
 	}
@@ -43,7 +49,7 @@ export const ChannelsCatalog = () => {
 	const sortChannels = (array) => {
 		const subscribers = (a) => a.subscribers.replace(/\s/g, '');
 		const postReach = (a) => a.postReach.replace(/\s/g, '');
-		const price = (a) => a.price.replace(/\s/g, '');
+		const price = (a) => a.price[Object.keys(a.price)[0]].replace(/\s/g, '')
 
 		switch(selectedOption.value){
 			case 'subscribers more': 
@@ -87,7 +93,7 @@ export const ChannelsCatalog = () => {
 							</span>
 						</div>
 						{sortChannels(filtered).map(channel => (
-							<ChannelCard  updateCart={set_cart} cart={cart} {...channel}/>
+							<ChannelCard  updateCart={set_cart} key={'channel-id-' + channel.id} cart={cart} {...channel}/>
 						))}
 					</div>
 				</div>

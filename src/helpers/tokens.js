@@ -1,0 +1,17 @@
+import axios from 'axios';
+ 
+export const setAuthToken = token => {
+   if (token) {
+       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+   }
+   else
+       delete axios.defaults.headers.common["Authorization"];
+}
+ 
+export const setBasicAuth = payload => {
+   if (payload) {
+       axios.defaults.headers.common["Authorization"] = `Basic ${'admin@example.com'}:${'qwerty12'}`;
+   }
+   else
+       delete axios.defaults.headers.common["Authorization"];
+}

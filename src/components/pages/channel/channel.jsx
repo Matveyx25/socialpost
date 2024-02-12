@@ -83,15 +83,15 @@ export const Channel = () => {
 								<ul className={s.postReachList}>
 									<li>
 										<p>За 12 часов</p>
-										<span>250,250</span>
+										{channel.id == 3 ? <span>50,250</span> : <span>250,250</span>}
 									</li>
 									<li>
 										<p>За 24 часа</p>
-										<span>351,821</span>
+										{channel.id == 3 ? <span>60,821</span> : <span>351,821</span>}
 									</li>
 									<li>
 										<p>За 48 часов</p>
-										<span>412,526</span>
+										{channel.id == 3 ? <span>67,526</span> : <span>412,526</span>}
 									</li>
 								</ul>
 								<LineChart data={postReachData.data} labels={postReachData.labels} borderColor={'#F78F8F'} startColor={'rgba(247, 143, 143, 1)'} endColor={'rgba(255, 255, 255, .34)'}/>

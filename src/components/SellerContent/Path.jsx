@@ -3,10 +3,15 @@ import { MotionPathPlugin, ScrollTrigger } from 'gsap/all';
 import React, { useEffect, useRef, useState } from 'react'
 import { Shus } from './Shus';
 import s from './SellerContent.module.scss'
+import { useMediaQuery } from 'react-responsive';
 
 gsap.registerPlugin(MotionPathPlugin, ScrollTrigger);
 
 export const Path = () => {
+	const isMobile = useMediaQuery({
+		query: '(max-width: 768px)'
+	})
+
 	let star = useRef(null)
 	let path = useRef(null)
 	const [progress, setProgress] = useState(0)
@@ -40,7 +45,7 @@ export const Path = () => {
 			}, 8)
 			.to(" .shu_3", {}, 6)
 
-		if(path){
+		if(!isMobile && path){
 			gsap.timeline({
 				scrollTrigger: {
 					trigger: ".motion-section__seller",
@@ -64,7 +69,7 @@ export const Path = () => {
 				}
 			}, 0).add(pulses, 0)
 		}
-	}, [path])
+	}, [path, isMobile])
 
 	return (
     <div className={s.pathContainer}>

@@ -122,10 +122,16 @@
 	color: $gray-900 !important;
 	background: #F3F3F3 !important;
 	border: none !important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: fit-content;
 }
 .removeBtn{
 	width: fit-content;
 	padding: 1rem 1.5rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: fit-content;
 }
 .formats{
 	:global{
@@ -232,6 +238,7 @@
 		:global{
 			.Dropdown-control{
 				height: 2.25rem;
+				min-width: 155px;
 				padding: 0.25rem 0.75rem;
 			}
 			.Dropdown-option, .Dropdown-option.is-selected{
@@ -311,6 +318,7 @@
 			.Dropdown-control{
 				height: 3.25rem;
 				padding: 0.5rem 1.5rem;
+				min-width: 209px;
 			}
 			.Dropdown-option, .Dropdown-option.is-selected{
 				padding: .5rem;
@@ -362,11 +370,22 @@
 	}
 	.button, .removeBtn{
 		font-size: .875rem;
+		max-width: calc(100% - 200px);
+		width: 100%;
+		padding: 1rem;
+		svg{
+			min-width: 18px;
+		}
+		span{
+			text-overflow: ellipsis;
+			overflow: hidden;
+		}
 	}
 	.formats{
 		:global{
 			.Dropdown-control{
 				padding: 0.69rem 1.5rem;
+				min-width: 190px;
 			}
 			.Dropdown-placeholder{
 				font-size: .875rem;

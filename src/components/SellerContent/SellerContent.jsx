@@ -28,7 +28,7 @@ export const SellerContent = () => {
 					start: "top top",
 					pin: false,
 					pinSpacing: true,
-					snap: {
+					snap: isMobile ? null : {
 						snapTo: true,
 						duration: 0.4,
 						delay: 0.1,
@@ -42,7 +42,7 @@ export const SellerContent = () => {
 		return () => {
 			ScrollTrigger.killAll();
 		}
-	}, [scroller])
+	}, [scroller, isMobile])
 
 	return (
 		<div className={s.wrapper}>

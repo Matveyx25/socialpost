@@ -90,7 +90,7 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 		const subscribers = +el.subscribers.replace(/\s/g, '');
 		const postReach = +el.postReach.replace(/\s/g, '');
 		const cpv = +el.cpv.replace(/\s/g, '');
-		const price = +el.price.replace(/\s/g, '');
+		const price = +el.price[Object.keys(el.price)[0]].replace(/\s/g, '');
 		const type = el.type;
 
 		console.log(selectedTypes, type, selectedTypes.findIndex(i => i.value === type) !== -1);
