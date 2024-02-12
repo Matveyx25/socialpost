@@ -25,7 +25,7 @@ function getAccessToken() {
 }
 
 instance.interceptors.request.use((request) => {
-	if (!request.headers['Authorization']){
+	if (!request.headers['Authorization'] && getAccessToken()){
 		request.headers['Authorization'] = `Bearer ${getAccessToken()}`;
 	}
 	return request;
@@ -33,7 +33,7 @@ instance.interceptors.request.use((request) => {
 
 export const auth = {
 	login(data) {
-		return instance.get("/login", {...data}).then(response => {
+		return instance.post("/login", {...data}).then(response => {
 				setAuthToken(response.accessToken);
 				localStorage.setItem('token', response.accessToken)
 				window.location.href = '/'
@@ -46,6 +46,7 @@ export const auth = {
 	},
 	logout() {
 		setAuthToken();
+		localStorage.removeItem('token')
 		window.location.href = '/'
 	}
 }

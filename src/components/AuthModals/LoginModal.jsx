@@ -45,7 +45,7 @@ export const LoginModal = ({isOpen, setOpen}) => {
 							"telegramFirstName": "string",
 							"telegramLastName": "string",
 							"telegramUsername": "string",
-							"telegramPhotoUrl": "string",
+							"telegramPhotoUrl": "https://www.shutterstock.com/image-vector/young-smiling-man-avatar-brown-600nw-2261401207.jpg",
 							"authDate": 0,
 							"hash": "string"
 						})
