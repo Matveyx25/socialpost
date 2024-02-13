@@ -3,7 +3,10 @@ import {toast} from "react-toastify";
 import { setAuthToken } from "../helpers/tokens";
 
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL
+    baseURL: process.env.REACT_APP_API_URL,
+		headers: {
+			'Access-Control-Allow-Origin': '*'
+		}
 })
 
 const errorHandler = (error) => {
@@ -34,8 +37,8 @@ instance.interceptors.request.use((request) => {
 export const auth = {
 	login(data) {
 		return instance.post("/login", {...data}).then(response => {
-				setAuthToken(response.accessToken);
-				localStorage.setItem('token', response.accessToken)
+				setAuthToken(response.data.accessToken);
+				localStorage.setItem('token', response.data.accessToken)
 				window.location.href = '/'
 			}).catch(err => {
 				console.log(err);

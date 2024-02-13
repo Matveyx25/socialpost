@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import s from './Header.module.scss'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Button } from '../Shared/Button/Button'
-import { IconMenu2, IconShoppingCart } from '@tabler/icons-react'
+import { IconChevronDown, IconChevronUp, IconMenu2, IconShoppingCart } from '@tabler/icons-react'
 import { useMediaQuery } from 'react-responsive'
 import { slide as Menu } from 'react-burger-menu'
+import { Dropdown } from '../Shared/Dropdown/Dropdown';
+import { auth } from '../../api/api'
 
 export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
@@ -15,6 +17,11 @@ export const Header = ({role, setRole, onModalOpen}) => {
 	const smMobile = useMediaQuery({
 		query: '(max-width: 420px)'
 	})
+
+	const dropdown = [
+		<NavLink>Профиль</NavLink>,
+		<span onClick={() => auth.logout()}>Выйти</span>,
+	]
 
 	const getSum = () => {
 		return !cart.length || cart.reduce((a, b) =>
@@ -71,9 +78,14 @@ export const Header = ({role, setRole, onModalOpen}) => {
 						</ul>}
 						<div className={s.btns}>
 							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
-							 <NavLink className={s.btn} onClick={() => onModalOpen()}>
-								Войти
-							</NavLink>
+							 {localStorage.getItem('token') ? 
+								<Dropdown
+									options={dropdown} label={<img src="https://st.adda247.com/https://adda247-wp-multisite-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/multisite/sites/5/2023/08/03164553/mukesh-ambani-e1691061413489.png"/>}
+									arrowClosed={<IconChevronDown size={18}/>}
+									arrowOpen={<IconChevronUp size={18}/>}/> : 
+									<NavLink className={s.btn} onClick={() => onModalOpen()}>
+									Войти
+								</NavLink>}
 						</div>
 					</div>
 				</div>

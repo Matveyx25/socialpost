@@ -58,6 +58,7 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
+					
 					{/* <Route element={<DashboardLayout/>}>
 						<Route path="/dashboard" element={<MainDashboard/>}/>
 						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>

@@ -6,7 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
 import { Button } from '../Shared/Button/Button';
 import { auth } from "../../api/api";
-import { TLoginButton, TLoginButtonSize } from "react-telegram-auth";
+import TelegramLoginButton from "telegram-login-button";
 
 export const LoginModal = ({isOpen, setOpen}) => {
 	const [login, set_login] = useState('')
@@ -50,18 +50,11 @@ export const LoginModal = ({isOpen, setOpen}) => {
 							"hash": "string"
 						})
 					}}/>
-					{/* <TLoginButton
-						botName="@socialpost_ru_bot"
-						buttonSize={TLoginButtonSize.Large}
-						lang="ru"
-						usePic={false}
-						cornerRadius={20}
-						onAuthCallback={(user) => {
-							auth.login(user);
-						}}
-						requestAccess={'write'}
-						additionalClasses={'css-class-for-wrapper'}
-					/> */}
+					<TelegramLoginButton
+						botName="socialpost_ru_bot"
+						dataOnauth={(user) => auth.login(user)}
+						className={s.tgBtnWrapper}
+					/>
 				</div>
 				<div className={s.footer}>
 					<p>Ещё нет аккаунта?<NavLink onClick={() => setOpen('register')}> Зарегистрироваться</NavLink></p>
