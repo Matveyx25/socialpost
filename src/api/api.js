@@ -3,10 +3,7 @@ import {toast} from "react-toastify";
 import { setAuthToken } from "../helpers/tokens";
 
 const instance = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-		headers: {
-			'Access-Control-Allow-Origin': '*'
-		}
+    baseURL: process.env.REACT_APP_API_URL
 })
 
 const errorHandler = (error) => {
