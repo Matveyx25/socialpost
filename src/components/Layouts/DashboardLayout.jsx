@@ -7,6 +7,7 @@ import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { DashboardModals } from "../DashboardModals/DashboardModals";
 
 const routesTitle = {
+	'/profile/': 'Профиль',
 	'/dashboard/': 'Дашборд',
 	'/dashboard/my-channels/': 'Мои каналы',
 	'/dashboard/placement-appointments/': 'Заявки на размещение',
@@ -19,7 +20,7 @@ const routesTitle = {
 
 const dropdown = [
 	'Профиль',
-	"Мои каналы",
+	// "Мои каналы",
 	"Выйти"
 ]
 

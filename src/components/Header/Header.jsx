@@ -19,7 +19,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 	})
 
 	const dropdown = [
-		<NavLink>Профиль</NavLink>,
+		<NavLink to="/">Профиль</NavLink>,
 		<span onClick={() => auth.logout()}>Выйти</span>,
 	]
 

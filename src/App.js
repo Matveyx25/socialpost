@@ -23,6 +23,10 @@ import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
 import { Channel } from "./components/pages/channel/channel";
 import { Helmet,HelmetProvider } from "react-helmet-async";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
+import { Outlet } from 'react-router-dom';
+import { Admin } from "react-admin";
+import AdminPanel from "./components/Admin/AdminPanel";
+import { Profile } from "./components/pages/profile/profile";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -58,16 +62,19 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
-					
-					{/* <Route element={<DashboardLayout/>}>
-						<Route path="/dashboard" element={<MainDashboard/>}/>
+					<Route element={<><Outlet/></>}>
+						<Route path="/admin/*" element={<AdminPanel/>}/>
+					</Route>
+					<Route element={<DashboardLayout/>}>
+						<Route path="/profile" element={<Profile/>}/>
+						{/* <Route path="/dashboard" element={<MainDashboard/>}/>
 						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
 						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
 						<Route path="/dashboard/appointment" element={<Report/>}/>
 						<Route path="/dashboard/payments" element={<Payments/>}/>
-						<Route path="/dashboard/requisites" element={<Requisites/>}/>
-						<Route path="/dashboard/faq" element={<FAQ/>} />
-					</Route> */}
+						<Route path="/dashboard/requisites" element={<Requisites/>}/> */}
+						<Route path="/dashboard/faq" element={<FAQ/>} /> 
+					</Route>
 				</Routes>
 			</div>
 		</HelmetProvider>

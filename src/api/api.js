@@ -32,8 +32,8 @@ instance.interceptors.request.use((request) => {
 });
 
 export const auth = {
-	login(data) {
-		return instance.post("/login", {...data}).then(response => {
+	loginTelegram(data) {
+		return instance.post("/login/telegram", {...data}).then(response => {
 				setAuthToken(response.data.accessToken);
 				localStorage.setItem('token', response.data.accessToken)
 				window.location.href = '/'
@@ -41,6 +41,28 @@ export const auth = {
 				console.log(err);
 			})
 	},
+	loginEmail(data) {
+		return instance.post("/login/email", {...data}).then(response => {
+				setAuthToken(response.data.accessToken);
+				localStorage.setItem('token', response.data.accessToken)
+				window.location.href = '/'
+			}).catch(err => {
+				console.log(err);
+			})
+	},
+	registrationEmail(data) {
+		return instance.post("/users/registration/by_email", data)
+	},
+	registrationTelegram(data) {
+		return instance.post("/users/registration/by_telegram", data)
+	},
+	// {
+	// 	"email": "string",
+	// 	"password": "string",
+	// 	"firstName": "string",
+	// 	"lastName": "string",
+	// 	"photoUrl": "string"
+	// }
 	me() {
 		return instance.get("/users/current")
 	},

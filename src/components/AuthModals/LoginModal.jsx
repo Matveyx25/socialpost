@@ -14,6 +14,18 @@ export const LoginModal = ({isOpen, setOpen}) => {
 
 	const navigate = useNavigate()
 
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		if(!password || !login){
+			return null
+		}
+
+		auth.loginEmail({
+			"email": login,
+			"password": password,
+		})
+	}
+
   return (
 		<Modal {...{isOpen, setOpen}} title={'Вход'} name={'login'}>
 			<form className={s.form}>
@@ -32,24 +44,9 @@ export const LoginModal = ({isOpen, setOpen}) => {
 						<NavLink onClick={() => setOpen('forget')}>Забыли пароль?</NavLink>
 					</div>
 				</div>
-				<Button label="Войти" onClick={() => {}}/>
-				{/* <Button label="Войти" disabled={!password || !login}/> */}
+				<Button label="Войти" disabled={!password || !login} onClick={handleSubmit}/>
 				<p>Или</p>
 				<div className={s.btns}>
-					{/* <Button theme="secondary" label="Вконтакте" leftIcon={<img src="./images/icons/vk.png"/>}/> */}
-					<Button theme="secondary" label="Telegram" leftIcon={<img src="./images/icons/tg.png"/>}
-					onClick={(e) => {
-						e.preventDefault()
-						auth.login({
-							"telegramId": 0,
-							"telegramFirstName": "string",
-							"telegramLastName": "string",
-							"telegramUsername": "string",
-							"telegramPhotoUrl": "https://www.shutterstock.com/image-vector/young-smiling-man-avatar-brown-600nw-2261401207.jpg",
-							"authDate": 0,
-							"hash": "string"
-						})
-					}}/>
 					<TelegramLoginButton
 						botName="socialpost_ru_bot"
 						dataOnauth={(user) => auth.login(user)}
