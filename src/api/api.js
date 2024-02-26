@@ -9,6 +9,8 @@ const instance = axios.create({
 const errorHandler = (error) => {
 	if(error?.response?.status && error?.response?.status !== 403){
 		toast.error(`${error?.response?.data?.message || 'Возникла ошибка'}`);  
+	}if(error?.response?.status == 401){
+		localStorage.removeItem('token')
 	}
 
   return Promise.reject({ ...error })
@@ -56,19 +58,24 @@ export const auth = {
 	registrationTelegram(data) {
 		return instance.post("/users/registration/by_telegram", data)
 	},
-	// {
-	// 	"email": "string",
-	// 	"password": "string",
-	// 	"firstName": "string",
-	// 	"lastName": "string",
-	// 	"photoUrl": "string"
-	// }
-	me() {
-		return instance.get("/users/current")
-	},
 	logout() {
 		setAuthToken();
 		localStorage.removeItem('token')
 		window.location.href = '/'
+	}
+}
+
+export const profile = {
+	me() {
+		return instance.get("/users/current")
+	},
+	updateProfile(data) {
+		return instance.put("/users/current", data)
+	},
+	connectTelegram(data) {
+		return instance.post("/users/current/connect/telegram", data)
+	},
+	connectEmail(data) {
+		return instance.post("/users/current/connect/email", data)
 	}
 }

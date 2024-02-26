@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Outlet, useLocation, useMatches } from "react-router-dom";
+import { NavLink, Outlet, useLocation, useMatches } from "react-router-dom";
 import { Sidebar } from "../Sidebar/Sidebar";
 import s from './Layouts.module.scss'
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { DashboardModals } from "../DashboardModals/DashboardModals";
+import { auth } from "../../api/api";
 
 const routesTitle = {
 	'/profile/': 'Профиль',
@@ -19,9 +20,8 @@ const routesTitle = {
 }
 
 const dropdown = [
-	'Профиль',
-	// "Мои каналы",
-	"Выйти"
+	<NavLink to="/profile">Профиль</NavLink>,
+	<span onClick={() => auth.logout()}>Выйти</span>,
 ]
 
 export const DashboardLayout = ({}) => {

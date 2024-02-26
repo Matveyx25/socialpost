@@ -6,11 +6,13 @@ import { IconChevronDown, IconChevronUp, IconMenu2, IconShoppingCart } from '@ta
 import { useMediaQuery } from 'react-responsive'
 import { slide as Menu } from 'react-burger-menu'
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
-import { auth } from '../../api/api'
+import { auth, profile } from '../../api/api'
+import { useQuery } from '@tanstack/react-query'
 
 export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
 	const [burgerOpen, setBurgerOpen] = useState(false)
+
 	const isMobile = useMediaQuery({
 		query: '(max-width: 840px)'
 	})
@@ -18,8 +20,10 @@ export const Header = ({role, setRole, onModalOpen}) => {
 		query: '(max-width: 420px)'
 	})
 
+	const {data: profileDat, isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+
 	const dropdown = [
-		<NavLink to="/">Профиль</NavLink>,
+		<NavLink to="/profile">Профиль</NavLink>,
 		<span onClick={() => auth.logout()}>Выйти</span>,
 	]
 
@@ -78,7 +82,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 						</ul>}
 						<div className={s.btns}>
 							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
-							 {localStorage.getItem('token') ? 
+							 {profileSuccess ? 
 								<Dropdown
 									options={dropdown} label={<img src="https://st.adda247.com/https://adda247-wp-multisite-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/multisite/sites/5/2023/08/03164553/mukesh-ambani-e1691061413489.png"/>}
 									arrowClosed={<IconChevronDown size={18}/>}

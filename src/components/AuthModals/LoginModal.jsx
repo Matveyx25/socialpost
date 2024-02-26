@@ -49,7 +49,7 @@ export const LoginModal = ({isOpen, setOpen}) => {
 				<div className={s.btns}>
 					<TelegramLoginButton
 						botName="socialpost_ru_bot"
-						dataOnauth={(user) => auth.login(user)}
+						dataOnauth={(user) => auth.loginTelegram(user)}
 						className={s.tgBtnWrapper}
 					/>
 				</div>

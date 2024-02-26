@@ -44,6 +44,7 @@
     "remark-gfm": "^4.0.0",
     "sass": "^1.63.6",
     "telegram-login-button": "^0.1.0",
+    "telegram-login-widget": "^0.1.12",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },

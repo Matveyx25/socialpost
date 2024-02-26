@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PublisherContent } from "./components/PublisherContent/PublisherContent";
 import { SellerContent } from './components/SellerContent/SellerContent';
 import { Route, Routes } from "react-router";
@@ -27,10 +27,14 @@ import { Outlet } from 'react-router-dom';
 import { Admin } from "react-admin";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { Profile } from "./components/pages/profile/profile";
+import { useQuery } from "@tanstack/react-query";
+import { profile } from "./api/api";
 
 function App() {
 	const [role, setRole] = useState('publisher')
 	const [modal, setModal] = useState('')
+
+	const {isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
 
   return (
 		<HelmetProvider>
@@ -65,7 +69,7 @@ function App() {
 					<Route element={<><Outlet/></>}>
 						<Route path="/admin/*" element={<AdminPanel/>}/>
 					</Route>
-					<Route element={<DashboardLayout/>}>
+					{profileSuccess ? <Route element={<DashboardLayout/>}>
 						<Route path="/profile" element={<Profile/>}/>
 						{/* <Route path="/dashboard" element={<MainDashboard/>}/>
 						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
@@ -74,7 +78,7 @@ function App() {
 						<Route path="/dashboard/payments" element={<Payments/>}/>
 						<Route path="/dashboard/requisites" element={<Requisites/>}/> */}
 						<Route path="/dashboard/faq" element={<FAQ/>} /> 
-					</Route>
+					</Route> : null}
 				</Routes>
 			</div>
 		</HelmetProvider>

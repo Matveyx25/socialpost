@@ -6,7 +6,6 @@ import { Input, InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
-import { Calendar } from '../../../Shared/Calendar/Calendar';
 import { IconEdit } from '@tabler/icons-react';
 
 const crypto = [

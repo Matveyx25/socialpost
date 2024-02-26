@@ -5,6 +5,7 @@ import { EditChannelModal } from './EditChannelModal'
 import { RemoveReportModal } from './RemoveReportModal'
 import { ApproveReportModal } from './ApproveReportModal'
 import { WithdrawModal } from './WithdrawModal'
+import { EmailModal } from './ConnectEmailModal'
 
 export const DashboardModals = ({isOpen, setOpen}) => {
 	return (
@@ -15,6 +16,7 @@ export const DashboardModals = ({isOpen, setOpen}) => {
 			<RemoveReportModal {...{isOpen, setOpen}}/>
 			<ApproveReportModal {...{isOpen, setOpen}}/>
 			<WithdrawModal {...{isOpen, setOpen}}/>
+			<EmailModal {...{isOpen, setOpen}}/>
 		</div>
 	)
 }
