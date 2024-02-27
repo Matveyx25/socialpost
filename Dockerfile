@@ -5,11 +5,15 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./public ./public
+COPY ./src ./src
 RUN npm run build
 
-FROM nginx:stable-alpine as runner
-COPY --from=builder /app/build /usr/share/nginx/html
+FROM node:14 AS runner
 
-EXPOSE  81
-CMD ["nginx", "-g", "daemon off;"]
+RUN npm install --global http-server
+
+COPY --from=builder /app/build /app/build
+RUN mv /app/build/index.html /app/build/404.html
+
+CMD ["http-server", "/app/build", "-p 80"]
