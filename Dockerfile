@@ -1,5 +1,8 @@
 FROM node:14 AS builder
 
+ARG API_URL
+ENV REACT_APP_API_URL=$API_URL
+
 WORKDIR /app
 COPY package*.json ./
 
