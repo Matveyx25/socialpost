@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup';
 import { InputField } from '../../Shared/Input/Input';
 import { Button } from '../../Shared/Button/Button';
-import { IconEdit } from '@tabler/icons-react';
+import { IconEdit, IconExternalLink, IconLink } from '@tabler/icons-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { profile as profileApi } from '../../../api/api';
 import { useOutletContext } from 'react-router-dom';
@@ -70,14 +70,6 @@ export const Profile = () => {
 								<div className={s.formRow}>
 									<InputField label={'Ваша фамилия'} name='lastName' placeholder='Иванов' className={s.input}/>
 								</div>
-								<div className={s.formRow}>
-									{/* <InputField label={'Ваш email'} name='email' placeholder='example@exampl.com' className={s.input}/> */}
-									{profile?.data.emailData?.email ? null : <a href='#' onClick={() => setModal('connect-email')}>Привязать эл.почту</a>}
-									<TelegramLoginButton
-										botName='socialpost_ru_bot'
-      							dataOnauth={(data) => connectTelegramMutate(data)}
-									/>
-								</div>
 
 								<div className={s.line}></div>
 								<div className={s.btns}>
@@ -86,6 +78,36 @@ export const Profile = () => {
 							</Form>)}
 					</Formik>
 			</DashboardCard>
+			{(profile?.data.telegramData && profile?.data.emailData) ? null :
+			 <DashboardCard className={s.formCard}>
+				<div className={s.cardHeader}>
+				Социальные сети а аккаунты
+				</div>
+				<div className={s.line}></div>
+					<div className={s.formRow}>
+						{/* <InputField label={'Ваш email'} name='email' placeholder='example@exampl.com' className={s.input}/> */}
+						{profile?.data.emailData?.email ? null :
+							<div className={s.jcsb}>
+								<p>Привязать эл.почту</p>
+							<a href='#' onClick={() => setModal('connect-email')}>
+								<IconExternalLink/>
+							</a>
+							</div>}
+					</div>
+					<div className={s.formRow}>
+						{/* <InputField label={'Ваш email'} name='email' placeholder='example@exampl.com' className={s.input}/> */}
+						{profile?.data.telegramData ? null :
+						<div className={s.jcsb}>
+							<p>Привязать telegram</p>
+							<TelegramLoginButton
+								botName='socialpost_ru_bot'
+								buttonSize='small'
+								dataOnauth={(data) => connectTelegramMutate(data)}
+							/>
+						</div>
+						}
+					</div>
+			</DashboardCard>}
 		</div>
 	)
 }

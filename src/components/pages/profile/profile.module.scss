@@ -1,5 +1,13 @@
 @import '~/src/styles/variables.scss';
 
+.wrapper{
+	display: flex;
+	gap: 1rem;
+	@media screen and (max-width: 996px) {
+		flex-wrap: wrap;
+	}
+}
+
 .cardHeader{
 	display: flex;
 	align-items: center;
@@ -39,11 +47,22 @@
 		gap: 0.5rem;
 		align-self: stretch;
 		margin-bottom: 1rem;
+		a{
+			color: $main-blue-color;
+			text-decoration: none;
+		}
 	}
 	.input, .select, .calendar{
 		width: 100%;
 	}
 	.btn{
 		width: 100%;
+	}
+	.jcsb{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 0.25rem 0;
 	}
 }
