@@ -37,10 +37,10 @@ export const auth = {
 	loginTelegram(user) {
 		const data = {
 			"telegramId": user?.id,
-			"telegramFirstName": user?.first_name,
-			"telegramLastName": user?.last_name,
-			"telegramUsername": user?.username,
-			"telegramPhotoUrl": user?.photo_url,
+			"firstName": user?.first_name,
+			"lastName": user?.last_name,
+			"username": user?.username,
+			"photoUrl": user?.photo_url,
 			"authDate": user?.auth_date,
 			"hash": user?.hash
 		}
@@ -68,10 +68,10 @@ export const auth = {
 	registrationTelegram(user) {
 		const data = {
 			"telegramId": user?.id,
-			"telegramFirstName": user?.first_name,
-			"telegramLastName": user?.last_name,
-			"telegramUsername": user?.username,
-			"telegramPhotoUrl": user?.photo_url,
+			"firstName": user?.first_name,
+			"lastName": user?.last_name,
+			"username": user?.username,
+			"photoUrl": user?.photo_url,
 			"authDate": user?.auth_date,
 			"hash": user?.hash
 		}
@@ -94,10 +94,10 @@ export const profile = {
 	connectTelegram(user) {
 		const data = {
 			"telegramId": user?.id,
-			"telegramFirstName": user?.first_name,
-			"telegramLastName": user?.last_name,
-			"telegramUsername": user?.username,
-			"telegramPhotoUrl": user?.photo_url,
+			"firstName": user?.first_name,
+			"lastName": user?.last_name,
+			"username": user?.username,
+			"photoUrl": user?.photo_url,
 			"authDate": user?.auth_date,
 			"hash": user?.hash
 		}
