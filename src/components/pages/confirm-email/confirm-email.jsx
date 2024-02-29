@@ -2,6 +2,7 @@ import { Player } from '@lottiefiles/react-lottie-player'
 import React, { useEffect, useState } from 'react'
 import { NavLink, useParams } from 'react-router-dom'
 import s from './confirm-email.module.scss'
+import { auth } from '../../../api/api'
 
 export const ConfirmEmail = () => {
 	const [isConfirm, setIsConfirm] = useState(false)
@@ -9,7 +10,14 @@ export const ConfirmEmail = () => {
 	const {token} = useParams()
 
 	useEffect(() => {
-		console.log(token);
+		auth.emailConfirm(token).then(res => {
+			if(res.status == 200){
+				setIsConfirm(true)
+			}
+		}).catch(err => {
+			setIsConfirm(true)
+			setIsError(true)
+		});
 	}, [])
 
 	return (
