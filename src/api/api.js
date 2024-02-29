@@ -34,8 +34,18 @@ instance.interceptors.request.use((request) => {
 });
 
 export const auth = {
-	loginTelegram(data) {
-		return instance.post("/login/telegram", {...data}).then(response => {
+	loginTelegram(user) {
+		const data = {
+			"telegramId": user?.id,
+			"telegramFirstName": user?.first_name,
+			"telegramLastName": user?.last_name,
+			"telegramUsername": user?.username,
+			"telegramPhotoUrl": user?.photo_url,
+			"authDate": user?.auth_date,
+			"hash": user?.hash
+		}
+
+		return instance.post("/login/telegram", data).then(response => {
 				setAuthToken(response.data.accessToken);
 				localStorage.setItem('token', response.data.accessToken)
 				window.location.href = '/'
@@ -44,7 +54,7 @@ export const auth = {
 			})
 	},
 	loginEmail(data) {
-		return instance.post("/login/email", {...data}).then(response => {
+		return instance.post("/login/email", data).then(response => {
 				setAuthToken(response.data.accessToken);
 				localStorage.setItem('token', response.data.accessToken)
 				window.location.href = '/'
@@ -55,7 +65,16 @@ export const auth = {
 	registrationEmail(data) {
 		return instance.post("/users/registration/by_email", data)
 	},
-	registrationTelegram(data) {
+	registrationTelegram(user) {
+		const data = {
+			"telegramId": user?.id,
+			"telegramFirstName": user?.first_name,
+			"telegramLastName": user?.last_name,
+			"telegramUsername": user?.username,
+			"telegramPhotoUrl": user?.photo_url,
+			"authDate": user?.auth_date,
+			"hash": user?.hash
+		}
 		return instance.post("/users/registration/by_telegram", data)
 	},
 	logout() {
@@ -72,7 +91,17 @@ export const profile = {
 	updateProfile(data) {
 		return instance.put("/users/current", data)
 	},
-	connectTelegram(data) {
+	connectTelegram(user) {
+		const data = {
+			"telegramId": user?.id,
+			"telegramFirstName": user?.first_name,
+			"telegramLastName": user?.last_name,
+			"telegramUsername": user?.username,
+			"telegramPhotoUrl": user?.photo_url,
+			"authDate": user?.auth_date,
+			"hash": user?.hash
+		}
+
 		return instance.post("/users/current/connect/telegram", data)
 	},
 	connectEmail(data) {
