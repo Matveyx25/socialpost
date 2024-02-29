@@ -81,7 +81,7 @@ export const Profile = () => {
 			{(profile?.data.telegramData && profile?.data.emailData) ? null :
 			 <DashboardCard className={s.formCard}>
 				<div className={s.cardHeader}>
-				Социальные сети а аккаунты
+				Социальные сети и аккаунты
 				</div>
 				<div className={s.line}></div>
 					<div className={s.formRow}>
