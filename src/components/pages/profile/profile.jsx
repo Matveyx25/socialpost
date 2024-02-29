@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup';
 import { InputField } from '../../Shared/Input/Input';
 import { Button } from '../../Shared/Button/Button';
-import { IconEdit, IconExternalLink, IconLink } from '@tabler/icons-react';
+import { IconCheck, IconEdit, IconExternalLink, IconLink } from '@tabler/icons-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { profile as profileApi } from '../../../api/api';
 import { useOutletContext } from 'react-router-dom';
@@ -19,7 +19,7 @@ export const Profile = () => {
 	const { mutate } = useMutation({
 		mutationFn: profileApi.updateProfile,
 		onSuccess: () => {
-      queryClient.invalidateQueries('profile')
+      queryClient.invalidateQueries(['profile'])
     },
 	})
 
@@ -38,7 +38,7 @@ export const Profile = () => {
 		firstName: Yup.string()
 		.matches(nameRegExp, 'Введите имя верно')
 			.required('Введите имя'),
-		lastName: Yup.string()
+		lastName: Yup.string().notRequired()
 		.matches(nameRegExp, 'Введите фамилию верно')
 	});
 
@@ -62,7 +62,7 @@ export const Profile = () => {
 							})
 						}}
 					>
-						{({ dirty, isValid }) => (
+						{({ dirty, isValid, values }) => (
 							<Form>
 								<div className={s.formRow}>
 									<InputField label={'Ваше имя'} name='firstName' placeholder='Иван' className={s.input}/>
@@ -73,41 +73,42 @@ export const Profile = () => {
 
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} disabled={!dirty || !isValid}/> 
+									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} 
+									disabled={!dirty || !isValid || 
+									values.firstName == profile?.data.firstName || 
+									(profile?.data.lastName && values.lastName == profile?.data.lastName)}/> 
 								</div>
 							</Form>)}
 					</Formik>
 			</DashboardCard>
-			{(profile?.data.telegramData && profile?.data.emailData) ? null :
 			 <DashboardCard className={s.formCard}>
 				<div className={s.cardHeader}>
 				Социальные сети и аккаунты
 				</div>
 				<div className={s.line}></div>
 					<div className={s.formRow}>
-						{/* <InputField label={'Ваш email'} name='email' placeholder='example@exampl.com' className={s.input}/> */}
-						{profile?.data.emailData?.email ? null :
 							<div className={s.jcsb}>
 								<p>Привязать эл.почту</p>
-							<a href='#' onClick={() => setModal('connect-email')}>
-								<IconExternalLink/>
-							</a>
-							</div>}
+								{profile?.data.emailData?.email ? 
+								<IconCheck className={s.checkIcon}/> :
+									<a href='#' onClick={() => setModal('connect-email')}>
+										<IconExternalLink/>
+									</a>}
+							</div>
 					</div>
 					<div className={s.formRow}>
-						{/* <InputField label={'Ваш email'} name='email' placeholder='example@exampl.com' className={s.input}/> */}
-						{profile?.data.telegramData ? null :
 						<div className={s.jcsb}>
 							<p>Привязать telegram</p>
-							<TelegramLoginButton
-								botName='socialpost_ru_bot'
-								buttonSize='small'
-								dataOnauth={(data) => connectTelegramMutate(data)}
-							/>
+							{profile?.data.telegramData ? 
+								<IconCheck className={s.checkIcon}/>
+								: <TelegramLoginButton
+									botName='socialpost_ru_bot'
+									buttonSize='small'
+									dataOnauth={(data) => connectTelegramMutate(data)}
+							/>}
 						</div>
-						}
 					</div>
-			</DashboardCard>}
+			</DashboardCard>
 		</div>
 	)
 }

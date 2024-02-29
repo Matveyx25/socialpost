@@ -22,6 +22,15 @@
 	}
 }
 
+.error{
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background: rgba($main-red-color, .2);
+	border: 1px solid $main-red-color;
+	margin-top: 0.5rem;
+	color: $main-red-color;
+}
+
 .rememberMe{
 	display: flex;
 	justify-content: space-between;
@@ -100,6 +109,8 @@
 	.tgBtnWrapper{
 		width: 100%;
 		text-align: center;
+		opacity: .4;
+		cursor: default;
 	}
 }
 

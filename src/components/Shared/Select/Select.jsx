@@ -4,10 +4,10 @@ import SelectElement from 'react-select';
 import s from './Select.module.scss'
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 
-export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, placeholder}) => {
+export const Select = ({label, required, onChange = () => {}, onBlur = () => {}, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={s.header}>
-			<span>{label}</span>
+			<span>{label}{required && <span className={s.star}>*</span>}</span>
 			{withInfo && <IconInfoCircleFilled color='#BDBEC0' />}
 		</div>}
 		<SelectElement
@@ -18,6 +18,7 @@ export const Select = ({label, closeMenuOnSelect, className, isMulti, withInfo, 
 			isSearchable={false}
 			isMulti={isMulti}
 			closeMenuOnSelect={closeMenuOnSelect}
+			onInputChange={onChange}
 			components={{
 				DropdownIndicator: () => <IconChevronDown size={18}/>
 			}}

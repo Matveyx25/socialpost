@@ -1,58 +1,170 @@
 import { Modal } from "../Shared/Modal/Modal";
-import s from './LoginModal.module.scss'
-import { Input } from '../Shared/Input/Input';
+import s from "./LoginModal.module.scss";
+import { Input, InputField } from "../Shared/Input/Input";
 import { useState } from "react";
-import { NavLink } from 'react-router-dom';
-import { Button } from '../Shared/Button/Button';
+import { NavLink } from "react-router-dom";
+import { Button } from "../Shared/Button/Button";
 import { auth } from "../../api/api";
 import TelegramLoginButton from "telegram-login-button";
+import * as Yup from "yup";
+import { Form, Formik } from "formik";
+import { Select } from '../Shared/Select/Select';
+import classNames from "classnames";
 
-export const RegisterModal = ({isOpen, setOpen}) => {
-	const [login, set_login] = useState('')
-	const [name, set_name] = useState('')
-	const [password, set_password] = useState('')
-	const [passwordSecond, set_passwordSecond] = useState('')
+export const RegisterModal = ({ isOpen, setOpen }) => {
+  const [error, set_error] = useState(null);
 
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		if(!password || !login || password !== passwordSecond || !name){
-			return null
-		}
+	const roleOptions = [
+		{ value: 'PUBLISHER', label: 'Паблишер' },
+		{ value: 'ADVERTISER', label: 'Рекламодатель' },
+	 ];
 
-		auth.registrationEmail({
-			"email": login,
-			"password": password,
-			"firstName": name
-		}).then(res => {
-			if(res.status === 200){
-				auth.loginEmail({
-					"email": login,
-					"password": password
-				})
-			}
-		})
-	}
+  const handleSubmit = (values) => {
+    if (
+      !values.password ||
+      !values.email ||
+      values.password !== values.secondPassword ||
+      !values.name
+    ) {
+      return null;
+    }
+
+    auth
+      .registrationEmail({
+        email: values.email,
+        password: values.password,
+        firstName: values.name,
+				role: values.role
+      })
+      .then((res) => {
+        if (res.status === 200) {
+					setOpen(false);
+					set_error(null);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err.response.status == 401) {
+          set_error("Пароль или почта введены неверно");
+        } else if (err.response.status == 400) {
+          set_error("Данные невалидны");
+        } else if (err.response.status == 409) {
+          set_error("Пользователь с такой почтой уже существует");
+        }
+      });
+  };
+
+  const validator = Yup.object().shape({
+    password: Yup.string()
+      .min(8, "Пароль должен быть не менее 8 символов")
+      .matches(/[a-z]/, "Пароль должен содержать хотя бы одну строчную букву")
+      .matches(/[A-Z]/, "Пароль должен содержать хотя бы одну заглавную букву")
+      .matches(/\d/, "Пароль должен содержать хотя бы одну цифру")
+      .matches(
+        /[^a-zA-Z\d]/,
+        "Пароль должен содержать хотя бы один специальный символ"
+      )
+      .required("Введите пароль"),
+    secondPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
+      .required("Подтвердите пароль"),
+    email: Yup.string()
+      .email("Такого почтового адреса не существует")
+      .required("Заполните поле email"),
+    name: Yup.string()
+      .matches(/^[a-zA-Zа-яА-Я\s]+$/, "Имя должно содержать только буквы")
+      .required("Заполните поле имя"),
+  });
 
   return (
-		<Modal {...{isOpen, setOpen}} title={'Регистрация'} name={'register'}>
-			<form className={s.form}>
-				<Input label={'Ваше имя'} required placeholder={'Иван'} value={name} onChange={(e) => set_name(e.target.value)}/>
-				<Input label={'Электронная почта'} required placeholder={'email@example.com'} value={login} onChange={(e) => set_login(e.target.value)}/>
-				<Input label={'Пароль'} required type="password" value={password} onChange={(e) => set_password(e.target.value)}/>
-				<Input label={'Повторите пароль'} required type="password" value={passwordSecond} onChange={(e) => set_passwordSecond(e.target.value)}/>
-				<Button label="Зарегистрироваться" disabled={!password || !login || password !== passwordSecond || !name} onClick={handleSubmit}/>
-				<p>Или</p>
-				<div className={s.btns}>
-					<TelegramLoginButton
-						botName="socialpost_ru_bot"
-						dataOnauth={(user) => auth.login(user)}
-						className={s.tgBtnWrapper}
-					/>
-				</div>
-				<div className={s.footer}>
-					<p>Уже есть аккаунт?<NavLink onClick={() => setOpen('login')}> Войти</NavLink></p>
-				</div>
-			</form>
-		</Modal>
+    <Modal {...{ isOpen, setOpen }} title={"Регистрация"} name={"register"}>
+      {error && <div className={s.error}>{error}</div>}
+      <Formik
+        initialValues={{
+          email: "",
+          password: "",
+          secondPassword: "",
+          name: "",
+					role: ""
+        }}
+        validationSchema={validator}
+        onSubmit={(values) => {
+          handleSubmit(values);
+        }}
+      >
+        {({ dirty, isValid, setFieldTouched, setFieldValue, values }) => (
+          <Form>
+            <div className={s.form}>
+							<Select 
+								label={'Выберите роль'} 
+								id="role"
+								name="role"
+								options={roleOptions}
+								required={true}
+								placeholder={'Выберите роль'}
+								onChange={(selectedOption) => { 
+									setFieldValue('role', selectedOption.value)
+								}}
+								onBlur={() => {
+									setFieldTouched('role')
+								}}
+								value={values?.role}
+								fullWidth={true}
+								isMulti={false}
+							/>
+              <InputField
+                label={"Ваше имя"}
+                required
+                placeholder={"Иван"}
+                id="name"
+                name="name"
+              />
+              <InputField
+                label={"Электронная почта"}
+                required
+                placeholder={"email@example.com"}
+                id="email"
+                name="email"
+              />
+              <InputField
+                label={"Пароль"}
+                required
+                type="password"
+                id="password"
+                name="password"
+              />
+              <InputField
+                label={"Повторите пароль"}
+                required
+                type="password"
+                id="secondPassword"
+                name="secondPassword"
+              />
+              <Button
+                label="Зарегистрироваться"
+                disabled={!dirty || !isValid}
+              />
+              <p>Или</p>
+              <div className={s.btns}>
+                <TelegramLoginButton
+                  botName="socialpost_ru_bot"
+                  dataOnauth={(user) => (values.role) && auth.loginTelegram(user)}
+                  className={classNames(s.tgBtnWrapper, !values.role && s.disabled)}
+                />
+              </div>
+              <div className={s.footer}>
+                <p>
+                  Ещё нет аккаунта?
+                  <NavLink onClick={() => setOpen("register")}>
+                    {" "}
+                    Зарегистрироваться
+                  </NavLink>
+                </p>
+              </div>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </Modal>
   );
 };

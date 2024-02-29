@@ -58,9 +58,10 @@ export const auth = {
 				setAuthToken(response.data.accessToken);
 				localStorage.setItem('token', response.data.accessToken)
 				window.location.href = '/'
-			}).catch(err => {
-				console.log(err);
 			})
+	},
+	emailConfirm(data) {
+		return instance.post("/users/confirm/email", data)
 	},
 	registrationEmail(data) {
 		return instance.post("/users/registration/by_email", data)

@@ -8,19 +8,19 @@ export const Dropdown = ({label, options}) => {
 	const [isOpen, setOpen] = useState(false);
   const menuRef = useRef(null);
   useClickOutside(menuRef, () => {
-    if (isOpen) setTimeout(() => setOpen(false), 50);
+    if (isOpen) setOpen(false);
   });
 
   return (
-    <div className={s.wrapper}>
-      <button className={`${s.button} ${isOpen ? s.active : ""}`} onClick={() => setOpen(!isOpen)}>
+    <div className={s.wrapper} ref={menuRef}>
+      <button className={`${s.button} ${isOpen ? s.active : ""}`} onClick={() => setOpen(prev => !prev)}>
 				<div className={s.circle}>
 					{label}
 				</div>
 				<IconChevronDown size={18} className={s.arrowDown}/>
 				<IconChevronUp size={18} className={s.arrowUp}/>
       </button>
-      <nav className={`${s.menu} ${isOpen ? s.active : ""}`} ref={menuRef}>
+      <nav className={`${s.menu} ${isOpen ? s.active : ""}`}>
         <ul className={s.list}>
           {options?.map(el => 
 						<li className={s.item}>

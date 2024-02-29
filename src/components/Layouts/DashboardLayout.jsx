@@ -5,7 +5,8 @@ import s from './Layouts.module.scss'
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { DashboardModals } from "../DashboardModals/DashboardModals";
-import { auth } from "../../api/api";
+import { auth, profile } from "../../api/api";
+import { useQuery } from "@tanstack/react-query";
 
 const routesTitle = {
 	'/profile/': 'Профиль',
@@ -28,6 +29,8 @@ export const DashboardLayout = ({}) => {
 	const { pathname } = useLocation()
 	const [modal, setModal] = useState('')
 
+	const {data: profileDat} = useQuery({queryKey: ['profile'], queryFn: profile.me})
+
   return (
 		<>
 			<DashboardModals isOpen={modal} setOpen={setModal}/>
@@ -37,9 +40,9 @@ export const DashboardLayout = ({}) => {
 					<div className={s.header}>
 						{routesTitle[pathname] || routesTitle[pathname + '/']}
 						<Dropdown 
-						options={dropdown} label={<img src="https://st.adda247.com/https://adda247-wp-multisite-assets.s3.ap-south-1.amazonaws.com/wp-content/uploads/multisite/sites/5/2023/08/03164553/mukesh-ambani-e1691061413489.png"/>}
-						arrowClosed={<IconChevronDown size={18}/>}
-						arrowOpen={<IconChevronUp size={18}/>}/>
+							options={dropdown} label={<img src={profileDat?.photoUrl || '/images/user.png'}/>}
+							arrowClosed={<IconChevronDown size={18}/>}
+							arrowOpen={<IconChevronUp size={18}/>}/>
 					</div>
 					<div className={s.scroll}>
 						<Outlet context={[setModal]}/>

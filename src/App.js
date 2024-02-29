@@ -29,12 +29,21 @@ import AdminPanel from "./components/Admin/AdminPanel";
 import { Profile } from "./components/pages/profile/profile";
 import { useQuery } from "@tanstack/react-query";
 import { profile } from "./api/api";
+import { setAuthToken } from "./helpers/tokens";
+import { IconLoader2 } from "@tabler/icons-react";
+import { ConfirmEmail } from "./components/pages/confirm-email/confirm-email";
+import { Loader } from './components/Shared/Loader/Loader';
 
 function App() {
 	const [role, setRole] = useState('publisher')
 	const [modal, setModal] = useState('')
 
-	const {isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+	const {isSuccess: profileSuccess, isError} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+
+	if(isError){
+		localStorage.removeItem('token')
+		setAuthToken()
+	}
 
   return (
 		<HelmetProvider>
@@ -49,6 +58,20 @@ function App() {
 				<AuthModals isOpen={modal} setOpen={setModal}/>
 				<ScrollToTop />
 				<Routes>
+				{localStorage.getItem('token') ? 
+					profileSuccess ? 
+					<Route element={<DashboardLayout/>}>
+						<Route path="/profile" element={<Profile/>}/>
+						{/* <Route path="/dashboard" element={<MainDashboard/>}/>
+						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
+						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
+						<Route path="/dashboard/appointment" element={<Report/>}/>
+						<Route path="/dashboard/payments" element={<Payments/>}/>
+						<Route path="/dashboard/requisites" element={<Requisites/>}/> */}
+						<Route path="/dashboard/faq" element={<FAQ/>} /> 
+					</Route> 
+					:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
+					: null}
 					<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
 						<Route path="/" element={
 							<>
@@ -59,6 +82,7 @@ function App() {
 									'seller': <SellerContent/>
 								}[role]}
 							</>}/>
+						<Route path="/confirm-email/:token" element={<ConfirmEmail/>}/>
 						<Route path="/policy" element={<Policy/>}/>
 						<Route path="/contact" element={<Contacts/>}/>
 						<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
@@ -69,16 +93,6 @@ function App() {
 					<Route element={<><Outlet/></>}>
 						<Route path="/admin/*" element={<AdminPanel/>}/>
 					</Route>
-					{profileSuccess ? <Route element={<DashboardLayout/>}>
-						<Route path="/profile" element={<Profile/>}/>
-						{/* <Route path="/dashboard" element={<MainDashboard/>}/>
-						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
-						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
-						<Route path="/dashboard/appointment" element={<Report/>}/>
-						<Route path="/dashboard/payments" element={<Payments/>}/>
-						<Route path="/dashboard/requisites" element={<Requisites/>}/> */}
-						<Route path="/dashboard/faq" element={<FAQ/>} /> 
-					</Route> : null}
 				</Routes>
 			</div>
 		</HelmetProvider>
