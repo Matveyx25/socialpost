@@ -24,10 +24,13 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
       !values.password ||
       !values.email ||
       values.password !== values.secondPassword ||
-      !values.name
+      !values.name || !values.role
     ) {
+			debugger
       return null;
     }
+
+		debugger
 
     auth
       .registrationEmail({
@@ -102,12 +105,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
 								options={roleOptions}
 								required={true}
 								placeholder={'Выберите роль'}
-								onChange={(selectedOption) => { 
-									setFieldValue('role', selectedOption.value)
-								}}
-								onBlur={() => {
-									setFieldTouched('role')
-								}}
+								setSelectedOption={(selectedOption) => setFieldValue('role', selectedOption.value)}
 								value={values?.role}
 								fullWidth={true}
 								isMulti={false}
@@ -142,7 +140,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
               />
               <Button
                 label="Зарегистрироваться"
-                disabled={!dirty || !isValid}
+                disabled={!dirty || !isValid || !values.role}
               />
               <p>Или</p>
               <div className={s.btns}>

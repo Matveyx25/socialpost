@@ -18,7 +18,6 @@ export const Select = ({label, required, onChange = () => {}, onBlur = () => {},
 			isSearchable={false}
 			isMulti={isMulti}
 			closeMenuOnSelect={closeMenuOnSelect}
-			onInputChange={onChange}
 			components={{
 				DropdownIndicator: () => <IconChevronDown size={18}/>
 			}}

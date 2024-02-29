@@ -109,8 +109,10 @@
 	.tgBtnWrapper{
 		width: 100%;
 		text-align: center;
-		opacity: .4;
-		cursor: default;
+		&.disabled{
+			opacity: .4;
+			cursor: default;
+		}
 	}
 }
 
