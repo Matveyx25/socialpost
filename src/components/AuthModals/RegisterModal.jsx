@@ -154,7 +154,11 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
               <div className={s.btns}>
                 <TelegramLoginButton
                   botName="socialpost_ru_bot"
-                  dataOnauth={(user) => (values.role) && auth.registrationTelegram({...user, role: values?.role})}
+                  dataOnauth={(user) => (values.role) && auth.registrationTelegram({...user, role: values?.role}).then(res => {
+										if(res.status == 200){
+											auth.loginTelegram(user)
+										}
+									})}
                   className={classNames(s.tgBtnWrapper, !values.role && s.disabled)}
                 />
               </div>
