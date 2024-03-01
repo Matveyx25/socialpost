@@ -39,7 +39,7 @@ function App() {
 	const [role, setRole] = useState('publisher')
 	const [modal, setModal] = useState('')
 
-	const {isSuccess: profileSuccess, isError} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+	const {data: profileData, isSuccess: profileSuccess, isError} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
 
 	if(isError){
 		localStorage.removeItem('token')
@@ -92,9 +92,9 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
-					<Route element={<><Outlet/></>}>
+					{profileData?.roles.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
 						<Route path="/admin/*" element={<AdminPanel/>}/>
-					</Route>
+					</Route>}
 				</Routes>
 			</div>
 		</HelmetProvider>

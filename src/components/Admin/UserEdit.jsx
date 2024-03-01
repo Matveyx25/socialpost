@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, EmailInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, EmailInput, ImageInput, SelectArrayInput } from "react-admin";
 
 export const UserEdit = (props) => (
   <Edit {...props}>
@@ -7,7 +7,17 @@ export const UserEdit = (props) => (
       <TextInput disabled source="id" />
       <TextInput source="firstName" />
       <TextInput source="lastName" />
-      {/* <EmailInput source="email" /> */}
+      <EmailInput source="email" />
+
+			<TextInput disabled source="id" />
+      <TextInput source="firstName" />
+      <TextInput source="lastName" />
+      <ImageInput source="photoUrl" />
+      <EmailInput source="emailData.email" />
+      <TextInput disabled source="telegramData.telegramId" />
+			<SelectArrayInput source="roles" choices={[
+                { id: 'PUBLISHER', name: 'Publisher' },
+                { id: 'ADVERTISER', name: 'Advertiser' }]} />
     </SimpleForm>
   </Edit>
 );
