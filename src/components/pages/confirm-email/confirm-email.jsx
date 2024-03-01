@@ -10,7 +10,7 @@ export const ConfirmEmail = () => {
 	const {token} = useParams()
 
 	useEffect(() => {
-		auth.emailConfirm(token).then(res => {
+		auth.emailConfirm({token}).then(res => {
 			if(res.status == 200){
 				setIsConfirm(true)
 			}
