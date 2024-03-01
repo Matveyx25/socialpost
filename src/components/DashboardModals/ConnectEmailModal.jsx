@@ -10,25 +10,24 @@ import * as Yup from 'yup'
 
 export const EmailModal = ({isOpen, setOpen}) => {
 	const queryClient = useQueryClient()
-
-	const { mutate } = useMutation({
-		mutationFn: profile.connectEmail,
-		onSuccess: () => {
-      queryClient.invalidateQueries('profile')
-    },
-	})
+	const [error, set_error] = useState(null)
 
 	const handleSubmit = (values) => {
-		if(!values.password || !values.email || values.password !== values.passwordSecond){
-			return null
-		}
-
-		mutate({
+		profile.connectEmail({
 			"email": values.email,
 			"password": values.password
-		})
-
-		setOpen()
+		}).then((res) => {
+			if (res.status === 200) {
+				setOpen(false);
+				set_error(null);
+			}
+		}).catch((err) => {
+			if (err.response.status == 401) {
+				set_error("Пароль или почта введены неверно");
+			} else if (err.response.status == 400) {
+				set_error("Данные невалидны");
+			}
+		});
 	}
 
 	const validator = Yup.object().shape({
@@ -52,7 +51,7 @@ export const EmailModal = ({isOpen, setOpen}) => {
 	
   return (
 		<Modal {...{isOpen, setOpen}} title={'Email'} name={'connect-email'}>
-
+			{error && <div className={s.error}>{error}</div>}
 			<Formik
         initialValues={{
           email: "",
