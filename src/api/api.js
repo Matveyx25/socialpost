@@ -42,8 +42,7 @@ export const auth = {
 			"username": user?.username,
 			"photoUrl": user?.photo_url,
 			"authDate": user?.auth_date,
-			"hash": user?.hash,
-			"role": user?.role
+			"hash": user?.hash
 		}
 
 		return instance.post("/login/telegram", data).then(response => {
@@ -85,7 +84,8 @@ export const auth = {
 			"username": user?.username,
 			"photoUrl": user?.photo_url,
 			"authDate": user?.auth_date,
-			"hash": user?.hash
+			"hash": user?.hash,
+			"role": user?.role
 		}
 		return instance.post("/users/registration/by_telegram", data)
 	},
