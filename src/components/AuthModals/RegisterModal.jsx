@@ -26,11 +26,8 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
       values.password !== values.secondPassword ||
       !values.name || !values.role
     ) {
-			debugger
       return null;
     }
-
-		debugger
 
     auth
       .registrationEmail({
@@ -77,6 +74,9 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
     name: Yup.string()
       .matches(/^[a-zA-Zа-яА-Я\s]+$/, "Имя должно содержать только буквы")
       .required("Заполните поле имя"),
+    lastName: Yup.string()
+      .matches(/^[a-zA-Zа-яА-Я\s]+$/, "Фамилия должна содержать только буквы")
+      .notRequired(),
   });
 
   return (
@@ -88,6 +88,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
           password: "",
           secondPassword: "",
           name: "",
+          lastName: "",
 					role: ""
         }}
         validationSchema={validator}
@@ -106,6 +107,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
 								required={true}
 								placeholder={'Выберите роль'}
 								setSelectedOption={(selectedOption) => setFieldValue('role', selectedOption.value)}
+								onBlur={() => setFieldTouched('role')}
 								value={values?.role}
 								fullWidth={true}
 								isMulti={false}
@@ -116,6 +118,12 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
                 placeholder={"Иван"}
                 id="name"
                 name="name"
+              />
+              <InputField
+                label={"Ваша фамилия"}
+                placeholder={"Иванов"}
+                id="lastName"
+                name="lastName"
               />
               <InputField
                 label={"Электронная почта"}
@@ -146,16 +154,16 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
               <div className={s.btns}>
                 <TelegramLoginButton
                   botName="socialpost_ru_bot"
-                  dataOnauth={(user) => (values.role) && auth.loginTelegram(user)}
+                  dataOnauth={(user) => (values.role) && auth.registrationTelegram(user)}
                   className={classNames(s.tgBtnWrapper, !values.role && s.disabled)}
                 />
               </div>
               <div className={s.footer}>
                 <p>
-                  Ещё нет аккаунта?
-                  <NavLink onClick={() => setOpen("register")}>
+                  Уже есть аккаунт?
+                  <NavLink onClick={() => setOpen("login")}>
                     {" "}
-                    Зарегистрироваться
+                    Войти
                   </NavLink>
                 </p>
               </div>

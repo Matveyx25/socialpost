@@ -51,8 +51,8 @@ export const Profile = () => {
 				<div className={s.line}></div>
 				<Formik
 						initialValues={{
-							firstName: profile?.data.firstName,
-							lastName: profile?.data.lastName,
+							firstName: profile?.data.firstName || '',
+							lastName: profile?.data.lastName || '',
 						}}
 						validationSchema={validator}
 						onSubmit={(props) => {
@@ -70,13 +70,11 @@ export const Profile = () => {
 								<div className={s.formRow}>
 									<InputField label={'Ваша фамилия'} name='lastName' placeholder='Иванов' className={s.input}/>
 								</div>
-
 								<div className={s.line}></div>
 								<div className={s.btns}>
 									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} 
 									disabled={!dirty || !isValid || 
-									values.firstName == profile?.data.firstName || 
-									(profile?.data.lastName && values.lastName == profile?.data.lastName)}/> 
+										(values.firstName === (profile?.data.firstName || '') && values.lastName === (profile?.data.lastName || ''))}/> 
 								</div>
 							</Form>)}
 					</Formik>

@@ -63,6 +63,16 @@ export const auth = {
 	emailConfirm(data) {
 		return instance.post("/users/confirm/email", data)
 	},
+	restorePassword(data){
+		return instance.post("/users/password/restore", data)
+	},
+	updatePassword(data){
+		return instance.put("/users/current/password", {password: data.password}, {
+			headers: {
+				Authorization: `Bearer ${data.token}`
+			}
+		})
+	},
 	registrationEmail(data) {
 		return instance.post("/users/registration/by_email", data)
 	},

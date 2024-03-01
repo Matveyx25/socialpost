@@ -33,6 +33,7 @@ import { setAuthToken } from "./helpers/tokens";
 import { IconLoader2 } from "@tabler/icons-react";
 import { ConfirmEmail } from "./components/pages/confirm-email/confirm-email";
 import { Loader } from './components/Shared/Loader/Loader';
+import { RestorePassword } from "./components/pages/restore-password/restore-password";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -83,6 +84,7 @@ function App() {
 								}[role]}
 							</>}/>
 						<Route path="/confirm-email/:token" element={<ConfirmEmail/>}/>
+						<Route path="/restore-password/:token" element={<RestorePassword/>}/>
 						<Route path="/policy" element={<Policy/>}/>
 						<Route path="/contact" element={<Contacts/>}/>
 						<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
