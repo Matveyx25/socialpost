@@ -1,16 +1,14 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
-import { Input } from '../Shared/Input/Input';
+import { Input, InputField } from '../Shared/Input/Input';
 import { useState } from "react";
 import { Button } from '../Shared/Button/Button';
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { profile } from "../../api/api";
+import { Form, Formik } from "formik";
+import * as Yup from 'yup'
 
 export const EmailModal = ({isOpen, setOpen}) => {
-	const [login, set_login] = useState('')
-	const [password, set_password] = useState('')
-	const [passwordSecond, set_passwordSecond] = useState('')
-
 	const queryClient = useQueryClient()
 
 	const { mutate } = useMutation({
@@ -20,28 +18,84 @@ export const EmailModal = ({isOpen, setOpen}) => {
     },
 	})
 
-	const handleSubmit = (e) => {
-		e.preventDefault()
-		if(!password || !login || password !== passwordSecond){
+	const handleSubmit = (values) => {
+		if(!values.password || !values.email || values.password !== values.passwordSecond){
 			return null
 		}
 
 		mutate({
-			"email": login,
-			"password": password
+			"email": values.email,
+			"password": values.password
 		})
 
 		setOpen()
 	}
 
+	const validator = Yup.object().shape({
+    password: Yup.string()
+      .min(8, "Пароль должен быть не менее 8 символов")
+      .matches(/[a-z]/, "Пароль должен содержать хотя бы одну строчную букву")
+      .matches(/[A-Z]/, "Пароль должен содержать хотя бы одну заглавную букву")
+      .matches(/\d/, "Пароль должен содержать хотя бы одну цифру")
+      .matches(
+        /[^a-zA-Z\d]/,
+        "Пароль должен содержать хотя бы один специальный символ"
+      )
+      .required("Введите пароль"),
+    secondPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Пароли должны совпадать")
+      .required("Подтвердите пароль"),
+    email: Yup.string()
+      .email("Такого почтового адреса не существует")
+      .required("Заполните поле email")
+  });
+	
   return (
 		<Modal {...{isOpen, setOpen}} title={'Email'} name={'connect-email'}>
-			<form className={s.form}>
-				<Input label={'Электронная почта'} required placeholder={'email@example.com'} value={login} onChange={(e) => set_login(e.target.value)}/>
-				<Input label={'Пароль'} required type="password" value={password} onChange={(e) => set_password(e.target.value)}/>
-				<Input label={'Повторите пароль'} required type="password" value={passwordSecond} onChange={(e) => set_passwordSecond(e.target.value)}/>
-				<Button label="Подключить" disabled={!password || !login || password !== passwordSecond} onClick={handleSubmit}/>
-			</form>
+
+			<Formik
+        initialValues={{
+          email: "",
+          password: "",
+					secondPassword: ''
+        }}
+        validationSchema={validator}
+				onSubmit={(values) => {
+					handleSubmit(values)
+				}}
+      >
+        {({ dirty, isValid }) => (
+          <Form>
+            <div className={s.form}>
+						<InputField
+                label={"Электронная почта"}
+                required
+                placeholder={"email@example.com"}
+                id="email"
+                name="email"
+              />
+              <InputField
+                label={"Пароль"}
+                required
+                type="password"
+                id="password"
+                name="password"
+              />
+              <InputField
+                label={"Повторите пароль"}
+                required
+                type="password"
+                id="secondPassword"
+                name="secondPassword"
+              />
+              <Button
+                label="Подключить"
+                disabled={!dirty || !isValid}
+              />
+            </div>
+          </Form>
+        )}
+      </Formik>
 		</Modal>
   );
 };
