@@ -1,19 +1,14 @@
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, EmailInput, ImageInput, SelectArrayInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput } from "react-admin";
 
 export const UserEdit = (props) => (
   <Edit {...props}>
     <SimpleForm>
-      <TextInput disabled source="id" />
-      <TextInput source="firstName" />
-      <TextInput source="lastName" />
-      <EmailInput source="email" />
-
 			<TextInput disabled source="id" />
       <TextInput source="firstName" />
       <TextInput source="lastName" />
       <ImageInput source="photoUrl" />
-      <EmailInput source="emailData.email" />
+      <TextInput source="emailData.email" />
       <TextInput disabled source="telegramData.telegramId" />
 			<SelectArrayInput source="roles" choices={[
                 { id: 'PUBLISHER', name: 'Publisher' },

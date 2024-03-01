@@ -92,7 +92,7 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
-					{profileData?.roles.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
+					{profileData?.data?.roles?.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
 						<Route path="/admin/*" element={<AdminPanel/>}/>
 					</Route>}
 				</Routes>
