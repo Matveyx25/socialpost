@@ -8,6 +8,7 @@ export const Modal = ({isOpen, setOpen, name, title, children}) => {
 			isOpen={isOpen === name}
 			onAfterOpen={() => setOpen(name)}
 			onRequestClose={() => setOpen('')}
+			shouldCloseOnEsc={false}
 			parentSelector={() => document.querySelector('#root')}
 		>
 			<div className="ReactModal__Header">
