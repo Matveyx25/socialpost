@@ -34,6 +34,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
         email: values.email,
         password: values.password,
         firstName: values.name,
+        lastName: values?.lastName,
 				role: values.role
       })
       .then((res) => {

@@ -20,7 +20,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 		query: '(max-width: 420px)'
 	})
 
-	const {data: profileDat, isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+	const {data: profileData, isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
 
 	const dropdown = [
 		<NavLink to="/profile">Профиль</NavLink>,
@@ -84,7 +84,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
 							 	{profileSuccess ? 
 									<Dropdown
-										options={dropdown} label={<img src={profileDat?.photoUrl || '/images/user.png'}/>}
+										options={dropdown} label={<img src={profileData?.data.photoUrl ? profileData?.data.photoUrl : '/images/user.png'}/>}
 										arrowClosed={<IconChevronDown size={18}/>}
 										arrowOpen={<IconChevronUp size={18}/>}/> : 
 										<NavLink className={s.btn} onClick={() => onModalOpen()}>

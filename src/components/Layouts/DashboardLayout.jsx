@@ -29,7 +29,7 @@ export const DashboardLayout = ({}) => {
 	const { pathname } = useLocation()
 	const [modal, setModal] = useState('')
 
-	const {data: profileDat} = useQuery({queryKey: ['profile'], queryFn: profile.me})
+	const {data: profileData} = useQuery({queryKey: ['profile'], queryFn: profile.me})
 
   return (
 		<>
@@ -40,7 +40,7 @@ export const DashboardLayout = ({}) => {
 					<div className={s.header}>
 						{routesTitle[pathname] || routesTitle[pathname + '/']}
 						<Dropdown 
-							options={dropdown} label={<img src={profileDat?.photoUrl || '/images/user.png'}/>}
+							options={dropdown} label={<img src={profileData?.data.photoUrl ? profileData?.data.photoUrl : '/images/user.png'}/>}
 							arrowClosed={<IconChevronDown size={18}/>}
 							arrowOpen={<IconChevronUp size={18}/>}/>
 					</div>
