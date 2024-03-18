@@ -5,6 +5,7 @@ import { Button } from '../Shared/Button/Button';
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
+import { useChannelById } from '../../hooks/useChannleById';
 
 const validator = Yup.object().shape({
 	nativePostPrice: Yup.string().required("Заполните поле"),
@@ -15,15 +16,16 @@ const validator = Yup.object().shape({
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
+	const {data: channel} = useChannelById(modalParams)
  
 	return (
 		 <Modal {...{isOpen, setOpen}} title={'Редактирование'} name={'edit-channel'}>
 			 <Formik
 				 initialValues={{
-					 nativePostPrice: '',
-					 post1For48Price: '',
-					 post1For24Price: '',
-					 post2For48Price: '',
+					 nativePostPrice: channel?.nativePostPrice || 0,
+					 post1For48Price: channel?.post1For48Price || 0,
+					 post1For24Price: channel?.post1For24Price || 0,
+					 post2For48Price: channel?.post2For48Price || 0,
 				 }}
 				 validationSchema={validator}
 				 onSubmit={(values) => {
