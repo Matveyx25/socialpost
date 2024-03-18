@@ -1,0 +1,18 @@
+name: parent-repo-update
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  update_parent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PARENT_REPO_PAT }}
+          repository: ${{ secrets.PARENT_REPO_NAME }}
+          event-type: submodule-push
+    
