@@ -2,7 +2,7 @@ name: parent-repo-update
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ master ]
   workflow_dispatch:
 
 jobs:
