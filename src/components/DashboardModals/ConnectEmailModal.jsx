@@ -3,13 +3,11 @@ import s from './DashboardModals.module.scss'
 import { Input, InputField } from '../Shared/Input/Input';
 import { useState } from "react";
 import { Button } from '../Shared/Button/Button';
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { profile } from "../../api/api";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup'
 
 export const EmailModal = ({isOpen, setOpen}) => {
-	const queryClient = useQueryClient()
 	const [error, set_error] = useState(null)
 
 	const handleSubmit = (values) => {

@@ -5,32 +5,21 @@ import { Form, Formik } from 'formik'
 import * as Yup from 'yup';
 import { InputField } from '../../Shared/Input/Input';
 import { Button } from '../../Shared/Button/Button';
-import { IconCheck, IconEdit, IconExternalLink, IconLink } from '@tabler/icons-react';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { profile as profileApi } from '../../../api/api';
+import { IconCheck, IconEdit, IconExternalLink } from '@tabler/icons-react';
 import { useOutletContext } from 'react-router-dom';
 import TelegramLoginButton from 'telegram-login-button';
+import { useProfile } from '../../../hooks/useProfile';
+import { useUpdateProfile } from '../../../hooks/useUpdateProfile';
+import { useConnectTelegram } from '../../../hooks/useConnectTelegram';
 
 export const Profile = () => {
 	const [setModal] = useOutletContext()
-
-	const queryClient = useQueryClient()
 	
-	const { mutate } = useMutation({
-		mutationFn: profileApi.updateProfile,
-		onSuccess: () => {
-      queryClient.invalidateQueries(['profile'])
-    },
-	})
+	const { mutate } = useUpdateProfile()
 
-	const { mutate: connectTelegramMutate } = useMutation({
-		mutationFn: profileApi.connectTelegram,
-		onSuccess: () => {
-      queryClient.invalidateQueries('profile')
-    },
-	})
+	const { mutate: connectTelegramMutate } = useConnectTelegram()
 
-	const {data: profile} = useQuery({queryKey: ['profile'], queryFn: profileApi.me})
+	const {data: profile} = useProfile()
 
 	const nameRegExp = /^([\S]+)?$/
 
@@ -51,8 +40,8 @@ export const Profile = () => {
 				<div className={s.line}></div>
 				<Formik
 						initialValues={{
-							firstName: profile?.data.firstName || '',
-							lastName: profile?.data.lastName || '',
+							firstName: profile?.firstName || '',
+							lastName: profile?.lastName || '',
 						}}
 						validationSchema={validator}
 						onSubmit={(props) => {
@@ -74,7 +63,7 @@ export const Profile = () => {
 								<div className={s.btns}>
 									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} 
 									disabled={!dirty || !isValid || 
-										(values.firstName === (profile?.data.firstName || '') && values.lastName === (profile?.data.lastName || ''))}/> 
+										(values.firstName === (profile?.firstName || '') && values.lastName === (profile?.lastName || ''))}/> 
 								</div>
 							</Form>)}
 					</Formik>
@@ -87,7 +76,7 @@ export const Profile = () => {
 					<div className={s.formRow}>
 							<div className={s.jcsb}>
 								<p>Привязать эл.почту</p>
-								{profile?.data.emailData?.email ? 
+								{profile?.emailData?.email ? 
 								<IconCheck className={s.checkIcon}/> :
 									<a href='#' onClick={() => setModal('connect-email')}>
 										<IconExternalLink/>
@@ -97,7 +86,7 @@ export const Profile = () => {
 					<div className={s.formRow}>
 						<div className={s.jcsb}>
 							<p>Привязать telegram</p>
-							{profile?.data.telegramData ? 
+							{profile?.telegramData ? 
 								<IconCheck className={s.checkIcon}/>
 								: <TelegramLoginButton
 									botName='socialpost_ru_bot'

@@ -6,8 +6,8 @@ import { IconChevronDown, IconChevronUp, IconMenu2, IconShoppingCart } from '@ta
 import { useMediaQuery } from 'react-responsive'
 import { slide as Menu } from 'react-burger-menu'
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
-import { auth, profile } from '../../api/api'
-import { useQuery } from '@tanstack/react-query'
+import { auth } from '../../api/api'
+import { useProfile } from '../../hooks/useProfile';
 
 export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
@@ -20,7 +20,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 		query: '(max-width: 420px)'
 	})
 
-	const {data: profileData, isSuccess: profileSuccess} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+	const {data: profile, isSuccess: profileSuccess} = useProfile()
 
 	const dropdown = [
 		<NavLink to="/profile">Профиль</NavLink>,
@@ -84,7 +84,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
 							 	{profileSuccess ? 
 									<Dropdown
-										options={dropdown} label={<img src={profileData?.data.photoUrl ? profileData?.data.photoUrl : '/images/user.png'}/>}
+										options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user.png'}/>}
 										arrowClosed={<IconChevronDown size={18}/>}
 										arrowOpen={<IconChevronUp size={18}/>}/> : 
 										<NavLink className={s.btn} onClick={() => onModalOpen()}>

@@ -27,19 +27,18 @@ import { Outlet } from 'react-router-dom';
 import { Admin } from "react-admin";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { Profile } from "./components/pages/profile/profile";
-import { useQuery } from "@tanstack/react-query";
-import { profile } from "./api/api";
 import { setAuthToken } from "./helpers/tokens";
 import { IconLoader2 } from "@tabler/icons-react";
 import { ConfirmEmail } from "./components/pages/confirm-email/confirm-email";
 import { Loader } from './components/Shared/Loader/Loader';
 import { RestorePassword } from "./components/pages/restore-password/restore-password";
+import { useProfile } from "./hooks/useProfile";
 
 function App() {
 	const [role, setRole] = useState('publisher')
 	const [modal, setModal] = useState('')
 
-	const {data: profileData, isSuccess: profileSuccess, isError} = useQuery({queryKey: ['profile'], queryFn: profile.me, enabled: !!localStorage.getItem('token')})
+	const {data: profile, isSuccess: profileSuccess, isError} = useProfile()
 
 	if(isError){
 		localStorage.removeItem('token')
@@ -63,12 +62,12 @@ function App() {
 					profileSuccess ? 
 					<Route element={<DashboardLayout/>}>
 						<Route path="/profile" element={<Profile/>}/>
-						{/* <Route path="/dashboard" element={<MainDashboard/>}/>
+						<Route path="/dashboard" element={<MainDashboard/>}/>
 						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
 						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
 						<Route path="/dashboard/appointment" element={<Report/>}/>
 						<Route path="/dashboard/payments" element={<Payments/>}/>
-						<Route path="/dashboard/requisites" element={<Requisites/>}/> */}
+						<Route path="/dashboard/requisites" element={<Requisites/>}/>
 						<Route path="/dashboard/faq" element={<FAQ/>} /> 
 					</Route> 
 					:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
@@ -92,7 +91,7 @@ function App() {
 						<Route path="/cart" element={<Cart/>}/>
 						<Route path="*" element={<NotFound/>}/>
 					</Route>
-					{profileData?.data?.roles?.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
+					{profile?.roles?.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
 						<Route path="/admin/*" element={<AdminPanel/>}/>
 					</Route>}
 				</Routes>

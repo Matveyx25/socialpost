@@ -120,3 +120,21 @@ export const profile = {
 		return instance.post("/users/current/connect/email", data)
 	}
 }
+
+export const publisher = {
+	getChannels(params) {
+		return instance.get("/channels/my", params)
+	},
+	createChannel(data) {
+		return instance.post("/channels/my", data)
+	},
+	confirmChannel(id) {
+		return instance.post(`/channels/${id}/confirm`)
+	},
+	updateChannel({data, id}) {
+		return instance.put("/channel/" + id, data)
+	},
+	removeChannel(id) {
+		return instance.delete("/channel/" + id)
+	}
+}
