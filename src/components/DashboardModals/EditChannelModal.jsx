@@ -1,42 +1,84 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
-import { Input } from '../Shared/Input/Input';
-import { useState } from "react";
+import { InputField } from '../Shared/Input/Input';
 import { Button } from '../Shared/Button/Button';
+import { Form, Formik } from "formik";
+import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
 
-export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
-	const [price1, set_price1] = useState('')
-	const [price2, set_price2] = useState('')
-	const [price3, set_price3] = useState('')
-	const [price4, set_price4] = useState('')
+const validator = Yup.object().shape({
+	nativePostPrice: Yup.string().required("Заполните поле"),
+	post1For48Price: Yup.string().required("Заполните поле"),
+	post1For24Price: Yup.string().required("Заполните поле"),
+	post2For48Price: Yup.string().required("Заполните поле"),
+ });
 
+ export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
-
-  return (
-		<Modal {...{isOpen, setOpen}} title={'Редактирование'} name={'edit-channel'}>
-			<form className={s.form}>
-				<Input label={'Нативное размещение размещение'} value={price1} onChange={(e) => set_price1(e.target.value)}/>
-				<Input label={'Размещение 1/48'} value={price2} onChange={(e) => set_price2(e.target.value)}/>
-				<Input label={'Размещение 1/24'} value={price3} onChange={(e) => set_price3(e.target.value)}/>
-				<Input label={'Размещение 2/48'} value={price4} onChange={(e) => set_price4(e.target.value)}/>
-				<div className={s.rowBtns}>
-					<Button label="Отменить" theme="secondary" className={s.btnHalf} onClick={(e) => {
-						e.preventDefault()
-						setOpen()
-					}}/>
-					<Button label="Применить" className={s.btnHalf} onClick={(e) => {
-						e.preventDefault()
-						updateChannel({data: {
-							"nativePostPrice": price1,
-							"post1For48Price": price2,
-							"post1For24Price": price3,
-							"post2For48Price": price4
-						}, id: modalParams})
-						setOpen()
-					}}/>
-				</div>
-			</form>
-		</Modal>
-  );
-};
+ 
+	return (
+		 <Modal {...{isOpen, setOpen}} title={'Редактирование'} name={'edit-channel'}>
+			 <Formik
+				 initialValues={{
+					 nativePostPrice: '',
+					 post1For48Price: '',
+					 post1For24Price: '',
+					 post2For48Price: '',
+				 }}
+				 validationSchema={validator}
+				 onSubmit={(values) => {
+					 updateChannel({data: {
+						 "nativePostPrice": values.nativePostPrice,
+						 "post1For48Price": values.post1For48Price,
+						 "post1For24Price": values.post1For24Price,
+						 "post2For48Price": values.post2For48Price
+					 }, id: modalParams})
+					 setOpen()
+				 }}
+			 >
+				 {({ dirty, isValid }) => (
+					 <Form>
+						 <div className={s.form}>
+							 <div className={s.input}>
+								 <InputField
+									label={'Нативное размещение'}
+									required
+									id="nativePostPrice"
+									name="nativePostPrice"
+								 />
+							 </div>
+							 <div className={s.input}>
+								 <InputField
+									label={'Размещение 1/48'}
+									required
+									id="post1For48Price"
+									name="post1For48Price"
+								 />
+							 </div>
+							 <div className={s.input}>
+								 <InputField
+									label={'Размещение 1/24'}
+									required
+									id="post1For24Price"
+									name="post1For24Price"
+								 />
+							 </div>
+							 <div className={s.input}>
+								 <InputField
+									label={'Размещение 2/48'}
+									required
+									id="post2For48Price"
+									name="post2For48Price"
+								 />
+							 </div>
+							 <div className={s.rowBtns}>
+								 <Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
+								 <Button label="Применить" className={s.btnHalf} disabled={!dirty || !isValid} type="submit"/>
+							 </div>
+						 </div>
+					 </Form>
+				 )}
+			 </Formik>
+		 </Modal>
+	);
+ };

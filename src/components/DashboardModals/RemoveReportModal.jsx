@@ -1,21 +1,47 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
-import { useState } from "react";
+import { InputField } from '../Shared/Input/Input';
 import { Button } from '../Shared/Button/Button';
-import { Textarea } from "../Shared/Textarea/Textarea";
+import { Form, Formik } from "formik";
+import * as Yup from 'yup';
+
+const validator = Yup.object().shape({
+ desc: Yup.string().required("Укажите причину отклонения"),
+});
 
 export const RemoveReportModal = ({isOpen, setOpen}) => {
-	const [desc, set_desc] = useState('')
-
   return (
 		<Modal {...{isOpen, setOpen}} title={'Отклонить заявку'} name={'remove-report'}>
-			<form className={s.form}>
-				<Textarea label={'Причина отклонения'} placeholder={'Причина удаления'} value={desc} onChange={(e) => set_desc(e.target.value)}/>
-				<div className={s.rowBtns}>
-					<Button label="Отменить" theme="secondary" className={s.btnHalf}/>
-					<Button label="Оклонить" className={s.btnHalf} disabled={!desc}/>
-				</div>
-			</form>
+			<Formik
+				initialValues={{
+					desc: '',
+				}}
+				validationSchema={validator}
+				onSubmit={(values) => {
+					console.log(values); // Здесь вы можете обработать отправку формы
+					setOpen(); // Закрываем модальное окно после успешной отправки
+				}}
+			>
+				{({ dirty, isValid }) => (
+					<Form>
+						<div className={s.form}>
+							<div className={s.input}>
+								<InputField
+									label={'Причина отклонения'}
+									required
+									placeholder={'Причина удаления'}
+									id="desc"
+									name="desc"
+								/>
+							</div>
+							<div className={s.rowBtns}>
+								<Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
+								<Button label="Отклонить" className={s.btnHalf} disabled={!dirty || !isValid} type="submit"/>
+							</div>
+						</div>
+					</Form>
+				)}
+			</Formik>
 		</Modal>
   );
 };

@@ -125,6 +125,9 @@ export const publisher = {
 	getChannels(params) {
 		return instance.get("/channels/my", params)
 	},
+	getChannelByID(id) {
+		return instance.get(`/channels/${id}`)
+	},
 	createChannel(data) {
 		return instance.post("/channels/my", data)
 	},

@@ -1,28 +1,47 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
-import { Input } from '../Shared/Input/Input';
-import { useState } from "react";
+import { InputField } from '../Shared/Input/Input';
 import { Button } from '../Shared/Button/Button';
-import { Select } from "../Shared/Select/Select";
+import { Form, Formik } from "formik";
+import * as Yup from 'yup';
 
-const types = [
-  { value: 'type1', label: 'Юридическое лицо' },
-  { value: 'type2', label: 'Физическое лицо' },
-];
+const validator = Yup.object().shape({
+ price: Yup.string()
+    .required("Укажите сумму вывода")
+    .min(1000, "Минимальная сумма вывода 1,000 ₽"),
+});
 
 export const WithdrawModal = ({isOpen, setOpen}) => {
-	const [price, set_price] = useState('25,000 ₽')
-	const [type, set_type] = useState(types[0])
-
   return (
 		<Modal {...{isOpen, setOpen}} title={'Вывести средства'} name={'withdraw-modal'}>
-			<form className={s.form}>
-				<Input label={'Сумма вывода (мин. 1,000 ₽)'} value={price} onChange={(e) => set_price(e.target.value)}/>
-				<Select label="Способ оплаты" fullWidth options={types} defaultValue={types[0]} setSelectedOption={set_type}/>
-				<div className={s.rowBtns}>
-					<Button label="Вывести" disabled={!price} className={s.fullBtn}/>
-				</div>
-			</form>
+			<Formik
+				initialValues={{
+					price: '',
+				}}
+				validationSchema={validator}
+				onSubmit={(values) => {
+					console.log(values); // Здесь вы може��е обработать отправку формы
+					setOpen(); // Закрываем модальное окно после успешной отправки
+				}}
+			>
+				{({ dirty, isValid }) => (
+					<Form>
+						<div className={s.form}>
+							<div className={s.input}>
+								<InputField
+								 label={'Сумма вывода (мин. 1,000 ₽)'}
+								 required
+								 id="price"
+								 name="price"
+								/>
+							</div>
+						<div className={s.rowBtns}>
+							<Button label="Вывести" disabled={!dirty || !isValid} className={s.fullBtn} type="submit"/>
+						</div>
+					</div>
+				</Form>
+				)}
+			</Formik>
 		</Modal>
   );
 };
