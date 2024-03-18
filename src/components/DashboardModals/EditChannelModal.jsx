@@ -7,11 +7,13 @@ import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
 import { useChannelById } from '../../hooks/useChannleById';
 
+const numberRegax = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/
+
 const validator = Yup.object().shape({
-	nativePostPrice: Yup.string().required("Заполните поле"),
-	post1For48Price: Yup.string().required("Заполните поле"),
-	post1For24Price: Yup.string().required("Заполните поле"),
-	post2For48Price: Yup.string().required("Заполните поле"),
+	nativePostPrice: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
+	post1For48Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
+	post1For24Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
+	post2For48Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
  });
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {

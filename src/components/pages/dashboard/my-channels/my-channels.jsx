@@ -18,7 +18,7 @@ export const MyChannels = () => {
 				<div className={s.cardHeader}>
 					<div>
 						<span>Мои каналы</span>
-						<span className={s.count}>{channels?.length}</span>
+						{channels?.length ? <span className={s.count}>{channels?.length}</span> : ''}
 					</div>
 					<Button label={"Добавить канал"} leftIcon={<IconPlus/>} onClick={() => setModal('add-channel')} className={s.btn}/>
 				</div>
