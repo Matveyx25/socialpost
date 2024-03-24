@@ -154,7 +154,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
               <p>Или</p>
               <div className={s.btns}>
                 <TelegramLoginButton
-                  botName="socialpost_ru_dev_bot"
+                  botName={process.env.REACT_APP_TG_BOT_NAME}
                   dataOnauth={(user) => (values.role) && auth.registrationTelegram({...user, role: values?.role}).then(res => {
 										if(res.status == 200){
 											auth.loginTelegram(user)

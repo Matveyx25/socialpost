@@ -89,7 +89,7 @@ export const Profile = () => {
 							{profile?.telegramData ? 
 								<IconCheck className={s.checkIcon}/>
 								: <TelegramLoginButton
-									botName='socialpost_ru_dev_bot'
+									botName={process.env.REACT_APP_TG_BOT_NAME}
 									buttonSize='small'
 									dataOnauth={(data) => connectTelegramMutate(data)}
 							/>}
