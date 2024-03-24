@@ -7,6 +7,8 @@ import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
 import { useChannelById } from '../../hooks/useChannleById';
 
+// http://5.35.95.209/api/channels?_end=10&_order=ASC&_sort=id&_start=0
+
 const numberRegax = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/
 
 const validator = Yup.object().shape({

@@ -18,10 +18,6 @@ export const AddChannelModal = ({isOpen, setOpen}) => {
   });
 
   const handleSubmit = (values) => {
-    if (!values.password || !values.email) {
-      return null;
-    }
-
 		createChannel({
 			url: values.url
 		})

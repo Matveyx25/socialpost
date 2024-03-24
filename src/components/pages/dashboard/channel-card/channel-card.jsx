@@ -28,7 +28,7 @@ export const ChannelCard = ({channel}) => {
 				{channel?.status !== 'NOT_CONFIRMED' ?
 					<Button className={s.editBtn} label={'Подтвердить'} theme='secondary' onClick={() => {
 						confirmChannel(channel?.id)
-						window.open('https://t.me/socialpost_ru_bot','_blank', 'rel=noopener noreferrer')
+						window.open('https://t.me/socialpost_ru_dev_bot','_blank', 'rel=noopener noreferrer')
 					}}/>
 				: <>
 					<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', channel?.id)}/>

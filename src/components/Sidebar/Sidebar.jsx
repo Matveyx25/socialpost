@@ -17,7 +17,7 @@ export const Sidebar = () => {
 			</div>
 			<div className={s.itemList}>
 				<SidebarItem label="Дашборд" icon={<IconDashboard/>} to={'/dashboard'} end/>
-				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/dashboard/my-channels'} count={channels?.length}/>
+				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/dashboard/my-channels'} count={channels?.length || ''}/>
 				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/dashboard/placement-appointments'} count={4}/>
 				<SidebarItem label="Выплаты" icon={<IconMoneybag/>} to={'/dashboard/payments'}/>
 				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/dashboard/requisites'}/>

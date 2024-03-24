@@ -135,9 +135,9 @@ export const publisher = {
 		return instance.post(`/channels/${id}/confirm`)
 	},
 	updateChannel({data, id}) {
-		return instance.put("/channel/" + id, data)
+		return instance.put("/channels/" + id, data)
 	},
 	removeChannel(id) {
-		return instance.delete("/channel/" + id)
+		return instance.delete("/channels/" + id)
 	}
 }
