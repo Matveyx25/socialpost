@@ -59,11 +59,11 @@ export const Entity = () => {
 				<div className={s.line}></div>
 				{isFetched && <Formik
 						initialValues={{
-							inn: LegalEntity?.inn || '',
-							OGRN: LegalEntity?.ogrn || '',
-							correspondentAddress: LegalEntity?.correspondenceAddress || '',
-							entityAddress: LegalEntity?.legalAddress || '',
-							taxSystem: LegalEntity?.taxSystem ||  ''
+							inn: LegalEntity?.inn,
+							OGRN: LegalEntity?.ogrn,
+							correspondentAddress: LegalEntity?.correspondenceAddress,
+							entityAddress: LegalEntity?.legalAddress,
+							taxSystem: LegalEntity?.taxSystem
 						}}
 						validationSchema={validator}
 						onSubmit={(values) => {

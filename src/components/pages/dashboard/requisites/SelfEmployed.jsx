@@ -70,16 +70,16 @@ export const SelfEmployed = () => {
 				<div className={s.line}></div>
 				{(isFetched || isError) && <Formik
 						initialValues={{
-							fullName: selfEmployed?.fullName || '',
-							seriesPassport: selfEmployed?.passportSeries || '',
-							numberPassport: selfEmployed?.passportNumber || '',
-							birthDate: selfEmployed?.birthDate || '',
-							city: selfEmployed?.birthCity || '',
-							address: selfEmployed?.address || '',
-							snils: selfEmployed?.snils || '',
-							inn: selfEmployed?.inn || '',
-							citizenshipCountry: selfEmployed?.citizenshipCountry || '',
-							passportIssueDate: selfEmployed?.passportIssueDate || '',
+							fullName: selfEmployed?.fullName,
+							seriesPassport: selfEmployed?.passportSeries,
+							numberPassport: selfEmployed?.passportNumber,
+							birthDate: selfEmployed?.birthDate,
+							city: selfEmployed?.birthCity,
+							address: selfEmployed?.address,
+							snils: selfEmployed?.snils,
+							inn: selfEmployed?.inn,
+							citizenshipCountry: selfEmployed?.citizenshipCountry,
+							passportIssueDate: selfEmployed?.passportIssueDate,
 						}}
 						validationSchema={validator}
 						onSubmit={(values) => {

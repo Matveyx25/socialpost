@@ -177,7 +177,7 @@ export const publisher = {
 		return instance.put(`/publisher/current/ie/bank_details`, data)
 	},
 	getCryptoWallet() {
-		return instance.get(`/publisher/current/ie`)
+		return instance.get(`/publisher/current/crypto_wallet_details`)
 	},
 	updateCryptoWallet(data) {
 		return instance.put(`/publisher/current/crypto_wallet_details`, data)

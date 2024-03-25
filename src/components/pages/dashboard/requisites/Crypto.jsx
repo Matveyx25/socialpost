@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import s from './requisites.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Select } from '../../../Shared/Select/Select';
-import { Input, InputField } from '../../../Shared/Input/Input';
-import { Form, Formik } from 'formik';
+import { InputField } from '../../../Shared/Input/Input';
+import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
-import { IconEdit } from '@tabler/icons-react';
+import { useCryptoWallet, useUpdateCryptoWallet } from '../../../../hooks/publisherBalance';
 
-const crypto = [
-  { value: 'USDT (TRC20)', label: 'USDT (TRC20)' },
+const currency = [
+  { value: 'USDT', label: 'USDT (TRC20)' },
   { value: 'Ethereum', label: 'Ethereum' },
   { value: 'Bitcoin', label: 'Bitcoin' },
   { value: 'Solano', label: 'Solano' },
@@ -17,12 +17,14 @@ const crypto = [
 ];
 
 export const Crypto = () => {
-	const [selectedCrypto, setSelectedCrypto] = useState(crypto[0])
-	const [filledForm, setFilledForm] = useState(false)
+	const {data: crypto, isFetched} = useCryptoWallet()
+	const {mutate: updateCryptoWallet} = useUpdateCryptoWallet()
 
 	const validator = Yup.object().shape({
 		address: Yup.string()
 			.required('Введите адрес'),
+		currency: Yup.string()
+		.required('Выберите криптовалюту'),
 	});
 
 	return (
@@ -32,30 +34,37 @@ export const Crypto = () => {
 				Личные данные
 				</div>
 				<div className={s.line}></div>
-				<Formik
+				{isFetched && <Formik
 						initialValues={{
-							address: ''
+							address: crypto?.address,
+							currency: crypto?.type
 						}}
 						validationSchema={validator}
-						onSubmit={() => {
-							setFilledForm(true)
+						onSubmit={(values) => {
+							updateCryptoWallet({
+								"type": values?.currency,
+								"address": values?.address
+							})
 						}}
 					>
 						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
-									<Select fullWidth label="Криптовалюта" options={crypto} defaultValue={selectedCrypto} setSelectedOption={setSelectedCrypto} className={s.select}/>
+									<Field name="currency">
+										{({ field: {value}, form: {setFieldValue}  }) => (
+											<Select fullWidth label="Криптовалюта" options={currency} defaultValue={value ? currency.find(e => e.value === value) : null} setSelectedOption={v => setFieldValue('currency', v.value)} className={s.select}/>
+										)}
+									</Field>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'Адрес'} name='address' placeholder='TLT3nnK2iYgZ8h19M12TtCPEPsAUFPQLJp' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-								{filledForm ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
-									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>
+					</Formik>}
 			</DashboardCard>
 		</div>
 	)
