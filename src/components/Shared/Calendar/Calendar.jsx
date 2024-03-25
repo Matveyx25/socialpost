@@ -3,12 +3,9 @@ import s from "./Calendar.module.scss"
 import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { IconCalendar } from '@tabler/icons-react';
-import { Button } from '../Button/Button';
 import { CalendarHeader } from '../RangeCalendar/CalendarHeader';
 
-export const Calendar = ({placeholder, className, label}) => {
-	const [date, setDate] = useState(null);
-
+export const Calendar = ({placeholder, className, label, value, onChange}) => {
 	const calendar = useRef(null)
 
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -32,12 +29,11 @@ export const Calendar = ({placeholder, className, label}) => {
 				<span>{label}</span>
 			</div>}
 			 <ReactDatePicker
-					selected={date}
+					selected={value ? new Date(value) : null}
 					ref={calendar}
 					onChange={(update) => {
-						setDate(update);
+						onChange(update.toISOString());
 					}}
-					locale="ru"
 					customInput={<ExampleCustomInput />}
 					calendarClassName={s.wrapper}
 					renderCustomHeader={CalendarHeader}

@@ -5,6 +5,7 @@ import { UserList } from "./UserList";
 import { UserEdit } from "./UserEdit";
 import { ChannelsList } from './ChannelsList';
 import { ChannelEdit } from "./ChannelEdit";
+import { IconUser } from "@tabler/icons-react";
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -29,7 +30,7 @@ const dataProvider = {
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin">
-    <Resource name="users" list={UserList} edit={UserEdit} />
+    <Resource name="users" list={UserList} edit={UserEdit}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
   </Admin>
 );
