@@ -47,7 +47,7 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectArrayInput source="roles" choices={[
+				<SelectArrayInput source="status" choices={[
 						{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },
 						{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
 				<hr />
