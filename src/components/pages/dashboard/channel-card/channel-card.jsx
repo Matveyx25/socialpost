@@ -25,15 +25,15 @@ export const ChannelCard = ({channel}) => {
 					</h2>
 					<p dangerouslySetInnerHTML={{__html: channel?.description}}></p>
 				</div>
-				{channel?.status !== 'NOT_CONFIRMED' ?
-					<Button className={s.editBtn} label={'Подтвердить'} theme='secondary' onClick={() => {
+				{{'NOT_CONFIRMED': <Button className={s.editBtn} label={'Подтвердить'} theme='secondary' onClick={() => {
 						confirmChannel(channel?.id)
 						window.open('https://t.me/' + process.env.REACT_APP_TG_BOT_NAME,'_blank', 'rel=noopener noreferrer')
-					}}/>
-				: <>
-					<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', channel?.id)}/>
-					<Button className={s.removeBtn} label={<IconTrash color='#F78F8F'/>} theme='secondary' onClick={() => setModal('remove-channel', channel?.id)}/>
-				</>}
+					}}/>,
+					'CONFIRMED': <>
+						<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', channel?.id)}/>
+						<Button className={s.removeBtn} label={<IconTrash color='#F78F8F'/>} theme='secondary' onClick={() => setModal('remove-channel', channel?.id)}/>
+					</>,
+				'WAITING_CONFIRMATION': <>подтверждается</>}[channel?.status]}
 			</div>
 			<div className={s.stats}>
 				<div>

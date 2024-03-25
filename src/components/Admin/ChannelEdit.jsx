@@ -5,23 +5,29 @@ import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, ImageField, 
 export const ChannelEdit = (props) => (
 		<Edit {...props}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
-				<TextField source="name" title="Имя"/>
-				<TextField source="telegramUsername" title="username"/>
-	      <TextField source="telegramId" title="id"/>
-	      <TextField source="subscribersCount" title="Подписчики"/>
-        <TextField source="engagementRate" title="ER"/>
-        <TextField source="costPerView" title="CPV"/>
-				<ImageInput source="imageUrl" label="Фото">
-						<ImageField source="." title="title" />
-				</ImageInput>
+				<TextField source="name" label="Имя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="firstName" isRequired fullWidth />
+							<TextField source="telegramUsername" label="username"/>
 						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="lastName" fullWidth />
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+	      			<TextField source="telegramId" label="id"/>
+						</Box>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+	      			<TextField source="subscribersCount" label="Подписчики"/>
 						</Box>
 				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<TextField source="engagementRate" label="ER"/>
+						</Box>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<TextField source="costPerView" label="CPV"/>
+						</Box>
+				</Box>
+				<ImageInput source="imageUrl" label="Фото">
+						<ImageField source="." label="label" />
+				</ImageInput>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<TextInput source="nativePostPrice" placeholder="nativePostPrice" fullWidth />

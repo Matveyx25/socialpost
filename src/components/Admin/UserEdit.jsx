@@ -9,7 +9,7 @@ export const UserEdit = (props) => (
 						Личная информация
 				</Typography>
 				<ImageInput source="photoUrl" label="Аватар пользователя">
-						<ImageField source="." title="title" />
+						<ImageField source="." label="label" />
 				</ImageInput>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
