@@ -24,15 +24,15 @@ import { Channel } from "./components/pages/channel/channel";
 import { Helmet,HelmetProvider } from "react-helmet-async";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { Outlet } from 'react-router-dom';
-import { Admin } from "react-admin";
 import AdminPanel from "./components/Admin/AdminPanel";
 import { Profile } from "./components/pages/profile/profile";
 import { setAuthToken } from "./helpers/tokens";
-import { IconLoader2 } from "@tabler/icons-react";
 import { ConfirmEmail } from "./components/pages/confirm-email/confirm-email";
 import { Loader } from './components/Shared/Loader/Loader';
 import { RestorePassword } from "./components/pages/restore-password/restore-password";
 import { useProfile } from "./hooks/useProfile";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.min.css'
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -56,45 +56,46 @@ function App() {
 					<link rel="preload" as="font" href={'/fonts/SF-Pro-Display-Semibold.woff'} type="font/woff" crossOrigin/>
 				</Helmet>
 				<AuthModals isOpen={modal} setOpen={setModal}/>
+				<ToastContainer/>
 				<ScrollToTop />
-				<Routes>
-				{localStorage.getItem('token') ? 
-					profileSuccess ? 
-					<Route element={<DashboardLayout/>}>
-						<Route path="/profile" element={<Profile/>}/>
-						<Route path="/dashboard" element={<MainDashboard/>}/>
-						<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
-						<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
-						<Route path="/dashboard/appointment" element={<Report/>}/>
-						<Route path="/dashboard/payments" element={<Payments/>}/>
-						<Route path="/dashboard/requisites" element={<Requisites/>}/>
-						<Route path="/dashboard/faq" element={<FAQ/>} /> 
-					</Route> 
-					:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
-					: null}
-					<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
-						<Route path="/" element={
-							<>
-								<SwitchWrapper {...{role, setRole}}/>
-								<div className="space"></div>
-										{{
-									'publisher': <PublisherContent/>,
-									'seller': <SellerContent/>
-								}[role]}
-							</>}/>
-						<Route path="/confirm-email/:token" element={<ConfirmEmail/>}/>
-						<Route path="/restore-password/:token" element={<RestorePassword/>}/>
-						<Route path="/policy" element={<Policy/>}/>
-						<Route path="/contact" element={<Contacts/>}/>
-						<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
-						<Route path="/channel/:channelId" element={<Channel/>}/>
-						<Route path="/cart" element={<Cart/>}/>
-						<Route path="*" element={<NotFound/>}/>
-					</Route>
-					{profile?.roles?.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
-						<Route path="/admin/*" element={<AdminPanel/>}/>
-					</Route>}
-				</Routes>
+					<Routes>
+					{localStorage.getItem('token') ? 
+						profileSuccess ? 
+						<Route element={<DashboardLayout/>}>
+							<Route path="/profile" element={<Profile/>}/>
+							<Route path="/dashboard" element={<MainDashboard/>}/>
+							<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
+							<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
+							<Route path="/dashboard/appointment" element={<Report/>}/>
+							<Route path="/dashboard/payments" element={<Payments/>}/>
+							<Route path="/dashboard/requisites" element={<Requisites/>}/>
+							<Route path="/dashboard/faq" element={<FAQ/>} /> 
+						</Route> 
+						:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
+						: null}
+						<Route element={<MainLayout {...{role, setRole, setModal}}/>}>
+							<Route path="/" element={
+								<>
+									<SwitchWrapper {...{role, setRole}}/>
+									<div className="space"></div>
+											{{
+										'publisher': <PublisherContent/>,
+										'seller': <SellerContent/>
+									}[role]}
+								</>}/>
+							<Route path="/confirm-email/:token" element={<ConfirmEmail/>}/>
+							<Route path="/restore-password/:token" element={<RestorePassword/>}/>
+							<Route path="/policy" element={<Policy/>}/>
+							<Route path="/contact" element={<Contacts/>}/>
+							<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
+							<Route path="/channel/:channelId" element={<Channel/>}/>
+							<Route path="/cart" element={<Cart/>}/>
+							<Route path="*" element={<NotFound/>}/>
+						</Route>
+						{profile?.roles?.includes('MAIN_ADMIN') && <Route element={<><Outlet/></>}>
+							<Route path="/admin/*" element={<AdminPanel/>}/>
+						</Route>}
+					</Routes>
 			</div>
 		</HelmetProvider>
   );

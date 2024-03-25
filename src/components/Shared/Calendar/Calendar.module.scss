@@ -118,6 +118,10 @@
 		background-color: #436CFF;
 		color: #fff;
 	}
+	:global(.react-datepicker__day--selected){
+		background-color: #436CFF;
+		color: #fff;
+	}
 	.btns{
 		display: flex;
 		justify-content: space-between;

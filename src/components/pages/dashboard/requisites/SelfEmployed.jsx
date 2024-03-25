@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './requisites.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Select } from '../../../Shared/Select/Select';
@@ -16,16 +16,12 @@ const counties = [
 ];
 
 export const SelfEmployed = () => {
-	const [selectedCountry, setSelectedCountry] = useState(counties[0])
-	const [filledForm1, setFilledForm1] = useState(false)
-	const [filledForm2, setFilledForm2] = useState(false)
-
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
 
-	const {data: selfEmployed} = useSelfEmployed()
+	const {data: selfEmployed, isFetched, isError} = useSelfEmployed()
 	const {mutate: updateSelfEmployed} = useUpdateSelfEmployed()
 
-	const {data: selfEmployedBankDetails} = useSelfEmployedBankDetails()
+	const {data: selfEmployedBankDetails, isFetched: isFetchedBankDetails, isError: isErrorBankDetails} = useSelfEmployedBankDetails()
 	const {mutate: updateSelfEmployedBankDetails} = useUpdateSelfEmployedBankDetails()
 
 	const validator = Yup.object().shape({
@@ -33,30 +29,37 @@ export const SelfEmployed = () => {
 			.matches(nameRegExp, 'Введите ФИО верно')
 			.required('Введите ФИО'),
 		seriesPassport: Yup.string()
+			.matches(/^\d+$/, 'Серия паспорта должен содержать только цифры')
 			.required('Введите серию паспорта'),
 		numberPassport: Yup.string()
+			.matches(/^\d+$/, 'Номер паспорта должен содержать только цифры')
 			.required('Введите номер паспорта'),
 		city: Yup.string()
 			.required('Введите город рождения'),
 		address: Yup.string()
 			.required('Введите адрес'),
 		snils: Yup.string()
+			.matches(/^\d+$/, 'СНИЛС должен содержать только цифры')
 			.required('Введите СНИЛС'),
 		inn: Yup.string()
+			.matches(/^\d+$/, 'ИНН должен содержать только цифры')
 			.required('Введите ИНН'),
 	});
 
 	const validator2 = Yup.object().shape({
 		accountNumber: Yup.string()
-			.required('Введите рассчетный счет'),
+			 .matches(/^\d+$/, 'Расчетный счет должен содержать только цифры')
+			 .required('Введите рассчетный счет'),
 		b: Yup.string()
-			.required('Введите B'),
+			 .matches(/^\d+$/, 'Поле B должно содержать только цифры')
+			 .required('Введите B'),
 		bic: Yup.string()
-			.required('Введите БИК'),
+			 .matches(/^\d+$/, 'БИК должен содержать только цифры')
+			 .required('Введите БИК'),
 		correspondentAccount: Yup.string()
-			.required('Введите корреспондентский счет'),
-	});
-
+			 .matches(/^\d+$/, 'Корреспондентский счет должен содержать только цифры')
+			 .required('Введите корреспондентский счет'),
+	 });	 
 
 	return (
 		<div className={s.formsWrapper}>
@@ -65,11 +68,12 @@ export const SelfEmployed = () => {
 				Личные данные
 				</div>
 				<div className={s.line}></div>
-				<Formik
+				{(isFetched || isError) && <Formik
 						initialValues={{
 							fullName: selfEmployed?.fullName || '',
 							seriesPassport: selfEmployed?.passportSeries || '',
 							numberPassport: selfEmployed?.passportNumber || '',
+							birthDate: selfEmployed?.birthDate || '',
 							city: selfEmployed?.birthCity || '',
 							address: selfEmployed?.address || '',
 							snils: selfEmployed?.snils || '',
@@ -86,19 +90,19 @@ export const SelfEmployed = () => {
 								passportSeries: values?.seriesPassport,
 								passportNumber: values?.numberPassport,
 								birthCity: values?.city,
+								birthDate: values?.birthDate,
 								address: values?.address,
 								snils: values?.snils,
 								inn: values?.inn,
 							})
-							setFilledForm1(true)
 						}}
 					>
 						{({ dirty, isValid }) => (
 							<Form>
 								<div className={s.formRow}>
 									<Field name="citizenshipCountry">
-										{({ field }) => (
-											<Select fullWidth label="Страна гражданства" options={counties} defaultValue={field.value} setSelectedOption={v => field.onChange(v.value)} className={s.select} headerClassName={s.selectHeader}/>
+										{({ field: {value}, form: {setFieldValue}  }) => (
+											<Select fullWidth label="Страна гражданства" options={counties} defaultValue={value ? counties.find(e => e.value === value) : null} setSelectedOption={v => setFieldValue('citizenshipCountry', v.value)} className={s.select} headerClassName={s.selectHeader}/>
 										)}
 									</Field>
 									<InputField label={'ФИО'} name='fullName' placeholder='Иванов Иван Иванович' className={s.input}/>
@@ -107,13 +111,17 @@ export const SelfEmployed = () => {
 									<InputField label={'Серия паспорта'} name='seriesPassport' placeholder='12345' className={s.input}/>
 									<InputField label={'Номер паспорта'} name='numberPassport' placeholder='12345' className={s.input}/>
 									<Field name="passportIssueDate">
-										{({ field }) => (
-											<Calendar placeholder={'11.08.2014'} label={'Выдан'} className={s.calendar} {...field}/>
+										{({ field: {value}, form: {setFieldValue} }) => (
+											<Calendar placeholder={'11.08.2014'} label={'Выдан'} className={s.calendar} value={value} onChange={v => setFieldValue("passportIssueDate", v.toISOString())}/>
 										)}
 									</Field>
 								</div>
 								<div className={s.formRow}>
-									<Calendar placeholder={'11.08.1998'} label={'Дата рождения'} className={s.calendar}/>
+									<Field name="birthDate">
+										{({ field: {value}, form: {setFieldValue}  }) => (
+											<Calendar placeholder={'11.08.1998'} label={'Дата рождения'} className={s.calendar} value={value} onChange={v => setFieldValue("birthDate", v.toISOString())}/>
+										)}
+									</Field>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'Город рождения'} name='city' placeholder='Минск' className={s.input}/>
@@ -125,23 +133,23 @@ export const SelfEmployed = () => {
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-								{filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
-									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
+								{/* {filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> :  */}
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>
+					</Formik>}
 			</DashboardCard>
 			<DashboardCard className={s.formCard}>
 				<div className={s.cardHeader}>
 				Банковские реквизиты
 				</div>
 				<div className={s.line}></div>
-				<Formik
+				{(isFetchedBankDetails || isErrorBankDetails) && <Formik
 						initialValues={{
-							accountNumber: selfEmployedBankDetails?.checkingAccount || '',
-							b: selfEmployedBankDetails?.bank || '',
-							bic: selfEmployedBankDetails?.bik || '',
-							correspondentAccount: selfEmployedBankDetails?.correspondentAccount || '',
+							accountNumber: selfEmployedBankDetails?.checkingAccount,
+							b: selfEmployedBankDetails?.bank,
+							bic: selfEmployedBankDetails?.bik,
+							correspondentAccount: selfEmployedBankDetails?.correspondentAccount,
 						}}
 						validationSchema={validator2}
 						onSubmit={(values) => {
@@ -151,7 +159,6 @@ export const SelfEmployed = () => {
 								bik: values?.bic,
 								correspondentAccount: values?.correspondentAccount,
 							})
-							setFilledForm2(true)
 						}}
 					>
 						{({ dirty, isValid }) => (
@@ -170,11 +177,10 @@ export const SelfEmployed = () => {
 								</div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-									{filledForm2 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> : 
-										<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>}
+									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>
+					</Formik>}
 			</DashboardCard>
 		</div>
 	)

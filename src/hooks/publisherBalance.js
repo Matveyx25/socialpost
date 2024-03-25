@@ -1,5 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
 import { publisher } from "../api/api"
+import { toast } from "react-toastify"
 
 export const useSelfEmployed = () => {
 	return useQuery({
@@ -16,6 +17,7 @@ export const useUpdateSelfEmployed = () => {
 		mutationFn: publisher.updateSelfEmployed,
 		onSuccess: () => {
       queryClient.invalidateQueries(['self-employed'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -35,6 +37,7 @@ export const useUpdateSelfEmployedBankDetails = () => {
 		mutationFn: publisher.updateSelfEmployedBankDetails,
 		onSuccess: () => {
       queryClient.invalidateQueries(['self-employed-bank-details'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -54,6 +57,7 @@ export const useUpdateLegalEntity = () => {
 		mutationFn: publisher.updateLegalEntity,
 		onSuccess: () => {
       queryClient.invalidateQueries(['legal-entity'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -73,6 +77,7 @@ export const useUpdateLegalEntityBankDetails = () => {
 		mutationFn: publisher.updateLegalEntityBankDetails,
 		onSuccess: () => {
       queryClient.invalidateQueries(['legal-entity-bank-details'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -92,6 +97,7 @@ export const useUpdateIE = () => {
 		mutationFn: publisher.updateIE,
 		onSuccess: () => {
       queryClient.invalidateQueries(['ie'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -111,6 +117,7 @@ export const useUpdateIEBankDetails = () => {
 		mutationFn: publisher.updateIEBankDetails,
 		onSuccess: () => {
       queryClient.invalidateQueries(['ie-bank-details'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }
@@ -130,6 +137,7 @@ export const useUpdateCryptoWallet = () => {
 		mutationFn: publisher.updateCryptoWallet,
 		onSuccess: () => {
       queryClient.invalidateQueries(['crypto-wallet'])
+			toast.success('Данные обновлены')
     }, 
 	})
 }

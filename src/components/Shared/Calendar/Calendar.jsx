@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useState } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import s from "./Calendar.module.scss"
 import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -31,9 +31,7 @@ export const Calendar = ({placeholder, className, label, value, onChange}) => {
 			 <ReactDatePicker
 					selected={value ? new Date(value) : null}
 					ref={calendar}
-					onChange={(update) => {
-						onChange(update.toISOString());
-					}}
+					onChange={onChange}
 					customInput={<ExampleCustomInput />}
 					calendarClassName={s.wrapper}
 					renderCustomHeader={CalendarHeader}
