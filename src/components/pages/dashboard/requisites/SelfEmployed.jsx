@@ -7,8 +7,8 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
-import { IconEdit } from '@tabler/icons-react';
 import { useSelfEmployed, useSelfEmployedBankDetails, useUpdateSelfEmployed, useUpdateSelfEmployedBankDetails } from '../../../../hooks/publisherBalance';
+import { Loader } from '../../../Shared/Loader/Loader';
 
 const counties = [
   { value: 'belarus', label: 'Беларусь' },
@@ -18,10 +18,10 @@ const counties = [
 export const SelfEmployed = () => {
 	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/
 
-	const {data: selfEmployed, isFetched, isError} = useSelfEmployed()
+	const {data: selfEmployed, isFetched} = useSelfEmployed()
 	const {mutate: updateSelfEmployed} = useUpdateSelfEmployed()
 
-	const {data: selfEmployedBankDetails, isFetched: isFetchedBankDetails, isError: isErrorBankDetails} = useSelfEmployedBankDetails()
+	const {data: selfEmployedBankDetails, isFetched: isFetchedBankDetails} = useSelfEmployedBankDetails()
 	const {mutate: updateSelfEmployedBankDetails} = useUpdateSelfEmployedBankDetails()
 
 	const validator = Yup.object().shape({
@@ -68,7 +68,7 @@ export const SelfEmployed = () => {
 				Личные данные
 				</div>
 				<div className={s.line}></div>
-				{(isFetched || isError) && <Formik
+				{isFetched ? <Formik
 						initialValues={{
 							fullName: selfEmployed?.fullName,
 							seriesPassport: selfEmployed?.passportSeries,
@@ -137,14 +137,14 @@ export const SelfEmployed = () => {
 									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>}
+					</Formik> : <Loader/>}
 			</DashboardCard>
 			<DashboardCard className={s.formCard}>
 				<div className={s.cardHeader}>
 				Банковские реквизиты
 				</div>
 				<div className={s.line}></div>
-				{(isFetchedBankDetails || isErrorBankDetails) && <Formik
+				{isFetchedBankDetails ? <Formik
 						initialValues={{
 							accountNumber: selfEmployedBankDetails?.checkingAccount,
 							b: selfEmployedBankDetails?.bank,
@@ -180,7 +180,7 @@ export const SelfEmployed = () => {
 									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>}
+					</Formik> : <Loader/>}
 			</DashboardCard>
 		</div>
 	)

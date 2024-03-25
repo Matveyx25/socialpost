@@ -7,6 +7,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { useLegalEntity, useLegalEntityBankDetails, useUpdateLegalEntity, useUpdateLegalEntityBankDetails } from '../../../../hooks/publisherBalance';
+import { Loader } from '../../../Shared/Loader/Loader';
 
 const tax = [
   { value: 'OSN', label: 'ОСН' },
@@ -57,7 +58,7 @@ export const Entity = () => {
 				Личные данные
 				</div>
 				<div className={s.line}></div>
-				{isFetched && <Formik
+				{isFetched ? <Formik
 						initialValues={{
 							inn: LegalEntity?.inn,
 							OGRN: LegalEntity?.ogrn,
@@ -102,14 +103,14 @@ export const Entity = () => {
 									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>}
+					</Formik> : <Loader/>}
 			</DashboardCard>
 			<DashboardCard className={s.formCard}>
 				<div className={s.cardHeader}>
 				Банковские реквизиты
 				</div>
 				<div className={s.line}></div>
-				{isFetchedBankDetails && <Formik
+				{isFetchedBankDetails ? <Formik
 						initialValues={{
 							accountNumber: LegalEntityBankDetails?.checkingAccount,
 							b: LegalEntityBankDetails?.bank,
@@ -145,7 +146,7 @@ export const Entity = () => {
 								<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>}
+					</Formik> : <Loader/>}
 			</DashboardCard>
 		</div>
 	)

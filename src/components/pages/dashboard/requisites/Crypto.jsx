@@ -7,6 +7,7 @@ import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { useCryptoWallet, useUpdateCryptoWallet } from '../../../../hooks/publisherBalance';
+import { Loader } from '../../../Shared/Loader/Loader';
 
 const currency = [
   { value: 'USDT', label: 'USDT (TRC20)' },
@@ -34,7 +35,7 @@ export const Crypto = () => {
 				Личные данные
 				</div>
 				<div className={s.line}></div>
-				{isFetched && <Formik
+				{isFetched ? <Formik
 						initialValues={{
 							address: crypto?.address,
 							currency: crypto?.type
@@ -64,7 +65,7 @@ export const Crypto = () => {
 									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
 								</div>
 							</Form>)}
-					</Formik>}
+					</Formik> : <Loader/>}
 			</DashboardCard>
 		</div>
 	)
