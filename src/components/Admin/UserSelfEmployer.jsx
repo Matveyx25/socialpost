@@ -1,10 +1,13 @@
 import { Box } from '@mui/material'
 import React from 'react'
 import { DateInput, Edit, SimpleForm, TextInput } from 'react-admin'
+import { useParams } from 'react-router-dom';
 
 export const UserSelfEmployer = (props) => {
+	const { id } = useParams();
+
 	return (
-		<Edit {...props}>
+		<Edit {...props} resource={'/users/' + id + 'self_employed'}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
