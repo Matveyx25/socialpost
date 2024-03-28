@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, FunctionField } from "react-admin";
+import { List, Datagrid, TextField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, FunctionField, ChipField } from "react-admin";
 
 export const ChannelsList = (props) => (
   <List {...props}>
@@ -11,9 +11,7 @@ export const ChannelsList = (props) => (
       <TextField source="costPerView" label="CPV"/>
       <ImageField source="imageUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
     	<BooleanField source='status' valueLabelTrue="CONFIRMED"/>
-			<ReferenceArrayField label="Тэги" reference="tag" source="tag">
-					<SingleFieldList />
-			</ReferenceArrayField>
+			<ChipField size="small" label="Тэг" source="tag"/>
     </Datagrid>
   </List>
 );
