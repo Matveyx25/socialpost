@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField } from "react-admin";
+import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, ArrayField, ChipField } from "react-admin";
 
 export const UserList = (props) => (
   <List {...props}>
@@ -10,9 +10,11 @@ export const UserList = (props) => (
       <ImageField source="photoUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
       <EmailField source="emailData.email" label="Эл. почта"/>
       <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
-			<ReferenceArrayField label="Роли" reference="roles" source="roles">
-					<SingleFieldList />
-			</ReferenceArrayField>
+			<ArrayField source="roles" label="Роли">
+					<SingleFieldList>
+						<ChipField size="small"/>
+					</SingleFieldList>
+			</ArrayField>
     </Datagrid>
   </List>
 );
