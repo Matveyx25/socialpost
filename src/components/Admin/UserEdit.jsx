@@ -9,9 +9,7 @@ export const UserEdit = (props) => {
 	return (
 		<Edit {...props}>
 				<SimpleForm sx={{ maxWidth: 500 }}>
-						<ImageInput source="photoUrl" label="Аватар пользователя">
-								<ImageField source="." label="label" />
-						</ImageInput>
+						<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
 						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 										<TextInput source="firstName" isRequired fullWidth />
