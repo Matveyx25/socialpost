@@ -1,8 +1,11 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, PasswordInput, ImageField, TabbedForm, DateInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, PasswordInput, ImageField, TabbedForm, DateInput, Link, useRecordContext } from "react-admin";
 
-export const UserEdit = (props) => (
+export const UserEdit = (props) => {
+	const user = useRecordContext();
+
+	return (
 		<Edit {...props}>
 				<SimpleForm sx={{ maxWidth: 500 }}>
 						<ImageInput source="photoUrl" label="Аватар пользователя">
@@ -38,6 +41,11 @@ export const UserEdit = (props) => (
 										</Box>
 								</Box>
 						</Box>
+						<Button
+							component={Link}
+							to={`/users/${user?.id}/self_employed`}
+							>Самозанятый</Button>
 				</SimpleForm>
-  </Edit>
-);
+		</Edit>
+	)
+};
