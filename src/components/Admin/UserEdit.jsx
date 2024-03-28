@@ -1,9 +1,10 @@
 import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
 import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, PasswordInput, ImageField, Link, useRecordContext } from "react-admin";
+import { useParams } from "react-router-dom";
 
 export const UserEdit = (props) => {
-	const user = useRecordContext();
+	const { id } = useParams();
 
 	return (
 		<Edit {...props}>
@@ -43,7 +44,7 @@ export const UserEdit = (props) => {
 						</Box>
 						<Button
 							component={Link}
-							to={`/users/${user?.id}/self_employed`}
+							to={`/admin/users/${id}/self_employed`}
 							>Самозанятый</Button>
 				</SimpleForm>
 		</Edit>
