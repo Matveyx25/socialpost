@@ -6,6 +6,7 @@ import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
 import { useChannelById } from '../../hooks/useChannleById';
+import { Loader } from "../Shared/Loader/Loader";
 
 // http://5.35.95.209/api/channels?_end=10&_order=ASC&_sort=id&_start=0
 
@@ -20,16 +21,16 @@ const validator = Yup.object().shape({
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
-	const {data: channel} = useChannelById(modalParams)
+	const {data: channel, isFetched} = useChannelById(modalParams)
  
 	return (
 		 <Modal {...{isOpen, setOpen}} title={'Редактирование'} name={'edit-channel'}>
-			 <Formik
+			 {isFetched ? <Formik
 				 initialValues={{
-					 nativePostPrice: channel?.nativePostPrice || 0,
-					 post1For48Price: channel?.post1For48Price || 0,
-					 post1For24Price: channel?.post1For24Price || 0,
-					 post2For48Price: channel?.post2For48Price || 0,
+					 nativePostPrice: channel?.nativePostPrice || '',
+					 post1For48Price: channel?.post1For48Price || '',
+					 post1For24Price: channel?.post1For24Price || '',
+					 post2For48Price: channel?.post2For48Price || '',
 				 }}
 				 validationSchema={validator}
 				 onSubmit={(values) => {
@@ -84,7 +85,7 @@ const validator = Yup.object().shape({
 						 </div>
 					 </Form>
 				 )}
-			 </Formik>
+			 </Formik> : <Loader/>}
 		 </Modal>
 	);
  };
