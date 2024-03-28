@@ -1,11 +1,12 @@
 import * as React from "react";
-import { Admin, Resource, fetchUtils, Route } from "react-admin";
+import { Admin, Resource, fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./UserList";
 import { UserEdit } from "./UserEdit";
 import { ChannelsList } from './ChannelsList';
 import { ChannelEdit } from "./ChannelEdit";
 import { UserSelfEmployer } from "./UserSelfEmployer";
+import { Route } from "react-router-dom";
 
 const fetchJson = (url, options = {}) => {
 	options.user = {

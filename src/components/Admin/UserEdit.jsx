@@ -1,6 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, PasswordInput, ImageField, TabbedForm, DateInput, Link, useRecordContext } from "react-admin";
+import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, PasswordInput, ImageField, Link, useRecordContext } from "react-admin";
 
 export const UserEdit = (props) => {
 	const user = useRecordContext();
