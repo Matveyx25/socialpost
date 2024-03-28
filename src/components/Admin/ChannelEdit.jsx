@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, ImageInput, SelectArrayInput, ImageField, TextField } from "react-admin";
+import { Edit, SimpleForm, TextInput, ImageInput, ImageField, TextField, SelectInput } from "react-admin";
 
 export const ChannelEdit = (props) => (
 		<Edit {...props}>
@@ -47,8 +47,9 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectArrayInput source="status" choices={[
+				<SelectInput source="status" choices={[
 						{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },
+						{ id: 'WAITING_CONFIRMATION', name: 'WAITING_CONFIRMATION' },
 						{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
 				<hr />
 		</SimpleForm>
