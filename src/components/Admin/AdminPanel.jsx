@@ -34,7 +34,6 @@ const AdminPanel = () => (
 		<Resource name="users" list={UserList} edit={UserEdit}>
 			<Route path=":id/self_employed" element={<UserSelfEmployer />}/>
 		</Resource>
-    <Resource name="users" list={UserList} edit={UserEdit}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
   </Admin>
 );
