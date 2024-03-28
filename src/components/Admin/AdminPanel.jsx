@@ -1,11 +1,11 @@
 import * as React from "react";
-import { Admin, Resource, fetchUtils } from "react-admin";
+import { Admin, Resource, fetchUtils, Route } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./UserList";
 import { UserEdit } from "./UserEdit";
 import { ChannelsList } from './ChannelsList';
 import { ChannelEdit } from "./ChannelEdit";
-import { IconUser } from "@tabler/icons-react";
+import { UserSelfEmployer } from "./UserSelfEmployer";
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -30,6 +30,9 @@ const dataProvider = {
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin">
+		<Resource name="users" list={UserList} edit={UserEdit}>
+			<Route path="/publisher/:id/self_employer" element={<UserSelfEmployer />} />
+		</Resource>
     <Resource name="users" list={UserList} edit={UserEdit}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
   </Admin>
