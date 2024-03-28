@@ -141,48 +141,48 @@ export const publisher = {
 		return instance.delete("/channels/" + id)
 	},
 	getSelfEmployed() {
-		return instance.get(`/publisher/current/self_employed`)
+		return instance.get(`/users/current/self_employed`)
 	},
 	updateSelfEmployed(data) {
-		return instance.put(`/publisher/current/self_employed`, data)
+		return instance.put(`/users/current/self_employed`, data)
 	},
 	getSelfEmployedBankDetails() {
-		return instance.get(`/publisher/current/self_employed/bank_details`)
+		return instance.get(`/users/current/self_employed/bank_details`)
 	},
 	updateSelfEmployedBankDetails(data) {
-		return instance.put(`/publisher/current/self_employed/bank_details`, data)
+		return instance.put(`/users/current/self_employed/bank_details`, data)
 	},
 	getLegalEntity() {
-		return instance.get(`/publisher/current/legal_entity`)
+		return instance.get(`/users/current/legal_entity`)
 	},
 	updateLegalEntity(data) {
-		return instance.put(`/publisher/current/legal_entity`, data)
+		return instance.put(`/users/current/legal_entity`, data)
 	},
 	getLegalEntityBankDetails() {
-		return instance.get(`/publisher/current/legal_entity/bank_details`)
+		return instance.get(`/users/current/legal_entity/bank_details`)
 	},
 	updateLegalEntityBankDetails(data) {
-		return instance.put(`/publisher/current/legal_entity/bank_details`, data)
+		return instance.put(`/users/current/legal_entity/bank_details`, data)
 	},
 	getIE() {
-		return instance.get(`/publisher/current/ie`)
+		return instance.get(`/users/current/ie`)
 	},
 	updateIE(data) {
-		return instance.put(`/publisher/current/ie`, data)
+		return instance.put(`/users/current/ie`, data)
 	},
 	getIEBankDetails() {
-		return instance.get(`/publisher/current/ie/bank_details`)
+		return instance.get(`/users/current/ie/bank_details`)
 	},
 	updateIEBankDetails(data) {
-		return instance.put(`/publisher/current/ie/bank_details`, data)
+		return instance.put(`/users/current/ie/bank_details`, data)
 	},
 	getCryptoWallet() {
-		return instance.get(`/publisher/current/crypto_wallet_details`)
+		return instance.get(`/users/current/crypto_wallet_details`)
 	},
 	updateCryptoWallet(data) {
-		return instance.put(`/publisher/current/crypto_wallet_details`, data)
+		return instance.put(`/users/current/crypto_wallet_details`, data)
 	},
 	requestWithdraw(data){
-		return instance.post(`/publisher/current/withdraw_balance`, data)
+		return instance.post(`/users/current/withdraw_balance`, data)
 	}
 }
