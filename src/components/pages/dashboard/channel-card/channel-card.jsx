@@ -4,6 +4,7 @@ import { IconEdit, IconTrash } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
 import {  useOutletContext } from 'react-router-dom'
 import { useConfirmChannel } from '../../../../hooks/useConfirmChannel';
+import classNames from 'classnames'
 
 export const ChannelCard = ({channel}) => {
 	const [setModal] = useOutletContext()
@@ -19,12 +20,16 @@ export const ChannelCard = ({channel}) => {
 				<div className={s.content}>
 					<h2>
 						{channel?.name}
-						<span>
+						{channel?.tag && <span>
 							{channel?.tag}
-						</span>
+						</span>}
+						{{'NOT_CONFIRMED': <div className={classNames(s.statusTag, s.notConfirmed)}>Ожидает подтверждение</div>,
+						'CONFIRMED': <div className={classNames(s.statusTag, s.confirmed)}>Подтвержден</div>}[channel?.status]}
 					</h2>
 					<p dangerouslySetInnerHTML={{__html: channel?.description}}></p>
 				</div>
+				{{'NOT_CONFIRMED': <div className={classNames(s.status, s.notConfirmed)}>Ожидает подтверждение</div>,
+					'CONFIRMED': <div className={classNames(s.status, s.confirmed)}>Подтвержден</div>}[channel?.status]}
 				{{'NOT_CONFIRMED': <Button className={s.editBtn} label={'Подтвердить'} theme='secondary' onClick={() => {
 						confirmChannel(channel?.id)
 						window.open('https://t.me/' + process.env.REACT_APP_TG_BOT_NAME,'_blank', 'rel=noopener noreferrer')
@@ -32,8 +37,7 @@ export const ChannelCard = ({channel}) => {
 					'CONFIRMED': <>
 						<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', channel?.id)}/>
 						<Button className={s.removeBtn} label={<IconTrash color='#F78F8F'/>} theme='secondary' onClick={() => setModal('remove-channel', channel?.id)}/>
-					</>,
-				'WAITING_CONFIRMATION': <>подтверждается</>}[channel?.status]}
+					</>}[channel?.status]}
 			</div>
 			<div className={s.stats}>
 				<div>
