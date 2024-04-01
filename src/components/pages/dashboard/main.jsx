@@ -7,6 +7,7 @@ import { ChannelItem } from './channel-item';
 import { Tabs } from '../../Shared/Tabs/Tabs';
 import { ReportItem } from './report-item/report-item';
 import { useOutletContext } from 'react-router-dom';
+import { useMyChannels } from '../../../hooks/useMyChannels';
 
 const tabs = [
 	{label: 'Запросы', count: 4, id: 5},
@@ -21,6 +22,7 @@ export const MainDashboard = () => {
 	const [tab, setTab] = useState(tabs[0].id)
 
 	const [setModal] = useOutletContext()
+	const {data: channels} = useMyChannels()
 
 	return (
 		<div className={s.grid}>
@@ -38,8 +40,9 @@ export const MainDashboard = () => {
 					</div>
 					<div className={s.line}></div>
 					<div className={s.channelsWrapper}>
-						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}  onClick={() => setModal('remove-channel')}/>
-						<ChannelItem title={'Marvel / DC: Geek Movies'} img={'https://static10.tgstat.ru/channels/_0/ba/badd99aa75b9e763b085afabff67c285.jpg'} link={'/'}  onClick={() => setModal('remove-channel')}/>
+						{channels?.map(channel => (
+							<ChannelItem title={channel?.name} img={channel?.imageUrl} link={'/'}  onClick={() => setModal('remove-channel', channel?.id)}/>
+						))}
 					</div>
 				</DashboardCard>
 			</div>

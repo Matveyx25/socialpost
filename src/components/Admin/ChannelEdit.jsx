@@ -30,7 +30,6 @@ export const ChannelEdit = (props) => (
 							<TextField source="costPerView" label="CPV"/>
 						</Box>
 				</Box>
-				<TextInput source="imageUrl" label="Фото" fullWidth />
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<TextInput source="nativePostPrice" placeholder="nativePostPrice" fullWidth />
@@ -50,9 +49,7 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectInput source="status" choices={[
-						{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },
-						{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
+				<SelectInput source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
 				<hr />
 		</SimpleForm>
   </Edit>

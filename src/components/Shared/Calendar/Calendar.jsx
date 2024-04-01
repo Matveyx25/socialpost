@@ -10,7 +10,7 @@ export const Calendar = ({placeholder, className, label, value, onChange}) => {
 
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
 		<div className={s.inputsWrapper} onClick={onClick} ref={ref}>
-			<IconCalendar size={20} color='#919396'/>
+			<IconCalendar className={s.icon} color='#919396'/>
 			<input value={value} placeholder={placeholder}/>
 		</div>
   ));

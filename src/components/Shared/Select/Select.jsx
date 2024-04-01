@@ -20,7 +20,7 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 			isMulti={isMulti}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
-				DropdownIndicator: () => <IconChevronDown size={18}/>
+				DropdownIndicator: () => <IconChevronDown className={s.icon}/>
 			}}
 			styles={{
 				...styles,
@@ -32,7 +32,7 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 					paddingLeft: 16,
 					paddingRight: 16,
 					"@media (max-width: 1260px)": {
-						padding: 8,
+						padding: 6,
 						minHeight: 32,
 						fontSize: 12
 					},
