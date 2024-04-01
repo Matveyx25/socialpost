@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, ImageInput, ImageField, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton } from "react-admin";
 
 export const ChannelEdit = (props) => (
 		<Edit {...props}  actions={
@@ -30,9 +30,7 @@ export const ChannelEdit = (props) => (
 							<TextField source="costPerView" label="CPV"/>
 						</Box>
 				</Box>
-				<ImageInput source="imageUrl" label="Фото">
-						<ImageField source="." label="label" />
-				</ImageInput>
+				<TextInput source="imageUrl" label="Фото" fullWidth />
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<TextInput source="nativePostPrice" placeholder="nativePostPrice" fullWidth />
@@ -54,7 +52,6 @@ export const ChannelEdit = (props) => (
 				</Typography>
 				<SelectInput source="status" choices={[
 						{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },
-						{ id: 'WAITING_CONFIRMATION', name: 'WAITING_CONFIRMATION' },
 						{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
 				<hr />
 		</SimpleForm>
