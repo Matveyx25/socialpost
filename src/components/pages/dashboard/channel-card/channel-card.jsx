@@ -1,10 +1,11 @@
 import React from 'react'
 import s from './channel-card.module.scss'
-import { IconEdit, IconTrash } from '@tabler/icons-react'
+import { IconEdit, IconTrash, IconInfoCircle } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
 import {  useOutletContext } from 'react-router-dom'
 import { useConfirmChannel } from '../../../../hooks/useConfirmChannel';
 import classNames from 'classnames'
+import { Tooltip } from 'react-tooltip'
 
 export const ChannelCard = ({channel}) => {
 	const [setModal] = useOutletContext()
@@ -13,6 +14,7 @@ export const ChannelCard = ({channel}) => {
 
 	return (
 		<div className={s.wrapper}>
+			<Tooltip id='confirm_channel' className="react-tooltip-clickable-link" events={['click']} html={`<div>Для подтверждения своего канала добавьте <a href="${'https://t.me/' + process.env.REACT_APP_TG_BOT_NAME}" target="_blank">@${process.env.REACT_APP_TG_BOT_NAME}</a> </br> как администратора канала для того, чтобы мы могли убедиться, что <br/> именно вы являетесь владельцем. Или напишите в поддержку сервиса.</div>`}/>
 			<div className={s.flex}>
 				<div className={s.img}>
 					<img src={channel?.imageUrl}/>
@@ -20,24 +22,20 @@ export const ChannelCard = ({channel}) => {
 				<div className={s.content}>
 					<h2>
 						{channel?.name}
-						{channel?.tag && <span>
-							{channel?.tag}
-						</span>}
-						{{'NOT_CONFIRMED': <div className={classNames(s.statusTag, s.notConfirmed)}>Ожидает подтверждение</div>,
-						'CONFIRMED': <div className={classNames(s.statusTag, s.confirmed)}>Подтвержден</div>}[channel?.status]}
+						{channel?.status === 'NOT_CONFIRMED' ?
+						 <div data-tooltip-id="confirm_channel" className={classNames(s.status, s.notConfirmed)}>Ожидает подтверждение <IconInfoCircle size={16}/></div> :
+						 <>
+							{channel?.tag && <span>
+								{channel?.tag}
+							</span>}
+						</>}
 					</h2>
 					<p dangerouslySetInnerHTML={{__html: channel?.description}}></p>
 				</div>
-				{{'NOT_CONFIRMED': <div className={classNames(s.status, s.notConfirmed)}>Ожидает подтверждение</div>,
-					'CONFIRMED': <div className={classNames(s.status, s.confirmed)}>Подтвержден</div>}[channel?.status]}
-				{{'NOT_CONFIRMED': <Button className={s.editBtn} label={'Подтвердить'} theme='secondary' onClick={() => {
-						confirmChannel(channel?.id)
-						window.open('https://t.me/' + process.env.REACT_APP_TG_BOT_NAME,'_blank', 'rel=noopener noreferrer')
-					}}/>,
-					'CONFIRMED': <>
+				{channel?.status === 'CONFIRMED' && <>
 						<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', channel?.id)}/>
 						<Button className={s.removeBtn} label={<IconTrash color='#F78F8F'/>} theme='secondary' onClick={() => setModal('remove-channel', channel?.id)}/>
-					</>}[channel?.status]}
+					</>}
 			</div>
 			<div className={s.stats}>
 				<div>

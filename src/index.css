@@ -82,3 +82,15 @@ code {
 .shu_1, .shu_2, .shu_3{
 	opacity: 0;
 }
+
+.react-tooltip-clickable-link { 
+	pointer-events: auto !important; 
+	background: #EDF1FF !important;
+	color: #436CFF !important;
+}
+
+.react-tooltip-clickable-link a{ 
+	text-decoration: none;
+	font-weight: bold;
+	color: #436CFF !important;
+}

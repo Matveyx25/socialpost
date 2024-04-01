@@ -12,30 +12,6 @@
 	background: #FFF;
 	border: 1px solid $gray-100;
 }
-.status{
-	display: flex;
-	background: none;
-	height: 3rem;
-	padding: 1rem 1rem;
-	justify-content: center;
-	align-items: center;
-	gap: 0.625rem;
-	flex-shrink: 0;
-	border-radius: 2.5rem;
-	transition: .4s;
-	font-family: 'SF Medium';
-	font-size: 1rem;
-	white-space: nowrap;
-	&.confirmed{
-		border: 1px solid #179F25;
-		color: #179F25;
-	}
-	&.notConfirmed{
-		border: 1px solid #F12828;
-		background-color: rgba(#F12828, .1);
-		color: #F12828;
-	}
-}
 .img{
 	min-width: 4.25rem;
 	width: 4.25rem;
@@ -64,6 +40,7 @@
 		margin: 0;
 		padding: 0;
 		margin-top: 0.25rem;
+		max-width: 560px;
 	}
 	h2{
 		color: $gray-900;
@@ -91,17 +68,22 @@
 		}
 	}
 }
-.statusTag{
+.status{
 	display: flex;
 	padding: 0.0625rem 0.375rem;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	gap: 0.625rem;
+	gap: .25rem;
 	border-radius: 0.25rem;
 	font-size: 0.875rem;
 	font-weight: 400;
 	line-height: 1.375rem;
+	button{
+		border: none;
+		cursor: pointer;
+		background: none;
+		padding: 0;
+		color: #F12828;
+	}
 	&.confirmed{
 		// border: 1px solid #179F25;
 		background-color: rgba(#179F25, .1);
@@ -111,6 +93,15 @@
 		// border: 1px solid #F12828;
 		background-color: rgba(#F12828, .1);
 		color: #F12828;
+		cursor: pointer;
+	}
+}
+:global(.tooltip){
+	padding: 0;
+	background: none;
+	a{
+		text-decoration: none;
+		color: #436CFF;
 	}
 }
 .line{
