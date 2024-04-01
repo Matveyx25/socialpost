@@ -1,9 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, ImageInput, ImageField, TextField, SelectInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, ImageInput, ImageField, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton } from "react-admin";
 
 export const ChannelEdit = (props) => (
-		<Edit {...props}>
+		<Edit {...props}  actions={
+			<TopToolbar>
+					<PrevNextButtons />
+					<ShowButton />
+			</TopToolbar>
+	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<TextField source="name" label="Имя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>

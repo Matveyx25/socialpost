@@ -1,6 +1,8 @@
 import { Chip } from "@mui/material";
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, ArrayField, ChipField, SimpleFormIterator } from "react-admin";
+import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, ArrayField, ChipField } from "react-admin";
+
+const RoleChip = ({ record }) => <Chip label={record} />;
 
 export const UserList = (props) => (
   <List {...props}>
@@ -12,9 +14,9 @@ export const UserList = (props) => (
       <EmailField source="emailData.email" label="Эл. почта"/>
       <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
 			<ArrayField source="roles" label="Роли">
-				<SimpleFormIterator inline>
-					<TextField source="." />
-				</SimpleFormIterator>
+					<SingleFieldList>
+						<RoleChip />
+					</SingleFieldList>
 			</ArrayField>
     </Datagrid>
   </List>
