@@ -52,7 +52,7 @@ export const ChannelCard = ({channel}) => {
 				</div> : null}
 				{channel?.costPerView ? <div>
 					<span>CPV</span>
-					<p>{channel?.costPerView}₽</p>
+					<p>{channel?.costPerView}</p>
 				</div> : null}
 				<div>
 					<span>Нативное размещение</span>
