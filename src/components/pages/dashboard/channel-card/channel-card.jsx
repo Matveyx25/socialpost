@@ -42,18 +42,18 @@ export const ChannelCard = ({channel}) => {
 					<span>Подписчики</span>
 					<p>{channel?.subscribersCount}</p>
 				</div>
-				{channel?.averagePostReach && <div>
+				{channel?.averagePostReach ? <div>
 					<span>Средний охват поста</span>
 					<p>{channel?.averagePostReach}</p>
-				</div>}
-				{channel?.engagementRate && <div>
+				</div> : null}
+				{channel?.engagementRate ? <div>
 					<span>ER</span>
 					<p>{channel?.engagementRate}%</p>
-				</div>}
-				{channel?.costPerView && <div>
+				</div> : null}
+				{channel?.costPerView ? <div>
 					<span>CPV</span>
 					<p>{channel?.costPerView}₽</p>
-				</div>}
+				</div> : null}
 				<div>
 					<span>Нативное размещение</span>
 					<p>{channel?.nativePostPrice || 0}₽</p>
