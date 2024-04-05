@@ -21,6 +21,7 @@ export const ChannelsList = (props) => (
       <TextField source="subscribersCount" label="Подписчики"/>
       <TextField source="engagementRate" label="ER"/>
       <TextField source="costPerView" label="CPV"/>
+      <TextField source="averagePostReach" label="Средний охват поста"/>
       <ImageField source="imageUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
     	<BooleanField source='status' valueLabelTrue="CONFIRMED"/>
 			<FunctionField label="Тэг" source="tag" render={renderTags}/>
