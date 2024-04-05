@@ -44,7 +44,7 @@ export const ChannelCard = ({channel}) => {
 				</div>
 				{channel?.averagePostReach && <div>
 					<span>Средний охват поста</span>
-					<p>{channel?.averagePostReach?.replace(/\s/g, '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}</p>
+					<p>{channel?.averagePostReach}</p>
 				</div>}
 				{channel?.engagementRate && <div>
 					<span>ER</span>
