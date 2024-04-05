@@ -1,6 +1,16 @@
 import * as React from "react";
 import { List, Datagrid, TextField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, FunctionField, ChipField } from "react-admin";
 
+const renderTags = (record) => {
+	const tags = record.tag.split(';');
+	if (tags.length === 1 && tags[0] === '') {
+			return null; // Не выводим, если строка пустая
+	}
+	return tags.map((tag, index) => (
+			<ChipField key={index} source={tag} />
+	));
+};
+
 export const ChannelsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
@@ -11,7 +21,7 @@ export const ChannelsList = (props) => (
       <TextField source="costPerView" label="CPV"/>
       <ImageField source="imageUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
     	<BooleanField source='status' valueLabelTrue="CONFIRMED"/>
-			<ChipField size="small" label="Тэг" source="tag"/>
+			<FunctionField label="Тэг" source="tag" render={renderTags}/>
     </Datagrid>
   </List>
 );
