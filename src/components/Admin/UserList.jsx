@@ -1,8 +1,18 @@
 import { Chip } from "@mui/material";
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, ArrayField, ChipField } from "react-admin";
+import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField } from "react-admin";
 
-const RoleChip = ({ record }) => <Chip label={record} />;
+const renderRoles = (record) => {
+	if (!record?.roles || record?.roles.length === 0) {
+		return null; 
+	}
+	
+	return record?.roles.map((role, index) => (
+			<ChipField key={index} source={role} />
+	));
+};
+
+const renderStatus = (record) => <BooleanField source={record.status === 'CONFIRMED'}/>
 
 export const UserList = (props) => (
   <List {...props}>
@@ -13,11 +23,8 @@ export const UserList = (props) => (
       <ImageField source="photoUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
       <EmailField source="emailData.email" label="Эл. почта"/>
       <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
-			<ArrayField source="roles" label="Роли">
-					<SingleFieldList>
-						<RoleChip />
-					</SingleFieldList>
-			</ArrayField>
+			<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
+			<FunctionField label="Тэг" source="tag" render={renderRoles}/>
     </Datagrid>
   </List>
 );

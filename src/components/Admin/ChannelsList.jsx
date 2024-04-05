@@ -1,11 +1,13 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, BooleanField, SingleFieldList, ReferenceArrayField, FunctionField, ChipField } from "react-admin";
+import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField } from "react-admin";
 
 const renderTags = (record) => {
-	const tags = record.tag.split(';');
-	if (tags.length === 1 && tags[0] === '') {
-			return null; // Не выводим, если строка пустая
+	if (!record?.tag || record?.tag === '') {
+		return null; 
 	}
+
+	const tags = record?.tag.split(';');
+	
 	return tags.map((tag, index) => (
 			<ChipField key={index} source={tag} />
 	));
