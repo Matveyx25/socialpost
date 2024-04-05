@@ -7,7 +7,7 @@ import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 
 export const AddChannelModal = ({isOpen, setOpen}) => {
-	const telegramChannelRegex = /^https:\/\/t\.me\/[a-zA-Z0-9_]+$/;
+	const telegramChannelRegex = /^https:\/\/t\.me\/.+$/;
 
 	const { mutate: createChannel } = useAddChannel()
 

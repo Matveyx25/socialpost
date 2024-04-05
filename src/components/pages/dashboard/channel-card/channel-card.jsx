@@ -25,9 +25,9 @@ export const ChannelCard = ({channel}) => {
 						{channel?.status === 'NOT_CONFIRMED' ?
 						 <div data-tooltip-id="confirm_channel" className={classNames(s.status, s.notConfirmed)}>Ожидает подтверждение <IconInfoCircle size={16}/></div> :
 						 <>
-							{channel?.tag && <span>
-								{channel?.tag}
-							</span>}
+							{channel?.tag && 
+								channel?.tag.split(';').map(el => 
+								<span>{el}</span>)}
 						</>}
 					</h2>
 					<p dangerouslySetInnerHTML={{__html: channel?.description}}></p>
