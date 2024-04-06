@@ -1,17 +1,17 @@
 import { Chip } from "@mui/material";
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField, SingleFieldList } from "react-admin";
+import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField } from "react-admin";
 
 const renderRoles = (record) => {
 	if (!record?.roles || record?.roles.length === 0) {
 		return null; 
 	}
+
+	const roles = record?.roles
 	
-	return <SingleFieldList>
-			{record?.roles.map((role, index) => (
-				<ChipField key={index} record={{role}} source="role"/>
-		))}
-	</SingleFieldList>
+	return roles?.map((role, index) => (
+				<ChipField key={index} record={{role}} source="role" sx={{ marginRight: index < roles?.length - 1 ? 1 : 0 }}/>
+		))
 };
 
 const renderStatus = (record) => <BooleanField source={record.status === 'CONFIRMED'}/>
