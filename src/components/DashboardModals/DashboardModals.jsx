@@ -9,7 +9,6 @@ import { EmailModal } from './ConnectEmailModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
-		console.log(modalParams);
 		if(!isOpen){
 			setModalParams(null)
 		}
