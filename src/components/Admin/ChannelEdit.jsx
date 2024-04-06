@@ -34,26 +34,29 @@ export const ChannelEdit = (props) => (
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
-									ER
+								ER
 							</Typography>
 							<TextField source="engagementRate"/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<Typography variant="h6" gutterBottom>
+								CPV
+							</Typography>
 							<TextInput source="costPerView" label="CPV" fullWidth/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="nativePostPrice" placeholder="nativePostPrice" fullWidth />
+								<TextInput source="nativePostPrice" placeholder="0" label="Нативное размещение" fullWidth />
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post1For24Price" placeholder="post1For24Price" fullWidth />
+								<TextInput source="post1For24Price" placeholder="0" label="1/24" fullWidth />
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post1For48Price" placeholder="post1For48Price" fullWidth />
+								<TextInput source="post1For48Price" placeholder="0" label="1/48" fullWidth />
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post2For48Price" placeholder="post2For48Price" fullWidth />
+								<TextInput source="post2For48Price" placeholder="0" label="2/48" fullWidth />
 						</Box>
 				</Box>
 				<hr />
@@ -61,7 +64,7 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectInput source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
+				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
 				<hr />
 		</SimpleForm>
   </Edit>
