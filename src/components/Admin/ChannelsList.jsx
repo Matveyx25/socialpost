@@ -9,7 +9,7 @@ const renderTags = (record) => {
 	const tags = record?.tag.split(';');
 	
 	return tags.map((tag, index) => (
-				<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < tags.length - 1 ? 1 : 0 }}/>
+				<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < tags.length - 1 ? 4 : 0, marginBottom: 4 }}/>
 		))
 };
 

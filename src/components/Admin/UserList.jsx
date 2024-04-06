@@ -10,7 +10,7 @@ const renderRoles = (record) => {
 	const roles = record?.roles
 	
 	return roles?.map((role, index) => (
-				<ChipField key={index} record={{role}} source="role" sx={{ marginRight: index < roles?.length - 1 ? 1 : 0 }}/>
+				<ChipField key={index} record={{role}} source="role" sx={{ marginRight: index < roles?.length - 1 ? 4 : 0, marginBottom: 4 }}/>
 		))
 };
 

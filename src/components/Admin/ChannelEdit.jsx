@@ -13,18 +13,30 @@ export const ChannelEdit = (props) => (
 				<TextField source="name" label="Имя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<TextField source="telegramUsername" title="username"/>
+							<Typography variant="h6" gutterBottom>
+								username
+							</Typography>
+							<TextField source="telegramUsername"/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<Typography variant="h6" gutterBottom>
+								telegramId
+							</Typography>
 	      			<TextField source="telegramId" title="id"/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<Typography variant="h6" gutterBottom>
+								Подписчики
+							</Typography>
 	      			<TextField source="subscribersCount" title="Подписчики"/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<TextField source="engagementRate" title="ER" fullWidth/>
+							<Typography variant="h6" gutterBottom>
+									ER
+							</Typography>
+							<TextField source="engagementRate"/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<TextInput source="costPerView" label="CPV" fullWidth/>
