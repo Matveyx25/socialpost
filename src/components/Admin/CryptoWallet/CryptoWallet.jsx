@@ -6,7 +6,7 @@ export const CryptoWallet = (props) => {
 	const { id } = useParams();
 
 	return (
-		<Edit {...props} id={''} resource={'users/' + id + '/ie'}>
+		<Edit {...props} id={''} resource={'users/' + id + '/crypto_wallet_details'}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<SelectInput source="type" choices={[
 					{ id: 'USDT', name: 'USDT' },

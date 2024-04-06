@@ -11,10 +11,10 @@ export const SelfEmployed = (props) => {
 			<SimpleForm sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="citizenshipCountry" isRequired fullWidth />
+									<TextInput source="citizenshipCountry" label="Гражданство" isRequired fullWidth />
 							</Box>
 							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="fullName" isRequired fullWidth />
+									<TextInput source="fullName" label="ФИО" isRequired fullWidth />
 							</Box>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
