@@ -16,19 +16,19 @@ export const ChannelEdit = (props) => (
 							<Typography variant="h6" gutterBottom>
 								username
 							</Typography>
-							<TextField source="telegramUsername"/>
+							<TextInput source="telegramUsername" label="telegramUsername" fullWidth disabled/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
 								telegramId
 							</Typography>
-	      			<TextField source="telegramId" title="id"/>
+							<TextInput source="telegramId" label="telegramId" fullWidth disabled/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
 								Подписчики
 							</Typography>
-	      			<TextField source="subscribersCount" title="Подписчики"/>
+							<TextInput source="subscribersCount" label="Подписчики" fullWidth disabled/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -36,7 +36,7 @@ export const ChannelEdit = (props) => (
 							<Typography variant="h6" gutterBottom>
 								ER
 							</Typography>
-							<TextField source="engagementRate"/>
+							<TextInput source="engagementRate" label="ER" fullWidth disabled/>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
