@@ -24,7 +24,7 @@ export const Dropdown = ({label, options}) => {
         <ul className={s.list}>
           {options?.map(el => 
 						<li className={s.item}>
-							<span>{el}</span>
+							{el}
 						</li>
 					)}
         </ul>

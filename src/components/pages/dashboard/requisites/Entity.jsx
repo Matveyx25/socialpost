@@ -39,9 +39,8 @@ export const Entity = () => {
 		accountNumber: Yup.string()
 			 .matches(/^\d+$/, 'Расчетный счет должен содержать только цифры')
 			.required('Введите рассчетный счет'),
-		b: Yup.string()
-			 .matches(/^\d+$/, 'В должен содержать только цифры')
-			.required('Введите B'),
+		bank: Yup.string()
+			.required('Введите банк'),
 		bic: Yup.string()
 			 .matches(/^\d+$/, 'БИК должен содержать только цифры')
 			.required('Введите БИК'),
@@ -113,7 +112,7 @@ export const Entity = () => {
 				{isFetchedBankDetails ? <Formik
 						initialValues={{
 							accountNumber: LegalEntityBankDetails?.checkingAccount,
-							b: LegalEntityBankDetails?.bank,
+							bank: LegalEntityBankDetails?.bank,
 							bic: LegalEntityBankDetails?.bik,
 							correspondentAccount: LegalEntityBankDetails?.correspondentAccount,
 						}}
@@ -121,7 +120,7 @@ export const Entity = () => {
 						onSubmit={(values) => {
 							updateLegalEntityBankDetails({
 								checkingAccount: values?.accountNumber,
-								bank: values?.b,
+								bank: values?.bank,
 								bik: values?.bic,
 								correspondentAccount: values?.correspondentAccount,
 							})
@@ -133,7 +132,7 @@ export const Entity = () => {
 									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'В'} name='b' placeholder='12345' className={s.input}/>
+									<InputField label={'Банк'} name='bank' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>

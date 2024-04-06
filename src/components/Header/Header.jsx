@@ -24,6 +24,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 
 	const dropdown = [
 		<NavLink to="/profile">Профиль</NavLink>,
+		profile?.roles?.includes('MAIN_ADMIN') ? <NavLink to="/admin">Админ-панель</NavLink> : null,
 		<span onClick={() => auth.logout()}>Выйти</span>,
 	]
 
@@ -88,8 +89,8 @@ export const Header = ({role, setRole, onModalOpen}) => {
 										arrowClosed={<IconChevronDown size={18}/>}
 										arrowOpen={<IconChevronUp size={18}/>}/> : 
 										<NavLink className={s.btn} onClick={() => onModalOpen()}>
-										Войти
-									</NavLink>
+											Войти
+										</NavLink>
 								}
 						</div>
 					</div>

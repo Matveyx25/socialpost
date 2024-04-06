@@ -9,8 +9,6 @@ import { useChannelById } from '../../hooks/useChannleById';
 import { Loader } from "../Shared/Loader/Loader";
 import { useEffect } from "react";
 
-// http://5.35.95.209/api/channels?_end=10&_order=ASC&_sort=id&_start=0
-
 const numberRegax = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/
 
 const validator = Yup.object().shape({
@@ -25,7 +23,7 @@ const validator = Yup.object().shape({
 	const {data: channel, isFetching, refetch} = useChannelById(modalParams)
 
 	useEffect(() => {
-		if(isOpen){
+		if(isOpen && modalParams){
 			refetch()
 		}
 	}, [isOpen])

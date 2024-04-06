@@ -50,9 +50,8 @@ export const SelfEmployed = () => {
 		accountNumber: Yup.string()
 			 .matches(/^\d+$/, 'Расчетный счет должен содержать только цифры')
 			 .required('Введите рассчетный счет'),
-		b: Yup.string()
-			 .matches(/^\d+$/, 'Поле B должно содержать только цифры')
-			 .required('Введите B'),
+		bank: Yup.string()
+			 .required('Введите банк'),
 		bic: Yup.string()
 			 .matches(/^\d+$/, 'БИК должен содержать только цифры')
 			 .required('Введите БИК'),
@@ -147,7 +146,7 @@ export const SelfEmployed = () => {
 				{isFetchedBankDetails ? <Formik
 						initialValues={{
 							accountNumber: selfEmployedBankDetails?.checkingAccount,
-							b: selfEmployedBankDetails?.bank,
+							bank: selfEmployedBankDetails?.bank,
 							bic: selfEmployedBankDetails?.bik,
 							correspondentAccount: selfEmployedBankDetails?.correspondentAccount,
 						}}
@@ -155,7 +154,7 @@ export const SelfEmployed = () => {
 						onSubmit={(values) => {
 							updateSelfEmployedBankDetails({
 								checkingAccount: values?.accountNumber,
-								bank: values?.b,
+								bank: values?.bank,
 								bik: values?.bic,
 								correspondentAccount: values?.correspondentAccount,
 							})
@@ -167,7 +166,7 @@ export const SelfEmployed = () => {
 									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
-									<InputField label={'В'} name='b' placeholder='12345' className={s.input}/>
+									<InputField label={'Банк'} name='bank' placeholder='12345' className={s.input}/>
 								</div>
 								<div className={s.formRow}>
 									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>

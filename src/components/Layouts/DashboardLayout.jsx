@@ -20,18 +20,19 @@ const routesTitle = {
 	'/dashboard/support/': 'Поддержка',
 }
 
-const dropdown = [
-	<NavLink to="/profile">Профиль</NavLink>,
-	<span onClick={() => auth.logout()}>Выйти</span>,
-]
-
 export const DashboardLayout = ({}) => {
 	const { pathname } = useLocation()
 	const [modal, setOpen] = useState('')
 	const [modalParams, setModalParams] = useState(null)
-
+	
 	const {data: profile} = useProfile()
-
+	
+	const dropdown = [
+		<NavLink to="/profile">Профиль</NavLink>,
+		profile?.roles?.includes('MAIN_ADMIN') ? <NavLink to="/admin">Админ-панель</NavLink> : null,
+		<span onClick={() => auth.logout()}>Выйти</span>,
+	]
+	
 	const setModal = (name, params) => {
 		setModalParams(params)
 		setOpen(name)
