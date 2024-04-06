@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField } from "react-admin";
+import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField, SingleFieldList } from "react-admin";
 
 const renderTags = (record) => {
 	if (!record?.tag || record?.tag === '') {
@@ -8,9 +8,11 @@ const renderTags = (record) => {
 
 	const tags = record?.tag.split(';');
 	
-	return tags.map((tag, index) => (
-			<ChipField key={index} record={{tag}} source="tag"/>
-	));
+	return <SingleFieldList>
+		{tags.map((tag, index) => (
+				<ChipField key={index} record={{tag}} source="tag"/>
+		))}
+	</SingleFieldList>
 };
 
 export const ChannelsList = (props) => (
