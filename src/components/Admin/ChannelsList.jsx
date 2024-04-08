@@ -14,6 +14,15 @@ const renderTags = (record) => {
 		))
 };
 
+const renderPhoto = (record) => {
+	if (record.photoUrl) {
+			return <img src={record.imageUrl} alt="User Photo" style={{ width: 50, height: 50, objectFit: 'cover' }} />;
+	} else {
+			return <div style={{ width: 50, height: 50 }} />;
+	}
+};
+
+
 export const ChannelsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
@@ -23,7 +32,7 @@ export const ChannelsList = (props) => (
       <TextField source="engagementRate" label="ER"/>
       <TextField source="costPerView" label="CPV"/>
       <TextField source="averagePostReach" label="Средний охват поста"/>
-      <ImageField source="imageUrl" sx={{ '& img': { width: 50, height: 50, objectFit: 'contain' } }} label="Фото"/>
+			<FunctionField label="Фото" source="imageUrl" render={renderPhoto}/>
     	<BooleanField source='status' valueLabelTrue="CONFIRMED"/>
 			<FunctionField label="Тэг" source="tag" render={renderTags}/>
 			<UrlField label="Ссылка" source="telegramUrl"/>

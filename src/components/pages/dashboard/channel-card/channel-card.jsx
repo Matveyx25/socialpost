@@ -3,14 +3,11 @@ import s from './channel-card.module.scss'
 import { IconEdit, IconTrash, IconInfoCircle } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
 import {  useOutletContext } from 'react-router-dom'
-import { useConfirmChannel } from '../../../../hooks/useConfirmChannel';
 import classNames from 'classnames'
 import { Tooltip } from 'react-tooltip'
 
 export const ChannelCard = ({channel}) => {
 	const [setModal] = useOutletContext()
-
-	const {mutate: confirmChannel} = useConfirmChannel()
 
 	return (
 		<div className={s.wrapper}>

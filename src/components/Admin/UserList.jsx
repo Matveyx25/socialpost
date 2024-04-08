@@ -1,4 +1,5 @@
 import { Chip } from "@mui/material";
+import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField } from "react-admin";
 
@@ -14,7 +15,15 @@ const renderRoles = (record) => {
 		))
 };
 
-const renderStatus = (record) => <BooleanField source={record.status === 'CONFIRMED'}/>
+const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
+
+const renderPhoto = (record) => {
+	if (record.photoUrl) {
+			return <img src={record.photoUrl} alt="User Photo" style={{ width: 50, height: 50, objectFit: 'cover' }} />;
+	} else {
+			return <div style={{ width: 50, height: 50 }} />;
+	}
+};
 
 export const UserList = (props) => (
   <List {...props}>
@@ -22,7 +31,7 @@ export const UserList = (props) => (
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>
       <TextField source="lastName" label="Фамилия"/>
-      <ImageField source="photoUrl" sx={{ '& img': { width: 50, height: 50, objectFit: 'contain' } }} label="Фото"/>
+			<FunctionField label="Фото" source="photoUrl" render={renderPhoto}/>
       <EmailField source="emailData.email" label="Эл. почта"/>
       <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
 			<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
