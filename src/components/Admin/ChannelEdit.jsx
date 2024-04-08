@@ -42,7 +42,7 @@ export const ChannelEdit = (props) => (
 							<Typography variant="h6" gutterBottom>
 								CPV
 							</Typography>
-							<TextInput source="costPerView" label="CPV" fullWidth/>
+							<TextInput source="costPerView" label="CPV" fullWidth disabled/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>

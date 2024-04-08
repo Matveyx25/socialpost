@@ -47,7 +47,7 @@ export const DashboardLayout = ({}) => {
 					<div className={s.header}>
 						{routesTitle[pathname] || routesTitle[pathname + '/']}
 						<Dropdown 
-							options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user.png'}/>}
+							options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user-without-image.svg'}/>}
 							arrowClosed={<IconChevronDown size={18}/>}
 							arrowOpen={<IconChevronUp size={18}/>}/>
 					</div>

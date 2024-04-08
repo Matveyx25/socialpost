@@ -17,7 +17,7 @@ export const ChannelCard = ({channel}) => {
 			<Tooltip id='confirm_channel' className="react-tooltip-clickable-link" events={['click']} html={`<div>Для подтверждения своего канала добавьте <a href="${'https://t.me/' + process.env.REACT_APP_TG_BOT_NAME}" target="_blank">@${process.env.REACT_APP_TG_BOT_NAME}</a> </br> как администратора канала для того, чтобы мы могли убедиться, что <br/> именно вы являетесь владельцем. Или напишите в поддержку сервиса.</div>`}/>
 			<div className={s.flex}>
 				<div className={s.img}>
-					<img src={channel?.imageUrl}/>
+					<img src={channel?.imageUrl ? channel?.imageUrl : '/images/channel-without-image.svg'}/>
 				</div>
 				<div className={s.content}>
 					<h2>
@@ -40,7 +40,7 @@ export const ChannelCard = ({channel}) => {
 			<div className={s.stats}>
 				<div>
 					<span>Подписчики</span>
-					<p>{channel?.subscribersCount}</p>
+					<p>{channel?.subscribersCount || 0}</p>
 				</div>
 				{channel?.averagePostReach ? <div>
 					<span>Средний охват поста</span>

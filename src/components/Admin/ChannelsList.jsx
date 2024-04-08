@@ -1,5 +1,6 @@
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField } from "react-admin";
+import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField, UrlField } from "react-admin";
+import { NavLink } from "react-router-dom";
 
 const renderTags = (record) => {
 	if (!record?.tag || record?.tag === '') {
@@ -22,9 +23,10 @@ export const ChannelsList = (props) => (
       <TextField source="engagementRate" label="ER"/>
       <TextField source="costPerView" label="CPV"/>
       <TextField source="averagePostReach" label="Средний охват поста"/>
-      <ImageField source="imageUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
+      <ImageField source="imageUrl" sx={{ '& img': { width: 50, height: 50, objectFit: 'contain' } }} label="Фото"/>
     	<BooleanField source='status' valueLabelTrue="CONFIRMED"/>
 			<FunctionField label="Тэг" source="tag" render={renderTags}/>
+			<UrlField label="Ссылка" source="telegramUrl"/>
     </Datagrid>
   </List>
 );

@@ -41,7 +41,7 @@ export const MainDashboard = () => {
 					<div className={s.line}></div>
 					<div className={s.channelsWrapper}>
 						{channels?.map(channel => (
-							<ChannelItem title={channel?.name} img={channel?.imageUrl} link={'/'}  onClick={() => setModal('remove-channel', channel?.id)}/>
+							<ChannelItem title={channel?.name} img={channel?.imageUrl} link={'/'} status={channel?.status}/>
 						))}
 					</div>
 				</DashboardCard>

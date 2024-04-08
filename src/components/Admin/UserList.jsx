@@ -22,7 +22,7 @@ export const UserList = (props) => (
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>
       <TextField source="lastName" label="Фамилия"/>
-      <ImageField source="photoUrl" sx={{ '& img': { maxWidth: 50, maxHeight: 50, objectFit: 'contain' } }} label="Фото"/>
+      <ImageField source="photoUrl" sx={{ '& img': { width: 50, height: 50, objectFit: 'contain' } }} label="Фото"/>
       <EmailField source="emailData.email" label="Эл. почта"/>
       <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
 			<FunctionField label="Подтвержден" source="status" render={renderStatus}/>

@@ -1,18 +1,19 @@
 import React from 'react'
 import s from './dashboard.module.scss'
-import { Button } from '../../Shared/Button/Button';
-import { IconX } from '@tabler/icons-react';
+import classNames from 'classnames'
 
-export const ChannelItem = ({title, img, link, onClick}) => {
+export const ChannelItem = ({title, img, link, status}) => {
 	return (
 		<div className={s.channelItem}>
 			<div className={s.img}>
-				<img src={img} alt="" />
+				<img src={img ? img : '/images/channel-without-image.svg'} alt="" />
 			</div>
 			<a href={link}>
 				{title}
 			</a>
-			<Button size='small' label={'Убрать'} leftIcon={<IconX size={18}/>} theme='secondary' onClick={onClick}/>
+			<div className={classNames(s.status, status === 'CONFIRMED' ? s.confirmed : s.notConfirmed)}>
+				{status === 'CONFIRMED' ? 'Подтвержден' : 'Ожидает подтверждение'}
+			</div>
 		</div>
 	)
 }
