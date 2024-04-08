@@ -9,14 +9,13 @@ import { useChannelById } from '../../hooks/useChannleById';
 import { Loader } from "../Shared/Loader/Loader";
 import { useEffect } from "react";
 
-const numberRegax = /^(0*[1-9][0-9]*(\.[0-9]*)?|0*\.[0-9]*[1-9][0-9]*)$/
 
 const validator = Yup.object().shape({
-	nativePostPrice: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
-	post1For48Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
-	post1For24Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
-	post2For48Price: Yup.string().matches(numberRegax, "Можно вводить только цифры").required("Заполните поле"),
- });
+	nativePostPrice: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
+	post1For48Price: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
+	post1For24Price: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
+	post2For48Price: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
+ })
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
@@ -48,7 +47,7 @@ const validator = Yup.object().shape({
 					 setOpen()
 				 }}
 			 >
-				 {({ dirty, isValid }) => (
+				 {({ dirty, isValid, values, touched  }) => (
 					 <Form>
 						 <div className={s.form}>
 							 <div className={s.input}>
@@ -83,6 +82,9 @@ const validator = Yup.object().shape({
 									name="post2For48Price"
 								 />
 							 </div>
+							 {(touched?.nativePostPrice || touched?.post1For48Price || touched?.post1For24Price || touched?.post2For48Price)  && !(values?.nativePostPrice || values?.post1For48Price || values?.post1For24Price || values?.post2For48Price) && (
+                  <div className={s.errorMessage}>Заполните хотя бы одно поле</div>
+                )}
 							 <div className={s.rowBtns}>
 								 <Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
 								 <Button label="Применить" className={s.btnHalf} disabled={!dirty || !isValid} type="submit"/>

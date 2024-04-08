@@ -54,22 +54,22 @@ export const ChannelCard = ({channel}) => {
 					<span>CPV</span>
 					<p>{channel?.costPerView}</p>
 				</div> : null}
-				<div>
+				{channel?.nativePostPrice && <div>
 					<span>Нативное размещение</span>
-					<p>{channel?.nativePostPrice || 0}₽</p>
-				</div>
-				<div>
+					<p>{channel?.nativePostPrice}₽</p>
+				</div>}
+				{channel?.post1For24Price && <div>
 					<span>Размещение 1/24</span>
-					<p>{channel?.post1For24Price || 0}₽</p>
-				</div>
-				<div>
+					<p>{channel?.post1For24Price}₽</p>
+				</div>}
+				{channel?.post1For48Price && <div>
 					<span>Размещение 1/48</span>
-					<p>{channel?.post1For48Price || 0}₽</p>
-				</div>
-				<div>
+					<p>{channel?.post1For48Price}₽</p>
+				</div>}
+				{channel?.post2For48Price && <div>
 					<span>Размещение 2/48</span>
-					<p>{channel?.post2For48Price || 0}₽</p>
-				</div>
+					<p>{channel?.post2For48Price}₽</p>
+				</div>}
 			</div>
 		</div>
 	)
