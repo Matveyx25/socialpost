@@ -13,6 +13,29 @@ import { LegalEntityBankDetails } from "./LegalEntity/LegalEntityBankDetails";
 import { IE } from './IE/IE';
 import { IEBankDetails } from "./IE/IEBankDetails";
 import { CryptoWallet } from "./CryptoWallet/CryptoWallet";
+import { Breadcrumb } from 'ra-ui-materialui';
+
+const CustomBreadcrumbs = ({ location }) => {
+	const pathnames = location.pathname.split('/').filter(x => x);
+
+	return (
+			<Breadcrumb>
+					{pathnames.map((value, index) => {
+							const last = index === pathnames.length - 1;
+							const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+
+							return last ? (
+									<span key={to}>{value}</span>
+							) : (
+									<a href={to} key={to}>
+											{value}
+									</a>
+							);
+					})}
+			</Breadcrumb>
+	);
+};
+
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -36,7 +59,7 @@ const dataProvider = {
 };
 
 const AdminPanel = () => (
-  <Admin dataProvider={dataProvider} basename="/admin">
+  <Admin dataProvider={dataProvider} basename="/admin" appBar={CustomBreadcrumbs}>
 		<Resource name="users" list={UserList} edit={UserEdit}>
 			<Route path=":id/self_employed" element={<SelfEmployed />}/>
 			<Route path=":id/self_employed/bank_details" element={<SelfEmployedBankDetails />}/>

@@ -15,8 +15,6 @@ const renderRoles = (record) => {
 		))
 };
 
-const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
-
 const renderPhoto = (record) => {
 	if (record.photoUrl) {
 			return <img src={record.photoUrl} alt="User Photo" style={{ width: 50, height: 50, objectFit: 'cover' }} />;
@@ -24,6 +22,8 @@ const renderPhoto = (record) => {
 			return <div style={{ width: 50, height: 50 }} />;
 	}
 };
+
+const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> : <IconX/>
 
 export const UserList = (props) => (
   <List {...props}>
@@ -33,8 +33,7 @@ export const UserList = (props) => (
       <TextField source="lastName" label="Фамилия"/>
 			<FunctionField label="Фото" source="photoUrl" render={renderPhoto}/>
       <EmailField source="emailData.email" label="Эл. почта"/>
-      <BooleanField source="telegramData" valueLabelFalse="null" valueLabelTrue="!!telegramData" label="Телеграм"/>
-			<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
+			<FunctionField label="Телеграм" source="telegramData" render={renderTelegramStatus}/>
 			<FunctionField label="Тэг" source="tag" render={renderRoles}/>
     </Datagrid>
   </List>
