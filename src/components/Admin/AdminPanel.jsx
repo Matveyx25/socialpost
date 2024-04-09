@@ -5,7 +5,7 @@ import { UserList } from "./UserList";
 import { UserEdit } from "./UserEdit";
 import { ChannelsList } from './ChannelsList';
 import { ChannelEdit } from "./ChannelEdit";
-import { Route } from "react-router-dom";
+import { NavLink, Route } from "react-router-dom";
 import { SelfEmployed } from './SelfEmployed/SelfEmployed';
 import { SelfEmployedBankDetails } from './SelfEmployed/SelfEmployedBankDetails';
 import { LegalEntity } from './LegalEntity/LegalEntity';
@@ -13,26 +13,31 @@ import { LegalEntityBankDetails } from "./LegalEntity/LegalEntityBankDetails";
 import { IE } from './IE/IE';
 import { IEBankDetails } from "./IE/IEBankDetails";
 import { CryptoWallet } from "./CryptoWallet/CryptoWallet";
-import { Breadcrumb } from 'ra-ui-materialui';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
 
 	return (
-			<Breadcrumb>
+			<Breadcrumbs>
 					{pathnames.map((value, index) => {
 							const last = index === pathnames.length - 1;
 							const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 
 							return last ? (
-									<span key={to}>{value}</span>
+									<Typography key={to}>{value}</Typography>
 							) : (
-									<a href={to} key={to}>
+									<Link underline="hover"
+												color="inherit"
+												key={to}
+												href={to}>
 											{value}
-									</a>
+									</Link>
 							);
 					})}
-			</Breadcrumb>
+			</Breadcrumbs>
 	);
 };
 
