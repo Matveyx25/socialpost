@@ -1,6 +1,6 @@
-import { Box, Button } from '@mui/material'
+import { Box } from '@mui/material'
 import React from 'react'
-import { DateInput, Edit, Link, SimpleForm, TextInput } from 'react-admin'
+import { DateInput, Edit, SimpleForm, TextInput } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const SelfEmployed = (props) => {
@@ -45,10 +45,6 @@ export const SelfEmployed = (props) => {
 									<TextInput source="inn" label="ИНН" isRequired fullWidth />
 							</Box>
 					</Box>
-					<Button
-							component={Link}
-							to={`./bank_details`}
-							>Банковские реквизиты</Button>
 			</SimpleForm>
 		</Edit>
 	)

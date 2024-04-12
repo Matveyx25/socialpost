@@ -1,20 +1,23 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, ShowButton, TabbedForm } from "react-admin";
+import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, ShowButton, TabbedForm, SimpleForm } from "react-admin";
 import { SelfEmployed } from "./SelfEmployed/SelfEmployed";
 import { LegalEntity } from "./LegalEntity/LegalEntity";
 import { IE } from "./IE/IE";
+import { SelfEmployedBankDetails } from "./SelfEmployed/SelfEmployedBankDetails";
+import { LegalEntityBankDetails } from "./LegalEntity/LegalEntityBankDetails";
+import { IEBankDetails } from "./IE/IEBankDetails";
 
 export const UserEdit = (props) => {
 	return (
 		<Edit {...props}  actions={
 			<TopToolbar>
 					<PrevNextButtons />
-					<ShowButton />
 			</TopToolbar>
 	}>
 		<TabbedForm>
 			<TabbedForm.Tab label="Общее">
+			<SimpleForm sx={{ maxWidth: 500 }}>
 				<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
@@ -36,11 +39,33 @@ export const UserEdit = (props) => {
 									{ id: 'ADVERTISER', name: 'Рекламодатель' }]} />
 						</Box>
 				</Box>
+			</SimpleForm>
 			</TabbedForm.Tab>
 			<TabbedForm.Tab label="Реквизиты">
-				<SelfEmployed />
-				<LegalEntity />
-				<IE />
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<SelfEmployed />
+						</Box>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<SelfEmployedBankDetails />
+						</Box>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<LegalEntity />
+						</Box>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<LegalEntityBankDetails />
+						</Box>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<IE />
+						</Box>
+						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<IEBankDetails />
+						</Box>
+				</Box>
 			</TabbedForm.Tab>
 		</TabbedForm>
 		</Edit>

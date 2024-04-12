@@ -5,14 +5,6 @@ import { UserList } from "./UserList";
 import { UserEdit } from "./UserEdit";
 import { ChannelsList } from './ChannelsList';
 import { ChannelEdit } from "./ChannelEdit";
-import { NavLink, Route } from "react-router-dom";
-import { SelfEmployed } from './SelfEmployed/SelfEmployed';
-import { SelfEmployedBankDetails } from './SelfEmployed/SelfEmployedBankDetails';
-import { LegalEntity } from './LegalEntity/LegalEntity';
-import { LegalEntityBankDetails } from "./LegalEntity/LegalEntityBankDetails";
-import { IE } from './IE/IE';
-import { IEBankDetails } from "./IE/IEBankDetails";
-import { CryptoWallet } from "./CryptoWallet/CryptoWallet";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
@@ -65,15 +57,7 @@ const dataProvider = {
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" appBar={CustomBreadcrumbs}>
-		<Resource name="users" list={UserList} edit={UserEdit}>
-			<Route path=":id/self_employed" element={<SelfEmployed />}/>
-			<Route path=":id/self_employed/bank_details" element={<SelfEmployedBankDetails />}/>
-			<Route path=":id/legal_entity" element={<LegalEntity />}/>
-			<Route path=":id/legal_entity/bank_details" element={<LegalEntityBankDetails />}/>
-			<Route path=":id/ie" element={<IE />}/>
-			<Route path=":id/ie/bank_details" element={<IEBankDetails />}/>
-			<Route path=":id/crypto_wallet_details" element={<CryptoWallet/>}/>
-		</Resource>
+		<Resource name="users" list={UserList} edit={UserEdit}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
   </Admin>
 );

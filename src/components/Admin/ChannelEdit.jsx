@@ -6,7 +6,6 @@ export const ChannelEdit = (props) => (
 		<Edit {...props}  actions={
 			<TopToolbar>
 					<PrevNextButtons />
-					<ShowButton />
 			</TopToolbar>
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>

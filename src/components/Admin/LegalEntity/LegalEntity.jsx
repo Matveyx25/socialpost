@@ -1,6 +1,5 @@
-import { Button } from '@mui/material';
 import React from 'react'
-import { Edit, Link, SelectInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SelectInput, SimpleForm, TextInput } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const LegalEntity = (props) => {
@@ -17,10 +16,6 @@ export const LegalEntity = (props) => {
 				<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
 				<TextInput source="legalAddress" label='Юридический адрес' isRequired fullWidth />
 				<TextInput source="correspondenceAddress" label='Адрес для корреспонденции' isRequired fullWidth />
-				<Button
-							component={Link}
-							to={`./bank_details`}
-							>Банковские реквизиты</Button>
 			</SimpleForm>
 		</Edit>
 	)
