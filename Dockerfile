@@ -1,4 +1,4 @@
-FROM node:14 AS builder
+FROM node:14 AS install
 
 ARG API_URL
 ENV REACT_APP_API_URL=$API_URL
@@ -8,10 +8,14 @@ COPY package*.json ./
 
 RUN npm install
 
+
+FROM install AS builder
+
 COPY ./public ./public
 COPY ./src ./src
 COPY ./.env ./.env
 RUN npm run build
+
 
 FROM node:14 AS runner
 
@@ -21,3 +25,9 @@ COPY --from=builder /app/build /app/build
 RUN mv /app/build/index.html /app/build/404.html
 
 CMD ["http-server", "/app/build", "-p 80"]
+
+
+FROM install AS dev
+
+CMD ["PORT=80", "node", "start"]
+
