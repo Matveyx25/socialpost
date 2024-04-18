@@ -31,5 +31,5 @@ FROM install AS dev
 
 ENV PORT=80
 
-CMD ["node", "start"]
+CMD ["npm", "start"]
 
