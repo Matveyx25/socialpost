@@ -29,5 +29,7 @@ CMD ["http-server", "/app/build", "-p 80"]
 
 FROM install AS dev
 
-CMD ["PORT=80", "node", "start"]
+ENV PORT=80
+
+CMD ["node", "start"]
 
