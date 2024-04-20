@@ -8,7 +8,8 @@ export const SelfEmployed = (props) => {
 
 	return (
 		<Edit {...props} id={''} resource={'users/' + id + '/self_employed'}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+				<Box sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 									<TextInput source="citizenshipCountry" label="Гражданство" isRequired fullWidth />
@@ -45,6 +46,13 @@ export const SelfEmployed = (props) => {
 									<TextInput source="inn" label="ИНН" isRequired fullWidth />
 							</Box>
 					</Box>
+				</Box>
+				<Box sx={{ maxWidth: 500 }}>
+					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
+					<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
+					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
+					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
+				</Box>
 			</SimpleForm>
 		</Edit>
 	)

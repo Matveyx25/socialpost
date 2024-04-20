@@ -25,8 +25,8 @@ export const useUpdateSelfEmployed = () => {
 export const useSelfEmployedBankDetails = () => {
 	return useQuery({
 		queryKey: ['self-employed-bank-details'],
-		queryFn: publisher.getSelfEmployedBankDetails,
-		select: data => data.data
+		queryFn: publisher.getSelfEmployed,
+		select: data => data.data.bankDetails
 	})
 }
 
@@ -34,7 +34,7 @@ export const useUpdateSelfEmployedBankDetails = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: publisher.updateSelfEmployedBankDetails,
+		mutationFn: (data) => publisher.updateSelfEmployed({bankDetails: data}),
 		onSuccess: () => {
       queryClient.invalidateQueries(['self-employed-bank-details'])
 			toast.success('Данные обновлены')
@@ -65,8 +65,8 @@ export const useUpdateLegalEntity = () => {
 export const useLegalEntityBankDetails = () => {
 	return useQuery({
 		queryKey: ['legal-entity-bank-details'],
-		queryFn: publisher.getLegalEntityBankDetails,
-		select: data => data.data
+		queryFn: publisher.getLegalEntity,
+		select: data => data.data.bankDetails
 	})
 }
 
@@ -74,7 +74,7 @@ export const useUpdateLegalEntityBankDetails = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: publisher.updateLegalEntityBankDetails,
+		mutationFn: (data) => publisher.updateLegalEntity({bankDetails: data}),
 		onSuccess: () => {
       queryClient.invalidateQueries(['legal-entity-bank-details'])
 			toast.success('Данные обновлены')
@@ -105,8 +105,8 @@ export const useUpdateIE = () => {
 export const useIEBankDetails = () => {
 	return useQuery({
 		queryKey: ['ie-bank-details'],
-		queryFn: publisher.getIEBankDetails,
-		select: data => data.data
+		queryFn: publisher.getIE,
+		select: data => data.data.bankDetails
 	})
 }
 
@@ -114,7 +114,7 @@ export const useUpdateIEBankDetails = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: publisher.updateIEBankDetails,
+		mutationFn: (data) => publisher.updateIE({bankDetails: data}),
 		onSuccess: () => {
       queryClient.invalidateQueries(['ie-bank-details'])
 			toast.success('Данные обновлены')

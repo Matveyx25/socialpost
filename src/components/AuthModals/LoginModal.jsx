@@ -11,11 +11,7 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 export const LoginModal = ({ isOpen, setOpen }) => {
-  const nameRegExp = /^([\S]+)?$/;
-
   const [error, set_error] = useState(null);
-
-  const navigate = useNavigate();
 
   const validator = Yup.object().shape({
 		password: Yup.string()
@@ -41,9 +37,9 @@ export const LoginModal = ({ isOpen, setOpen }) => {
         password: values.password,
       })
       .catch((err) => {
-        if (err.response.status == 401) {
+        if (err?.response?.status == 401) {
           set_error("Пароль или почта введены неверно");
-        } else if (err.response.status == 400) {
+        } else if (err?.response?.status == 400) {
           set_error("Данные невалидны");
         }
       });
