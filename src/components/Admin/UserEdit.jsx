@@ -7,14 +7,14 @@ import { IE } from "./IE/IE";
 
 export const UserEdit = (props) => {
 	return (
-		<Edit {...props}  actions={
+		<Edit actions={
 			<TopToolbar>
 					<PrevNextButtons />
 			</TopToolbar>
 		}>
 			<TabbedForm>
 				<TabbedForm.Tab label={'Общее'}>
-					<SimpleForm sx={{ maxWidth: 500 }}>
+					<SimpleForm {...props} sx={{ maxWidth: 500 }}>
 						<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
 						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
