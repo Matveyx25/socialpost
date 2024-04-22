@@ -123,7 +123,7 @@ export const profile = {
 		return instance.get("/balance_operations/my", params)
 	},
 	withdrawalBalance(data) {
-		return instance.post("/balance_operations/withdrawal")
+		return instance.post("/balance_operations/withdrawal", data)
 	}
 }
 

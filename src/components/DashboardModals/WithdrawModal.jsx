@@ -28,7 +28,7 @@ export const WithdrawModal = ({isOpen, setOpen}) => {
 					withdraw({
 						"type": "SELF_EMPLOYED",
 						"amount": values?.price
-					}); 
+					});
 					setOpen();
 				}}
 			>

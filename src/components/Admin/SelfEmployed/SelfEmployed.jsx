@@ -1,19 +1,16 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { DateInput, Edit, SimpleForm, TextInput, useRecordContext } from 'react-admin'
+import { DateInput, SimpleForm, TextInput, useEditController } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const SelfEmployed = (props) => {
 	const { id } = useParams();
-	const record = useRecordContext()
-
-	if(!record){
-		return null
-	}
+	
+	const { record, save, isLoading } = useEditController({ resource: 'users/' + id + '/self_employed', id: '' });
+  if (isLoading) return null;
 
 	return (
-		<Edit {...props} id={''} resource={'users/' + id + '/self_employed'}>
-			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 				<Box sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
@@ -58,7 +55,6 @@ export const SelfEmployed = (props) => {
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
 					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
 				</Box>
-			</Box>
-		</Edit>
+			</SimpleForm>
 	)
 }

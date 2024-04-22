@@ -15,7 +15,7 @@ export const OperationEdit = (props) => (
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
-								Id пользователя
+								Id
 							</Typography>
 							<TextInput source="userId" label="Id пользователя" fullWidth disabled/>
 						</Box>

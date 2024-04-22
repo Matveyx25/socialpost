@@ -31,77 +31,99 @@ export const Payments = () => {
 	const [setModal] = useOutletContext()
 
 	return (
-		<div className={s.grid}>
-			<DashboardCard className={s.balance}>
-				<div>
-					<p>{profile?.balance} ₽</p>
-					<span className={s.label}>Баланс кабинета</span>
-				</div>
-				<Button label={'Вывести'} className={s.btn} onClick={() => setModal('withdraw-modal')}/>
-			</DashboardCard>
-			<div className={s.tableCard}>
-				<div className={s.filters}>
-					<RangeCalendar/>
-					Найдено выплат: {operations?.length}
-					<Button label='Сбросить' leftIcon={<IconRefresh/>} theme='secondary' className={s.refreshBtn}/>
-				</div>
-				<div className={s.tableWrapper}>
-					<table className={s.table}>
-						<thead>
-								<tr>
-									<th>Тип</th>
-									<th>Статус</th>
-									<th>
-										<div className={s.flex}>
-										Дата
-											<IconSortDescending size={18}/>
-										</div>
-									</th>
-									<th>
-										<div className={s.flex}>
-										Сумма
-											<IconSortDescending size={18}/>
-										</div>
-									</th>
-								</tr>
-						</thead>
-						<tbody>
-								{isOperationsFetched ? operations?.map(el => (
-									<tr key={el.id}>
-										<td>
-										{/* INCOME, WITHDRAWAL_SELF_EMPLOYED, WITHDRAWAL_IE, WITHDRAWAL_LEGAL_ENTITY, WITHDRAWAL_CRYPTO_WALLET */}
-											<div className={s.center}>
-												{el.type}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{/* PENDING, EXECUTED, DECLINED */}
-												{el.status}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el.dataTime}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el.amount}₽
-											</div>
-										</td>
-									</tr>
-								)) : <Loader />}
-						</tbody>
-					</table>
-				</div>
-				<Pagination 
-				currentPage={page}
-        totalCount={10}
-        pageSize={size}
-				setSize={setSize}
-        onPageChange={page => setPage(page)}/>
-			</div>
-		</div>
-	)
+    <div className={s.grid}>
+      <DashboardCard className={s.balance}>
+        <div>
+          <p>{profile?.balance} ₽</p>
+          <span className={s.label}>Баланс кабинета</span>
+        </div>
+        <Button
+          label={"Вывести"}
+          className={s.btn}
+          onClick={() => setModal("withdraw-modal")}
+        />
+      </DashboardCard>
+      <div className={s.tableCard}>
+        <div className={s.filters}>
+          <RangeCalendar />
+          Найдено выплат: {operations?.length}
+          <Button
+            label="Сбросить"
+            leftIcon={<IconRefresh />}
+            theme="secondary"
+            className={s.refreshBtn}
+          />
+        </div>
+        <div className={s.tableWrapper}>
+          <table className={s.table}>
+            <thead>
+              <tr>
+                <th>Тип</th>
+                <th>Статус</th>
+                <th>
+                  <div className={s.flex}>
+                    Дата
+                    <IconSortDescending size={18} />
+                  </div>
+                </th>
+                <th>
+                  <div className={s.flex}>
+                    Сумма
+                    <IconSortDescending size={18} />
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {isOperationsFetched ? (
+                operations?.map((el) => (
+                  <tr key={el.id}>
+                    <td>
+                      <div className={s.center}>
+                        {
+                          {
+                            INCOME: "Поступление",
+                            WITHDRAWAL_SELF_EMPLOYED: "Вывод у самозанятого",
+                            WITHDRAWAL_IE: "Вывод у ИП",
+                            WITHDRAWAL_LEGAL_ENTITY: "Вывод у ЮЛ",
+                            WITHDRAWAL_CRYPTO_WALLET: "Вывод с криптокошелька",
+                          }[el.type]
+                        }
+                      </div>
+                    </td>
+                    <td>
+                      <div className={s.center}>
+												{
+                          {
+                            PENDING: "В ОЖИДАНИИ",
+                            EXECUTED: "ВЫПОЛНЕНО",
+                            DECLINED: "ОТКЛОНЕНО",
+                          }[el.status]
+                        }
+                      </div>
+                    </td>
+                    <td>
+                      <div className={s.center}>{(new Date(el.dateTime)).toLocaleDateString('ru-RU', {dateStyle: 'medium'})}</div>
+                    </td>
+                    <td>
+                      <div className={s.center}>{el.amount}₽</div>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <Loader />
+              )}
+            </tbody>
+          </table>
+        </div>
+        <Pagination
+          currentPage={page}
+          totalCount={10}
+          pageSize={size}
+          setSize={setSize}
+          onPageChange={(page) => setPage(page)}
+        />
+      </div>
+    </div>
+  );
 }
