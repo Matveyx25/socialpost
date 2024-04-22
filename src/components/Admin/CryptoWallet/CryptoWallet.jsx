@@ -1,13 +1,19 @@
 import React from 'react'
-import { Edit, SelectInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SelectInput, TextInput, useRecordContext } from 'react-admin'
+import { Box } from 'react-html-email';
 import { useParams } from 'react-router-dom';
 
 export const CryptoWallet = (props) => {
 	const { id } = useParams();
+	const record = useRecordContext()
+
+	if(!record){
+		return null
+	}
 
 	return (
 		<Edit {...props} id={''} resource={'users/' + id + '/crypto_wallet_details'}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<Box sx={{ maxWidth: 500 }}>
 				<SelectInput source="type" choices={[
 					{ id: 'USDT', name: 'USDT' },
 					{ id: 'Bitcoin', name: 'Bitcoin' },
@@ -16,7 +22,7 @@ export const CryptoWallet = (props) => {
   				{ id: 'Ethereum', name: 'Ethereum' }
 				]} label='Криптовалюта' isRequired fullWidth />
 				<TextInput source="address" label='Адрес' isRequired fullWidth />
-			</SimpleForm>
+			</Box>
 		</Edit>
 	)
 }

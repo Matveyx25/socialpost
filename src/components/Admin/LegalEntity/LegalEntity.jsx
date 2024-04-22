@@ -1,14 +1,19 @@
 import { Box } from '@mui/material';
 import React from 'react'
-import { Edit, SelectInput, SimpleForm, TextInput } from 'react-admin'
+import { Edit, SelectInput, SimpleForm, TextInput, useRecordContext } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const LegalEntity = (props) => {
 	const { id } = useParams();
+	const record = useRecordContext()
+
+	if(!record){
+		return null
+	}
 
 	return (
 		<Edit {...props} id={''} resource={'users/' + id + '/legal_entity'}>
-			<SimpleForm  flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 					<Box sx={{ maxWidth: 500 }}>	
 						<TextInput source="inn" label='ИНН' isRequired fullWidth />
 						<SelectInput source="taxSystem" choices={[
@@ -25,7 +30,7 @@ export const LegalEntity = (props) => {
 						<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
 						<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
 					</Box>
-			</SimpleForm>
+			</Box>
 		</Edit>
 	)
 }
