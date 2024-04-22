@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { publisher } from "../api/api"
+import { publisher, profile } from "../api/api"
 import { toast } from "react-toastify"
 
 export const useSelfEmployed = () => {
@@ -17,26 +17,6 @@ export const useUpdateSelfEmployed = () => {
 		mutationFn: publisher.updateSelfEmployed,
 		onSuccess: () => {
       queryClient.invalidateQueries(['self-employed'])
-			toast.success('Данные обновлены')
-    }, 
-	})
-}
-
-export const useSelfEmployedBankDetails = () => {
-	return useQuery({
-		queryKey: ['self-employed-bank-details'],
-		queryFn: publisher.getSelfEmployed,
-		select: data => data.data.bankDetails
-	})
-}
-
-export const useUpdateSelfEmployedBankDetails = () => {
-	const queryClient = useQueryClient()
-
-	return useMutation({
-		mutationFn: (data) => publisher.updateSelfEmployed({bankDetails: data}),
-		onSuccess: () => {
-      queryClient.invalidateQueries(['self-employed-bank-details'])
 			toast.success('Данные обновлены')
     }, 
 	})
@@ -62,26 +42,6 @@ export const useUpdateLegalEntity = () => {
 	})
 }
 
-export const useLegalEntityBankDetails = () => {
-	return useQuery({
-		queryKey: ['legal-entity-bank-details'],
-		queryFn: publisher.getLegalEntity,
-		select: data => data.data.bankDetails
-	})
-}
-
-export const useUpdateLegalEntityBankDetails = () => {
-	const queryClient = useQueryClient()
-
-	return useMutation({
-		mutationFn: (data) => publisher.updateLegalEntity({bankDetails: data}),
-		onSuccess: () => {
-      queryClient.invalidateQueries(['legal-entity-bank-details'])
-			toast.success('Данные обновлены')
-    }, 
-	})
-}
-
 export const useIE = () => {
 	return useQuery({
 		queryKey: ['ie'],
@@ -97,26 +57,6 @@ export const useUpdateIE = () => {
 		mutationFn: publisher.updateIE,
 		onSuccess: () => {
       queryClient.invalidateQueries(['ie'])
-			toast.success('Данные обновлены')
-    }, 
-	})
-}
-
-export const useIEBankDetails = () => {
-	return useQuery({
-		queryKey: ['ie-bank-details'],
-		queryFn: publisher.getIE,
-		select: data => data.data.bankDetails
-	})
-}
-
-export const useUpdateIEBankDetails = () => {
-	const queryClient = useQueryClient()
-
-	return useMutation({
-		mutationFn: (data) => publisher.updateIE({bankDetails: data}),
-		onSuccess: () => {
-      queryClient.invalidateQueries(['ie-bank-details'])
 			toast.success('Данные обновлены')
     }, 
 	})
@@ -138,6 +78,27 @@ export const useUpdateCryptoWallet = () => {
 		onSuccess: () => {
       queryClient.invalidateQueries(['crypto-wallet'])
 			toast.success('Данные обновлены')
+    }, 
+	})
+}
+
+
+export const useBalanceOperations = () => {
+	return useQuery({
+		queryKey: ['balance-operations'],
+		queryFn: profile.getBalanceOperations,
+		select: data => data.data
+	})
+}
+
+export const useWithdrawal = () => {
+	const queryClient = useQueryClient()
+
+	return useMutation({
+		mutationFn: profile.withdrawalBalance,
+		onSuccess: () => {
+      queryClient.invalidateQueries(['balance-operations'])
+			toast.success('Заявка создана')
     }, 
 	})
 }

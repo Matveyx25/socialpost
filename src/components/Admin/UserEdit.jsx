@@ -31,9 +31,18 @@ export const UserEdit = (props) => {
 									<Typography variant="h6" gutterBottom>
 											Роли
 									</Typography>
-									<SelectArrayInput label="роли" source="roles" choices={[
+									<SelectArrayInput fullWidth label="роли" source="roles" choices={[
 											{ id: 'PUBLISHER', name: 'Паблишер' },
 											{ id: 'ADVERTISER', name: 'Рекламодатель' }]} />
+								</Box>
+						</Box>
+						<hr />
+						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+									<Typography variant="h6" gutterBottom>
+											Баланс
+									</Typography>
+									<TextInput source="balance" fullWidth label="Баланс"/>
 								</Box>
 						</Box>
 					</SimpleForm>

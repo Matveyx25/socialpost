@@ -8,6 +8,9 @@ import { Button } from '../../../Shared/Button/Button'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import { DashboardCard } from '../dashboard-card';
 import channelsJson from '../../../../data/channels.json'
+import { useProfile } from '../../../../hooks/useProfile';
+import { useBalanceOperations } from '../../../../hooks/publisherBalance';
+import { Loader } from '../../../Shared/Loader/Loader';
 
 const payments = [
 	{
@@ -16,40 +19,12 @@ const payments = [
 		channel: 'Marvel/DC',
 		dateDone: '25.10.2023 в 12:30',
 		price: '2400',
-	},
-	{
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-	},
-	{
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-	},
-	{
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-	},
-	{
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-	},
+	}
 ]
-const channels = [{label: 'Все каналы', value: 'all'} ,...channelsJson.map(el => ({label: el.title, value: el.id}))]
 
 export const Payments = () => {
-	const [selectedChannel, setSelectedChannel] = useState()
+	const {data: profile, isFetched: isProfileFetched} = useProfile()
+	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations()
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
 
@@ -59,75 +34,70 @@ export const Payments = () => {
 		<div className={s.grid}>
 			<DashboardCard className={s.balance}>
 				<div>
-					<p>24,500 ₽</p>
+					<p>{profile?.balance} ₽</p>
 					<span className={s.label}>Баланс кабинета</span>
 				</div>
 				<Button label={'Вывести'} className={s.btn} onClick={() => setModal('withdraw-modal')}/>
 			</DashboardCard>
 			<div className={s.tableCard}>
 				<div className={s.filters}>
-					<Select options={channels} defaultValue={channels[0]} setSelectedOption={setSelectedChannel}/>
 					<RangeCalendar/>
-					Найдено выплат: 12
+					Найдено выплат: {operations?.length}
 					<Button label='Сбросить' leftIcon={<IconRefresh/>} theme='secondary' className={s.refreshBtn}/>
 				</div>
 				<div className={s.tableWrapper}>
 					<table className={s.table}>
 						<thead>
 								<tr>
-									<th>Канал</th>
-									<th>Название РК</th>
-									<th>Название обьявления</th>
+									<th>Тип</th>
+									<th>Статус</th>
 									<th>
 										<div className={s.flex}>
-										Дата начисления
+										Дата
 											<IconSortDescending size={18}/>
 										</div>
 									</th>
 									<th>
 										<div className={s.flex}>
-										Сумма начисления
+										Сумма
 											<IconSortDescending size={18}/>
 										</div>
 									</th>
 								</tr>
 						</thead>
 						<tbody>
-								{[...payments, ...payments, ...payments].map(el => (
-									<tr>
+								{isOperationsFetched ? operations?.map(el => (
+									<tr key={el.id}>
 										<td>
+										{/* INCOME, WITHDRAWAL_SELF_EMPLOYED, WITHDRAWAL_IE, WITHDRAWAL_LEGAL_ENTITY, WITHDRAWAL_CRYPTO_WALLET */}
 											<div className={s.center}>
-												{el.channel}
+												{el.type}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.nameOfAd}
+												{/* PENDING, EXECUTED, DECLINED */}
+												{el.status}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.nameOfPost}
+												{el.dataTime}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.dateDone}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el.price}₽
+												{el.amount}₽
 											</div>
 										</td>
 									</tr>
-								))}
+								)) : <Loader />}
 						</tbody>
 					</table>
 				</div>
 				<Pagination 
 				currentPage={page}
-        totalCount={300}
+        totalCount={10}
         pageSize={size}
 				setSize={setSize}
         onPageChange={page => setPage(page)}/>

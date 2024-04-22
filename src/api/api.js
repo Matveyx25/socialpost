@@ -118,6 +118,12 @@ export const profile = {
 	},
 	connectEmail(data) {
 		return instance.post("/users/current/connect/email", data)
+	},
+	getBalanceOperations(params) {
+		return instance.get("/balance_operations/my", params)
+	},
+	withdrawalBalance(data) {
+		return instance.post("/balance_operations/withdrawal")
 	}
 }
 
@@ -146,35 +152,17 @@ export const publisher = {
 	updateSelfEmployed(data) {
 		return instance.put(`/users/current/self_employed/`, data)
 	},
-	getSelfEmployedBankDetails() {
-		return instance.get(`/users/current/self_employed/bank_details/`)
-	},
-	updateSelfEmployedBankDetails(data) {
-		return instance.put(`/users/current/self_employed/bank_details/`, data)
-	},
 	getLegalEntity() {
 		return instance.get(`/users/current/legal_entity/`)
 	},
 	updateLegalEntity(data) {
 		return instance.put(`/users/current/legal_entity/`, data)
 	},
-	getLegalEntityBankDetails() {
-		return instance.get(`/users/current/legal_entity/bank_details/`)
-	},
-	updateLegalEntityBankDetails(data) {
-		return instance.put(`/users/current/legal_entity/bank_details/`, data)
-	},
 	getIE() {
 		return instance.get(`/users/current/ie/`)
 	},
 	updateIE(data) {
 		return instance.put(`/users/current/ie/`, data)
-	},
-	getIEBankDetails() {
-		return instance.get(`/users/current/ie/bank_details/`)
-	},
-	updateIEBankDetails(data) {
-		return instance.put(`/users/current/ie/bank_details/`, data)
 	},
 	getCryptoWallet() {
 		return instance.get(`/users/current/crypto_wallet_details/`)

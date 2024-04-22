@@ -4,14 +4,19 @@ import { InputField } from '../Shared/Input/Input';
 import { Button } from '../Shared/Button/Button';
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
+import { useWithdrawal } from "../../hooks/publisherBalance";
 
 const validator = Yup.object().shape({
  price: Yup.string()
     .required("Укажите сумму вывода")
-    .min(1000, "Минимальная сумма вывода 1,000 ₽"),
+		.test("price", "Минимальная сумма вывода 1,000 ₽", function (f) {
+      return +f >= 1000;
+    }),
 });
 
 export const WithdrawModal = ({isOpen, setOpen}) => {
+	const {mutate: withdraw} = useWithdrawal()
+
   return (
 		<Modal {...{isOpen, setOpen}} title={'Вывести средства'} name={'withdraw-modal'}>
 			<Formik
@@ -20,8 +25,11 @@ export const WithdrawModal = ({isOpen, setOpen}) => {
 				}}
 				validationSchema={validator}
 				onSubmit={(values) => {
-					console.log(values); // Здесь вы може��е обработать отправку формы
-					setOpen(); // Закрываем модальное окно после успешной отправки
+					withdraw({
+						"type": "SELF_EMPLOYED",
+						"amount": values?.price
+					}); 
+					setOpen();
 				}}
 			>
 				{({ dirty, isValid }) => (
