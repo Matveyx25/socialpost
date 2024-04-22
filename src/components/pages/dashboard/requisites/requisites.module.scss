@@ -19,9 +19,12 @@
 }
 
 .formsWrapper{
+	width: 100%;
 	display: flex;
 	gap: 1.25rem;
-	height: 100%;
+}
+
+.formsWrapperCard{
 	margin-top: 1.25rem;
 }
 
@@ -34,6 +37,10 @@
 
 .formCard{
 	max-width: 36.3125rem;
+	flex-grow: 1;
+	width: 100%;
+	height: -moz-fit-content;
+	height: fit-content;
 	.formRow{
 		display: flex;
 		align-items: flex-start;
@@ -44,7 +51,11 @@
 	.input, .select, .calendar{
 		width: 100%;
 	}
-	.btn{
-		width: 100%;
-	}
+}
+
+.btn{
+	margin-top: 1rem;
+	margin-left: auto;
+	margin-right: 0;
+	// width: 100%;
 }

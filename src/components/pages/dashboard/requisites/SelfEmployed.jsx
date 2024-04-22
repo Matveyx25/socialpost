@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import s from './requisites.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Select } from '../../../Shared/Select/Select';
-import { Input, InputField } from '../../../Shared/Input/Input';
+import { InputField } from '../../../Shared/Input/Input';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
-import { useSelfEmployed, useSelfEmployedBankDetails, useUpdateSelfEmployed, useUpdateSelfEmployedBankDetails } from '../../../../hooks/publisherBalance';
+import { useSelfEmployed, useUpdateSelfEmployed } from '../../../../hooks/publisherBalance';
 import { Loader } from '../../../Shared/Loader/Loader';
 
 const counties = [
@@ -20,9 +20,6 @@ export const SelfEmployed = () => {
 
 	const {data: selfEmployed, isFetched} = useSelfEmployed()
 	const {mutate: updateSelfEmployed} = useUpdateSelfEmployed()
-
-	const {data: selfEmployedBankDetails, isFetched: isFetchedBankDetails} = useSelfEmployedBankDetails()
-	const {mutate: updateSelfEmployedBankDetails} = useUpdateSelfEmployedBankDetails()
 
 	const validator = Yup.object().shape({
 		fullName: Yup.string()
@@ -44,61 +41,69 @@ export const SelfEmployed = () => {
 		inn: Yup.string()
 			.matches(/^\d+$/, 'ИНН должен содержать только цифры')
 			.required('Введите ИНН'),
+		accountNumber: Yup.string()
+			.matches(/^\d+$/, 'Расчетный счет должен содержать только цифры')
+			.required('Введите рассчетный счет'),
+		bank: Yup.string()
+				.required('Введите банк'),
+		bic: Yup.string()
+				.matches(/^\d+$/, 'БИК должен содержать только цифры')
+				.required('Введите БИК'),
+		correspondentAccount: Yup.string()
+				.matches(/^\d+$/, 'Корреспондентский счет должен содержать только цифры')
+				.required('Введите корреспондентский счет'),
 	});
 
-	const validator2 = Yup.object().shape({
-		accountNumber: Yup.string()
-			 .matches(/^\d+$/, 'Расчетный счет должен содержать только цифры')
-			 .required('Введите рассчетный счет'),
-		bank: Yup.string()
-			 .required('Введите банк'),
-		bic: Yup.string()
-			 .matches(/^\d+$/, 'БИК должен содержать только цифры')
-			 .required('Введите БИК'),
-		correspondentAccount: Yup.string()
-			 .matches(/^\d+$/, 'Корреспондентский счет должен содержать только цифры')
-			 .required('Введите корреспондентский счет'),
-	 });	 
-
 	return (
-		<div className={s.formsWrapper}>
-			<DashboardCard className={s.formCard}>
-				<div className={s.cardHeader}>
-				Личные данные
-				</div>
-				<div className={s.line}></div>
-				{isFetched ? <Formik
-						initialValues={{
-							fullName: selfEmployed?.fullName,
-							seriesPassport: selfEmployed?.passportSeries,
-							numberPassport: selfEmployed?.passportNumber,
-							birthDate: selfEmployed?.birthDate,
-							city: selfEmployed?.birthCity,
-							address: selfEmployed?.address,
-							snils: selfEmployed?.snils,
-							inn: selfEmployed?.inn,
-							citizenshipCountry: selfEmployed?.citizenshipCountry,
-							passportIssueDate: selfEmployed?.passportIssueDate,
-						}}
-						validationSchema={validator}
-						onSubmit={(values) => {
-							updateSelfEmployed({
-								passportIssueDate: values?.passportIssueDate,
-								citizenshipCountry: values?.citizenshipCountry,
-								fullName: values?.fullName,
-								passportSeries: values?.seriesPassport,
-								passportNumber: values?.numberPassport,
-								birthCity: values?.city,
-								birthDate: values?.birthDate,
-								address: values?.address,
-								snils: values?.snils,
-								inn: values?.inn,
-							})
-						}}
-					>
-						{({ dirty, isValid }) => (
-							<Form>
-								<div className={s.formRow}>
+    <>
+      {isFetched ? (
+        <Formik
+          initialValues={{
+						fullName: selfEmployed?.fullName,
+						seriesPassport: selfEmployed?.passportSeries,
+						numberPassport: selfEmployed?.passportNumber,
+						birthDate: selfEmployed?.birthDate,
+						city: selfEmployed?.birthCity,
+						address: selfEmployed?.address,
+						snils: selfEmployed?.snils,
+						inn: selfEmployed?.inn,
+						citizenshipCountry: selfEmployed?.citizenshipCountry,
+						passportIssueDate: selfEmployed?.passportIssueDate,
+            accountNumber: selfEmployed?.bankDetails?.checkingAccount,
+            bank: selfEmployed?.bankDetails?.bank,
+            bic: selfEmployed?.bankDetails?.bik,
+            correspondentAccount: selfEmployed?.bankDetails?.correspondentAccount,
+          }}
+          validationSchema={validator}
+          onSubmit={(values) => {
+            updateSelfEmployed({
+              passportIssueDate: values?.passportIssueDate,
+							citizenshipCountry: values?.citizenshipCountry,
+							fullName: values?.fullName,
+							passportSeries: values?.seriesPassport,
+							passportNumber: values?.numberPassport,
+							birthCity: values?.city,
+							birthDate: values?.birthDate,
+							address: values?.address,
+							snils: values?.snils,
+							inn: values?.inn,
+              bankDetails: {
+                checkingAccount: values?.accountNumber,
+                bank: values?.bank,
+                bik: values?.bic,
+                correspondentAccount: values?.correspondentAccount,
+              },
+            });
+          }}
+        >
+          {({ isValid, dirty }) => (
+            <Form>
+              <DashboardCard className={s.formsWrapperCard}>
+                <div className={s.formsWrapper}>
+                  <div className={s.formCard}>
+                    <div className={s.cardHeader}>Личные данные</div>
+                    <div className={s.line}></div>
+                    <div className={s.formRow}>
 									<Field name="citizenshipCountry">
 										{({ field: {value}, form: {setFieldValue}  }) => (
 											<Select fullWidth label="Страна гражданства" options={counties} defaultValue={value ? counties.find(e => e.value === value) : null} setSelectedOption={v => setFieldValue('citizenshipCountry', v.value)} className={s.select} headerClassName={s.selectHeader}/>
@@ -130,57 +135,60 @@ export const SelfEmployed = () => {
 									<InputField label={'СНИЛС'} name='snils' placeholder='12345' className={s.input}/>
 									<InputField label={'ИНН'} name='inn' placeholder='12345' className={s.input}/>
 								</div>
+                  </div>
+                  <div className={s.formCard}>
+                    <div className={s.cardHeader}>Банковские реквизиты</div>
+                    <div className={s.line}></div>
+                    <div className={s.formRow}>
+                      <InputField
+                        label={"Расчетный счет"}
+                        name="accountNumber"
+                        placeholder="12345"
+                        className={s.input}
+                      />
+                    </div>
+                    <div className={s.formRow}>
+                      <InputField
+                        label={"Банк"}
+                        name="bank"
+                        placeholder="12345"
+                        className={s.input}
+                      />
+                    </div>
+                    <div className={s.formRow}>
+                      <InputField
+                        label={"БИК"}
+                        name="bic"
+                        placeholder="12345"
+                        className={s.input}
+                      />
+                    </div>
+                    <div className={s.formRow}>
+                      <InputField
+                        label={"Корреспондентский счет"}
+                        name="correspondentAccount"
+                        placeholder="30101"
+                        className={s.input}
+                      />
+                    </div>
+                  </div>
+                </div>
 								<div className={s.line}></div>
 								<div className={s.btns}>
-								{/* {filledForm1 ? <Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>}/> :  */}
-									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
+									<Button
+										label="Запомнить данные"
+										theme="secondary"
+										className={s.btn}
+										disabled={!dirty || !isValid}
+									/>
 								</div>
-							</Form>)}
-					</Formik> : <Loader/>}
-			</DashboardCard>
-			<DashboardCard className={s.formCard}>
-				<div className={s.cardHeader}>
-				Банковские реквизиты
-				</div>
-				<div className={s.line}></div>
-				{isFetchedBankDetails ? <Formik
-						initialValues={{
-							accountNumber: selfEmployedBankDetails?.checkingAccount,
-							bank: selfEmployedBankDetails?.bank,
-							bic: selfEmployedBankDetails?.bik,
-							correspondentAccount: selfEmployedBankDetails?.correspondentAccount,
-						}}
-						validationSchema={validator2}
-						onSubmit={(values) => {
-							updateSelfEmployedBankDetails({
-								checkingAccount: values?.accountNumber,
-								bank: values?.bank,
-								bik: values?.bic,
-								correspondentAccount: values?.correspondentAccount,
-							})
-						}}
-					>
-						{({ dirty, isValid }) => (
-							<Form>
-								<div className={s.formRow}>
-									<InputField label={'Расчетный счет'} name='accountNumber' placeholder='12345' className={s.input}/>
-								</div>
-								<div className={s.formRow}>
-									<InputField label={'Банк'} name='bank' placeholder='12345' className={s.input}/>
-								</div>
-								<div className={s.formRow}>
-									<InputField label={'БИК'} name='bic' placeholder='12345' className={s.input}/>
-								</div>
-								<div className={s.formRow}>
-									<InputField label={'Корреспондентский счет'} name='correspondentAccount' placeholder='30101' className={s.input}/>
-								</div>
-								<div className={s.line}></div>
-								<div className={s.btns}>
-									<Button label="Запомнить данные" theme='secondary' className={s.btn} disabled={!dirty || !isValid}/>
-								</div>
-							</Form>)}
-					</Formik> : <Loader/>}
-			</DashboardCard>
-		</div>
-	)
+              </DashboardCard>
+            </Form>
+          )}
+        </Formik>
+      ) : (
+        <Loader />
+      )}
+    </>
+  );
 }

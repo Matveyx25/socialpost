@@ -1,8 +1,8 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from "./LoginModal.module.scss";
-import { Input, InputField } from "../Shared/Input/Input";
-import { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { InputField } from "../Shared/Input/Input";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
 import { Button } from "../Shared/Button/Button";
 import { auth } from "../../api/api";
@@ -37,9 +37,9 @@ export const LoginModal = ({ isOpen, setOpen }) => {
         password: values.password,
       })
       .catch((err) => {
-        if (err?.response?.status == 401) {
+        if (+err?.response?.status === 401) {
           set_error("Пароль или почта введены неверно");
-        } else if (err?.response?.status == 400) {
+        } else if (+err?.response?.status === 400) {
           set_error("Данные невалидны");
         }
       });
