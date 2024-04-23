@@ -5,7 +5,7 @@ import { Button } from '../Shared/Button/Button';
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { useUpdateChannel } from '../../hooks/useUpdateChannel';
-import { useChannelById } from '../../hooks/useChannleById';
+import { useMyChannelById } from '../../hooks/useMyChannelById';
 import { Loader } from "../Shared/Loader/Loader";
 import { useEffect } from "react";
 import { Checkbox } from '../Shared/Checkbox/checkbox';
@@ -20,7 +20,7 @@ const validator = Yup.object().shape({
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
-	const {data: channel, isFetching, refetch} = useChannelById(modalParams)
+	const {data: channel, isFetching, refetch} = useMyChannelById(modalParams)
 
 	useEffect(() => {
 		if(isOpen && modalParams){

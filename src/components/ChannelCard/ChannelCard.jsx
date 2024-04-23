@@ -38,7 +38,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
 
   const addToCart = () => {
     set_inCart(true);
-    updateCart([...cart, { id, count: 1, format: selectedFormat.value }]);
+    updateCart([...cart, { id, count: 1, format: selectedFormat.value, price: formats.find((el) => el.value === selectedFormat.value)?.price}]);
   };
 
   const removeFromCart = () => {

@@ -2,12 +2,12 @@ import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
 import { Button } from '../Shared/Button/Button';
 import { useRemoveChannel } from '../../hooks/useRemoveChannel';
-import { useChannelById } from "../../hooks/useChannleById";
+import { useMyChannelById } from "../../hooks/useMyChannelById";
 
 export const RemoveChannelModal = ({isOpen, setOpen, modalParams}) => {
 
 	const {mutate: removeChannel} = useRemoveChannel()
-	const {data: channel} = useChannelById(modalParams)
+	const {data: channel} = useMyChannelById(modalParams)
 
   return (
 		<Modal {...{isOpen, setOpen}} title={'Убрать канал'} name={'remove-channel'}>

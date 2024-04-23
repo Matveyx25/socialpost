@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import s from './cart.module.scss'
-import channels from '../../../data/channels.json'
-import { Counter } from '../../Shared/Counter/Counter';
-import { IconSquare, IconSquareCheckFilled, IconTrash } from '@tabler/icons-react';
+import { IconSquare, IconSquareCheckFilled } from '@tabler/icons-react';
 import emailjs from '@emailjs/browser';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -11,14 +9,10 @@ import { InputField } from '../../Shared/Input/Input';
 import ReactDomServer from 'react-dom/server';
 import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
+import { CartChannelCard } from './cartChannleCard';
+import { renderHtmlEmail } from './cartEmail';
 
 export const Cart = () => {
-	const getSum = () => {
-  	return !cart.length || cart.map(el => ({ ...channels.find(e => e.id === el.id), count: el.count, format: el.format }))
-			.reduce((a, b) =>
-				a + (b.price[b.format] !== 'договорная' ? b.price[b.format]?.replace(/\s/g, '') : 0) * b.count, 0);
-	};
-	
 	const [payingNotice, set_payingNotice] = useState(false)
 	const [policy, set_policy] = useState(false)
 	
@@ -27,6 +21,15 @@ export const Cart = () => {
 		const initialValue = JSON.parse(saved);
 		return initialValue || "";
 	});
+
+	const getSum = () => {
+		let sum = 0 
+		cart?.forEach(b => {
+			sum += (+b.price * +b.count)
+		});
+  	return !cart.length || sum
+	};
+
 	const [sum, set_sum] = useState(() => getSum())
 
 	useEffect(() => {
@@ -57,49 +60,8 @@ export const Cart = () => {
 		email: Yup.string().email('Такого почтового адреса не существует').required('Заполните поле email'),
 	});
 
-	const renderHtmlEmail = (values) => {
-		return (
-			<>
-				<p>От {values.fullName},</p>
-					<p>Email {values.email},</p>
-					{values.phone && <p>Телефон {values.phone},</p>}
-					{values.tg && <p>Телеграмм {values.tg},</p>}
-					<p>Корзина</p>
-					<table style={{ borderCollapse: 'collapse', width: '100%' }}>
-						<thead>
-							<tr>
-								<th style={{ border: '1px solid black', padding: '8px' }}>Название постов</th>
-								<th style={{ border: '1px solid black', padding: '8px' }}>Формат размещений</th>
-								<th style={{ border: '1px solid black', padding: '8px' }}>Кол-во размещений</th>
-								<th style={{ border: '1px solid black', padding: '8px' }}>Общая стоимость размещений</th>
-							</tr>
-						</thead>
-						<tbody>
-							{cart.map((el) => {
-								const channel = channels.find(e => e.id === el.id)
-								return ( 
-										<tr key={channel.id}>
-											<td style={{ border: '1px solid black', padding: '8px' }}>{channel.title}</td>
-											<td style={{ border: '1px solid black', padding: '8px' }}>{el.format}</td>
-											<td style={{ border: '1px solid black', padding: '8px' }}>{el.count}</td>
-											<td style={{ border: '1px solid black', padding: '8px' }}>
-												{(channel?.price[el.format] !== 'договорная' ? +channel?.price[el.format]?.replace(/\s/g, '') : 0) * +el.count}₽
-											</td>
-										</tr>
-									)
-								})}
-						</tbody>
-					</table>
-					<p>
-						Итого: <strong>{cart.length ? (sum + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,') 
-							: '0'} ₽</strong>
-					</p>
-				</>
-		)
-	}
-
 	const sendEmail = (values) => {
-		const html = renderHtmlEmail(values)
+		const html = renderHtmlEmail(values, cart, sum)
     emailjs.send('service_rgqkma5', 'template_dh599xr', 
 		{user_name: values.fullName,
 			myHTML: ReactDomServer.renderToString(html)
@@ -138,40 +100,9 @@ export const Cart = () => {
 					</h2>
 					<div className={s.flex}>
 					<div className={s.cardsWrapper}>
-						{cart.length ? cart.map((el) => {
-							const channel = channels.find(e => e.id === el.id)
-							return (
-								<div key={'card-in-cart-' + channel.id} className={s.productCard}>
-									<div className={s.productTitle}>
-										{channel?.title}
-									</div>
-									<div className={s.productFormat}>
-										<span>Формат размещения</span>
-										{el.format}
-									</div>
-										<div className={s.productPrice}>
-											<span>Общая стоимость</span>
-											{(channel?.price[el.format] !== 'договорная' ? +channel?.price[el.format]?.replace(/\s/g, '') * +el.count + '₽' : 'договорная') }
-										</div>
-										<div className={s.productBtns}>
-											<button className={s.removeBtn}>
-												<IconTrash size={24} color='#436CFF' onClick={() => removeFromCart(channel.id)}/>
-											</button>
-											<Counter value={el.count} min={1} max={Infinity} onChange={(value) => {
-													const newState = cart.map(obj => {
-														if (obj.id === el.id) {
-															return {...obj, count: value};
-														}
-
-														return obj;
-													});
-											
-													set_cart(newState)
-												}}/>
-										</div>
-								</div>
-							)
-						}) : <div className={s.empty}>Корзина пуста</div>}
+						{cart.length ? cart.map((el) => (
+							<CartChannelCard key={el?.id} {...{el, set_cart, cart, removeFromCart}}/>
+						)) : <div className={s.empty}>Корзина пуста</div>}
 						</div> 
 						<div className={s.cardWrapper}>
 							<h5>Ваш заказ</h5>
