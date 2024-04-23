@@ -51,19 +51,19 @@ export const ChannelCard = ({channel}) => {
 					<span>CPV</span>
 					<p>{channel?.costPerView}</p>
 				</div> : null}
-				{channel?.nativePostPrice && <div>
+				{typeof +channel?.nativePostPrice === 'number' && <div>
 					<span>Нативное размещение</span>
 					<p>{channel?.nativePostPrice}₽</p>
 				</div>}
-				{channel?.post1For24Price && <div>
+				{typeof +channel?.post1For24Price === 'number' && <div>
 					<span>Размещение 1/24</span>
 					<p>{channel?.post1For24Price}₽</p>
 				</div>}
-				{channel?.post1For48Price && <div>
+				{typeof +channel?.post1For48Price === 'number' && <div>
 					<span>Размещение 1/48</span>
 					<p>{channel?.post1For48Price}₽</p>
 				</div>}
-				{channel?.post2For48Price && <div>
+				{typeof +channel?.post2For48Price === 'number' && <div>
 					<span>Размещение 2/48</span>
 					<p>{channel?.post2For48Price}₽</p>
 				</div>}

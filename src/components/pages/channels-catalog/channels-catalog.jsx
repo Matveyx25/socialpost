@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react'
 import s from './channels-catalog.module.scss'
 import { Filters } from '../../Filters/Filters'
 import { ChannelCard } from '../../ChannelCard/ChannelCard';
-import channels from '../../../data/channels.json'
 import { Select } from '../../Shared/Select/Select';
 import { useMediaQuery } from 'react-responsive';
 import { FilterModal } from '../../Filters/FilterModal';
+import { useChannels } from '../../../hooks/useChannels';
+import { Loader } from '../../Shared/Loader/Loader';
 
 const options = [
   { value: 'subscribers more', label: 'Подписчиков: Больше' },
@@ -18,12 +19,10 @@ const options = [
 
 export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(options[0]);
-	const [filtered, setFiltered] = useState([...channels]);
 	const [modalIsOpen, setModalIsOpen] = useState('')
 	const isMobile = useMediaQuery({
 		query: '(max-width: 820px)'
 	})
-
 
 	const [cart, set_cart] = useState(() => {
 		const saved = localStorage.getItem("cart");
@@ -31,70 +30,61 @@ export const ChannelsCatalog = () => {
 		return initialValue || "";
 	});
 
+	const {data: channels, isFetched} = useChannels()
+
+	const onFilterSubmit = () => {}
+
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
 		window.dispatchEvent(new Event("cart-changed"));
 	}, [cart])
 
-	useEffect(() => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		set_cart(initialValue || '')
-	}, [filtered])
-
-	const onFilterSubmit = (filter) => {
-		setFiltered([...channels].filter(filter))
-	}
-
-	const sortChannels = (array) => {
-		const subscribers = (a) => a.subscribers.replace(/\s/g, '');
-		const postReach = (a) => a.postReach.replace(/\s/g, '');
-		const price = (a) => a.price[Object.keys(a.price)[0]].replace(/\s/g, '')
-
-		switch(selectedOption.value){
-			case 'subscribers more': 
-				return array.sort((a, b) => subscribers(b) - subscribers(a))
-			case 'subscribers less': 
-				return array.sort((a, b) => subscribers(a) - subscribers(b))
-			case 'post-reach more': 
-				return array.sort((a, b) => postReach(b) - postReach(a))
-			case 'post-reach less': 
-				return array.sort((a, b) => postReach(a) - postReach(b))
-			case 'price more': 
-				return array.sort((a, b) => price(b) - price(a))
-			case 'price less': 
-				return array.sort((a, b) => price(a) - price(b))
-			default: 
-				break
-		}
-	}
-
-
 	return (
 		<div className={s.wrapper}>
-			{isMobile && <FilterModal isOpen={modalIsOpen} setOpen={setModalIsOpen} onFilterSubmit={onFilterSubmit} maxSubscribersNumber={
-						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>}
+			{isMobile && <FilterModal isOpen={modalIsOpen} setOpen={setModalIsOpen} onFilterSubmit={onFilterSubmit}
+			maxSubscribersNumber={10000000}/>}
 			<div className="container">
 				<h2 className={s.title}>
 					Каталог каналов
 				</h2>
 				<p className={s.subtitle}>
-					{(channels.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
+					{(channels?.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
 				</p>
 				<div className={s.flex}>
-					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={
-						Math.max(...channels.map(o => Number(o.subscribers.replace(/\s/g, ''))))}/>}
+					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={10000000}/>}
 					<div className={s.content}>
 						<div className={s.header}>
 							{isMobile && <button className={s.filterBtn} onClick={() => setModalIsOpen('filter-modal')}>Фильтры</button>}
 							<Select defaultValue={options[0]} options={options} setSelectedOption={setSelectedOption}/>
 							<span>
-								Найдено: {(filtered.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
+								Найдено: {(channels?.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
 							</span>
 						</div>
-						{sortChannels(filtered).map(channel => (
-							<ChannelCard  updateCart={set_cart} key={'channel-id-' + channel.id} cart={cart} {...channel}/>
-						))}
+						{isFetched ? channels?.map(channel =>{
+						const {
+              nativePostPriceEnabled,
+              post1For24PriceEnabled,
+              post1For48PriceEnabled,
+              post2For48PriceEnabled,
+							nativePostPrice,
+							post1For24Price,
+							post1For48Price,
+							post2For48Price
+            } = channel;
+						const formats = [
+							{enabled: nativePostPriceEnabled, label: 'Нативный', value: 'nativePostPrice', price: nativePostPrice},
+							{enabled: post1For24PriceEnabled, label: '1/24', value: 'post1For24Price', price: post1For24Price},
+							{enabled: post1For48PriceEnabled, label: '1/48', value: 'post1For48Price', price: post1For48Price},
+							{enabled: post2For48PriceEnabled, label: '2/48', value: 'post2For48Price', price: post2For48Price},
+						].filter(el => el.enabled)
+
+						return (
+              <ChannelCard
+                updateCart={set_cart}
+                key={"channel-id-" + channel.id}
+                {...{ channel, cart, formats }}
+              />
+            );}) : <Loader/>}
 					</div>
 				</div>
 			</div>

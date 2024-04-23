@@ -174,3 +174,9 @@ export const publisher = {
 		return instance.post(`/users/current/withdraw_balance`, data)
 	}
 }
+
+export const channels = {
+	getAllChannels(params) {
+		return instance.get('/channels', params)
+	}
+}

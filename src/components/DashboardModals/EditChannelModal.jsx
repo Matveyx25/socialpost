@@ -8,6 +8,7 @@ import { useUpdateChannel } from '../../hooks/useUpdateChannel';
 import { useChannelById } from '../../hooks/useChannleById';
 import { Loader } from "../Shared/Loader/Loader";
 import { useEffect } from "react";
+import { Checkbox } from '../Shared/Checkbox/checkbox';
 
 
 const validator = Yup.object().shape({
@@ -31,18 +32,27 @@ const validator = Yup.object().shape({
 		 <Modal {...{isOpen, setOpen}} title={'Редактирование'} name={'edit-channel'}>
 			 {!isFetching ? <Formik
 				 initialValues={{
-					 nativePostPrice: channel?.nativePostPrice || '',
-					 post1For48Price: channel?.post1For48Price || '',
-					 post1For24Price: channel?.post1For24Price || '',
-					 post2For48Price: channel?.post2For48Price || '',
+					nativePostPrice: typeof channel?.nativePostPrice === 'number' ? channel?.nativePostPrice : '',
+					post1For48Price: typeof channel?.post1For48Price === 'number' ? channel?.post1For48Price : '',
+					post1For24Price: typeof channel?.post1For24Price === 'number' ? channel?.post1For24Price : '',
+					post2For48Price: typeof channel?.post2For48Price === 'number' ? channel?.post2For48Price : '',
+					nativePostPriceEnabled: channel?.nativePostPriceEnabled,
+					post1For24PriceEnabled: channel?.post1For24PriceEnabled,
+					post1For48PriceEnabled: channel?.post1For48PriceEnabled,
+					post2For48PriceEnabled: channel?.post2For48PriceEnabled,
 				 }}
 				 validationSchema={validator}
 				 onSubmit={(values) => {
 					 updateChannel({data: {
-						 "nativePostPrice": values.nativePostPrice,
-						 "post1For48Price": values.post1For48Price,
-						 "post1For24Price": values.post1For24Price,
-						 "post2For48Price": values.post2For48Price
+							"nativePostPrice": values.nativePostPrice,
+							"post1For48Price": values.post1For48Price,
+							"post1For24Price": values.post1For24Price,
+							"post2For48Price": values.post2For48Price,
+							nativePostPriceEnabled: values?.nativePostPriceEnabled,
+							post1For24PriceEnabled: values?.post1For24PriceEnabled,
+							post1For48PriceEnabled: values?.post1For48PriceEnabled,
+							post2For48PriceEnabled: values?.post2For48PriceEnabled,
+							"nativePostPriceType": "NUMERIC",
 					 }, id: modalParams})
 					 setOpen()
 				 }}
@@ -52,32 +62,48 @@ const validator = Yup.object().shape({
 						 <div className={s.form}>
 							 <div className={s.input}>
 								 <InputField
-									label={'Нативное размещение'}
-									required
+									label={
+										<div className={s.inputFlexHeader}>
+											Нативное размещение
+											<Checkbox name={'nativePostPriceEnabled'} label={'Показывать'}/>
+										</div>
+									}
 									id="nativePostPrice"
 									name="nativePostPrice"
 								 />
 							 </div>
 							 <div className={s.input}>
 								 <InputField
-									label={'Размещение 1/48'}
-									required
+									label={
+										<div className={s.inputFlexHeader}>
+											Размещение 1/48	
+											<Checkbox name={'post1For48PriceEnabled'} label={'Показывать'}/>
+										</div>
+									}
 									id="post1For48Price"
 									name="post1For48Price"
 								 />
 							 </div>
 							 <div className={s.input}>
 								 <InputField
-									label={'Размещение 1/24'}
-									required
+									label={
+										<div className={s.inputFlexHeader}>
+											Размещение 1/24	
+											<Checkbox name={'post1For24PriceEnabled'} label={'Показывать'}/>
+										</div>
+									}
 									id="post1For24Price"
 									name="post1For24Price"
 								 />
 							 </div>
 							 <div className={s.input}>
 								 <InputField
-									label={'Размещение 2/48'}
-									required
+									label={
+										<div className={s.inputFlexHeader}>
+											Размещение 2/48	
+											<Checkbox name={'post2For48PriceEnabled'} label={'Показывать'}/>
+										</div>
+									}
 									id="post2For48Price"
 									name="post2For48Price"
 								 />

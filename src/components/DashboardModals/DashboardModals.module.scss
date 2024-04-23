@@ -8,6 +8,12 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 1rem;
+	.inputFlexHeader{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+	}
 	.errorMessage{
 		color: $main-red-color;
 		font-size: 0.875rem;

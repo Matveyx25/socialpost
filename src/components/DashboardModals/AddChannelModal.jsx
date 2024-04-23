@@ -19,7 +19,16 @@ export const AddChannelModal = ({isOpen, setOpen}) => {
 
   const handleSubmit = (values) => {
 		createChannel({
-			url: values.url
+			url: values.url,
+			"nativePostPriceType": "NUMERIC",
+			"nativePostPriceEnabled": false,
+			"nativePostPrice": 0,
+			"post1For48PriceEnabled": false,
+			"post1For48Price": 0,
+			"post1For24PriceEnabled": false,
+			"post1For24Price": 0,
+			"post2For48PriceEnabled": false,
+			"post2For48Price": 0
 		})
 		setOpen()
   };
