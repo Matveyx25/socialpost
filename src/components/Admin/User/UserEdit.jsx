@@ -48,7 +48,7 @@ export const UserEdit = (props) => {
 					</Box>
 				</TabbedForm.Tab>
 				<TabbedForm.Tab label="Реквизиты">
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+					{/* <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<SelfEmployed />
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -56,7 +56,7 @@ export const UserEdit = (props) => {
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<IE />
-					</Box>
+					</Box> */}
 				</TabbedForm.Tab>
 			</TabbedForm>
 		</Edit>
