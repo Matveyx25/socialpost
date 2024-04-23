@@ -20,6 +20,7 @@ const options = [
 export const ChannelsCatalog = () => {
 	const [selectedOption, setSelectedOption] = useState(options[0]);
 	const [modalIsOpen, setModalIsOpen] = useState('')
+	const [filters, setFilters] = useState(null)
 	const isMobile = useMediaQuery({
 		query: '(max-width: 820px)'
 	})
@@ -30,9 +31,21 @@ export const ChannelsCatalog = () => {
 		return initialValue || "";
 	});
 
-	const {data: channels, isFetched} = useChannels()
+	const {data: channels, isFetched, refetch} = useChannels(filters)
 
-	const onFilterSubmit = () => {}
+	const onFilterSubmit = (f) => {
+		setFilters({
+			subscribers_min: f?.minSubscribers,
+			subscribers_max: f?.maxSubscribers,
+			average_post_reach_min: f?.minPostReach,
+			average_post_reach_max: f?.maxPostReach,
+			cost_per_view_min: f?.minCPV,
+			cost_per_view_max: f?.maxCPV,
+			price_min: f?.minPrice,
+			price_max: f?.maxPrice,
+		})
+		refetch()
+	}
 
 	useEffect(() => {
 		localStorage.setItem("cart", JSON.stringify(cart));
@@ -61,21 +74,11 @@ export const ChannelsCatalog = () => {
 							</span>
 						</div>
 						{isFetched ? channels?.map(channel =>{
-						const {
-              nativePostPriceEnabled,
-              post1For24PriceEnabled,
-              post1For48PriceEnabled,
-              post2For48PriceEnabled,
-							nativePostPrice,
-							post1For24Price,
-							post1For48Price,
-							post2For48Price
-            } = channel;
 						const formats = [
-							{enabled: nativePostPriceEnabled, label: 'Нативный', value: 'nativePostPrice', price: nativePostPrice},
-							{enabled: post1For24PriceEnabled, label: '1/24', value: 'post1For24Price', price: post1For24Price},
-							{enabled: post1For48PriceEnabled, label: '1/48', value: 'post1For48Price', price: post1For48Price},
-							{enabled: post2For48PriceEnabled, label: '2/48', value: 'post2For48Price', price: post2For48Price},
+							{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'nativePostPrice', price: channel?.nativePostPrice},
+							{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'post1For24Price', price: channel?.post1For24Price},
+							{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'post1For48Price', price: channel?.post1For48Price},
+							{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'post2For48Price', price: channel?.post2For48Price},
 						].filter(el => el.enabled)
 
 						return (

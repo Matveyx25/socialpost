@@ -177,6 +177,7 @@ export const publisher = {
 
 export const channels = {
 	getAllChannels(params) {
-		return instance.get('/channels', params)
+		console.log(params);
+		return instance.get('/channels', {params})
 	}
 }

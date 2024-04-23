@@ -86,34 +86,20 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 		set_maxPrice(undefined)
 	}
 
-	const filterFunction = (el) => {
-		const subscribers = +el.subscribers.replace(/\s/g, '');
-		const postReach = +el.postReach.replace(/\s/g, '');
-		const cpv = +el.cpv.replace(/\s/g, '');
-		const price = +el.price[Object.keys(el.price)[0]].replace(/\s/g, '');
-		const type = el.type;
-
-		console.log(selectedTypes, type, selectedTypes.findIndex(i => i.value === type) !== -1);
-
-		return (
-			(minSubscribers === undefined || subscribers >= +minSubscribers) &&
-			(maxSubscribers === undefined || subscribers <= +maxSubscribers) &&
-			(minPostReach === undefined || postReach >= +minPostReach) &&
-			(maxPostReach === undefined || postReach <= +maxPostReach) &&
-			(minCPV === undefined || cpv >= +minCPV) &&
-			(maxCPV === undefined || cpv <= +maxCPV) &&
-			(minPrice === undefined || price >= +minPrice) &&
-			(maxPrice === undefined || price <= +maxPrice) &&
-			(selectedTypes.length === 0 || selectedTypes.findIndex(i => i.label === type) !== -1)
-		);
-	}
-
 	const submitHandler = () => {
 		set_isSended(true)
-		setTimeout(() => {
-			set_isSended(false)
-		}, 2000)
-		onFilterSubmit(filterFunction)
+		onFilterSubmit({
+				minSubscribers: minSubscribers,
+				maxSubscribers: maxSubscribers,
+				minPostReach: minPostReach,
+				maxPostReach: maxPostReach,
+				minCPV: minCPV,
+				maxCPV: maxCPV,
+				minPrice: minPrice,
+				maxPrice: maxPrice,
+				selectedTypes: selectedTypes,
+		})
+		set_isSended(false)
 	}
 
 	return (
@@ -125,7 +111,7 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 				<RangeSlider scales={filterSubsScales} maxSubscribersNumber={maxSubscribersNumber} minValue={minSubscribers} maxValue={maxSubscribers} set_minValue={set_minSubscribers} set_maxValue={set_maxSubscribers}/>
 				<RangeInputs minValue={minSubscribers} maxValue={maxSubscribers} minOnChange={set_minSubscribers} maxOnChange={set_maxSubscribers}/>
 			</div>
-			<Select className={s.select} options={filterChannelTypes} setSelectedOption={set_selectedTypes} isMulti closeMenuOnSelect={false} fullWidth placeholder="Тематика канала"/>
+			{/* <Select className={s.select} options={filterChannelTypes} setSelectedOption={set_selectedTypes} isMulti closeMenuOnSelect={false} fullWidth placeholder="Тематика канала"/> */}
 			<div className={s.inputsGroup}>
 				<h5>Средний охват поста</h5>
 				<RangeInputs minValue={minPostReach} maxValue={maxPostReach} minOnChange={set_minPostReach} maxOnChange={set_maxPostReach}/>
