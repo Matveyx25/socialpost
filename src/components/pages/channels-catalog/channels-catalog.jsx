@@ -7,6 +7,8 @@ import { useMediaQuery } from 'react-responsive';
 import { FilterModal } from '../../Filters/FilterModal';
 import { useChannels } from '../../../hooks/useChannels';
 import { Loader } from '../../Shared/Loader/Loader';
+import { useCart } from '../../../hooks/useCart';
+import { useUpdateCart } from '../../../hooks/useUpdateCart';
 
 const options = [
   { value: 'subscribers more', label: 'Подписчиков: Больше' },
@@ -18,18 +20,15 @@ const options = [
 ];
 
 export const ChannelsCatalog = () => {
+	const {data: cart} = useCart()
+	const {mutate: updateCart} = useUpdateCart()
+	
 	const [selectedOption, setSelectedOption] = useState(options[0]);
 	const [modalIsOpen, setModalIsOpen] = useState('')
 	const [filters, setFilters] = useState(null)
 	const isMobile = useMediaQuery({
 		query: '(max-width: 820px)'
 	})
-
-	const [cart, set_cart] = useState(() => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		return initialValue || "";
-	});
 
 	const {data: channels, isFetched, refetch} = useChannels(filters)
 
@@ -46,11 +45,6 @@ export const ChannelsCatalog = () => {
 		})
 		refetch()
 	}
-
-	useEffect(() => {
-		localStorage.setItem("cart", JSON.stringify(cart));
-		window.dispatchEvent(new Event("cart-changed"));
-	}, [cart])
 
 	return (
 		<div className={s.wrapper}>
@@ -75,15 +69,15 @@ export const ChannelsCatalog = () => {
 						</div>
 						{isFetched ? channels?.map(channel =>{
 						const formats = [
-							{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'nativePostPrice', price: channel?.nativePostPrice},
-							{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'post1For24Price', price: channel?.post1For24Price},
-							{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'post1For48Price', price: channel?.post1For48Price},
-							{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'post2For48Price', price: channel?.post2For48Price},
+							{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'NATIVE_POST_PRICE', price: channel?.nativePostPrice},
+							{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'POST_1_FOR_24', price: channel?.post1For24Price},
+							{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'POST_1_FOR_48', price: channel?.post1For48Price},
+							{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'POST_2_FOR_48', price: channel?.post2For48Price},
 						].filter(el => el.enabled)
 
 						return (
               <ChannelCard
-                updateCart={set_cart}
+                updateCart={updateCart}
                 key={"channel-id-" + channel.id}
                 {...{ channel, cart, formats }}
               />

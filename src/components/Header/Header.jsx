@@ -8,10 +8,12 @@ import { slide as Menu } from 'react-burger-menu'
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { auth } from '../../api/api'
 import { useProfile } from '../../hooks/useProfile';
+import { useCart } from '../../hooks/useCart';
 
 export const Header = ({role, setRole, onModalOpen}) => {
 	const navigate = useNavigate()
 	const [burgerOpen, setBurgerOpen] = useState(false)
+	const {data: cart} = useCart()
 
 	const isMobile = useMediaQuery({
 		query: '(max-width: 840px)'
@@ -29,26 +31,9 @@ export const Header = ({role, setRole, onModalOpen}) => {
 	]
 
 	const getSum = () => {
-		return !cart.length || cart.reduce((a, b) =>
+		return !cart?.length || cart?.reduce((a, b) =>
 				a + b.count, 0);
 	};
-
-	const [cart, set_cart] = useState(() => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		return initialValue || "";
-	});
-
-	useEffect(() => {
-		localStorage.setItem("cart", JSON.stringify(cart));
-	}, [cart])
-
-	window.addEventListener('cart-changed', () => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		set_cart(initialValue || "")
-	})
-
 
 	return (
 		<>
@@ -82,7 +67,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 							</li>
 						</ul>}
 						<div className={s.btns}>
-							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart.length > 0 ? s.cartIcon : ''}/>}/>
+							 <Button onClick={() => navigate('cart')} className={s.cartBtn} label={cart?.length > 0 ? '|  ' + getSum() : ''} leftIcon={<IconShoppingCart className={cart?.length > 0 ? s.cartIcon : ''}/>}/>
 							 	{profileSuccess ? 
 									<Dropdown
 									options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user-without-image.svg'}/>}

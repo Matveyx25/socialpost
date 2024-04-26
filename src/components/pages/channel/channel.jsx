@@ -8,8 +8,13 @@ import { IconShoppingCart } from '@tabler/icons-react';
 import { Button } from '../../Shared/Button/Button';
 import { IconX } from '@tabler/icons-react';
 import LineChart from '../../Shared/LineChart/LineChart';
+import { useCart } from '../../../hooks/useCart';
+import { useUpdateCart } from '../../../hooks/useUpdateCart';
 
 export const Channel = () => {
+	const {data: cart} = useCart()
+	const {mutate: updateCart} = useUpdateCart()
+
 	const { channelId } = useParams()
 	const channel = channels.find(el => el.id === channelId)
 	const {img, title, type, desc, cpv, er, postReach, subscribers, price} = channel
@@ -18,28 +23,18 @@ export const Channel = () => {
 		label: el,
 		value: el
 	}))
-	
-	const [cart, set_cart] = useState(() => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		return initialValue || "";
-	});
+
 	const [inCart, set_inCart] = useState(cart && cart?.find(el => el.id === channelId))
 	const [selectedFormat, setSelectedFormat] = useState(inCart ? formats.find(el => el.value === cart?.find(a => a.id === channelId).format) : formats[0])
-	
-	useEffect(() => {
-		localStorage.setItem("cart", JSON.stringify(cart));
-		window.dispatchEvent(new Event("cart-changed"));
-	}, [cart])
 
 	const addToCart = () => {
 		set_inCart(true)
-		set_cart([...cart, {id: channelId, count: 1, format: selectedFormat.label}])
+		updateCart([...cart, {id: channelId, count: 1, format: selectedFormat.label}])
 	}
 	
 	const removeFromCart = () => {
 		set_inCart(false)
-		set_cart(cart.filter(el => el.id !== channelId))
+		updateCart(cart?.filter(el => el.id !== channelId))
 	}
 
 	const postReachData = {

@@ -43,7 +43,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
 
   const removeFromCart = () => {
     set_inCart(false);
-    updateCart(cart.filter((el) => el.id !== id));
+    updateCart(cart?.filter((el) => el.id !== id));
   };
 
   useEffect(() => {

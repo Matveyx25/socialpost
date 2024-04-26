@@ -5,7 +5,15 @@ export const useUpdateCart = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: (data) => data && profile.updateCart(data.map(el => ({format: el.format, channelId: el.channelId, count: el.count}))),
+		mutationFn: (data) => {
+			 const token = localStorage.getItem('token');
+			 if (!token) {
+				 localStorage.setItem('cart', JSON.stringify(data));
+				 queryClient.invalidateQueries(['cart'])
+				 return
+			 }
+			 return profile.updateCart(data.map(el => ({format: el.format, channelId: el.id, count: el.count})));
+		},
 		onSuccess: () => {
       queryClient.invalidateQueries(['cart'])
     },

@@ -11,36 +11,32 @@ import { NavLink } from 'react-router-dom';
 import { Player } from '@lottiefiles/react-lottie-player';
 import { CartChannelCard } from './cartChannleCard';
 import { renderHtmlEmail } from './cartEmail';
+import { useCart } from '../../../hooks/useCart';
+import { useUpdateCart } from '../../../hooks/useUpdateCart';
 
 export const Cart = () => {
+	const {data: cart} = useCart()
+	const {mutate: updateCart} = useUpdateCart()
+	
 	const [payingNotice, set_payingNotice] = useState(false)
 	const [policy, set_policy] = useState(false)
-	
-	const [cart, set_cart] = useState(() => {
-		const saved = localStorage.getItem("cart");
-		const initialValue = JSON.parse(saved);
-		return initialValue || "";
-	});
 
 	const getSum = () => {
 		let sum = 0 
 		cart?.forEach(b => {
 			sum += (+b.price * +b.count)
 		});
-  	return !cart.length || sum
+  	return !cart?.length || sum
 	};
 
 	const [sum, set_sum] = useState(() => getSum())
 
 	useEffect(() => {
-		localStorage.setItem("cart", JSON.stringify(cart));
 		set_sum(getSum())
-		window.dispatchEvent(new Event("cart-changed"));
 	}, [cart])
 
-
 	const removeFromCart = (id) => {
-		set_cart(cart?.filter(el => el.id !== id))
+		updateCart(cart?.filter(el => el.id !== id))
 	}
 
 	const phoneRegExp = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/
@@ -100,8 +96,8 @@ export const Cart = () => {
 					</h2>
 					<div className={s.flex}>
 					<div className={s.cardsWrapper}>
-						{cart.length ? cart.map((el) => (
-							<CartChannelCard key={el?.id} {...{el, set_cart, cart, removeFromCart}}/>
+						{cart?.length ? cart?.map((el) => (
+							<CartChannelCard key={el?.id} {...{el, removeFromCart}}/>
 						)) : <div className={s.empty}>Корзина пуста</div>}
 						</div> 
 						<div className={s.cardWrapper}>
@@ -131,7 +127,7 @@ export const Cart = () => {
 										<span className={s.line}></span>
 										<p className={s.price}>
 											<span>Итого </span> 
-											<span>{cart.length ? sum : '0'} ₽</span>
+											<span>{cart?.length ? sum : '0'} ₽</span>
 										</p>
 										<span className={s.line}></span>
 										<div className={`${s.checkbox + ' ' + s.sm}`}>	
@@ -155,7 +151,7 @@ export const Cart = () => {
 											</label>
 										</div>
 										<div className={s.btns}>
-											<Button label="Оформить заказ" disabled={!values.fullName || !values.email || !policy || !payingNotice || !cart.length || Object.values(errors).length} className={s.btn}/> 
+											<Button label="Оформить заказ" disabled={!values.fullName || !values.email || !policy || !payingNotice || !cart?.length || Object.values(errors).length} className={s.btn}/> 
 										</div>
 									</Form>)}
 							</Formik>

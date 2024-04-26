@@ -57,6 +57,19 @@ export const auth = {
 		return instance.post("/login/email", data).then(response => {
 				setAuthToken(response.data.accessToken);
 				localStorage.setItem('token', response.data.accessToken)
+
+				const pendingCartUpdate = localStorage.getItem('cart');
+				if (pendingCartUpdate) {
+					const cartData = JSON.parse(pendingCartUpdate);
+					profile.updateCart(cartData.map(el => ({format: el.format, channelId: el.id, count: el.count})))
+						.then(() => {
+							localStorage.removeItem('cart');
+						})
+						.catch((error) => {
+							console.error('Ошибка при отправке данных корзины на сервер:', error);
+						});
+				}
+				
 				window.location.href = '/'
 			})
 	},

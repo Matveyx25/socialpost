@@ -4,15 +4,19 @@ import s from './cart.module.scss'
 import { IconTrash } from '@tabler/icons-react'
 import { Counter } from '../../Shared/Counter/Counter'
 import { Loader } from '../../Shared/Loader/Loader'
+import { useUpdateCart } from '../../../hooks/useUpdateCart'
+import { useCart } from '../../../hooks/useCart'
 
-export const CartChannelCard = ({el, removeFromCart, cart, set_cart}) => {
+export const CartChannelCard = ({el, removeFromCart}) => {
 	const {data: channel, isFetched} = useChannelById(el.id)
+	const {data: cart} = useCart()
+	const {mutate: updateCart} = useUpdateCart()
 
 	const formats = channel ? [
-		{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'nativePostPrice', price: channel?.nativePostPrice},
-		{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'post1For24Price', price: channel?.post1For24Price},
-		{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'post1For48Price', price: channel?.post1For48Price},
-		{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'post2For48Price', price: channel?.post2For48Price},
+		{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'NATIVE_POST_PRICE', price: channel?.nativePostPrice},
+		{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'POST_1_FOR_24', price: channel?.post1For24Price},
+		{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'POST_1_FOR_48', price: channel?.post1For48Price},
+		{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'POST_2_FOR_48', price: channel?.post2For48Price},
 	] : []
 
 	if(!isFetched){
@@ -37,7 +41,7 @@ export const CartChannelCard = ({el, removeFromCart, cart, set_cart}) => {
 						<IconTrash size={24} color='#436CFF' onClick={() => removeFromCart(channel.id)}/>
 					</button>
 					<Counter value={el.count} min={1} max={Infinity} onChange={(value) => {
-							const newState = cart.map(obj => {
+							const newState = cart?.map(obj => {
 								if (obj?.id === el?.id) {
 									return {...obj, count: value};
 								}
@@ -45,7 +49,7 @@ export const CartChannelCard = ({el, removeFromCart, cart, set_cart}) => {
 								return obj;
 							});
 					
-							set_cart(newState)
+							updateCart(newState)
 						}}/>
 				</div>
 		</div>)
