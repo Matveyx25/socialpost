@@ -6,8 +6,7 @@ import { IconCalendarUp, IconChevronRight, IconChevronDown, IconCalendarDown, Ic
 import { CalendarHeader } from './CalendarHeader';
 import { Button } from '../Button/Button';
 
-export const RangeCalendar = () => {
-	const [dateRange, setDateRange] = useState([null, null]);
+export const RangeCalendar = ({dateRange, setDateRange}) => {
   const [startDate, endDate] = dateRange;
 
 	const calendar = useRef(null)

@@ -100,6 +100,12 @@ export const profile = {
 	me() {
 		return instance.get("/users/current")
 	},
+	getCart() {
+		return instance.get("/users/current/cart")
+	},
+	updateCart(data) {
+		return instance.put("/users/current/cart", data)
+	},
 	updateProfile(data) {
 		return instance.put("/users/current", data)
 	},
@@ -120,7 +126,7 @@ export const profile = {
 		return instance.post("/users/current/connect/email", data)
 	},
 	getBalanceOperations(params) {
-		return instance.get("/balance_operations/my", params)
+		return instance.get("/balance_operations/my", {params})
 	},
 	withdrawalBalance(data) {
 		return instance.post("/balance_operations/withdrawal", data)

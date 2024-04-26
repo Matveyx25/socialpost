@@ -1,34 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './payments.module.scss'
 import { IconRefresh, IconSortDescending } from '@tabler/icons-react'
-import { Select } from '../../../Shared/Select/Select';
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
-import { useNavigate, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import { DashboardCard } from '../dashboard-card';
-import channelsJson from '../../../../data/channels.json'
 import { useProfile } from '../../../../hooks/useProfile';
 import { useBalanceOperations } from '../../../../hooks/publisherBalance';
 import { Loader } from '../../../Shared/Loader/Loader';
 
-const payments = [
-	{
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-	}
-]
-
 export const Payments = () => {
-	const {data: profile, isFetched: isProfileFetched} = useProfile()
-	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations()
+	const [dateRange, setDateRange] = useState([null, null])
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
 
+	const {data: profile} = useProfile()
+	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations({
+		start_date: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
+		end_date: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
+	})
+	
 	const [setModal] = useOutletContext()
+
+	useEffect(() => {
+		if(dateRange[0] || dateRange[1]){
+
+		}
+	}, [dateRange])
 
 	return (
     <div className={s.grid}>
@@ -45,7 +44,7 @@ export const Payments = () => {
       </DashboardCard>
       <div className={s.tableCard}>
         <div className={s.filters}>
-          <RangeCalendar />
+          <RangeCalendar {...{dateRange, setDateRange}}/>
           Найдено выплат: {operations?.length}
           <Button
             label="Сбросить"

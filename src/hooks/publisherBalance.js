@@ -83,10 +83,12 @@ export const useUpdateCryptoWallet = () => {
 }
 
 
-export const useBalanceOperations = () => {
+export const useBalanceOperations = (params) => {
+	console.log(params);
+
 	return useQuery({
-		queryKey: ['balance-operations'],
-		queryFn: profile.getBalanceOperations,
+		queryKey: ['balance-operations', params],
+		queryFn: () => profile.getBalanceOperations(params),
 		select: data => data.data
 	})
 }
