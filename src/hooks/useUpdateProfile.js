@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { profile } from "../api/api"
+import { toast } from "react-toastify"
 
 export const useUpdateProfile = () => {
 	const queryClient = useQueryClient()
@@ -8,6 +9,7 @@ export const useUpdateProfile = () => {
 		mutationFn: profile.updateProfile,
 		onSuccess: () => {
       queryClient.invalidateQueries(['profile'])
+			toast.success('Данные обновлены')
     },
 	})
 }

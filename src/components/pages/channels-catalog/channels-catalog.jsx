@@ -55,7 +55,7 @@ export const ChannelsCatalog = () => {
 	return (
 		<div className={s.wrapper}>
 			{isMobile && <FilterModal isOpen={modalIsOpen} setOpen={setModalIsOpen} onFilterSubmit={onFilterSubmit}
-			maxSubscribersNumber={10000000}/>}
+			maxSubscribersNumber={100000}/>}
 			<div className="container">
 				<h2 className={s.title}>
 					Каталог каналов
@@ -64,7 +64,7 @@ export const ChannelsCatalog = () => {
 					{(channels?.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
 				</p>
 				<div className={s.flex}>
-					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={10000000}/>}
+					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={100000}/>}
 					<div className={s.content}>
 						<div className={s.header}>
 							{isMobile && <button className={s.filterBtn} onClick={() => setModalIsOpen('filter-modal')}>Фильтры</button>}

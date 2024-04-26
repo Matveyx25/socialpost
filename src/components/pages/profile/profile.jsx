@@ -11,6 +11,8 @@ import TelegramLoginButton from 'telegram-login-button';
 import { useProfile } from '../../../hooks/useProfile';
 import { useUpdateProfile } from '../../../hooks/useUpdateProfile';
 import { useConnectTelegram } from '../../../hooks/useConnectTelegram';
+import { auth } from '../../../api/api';
+import { toast } from 'react-toastify';
 
 export const Profile = () => {
 	const [setModal] = useOutletContext()
@@ -28,8 +30,26 @@ export const Profile = () => {
 		.matches(nameRegExp, 'Введите имя верно')
 			.required('Введите имя'),
 		lastName: Yup.string().notRequired()
-		.matches(nameRegExp, 'Введите фамилию верно')
+		.matches(nameRegExp, 'Введите фамилию верно'),
+		password: Yup.string()
+      .min(8, "Пароль должен быть не менее 8 символов")
+      .matches(/[a-z]/, "Пароль должен содержать хотя бы одну строчную букву")
+      .matches(/[A-Z]/, "Пароль должен содержать хотя бы одну заглавную букву")
+      .matches(/\d/, "Пароль должен содержать хотя бы одну цифру")
+      .matches(
+        /[^a-zA-Z\d]/,
+        "Пароль должен содержать хотя бы один специальный символ"
+      ),
+    secondPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Пароли должны совпадать"),
 	});
+
+
+	const newValues = (values) => {
+		const fname = values.firstName;
+		const lname = values.lastName
+		return fname !== profile.firstName || lname !== profile.lastName
+	}
 
 	return (
 		<div className={s.wrapper}>
@@ -45,10 +65,19 @@ export const Profile = () => {
 						}}
 						validationSchema={validator}
 						onSubmit={(props) => {
-							mutate({
-								firstName: props.firstName,
-								lastName: props.lastName
-							})
+							if(props?.password && props?.secondPassword){
+								auth.updatePassword({password: props.password}).then(res => {
+									toast.success('Пароль обновлен')
+									props.password = ''
+									props.secondPassword = ''
+								})
+							}
+							if(newValues(props)){
+								mutate({
+									firstName: props.firstName,
+									lastName: props.lastName
+								})
+							}
 						}}
 					>
 						{({ dirty, isValid, values }) => (
@@ -60,10 +89,14 @@ export const Profile = () => {
 									<InputField label={'Ваша фамилия'} name='lastName' placeholder='Иванов' className={s.input}/>
 								</div>
 								<div className={s.line}></div>
+								<div className={s.formRow}>
+									<InputField type='password' label={'Новый пароль'} name='password' placeholder='Новый пароль' className={s.input}/>
+									<InputField type='password' label={'Повторите пароль'} name='secondPassword' placeholder='Повторите пароль' className={s.input}/>
+								</div>
+								<div className={s.line}></div>
 								<div className={s.btns}>
 									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} 
-									disabled={!dirty || !isValid || 
-										(values.firstName === (profile?.firstName || '') && values.lastName === (profile?.lastName || ''))}/> 
+									disabled={(!dirty && !isValid) || !newValues(values) && (!values?.password || !values?.secondPassword)}/> 
 								</div>
 							</Form>)}
 					</Formik>
