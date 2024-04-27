@@ -6,6 +6,19 @@
 	gap: 1.25rem;
 	height: 100%;
 }
+.cardHeader{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: $gray-800;
+	font-size: 1.25rem;
+	font-style: normal;
+	font-weight: 600;
+	line-height: normal;
+	letter-spacing: 0.025rem;
+	padding: 1rem;
+	border-bottom: 1px solid $gray-100;
+}
 .balance{
 	display: flex;
 	padding: 1rem;

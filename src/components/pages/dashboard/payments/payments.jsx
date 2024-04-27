@@ -31,7 +31,7 @@ export const Payments = () => {
 
 	return (
     <div className={s.grid}>
-      <DashboardCard className={s.balance}>
+      <DashboardCard className={s.balance} >
         <div>
           <p>{profile?.balance} ₽</p>
           <span className={s.label}>Баланс кабинета</span>
@@ -43,6 +43,9 @@ export const Payments = () => {
         />
       </DashboardCard>
       <div className={s.tableCard}>
+				<div className={s.cardHeader}>
+						<span>История операций</span>
+				</div>
         <div className={s.filters}>
           <RangeCalendar {...{dateRange, setDateRange}}/>
           Найдено выплат: {operations?.length}
@@ -62,13 +65,11 @@ export const Payments = () => {
                 <th>
                   <div className={s.flex}>
                     Дата
-                    <IconSortDescending size={18} />
                   </div>
                 </th>
                 <th>
                   <div className={s.flex}>
                     Сумма
-                    <IconSortDescending size={18} />
                   </div>
                 </th>
               </tr>
@@ -94,9 +95,9 @@ export const Payments = () => {
                       <div className={s.center}>
 												{
                           {
-                            PENDING: "В ОЖИДАНИИ",
-                            EXECUTED: "ВЫПОЛНЕНО",
-                            DECLINED: "ОТКЛОНЕНО",
+                            PENDING: "В обработке",
+                            EXECUTED: "Исполнено",
+                            DECLINED: "Отклонено",
                           }[el.status]
                         }
                       </div>

@@ -14,7 +14,7 @@ const routesTitle = {
 	'/dashboard/my-channels/': 'Мои каналы',
 	'/dashboard/placement-appointments/': 'Заявки на размещение',
 	'/dashboard/appointment/': 'Заявки на размещение / Бесплатный урок',
-	'/dashboard/payments/': 'Выплаты',
+	'/dashboard/payments/': 'Кошелек',
 	'/dashboard/requisites/': 'Реквизиты',
 	'/dashboard/faq/': 'FAQ',
 	'/dashboard/support/': 'Поддержка',

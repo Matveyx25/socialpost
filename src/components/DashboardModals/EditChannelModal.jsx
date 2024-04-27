@@ -44,15 +44,14 @@ const validator = Yup.object().shape({
 				 validationSchema={validator}
 				 onSubmit={(values) => {
 					 updateChannel({data: {
-							"nativePostPrice": values.nativePostPrice,
-							"post1For48Price": values.post1For48Price,
-							"post1For24Price": values.post1For24Price,
-							"post2For48Price": values.post2For48Price,
+							"nativePostPrice":  typeof +values?.nativePostPrice === 'number' ? values?.nativePostPrice : 0,
+							"post1For48Price":  typeof +values?.post1For48Price === 'number' ? values?.post1For48Price : 0,
+							"post1For24Price":  typeof +values?.post1For24Price === 'number' ? values?.post1For24Price : 0,
+							"post2For48Price":  typeof +values?.post2For48Price === 'number' ? values?.post2For48Price : 0,
 							nativePostPriceEnabled: values?.nativePostPriceEnabled,
 							post1For24PriceEnabled: values?.post1For24PriceEnabled,
 							post1For48PriceEnabled: values?.post1For48PriceEnabled,
 							post2For48PriceEnabled: values?.post2For48PriceEnabled,
-							"nativePostPriceType": "NUMERIC",
 					 }, id: modalParams})
 					 setOpen()
 				 }}

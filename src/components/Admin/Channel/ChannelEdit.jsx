@@ -39,9 +39,9 @@ export const ChannelEdit = (props) => (
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
-								CPV
+								Тэги
 							</Typography>
-							<TextInput source="costPerView" label="CPV" fullWidth disabled/>
+							<TextInput source="tag" label="Тэги" fullWidth/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>

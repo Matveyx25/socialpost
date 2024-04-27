@@ -33,7 +33,7 @@ export const PublisherContent = () => {
 					<div className={s.info} id="publisher_info3">
 						<img src="/images/publisher/img3.svg" alt="" />
 						<span>
-							Выплаты любым удобным<br/>
+							Кошелек любым удобным<br/>
 							Вам способом
 						</span>
 					</div>
