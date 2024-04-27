@@ -82,7 +82,7 @@ export const auth = {
 	updatePassword(data){
 		return instance.put("/users/current/password", {password: data.password}, {
 			headers: {
-				Authorization: `Bearer ${data.token}`
+				Authorization: `Bearer ${data.token || localStorage.getItem('token')}`
 			}
 		})
 	},
