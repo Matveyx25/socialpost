@@ -10,7 +10,8 @@ export const SelfEmployed = (props) => {
 	const { record: createRecord, save: create } = useCreateController({resource: 'users/' + id + '/self_employed', id: ''})
 
 	return (
-		<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
+		<Edit>
+			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
 				<Box sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
@@ -56,5 +57,6 @@ export const SelfEmployed = (props) => {
 					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
 				</Box>
 			</SimpleForm>
+		</Edit>
 	)
 }
