@@ -1,16 +1,16 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import { DateInput, SimpleForm, TextInput, useEditController } from 'react-admin'
+import { Create, DateInput, Edit, SimpleForm, TextInput, useCreateController, useEditController } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const SelfEmployed = (props) => {
 	const { id } = useParams();
 	
-	const { record, save, isLoading } = useEditController({ resource: 'users/' + id + '/self_employed', id: '' });
-  if (isLoading) return null;
+	const { record, save } = useEditController({ resource: 'users/' + id + '/self_employed', id: '' });
+	const { record: createRecord, save: create } = useCreateController({resource: 'users/' + id + '/self_employed', id: ''})
 
 	return (
-			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+		<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
 				<Box sx={{ maxWidth: 500 }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>

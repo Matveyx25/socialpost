@@ -1,16 +1,16 @@
 import { Box } from '@mui/material';
 import React from 'react'
-import { SelectInput, SimpleForm, TextInput, useEditController } from 'react-admin'
+import { SelectInput, SimpleForm, TextInput, useCreateController, useEditController } from 'react-admin'
 import { useParams } from 'react-router-dom';
 
 export const LegalEntity = () => {
 	const { id } = useParams();
 
-	const { record, save, isLoading } = useEditController({ resource: 'users/' + id + '/legal_entity', id: '' });
-  if (isLoading) return null;
+	const { record, save } = useEditController({ resource: 'users/' + id + '/legal_entity', id: '' });
+  const { record: createRecord, save: create } = useCreateController({resource: 'users/' + id + '/legal_entity', id: ''})
 
 	return (
-		<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record} onSubmit={save}>
+		<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
 				<Box sx={{ maxWidth: 500 }}>	
 					<TextInput source="inn" label='ИНН' isRequired fullWidth />
 					<SelectInput source="taxSystem" choices={[

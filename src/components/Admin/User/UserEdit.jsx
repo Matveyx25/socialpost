@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, TabbedForm } from "react-admin";
+import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, TabbedForm, SimpleForm } from "react-admin";
 import { SelfEmployed } from '../SelfEmployed/SelfEmployed';
 import { LegalEntity } from '../LegalEntity/LegalEntity';
 import { IE } from '../IE/IE';
@@ -12,59 +12,40 @@ export const UserEdit = (props) => {
 					<PrevNextButtons />
 			</TopToolbar>
 		}>
-			<TabbedForm>
-				<TabbedForm.Tab label={'Общее'}>
-					<Box sx={{ maxWidth: 500 }}>
-						<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
-						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-										<TextInput source="firstName" isRequired fullWidth label="Имя"/>
-								</Box>
-								<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-										<TextInput source="lastName" fullWidth label="Фамилия"/>
-								</Box>
-						</Box>
-						<TextInput type="email" source="emailData.email" isRequired fullWidth label="Почта"/>
-						<hr />
-						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<Typography variant="h6" gutterBottom>
-											Роли
-									</Typography>
-									<SelectArrayInput fullWidth label="роли" source="roles" choices={[
-											{ id: 'PUBLISHER', name: 'Паблишер' },
-											{ id: 'ADVERTISER', name: 'Рекламодатель' }]} />
-								</Box>
-						</Box>
-						<hr />
-						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-								<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<Typography variant="h6" gutterBottom>
-											Баланс
-									</Typography>
-									<TextInput disabled source="balance" fullWidth label="Баланс"/>
-								</Box>
-						</Box>
-					</Box>
-				</TabbedForm.Tab>
-				<TabbedForm.Tab label="Каналы">
-				</TabbedForm.Tab>
-				<TabbedForm.Tab label="Реквизиты">
-					{/* <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<SelfEmployed />
-					</Box>
+			<SimpleForm>
+				<Box sx={{ maxWidth: 500 }}>
+					<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<LegalEntity />
-					</Box> */}
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<IE />
+							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+									<TextInput source="firstName" isRequired fullWidth label="Имя"/>
+							</Box>
+							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+									<TextInput source="lastName" fullWidth label="Фамилия"/>
+							</Box>
 					</Box>
-				</TabbedForm.Tab>
-				<TabbedForm.Tab label="Рекламные кампании">
-				</TabbedForm.Tab>
-				<TabbedForm.Tab label="Посты">
-				</TabbedForm.Tab>
-			</TabbedForm>
+					<TextInput type="email" source="emailData.email" isRequired fullWidth label="Почта"/>
+					<hr />
+					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+								<Typography variant="h6" gutterBottom>
+										Роли
+								</Typography>
+								<SelectArrayInput fullWidth label="роли" source="roles" choices={[
+										{ id: 'PUBLISHER', name: 'Паблишер' },
+										{ id: 'ADVERTISER', name: 'Рекламодатель' }]} />
+							</Box>
+					</Box>
+					<hr />
+					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+								<Typography variant="h6" gutterBottom>
+										Баланс
+								</Typography>
+								<TextInput disabled source="balance" fullWidth label="Баланс"/>
+							</Box>
+					</Box>
+				</Box>
+			</SimpleForm>
 		</Edit>
 	)
 };

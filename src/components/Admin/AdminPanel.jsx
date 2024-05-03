@@ -11,6 +11,8 @@ import Link from '@mui/material/Link';
 import { OperationsList } from './Operations/OperationsList';
 import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
+import { Route } from "react-router-dom";
+import { Requisites } from "./User/Requisites";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -55,19 +57,14 @@ const dataProvider = {
   getList: (resource, params) =>
     customDataProvider.getList(resource, params).then((result) => {
       return { ...result};
-    }),
-		getOne: (resource, params) =>
-		customDataProvider.getOne(resource, params).then((result) => {
-				if (!result.data || Object.keys(result.data).length === 0) {
-						return { data: {} };
-				}
-				return result;
-		}),
+    })
 };
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs}>
-		<Resource name="users" list={UserList} edit={UserEdit}/>
+		<Resource name="users" list={UserList} edit={UserEdit}>
+				<Route path=":id/requisites" element={<Requisites />} />
+		</Resource>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} />
   </Admin>
