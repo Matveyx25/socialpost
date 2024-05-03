@@ -56,6 +56,13 @@ const dataProvider = {
     customDataProvider.getList(resource, params).then((result) => {
       return { ...result};
     }),
+		getOne: (resource, params) =>
+		customDataProvider.getOne(resource, params).then((result) => {
+				if (!result.data || Object.keys(result.data).length === 0) {
+						return { data: {} };
+				}
+				return result;
+		}),
 };
 
 const AdminPanel = () => (
