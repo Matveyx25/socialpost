@@ -18,7 +18,7 @@ const errorHandler = (error) => {
 
 instance.interceptors.response.use(
   (response) => {return response},
-  (error) => errorHandler(error)
+  (error) => errorHandler(error),
 );
 
 
@@ -139,7 +139,12 @@ export const profile = {
 		return instance.post("/users/current/connect/email", data)
 	},
 	getBalanceOperations(params) {
-		return instance.get("/balance_operations/my", {params})
+		return instance.get("/balance_operations/my", {params, paramsSerializer: {
+			indexes: null
+		}}).then(res => {
+			console.log(res.headers['x-total-count']);
+			return res
+		})
 	},
 	withdrawalBalance(data) {
 		return instance.post("/balance_operations/withdrawal", data)

@@ -47,16 +47,22 @@ export const UserEdit = (props) => {
 						</Box>
 					</Box>
 				</TabbedForm.Tab>
+				<TabbedForm.Tab label="Каналы">
+				</TabbedForm.Tab>
 				<TabbedForm.Tab label="Реквизиты">
 					{/* <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<SelfEmployed />
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<LegalEntity />
-					</Box>
+					</Box> */}
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<IE />
-					</Box> */}
+					</Box>
+				</TabbedForm.Tab>
+				<TabbedForm.Tab label="Рекламные кампании">
+				</TabbedForm.Tab>
+				<TabbedForm.Tab label="Посты">
 				</TabbedForm.Tab>
 			</TabbedForm>
 		</Edit>

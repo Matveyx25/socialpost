@@ -5,6 +5,7 @@ import { Button } from '../../../Shared/Button/Button'
 import {  useOutletContext } from 'react-router-dom'
 import classNames from 'classnames'
 import { Tooltip } from 'react-tooltip'
+import { priceSeparator } from '../../../../helpers/priceSeparator'
 
 export const ChannelCard = ({channel}) => {
 	const [setModal] = useOutletContext()
@@ -37,35 +38,35 @@ export const ChannelCard = ({channel}) => {
 			<div className={s.stats}>
 				<div>
 					<span>Подписчики</span>
-					<p>{channel?.subscribersCount || 0}</p>
+					<p>{priceSeparator(channel?.subscribersCount || 0)}</p>
 				</div>
 				{channel?.averagePostReach ? <div>
 					<span>Средний охват поста</span>
-					<p>{channel?.averagePostReach}</p>
+					<p>{priceSeparator(channel?.averagePostReach)}</p>
 				</div> : null}
 				{channel?.engagementRate ? <div>
 					<span>ER</span>
-					<p>{channel?.engagementRate}%</p>
+					<p>{priceSeparator(channel?.engagementRate)}%</p>
 				</div> : null}
 				{channel?.costPerView ? <div>
 					<span>CPV</span>
-					<p>{channel?.costPerView}</p>
+					<p>{priceSeparator(channel?.costPerView)}</p>
 				</div> : null}
 				{typeof +channel?.nativePostPrice === 'number' && <div>
 					<span>Нативное размещение</span>
-					<p>{channel?.nativePostPrice}₽</p>
+					<p>{priceSeparator(channel?.nativePostPrice)}₽</p>
 				</div>}
 				{typeof +channel?.post1For24Price === 'number' && <div>
 					<span>Размещение 1/24</span>
-					<p>{channel?.post1For24Price}₽</p>
+					<p>{priceSeparator(channel?.post1For24Price)}₽</p>
 				</div>}
 				{typeof +channel?.post1For48Price === 'number' && <div>
 					<span>Размещение 1/48</span>
-					<p>{channel?.post1For48Price}₽</p>
+					<p>{priceSeparator(channel?.post1For48Price)}₽</p>
 				</div>}
 				{typeof +channel?.post2For48Price === 'number' && <div>
 					<span>Размещение 2/48</span>
-					<p>{channel?.post2For48Price}₽</p>
+					<p>{priceSeparator(channel?.post2For48Price)}₽</p>
 				</div>}
 			</div>
 		</div>

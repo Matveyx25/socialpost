@@ -8,6 +8,8 @@ import { Tabs } from '../../Shared/Tabs/Tabs';
 import { ReportItem } from './report-item/report-item';
 import { useOutletContext } from 'react-router-dom';
 import { useMyChannels } from '../../../hooks/useMyChannels';
+import { useProfile } from '../../../hooks/useProfile';
+import { priceSeparator } from '../../../helpers/priceSeparator';
 
 const tabs = [
 	{label: 'Запросы', count: 4, id: 5},
@@ -23,13 +25,14 @@ export const MainDashboard = () => {
 
 	const [setModal] = useOutletContext()
 	const {data: channels} = useMyChannels()
+	const {data: profile} = useProfile()
 
 	return (
 		<div className={s.grid}>
 			<div className={s.colSm}>
 				<DashboardCard>
 					<div className={s.balanceWrapper}>
-						<span className={s.balance}>0,00 ₽</span>
+						<span className={s.balance}>{priceSeparator(profile?.balance)} ₽</span>
 						<span className={s.balanceLabel}>Общий баланс</span>
 					</div>
 				</DashboardCard>

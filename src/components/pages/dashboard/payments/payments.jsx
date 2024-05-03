@@ -9,31 +9,32 @@ import { DashboardCard } from '../dashboard-card';
 import { useProfile } from '../../../../hooks/useProfile';
 import { useBalanceOperations } from '../../../../hooks/publisherBalance';
 import { Loader } from '../../../Shared/Loader/Loader';
+import { priceSeparator } from '../../../../helpers/priceSeparator'
+import { Select } from '../../../Shared/Select/Select'
+import { useMyChannels } from '../../../../hooks/useMyChannels';
 
 export const Payments = () => {
 	const [dateRange, setDateRange] = useState([null, null])
+	const [option, setOption] = useState()
+	const [channel, setChannels] = useState(null)
 	const [page, setPage] = useState(1)
-	const [size, setSize] = useState(30)
+	const [size, setSize] = useState(10)
 
 	const {data: profile} = useProfile()
-	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations({
+	const {data: operations, isFetched: isOperationsFetched, headers: operationsHeaders} = useBalanceOperations({
 		start_date: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
 		end_date: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
+		type: option?.value
 	})
+	const {data: channels} = useMyChannels()
 	
 	const [setModal] = useOutletContext()
-
-	useEffect(() => {
-		if(dateRange[0] || dateRange[1]){
-
-		}
-	}, [dateRange])
 
 	return (
     <div className={s.grid}>
       <DashboardCard className={s.balance} >
         <div>
-          <p>{profile?.balance} ₽</p>
+          <p>{priceSeparator(profile?.balance)} ₽</p>
           <span className={s.label}>Баланс кабинета</span>
         </div>
         <Button
@@ -48,12 +49,43 @@ export const Payments = () => {
 				</div>
         <div className={s.filters}>
           <RangeCalendar {...{dateRange, setDateRange}}/>
+					<Select
+						options={[
+							{label: 'Все операции', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET', 'INCOME']},
+							{label: 'Поступления', value: ["INCOME"]},
+							{label: 'Списания', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET']},
+						]}
+						required={true}
+						placeholder={'Все операции'}
+						setSelectedOption={setOption}
+						value={option}
+						fullWidth={true}
+						isMulti={false}
+					/>
           Найдено выплат: {operations?.length}
+					{channels && <Select
+						options={[
+							{label: 'Все каналы', value: null},
+							...channels?.map(el => ({label: el.name, value: el.id}))
+						]}
+						required={true}
+						placeholder={'Все каналы'}
+						setSelectedOption={setChannels}
+						value={channel}
+						fullWidth={true}
+						isMulti={false}
+						className={s.channels}
+					/>}
           <Button
             label="Сбросить"
             leftIcon={<IconRefresh />}
             theme="secondary"
             className={s.refreshBtn}
+						onClick={() => {
+							setChannels()
+							setDateRange([null, null])
+							setOption()
+						}}
           />
         </div>
         <div className={s.tableWrapper}>
@@ -76,7 +108,7 @@ export const Payments = () => {
             </thead>
             <tbody>
               {isOperationsFetched ? (
-                operations?.map((el) => (
+                operations?.data.map((el) => (
                   <tr key={el.id}>
                     <td>
                       <div className={s.center}>
@@ -116,13 +148,18 @@ export const Payments = () => {
             </tbody>
           </table>
         </div>
-        <Pagination
+				{
+					console.log(
+					operations?.headers
+					)
+				}
+        {/* {operations?.headers && <Pagination
           currentPage={page}
-          totalCount={10}
+          totalCount={operations?.headers['X-Total-Count']}
           pageSize={size}
           setSize={setSize}
           onPageChange={(page) => setPage(page)}
-        />
+        />} */}
       </div>
     </div>
   );
