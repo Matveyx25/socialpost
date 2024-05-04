@@ -1,34 +1,40 @@
-import { Box } from '@mui/material';
-import React from 'react'
-import { Edit, SelectInput, SimpleForm, TextInput, useCreateController, useEditController } from 'react-admin'
+import { Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react'
+import { useDataProvider, useNotify } from 'react-admin'
 import { useParams } from 'react-router-dom';
+import { CreateLegalEntity } from './CreateLegalEntity';
+import { EditLegalEntity } from './EditLegalEntity';
 
 export const LegalEntity = () => {
 	const { id } = useParams();
+	const [loading, setLoading] = useState(true);
+	const [record, setRecord] = useState(null);
+	const dataProvider = useDataProvider();
+	const notify = useNotify();
 
-	const { record, save } = useEditController({ resource: 'users/' + id + '/legal_entity', id: '' });
-  const { record: createRecord, save: create } = useCreateController({resource: 'users/' + id + '/legal_entity', id: ''})
+	useEffect(() => {
+			dataProvider.getOne('users/' + id + '/legal_entity', { id: '' })
+				.then(({ data }) => {
+						setRecord(data);
+						setLoading(false);
+				})
+				.catch(error => {
+						if (error.status === 404) {
+								setLoading(false);
+						} else {
+								notify('Error', 'error');
+								setLoading(false);
+						}
+				});
+	}, [dataProvider, id, notify]);
 
-	return (
-		<Edit>
-			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
-					<Box sx={{ maxWidth: 500 }}>	
-						<TextInput source="inn" label='ИНН' isRequired fullWidth />
-						<SelectInput source="taxSystem" choices={[
-							{ id: 'OSN', name: 'ОСН' },
-							{ id: 'USN', name: 'УСН' }
-						]} label='Система налогообложения' isRequired fullWidth />
-						<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
-						<TextInput source="legalAddress" label='Юридический адрес' isRequired fullWidth />
-						<TextInput source="correspondenceAddress" label='Адрес для корреспонденции' isRequired fullWidth />
-					</Box>
-					<Box sx={{ maxWidth: 500 }}>
-						<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
-						<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
-						<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
-						<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
-					</Box>
-			</SimpleForm>
-		</Edit>
-	)
+	if (loading) {
+			return <Typography>Loading...</Typography>;
+	}
+
+	if(!record){
+		return <CreateLegalEntity id={id}/>
+	}
+
+	return <EditLegalEntity {...{id, record}}/>
 }

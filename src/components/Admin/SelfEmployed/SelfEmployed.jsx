@@ -1,62 +1,41 @@
-import { Box } from '@mui/material'
-import React from 'react'
-import { Create, DateInput, Edit, SimpleForm, TextInput, useCreateController, useEditController } from 'react-admin'
+import { Box, Typography } from '@mui/material'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import { CreateSelfEmployed } from './CreateSelfEmployed';
+import { EditSelfEmployed } from './EditSelfEmpoloyed';
+import { useDataProvider, useNotify } from 'react-admin';
 
 export const SelfEmployed = (props) => {
 	const { id } = useParams();
-	
-	const { record, save } = useEditController({ resource: 'users/' + id + '/self_employed', id: '' });
-	const { record: createRecord, save: create } = useCreateController({resource: 'users/' + id + '/self_employed', id: ''})
 
-	return (
-		<Edit>
-			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record || createRecord} onSubmit={record ? save : create}>
-				<Box sx={{ maxWidth: 500 }}>
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="citizenshipCountry" label="Гражданство" isRequired fullWidth />
-							</Box>
-							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="fullName" label="ФИО" isRequired fullWidth />
-							</Box>
-					</Box>
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="passportSeries" label="Серия паспорта" isRequired fullWidth />
-							</Box>
-							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="passportNumber" label="Номер паспорта" isRequired fullWidth />
-							</Box>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<DateInput source="passportIssueDate" label="Выдан" isRequired fullWidth />
-							</Box>
-					</Box>
-					<DateInput source="birthDate" label="Дата рождения" isRequired fullWidth />
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="birthCity" label="Город рождения" isRequired fullWidth />
-							</Box>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="address" label="Адрес" isRequired fullWidth />
-							</Box>
-					</Box>
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="snils" label="СНИЛС" isRequired fullWidth />
-							</Box>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="inn" label="ИНН" isRequired fullWidth />
-							</Box>
-					</Box>
-				</Box>
-				<Box sx={{ maxWidth: 500 }}>
-					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
-					<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
-					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
-					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
-				</Box>
-			</SimpleForm>
-		</Edit>
-	)
+	const [loading, setLoading] = useState(true);
+	const [record, setRecord] = useState(null);
+	const dataProvider = useDataProvider();
+	const notify = useNotify();
+
+	useEffect(() => {
+			dataProvider.getOne('users/' + id + '/self_employed', { id: '' })
+				.then(({ data }) => {
+						setRecord(data);
+						setLoading(false);
+				})
+				.catch(error => {
+						if (error.status === 404) {
+								setLoading(false);
+						} else {
+								notify('Error', 'error');
+								setLoading(false);
+						}
+				});
+	}, [dataProvider, id, notify]);
+
+	if (loading) {
+			return <Typography>Loading...</Typography>;
+	}
+
+	if(!record){
+		return <CreateSelfEmployed id={id}/>
+	}
+
+	return <EditSelfEmployed {...{id, record}}/>
 }
