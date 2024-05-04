@@ -13,6 +13,7 @@ import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
 import { Route } from "react-router-dom";
 import { Requisites } from "./User/Requisites";
+import { UserTabs } from "./User/UserTabs";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -62,9 +63,7 @@ const dataProvider = {
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs}>
-		<Resource name="users" list={UserList} edit={UserEdit}>
-				<Route path=":id/requisites" element={<Requisites />} />
-		</Resource>
+		<Resource name="users" list={UserList} edit={UserTabs}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} />
   </Admin>

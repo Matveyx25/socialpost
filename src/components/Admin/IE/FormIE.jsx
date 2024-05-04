@@ -8,20 +8,22 @@ export const FormIE = () => {
 			<Typography variant="h6" gutterBottom>
 				ИП
 			</Typography>
-			<Box sx={{ maxWidth: 500, sm: 'flex' }}>
-				<TextInput source="inn" label='ИНН' isRequired fullWidth />
-				<SelectInput source="taxSystem" choices={[
-					{ id: 'OSN', name: 'ОСН' },
-					{ id: 'USN', name: 'УСН' }
-				]} label='Система налогообложения' isRequired fullWidth />
-				<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
-				<TextInput source="address" label='Адрес' isRequired fullWidth />
-			</Box>
-			<Box sx={{ maxWidth: 500 }}>
-				<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
-				<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
-				<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
-				<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+				<Box sx={{ maxWidth: 500, sm: 'flex' }}>
+					<TextInput source="inn" label='ИНН' isRequired fullWidth />
+					<SelectInput source="taxSystem" choices={[
+						{ id: 'OSN', name: 'ОСН' },
+						{ id: 'USN', name: 'УСН' }
+					]} label='Система налогообложения' isRequired fullWidth />
+					<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
+					<TextInput source="address" label='Адрес' isRequired fullWidth />
+				</Box>
+				<Box sx={{ maxWidth: 500 }}>
+					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
+					<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
+					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
+					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
+				</Box>
 			</Box>
 		</>
 	)

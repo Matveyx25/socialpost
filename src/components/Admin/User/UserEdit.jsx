@@ -1,9 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, TabbedForm, SimpleForm } from "react-admin";
-import { SelfEmployed } from '../SelfEmployed/SelfEmployed';
-import { LegalEntity } from '../LegalEntity/LegalEntity';
-import { IE } from '../IE/IE';
+import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm } from "react-admin";
 
 export const UserEdit = (props) => {
 	return (

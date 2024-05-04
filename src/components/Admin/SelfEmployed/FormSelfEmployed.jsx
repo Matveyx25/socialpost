@@ -8,7 +8,8 @@ export const FormSelfEmployed = () => {
 			<Typography variant="h6" gutterBottom>
 					Самозанятый
 			</Typography>
-			<Box sx={{ maxWidth: 500, sm: 'flex' }}>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+				<Box sx={{ maxWidth: 500, sm: 'flex' }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 									<TextInput source="citizenshipCountry" label="Гражданство" isRequired fullWidth />
@@ -52,6 +53,7 @@ export const FormSelfEmployed = () => {
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
 					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
 				</Box>
+			</Box>
 		</>
 	)
 }
