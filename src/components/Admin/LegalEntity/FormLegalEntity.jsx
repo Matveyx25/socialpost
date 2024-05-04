@@ -1,11 +1,14 @@
-import { Box } from '@mui/material'
+import { Box, Typography } from '@mui/material'
 import React from 'react'
 import { SelectInput, TextInput } from 'react-admin'
 
 export const FormLegalEntity = () => {
 	return (
 		<>
-			<Box sx={{ maxWidth: 500 }}>	
+			<Typography variant="h6" gutterBottom>
+				Юр. лицо
+			</Typography>
+			<Box sx={{ maxWidth: 500, sm: 'flex' }}>	
 				<TextInput source="inn" label='ИНН' isRequired fullWidth />
 				<SelectInput source="taxSystem" choices={[
 					{ id: 'OSN', name: 'ОСН' },

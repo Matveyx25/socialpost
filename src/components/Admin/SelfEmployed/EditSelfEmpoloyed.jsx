@@ -9,10 +9,7 @@ export const EditSelfEmployed = ({record, id}) => {
 
 	return (
 		<Edit>
-				<Typography variant="h3" gutterBottom>
-					Самозанятый
-				</Typography>
-			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={record} onSubmit={saveEdit}>
+			<SimpleForm flex={1} record={record} onSubmit={saveEdit}>
 				<FormSelfEmployed/>
 			</SimpleForm>
 		</Edit>

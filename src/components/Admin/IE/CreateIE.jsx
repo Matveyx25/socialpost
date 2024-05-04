@@ -1,19 +1,11 @@
 import React from 'react'
-import { Create, SimpleForm, useCreateController } from 'react-admin';
 import { FormIE } from './FormIE';
-import { Typography } from '@mui/material';
+import { CustomCreateController } from '../CustomControllers/CustomCreateController';
 
 export const CreateIE = ({id}) => {
-	const { record: createRecord, save: create } = useCreateController({ resource: 'users/' + id + '/ie/', id: '' });
-		
 	return (
-		<Create>
-				<Typography variant="h3" gutterBottom>
-					ИП
-				</Typography>
-				<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }} record={createRecord} onSubmit={create}>
-						<FormIE />
-				</SimpleForm>
-		</Create>
+		<CustomCreateController resource={'users/' + id + '/ie/'} id='' >
+			<FormIE />
+		</CustomCreateController>
 	)
 }
