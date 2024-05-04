@@ -4,7 +4,7 @@ import { CustomCreateController } from '../CustomControllers/CustomCreateControl
 
 export const CreateLegalEntity = ({id}) => {
 	return (
-		<CustomCreateController resource={'users/' + id + '/legal_entity/'} id='' >
+		<CustomCreateController resource={'users/' + id + '/legal_entity'} id='' >
 			<FormLegalEntity />
 		</CustomCreateController>
 	)
