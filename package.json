@@ -6,6 +6,7 @@
     "@emailjs/browser": "^3.11.0",
     "@fullpage/react-fullpage": "^0.1.40",
     "@lottiefiles/react-lottie-player": "^3.5.3",
+    "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.11",
     "@react-spectrum/datepicker": "^3.9.0",
     "@studio-freight/lenis": "^1.0.16",
