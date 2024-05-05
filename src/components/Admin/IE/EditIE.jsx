@@ -3,7 +3,7 @@ import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormIE } from './FormIE';
 
 export const EditIE = ({record, id}) => {
-	const { save: saveEdit } = useEditController({ resource: 'users/', id: id + '/ie/' });
+	const { save: saveEdit } = useEditController({ resource: 'users', id: id + '/ie/' });
 
 	return (
 		<Edit>

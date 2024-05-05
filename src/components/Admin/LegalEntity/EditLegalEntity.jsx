@@ -2,10 +2,9 @@
 import React from 'react'
 import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormLegalEntity } from './FormLegalEntity';
-import { Typography } from '@mui/material';
 
 export const EditLegalEntity = ({record, id}) => {
-	const { save: saveEdit } = useEditController({ resource: 'users/' + id + '/legal_entity/', id: '' });
+	const { save: saveEdit } = useEditController({ resource: 'users', id: id + '/legal_entity/' });
 
 	return (
 		<Edit>

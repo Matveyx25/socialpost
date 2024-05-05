@@ -14,7 +14,7 @@ export const SelfEmployed = (props) => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users/' + id + '/self_employed', { id: '' })
+			dataProvider.getOne('users', { id: id + '/self_employed/' })
 				.then(({ data }) => {
 						setRecord(data);
 						setLoading(false);

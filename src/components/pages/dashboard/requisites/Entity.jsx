@@ -18,7 +18,7 @@ const tax = [
 ];
 
 export const Entity = () => {
-  const { data: LegalEntity, isFetched } = useLegalEntity();
+  const { data: LegalEntity } = useLegalEntity();
   const { mutate: updateLegalEntity } = useUpdateLegalEntity();
 
   const validator = Yup.object().shape({
@@ -46,149 +46,144 @@ export const Entity = () => {
   });
 
   return (
-    <>
-      {isFetched ? (
-        <Formik
-          initialValues={{
-            inn: LegalEntity?.inn,
-            OGRN: LegalEntity?.ogrn,
-            correspondentAddress: LegalEntity?.correspondenceAddress,
-            entityAddress: LegalEntity?.legalAddress,
-            taxSystem: LegalEntity?.taxSystem,
-            accountNumber: LegalEntity?.bankDetails?.checkingAccount,
-            bank: LegalEntity?.bankDetails?.bank,
-            bic: LegalEntity?.bankDetails?.bik,
-            correspondentAccount:
-              LegalEntity?.bankDetails?.correspondentAccount,
-          }}
-          validationSchema={validator}
-          onSubmit={(values) => {
-            updateLegalEntity({
-              inn: values?.inn,
-              taxSystem: values?.taxSystem,
-              ogrn: values?.OGRN,
-              legalAddress: values?.entityAddress,
-              correspondenceAddress: values?.correspondentAddress,
-              bankDetails: {
-                checkingAccount: values?.accountNumber,
-                bank: values?.bank,
-                bik: values?.bic,
-                correspondentAccount: values?.correspondentAccount,
-              },
-            });
-          }}
-        >
-          {({ dirty, isValid }) => (
-            <Form>
-							<DashboardCard className={s.formsWrapperCard}>
-								<div className={s.formsWrapper}>
-									<div className={s.formCard}>
-										<div className={s.cardHeader}>Личные данные</div>
-										<div className={s.line}></div>
-										<div className={s.formRow}>
-											<InputField
-												label={"ИНН"}
-												name="inn"
-												placeholder="12345"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<Field name="taxSystem">
-												{({ field: { value }, form: { setFieldValue } }) => (
-													<Select
-														fullWidth
-														label="Система налогообложения"
-														options={tax}
-														defaultValue={
-															value ? tax.find((e) => e.value === value) : null
-														}
-														setSelectedOption={(v) =>
-															setFieldValue("taxSystem", v.value)
-														}
-														className={s.select}
-													/>
-												)}
-											</Field>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"ОГРН"}
-												name="OGRN"
-												placeholder="1-02-66-05-60662-0"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"Юридический адрес"}
-												name="entityAddress"
-												placeholder="Железнодорожная 21А"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"Адрес для корреспонденции"}
-												name="correspondentAddress"
-												placeholder="Железнодорожная 21А"
-												className={s.input}
-											/>
-										</div>
-									</div>
-									<div className={s.formCard}>
-										<div className={s.cardHeader}>Банковские реквизиты</div>
-										<div className={s.line}></div>
-										<div className={s.formRow}>
-											<InputField
-												label={"Расчетный счет"}
-												name="accountNumber"
-												placeholder="12345"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"Банк"}
-												name="bank"
-												placeholder="12345"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"БИК"}
-												name="bic"
-												placeholder="12345"
-												className={s.input}
-											/>
-										</div>
-										<div className={s.formRow}>
-											<InputField
-												label={"Корреспондентский счет"}
-												name="correspondentAccount"
-												placeholder="30101"
-												className={s.input}
-											/>
-										</div>
-									</div>
-								</div>
+		<Formik
+			enableReinitialize={true}
+			initialValues={{
+				inn: LegalEntity?.inn,
+				OGRN: LegalEntity?.ogrn,
+				correspondentAddress: LegalEntity?.correspondenceAddress,
+				entityAddress: LegalEntity?.legalAddress,
+				taxSystem: LegalEntity?.taxSystem,
+				accountNumber: LegalEntity?.bankDetails?.checkingAccount,
+				bank: LegalEntity?.bankDetails?.bank,
+				bic: LegalEntity?.bankDetails?.bik,
+				correspondentAccount:
+					LegalEntity?.bankDetails?.correspondentAccount,
+			}}
+			validationSchema={validator}
+			onSubmit={(values) => {
+				updateLegalEntity({
+					inn: values?.inn,
+					taxSystem: values?.taxSystem,
+					ogrn: values?.OGRN,
+					legalAddress: values?.entityAddress,
+					correspondenceAddress: values?.correspondentAddress,
+					bankDetails: {
+						checkingAccount: values?.accountNumber,
+						bank: values?.bank,
+						bik: values?.bic,
+						correspondentAccount: values?.correspondentAccount,
+					},
+				});
+			}}
+		>
+			{({ dirty, isValid }) => (
+				<Form>
+					<DashboardCard className={s.formsWrapperCard}>
+						<div className={s.formsWrapper}>
+							<div className={s.formCard}>
+								<div className={s.cardHeader}>Личные данные</div>
 								<div className={s.line}></div>
-								<div className={s.btns}>
-									<Button
-										label="Запомнить данные"
-										theme="secondary"
-										className={s.btn}
-										disabled={!dirty || !isValid}
+								<div className={s.formRow}>
+									<InputField
+										label={"ИНН"}
+										name="inn"
+										placeholder="12345"
+										className={s.input}
 									/>
 								</div>
-							</DashboardCard>
-            </Form>
-          )}
-        </Formik>
-      ) : (
-        <Loader />
-      )}
-    </>
+								<div className={s.formRow}>
+									<Field name="taxSystem">
+										{({ field: { value }, form: { setFieldValue } }) => (
+											<Select
+												fullWidth
+												label="Система налогообложения"
+												options={tax}
+												defaultValue={
+													value ? tax.find((e) => e.value === value) : null
+												}
+												setSelectedOption={(v) =>
+													setFieldValue("taxSystem", v.value)
+												}
+												className={s.select}
+											/>
+										)}
+									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"ОГРН"}
+										name="OGRN"
+										placeholder="1-02-66-05-60662-0"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Юридический адрес"}
+										name="entityAddress"
+										placeholder="Железнодорожная 21А"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Адрес для корреспонденции"}
+										name="correspondentAddress"
+										placeholder="Железнодорожная 21А"
+										className={s.input}
+									/>
+								</div>
+							</div>
+							<div className={s.formCard}>
+								<div className={s.cardHeader}>Банковские реквизиты</div>
+								<div className={s.line}></div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Расчетный счет"}
+										name="accountNumber"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Банк"}
+										name="bank"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"БИК"}
+										name="bic"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Корреспондентский счет"}
+										name="correspondentAccount"
+										placeholder="30101"
+										className={s.input}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className={s.line}></div>
+						<div className={s.btns}>
+							<Button
+								label="Запомнить данные"
+								theme="secondary"
+								className={s.btn}
+								disabled={!dirty || !isValid}
+							/>
+						</div>
+					</DashboardCard>
+				</Form>
+			)}
+		</Formik>
   );
 };

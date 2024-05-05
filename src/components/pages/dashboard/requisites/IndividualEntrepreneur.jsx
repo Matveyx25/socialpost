@@ -10,7 +10,6 @@ import {
   useIE,
   useUpdateIE,
 } from "../../../../hooks/publisherBalance";
-import { Loader } from "../../../Shared/Loader/Loader";
 
 const tax = [
   { value: "OSN", label: "ОСН" },
@@ -18,7 +17,7 @@ const tax = [
 ];
 
 export const IndividualEntrepreneur = () => {
-  const { data: IE, isFetched } = useIE();
+  const { data: IE } = useIE();
   const { mutate: updateIE } = useUpdateIE();
 
   const validator = Yup.object().shape({
@@ -43,138 +42,133 @@ export const IndividualEntrepreneur = () => {
   });
 
   return (
-    <>
-      {isFetched ? (
-        <Formik
-          initialValues={{
-            inn: IE?.inn,
-            OGRN: IE?.ogrn,
-            address: IE?.address,
-            taxSystem: IE?.taxSystem,
-            accountNumber: IE?.bankDetails?.checkingAccount,
-            bank: IE?.bankDetails?.bank,
-            bic: IE?.bankDetails?.bik,
-            correspondentAccount: IE?.bankDetails?.correspondentAccount,
-          }}
-          validationSchema={validator}
-          onSubmit={(values) => {
-            updateIE({
-              inn: values?.inn,
-              ogrn: values?.OGRN,
-              address: values?.address,
-              taxSystem: values?.taxSystem,
-              bankDetails: {
-                checkingAccount: values?.accountNumber,
-                bank: values?.bank,
-                bik: values?.bic,
-                correspondentAccount: values?.correspondentAccount,
-              },
-            });
-          }}
-        >
-          {({ isValid, dirty }) => (
-            <Form>
-              <DashboardCard className={s.formsWrapperCard}>
-                <div className={s.formsWrapper}>
-                  <div className={s.formCard}>
-                    <div className={s.cardHeader}>Личные данные</div>
-                    <div className={s.line}></div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"ИНН"}
-                        name="inn"
-                        placeholder="12345"
-                        className={s.input}
-                      />
-                    </div>
-                    <div className={s.formRow}>
-                      <Field name="taxSystem">
-                        {({ field: { value }, form: { setFieldValue } }) => (
-                          <Select
-                            fullWidth
-                            label="Система налогообложения"
-                            options={tax}
-                            defaultValue={
-                              value ? tax.find((e) => e.value === value) : null
-                            }
-                            setSelectedOption={(v) =>
-                              setFieldValue("taxSystem", v.value)
-                            }
-                            className={s.select}
-                          />
-                        )}
-                      </Field>
-                    </div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"ОГРН"}
-                        name="OGRN"
-                        placeholder="1-02-66-05-60662-0"
-                        className={s.input}
-                      />
-                    </div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"Адрес"}
-                        name="address"
-                        placeholder="Железнодорожная 21А"
-                        className={s.input}
-                      />
-                    </div>
-                  </div>
-                  <div className={s.formCard}>
-                    <div className={s.cardHeader}>Банковские реквизиты</div>
-                    <div className={s.line}></div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"Расчетный счет"}
-                        name="accountNumber"
-                        placeholder="12345"
-                        className={s.input}
-                      />
-                    </div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"Банк"}
-                        name="bank"
-                        placeholder="12345"
-                        className={s.input}
-                      />
-                    </div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"БИК"}
-                        name="bic"
-                        placeholder="12345"
-                        className={s.input}
-                      />
-                    </div>
-                    <div className={s.formRow}>
-                      <InputField
-                        label={"Корреспондентский счет"}
-                        name="correspondentAccount"
-                        placeholder="30101"
-                        className={s.input}
-                      />
-                    </div>
-                  </div>
-                </div>
+		<Formik
+			enableReinitialize={true}	
+			initialValues={{
+				inn: IE?.inn,
+				OGRN: IE?.ogrn,
+				address: IE?.address,
+				taxSystem: IE?.taxSystem,
+				accountNumber: IE?.bankDetails?.checkingAccount,
+				bank: IE?.bankDetails?.bank,
+				bic: IE?.bankDetails?.bik,
+				correspondentAccount: IE?.bankDetails?.correspondentAccount,
+			}}
+			validationSchema={validator}
+			onSubmit={(values) => {
+				updateIE({
+					inn: values?.inn,
+					ogrn: values?.OGRN,
+					address: values?.address,
+					taxSystem: values?.taxSystem,
+					bankDetails: {
+						checkingAccount: values?.accountNumber,
+						bank: values?.bank,
+						bik: values?.bic,
+						correspondentAccount: values?.correspondentAccount,
+					},
+				});
+			}}
+		>
+			{({ isValid, dirty }) => (
+				<Form>
+					<DashboardCard className={s.formsWrapperCard}>
+						<div className={s.formsWrapper}>
+							<div className={s.formCard}>
+								<div className={s.cardHeader}>Личные данные</div>
 								<div className={s.line}></div>
-								<div className={s.btns}>
-									<Button
-										label="Запомнить данные"
-										theme="secondary"
-										className={s.btn}
-										disabled={!dirty || !isValid}
+								<div className={s.formRow}>
+									<InputField
+										label={"ИНН"}
+										name="inn"
+										placeholder="12345"
+										className={s.input}
 									/>
 								</div>
-              </DashboardCard>
-            </Form>
-          )}
-        </Formik>
-      ) : (
-        <Loader />
-      )}
-    </>
+								<div className={s.formRow}>
+									<Field name="taxSystem">
+										{({ field: { value }, form: { setFieldValue } }) => (
+											<Select
+												fullWidth
+												label="Система налогообложения"
+												options={tax}
+												defaultValue={
+													value ? tax.find((e) => e.value === value) : null
+												}
+												setSelectedOption={(v) =>
+													setFieldValue("taxSystem", v.value)
+												}
+												className={s.select}
+											/>
+										)}
+									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"ОГРН"}
+										name="OGRN"
+										placeholder="1-02-66-05-60662-0"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Адрес"}
+										name="address"
+										placeholder="Железнодорожная 21А"
+										className={s.input}
+									/>
+								</div>
+							</div>
+							<div className={s.formCard}>
+								<div className={s.cardHeader}>Банковские реквизиты</div>
+								<div className={s.line}></div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Расчетный счет"}
+										name="accountNumber"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Банк"}
+										name="bank"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"БИК"}
+										name="bic"
+										placeholder="12345"
+										className={s.input}
+									/>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Корреспондентский счет"}
+										name="correspondentAccount"
+										placeholder="30101"
+										className={s.input}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className={s.line}></div>
+						<div className={s.btns}>
+							<Button
+								label="Запомнить данные"
+								theme="secondary"
+								className={s.btn}
+								disabled={!dirty || !isValid}
+							/>
+						</div>
+					</DashboardCard>
+				</Form>
+			)}
+		</Formik>
   );
 };

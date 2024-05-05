@@ -7,7 +7,10 @@ const instance = axios.create({
 })
 
 const errorHandler = (error) => {
-	if(error?.response?.status && error?.response?.status !== 403){
+	if(error?.response?.status && 
+		error?.response?.status !== 403 &&
+		error?.response?.status !== 404
+	){
 		toast.error(`${error?.response?.data?.message || 'Возникла ошибка'}`);  
 	}if(error?.response?.status == 401){
 		localStorage.removeItem('token')

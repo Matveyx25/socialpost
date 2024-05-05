@@ -13,7 +13,7 @@ export const LegalEntity = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users/' + id + '/legal_entity', { id: '' })
+			dataProvider.getOne('users', { id: id + '/legal_entity/' })
 				.then(({ data }) => {
 						setRecord(data);
 						setLoading(false);

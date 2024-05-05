@@ -4,7 +4,7 @@ import { CustomCreateController } from '../CustomControllers/CustomCreateControl
 
 export const CreateIE = ({id}) => {
 	return (
-		<CustomCreateController resource={'users/'} id={id + '/ie'} >
+		<CustomCreateController resource={'users'} id={id + '/ie/'} >
 			<FormIE />
 		</CustomCreateController>
 	)
