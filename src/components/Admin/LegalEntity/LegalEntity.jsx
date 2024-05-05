@@ -15,7 +15,7 @@ export const LegalEntity = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-		admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/legal_entity/')
+		admin.getRequisites({path: process.env.REACT_APP_API_URL + '/users/' + id + '/legal_entity/'})
 				.then((data) => {
 						setRecord(data);
 						setLoading(false);

@@ -16,7 +16,7 @@ export const SelfEmployed = (props) => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/self_employed/')
+			admin.getRequisites({path: process.env.REACT_APP_API_URL + '/users/' + id + '/self_employed/'})
 				.then((data) => {
 						setRecord(data);
 						setLoading(false);

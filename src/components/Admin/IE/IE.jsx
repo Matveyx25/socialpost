@@ -15,7 +15,7 @@ export const IE = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-		admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/ie/')
+		admin.getRequisites({path: process.env.REACT_APP_API_URL + '/users/' + id + '/ie/'})
 					.then((data) => {
 							setRecord(data);
 							setLoading(false);
