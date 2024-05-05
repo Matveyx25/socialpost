@@ -5,7 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { IconCalendar } from '@tabler/icons-react';
 import { CalendarHeader } from '../RangeCalendar/CalendarHeader';
 
-export const Calendar = ({placeholder, className, label, value, onChange}) => {
+export const Calendar = ({placeholder, className, label, disabled, value, onChange}) => {
 	const calendar = useRef(null)
 
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -36,6 +36,7 @@ export const Calendar = ({placeholder, className, label, value, onChange}) => {
 					calendarClassName={s.wrapper}
 					renderCustomHeader={CalendarHeader}
 					calendarContainer={MyContainer}
+					disabled={disabled}
 				/>
 		</div>
 	)

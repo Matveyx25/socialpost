@@ -84,6 +84,7 @@ export const IndividualEntrepreneur = () => {
 										name="inn"
 										placeholder="12345"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -100,6 +101,7 @@ export const IndividualEntrepreneur = () => {
 													setFieldValue("taxSystem", v.value)
 												}
 												className={s.select}
+												disabled={IE?.status && IE?.status !== 'DECLINES'}
 											/>
 										)}
 									</Field>
@@ -110,6 +112,7 @@ export const IndividualEntrepreneur = () => {
 										name="OGRN"
 										placeholder="1-02-66-05-60662-0"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -118,6 +121,7 @@ export const IndividualEntrepreneur = () => {
 										name="address"
 										placeholder="Железнодорожная 21А"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 							</div>
@@ -130,6 +134,7 @@ export const IndividualEntrepreneur = () => {
 										name="accountNumber"
 										placeholder="12345"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -138,6 +143,7 @@ export const IndividualEntrepreneur = () => {
 										name="bank"
 										placeholder="12345"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -146,6 +152,7 @@ export const IndividualEntrepreneur = () => {
 										name="bic"
 										placeholder="12345"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -154,6 +161,7 @@ export const IndividualEntrepreneur = () => {
 										name="correspondentAccount"
 										placeholder="30101"
 										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
 									/>
 								</div>
 							</div>

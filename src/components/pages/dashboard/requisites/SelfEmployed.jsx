@@ -9,6 +9,7 @@ import { Button } from '../../../Shared/Button/Button';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
 import { useSelfEmployed, useUpdateSelfEmployed } from '../../../../hooks/publisherBalance';
 import { Loader } from '../../../Shared/Loader/Loader';
+import classNames from 'classnames';
 
 const counties = [
   { value: 'belarus', label: 'Беларусь' },
@@ -105,34 +106,34 @@ export const SelfEmployed = () => {
 								<div className={s.formRow}>
 							<Field name="citizenshipCountry">
 								{({ field: {value}, form: {setFieldValue}  }) => (
-									<Select fullWidth label="Страна гражданства" options={counties} defaultValue={value ? counties.find(e => e.value === value) : null} setSelectedOption={v => setFieldValue('citizenshipCountry', v.value)} className={s.select} headerClassName={s.selectHeader}/>
+									<Select fullWidth label="Страна гражданства" options={counties} defaultValue={value ? counties.find(e => e.value === value) : null} setSelectedOption={v => setFieldValue('citizenshipCountry', v.value)} className={s.select} headerClassName={s.selectHeader} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 								)}
 							</Field>
-							<InputField label={'ФИО'} name='fullName' placeholder='Иванов Иван Иванович' className={s.input}/>
+							<InputField label={'ФИО'} name='fullName' placeholder='Иванов Иван Иванович' className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 						</div>
 						<div className={s.formRow}>
 							<InputField label={'Серия паспорта'} name='seriesPassport' placeholder='12345' className={s.input}/>
 							<InputField label={'Номер паспорта'} name='numberPassport' placeholder='12345' className={s.input}/>
 							<Field name="passportIssueDate">
 								{({ field: {value}, form: {setFieldValue} }) => (
-									<Calendar placeholder={'11.08.2014'} label={'Выдан'} className={s.calendar} value={value} onChange={v => setFieldValue("passportIssueDate", v.toISOString())}/>
+									<Calendar placeholder={'11.08.2014'} label={'Выдан'} className={s.calendar} value={value} onChange={v => setFieldValue("passportIssueDate", v.toISOString())} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 								)}
 							</Field>
 						</div>
 						<div className={s.formRow}>
 							<Field name="birthDate">
 								{({ field: {value}, form: {setFieldValue}  }) => (
-									<Calendar placeholder={'11.08.1998'} label={'Дата рождения'} className={s.calendar} value={value} onChange={v => setFieldValue("birthDate", v.toISOString())}/>
+									<Calendar placeholder={'11.08.1998'} label={'Дата рождения'} className={s.calendar} value={value} onChange={v => setFieldValue("birthDate", v.toISOString())} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 								)}
 							</Field>
 						</div>
 						<div className={s.formRow}>
-							<InputField label={'Город рождения'} name='city' placeholder='Минск' className={s.input}/>
-							<InputField label={'Адрес'} name='address' placeholder='Железнодорожная 21А' className={s.input}/>
+							<InputField label={'Город рождения'} name='city' placeholder='Минск' className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
+							<InputField label={'Адрес'} name='address' placeholder='Железнодорожная 21А' className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 						</div>
 						<div className={s.formRow}>
-							<InputField label={'СНИЛС'} name='snils' placeholder='12345' className={s.input}/>
-							<InputField label={'ИНН'} name='inn' placeholder='12345' className={s.input}/>
+							<InputField label={'СНИЛС'} name='snils' placeholder='12345' className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
+							<InputField label={'ИНН'} name='inn' placeholder='12345' className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}/>
 						</div>
 							</div>
 							<div className={s.formCard}>
@@ -143,7 +144,7 @@ export const SelfEmployed = () => {
 										label={"Расчетный счет"}
 										name="accountNumber"
 										placeholder="12345"
-										className={s.input}
+										className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -151,7 +152,7 @@ export const SelfEmployed = () => {
 										label={"Банк"}
 										name="bank"
 										placeholder="12345"
-										className={s.input}
+										className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -159,7 +160,7 @@ export const SelfEmployed = () => {
 										label={"БИК"}
 										name="bic"
 										placeholder="12345"
-										className={s.input}
+										className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -167,19 +168,31 @@ export const SelfEmployed = () => {
 										label={"Корреспондентский счет"}
 										name="correspondentAccount"
 										placeholder="30101"
-										className={s.input}
+										className={s.input} disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}
 									/>
 								</div>
 							</div>
 						</div>
 						<div className={s.line}></div>
 						<div className={s.btns}>
-							<Button
+						<div className={s.btns}>
+							{selfEmployed?.status ?
+							<>
+								<div className={classNames(s.status, s[selfEmployed.status])}>
+									{{
+										'PENDING': 'В ОЖИДАНИИ',
+										'EXECUTED': 'ВЫПОЛНЕНО',
+										'DECLINED': 'ОТКЛОНЕНО',
+									}[selfEmployed.status]}
+								</div>
+							</>
+							: <Button
 								label="Запомнить данные"
 								theme="secondary"
 								className={s.btn}
 								disabled={!dirty || !isValid}
-							/>
+							/>}
+						</div>
 						</div>
 					</DashboardCard>
 				</Form>

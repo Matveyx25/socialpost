@@ -5,7 +5,7 @@ import s from './Select.module.scss'
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
 
-export const Select = ({styles, headerClassName ,label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, placeholder}) => {
+export const Select = ({styles, headerClassName ,label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={classNames(headerClassName, s.header)}>
 			<span>{label}{required && <span className={s.star}>*</span>}</span>
@@ -18,6 +18,7 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 			placeholder={placeholder ? placeholder : 'Выбрать...'}
 			isSearchable={false}
 			isMulti={isMulti}
+			isDisabled={disabled}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
 				DropdownIndicator: () => <IconChevronDown className={s.icon}/>

@@ -11,6 +11,7 @@ import {
   useUpdateLegalEntity,
 } from "../../../../hooks/publisherBalance";
 import { Loader } from "../../../Shared/Loader/Loader";
+import classNames from "classnames";
 
 const tax = [
   { value: "OSN", label: "ОСН" },
@@ -90,6 +91,7 @@ export const Entity = () => {
 										name="inn"
 										placeholder="12345"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -106,6 +108,7 @@ export const Entity = () => {
 													setFieldValue("taxSystem", v.value)
 												}
 												className={s.select}
+												disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 											/>
 										)}
 									</Field>
@@ -116,6 +119,7 @@ export const Entity = () => {
 										name="OGRN"
 										placeholder="1-02-66-05-60662-0"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -124,6 +128,7 @@ export const Entity = () => {
 										name="entityAddress"
 										placeholder="Железнодорожная 21А"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -132,6 +137,7 @@ export const Entity = () => {
 										name="correspondentAddress"
 										placeholder="Железнодорожная 21А"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 							</div>
@@ -144,6 +150,7 @@ export const Entity = () => {
 										name="accountNumber"
 										placeholder="12345"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -152,6 +159,7 @@ export const Entity = () => {
 										name="bank"
 										placeholder="12345"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -160,6 +168,7 @@ export const Entity = () => {
 										name="bic"
 										placeholder="12345"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 								<div className={s.formRow}>
@@ -168,6 +177,7 @@ export const Entity = () => {
 										name="correspondentAccount"
 										placeholder="30101"
 										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 									/>
 								</div>
 							</div>
@@ -176,7 +186,7 @@ export const Entity = () => {
 						<div className={s.btns}>
 							{LegalEntity?.status ?
 							<>
-								<div className={s.button}>
+								<div className={classNames(s.status, s[LegalEntity.status])}>
 									{{
 										'PENDING': 'В ОЖИДАНИИ',
 										'EXECUTED': 'ВЫПОЛНЕНО',

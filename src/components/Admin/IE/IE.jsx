@@ -4,6 +4,7 @@ import { useDataProvider, useNotify } from 'react-admin'
 import { useParams } from 'react-router-dom';
 import { CreateIE } from './CreateIE';
 import { EditIE } from './EditIE';
+import axios from 'axios';
 
 export const IE = () => {
 	const { id } = useParams();
@@ -13,11 +14,10 @@ export const IE = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users', { id: id + '/ie/' })
+			axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/ie/')
 					.then((data) => {
-							setRecord(data.data);
+							setRecord(data);
 							setLoading(false);
-							return data
 					})
 					.catch(error => {
 							if (error.status === 404) {
@@ -37,5 +37,5 @@ export const IE = () => {
 		return <CreateIE id={id}/>
 	}
 
-	return <EditIE {...{id, record}}/>
+	return <EditIE id={id}/>
 }

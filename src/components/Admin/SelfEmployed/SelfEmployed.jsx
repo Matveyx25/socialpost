@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CreateSelfEmployed } from './CreateSelfEmployed';
 import { EditSelfEmployed } from './EditSelfEmpoloyed';
 import { useDataProvider, useNotify } from 'react-admin';
+import axios from 'axios';
 
 export const SelfEmployed = (props) => {
 	const { id } = useParams();
@@ -14,9 +15,9 @@ export const SelfEmployed = (props) => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users', { id: id + '/self_employed/' })
+			axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/self_employed/')
 				.then((data) => {
-						setRecord(data.data);
+						setRecord(data);
 						setLoading(false);
 						return data
 				})

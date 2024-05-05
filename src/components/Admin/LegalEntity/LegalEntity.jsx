@@ -4,6 +4,7 @@ import { useDataProvider, useNotify } from 'react-admin'
 import { useParams } from 'react-router-dom';
 import { CreateLegalEntity } from './CreateLegalEntity';
 import { EditLegalEntity } from './EditLegalEntity';
+import axios from 'axios';
 
 export const LegalEntity = () => {
 	const { id } = useParams();
@@ -13,12 +14,11 @@ export const LegalEntity = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users', { id: id + '/legal_entity/' })
-					.then((data) => {
-							setRecord(data.data);
-							setLoading(false);
-							return data
-					})
+		axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/legal_entity/')
+				.then((data) => {
+						setRecord(data);
+						setLoading(false);
+				})
 				.catch(error => {
 						if (error.status === 404) {
 								setLoading(false);
