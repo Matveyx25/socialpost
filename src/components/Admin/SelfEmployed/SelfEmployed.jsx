@@ -40,5 +40,5 @@ export const SelfEmployed = (props) => {
 		return <CreateSelfEmployed id={id}/>
 	}
 
-	return <EditSelfEmployed {...{id, record}}/>
+	return <EditSelfEmployed id={id}/>
 }

@@ -4,7 +4,7 @@ import { CustomCreateController } from '../CustomControllers/CustomCreateControl
 
 export const CreateSelfEmployed = ({id}) => {		
 	return (
-		<CustomCreateController resource={'users'} id={id + '/self_employed/'} >
+		<CustomCreateController resource={'users/' + id + '/self_employed'} id='' >
 			<FormSelfEmployed />
 		</CustomCreateController>
 	)

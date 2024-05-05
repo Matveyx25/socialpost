@@ -38,5 +38,5 @@ export const LegalEntity = () => {
 		return <CreateLegalEntity id={id}/>
 	}
 
-	return <EditLegalEntity {...{id, record}}/>
+	return <EditLegalEntity id={id}/>
 }
