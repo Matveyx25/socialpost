@@ -10,6 +10,7 @@ import {
   useIE,
   useUpdateIE,
 } from "../../../../hooks/publisherBalance";
+import classNames from "classnames";
 
 const tax = [
   { value: "OSN", label: "ОСН" },
@@ -159,12 +160,22 @@ export const IndividualEntrepreneur = () => {
 						</div>
 						<div className={s.line}></div>
 						<div className={s.btns}>
-							<Button
+							{IE?.status ?
+							<>
+								<div className={classNames(s.status, s[IE.status])}>
+									{{
+										'PENDING': 'В ОЖИДАНИИ',
+										'EXECUTED': 'ВЫПОЛНЕНО',
+										'DECLINED': 'ОТКЛОНЕНО',
+									}[IE.status]}
+								</div>
+							</>
+							: <Button
 								label="Запомнить данные"
 								theme="secondary"
 								className={s.btn}
 								disabled={!dirty || !isValid}
-							/>
+							/>}
 						</div>
 					</DashboardCard>
 				</Form>

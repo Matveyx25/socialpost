@@ -174,12 +174,22 @@ export const Entity = () => {
 						</div>
 						<div className={s.line}></div>
 						<div className={s.btns}>
-							<Button
+							{LegalEntity?.status ?
+							<>
+								<div className={s.button}>
+									{{
+										'PENDING': 'В ОЖИДАНИИ',
+										'EXECUTED': 'ВЫПОЛНЕНО',
+										'DECLINED': 'ОТКЛОНЕНО',
+									}[LegalEntity.status]}
+								</div>
+							</>
+							: <Button
 								label="Запомнить данные"
 								theme="secondary"
 								className={s.btn}
 								disabled={!dirty || !isValid}
-							/>
+							/>}
 						</div>
 					</DashboardCard>
 				</Form>

@@ -14,9 +14,10 @@ export const IE = () => {
 
 	useEffect(() => {
 			dataProvider.getOne('users', { id: id + '/ie/' })
-					.then(({ data }) => {
-							setRecord(data);
+					.then((data) => {
+							setRecord(data.data);
 							setLoading(false);
+							return data
 					})
 					.catch(error => {
 							if (error.status === 404) {

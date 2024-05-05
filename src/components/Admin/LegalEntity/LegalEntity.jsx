@@ -14,10 +14,11 @@ export const LegalEntity = () => {
 
 	useEffect(() => {
 			dataProvider.getOne('users', { id: id + '/legal_entity/' })
-				.then(({ data }) => {
-						setRecord(data);
-						setLoading(false);
-				})
+					.then((data) => {
+							setRecord(data.data);
+							setLoading(false);
+							return data
+					})
 				.catch(error => {
 						if (error.status === 404) {
 								setLoading(false);

@@ -35,6 +35,23 @@
 	margin: 1rem 0;
 }
 
+.status{
+	font-size: 0.875rem;
+	white-space: nowrap;
+	margin-left: auto;
+	margin-right: 0;
+	width: fit-content;
+	&.PENDING{
+		color: $main-blue-color;
+	}
+	&.EXECUTED{
+		color: #179F25;
+	}
+	&.DECLINED{
+		color: #F12828;
+	}
+}
+
 .formCard{
 	max-width: 36.3125rem;
 	flex-grow: 1;
