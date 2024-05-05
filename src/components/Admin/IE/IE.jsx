@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { CreateIE } from './CreateIE';
 import { EditIE } from './EditIE';
 import axios from 'axios';
+import { admin } from '../../../api/api';
 
 export const IE = () => {
 	const { id } = useParams();
@@ -14,7 +15,7 @@ export const IE = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/ie/')
+		admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/ie/')
 					.then((data) => {
 							setRecord(data);
 							setLoading(false);

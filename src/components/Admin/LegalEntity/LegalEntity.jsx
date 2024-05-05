@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { CreateLegalEntity } from './CreateLegalEntity';
 import { EditLegalEntity } from './EditLegalEntity';
 import axios from 'axios';
+import { admin } from '../../../api/api';
 
 export const LegalEntity = () => {
 	const { id } = useParams();
@@ -14,7 +15,7 @@ export const LegalEntity = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-		axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/legal_entity/')
+		admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/legal_entity/')
 				.then((data) => {
 						setRecord(data);
 						setLoading(false);

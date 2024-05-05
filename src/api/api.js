@@ -210,3 +210,9 @@ export const channels = {
 		return instance.get(`/channels/${id}`)
 	},
 }
+
+export const admin = {
+	getRequisites(options) {
+		return instance.get(options.path)
+	}
+}

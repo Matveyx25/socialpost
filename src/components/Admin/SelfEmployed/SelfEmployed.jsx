@@ -5,6 +5,7 @@ import { CreateSelfEmployed } from './CreateSelfEmployed';
 import { EditSelfEmployed } from './EditSelfEmpoloyed';
 import { useDataProvider, useNotify } from 'react-admin';
 import axios from 'axios';
+import { admin } from '../../../api/api';
 
 export const SelfEmployed = (props) => {
 	const { id } = useParams();
@@ -15,7 +16,7 @@ export const SelfEmployed = (props) => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			axios.get(process.env.REACT_APP_API_URL + '/users/' + id + '/self_employed/')
+			admin.getRequisites(process.env.REACT_APP_API_URL + '/users/' + id + '/self_employed/')
 				.then((data) => {
 						setRecord(data);
 						setLoading(false);
