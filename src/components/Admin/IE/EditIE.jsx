@@ -1,10 +1,9 @@
 import React from 'react'
 import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormIE } from './FormIE';
-import { Typography } from '@mui/material';
 
 export const EditIE = ({record, id}) => {
-	const { save: saveEdit } = useEditController({ resource: 'users/' + id + '/ie/', id: '' });
+	const { save: saveEdit } = useEditController({ resource: 'users/', id: id + '/ie/' });
 
 	return (
 		<Edit>

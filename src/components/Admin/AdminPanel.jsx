@@ -14,6 +14,8 @@ import { OperationEdit } from "./Operations/OperationEdit";
 import { Route } from "react-router-dom";
 import { Requisites } from "./User/Requisites";
 import { UserTabs } from "./User/UserTabs";
+import { IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
+import { IconFileDots } from "@tabler/icons-react";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -63,10 +65,10 @@ const dataProvider = {
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs}>
-		<Resource name="users" list={UserList} edit={UserTabs}/>
-    <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
-    <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} />
-    <Resource name="users/publishers/agreements" list={ListGuesser} />
+		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
+    <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
+    <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Денежные операции' }} icon={IconMoneybag}/>
+    <Resource name="users/publishers/agreements" list={ListGuesser} options={{ label: 'Договоры' }} icon={IconFileDots}/>
   </Admin>
 );
 

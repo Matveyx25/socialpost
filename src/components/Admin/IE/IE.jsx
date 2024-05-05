@@ -13,7 +13,7 @@ export const IE = () => {
 	const notify = useNotify();
 
 	useEffect(() => {
-			dataProvider.getOne('users/' + id + '/ie', { id: '' })
+			dataProvider.getOne('users/', { id: id + '/ie' })
 					.then(({ data }) => {
 							setRecord(data);
 							setLoading(false);
