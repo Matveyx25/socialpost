@@ -1,8 +1,7 @@
 
 import React from 'react'
-import { Edit, SimpleForm, useEditController } from 'react-admin';
+import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormSelfEmployed } from './FormSelfEmployed';
-import { Typography } from '@mui/material';
 
 export const EditSelfEmployed = ({record, id}) => {
 	const { save: saveEdit } = useEditController({ resource: 'users/' + id + '/self_employed/', id: '' });
@@ -11,6 +10,11 @@ export const EditSelfEmployed = ({record, id}) => {
 		<Edit>
 			<SimpleForm flex={1} record={record} onSubmit={saveEdit}>
 				<FormSelfEmployed/>
+				<SelectInput source="status" choices={[
+						{ id: "PENDING", name: "В ОЖИДАНИИ" },
+						{ id: "EXECUTED", name: "ВЫПОЛНЕНО" },
+						{ id: "DECLINED", name: "ОТКЛОНЕНО" },
+					]} label='Статус' isRequired fullWidth />
 			</SimpleForm>
 		</Edit>
 	)

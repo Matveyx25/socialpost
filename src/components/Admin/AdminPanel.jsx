@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, Resource, fetchUtils } from "react-admin";
+import { Admin, ListGuesser, Resource, fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./User/UserList";
 import { UserEdit } from "./User/UserEdit";
@@ -66,6 +66,7 @@ const AdminPanel = () => (
 		<Resource name="users" list={UserList} edit={UserTabs}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} />
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} />
+    <Resource name="users/publishers/agreements" list={ListGuesser} />
   </Admin>
 );
 
