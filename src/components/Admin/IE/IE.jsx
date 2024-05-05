@@ -11,7 +11,6 @@ export const IE = () => {
 	const { id } = useParams();
 	const [loading, setLoading] = useState(true);
 	const [record, setRecord] = useState(null);
-	const dataProvider = useDataProvider();
 	const notify = useNotify();
 
 	useEffect(() => {
@@ -28,7 +27,7 @@ export const IE = () => {
 									setLoading(false);
 							}
 					});
-	}, [dataProvider, id, notify]);
+	}, [id]);
 
 	if (loading) {
 			return <Typography>Loading...</Typography>;
