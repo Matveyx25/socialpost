@@ -1,14 +1,12 @@
 
 import React from 'react'
-import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
+import { Edit, SelectInput, SimpleForm } from 'react-admin';
 import { FormLegalEntity } from './FormLegalEntity';
 
 export const EditLegalEntity = ({ id}) => {
-	const { record, save: saveEdit } = useEditController({ resource: 'users/' + id + '/legal_entity', id: '' });
-
 	return (
-		<Edit>
-			<SimpleForm flex={1} record={record} onSubmit={saveEdit}>
+		<Edit resource={'users/' + id + '/legal_entity'} id=''>
+			<SimpleForm flex={1}>
 				<FormLegalEntity/>
 				<SelectInput source="status" choices={[
 							{ id: "PENDING", name: "В ОЖИДАНИИ" },
