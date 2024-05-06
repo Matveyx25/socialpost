@@ -5,7 +5,7 @@ import { FormLegalEntity } from './FormLegalEntity';
 
 export const EditLegalEntity = ({ id}) => {
 	return (
-		<Edit resource={'users/' + id + '/legal_entity'} id=''>
+		<Edit resource={'users/'} id={id + '/legal_entity/'}>
 			<SimpleForm flex={1}>
 				<FormLegalEntity/>
 				<SelectInput source="status" choices={[

@@ -5,7 +5,7 @@ import { FormSelfEmployed } from './FormSelfEmployed';
 
 export const EditSelfEmployed = ({id}) => {
 	return (
-		<Edit resource={'users/' + id + '/self_employed'} id={''}>
+		<Edit resource={'users/'} id={id + '/self_employed/'}>
 			<SimpleForm flex={1}>
 				<FormSelfEmployed/>
 				<SelectInput source="status" choices={[
