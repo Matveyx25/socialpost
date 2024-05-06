@@ -4,7 +4,7 @@ import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormSelfEmployed } from './FormSelfEmployed';
 
 export const EditSelfEmployed = ({id}) => {
-	const { record, save: saveEdit } = useEditController({ resource: 'users/' + id + '/self_employed/', id: '' });
+	const { record, save: saveEdit } = useEditController({ resource: 'users/' + id + '/self_employed', id: '' });
 
 	return (
 		<Edit>

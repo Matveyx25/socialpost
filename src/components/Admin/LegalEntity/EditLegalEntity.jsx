@@ -4,7 +4,7 @@ import { Edit, SelectInput, SimpleForm, useEditController } from 'react-admin';
 import { FormLegalEntity } from './FormLegalEntity';
 
 export const EditLegalEntity = ({ id}) => {
-	const { record, save: saveEdit } = useEditController({ resource: 'users/' + id + '/legal_entity/', id: '' });
+	const { record, save: saveEdit } = useEditController({ resource: 'users/' + id + '/legal_entity', id: '' });
 
 	return (
 		<Edit>
