@@ -19,7 +19,7 @@ const renderDownload = (record) => {
 	const onClick = () => {
 		admin.downloadDoc(record?.userId, record?.type).then(blob => {
 			const link = document.createElement('a');
-			link.href = window.URL.createObjectURL(blob);
+			link.href = window.URL.createObjectURL(blob.data);
 			link.download = 'Договор_' + record?.type;
 			link.click();
 		}).catch(error => console.error(error));
