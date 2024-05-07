@@ -5,12 +5,12 @@ import { FormLegalEntity } from './FormLegalEntity';
 
 export const EditLegalEntity = ({ id}) => {
 	return (
-		<Edit resource={'users/'} id={id + '/legal_entity/'}>
+		<Edit resource={'users'} id={id + '/legal_entity/'}>
 			<SimpleForm flex={1}>
 				<FormLegalEntity/>
 				<SelectInput source="status" choices={[
 							{ id: "PENDING", name: "В ОЖИДАНИИ" },
-							{ id: "EXECUTED", name: "ВЫПОЛНЕНО" },
+							{ id: "ACCEPTED", name: "ПРИНЯТО" },
 							{ id: "DECLINED", name: "ОТКЛОНЕНО" },
 						]} label='Статус' isRequired fullWidth />
 			</SimpleForm>

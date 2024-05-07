@@ -10,12 +10,12 @@ export const Requisites = () => {
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 				<SelfEmployed />
 			</Box>
-			{/* <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 				<LegalEntity />
-			</Box> */}
-			{/* <Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+			</Box>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 				<IE />
-			</Box> */}
+			</Box>
 		</div>
 	)
 }

@@ -67,7 +67,6 @@ export const SelfEmployed = () => {
         address: selfEmployed?.address,
         snils: selfEmployed?.snils,
         inn: selfEmployed?.inn,
-        citizenshipCountry: selfEmployed?.citizenshipCountry,
         passportIssueDate: selfEmployed?.passportIssueDate,
         accountNumber: selfEmployed?.bankDetails?.checkingAccount,
         bank: selfEmployed?.bankDetails?.bank,
@@ -78,7 +77,6 @@ export const SelfEmployed = () => {
       onSubmit={(values) => {
         updateSelfEmployed({
           passportIssueDate: values?.passportIssueDate,
-          citizenshipCountry: values?.citizenshipCountry,
           fullName: values?.fullName,
           passportSeries: values?.seriesPassport,
           passportNumber: values?.numberPassport,
@@ -104,27 +102,6 @@ export const SelfEmployed = () => {
                 <div className={s.cardHeader}>Личные данные</div>
                 <div className={s.line}></div>
                 <div className={s.formRow}>
-                  <Field name="citizenshipCountry">
-                    {({ field: { value }, form: { setFieldValue } }) => (
-                      <Select
-                        fullWidth
-                        label="Страна гражданства"
-                        options={counties}
-                        defaultValue={
-                          value ? counties.find((e) => e.value === value) : null
-                        }
-                        setSelectedOption={(v) =>
-                          setFieldValue("citizenshipCountry", v.value)
-                        }
-                        className={s.select}
-                        headerClassName={s.selectHeader}
-                        disabled={
-                          selfEmployed?.status &&
-                          selfEmployed?.status !== "DECLINES"
-                        }
-                      />
-                    )}
-                  </Field>
                   <InputField
                     label={"ФИО"}
                     name="fullName"
