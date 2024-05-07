@@ -189,7 +189,7 @@ export const Entity = () => {
 								<div className={classNames(s.status, s[LegalEntity.status])}>
 									{{
 										'PENDING': 'В ОЖИДАНИИ',
-										'EXECUTED': 'ВЫПОЛНЕНО',
+										'ACCEPTED': 'ВЫПОЛНЕНО',
 										'DECLINED': 'ОТКЛОНЕНО',
 									}[LegalEntity.status]}
 								</div>

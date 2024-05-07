@@ -173,7 +173,7 @@ export const IndividualEntrepreneur = () => {
 								<div className={classNames(s.status, s[IE.status])}>
 									{{
 										'PENDING': 'В ОЖИДАНИИ',
-										'EXECUTED': 'ВЫПОЛНЕНО',
+										'ACCEPTED': 'ВЫПОЛНЕНО',
 										'DECLINED': 'ОТКЛОНЕНО',
 									}[IE.status]}
 								</div>

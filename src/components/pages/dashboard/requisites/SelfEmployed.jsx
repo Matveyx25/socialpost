@@ -280,7 +280,7 @@ export const SelfEmployed = () => {
                       {
                         {
                           PENDING: "В ОЖИДАНИИ",
-                          EXECUTED: "ВЫПОЛНЕНО",
+                          ACCEPTED: "ВЫПОЛНЕНО",
                           DECLINED: "ОТКЛОНЕНО",
                         }[selfEmployed.status]
                       }

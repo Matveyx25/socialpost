@@ -16,6 +16,7 @@ import { Requisites } from "./User/Requisites";
 import { UserTabs } from "./User/UserTabs";
 import { IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
 import { IconFileDots } from "@tabler/icons-react";
+import { DocumentsList } from "./Documents/DocumentsList";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -75,7 +76,7 @@ const AdminPanel = () => (
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Денежные операции' }} icon={IconMoneybag}/>
-    <Resource name="users/publishers/agreements" list={ListGuesser} options={{ label: 'Договоры' }} icon={IconFileDots}/>
+    <Resource name="users/publishers/agreements" list={DocumentsList} options={{ label: 'Договоры' }} icon={IconFileDots}/>
   </Admin>
 );
 

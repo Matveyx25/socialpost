@@ -214,5 +214,14 @@ export const channels = {
 export const admin = {
 	getRequisites(options) {
 		return instance.get(options.path)
+	},
+	downloadDoc(userId, type) {
+		const types = {
+			'INDIVIDUAL_ENTREPRENEUR': '/ie/',
+			'SELF_EMPLOYED': '/self_employed/',
+			'LEGAL_ENTITY': '/legal_entity/',
+		}
+
+		return instance.get('/users/' + userId + types[type] + 'agreement')
 	}
 }
