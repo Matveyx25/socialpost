@@ -23,6 +23,7 @@ const renderDownload = (record) => {
 			link.href = window.URL.createObjectURL(blob);
 			link.download = 'Договор_' + record?.type + '.pdf';
 			link.click();
+			window.URL.revokeObjectURL(link.href);
 		}).catch(error => console.error(error));
 	}
 
