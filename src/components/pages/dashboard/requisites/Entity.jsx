@@ -188,14 +188,14 @@ export const Entity = () => {
 							<>
 								<div className={classNames(s.status, s[LegalEntity.status])}>
 									{{
-										'PENDING': 'В ОЖИДАНИИ',
-										'ACCEPTED': 'ВЫПОЛНЕНО',
-										'DECLINED': 'ОТКЛОНЕНО',
+										'PENDING': 'Данные на модерации',
+										'ACCEPTED': 'Данные приняты',
+										'DECLINED': 'Данные отклонены',
 									}[LegalEntity.status]}
 								</div>
 							</>
 							: <Button
-								label="Запомнить данные"
+								label={(!dirty || !isValid) ? 'Данные пустые' : "Сохранить данные"}
 								theme="secondary"
 								className={s.btn}
 								disabled={!dirty || !isValid}

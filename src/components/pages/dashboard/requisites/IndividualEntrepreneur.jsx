@@ -172,14 +172,14 @@ export const IndividualEntrepreneur = () => {
 							<>
 								<div className={classNames(s.status, s[IE.status])}>
 									{{
-										'PENDING': 'В ОЖИДАНИИ',
-										'ACCEPTED': 'ВЫПОЛНЕНО',
-										'DECLINED': 'ОТКЛОНЕНО',
+										'PENDING': 'Данные на модерации',
+										'ACCEPTED': 'Данные приняты',
+										'DECLINED': 'Данные отклонены',
 									}[IE.status]}
 								</div>
 							</>
 							: <Button
-								label="Запомнить данные"
+							label={(!dirty || !isValid) ? 'Данные пустые' : "Сохранить данные"}
 								theme="secondary"
 								className={s.btn}
 								disabled={!dirty || !isValid}

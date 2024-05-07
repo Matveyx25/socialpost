@@ -8,9 +8,9 @@ export const EditIE = ({ id}) => {
 			<SimpleForm flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 				<FormIE/>
 				<SelectInput source="status" choices={[
-						{ id: "PENDING", name: "В ОЖИДАНИИ" },
-						{ id: "ACCEPTED", name: "ПРИНЯТО" },
-						{ id: "DECLINED", name: "ОТКЛОНЕНО" },
+						{ id: "PENDING", name: "Данные на модерации" },
+						{ id: "ACCEPTED", name: "Данные приняты" },
+						{ id: "DECLINED", name: "Данные отклонены" },
 					]} label='Статус' isRequired fullWidth />
 			</SimpleForm>
 		</Edit>

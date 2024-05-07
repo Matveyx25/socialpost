@@ -279,16 +279,16 @@ export const SelfEmployed = () => {
                     >
                       {
                         {
-                          PENDING: "В ОЖИДАНИИ",
-                          ACCEPTED: "ВЫПОЛНЕНО",
-                          DECLINED: "ОТКЛОНЕНО",
+													'PENDING': 'Данные на модерации',
+													'ACCEPTED': 'Данные приняты',
+													'DECLINED': 'Данные отклонены',
                         }[selfEmployed.status]
                       }
                     </div>
                   </>
                 ) : (
                   <Button
-                    label="Запомнить данные"
+                    label={(!dirty || !isValid) ? 'Данные пустые' : "Сохранить данные"}
                     theme="secondary"
                     className={s.btn}
                     disabled={!dirty || !isValid}

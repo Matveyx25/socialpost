@@ -36,11 +36,11 @@ export const DocumentsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
+      <DateField source="conclusionDateTime" label="Дата"/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />
 			<TextField source="userLastName" label="Фамилия" />
-			<FunctionField label="Тип" source="type" render={renderType}/>
-      <DateField source="conclusionDateTime" label="Дата"/>
+			<FunctionField label="Статус" source="type" render={renderType}/>
 			<FunctionField label="Документ" render={renderDownload}/>
     </Datagrid>
   </List>

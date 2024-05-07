@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, DateInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, DateInput, Labeled, DateField } from "react-admin";
 
 export const OperationEdit = (props) => (
 		<Edit {...props}  actions={
@@ -14,30 +14,26 @@ export const OperationEdit = (props) => (
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Id
-							</Typography>
-							<TextInput source="userId" label="Id пользователя" fullWidth disabled/>
+							<Labeled>
+								<TextField source="userId" label="Id"/>
+							</Labeled>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Имя
-							</Typography>
-							<TextInput source="userFirstName" label="Имя" fullWidth disabled/>
+							<Labeled>
+								<TextField source="userFirstName" label="Имя"/>
+							</Labeled>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Фамилия
-							</Typography>
-							<TextInput source="userLastName" label="Фамилия" fullWidth disabled/>
+							<Labeled>
+								<TextField source="userLastName" label="Фамилия"/>
+							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Баланс пользователя
-							</Typography>
-							<TextInput source="userBalance" label="Баланс пользователя" fullWidth disabled/>
+							<Labeled>
+								<TextField source="userBalance" label="Баланс пользователя"/>
+							</Labeled>
 						</Box>
 				</Box>
 				<hr />
@@ -52,10 +48,9 @@ export const OperationEdit = (props) => (
 							<TextInput source="amount" placeholder="0" label="Сумма" fullWidth />
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<Typography variant="h6" gutterBottom>
-									Дата операции
-								</Typography>
-								<DateInput source="dateTime" label="Дата операции" fullWidth disabled/>
+								<Labeled>
+									<DateField source="dateTime" label="Дата операции"/>
+								</Labeled>
 						</Box>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -68,7 +63,6 @@ export const OperationEdit = (props) => (
 										{ id: "WITHDRAWAL_SELF_EMPLOYED", name: "Вывод у самозанятого" },
 										{ id: "WITHDRAWAL_IE", name: "Вывод у ИП" },
 										{ id: "WITHDRAWAL_LEGAL_ENTITY", name: "Вывод у ЮЛ" },
-										{ id: "WITHDRAWAL_CRYPTO_WALLET", name: "Вывод с криптокошелька" },
 									]}
 								/>
 						</Box>

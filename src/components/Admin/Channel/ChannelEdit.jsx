@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, Labeled } from "react-admin";
 
 export const ChannelEdit = (props) => (
 		<Edit {...props}  actions={
@@ -12,30 +12,27 @@ export const ChannelEdit = (props) => (
 				<TextField source="name" label="Имя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								username
-							</Typography>
-							<TextInput source="telegramUsername" label="telegramUsername" fullWidth disabled/>
+							<Labeled>
+								<TextField source="telegramUsername" label="telegramUsername"/>
+							</Labeled>
+
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								telegramId
-							</Typography>
-							<TextInput source="telegramId" label="telegramId" fullWidth disabled/>
+							<Labeled>
+								<TextField source="telegramId" label="telegramId"/>
+							</Labeled>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Подписчики
-							</Typography>
-							<TextInput source="subscribersCount" label="Подписчики" fullWidth disabled/>
+							<Labeled>
+								<TextField source="subscribersCount" label="Подписчики"/>
+							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								ER
-							</Typography>
-							<TextInput source="engagementRate" label="ER" fullWidth disabled/>
+							<Labeled>
+								<TextField source="engagementRate" label="ER"/>
+							</Labeled>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
@@ -63,7 +60,7 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'NOT_CONFIRMED' },{ id: 'CONFIRMED', name: 'CONFIRMED' }]} />
+				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'НЕ ПОДТВЕРЖДЕН' },{ id: 'CONFIRMED', name: 'ПОДТВЕРЖДЕН' }]} />
 				<hr />
 		</SimpleForm>
   </Edit>

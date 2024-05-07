@@ -9,9 +9,9 @@ export const EditSelfEmployed = ({id}) => {
 			<SimpleForm flex={1}>
 				<FormSelfEmployed/>
 				<SelectInput source="status" choices={[
-						{ id: "PENDING", name: "В ОЖИДАНИИ" },
-						{ id: "ACCEPTED", name: "ПРИНЯТО" },
-						{ id: "DECLINED", name: "ОТКЛОНЕНО" },
+						{ id: "PENDING", name: "Данные на модерации" },
+						{ id: "ACCEPTED", name: "Данные приняты" },
+						{ id: "DECLINED", name: "Данные отклонены" },
 					]} label='Статус' isRequired fullWidth />
 			</SimpleForm>
 		</Edit>

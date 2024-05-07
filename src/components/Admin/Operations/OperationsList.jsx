@@ -1,14 +1,42 @@
 import * as React from "react";
-import { List, Datagrid, TextField, DateField, ReferenceField } from "react-admin";
+import { List, Datagrid, TextField, DateField, ReferenceField, FunctionField } from "react-admin";
+
+
+const renderStatus = (record) => {
+	const status = record.status
+
+	const statuses = {
+		'PENDING': 'В ОЖИДАНИИ',
+		'EXECUTED': 'ВЫПОЛНЕНО',
+		'DECLINED': 'ОТКЛОНЕНО',
+	}
+
+	return <TextField record={{status: statuses[status]}} source="status"/>
+};
+
+const renderType = (record) => {
+	const type = record.type
+
+	const types = {
+		'INCOME': 'Начисления',
+		'WITHDRAWAL_SELF_EMPLOYED': 'Вывод у самозанятого',
+		'WITHDRAWAL_IE': 'Вывод у ИП',
+		'WITHDRAWAL_LEGAL_ENTITY': 'Вывод у ЮЛ',
+	}
+
+	return <TextField record={{type: types[type]}} source="type"/>
+};
 
 export const OperationsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-			<ReferenceField source="userId" reference="users" label="Пользователь" />
-      <TextField source="type" label="Тип операции"/>
-      <TextField source="status" label="Статус"/>
+      <FunctionField label="Тип операции" source="type" render={renderType}/>
+      <FunctionField label="Статус" source="status" render={renderStatus}/>
       <DateField source="dateTime" label="Дата операции"/>
+			<ReferenceField source="userId" reference="users" label="Пользователь" />
+			<TextField source="userFirstName" label="Имя" />
+			<TextField source="userLastName" label="Фамилия" />
     </Datagrid>
   </List>
 );
