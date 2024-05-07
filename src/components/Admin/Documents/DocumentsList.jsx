@@ -17,10 +17,11 @@ const renderType = (record) => {
 
 const renderDownload = (record) => {
 	const onClick = () => {
-		admin.downloadDoc(record?.userId, record?.type).then(blob => {
+		admin.downloadDoc(record?.userId, record?.type).then(data => {
+			const blob = new Blob([data.data], { type: 'application/pdf' });
 			const link = document.createElement('a');
-			link.href = window.URL.createObjectURL(blob.data);
-			link.download = 'Договор_' + record?.type;
+			link.href = window.URL.createObjectURL(blob);
+			link.download = 'Договор_' + record?.type + '.pdf';
 			link.click();
 		}).catch(error => console.error(error));
 	}
