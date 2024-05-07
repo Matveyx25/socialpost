@@ -17,14 +17,16 @@ export const Payments = () => {
 	const [dateRange, setDateRange] = useState([null, null])
 	const [option, setOption] = useState()
 	const [channel, setChannels] = useState(null)
-	const [page, setPage] = useState(1)
-	const [size, setSize] = useState(10)
+	const [page, setPage] = useState(0)
+	const [size, setSize] = useState(30)
 
 	const {data: profile} = useProfile()
-	const {data: operations, isFetched: isOperationsFetched, headers: operationsHeaders} = useBalanceOperations({
+	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations({
 		start_date: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
 		end_date: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
-		type: option?.value
+		type: option?.value,
+		_start: page * 30,
+		_end: (page + 1) * 30,
 	})
 	const {data: channels} = useMyChannels()
 	
@@ -148,18 +150,14 @@ export const Payments = () => {
             </tbody>
           </table>
         </div>
-				{
-					console.log(
-					operations?.headers
-					)
-				}
-        {/* {operations?.headers && <Pagination
+        {operations?.headers['x-total-count'] && 
+				<Pagination
           currentPage={page}
-          totalCount={operations?.headers['X-Total-Count']}
+          totalCount={+operations?.headers['x-total-count']}
           pageSize={size}
           setSize={setSize}
           onPageChange={(page) => setPage(page)}
-        />} */}
+        />}
       </div>
     </div>
   );

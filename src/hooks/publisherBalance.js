@@ -87,7 +87,7 @@ export const useBalanceOperations = (params) => {
 	return useQuery({
 		queryKey: ['balance-operations', params],
 		queryFn: () => profile.getBalanceOperations(params),
-		select: data => ({ data: data.data, headers: data.totalCount }),
+		select: data => ({ data: data.data, headers: data.headers }),
 	})
 }
 
