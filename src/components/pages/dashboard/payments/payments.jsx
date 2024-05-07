@@ -65,19 +65,21 @@ export const Payments = () => {
 						isMulti={false}
 					/>
           Найдено выплат: {operations?.length}
-					{channels && <Select
-						options={[
-							{label: 'Все каналы', value: null},
-							...channels?.map(el => ({label: el.name, value: el.id}))
-						]}
-						required={true}
-						placeholder={'Все каналы'}
-						setSelectedOption={setChannels}
-						value={channel}
-						fullWidth={true}
-						isMulti={false}
-						className={s.channels}
-					/>}
+					<div className={s.channels}>
+						{(channels && option?.value[0] === "INCOME") && 
+						<Select
+							options={[
+								{label: 'Все каналы', value: null},
+								...channels?.map(el => ({label: el.name, value: el.id}))
+							]}
+							required={true}
+							placeholder={'Все каналы'}
+							setSelectedOption={setChannels}
+							value={channel}
+							fullWidth={true}
+							isMulti={false}
+						/>}
+					</div>
           <Button
             label="Сбросить"
             leftIcon={<IconRefresh />}
