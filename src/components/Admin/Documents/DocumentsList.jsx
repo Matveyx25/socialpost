@@ -19,9 +19,12 @@ const renderDownload = (record) => {
 	const onClick = () => {
 		admin.downloadDoc(record?.userId, record?.type).then(data => {
 			const blob = new Blob([data.data], { type: 'application/pdf' });
-			
-			var file = window.URL.createObjectURL(blob);
-			window.location.assign(file);
+			const link = document.createElement('a');
+			const date = new Date(record?.conclusionDateTime)
+			link.href = window.URL.createObjectURL(blob);
+			link.download = 'Договор_№' + record?.id + '_' + date.toLocaleDateString('ru-RU', {}) + '.pdf';
+			link.click();
+			window.URL.revokeObjectURL(link.href);
 		}).catch(error => console.error(error));
 	}
 
