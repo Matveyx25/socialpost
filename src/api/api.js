@@ -145,7 +145,6 @@ export const profile = {
 		return instance.get("/balance_operations/my", {params, paramsSerializer: {
 			indexes: null
 		}}).then(res => {
-			console.log(res.headers['x-total-count']);
 			return res
 		})
 	},
@@ -222,6 +221,6 @@ export const admin = {
 			'LEGAL_ENTITY': '/legal_entity/',
 		}
 
-		return instance.get('/users/' + userId + types[type] + 'agreement')
+		return instance.get('/users/' + userId + types[type] + 'agreement', { responseType: 'blob' })
 	}
 }
