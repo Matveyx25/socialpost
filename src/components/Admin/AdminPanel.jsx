@@ -63,8 +63,8 @@ const dataProvider = {
     }),
 	getOne: (resource, params) =>
     customDataProvider.getOne(resource, params).then((result) => {
-      if(!result?.id){
-				return {...result, id: params.id};
+      if(!result?.data?.id){
+				return {...result, data: {...result.data, id: params.id}};
 			}
 			return { ...result};
     })
