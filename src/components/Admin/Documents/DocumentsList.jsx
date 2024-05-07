@@ -40,7 +40,7 @@ export const DocumentsList = (props) => (
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />
 			<TextField source="userLastName" label="Фамилия" />
-			<FunctionField label="Статус" source="type" render={renderType}/>
+			<FunctionField label="Статус реквизитов" source="type" render={renderType}/>
 			<FunctionField label="Документ" render={renderDownload}/>
     </Datagrid>
   </List>
