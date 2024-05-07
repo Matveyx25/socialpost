@@ -1,6 +1,20 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, DateInput, Labeled, DateField } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, DateInput, Labeled, DateField, FunctionField } from "react-admin";
+
+
+const renderType = (record) => {
+	const type = record.type
+
+	const types = {
+		'INCOME': 'Начисления',
+		'WITHDRAWAL_SELF_EMPLOYED': 'Вывод у самозанятого',
+		'WITHDRAWAL_IE': 'Вывод у ИП',
+		'WITHDRAWAL_LEGAL_ENTITY': 'Вывод у ЮЛ',
+	}
+
+	return <TextField record={{type: types[type]}} source="type"/>
+};
 
 export const OperationEdit = (props) => (
 		<Edit {...props}  actions={
@@ -28,8 +42,6 @@ export const OperationEdit = (props) => (
 								<TextField source="userLastName" label="Фамилия"/>
 							</Labeled>
 						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="userBalance" label="Баланс пользователя"/>
@@ -42,30 +54,22 @@ export const OperationEdit = (props) => (
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Typography variant="h6" gutterBottom>
-								Сумма
-							</Typography>
-							<TextInput source="amount" placeholder="0" label="Сумма" fullWidth />
+							<Labeled>
+								<TextField source="amount" label="Сумма"/>
+							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
 									<DateField source="dateTime" label="Дата операции"/>
 								</Labeled>
 						</Box>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+							<Labeled>
+								<FunctionField label="Тип операции" source="type" render={renderType}/>
+							</Labeled>
+						</Box>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<SelectInput
-									label="Тип"
-									source="type"
-									choices={[
-										{ id: "INCOME", name: "Поступление" },
-										{ id: "WITHDRAWAL_SELF_EMPLOYED", name: "Вывод у самозанятого" },
-										{ id: "WITHDRAWAL_IE", name: "Вывод у ИП" },
-										{ id: "WITHDRAWAL_LEGAL_ENTITY", name: "Вывод у ЮЛ" },
-									]}
-								/>
-						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 								<SelectInput
 									label="Статус"

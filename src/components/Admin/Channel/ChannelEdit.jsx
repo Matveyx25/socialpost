@@ -15,7 +15,6 @@ export const ChannelEdit = (props) => (
 							<Labeled>
 								<TextField source="telegramUsername" label="telegramUsername"/>
 							</Labeled>
-
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
@@ -27,13 +26,13 @@ export const ChannelEdit = (props) => (
 								<TextField source="subscribersCount" label="Подписчики"/>
 							</Labeled>
 						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="engagementRate" label="ER"/>
 							</Labeled>
 						</Box>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Typography variant="h6" gutterBottom>
 								Тэги
@@ -60,7 +59,7 @@ export const ChannelEdit = (props) => (
 				<Typography variant="h6" gutterBottom>
 						Статус
 				</Typography>
-				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'НЕ ПОДТВЕРЖДЕН' },{ id: 'CONFIRMED', name: 'ПОДТВЕРЖДЕН' }]} />
+				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'НЕ ПОДТВЕРЖДЕН' },{ id: 'CONFIRMED', name: 'ПОДТВЕРЖДЕН' }]} fullWidth/>
 				<hr />
 		</SimpleForm>
   </Edit>
