@@ -3,6 +3,7 @@ import React from 'react'
 import { DateInput, TextInput } from 'react-admin'
 
 export const FormSelfEmployed = () => {
+
 	return (
 		<>
 			<Typography variant="h6" gutterBottom>
@@ -11,9 +12,6 @@ export const FormSelfEmployed = () => {
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 				<Box sx={{ maxWidth: 500, sm: 'flex' }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<TextInput source="citizenshipCountry" label="Гражданство" isRequired fullWidth />
-							</Box>
 							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 									<TextInput source="fullName" label="ФИО" isRequired fullWidth />
 							</Box>

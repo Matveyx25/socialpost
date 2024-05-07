@@ -60,6 +60,13 @@ const dataProvider = {
   getList: (resource, params) =>
     customDataProvider.getList(resource, params).then((result) => {
       return { ...result};
+    }),
+	getOne: (resource, params) =>
+    customDataProvider.getOne(resource, params).then((result) => {
+      if(!result?.id){
+				return {...result, id: params.id};
+			}
+			return { ...result};
     })
 };
 
