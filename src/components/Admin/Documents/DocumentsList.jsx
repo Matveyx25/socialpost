@@ -20,7 +20,7 @@ const renderDownload = (record) => {
 		admin.downloadDoc(record?.userId, record?.type).then(data => {
 			const blob = new Blob([data.data], { type: 'application/pdf' });
 			
-			var file = window.URL.create0bjectURL(blob);
+			var file = window.URL.createObjectURL(blob);
 			window.location.assign(file);
 		}).catch(error => console.error(error));
 	}
