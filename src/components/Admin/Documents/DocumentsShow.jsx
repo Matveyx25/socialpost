@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField, useShowContext } from "react-admin";
+import { FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField, useShowContext, useShowController } from "react-admin";
 import { ShowIE } from '../IE/ShowIE';
 import { ShowSelfEmployed } from "../SelfEmployed/ShowSelfEmployed";
 import { ShowLegalEntity } from '../LegalEntity/ShowLegalEntity';
@@ -24,6 +24,7 @@ const renderType = (record) => {
 
 const Content = () => {
 	const {record} = useShowContext()
+	const {record: requisites} = useShowController({resource: 'users', id: record?.userId + '/' + requisites[record?.type]})
 
 	return (
 		<>		
@@ -39,15 +40,13 @@ const Content = () => {
 				</Labeled>
 			</SimpleShowLayout>
 
-			<Show resource={'users'} id={record?.userId + '/' + requisites[record?.type]}>
-				<SimpleShowLayout>
-					{{	
-						'INDIVIDUAL_ENTREPRENEUR': <ShowIE/>,
-						'SELF_EMPLOYED': <ShowSelfEmployed/>,
-						'LEGAL_ENTITY': <ShowLegalEntity/>,
-						}[record?.type]}
-				</SimpleShowLayout>
-			</Show>
+			<SimpleShowLayout record={requisites}>
+				{{	
+					'INDIVIDUAL_ENTREPRENEUR': <ShowIE/>,
+					'SELF_EMPLOYED': <ShowSelfEmployed/>,
+					'LEGAL_ENTITY': <ShowLegalEntity/>,
+					}[record?.type]}
+			</SimpleShowLayout>
 		</>
 	)
 }
