@@ -31,9 +31,11 @@ export const ShowSelfEmployed = () => {
 								</Labeled>
 							</Box>
 					</Box>
-					<Labeled>
-						<DateField source="birthDate" label="Дата рождения"/>
-					</Labeled>
+					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Labeled>
+							<DateField source="birthDate" label="Дата рождения"/>
+						</Labeled>
+					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
@@ -60,24 +62,32 @@ export const ShowSelfEmployed = () => {
 					</Box>
 				</Box>
         <Box sx={{ maxWidth: 500 }}>
-          <Labeled>
-            <TextField
-              source="bankDetails.checkingAccount"
-              label="Расчетный счет"
-            />
-          </Labeled>
-          <Labeled>
-            <TextField source="bankDetails.bank" label="B" />
-          </Labeled>
-          <Labeled>
-            <TextField source="bankDetails.bik" label="БИК" />
-          </Labeled>
-          <Labeled>
-            <TextField
-              source="bankDetails.correspondentAccount"
-              label="Корреспондентский счет"
-            />
-          </Labeled>
+          <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Labeled>
+							<TextField
+								source="bankDetails.checkingAccount"
+								label="Расчетный счет"
+							/>
+						</Labeled>
+					</Box>
+          <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Labeled>
+							<TextField source="bankDetails.bank" label="B" />
+						</Labeled>
+					</Box>
+          <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Labeled>
+							<TextField source="bankDetails.bik" label="БИК" />
+						</Labeled>
+					</Box>
+          <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Labeled>
+							<TextField
+								source="bankDetails.correspondentAccount"
+								label="Корреспондентский счет"
+							/>
+						</Labeled>
+					</Box>
         </Box>
       </Box>
     </>
