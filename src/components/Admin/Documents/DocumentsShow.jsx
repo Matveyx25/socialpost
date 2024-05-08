@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField } from "react-admin";
+import { FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField, useShowContext } from "react-admin";
 import { ShowIE } from '../IE/ShowIE';
 import { ShowSelfEmployed } from "../SelfEmployed/ShowSelfEmployed";
 import { ShowLegalEntity } from '../LegalEntity/ShowLegalEntity';
@@ -23,7 +23,7 @@ const renderType = (record) => {
 };
 
 export const DocumentsShow = (props) => {
-	const {userId} = props?.record
+	const {record} = useShowContext(props)
 
 	return (
 		<Show {...props}>
@@ -39,13 +39,13 @@ export const DocumentsShow = (props) => {
 				</Labeled>
 			</SimpleShowLayout>
 
-			<Show resource={'users'} id={userId + '/' + requisites[props?.record?.type]}>
+			<Show resource={'users'} id={record?.userId + '/' + requisites[record?.type]}>
 				<SimpleShowLayout>
 					{{	
 						'INDIVIDUAL_ENTREPRENEUR': <ShowIE/>,
 						'SELF_EMPLOYED': <ShowSelfEmployed/>,
 						'LEGAL_ENTITY': <ShowLegalEntity/>,
-						}[props?.record?.type]}
+						}[record?.type]}
 				</SimpleShowLayout>
 			</Show>
 		</Show>
