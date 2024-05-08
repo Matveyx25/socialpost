@@ -5,9 +5,9 @@ import { ShowSelfEmployed } from "../SelfEmployed/ShowSelfEmployed";
 import { ShowLegalEntity } from '../LegalEntity/ShowLegalEntity';
 
 const requisites = {
-	'INDIVIDUAL_ENTREPRENEUR': 'ie',
-	'SELF_EMPLOYED': 'self_employed',
-	'LEGAL_ENTITY': 'legal_entity',
+	'INDIVIDUAL_ENTREPRENEUR': '/ie/',
+	'SELF_EMPLOYED': '/self_employed/',
+	'LEGAL_ENTITY': '/legal_entity/',
 }
 
 const renderType = (record) => {
@@ -24,7 +24,7 @@ const renderType = (record) => {
 
 const Content = () => {
 	const {record} = useShowContext()
-	const {record: requisitesRecord} = useShowController({resource: 'users', id: record?.userId + '/' + requisites[record?.type]})
+	const {record: requisitesRecord} = useShowController({resource: 'users', id: record?.userId + requisites[record?.type]})
 
 	return (
 		<>		
