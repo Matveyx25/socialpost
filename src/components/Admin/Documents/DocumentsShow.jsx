@@ -22,11 +22,11 @@ const renderType = (record) => {
 	return <TextField record={{type: types[type]}} source="type"/>
 };
 
-export const DocumentsShow = (props) => {
-	const {record} = useShowContext(props)
+const Content = () => {
+	const {record} = useShowContext()
 
 	return (
-		<Show {...props}>
+		<>		
 			<SimpleShowLayout>
 				<Labeled>
 					<TextField label="Номер документа" source="id"/>
@@ -48,5 +48,13 @@ export const DocumentsShow = (props) => {
 						}[record?.type]}
 				</SimpleShowLayout>
 			</Show>
+		</>
+	)
+}
+
+export const DocumentsShow = (props) => {
+	return (
+		<Show {...props}>
+			<Content/>
 		</Show>
 )};
