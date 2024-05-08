@@ -21,6 +21,8 @@ export const ChannelEdit = (props) => (
 								<TextField source="telegramId" label="telegramId"/>
 							</Labeled>
 						</Box>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="subscribersCount" label="Подписчики"/>

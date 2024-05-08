@@ -24,14 +24,9 @@ export const OperationEdit = (props) => (
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<Typography variant="h6" gutterBottom>
-					Пользователь
+					Пользователь №{props?.record.id}
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
-								<TextField source="userId" label="Id"/>
-							</Labeled>
-						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="userFirstName" label="Имя"/>
@@ -53,6 +48,11 @@ export const OperationEdit = (props) => (
 					Операция
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+							<Labeled>
+								<FunctionField label="Тип операции" source="type" render={renderType}/>
+							</Labeled>
+						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="amount" label="Сумма"/>
@@ -63,24 +63,18 @@ export const OperationEdit = (props) => (
 									<DateField source="dateTime" label="Дата операции"/>
 								</Labeled>
 						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
-								<FunctionField label="Тип операции" source="type" render={renderType}/>
-							</Labeled>
-						</Box>
 					</Box>
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<SelectInput
-									label="Статус"
-									source="status"
-									choices={[
-										{ id: "PENDING", name: "В ОЖИДАНИИ" },
-										{ id: "EXECUTED", name: "ВЫПОЛНЕНО" },
-										{ id: "DECLINED", name: "ОТКЛОНЕНО" },
-									]}
-								/>
-						</Box>
+					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }} sx={{mt: 16}}>
+						<SelectInput
+							label="Статус"
+							source="status"
+							choices={[
+								{ id: "PENDING", name: "В ОЖИДАНИИ" },
+								{ id: "EXECUTED", name: "ВЫПОЛНЕНО" },
+								{ id: "DECLINED", name: "ОТКЛОНЕНО" },
+							]}
+							fullWidth
+						/>
 				</Box>
 		</SimpleForm>
   </Edit>

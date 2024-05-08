@@ -1,6 +1,6 @@
 import { IconDownload } from "@tabler/icons-react";
 import * as React from "react";
-import { List, Datagrid, TextField, DateField, FunctionField, ReferenceField } from "react-admin";
+import { List, Datagrid, TextField, DateField, FunctionField, ReferenceField, ShowButton } from "react-admin";
 import { admin } from '../../../api/api';
 
 const renderType = (record) => {
@@ -42,6 +42,9 @@ export const DocumentsList = (props) => (
 			<TextField source="userLastName" label="Фамилия" />
 			<FunctionField label="Статус реквизитов" source="type" render={renderType}/>
 			<FunctionField label="Документ" render={renderDownload}/>
+			<>
+				<ShowButton />
+			</>
     </Datagrid>
   </List>
 );
