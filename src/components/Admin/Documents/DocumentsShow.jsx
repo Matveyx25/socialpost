@@ -24,7 +24,7 @@ const renderType = (record) => {
 
 const Content = () => {
 	const {record} = useShowContext()
-	const {record: requisites} = useShowController({resource: 'users', id: record?.userId + '/' + requisites[record?.type]})
+	const {record: requisitesRecord} = useShowController({resource: 'users', id: record?.userId + '/' + requisites[record?.type]})
 
 	return (
 		<>		
@@ -40,7 +40,7 @@ const Content = () => {
 				</Labeled>
 			</SimpleShowLayout>
 
-			<SimpleShowLayout record={requisites}>
+			<SimpleShowLayout record={requisitesRecord}>
 				{{	
 					'INDIVIDUAL_ENTREPRENEUR': <ShowIE/>,
 					'SELF_EMPLOYED': <ShowSelfEmployed/>,
