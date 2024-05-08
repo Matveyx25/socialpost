@@ -1,6 +1,6 @@
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import { DateField, Labeled } from "react-admin";
+import { DateField, Labeled, TextField } from "react-admin";
 
 export const ShowSelfEmployed = () => {
 	return (

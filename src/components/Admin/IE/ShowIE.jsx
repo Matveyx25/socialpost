@@ -1,6 +1,6 @@
-import { Box, TextField } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
-import { Labeled, SelectField } from "react-admin";
+import { Labeled, SelectField, TextField} from "react-admin";
 
 export const ShowIE = () => {
 	return (
