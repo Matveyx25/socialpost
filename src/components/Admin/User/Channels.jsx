@@ -1,6 +1,6 @@
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { List, Datagrid, TextField, FunctionField, ChipField, UrlField } from "react-admin";
+import { List, Datagrid, TextField, FunctionField, ChipField, UrlField, Show } from "react-admin";
 import { useParams } from "react-router-dom";
 
 const renderTags = (record) => {
@@ -25,11 +25,11 @@ const renderPhoto = (record) => {
 
 const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
 
-export const Channels = (props) => {
+export const Channels = () => {
 	const { id } = useParams();
 
 	(
-	 <List {...props} resource={'channels'} filterDefaultValues={{owner_id: id}}>
+	 <Show resource={'channels'} filterDefaultValues={{owner_id: id}}>
 		 <Datagrid rowClick="edit">
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
@@ -42,6 +42,6 @@ export const Channels = (props) => {
 			 <FunctionField label="Тэг" source="tag" render={renderTags}/>
 			 <UrlField label="Ссылка" source="telegramUrl"/>
 		 </Datagrid>
-	 </List>
+	 </Show>
  );
 }
