@@ -1,7 +1,6 @@
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField, UrlField } from "react-admin";
-import { NavLink } from "react-router-dom";
 
 const renderTags = (record) => {
 	if (!record?.tag || record?.tag === '') {

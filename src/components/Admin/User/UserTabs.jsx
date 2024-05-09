@@ -3,6 +3,7 @@ import React from 'react'
 import { UserEdit } from './UserEdit'
 import { Requisites } from './Requisites';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
+import { Channels } from './Channels';
 
 export const UserTabs = () => {
 	const [value, setValue] = React.useState(0);
@@ -27,7 +28,7 @@ export const UserTabs = () => {
 					<UserEdit/>
 				</TabPanel>
 				<TabPanel value={1}>
-				Каналы
+					<Channels/>
 				</TabPanel>
 				<TabPanel value={2}>
 					<Requisites/>

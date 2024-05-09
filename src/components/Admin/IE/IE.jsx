@@ -4,7 +4,6 @@ import { useDataProvider, useNotify } from 'react-admin'
 import { useParams } from 'react-router-dom';
 import { CreateIE } from './CreateIE';
 import { EditIE } from './EditIE';
-import axios from 'axios';
 import { admin } from '../../../api/api';
 
 export const IE = () => {
