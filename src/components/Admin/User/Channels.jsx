@@ -29,7 +29,7 @@ export const Channels = (props) => {
 	const { id } = useParams();
 
 	(
-	 <List {...props} resource={'channels'} filter={{'owner_id': id}}>
+	 <List {...props} resource={'channels'} filterDefaultValues={{owner_id: id}}>
 		 <Datagrid rowClick="edit">
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
