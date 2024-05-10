@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, SelectInput, TopToolbar, PrevNextButtons, Labeled, DateField, FunctionField } from "react-admin";
+import { Edit, SimpleForm, TextField, SelectInput, TopToolbar, PrevNextButtons, Labeled, DateField, FunctionField, useRecordContext } from "react-admin";
 
 
 const renderType = (record) => {
@@ -16,15 +16,13 @@ const renderType = (record) => {
 	return <TextField record={{type: types[type]}} source="type"/>
 };
 
-export const OperationEdit = (props) => (
-		<Edit {...props}  actions={
-			<TopToolbar>
-					<PrevNextButtons />
-			</TopToolbar>
-	}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+const Form = () => {
+	const record = useRecordContext()
+
+	return (
+		<SimpleForm sx={{ maxWidth: 500 }}>
 				<Typography variant="h6" gutterBottom>
-					Пользователь №{props?.record.id}
+					Пользователь №{record.id}
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
@@ -77,5 +75,15 @@ export const OperationEdit = (props) => (
 						/>
 				</Box>
 		</SimpleForm>
+	)
+}
+
+export const OperationEdit = (props) => (
+		<Edit {...props}  actions={
+			<TopToolbar>
+					<PrevNextButtons />
+			</TopToolbar>
+	}>
+			<Form/>
   </Edit>
 );
