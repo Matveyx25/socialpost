@@ -60,7 +60,7 @@ export const OperationEdit = (props) => (
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
-									<DateField source="dateTime" label="Дата операции" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
+									<DateField source="dateTime" label="Дата операции" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 								</Labeled>
 						</Box>
 					</Box>

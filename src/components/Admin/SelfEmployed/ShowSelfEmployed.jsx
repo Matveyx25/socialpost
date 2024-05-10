@@ -27,13 +27,13 @@ export const ShowSelfEmployed = () => {
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
-									<DateField source="passportIssueDate" label="Выдан" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
+									<DateField source="passportIssueDate" label="Выдан" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 								</Labeled>
 							</Box>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Labeled>
-							<DateField source="birthDate" label="Дата рождения" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
+							<DateField source="birthDate" label="Дата рождения" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 						</Labeled>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
