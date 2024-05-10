@@ -27,8 +27,8 @@ const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : 
 
 export const Channels = () => {
 	const { id } = useParams();
-
-	(
+	
+	return (
 	 <List resource={`channels?owner_id=${id}`}>
 		 <Datagrid rowClick="edit">
 			 <TextField source="id" />
