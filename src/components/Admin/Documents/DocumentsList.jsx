@@ -36,7 +36,7 @@ export const DocumentsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-      <DateField source="conclusionDateTime" label="Дата" options={{dateStyle: 'short'}}/>
+      <DateField source="conclusionDateTime" label="Дата" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />
 			<TextField source="userLastName" label="Фамилия" />
