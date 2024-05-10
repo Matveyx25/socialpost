@@ -36,7 +36,10 @@ export const DocumentsList = (props) => (
   <List {...props}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
-      <DateField source="conclusionDateTime" label="Дата"/>
+      <DateField source="conclusionDateTime" label="Дата" 
+			transform={value =>
+				(new Date(value)).toLocaleString('ru-RU', {})
+				}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />
 			<TextField source="userLastName" label="Фамилия" />

@@ -24,10 +24,10 @@ export const FormSelfEmployed = () => {
 									<TextInput source="passportNumber" label="Номер паспорта" isRequired fullWidth />
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-									<DateInput source="passportIssueDate" label="Выдан" isRequired fullWidth />
+									<DateInput source="passportIssueDate" label="Выдан" isRequired fullWidth parse={(date) => (date ? date.toLocaleDateString('ru-RU', {}) : null)}/>
 							</Box>
 					</Box>
-					<DateInput source="birthDate" label="Дата рождения" isRequired fullWidth />
+					<DateInput source="birthDate" label="Дата рождения" isRequired fullWidth parse={(date) => (date ? date.toLocaleDateString('ru-RU', {}) : null)}/>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 									<TextInput source="birthCity" label="Город рождения" isRequired fullWidth />

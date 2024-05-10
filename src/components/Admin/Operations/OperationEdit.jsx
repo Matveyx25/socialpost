@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, DateInput, Labeled, DateField, FunctionField } from "react-admin";
+import { Edit, SimpleForm, TextField, SelectInput, TopToolbar, PrevNextButtons, Labeled, DateField, FunctionField } from "react-admin";
 
 
 const renderType = (record) => {
@@ -60,7 +60,10 @@ export const OperationEdit = (props) => (
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
-									<DateField source="dateTime" label="Дата операции"/>
+									<DateField source="dateTime" label="Дата операции"
+									transform={value =>
+									(new Date(value)).toLocaleString('ru-RU', {})
+									}	/>
 								</Labeled>
 						</Box>
 					</Box>

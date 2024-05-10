@@ -27,13 +27,17 @@ export const ShowSelfEmployed = () => {
 							</Box>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
-									<DateField source="passportIssueDate" label="Выдан"/>
+									<DateField source="passportIssueDate" label="Выдан" transform={value =>
+									(new Date(value)).toLocaleString('ru-RU', {})
+									}/>
 								</Labeled>
 							</Box>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Labeled>
-							<DateField source="birthDate" label="Дата рождения"/>
+							<DateField source="birthDate" label="Дата рождения" transform={value =>
+									(new Date(value)).toLocaleString('ru-RU', {})
+									}/>
 						</Labeled>
 					</Box>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
