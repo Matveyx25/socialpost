@@ -28,7 +28,7 @@ export const ShowSelfEmployed = () => {
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 								<Labeled>
 									<DateField source="passportIssueDate" label="Выдан" transform={value =>
-									(new Date(value)).toLocaleString('ru-RU', {})
+									(new Date(value)).toLocaleDateString('ru-RU', {})
 									}/>
 								</Labeled>
 							</Box>
@@ -36,7 +36,7 @@ export const ShowSelfEmployed = () => {
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Labeled>
 							<DateField source="birthDate" label="Дата рождения" transform={value =>
-									(new Date(value)).toLocaleString('ru-RU', {})
+									(new Date(value)).toLocaleDateString('ru-RU', {})
 									}/>
 						</Labeled>
 					</Box>

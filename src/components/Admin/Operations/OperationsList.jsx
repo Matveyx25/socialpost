@@ -34,7 +34,7 @@ export const OperationsList = (props) => (
       <FunctionField label="Тип операции" source="type" render={renderType}/>
       <FunctionField label="Статус" source="status" render={renderStatus}/>
       <DateField source="dateTime" label="Дата операции" transform={value =>
-									(new Date(value)).toLocaleString('ru-RU', {})
+									(new Date(value)).toLocaleDateString('ru-RU', {})
 									}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />

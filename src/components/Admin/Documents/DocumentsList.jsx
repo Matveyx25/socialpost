@@ -22,7 +22,7 @@ const renderDownload = (record) => {
 			const link = document.createElement('a');
 			const date = new Date(record?.conclusionDateTime)
 			link.href = window.URL.createObjectURL(blob);
-			link.download = 'Договор_№' + record?.id + '_' + date.toLocaleDateString('ru-RU', {}) + '.pdf';
+			link.download = 'Договор_№' + record?.id + '_' + date?.toLocaleDateString('ru-RU', {}) + '.pdf';
 			link.click();
 			window.URL.revokeObjectURL(link.href);
 		}).catch(error => console.error(error));
@@ -38,7 +38,7 @@ export const DocumentsList = (props) => (
       <TextField source="id" />
       <DateField source="conclusionDateTime" label="Дата" 
 			transform={value =>
-				(new Date(value)).toLocaleString('ru-RU', {})
+				(new Date(value)).toLocaleDateString('ru-RU', {})
 				}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />
 			<TextField source="userFirstName" label="Имя" />

@@ -62,7 +62,7 @@ export const OperationEdit = (props) => (
 								<Labeled>
 									<DateField source="dateTime" label="Дата операции"
 									transform={value =>
-									(new Date(value)).toLocaleString('ru-RU', {})
+									(new Date(value)).toLocaleDateString('ru-RU', {})
 									}	/>
 								</Labeled>
 						</Box>
