@@ -29,7 +29,7 @@ export const Channels = () => {
 	const { id } = useParams();
 
 	(
-	 <Show resource={'channels'} filterDefaultValues={{owner_id: id}}>
+	 <List resource={`channels?owner_id=${id}`}>
 		 <Datagrid rowClick="edit">
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
@@ -42,6 +42,6 @@ export const Channels = () => {
 			 <FunctionField label="Тэг" source="tag" render={renderTags}/>
 			 <UrlField label="Ссылка" source="telegramUrl"/>
 		 </Datagrid>
-	 </Show>
+	 </List>
  );
 }
