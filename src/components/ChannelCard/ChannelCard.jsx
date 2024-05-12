@@ -76,7 +76,11 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
               <NavLink className={s.title} to={"/channel/" + id}>
                 {name}
               </NavLink>
-              <span>{tag}</span>
+              <>
+  							{channel?.tag && 
+  								channel?.tag.split(';').map(el => 
+  								<span>{el}</span>)}
+  						</>
             </div>
             <p dangerouslySetInnerHTML={{ __html: description }}></p>
           </div>
