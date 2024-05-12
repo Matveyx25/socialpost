@@ -20,7 +20,7 @@ export const FormIE = () => {
 				</Box>
 				<Box sx={{ maxWidth: 500 }}>
 					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
-					<TextInput source="bankDetails.bank" label='B' isRequired fullWidth />
+					<TextInput source="bankDetails.bank" label='Банк' isRequired fullWidth />
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />
 					<TextInput source="bankDetails.correspondentAccount" label='Корреспондентский счет' isRequired fullWidth />
 				</Box>

@@ -72,7 +72,7 @@ export const ShowSelfEmployed = () => {
 					</Box>
           <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 						<Labeled>
-							<TextField source="bankDetails.bank" label="B" />
+							<TextField source="bankDetails.bank" label="Банк" />
 						</Labeled>
 					</Box>
           <Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>

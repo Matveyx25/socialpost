@@ -1,5 +1,5 @@
 import * as React from "react";
-import { FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField, useShowContext, useShowController } from "react-admin";
+import { DateField, FunctionField, Labeled, Show, ShowGuesser, SimpleShowLayout, TextField, useShowContext, useShowController } from "react-admin";
 import { ShowIE } from '../IE/ShowIE';
 import { ShowSelfEmployed } from "../SelfEmployed/ShowSelfEmployed";
 import { ShowLegalEntity } from '../LegalEntity/ShowLegalEntity';
@@ -33,7 +33,7 @@ const Content = () => {
 					<TextField label="Номер документа" source="id"/>
 				</Labeled>
 				<Labeled>
-					<TextField label="Дата заклюючения" source="conclusionDateTime"/>
+					<DateField label="Дата заклюючения" source="conclusionDateTime" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 				</Labeled>
 				<Labeled>
 					<FunctionField label="Статус реквизитов"  source="type" render={renderType}/>

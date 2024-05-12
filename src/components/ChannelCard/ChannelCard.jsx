@@ -81,7 +81,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
             <p dangerouslySetInnerHTML={{ __html: description }}></p>
           </div>
         </div>
-        <div className={s.mobileBtns}>
+        {formats.find((el) => el.value === selectedFormat.value)?.price ? <div className={s.mobileBtns}>
           <Dropdown
             value={selectedFormat}
             options={formats.map((el) => ({
@@ -104,7 +104,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
             <Button
               className={s.button}
               label={(
-                formats.find((el) => el.value === selectedFormat.value).price +
+                formats.find((el) => el.value === selectedFormat.value)?.price +
                 ""
               )
                 .replace(/\s/g, "")
@@ -113,7 +113,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
               onClick={addToCart}
             />
           )}
-        </div>
+        </div> : <></>}
       </div>
       <div className={s.stats}>
         <div>
