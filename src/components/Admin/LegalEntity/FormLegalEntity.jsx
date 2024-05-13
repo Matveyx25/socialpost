@@ -9,7 +9,7 @@ export const FormLegalEntity = () => {
 				Юр. лицо
 			</Typography>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<Box sx={{ maxWidth: 500, sm: 'flex' }}>	
+				<Box sx={{ maxWidth: 500, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>	
 					<TextInput source="inn" label='ИНН' isRequired fullWidth />
 					<SelectInput source="taxSystem" choices={[
 						{ id: 'OSN', name: 'ОСН' },
@@ -19,7 +19,7 @@ export const FormLegalEntity = () => {
 					<TextInput source="legalAddress" label='Юридический адрес' isRequired fullWidth />
 					<TextInput source="correspondenceAddress" label='Адрес для корреспонденции' isRequired fullWidth />
 				</Box>
-				<Box sx={{ maxWidth: 500 }}>
+				<Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
 					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
 					<TextInput source="bankDetails.bank" label='Банк' isRequired fullWidth />
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />

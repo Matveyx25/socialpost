@@ -2,6 +2,7 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, FunctionField, ChipField, UrlField, Show } from "react-admin";
 import { useParams } from "react-router-dom";
+import { CustomEmpty } from "../CustomEmpty";
 
 const renderTags = (record) => {
 	if (!record?.tag || record?.tag === '') {
@@ -30,7 +31,7 @@ export const Channels = () => {
 
 	return (
 	 <List resource={'channels'} filter={{owner_id: id}}>
-		 <Datagrid rowClick="edit">
+		 <Datagrid rowClick="edit"  empty={<CustomEmpty message={'Каналов нет'}/>}>
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
 			 <TextField source="subscribersCount" label="Подписчики"/>

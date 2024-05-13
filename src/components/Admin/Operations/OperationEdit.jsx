@@ -35,7 +35,7 @@ const Form = () => {
 								<TextField source="userLastName" label="Фамилия"/>
 							</Labeled>
 						</Box>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 							<Labeled>
 								<TextField source="userBalance" label="Баланс пользователя"/>
 							</Labeled>
@@ -46,12 +46,12 @@ const Form = () => {
 					Операция
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 							<Labeled>
 								<FunctionField label="Тип операции" source="type" render={renderType}/>
 							</Labeled>
 						</Box>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="amount" label="Сумма"/>
 							</Labeled>
@@ -62,7 +62,7 @@ const Form = () => {
 								</Labeled>
 						</Box>
 					</Box>
-					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }} sx={{mt: 16}}>
+					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }} sx={{mt: '1rem'}}>
 						<SelectInput
 							label="Статус"
 							source="status"

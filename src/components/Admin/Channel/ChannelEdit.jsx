@@ -11,31 +11,31 @@ export const ChannelEdit = (props) => (
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<TextField source="name" label="Имя"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 							<Labeled>
 								<TextField source="telegramUsername" label="telegramUsername"/>
 							</Labeled>
 						</Box>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="telegramId" label="telegramId"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 							<Labeled>
 								<TextField source="subscribersCount" label="Подписчики"/>
 							</Labeled>
 						</Box>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="engagementRate" label="ER"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 							<Typography variant="h6" gutterBottom>
 								Тэги
 							</Typography>
@@ -43,7 +43,7 @@ export const ChannelEdit = (props) => (
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+						<Box flex={1}>
 								<TextInput source="nativePostPrice" placeholder="0" label="Нативное размещение" fullWidth />
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>

@@ -11,10 +11,10 @@ export const Requisites = () => {
 				<SelfEmployed />
 			</Box>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<LegalEntity />
+				<IE />
 			</Box>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<IE />
+				<LegalEntity />
 			</Box>
 		</div>
 	)

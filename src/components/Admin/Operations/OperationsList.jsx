@@ -1,5 +1,6 @@
 import * as React from "react";
 import { List, Datagrid, TextField, DateField, ReferenceField, FunctionField } from "react-admin";
+import { CustomEmpty } from "../CustomEmpty";
 
 
 const renderStatus = (record) => {
@@ -29,7 +30,7 @@ const renderType = (record) => {
 
 export const OperationsList = (props) => (
   <List {...props}>
-    <Datagrid rowClick="edit">
+    <Datagrid rowClick="edit" empty={<CustomEmpty message={'Операций нет'}/>}>
       <TextField source="id" />
       <FunctionField label="Тип операции" source="type" render={renderType}/>
       <FunctionField label="Статус" source="status" render={renderStatus}/>

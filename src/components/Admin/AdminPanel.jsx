@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Admin, ListGuesser, Resource, fetchUtils } from "react-admin";
+import { Admin, AppBar, Layout, ListGuesser, Resource, TitlePortal, fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./User/UserList";
 import { UserEdit } from "./User/UserEdit";
@@ -11,13 +11,14 @@ import Link from '@mui/material/Link';
 import { OperationsList } from './Operations/OperationsList';
 import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
-import { Route } from "react-router-dom";
+import { Route, useNavigate } from "react-router-dom";
 import { Requisites } from "./User/Requisites";
 import { UserTabs } from "./User/UserTabs";
-import { IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
+import { IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
 import { IconFileDots } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
+import { Box, Button } from "@mui/material";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -72,8 +73,27 @@ const dataProvider = {
     })
 };
 
+const LogoutButton = () => {
+	const navigate = useNavigate()
+	return (
+		<Button variant="text" onClick={() =>  navigate('/')}>
+			<IconLogout color="inherit"/>
+		</Button>
+	)
+};
+
+
+export const MyAppBar = () => (
+	<AppBar color="primary">
+			<TitlePortal />
+			<LogoutButton/>
+	</AppBar>
+);
+
+export const MyLayout = props => <Layout {...props} appBar={MyAppBar} />;
+
 const AdminPanel = () => (
-  <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs}>
+  <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs} layout={MyLayout}>
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>

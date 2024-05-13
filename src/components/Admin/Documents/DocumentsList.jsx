@@ -2,6 +2,7 @@ import { IconDownload } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, DateField, FunctionField, ReferenceField, ShowButton } from "react-admin";
 import { admin } from '../../../api/api';
+import { CustomEmpty } from '../CustomEmpty';
 
 const renderType = (record) => {
 	const type = record.type
@@ -33,8 +34,8 @@ const renderDownload = (record) => {
 
 
 export const DocumentsList = (props) => (
-  <List {...props}>
-    <Datagrid rowClick="edit">
+  <List {...props} bulkActionButtons={false}>
+    <Datagrid rowClick="edit" empty={<CustomEmpty message={'Документов нет'}/>}>
       <TextField source="id" />
       <DateField source="conclusionDateTime" label="Дата" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />

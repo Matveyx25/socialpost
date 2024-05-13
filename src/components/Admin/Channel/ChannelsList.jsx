@@ -1,6 +1,7 @@
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField, UrlField } from "react-admin";
+import { CustomEmpty } from '../CustomEmpty';
 
 const renderTags = (record) => {
 	if (!record?.tag || record?.tag === '') {
@@ -25,8 +26,8 @@ const renderPhoto = (record) => {
 const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
 
 export const ChannelsList = (props) => (
-  <List {...props}>
-    <Datagrid rowClick="edit">
+  <List {...props} >
+    <Datagrid rowClick="edit" empty={<CustomEmpty message={'Каналов нет'}/>}>
       <TextField source="id" />
       <TextField source="name" label="Название"/>
       <TextField source="subscribersCount" label="Подписчики"/>

@@ -23,7 +23,7 @@ export const UserEdit = (props) => {
 					<TextInput type="email" source="emailData.email" isRequired fullWidth label="Почта"/>
 					<hr />
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<Box flex={1}>
 								<Typography variant="h6" gutterBottom>
 										Роли
 								</Typography>
@@ -34,7 +34,7 @@ export const UserEdit = (props) => {
 					</Box>
 					<hr />
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
+							<Box flex={1}>
 								<Typography variant="h6" gutterBottom>
 										Баланс
 								</Typography>

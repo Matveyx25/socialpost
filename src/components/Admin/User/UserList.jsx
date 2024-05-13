@@ -2,6 +2,7 @@ import { Chip } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField } from "react-admin";
+import { CustomEmpty } from "../CustomEmpty";
 
 const renderRoles = (record) => {
 	if (!record?.roles || record?.roles.length === 0) {
@@ -27,7 +28,7 @@ const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> :
 
 export const UserList = (props) => (
   <List {...props}>
-    <Datagrid rowClick="edit">
+    <Datagrid rowClick="edit"  empty={<CustomEmpty message={'Пользователей нет'}/>}>
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>
       <TextField source="lastName" label="Фамилия"/>
