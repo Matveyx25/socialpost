@@ -27,8 +27,8 @@ const renderPhoto = (record) => {
 const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> : <IconX/>
 
 export const UserList = (props) => (
-  <List {...props}>
-    <Datagrid rowClick="edit"  empty={<CustomEmpty message={'Пользователей нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Пользователей нет'}/>}>
+    <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>
       <TextField source="lastName" label="Фамилия"/>

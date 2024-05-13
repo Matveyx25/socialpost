@@ -77,7 +77,7 @@ const LogoutButton = () => {
 	const navigate = useNavigate()
 	return (
 		<Button variant="text" onClick={() =>  navigate('/')}>
-			<IconLogout color="inherit"/>
+			<IconLogout color="#fff"/>
 		</Button>
 	)
 };

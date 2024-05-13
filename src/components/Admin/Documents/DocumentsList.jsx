@@ -34,8 +34,8 @@ const renderDownload = (record) => {
 
 
 export const DocumentsList = (props) => (
-  <List {...props} bulkActionButtons={false}>
-    <Datagrid rowClick="edit" empty={<CustomEmpty message={'Документов нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Документов нет'}/>} bulkActionButtons={false}>
+    <Datagrid rowClick="edit">
       <TextField source="id" />
       <DateField source="conclusionDateTime" label="Дата" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 			<ReferenceField source="userId" reference="users" label="Пользователь" />

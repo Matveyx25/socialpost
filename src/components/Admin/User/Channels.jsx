@@ -30,8 +30,8 @@ export const Channels = () => {
 	const { id } = useParams();
 
 	return (
-	 <List resource={'channels'} filter={{owner_id: id}}>
-		 <Datagrid rowClick="edit"  empty={<CustomEmpty message={'Каналов нет'}/>}>
+	 <List resource={'channels'} filter={{owner_id: id}} empty={<CustomEmpty message={'Каналов нет'}/>}>
+		 <Datagrid rowClick="edit">
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
 			 <TextField source="subscribersCount" label="Подписчики"/>

@@ -29,8 +29,8 @@ const renderType = (record) => {
 };
 
 export const OperationsList = (props) => (
-  <List {...props}>
-    <Datagrid rowClick="edit" empty={<CustomEmpty message={'Операций нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>}>
+    <Datagrid rowClick="edit">
       <TextField source="id" />
       <FunctionField label="Тип операции" source="type" render={renderType}/>
       <FunctionField label="Статус" source="status" render={renderStatus}/>
