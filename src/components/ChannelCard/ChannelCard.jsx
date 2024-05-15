@@ -65,7 +65,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
     <div className={s.wrapper} key={key}>
       <div className={s.flex}>
         <div className={s.mobileFlex}>
-          <NavLink className={s.img} to={"/channel/" + id}>
+          <NavLink className={s.img} to={'#'}>
             <img
               src={imageUrl ? imageUrl : "/images/channel-without-image.svg"}
               alt=""
@@ -73,7 +73,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
           </NavLink>
           <div className={s.content}>
             <div className={s.titleFlex}>
-              <NavLink className={s.title} to={"/channel/" + id}>
+              <NavLink className={s.title} to={'#'}>
                 {name}
               </NavLink>
               <h2>

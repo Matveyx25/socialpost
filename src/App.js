@@ -88,7 +88,7 @@ function App() {
 							<Route path="/policy" element={<Policy/>}/>
 							<Route path="/contact" element={<Contacts/>}/>
 							<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
-							<Route path="/channel/:channelId" element={<Channel/>}/>
+							{/* <Route path="/channel/:channelId" element={<Channel/>}/> */}
 							<Route path="/cart" element={<Cart/>}/>
 							<Route path="*" element={<NotFound/>}/>
 						</Route>
