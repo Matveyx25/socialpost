@@ -123,9 +123,9 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
         <div>
           <span>Подписчики</span>
           <p>
-            {(subscribersCount + "")
-              ?.replace(/\s/g, "")
-              ?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}
+						{!subscribersCount ? <p>-</p> :  <p>{(subscribersCount + "")
+						?.replace(/\s/g, "")
+						?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}</p>}
           </p>
         </div>
         <div>
@@ -133,7 +133,6 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
 					{!averagePostReach ? <p>-</p> :  <p>{(averagePostReach + "")
 						?.replace(/\s/g, "")
 						?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}₽</p>}
-					{}
         </div>
         <div>
           <span>ER</span>
