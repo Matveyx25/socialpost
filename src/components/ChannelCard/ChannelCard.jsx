@@ -130,19 +130,18 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
         </div>
         <div>
           <span>Средний охват поста</span>
-          <p>
-            {(averagePostReach + "")
-              ?.replace(/\s/g, "")
-              ?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}
-          </p>
+					{!averagePostReach ? <p>-</p> :  <p>{(averagePostReach + "")
+						?.replace(/\s/g, "")
+						?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}₽</p>}
+					{}
         </div>
         <div>
           <span>ER</span>
-          <p>{engagementRate}%</p>
+          {!engagementRate ? <p>-</p> : <p>{engagementRate}%</p>}
         </div>
         <div>
           <span>CPV</span>
-          <p>{costPerView}₽</p>
+          {!costPerView ? <p>-</p> :  <p>{costPerView}₽</p>}
         </div>
       </div>
     </div>

@@ -11,12 +11,30 @@ import { useCart } from '../../../hooks/useCart';
 import { useUpdateCart } from '../../../hooks/useUpdateCart';
 
 const options = [
-  { value: 'subscribers more', label: 'Подписчиков: Больше' },
-  { value: 'subscribers less', label: 'Подписчиков: Меньше' },
-  { value: 'post-reach more', label: 'Охват поста: Больше' },
-  { value: 'post-reach less', label: 'Охват поста: Меньше' },
-  { value: 'price more', label: 'Цена: Больше' },
-  { value: 'price less', label: 'Цена: Меньше' },
+  { value: {
+		_order: 'DESC',
+		_sort: 'subscribersCount'
+		}, label: 'Подписчиков: Больше' },
+  { value: {
+		_order: 'ASC',
+		_sort: 'subscribersCount'
+		}, label: 'Подписчиков: Меньше' },
+  { value: {
+		_order: 'DESC',
+		_sort: 'averagePostReach'
+		}, label: 'Охват поста: Больше' },
+  {value: {
+		_order: 'ASC',
+		_sort: 'averagePostReach'
+		}, label: 'Охват поста: Меньше' },
+  { value: {
+		_order: 'DESC',
+		_sort: 'costPerView'
+		}, label: 'Цена: Больше' },
+  {  value: {
+		_order: 'ASC',
+		_sort: 'costPerView'
+		}, label: 'Цена: Меньше' },
 ];
 
 export const ChannelsCatalog = () => {
@@ -30,7 +48,7 @@ export const ChannelsCatalog = () => {
 		query: '(max-width: 820px)'
 	})
 
-	const {data: channels, isFetched, refetch} = useChannels(filters)
+	const {data: channels, isFetched, refetch} = useChannels({...filters, ...selectedOption.value})
 
 	const onFilterSubmit = (f) => {
 		setFilters({
@@ -41,7 +59,7 @@ export const ChannelsCatalog = () => {
 			cost_per_view_min: f?.minCPV,
 			cost_per_view_max: f?.maxCPV,
 			price_min: f?.minPrice,
-			price_max: f?.maxPrice,
+			price_max: f?.maxPrice
 		})
 		refetch()
 	}
