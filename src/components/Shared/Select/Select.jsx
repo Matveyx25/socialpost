@@ -52,6 +52,7 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 					...baseStyles,
 					border: '1px solid #BDBEC0',
 					borderRadius: 8,
+					minWidth: 'fit-content',
 					boxShadow: '0px 4px 20px 0px rgba(212, 217, 222, 0.25)',
 					"@media (max-width: 1260px)": {
 						fontSize: 12
@@ -87,6 +88,7 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 					fontFamily: 'SF Regular',
 					fontSize: '1rem',
 					lineHeight: '1.5rem',
+					minWidth: 'fit-content',
 					background: isSelected ? 'rgba(237, 241, 255, 1)' : 'none', 
 					"&:hover": {
 						background: 'rgba(237, 241, 255, 1)'
