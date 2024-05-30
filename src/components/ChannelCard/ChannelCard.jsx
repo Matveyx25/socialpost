@@ -67,7 +67,7 @@ export const ChannelCard = ({link, updateCart, id, cart, title, type, desc, subs
 				</div>
 				<div>
 					<span>CPV</span>
-					<p>{cpv}₽</p>
+					{cpv === '-' ? <p>{cpv}</p> : <p>{cpv}₽</p>}
 				</div>
 			</div>
 		</div>
