@@ -181,7 +181,7 @@ export const Reports = () => {
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.link ? <IconExternalLink color='#436CFF' size={24} onClick={() => navigation('/dashboard/appointment')}/> : '-'}
+												{el.link ? <IconExternalLink color='#436CFF' size={24} onClick={() => navigation('/appointment')}/> : '-'}
 											</div>
 										</td>
 									</tr>

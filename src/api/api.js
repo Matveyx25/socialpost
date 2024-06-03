@@ -201,6 +201,27 @@ export const publisher = {
 	}
 }
 
+export const advertiser = {
+	getMyCampaigns(params) {
+		return instance.get('/campaigns/my', params)
+	},
+	getCampaignById(id) {
+		return instance.get('/campaigns/' + id)
+	},
+	createCampaign(data) {
+		return instance.post('/campaigns/my', data)
+	},
+	getMyClients(params) {
+		return instance.get('/campaigns/clients/my', params)
+	},
+	getClientById(id) {
+		return instance.get('/campaigns/clients/' + id)
+	},
+	createClient(data) {
+		return instance.post('/campaigns/clients/my', data)
+	},
+}
+
 export const channels = {
 	getAllChannels(params) {
 		return instance.get('/channels', {params})

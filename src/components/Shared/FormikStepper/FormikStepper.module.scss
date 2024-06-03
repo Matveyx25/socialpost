@@ -1,0 +1,22 @@
+@import '~/src/styles/variables.scss';
+
+.rowBtns{
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	align-self: stretch;
+	padding-top: 1rem;
+	border-top: 1px solid $gray-100;
+	.btnHalf{
+		flex-grow: 1;
+		width: calc((100% - .5rem) / 2);
+		padding-left: 0;
+		padding-right: 0;
+	}
+	.fullBtn{
+		flex-grow: 1;
+		width: 100%;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}

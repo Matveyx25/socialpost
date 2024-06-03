@@ -33,6 +33,8 @@ import { RestorePassword } from "./components/pages/restore-password/restore-pas
 import { useProfile } from "./hooks/useProfile";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css'
+import { AdvertisingCompanies } from "./components/pages/dashboard/advertising-companies/advertising-companies";
+import { MyClients } from "./components/pages/dashboard/my-clients/my-clients";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -62,14 +64,45 @@ function App() {
 					{localStorage.getItem('token') ? 
 						profileSuccess ? 
 						<Route element={<DashboardLayout/>}>
-							<Route path="/profile" element={<Profile/>}/>
-							<Route path="/dashboard" element={<MainDashboard/>}/>
-							<Route path="/dashboard/my-channels" element={<MyChannels/>}/>
-							<Route path="/dashboard/placement-appointments" element={<Reports/>}/>
-							<Route path="/dashboard/appointment" element={<Report/>}/>
-							<Route path="/dashboard/payments" element={<Payments/>}/>
-							<Route path="/dashboard/requisites" element={<Requisites/>}/>
-							<Route path="/dashboard/faq" element={<FAQ/>} /> 
+							{profile?.roles?.includes('PUBLISHER') ? 
+							<>
+								<Route path="/dashboard" element={<MainDashboard/>} handle={{
+									crumb: () => 'Дашборд',
+								}}/>
+								<Route path="/my-channels" element={<MyChannels/>} handle={{
+									crumb: () => 'Мои каналы',
+								}}/>
+								<Route path="/placement-appointments" element={<Reports/>} handle={{
+									crumb: () => 'Заявки на размещение',
+								}}/>
+								<Route path="/appointment" element={<Report/>} handle={{
+									crumb: () => 'Заявки на размещение',
+								}}/>
+								<Route path="/payments" element={<Payments/>} handle={{
+									crumb: () => 'Кошелек',
+								}}/>
+								<Route path="/requisites" element={<Requisites/>} handle={{
+									crumb: () => 'Реквизиты',
+								}}/>
+							</> :
+							<>
+								<Route path="/dashboard" element={<AdvertisingCompanies/>} handle={{
+									crumb: () => 'Рекламные кампании',
+								}}/>
+								<Route path="/clients" element={<MyClients/>} handle={{
+									crumb: () => 'Клиенты',
+								}}/>
+								<Route path="/advertising-company/:companyId" element={<AdvertisingCompanies/>} handle={{
+									crumb: (companyId) => 'Рекламные кампании',
+								}}/>
+							</>
+							}
+							<Route path="/profile" element={<Profile/>} handle={{
+									crumb: () => <p>{'Профиль'}</p>,
+								}}/>
+							<Route path="/faq" element={<FAQ/>} handle={{
+									crumb: () => <p>{'FAQ'}</p>,
+								}}/>
 						</Route> 
 						:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
 						: null}

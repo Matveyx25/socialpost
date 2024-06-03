@@ -2,11 +2,13 @@ import React from 'react'
 import s from './Sidebar.module.scss'
 import { NavLink } from 'react-router-dom'
 import { SidebarItem } from './SidebarItem'
-import { IconBuildingBank, IconDashboard, IconHelp, IconLifebuoy, IconList, IconMoneybag, IconPointerQuestion, IconUserFilled } from '@tabler/icons-react'
+import { IconBuildingBank, IconDashboard, IconGraph, IconHelp, IconLifebuoy, IconList, IconMoneybag, IconPointerQuestion, IconSettings, IconUserFilled, IconUsers } from '@tabler/icons-react'
 import { useMyChannels } from '../../hooks/useMyChannels'
+import { useProfile } from '../../hooks/useProfile';
 
 export const Sidebar = () => {
 	const {data: channels} = useMyChannels()
+	const {data: profile} = useProfile()
 
 	return (
 		<div className={s.wrapper}>
@@ -15,16 +17,25 @@ export const Sidebar = () => {
 					<img src="/images/logo.png" alt="" />
 				</NavLink>
 			</div>
+			{profile?.roles?.includes('PUBLISHER') ? 
 			<div className={s.itemList}>
 				<SidebarItem label="Дашборд" icon={<IconDashboard/>} to={'/dashboard'} end/>
-				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/dashboard/my-channels'} count={channels?.length || ''}/>
-				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/dashboard/placement-appointments'} count={4}/>
-				<SidebarItem label="Кошелек" icon={<IconMoneybag/>} to={'/dashboard/payments'}/>
-				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/dashboard/requisites'}/>
+				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/my-channels'} count={channels?.length || ''}/>
+				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/placement-appointments'} count={4}/>
+				<SidebarItem label="Кошелек" icon={<IconMoneybag/>} to={'/payments'}/>
+				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/requisites'}/>
 				<SidebarItem label="Профиль" icon={<IconUserFilled/>} to={'/profile'}/>
-				<SidebarItem label="FAQ" icon={<IconHelp/>} to={'/dashboard/faq'}/>
+				<SidebarItem label="FAQ" icon={<IconHelp/>} to={'/faq'}/>
 				<SidebarItem label="Поддержка" icon={<IconLifebuoy/>} to={'https://t.me/socialpost_support'} target="_blank"/>
-			</div>
+			</div> :
+			<div className={s.itemList}>
+				<SidebarItem label="Рекламные кампании" icon={<IconGraph/>} to={'/dashboard'} end/>
+				<SidebarItem label="Клиенты" icon={<IconUsers/>} to={'/clients'}/>
+				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/requisites'}/>
+				<SidebarItem label="Настройки" icon={<IconSettings/>} to={'/profile'}/>
+				<SidebarItem label="FAQ" icon={<IconHelp/>} to={'/faq'}/>
+				<SidebarItem label="Поддержка" icon={<IconLifebuoy/>} to={'https://t.me/socialpost_support'} target="_blank"/>
+			</div> }
 		</div>
 	)
 }

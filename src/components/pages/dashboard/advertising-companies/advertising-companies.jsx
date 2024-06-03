@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import s from './payments.module.scss'
-import { IconRefresh, IconSortDescending } from '@tabler/icons-react'
-import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
+import React, { useState } from 'react'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
+import { Loader } from '../../../Shared/Loader/Loader'
+import { IconPlus, IconRefresh } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
-import { useOutletContext } from 'react-router-dom'
-import { DashboardCard } from '../dashboard-card';
-import { useProfile } from '../../../../hooks/useProfile';
-import { useBalanceOperations } from '../../../../hooks/publisherBalance';
-import { Loader } from '../../../Shared/Loader/Loader';
-import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { Select } from '../../../Shared/Select/Select'
-import { useMyChannels } from '../../../../hooks/useMyChannels';
+import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
+import { priceSeparator } from '../../../../helpers/priceSeparator'
+import { DashboardCard } from '../dashboard-card'
+import { useOutletContext } from 'react-router-dom'
+import { useMyChannels } from '../../../../hooks/useMyChannels'
+import { useBalanceOperations } from '../../../../hooks/publisherBalance'
+import { useProfile } from '../../../../hooks/useProfile'
+import s from './advertising-companies.module.scss'
 
-export const Payments = () => {
+export const AdvertisingCompanies = () => {
 	const [dateRange, setDateRange] = useState([null, null])
 	const [option, setOption] = useState()
 	const [channel, setChannels] = useState(null)
@@ -34,61 +34,30 @@ export const Payments = () => {
 
 	return (
     <div className={s.grid}>
-      <DashboardCard className={s.balance} >
-        <div>
-          <p>{priceSeparator(profile?.balance)} ₽</p>
-          <span className={s.label}>Баланс кабинета</span>
-        </div>
-        <Button
-          label={"Вывести"}
-          className={s.btn}
-          onClick={() => setModal("withdraw-modal")}
-        />
-      </DashboardCard>
       <div className={s.tableCard}>
-				<div className={s.cardHeader}>
-						<span>История операций</span>
-				</div>
         <div className={s.filters}>
-          <RangeCalendar {...{dateRange, setDateRange}}/>
-					<Select
-						options={[
-							{label: 'Все операции', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET', 'INCOME']},
-							{label: 'Поступления', value: ["INCOME"]},
-							{label: 'Списания', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET']},
-						]}
-						required={true}
-						placeholder={'Все операции'}
-						setSelectedOption={setOption}
-						value={option}
-						fullWidth={true}
-						isMulti={false}
-					/>
-          Найдено выплат: {operations?.headers['x-total-count']}
-					<div className={s.channels}>
-						{(channels && option?.value[0] === "INCOME") && 
+					<div className={s.selects}>
 						<Select
 							options={[
-								{label: 'Все каналы', value: null},
-								...channels?.map(el => ({label: el.name, value: el.id}))
+								{label: 'Все операции', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET', 'INCOME']},
+								{label: 'Поступления', value: ["INCOME"]},
+								{label: 'Списания', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET']},
 							]}
 							required={true}
-							placeholder={'Все каналы'}
-							setSelectedOption={setChannels}
-							value={channel}
+							placeholder={'Все операции'}
+							setSelectedOption={setOption}
+							value={option}
 							fullWidth={true}
 							isMulti={false}
-						/>}
+						/>
 					</div>
+          
           <Button
-            label="Сбросить"
-            leftIcon={<IconRefresh />}
-            theme="secondary"
-            className={s.refreshBtn}
+            label="Создать кампанию"
+            leftIcon={<IconPlus size={20}/>}
+            className={s.addBtn}
 						onClick={() => {
-							setChannels()
-							setDateRange([null, null])
-							setOption()
+							setModal('add-campaing')
 						}}
           />
         </div>
@@ -96,17 +65,20 @@ export const Payments = () => {
           <table className={s.table}>
             <thead>
               <tr>
-                <th>Тип</th>
-                <th>Статус</th>
                 <th>
-                  <div className={s.flex}>
-                    Дата
-                  </div>
+									Клиент
+								</th>
+                <th>
+									Тип
+								</th>
+                <th>
+									Общий лимит трат
                 </th>
                 <th>
-                  <div className={s.flex}>
-                    Сумма
-                  </div>
+									Всего потрачено
+                </th>
+                <th>
+									Статус
                 </th>
               </tr>
             </thead>

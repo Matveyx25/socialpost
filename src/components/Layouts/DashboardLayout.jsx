@@ -7,21 +7,9 @@ import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { DashboardModals } from "../DashboardModals/DashboardModals";
 import { auth, profile } from "../../api/api";
 import { useProfile } from "../../hooks/useProfile";
-
-const routesTitle = {
-	'/profile/': 'Профиль',
-	'/dashboard/': 'Дашборд',
-	'/dashboard/my-channels/': 'Мои каналы',
-	'/dashboard/placement-appointments/': 'Заявки на размещение',
-	'/dashboard/appointment/': 'Заявки на размещение / Бесплатный урок',
-	'/dashboard/payments/': 'Кошелек',
-	'/dashboard/requisites/': 'Реквизиты',
-	'/dashboard/faq/': 'FAQ',
-	'/dashboard/support/': 'Поддержка',
-}
+import { Breadcrumbs } from "../Shared/Breadcrunbs/Breadcrumbs";
 
 export const DashboardLayout = ({}) => {
-	const { pathname } = useLocation()
 	const [modal, setOpen] = useState('')
 	const [modalParams, setModalParams] = useState(null)
 	
@@ -45,7 +33,8 @@ export const DashboardLayout = ({}) => {
 				<Sidebar/>
 				<div className={s.content}>
 					<div className={s.header}>
-						{routesTitle[pathname] || routesTitle[pathname + '/']}
+						{/* {routesTitle[pathname] || routesTitle[pathname + '/']} */}
+						<Breadcrumbs/>
 						<Dropdown 
 							options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user-without-image.svg'}/>}
 							arrowClosed={<IconChevronDown size={18}/>}
