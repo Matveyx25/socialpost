@@ -32,7 +32,7 @@ export const MyClients = () => {
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
 						placeholder={'Найти кампанию'} value={search} onChange={setSearch}/>
-						Найдено компаний: {clients?.headers['x-total-count']}
+						Найдено клиентов: {clients?.headers['x-total-count']}
 					</div>
           
           <Button

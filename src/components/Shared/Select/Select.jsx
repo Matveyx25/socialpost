@@ -1,11 +1,18 @@
 import { IconChevronDown } from '@tabler/icons-react';
 import React from 'react'
-import SelectElement from 'react-select';
+import SelectElement, {components} from 'react-select';
 import s from './Select.module.scss'
 import { IconInfoCircleFilled } from '@tabler/icons-react';
 import classNames from 'classnames';
 
-export const Select = ({styles, headerClassName ,label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
+const CustomMenu = (props) => (
+		<components.MenuList  {...props}>
+				{props.children}
+				{props.lastElement}
+		</components.MenuList >
+	)
+
+export const Select = ({styles, headerClassName, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={classNames(headerClassName, s.header)}>
 			<span>{label}{required && <span className={s.star}>*</span>}</span>
@@ -21,7 +28,8 @@ export const Select = ({styles, headerClassName ,label, required, closeMenuOnSel
 			isDisabled={disabled}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
-				DropdownIndicator: () => <IconChevronDown className={s.icon}/>
+				DropdownIndicator: () => <IconChevronDown className={s.icon}/>,
+				MenuList: (props) => <CustomMenu {...props} lastElement={lastElement}/>
 			}}
 			styles={{
 				...styles,

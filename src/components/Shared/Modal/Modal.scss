@@ -17,6 +17,7 @@
 		height: fit-content;
 		transform: translate(-50%, -50%);
 		max-width: calc(100% - 2rem);
+		overflow: visible !important;
 	}
 	&__Header{
 		display: flex;

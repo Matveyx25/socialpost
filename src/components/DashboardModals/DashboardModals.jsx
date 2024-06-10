@@ -6,7 +6,7 @@ import { RemoveReportModal } from './RemoveReportModal'
 import { ApproveReportModal } from './ApproveReportModal'
 import { WithdrawModal } from './WithdrawModal'
 import { EmailModal } from './ConnectEmailModal'
-import { AddCampaingModal } from './AddCampaingModal'
+import { AddCampaignModal } from './AddCampaignModal'
 import { AddClientModal } from './AddClientModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
@@ -25,7 +25,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<ApproveReportModal {...{isOpen, setOpen}}/>
 			<WithdrawModal {...{isOpen, setOpen}}/>
 			<EmailModal {...{isOpen, setOpen}}/>
-			<AddCampaingModal {...{isOpen, setOpen}}/>
+			<AddCampaignModal {...{isOpen, setOpen}}/>
 			<AddClientModal {...{isOpen, setOpen}}/>
 		</div>
 	)

@@ -1,120 +1,175 @@
-import React, { useState } from 'react'
-import { Pagination } from '../../../Shared/Pagination/Pagination'
-import { Loader } from '../../../Shared/Loader/Loader'
-import { IconPlus, IconRefresh } from '@tabler/icons-react'
-import { Button } from '../../../Shared/Button/Button'
-import { Select } from '../../../Shared/Select/Select'
-import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
-import { priceSeparator } from '../../../../helpers/priceSeparator'
-import { DashboardCard } from '../dashboard-card'
-import { useOutletContext } from 'react-router-dom'
-import { useMyChannels } from '../../../../hooks/useMyChannels'
-import { useBalanceOperations } from '../../../../hooks/publisherBalance'
-import { useProfile } from '../../../../hooks/useProfile'
-import s from './advertising-companies.module.scss'
+import React, { useState } from "react";
+import { Pagination } from "../../../Shared/Pagination/Pagination";
+import { Loader } from "../../../Shared/Loader/Loader";
+import { IconPlus, IconRefresh, IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
+import { Button } from "../../../Shared/Button/Button";
+import { Select } from "../../../Shared/Select/Select";
+import { useOutletContext } from "react-router-dom";
+import { useMyCampaign } from "../../../../hooks/useMyCampaign";
+import s from "./advertising-companies.module.scss";
+import { useMyClients } from "../../../../hooks/useMyClients";
+import classNames from "classnames";
+import { useFormik } from "formik";
 
 export const AdvertisingCompanies = () => {
-	const [dateRange, setDateRange] = useState([null, null])
-	const [option, setOption] = useState()
-	const [channel, setChannels] = useState(null)
-	const [page, setPage] = useState(1)
-	const [size, setSize] = useState(30)
+  const [type, setType] = useState();
+  const [status, setStatus] = useState();
+  const [client, setClient] = useState();
+	const [allChecked, setAllChecked] = useState(false)
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(30);
 
-	const {data: profile} = useProfile()
-	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations({
-		start_date: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
-		end_date: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
-		type: option?.value,
-		_start: (page - 1) * 30,
-		_end: page * 30,
+  const { data: companies, isFetched } = useMyCampaign({
+    type: type?.value,
+    status: status?.value,
+    clientId: client?.value,
+    _start: (page - 1) * 30,
+    _end: page * 30,
+  });
+
+  const { data: clients } = useMyClients();
+
+  const [setModal] = useOutletContext();
+
+	const formik = useFormik({
+		initialValues: {
+			clientIds: []
+		},
+		onSubmit: (values) => {
+      console.log(values);
+    }
 	})
-	const {data: channels} = useMyChannels()
-	
-	const [setModal] = useOutletContext()
 
-	return (
+  return (
     <div className={s.grid}>
       <div className={s.tableCard}>
         <div className={s.filters}>
-					<div className={s.selects}>
-						<Select
-							options={[
-								{label: 'Все операции', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET', 'INCOME']},
-								{label: 'Поступления', value: ["INCOME"]},
-								{label: 'Списания', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET']},
-							]}
-							required={true}
-							placeholder={'Все операции'}
-							setSelectedOption={setOption}
-							value={option}
-							fullWidth={true}
-							isMulti={false}
-						/>
-					</div>
-          
+          <div className={s.selects}>
+            {clients?.data && (
+              <Select
+                options={clients?.data.map((el) => ({
+                  value: el.id,
+                  label: el.name,
+                }))}
+                required={true}
+                placeholder={"Клиент"}
+                setSelectedOption={setClient}
+                value={client}
+                fullWidth={true}
+                isMulti={false}
+              />
+            )}
+            <Select
+              options={[
+                { label: "Размещение рекламных постов", value: "AD_POST" },
+                { label: "Размещение нативных постов", value: "NATIVE_POST" },
+                { label: "Кампания с фиксированным СРМ", value: "FIXED_CPM" },
+              ]}
+              required={true}
+              placeholder={"Тип"}
+              setSelectedOption={setType}
+              value={type}
+              fullWidth={true}
+              isMulti={false}
+            />
+            <Select
+              options={[
+                { label: "Активная", value: "ACTIVE" },
+                { label: "Завершенная", value: "COMPLETED" },
+              ]}
+              required={true}
+              placeholder={"Статус"}
+              setSelectedOption={setStatus}
+              value={status}
+              fullWidth={true}
+              isMulti={false}
+            />
+          </div>
           <Button
             label="Создать кампанию"
-            leftIcon={<IconPlus size={20}/>}
+            leftIcon={<IconPlus size={20} />}
             className={s.addBtn}
-						onClick={() => {
-							setModal('add-campaing')
-						}}
+            onClick={() => {
+              setModal("add-campaign");
+            }}
           />
         </div>
         <div className={s.tableWrapper}>
           <table className={s.table}>
             <thead>
               <tr>
-                <th>
-									Клиент
-								</th>
-                <th>
-									Тип
-								</th>
-                <th>
-									Общий лимит трат
-                </th>
-                <th>
-									Всего потрачено
-                </th>
-                <th>
-									Статус
-                </th>
+                {/* <th>
+									<div className={s.checkWrapper}>
+										<label>
+											<input
+												name="all"
+												type="checkbox"
+												value={allChecked}
+												onChange={() => setAllChecked(prev => !prev)}
+											/>
+											<span className={s.checkLabel}>
+												<IconSquare className={s.checkboxIconEmpty} />
+												<IconSquareCheckFilled className={s.checkboxIconFill} />
+											</span>
+										</label>
+									</div>
+								</th> */}
+                <th>Клиент</th>
+                <th>Тип</th>
+                <th>Общий лимит трат</th>
+                <th>Всего потрачено</th>
+                <th>Статус</th>
               </tr>
             </thead>
             <tbody>
-              {isOperationsFetched ? (
-                operations?.data.map((el) => (
+              {isFetched ? (
+                companies?.data.map((el) => (
                   <tr key={el.id}>
+                    {/* <td>
+											<div className={s.checkWrapper}>
+												<label>
+													<input
+														name="clientIds"
+														type="checkbox"
+														onChange={formik.handleChange}
+														value={el.id}
+													/>
+													<span className={s.checkLabel}>
+														<IconSquare className={s.checkboxIconEmpty} />
+														<IconSquareCheckFilled className={s.checkboxIconFill} />
+													</span>
+												</label>
+											</div>
+                    </td> */}
+                    <td>
+                      <div className={s.center}>{el?.client?.name}</div>
+                    </td>
                     <td>
                       <div className={s.center}>
                         {
                           {
-                            INCOME: "Поступление",
-                            WITHDRAWAL_SELF_EMPLOYED: "Вывод у самозанятого",
-                            WITHDRAWAL_IE: "Вывод у ИП",
-                            WITHDRAWAL_LEGAL_ENTITY: "Вывод у ЮЛ",
-                            WITHDRAWAL_CRYPTO_WALLET: "Вывод с криптокошелька",
+                            AD_POST: "Размещение рекламных постов",
+                            NATIVE_POST: "Размещение нативных постов",
+                            FIXED_CPM: "Кампания с фиксированным СРМ",
                           }[el.type]
                         }
                       </div>
                     </td>
                     <td>
-                      <div className={s.center}>
-												{
+                      <div className={s.center}>{el.moneyBlocked}₽</div>
+                    </td>
+                    <td>
+                      <div className={s.center}>{el.totalMoneySpent}₽</div>
+                    </td>
+                    <td>
+                      <div className={classNames(s.center, s[el.status])}>
+                        {
                           {
-                            PENDING: "В обработке",
-                            EXECUTED: "Исполнено",
-                            DECLINED: "Отклонено",
+                            ACTIVE: "Активная",
+                            COMPLETED: "Завершенная",
                           }[el.status]
                         }
                       </div>
-                    </td>
-                    <td>
-                      <div className={s.center}>{(new Date(el.dateTime)).toLocaleDateString('ru-RU', {dateStyle: 'medium'})}</div>
-                    </td>
-                    <td>
-                      <div className={s.center}>{el.amount}₽</div>
                     </td>
                   </tr>
                 ))
@@ -124,15 +179,16 @@ export const AdvertisingCompanies = () => {
             </tbody>
           </table>
         </div>
-        {operations?.headers['x-total-count'] && 
-				<Pagination
-          currentPage={page}
-          totalCount={+operations?.headers['x-total-count']}
-          pageSize={size}
-          setSize={setSize}
-          onPageChange={(page) => setPage(page)}
-        />}
+        {companies?.headers["x-total-count"] && (
+          <Pagination
+            currentPage={page}
+            totalCount={+companies?.headers["x-total-count"]}
+            pageSize={size}
+            setSize={setSize}
+            onPageChange={(page) => setPage(page)}
+          />
+        )}
       </div>
     </div>
   );
-}
+};

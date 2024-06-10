@@ -203,7 +203,7 @@ export const publisher = {
 
 export const advertiser = {
 	getMyCampaigns(params) {
-		return instance.get('/campaigns/my', params)
+		return instance.get('/campaigns/my', {params})
 	},
 	getCampaignById(id) {
 		return instance.get('/campaigns/' + id)
@@ -212,7 +212,7 @@ export const advertiser = {
 		return instance.post('/campaigns/my', data)
 	},
 	getMyClients(params) {
-		return instance.get('/campaigns/clients/my', params)
+		return instance.get('/campaigns/clients/my', {params})
 	},
 	getClientById(id) {
 		return instance.get('/campaigns/clients/' + id)

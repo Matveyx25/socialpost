@@ -1,5 +1,5 @@
 import { Form, Formik } from "formik";
-import { Children, useEffect, useState } from "react";
+import { Children } from "react";
 import { Button } from "../Button/Button";
 import s from './FormikStepper.module.scss'
 
@@ -14,10 +14,6 @@ export function FormikStepper({ children, ...props }) {
   function isLastStep() {
     return props.step === childrenArray.length - 1;
   }
-
-	useEffect(() => {
-		console.log(props.step);
-	}, [props.step])
 
   return (
     <Formik
@@ -54,7 +50,7 @@ export function FormikStepper({ children, ...props }) {
 							<Button
 								label={isLastStep() ? "Создать кампанию" : "Далее"}
 								className={s.btnHalf}
-								disabled={!dirty || !isValid}
+								disabled={isSubmitting || !dirty || !isValid}
 								type="submit"
 							/>
 						</div>
