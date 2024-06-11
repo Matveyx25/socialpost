@@ -31,7 +31,7 @@ export const MyClients = () => {
         <div className={s.filters}>
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
-						placeholder={'Найти кампанию'} value={search} onChange={setSearch}/>
+						placeholder={'Найти компанию'} value={search} onChange={setSearch}/>
 						Найдено клиентов: {clients?.headers['x-total-count']}
 					</div>
           
@@ -103,16 +103,17 @@ export const MyClients = () => {
                       <div className={s.center}>{el.name}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.inn}</div>
+                      <div className={s.center}>{el.inn ? el.inn : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.phone}</div>
+                      <div className={s.center}>{el.phone ? el.phone : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>№{el.contractNumber}</div>
+                      <div className={s.center}>{el.contractNumber ? '№' + el.contractNumber  : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.contractSubject}</div>
+                      <div className={s.center}>{el.contractSubject ? el.contractSubject : '-'}</div>
+											
                     </td>
                     <td>
                       <div className={s.center}>{(new Date(el.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div>

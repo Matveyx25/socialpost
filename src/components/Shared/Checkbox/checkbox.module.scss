@@ -38,9 +38,6 @@
 	}
 	input{
 		display: none;
-		&:checked{
-			display: block;
-		}
 		&:checked + .label{
 			.checkboxIcon{
 				&Fill{

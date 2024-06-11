@@ -98,22 +98,6 @@ export const AdvertisingCompanies = () => {
           <table className={s.table}>
             <thead>
               <tr>
-                {/* <th>
-									<div className={s.checkWrapper}>
-										<label>
-											<input
-												name="all"
-												type="checkbox"
-												value={allChecked}
-												onChange={() => setAllChecked(prev => !prev)}
-											/>
-											<span className={s.checkLabel}>
-												<IconSquare className={s.checkboxIconEmpty} />
-												<IconSquareCheckFilled className={s.checkboxIconFill} />
-											</span>
-										</label>
-									</div>
-								</th> */}
                 <th>Клиент</th>
                 <th>Тип</th>
                 <th>Общий лимит трат</th>
@@ -125,22 +109,6 @@ export const AdvertisingCompanies = () => {
               {isFetched ? (
                 companies?.data.map((el) => (
                   <tr key={el.id}>
-                    {/* <td>
-											<div className={s.checkWrapper}>
-												<label>
-													<input
-														name="clientIds"
-														type="checkbox"
-														onChange={formik.handleChange}
-														value={el.id}
-													/>
-													<span className={s.checkLabel}>
-														<IconSquare className={s.checkboxIconEmpty} />
-														<IconSquareCheckFilled className={s.checkboxIconFill} />
-													</span>
-												</label>
-											</div>
-                    </td> */}
                     <td>
                       <div className={s.center}>{el?.client?.name}</div>
                     </td>
@@ -156,10 +124,10 @@ export const AdvertisingCompanies = () => {
                       </div>
                     </td>
                     <td>
-                      <div className={s.center}>{el.moneyBlocked}₽</div>
+                      <div className={s.center}>{el.moneyBlocked ? el.moneyBlocked + '₽' : '-'}</div>
                     </td>
                     <td>
-                      <div className={s.center}>{el.totalMoneySpent}₽</div>
+                      <div className={s.center}>{el.totalMoneySpent ? el.totalMoneySpent + '₽' : '-'}</div>
                     </td>
                     <td>
                       <div className={classNames(s.center, s[el.status])}>
