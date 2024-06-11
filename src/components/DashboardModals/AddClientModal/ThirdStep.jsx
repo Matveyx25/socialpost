@@ -1,4 +1,4 @@
-import { Field, useField, useFormikContext } from "formik";
+import { Field } from "formik";
 import { FormikStep } from "../../Shared/FormikStepper/FormikStepper";
 import s from '../DashboardModals.module.scss'
 import { Select } from "../../Shared/Select/Select";
@@ -6,11 +6,8 @@ import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
 import { Checkbox } from "../../Shared/Checkbox/checkbox";
 import * as Yup from "yup";
 import { Calendar } from "../../Shared/Calendar/Calendar";
-import { useEffect } from "react";
 
 export const ThirdStep = () => {
-  const context = useFormikContext();
-
   const typeOptions = [
     { value: "PHYSICAL_ENTITY", label: "Физ. лицо" },
     { value: "IE", label: "ИП" },
@@ -28,27 +25,8 @@ export const ThirdStep = () => {
     { value: "Иное", label: "Иное" },
   ];
 
-  if (context.getFieldMeta('role').value !== "AGENCY") {
-		return null;
-  }
-
   return (
-    <FormikStep
-      validationSchema={Yup.object().shape({
-        "agencyInfo.advertiserType": Yup.string().required(),
-        "agencyInfo.advertiserInn": Yup.string().required(),
-        "agencyInfo.advertiserPhone": Yup.string().required(),
-        "agencyInfo.executorType": Yup.string().required(),
-        "agencyInfo.executorInn": Yup.string().required(),
-        "agencyInfo.executorPhone": Yup.string().required(),
-        "agencyInfo.contractNumber": Yup.string().required(),
-        "agencyInfo.contractSubject": Yup.string().required(),
-        "agencyInfo.description": Yup.string(),
-        "agencyInfo.conclusionDate": Yup.string().required(),
-        "agencyInfo.recognizedByNDS": Yup.boolean().oneOf([true], 'Признак НДС должен быть выбран'),
-        "agencyInfo.moneyAmount": Yup.string(),
-      })}
-    >
+    <FormikStep>
 			<div className={s.scroller}>
 				<div className={s.form}>
 					<div className={s.subtitle}>Рекламодатель</div>

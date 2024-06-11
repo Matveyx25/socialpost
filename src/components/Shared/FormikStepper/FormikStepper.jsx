@@ -1,10 +1,46 @@
-import { Form, Formik } from "formik";
-import { Children } from "react";
+import { Form, Formik, useFormikContext } from "formik";
+import { Children, useEffect } from "react";
 import { Button } from "../Button/Button";
 import s from './FormikStepper.module.scss'
 
 export function FormikStep({ children }) {
   return <>{children}</>;
+}
+
+const MyForm = ({currentChild, isLastStep, ...props}) => {
+	const context  = useFormikContext();
+	const {setTouched, isValid, dirty} = context
+
+	useEffect(() => {
+		setTouched({});
+	}, [currentChild]);
+	
+	return (
+		<Form autoComplete="off">
+			{currentChild}
+			<div className={s.rowBtns}>
+				<Button
+					label={props.step === 0 ? "Отменить" : "Назад"}
+					theme="secondary"
+					className={s.btnHalf}
+					onClick={(event) => {
+						event.stopPropagation()
+						event.preventDefault()
+						if(props.step === 0){
+							props.onCancel()
+						}else{
+							props.setStep(s => s - 1)
+						}}}
+				/>
+				<Button
+					label={isLastStep() ? "Создать кампанию" : "Далее"}
+					className={s.btnHalf}
+					disabled={!dirty || !isValid}
+					type="submit"
+				/>
+			</div>
+		</Form>
+	)
 }
 
 export function FormikStepper({ children, ...props }) {
@@ -23,39 +59,13 @@ export function FormikStepper({ children, ...props }) {
         if (isLastStep()) {
           await props.onSubmit(values, helpers);
         } else {
-          props.setStep((s) => s + 1);
+          props.setStep(s => s + 1);
           helpers.setTouched({});
         }
       }}
     >
-      {({ isSubmitting, dirty, isValid }) => (
-        <>
-					<Form autoComplete="off">
-						{currentChild}
-						<div className={s.rowBtns}>
-							{<Button
-								label={props.step === 0 ? "Отменить" : "Назад"}
-								theme="secondary"
-								className={s.btnHalf}
-								disabled={isSubmitting}
-								variant="contained"
-								color="primary"
-								onClick={() => {
-									if(props.step === 0){
-										props.onCancel()
-									}else{
-										props.setStep((s) => s - 1)
-									}}}
-							/>}
-							<Button
-								label={isLastStep() ? "Создать кампанию" : "Далее"}
-								className={s.btnHalf}
-								disabled={isSubmitting || !dirty || !isValid}
-								type="submit"
-							/>
-						</div>
-					</Form>
-				</>
+      {({ dirty, isValid }) => (
+        <MyForm {...props} {...{isLastStep, currentChild}}/>
       )}
     </Formik>
   );

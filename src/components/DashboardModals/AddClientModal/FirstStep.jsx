@@ -3,7 +3,6 @@ import { FormikStep } from "../../Shared/FormikStepper/FormikStepper";
 import s from '../DashboardModals.module.scss'
 import { Select } from "../../Shared/Select/Select";
 import { InputField } from "../../Shared/Input/Input";
-import * as Yup from "yup";
 
 export const FirstStep = ({setRole}) => {
   const roleOptions = [
@@ -18,13 +17,7 @@ export const FirstStep = ({setRole}) => {
   ];
 
   return (
-		<FormikStep
-			validationSchema={Yup.object().shape({
-				role: Yup.string().required("Выберите роль клиента"),
-				type: Yup.string().required("Выберите тип клиента"),
-				name: Yup.string().required("Заполните поле"),
-			})}
-		>
+		<FormikStep>
 			<div className={s.scroller}>
 				<div className={s.form}>
 					<div className={s.input}>

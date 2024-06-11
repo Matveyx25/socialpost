@@ -3,39 +3,11 @@ import { FormikStep } from "../../Shared/FormikStepper/FormikStepper";
 import s from "../DashboardModals.module.scss";
 import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
 import { Checkbox } from "../../Shared/Checkbox/checkbox";
-import * as Yup from "yup";
 import { Calendar } from "../../Shared/Calendar/Calendar";
 
 export const SecondStep = () => {
   return (
-    <FormikStep
-      validationSchema={Yup.object().shape({
-        inn: Yup.string().when("type", (type, field) =>
-          type.includes("IE") || type.includes("OOO")
-            ? field.required("Введите ИНН")
-            : field.when("phone", (phone, phoneField) =>
-                phone + "" ? phoneField : phoneField.required("Введите ИНН")
-              )
-        ),
-        phone: Yup.string().when("type", (type, field) =>
-          type.includes("PHYSICAL_ENTITY")
-            ? field.when("inn", (inn, innField) =>
-                inn + ""
-                  ? innField
-                  : innField.required("Введите номер телефона")
-              )
-            : field.required("Введите номер телефона")
-        ),
-        contractNumber: Yup.string().required("Введите номер договора"),
-        contractSubject: Yup.string().required("Введите предмет договора"),
-        description: Yup.string(),
-        conclusionDate: Yup.string().required(
-          "Введите дату заключения договора"
-        ),
-        recognizedByNDS: Yup.boolean(),
-        moneyAmount: Yup.number().nullable(),
-      })}
-    >
+    <FormikStep>
 			<div className={s.scroller}>
 				<div className={s.form}>
 					<div className={s.input}>

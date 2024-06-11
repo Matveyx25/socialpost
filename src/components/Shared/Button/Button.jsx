@@ -13,10 +13,11 @@ const themes = {
 	}
 }
 
-export const Button = ({theme = 'primary', size = 'normal', fetching, rightIcon, leftIcon, label, className, onClick, disabled}) => {
+export const Button = ({theme = 'primary', size = 'normal', fetching, rightIcon, leftIcon, label, className, onClick, disabled, ...props}) => {
 	return (
 		<button 
 		onClick={onClick} 
+		{...props}
 		className={`${className} ${s.wrapper}
 								${themes[theme].className} 
 								${fetching && s.fetching} 
