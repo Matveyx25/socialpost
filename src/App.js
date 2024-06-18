@@ -35,6 +35,7 @@ import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.min.css'
 import { AdvertisingCompanies } from "./components/pages/dashboard/advertising-companies/advertising-companies";
 import { MyClients } from "./components/pages/dashboard/my-clients/my-clients";
+import { AdvertisingCompany } from "./components/pages/dashboard/advertising-company/advertising-company";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -92,7 +93,7 @@ function App() {
 								<Route path="/clients" element={<MyClients/>} handle={{
 									crumb: () => 'Клиенты',
 								}}/>
-								<Route path="/advertising-company/:companyId" element={<AdvertisingCompanies/>} handle={{
+								<Route path="/advertising-company/:companyId" element={<AdvertisingCompany/>} handle={{
 									crumb: (companyId) => 'Рекламные кампании',
 								}}/>
 							</>

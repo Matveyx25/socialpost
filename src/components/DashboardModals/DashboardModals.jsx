@@ -8,6 +8,7 @@ import { WithdrawModal } from './WithdrawModal'
 import { EmailModal } from './ConnectEmailModal'
 import { AddCampaignModal } from './AddCampaignModal'
 import { AddClientModal } from './AddClientModal'
+import { AddPostModal } from './AddPostModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -27,6 +28,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<EmailModal {...{isOpen, setOpen}}/>
 			<AddCampaignModal {...{isOpen, setOpen}}/>
 			<AddClientModal {...{isOpen, setOpen}}/>
+			<AddPostModal {...{isOpen, setOpen, modalParams}}/>
 		</div>
 	)
 }

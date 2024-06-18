@@ -3,7 +3,6 @@ import s from './DashboardModals.module.scss'
 import { InputField } from '../Shared/Input/Input';
 import * as Yup from 'yup';
 import { useEffect, useState } from "react";
-import "formik-stepper/dist/style.css";
 import { FormikStep, FormikStepper } from "../Shared/FormikStepper/FormikStepper";
 import { Field } from "formik";
 import { Select } from "../Shared/Select/Select";

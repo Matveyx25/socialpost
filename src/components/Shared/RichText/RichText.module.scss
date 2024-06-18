@@ -1,0 +1,59 @@
+.smallBtn{
+	width: fit-content;
+	padding: 0.5rem;
+}
+.toolbar{
+	display: flex;
+	width: 100%;
+	padding: 8px;
+	gap: 8px;
+	border-radius: 4px;
+	background: rgba(243, 243, 243, 1);
+	margin-bottom: 12px;
+}
+.menuItem{
+	padding: 0;
+	width: 24px;
+	height: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 4px;
+	background: none;
+	border: none;
+	color: rgba(145, 147, 150, 1);
+	transition: .3s;
+	cursor: pointer;
+	&.active{
+		background: rgba(217, 226, 255, 1);
+		color: rgba(105, 138, 255, 1);
+	}
+}
+
+.wrapper{
+	*{
+		outline: none !important;
+	}
+	width: 100%;
+	min-height: 212px;
+	padding: 12px;
+	border-radius: 8px;
+	border: 1px solid rgba(233, 234, 234, 1);
+	font-size: 16px;
+	font-weight: 400;
+	line-height: 24px;
+	letter-spacing: 0.02em;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+	max-height: 70svh;
+	overflow: hidden;
+	&:focus, &:has(:focus){
+		border: 1px solid rgba(161, 182, 255, 1)
+	}
+}
+
+.textarea{
+	overflow-y: auto;
+	flex-grow: 1;
+}

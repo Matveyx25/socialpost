@@ -208,6 +208,29 @@ export const advertiser = {
 	getCampaignById(id) {
 		return instance.get('/campaigns/' + id)
 	},
+	getPostsByCampaign(id, params) {
+		return instance.get('/campaigns/' + id + '/posts',  {params})
+	},
+	async createPost(data) {
+		let uploadPromises = data?.files?.map(file => {
+				const formData = new FormData();
+				formData.append('upload', file);
+				return instance.post('/uploads', formData);
+		});
+
+		const uploadResponses = await Promise.all(uploadPromises);
+		const fileIds = uploadResponses?.map(response => response.data.id);
+
+		return instance.post('/campaigns/' + data.id + '/posts', {
+			"name": data.name,
+			"type": data.type,
+			"content": data.content,
+			"postUploadsIds": fileIds
+		})
+	},
+	getPostById(id) {
+		return instance.get('/campaigns/posts/' + id)
+	},
 	createCampaign(data) {
 		return instance.post('/campaigns/my', data)
 	},

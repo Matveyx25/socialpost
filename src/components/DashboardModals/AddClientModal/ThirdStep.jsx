@@ -4,7 +4,6 @@ import s from '../DashboardModals.module.scss'
 import { Select } from "../../Shared/Select/Select";
 import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
 import { Checkbox } from "../../Shared/Checkbox/checkbox";
-import * as Yup from "yup";
 import { Calendar } from "../../Shared/Calendar/Calendar";
 
 export const ThirdStep = () => {

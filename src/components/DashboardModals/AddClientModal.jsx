@@ -1,6 +1,5 @@
 import { Modal } from "../Shared/Modal/Modal";
 import { useEffect, useState } from "react";
-import "formik-stepper/dist/style.css";
 import { FormikStepper } from "../Shared/FormikStepper/FormikStepper";
 import { useAddClient } from "../../hooks/useAddClient";
 import { ThirdStep } from "./AddClientModal/ThirdStep";

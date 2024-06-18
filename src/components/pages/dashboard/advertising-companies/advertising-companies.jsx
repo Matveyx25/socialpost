@@ -4,7 +4,7 @@ import { Loader } from "../../../Shared/Loader/Loader";
 import { IconPlus, IconRefresh, IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
 import { Button } from "../../../Shared/Button/Button";
 import { Select } from "../../../Shared/Select/Select";
-import { useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { useMyCampaign } from "../../../../hooks/useMyCampaign";
 import s from "./advertising-companies.module.scss";
 import { useMyClients } from "../../../../hooks/useMyClients";
@@ -18,6 +18,7 @@ export const AdvertisingCompanies = () => {
 	const [allChecked, setAllChecked] = useState(false)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
+	const navigate = useNavigate()
 
   const { data: companies, isFetched } = useMyCampaign({
     type: type?.value,
@@ -108,7 +109,7 @@ export const AdvertisingCompanies = () => {
             <tbody>
               {isFetched ? (
                 companies?.data.map((el) => (
-                  <tr key={el.id}>
+                  <tr key={el.id} onClick={() => navigate('/advertising-company/' + el.id)}>
                     <td>
                       <div className={s.center}>{el?.client?.name}</div>
                     </td>
