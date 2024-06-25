@@ -6,13 +6,11 @@ import { Field } from "formik";
 import { Select } from "../Shared/Select/Select";
 import { InputField } from "../Shared/Input/Input";
 import s from './DashboardModals.module.scss'
-import { useMyCampaign } from '../../hooks/useMyCampaign';
 import { useAddPost } from '../../hooks/useAddPost';
 
 import { RichText } from "../Shared/RichText/RichText";
 import { IconX } from "@tabler/icons-react";
 import { Upload } from "../Shared/Upload/Upload";
-import { convert } from "@sigle/slate-to-markdown";
 import { Node, Text } from "slate";
 
 
@@ -27,6 +25,9 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 	const serializeNodes = node => {
 		if (Text.isText(node)) {
 			let string = Node.string(node)
+			if(!string){
+				return string
+			}
 			if (node.bold) {
 				string = `**${string}**`
 			}
@@ -34,7 +35,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				string = `*${string}*`
 			}
 			if(node.underline){
-				string = `_${string}_`
+				string = `<ins>${string}</ins>`
 			}
 			if(node.strikethrough){
 				string = `~~${string}~~`
@@ -42,23 +43,22 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 			return string
 		}
 	
-		const children = node.children.map(n => serializeNodes(n)).join('')
+		const children = node.children?.map(n => serializeNodes(n)).join('')
 	
 		switch (node.type) {
 			case 'link':
-				const url = node.url;
-				return `[${serializeNodes(children)}](${url})`;
+				const url = node.href;
+				return `[${children}](${url})`;
 			default:
 				return children
 		}
 	}
 
   const { mutate: createPost } = useAddPost();
-	const { data: campaigns } = useMyCampaign()
 
   const handleSubmit = (values) => {
-		const markdownContent = values.content.map(el => serializeNodes(el)).join('\n')
-    createPost({...values, content: markdownContent, files});
+		const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
+		createPost({...values, content: markdownContent, files});
     setOpen();
     setCurrentStep(0);
   };
@@ -151,27 +151,6 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 									)}
 								</Field>
 							</div>
-							{/* {campaigns?.data && <div className={s.input}>
-								<Field name="id">
-									{({ field: { value }, form: { setFieldValue } }) => (
-										<Select
-											label={"Рекламная кампания"}
-											id="id"
-											name="id"
-											options={campaigns?.data?.map(el => ({
-												value: el.id,
-												label: el.name
-											}))}
-											required={true}
-											placeholder={"Рекламная кампания"}
-											fullWidth={true}
-											isMulti={false}
-											value={value}
-											setSelectedOption={(v) => setFieldValue("id", v.value)}
-										/>
-									)}
-								</Field>
-							</div>} */}
 						</div>
 				</FormikStep>
 				<FormikStep validationSchema={Yup.object().shape({

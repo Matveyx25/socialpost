@@ -14,6 +14,13 @@ import { usePostsByCampaign } from '../../../../hooks/usePostsByCampaign';
 import { Tabs } from '../../../Shared/Tabs/Tabs';
 
 export const AdvertisingCompany = () => {
+	const tabs = [
+		{label: 'Активные', value: 'NOT_MODERATED', id: 0},
+		{label: 'На проверке', value: 'MODERATING', id: 1},
+		{label: 'Отклоненные', value: 'DECLINED', id: 2},
+		{label: 'Архивные', value: 'ACCEPTED', id: 3}
+	]
+
 	const [allChecked, setAllChecked] = useState(false)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
@@ -25,6 +32,7 @@ export const AdvertisingCompany = () => {
   const { data: company } = useCampaignById(companyId);
 
   const { data: posts, isFetched } = usePostsByCampaign(companyId, {
+		status: tabs[tab].value,
 		_start: (page - 1) * 30,
     _end: page * 30,
 	});
@@ -39,14 +47,6 @@ export const AdvertisingCompany = () => {
       console.log(values);
     }
 	})
-
-
-	const tabs = [
-		{label: 'Активные', count: 1, value: 'DECLINED', id: 0},
-		{label: 'На проверке', count: 2, value: 'MODERATING', id: 1},
-		{label: 'Отклоненные', count: 48, value: 'NOT_MODERATED', id: 2},
-		{label: 'Архивные', count: 0, value: 'ACCEPTED', id: 3}
-	]
 
   return (
     <div className={s.grid}>

@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
 import { DashboardCard } from '../dashboard-card'
 import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 import { Button } from '../../../Shared/Button/Button';
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import s from './post-by-advertiser.module.scss'
 import { usePost } from '../../../../hooks/usePost';
 import { Tabs } from '../../../Shared/Tabs/Tabs'
 import { usePostRequests } from '../../../../hooks/usePostRequests';
+import {ImageGrid} from "react-fb-image-video-grid"
+import DOMPurify from 'dompurify';
+import remarkGfm from 'remark-gfm';
 
 export const PostByAdvertiser = () => {
 	const [setModal] = useOutletContext()
@@ -38,10 +41,18 @@ export const PostByAdvertiser = () => {
 					</div>
 					<div className={s.line}></div>
 					{post?.uploads.length ? <div className={s.preview}>
-						{post?.uploads?.map(img => <img src={img.file} alt="" />)}
+							<ImageGrid showModal={false}>
+								{post?.uploads?.map(img => 
+									<div>
+										<img src={img.thumbnailUrl} alt="" />
+									</div>
+								)}
+							</ImageGrid>
 					</div> : ''}
 					<div className={s.content}>
-						<Markdown remarkPlugins={[remarkGfm]}>{post?.content}</Markdown>
+						<Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
+							{DOMPurify.sanitize(post?.content)}
+							</Markdown>
 					</div>
 				</DashboardCard>
 			</div>
