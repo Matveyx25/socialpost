@@ -184,7 +184,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 						<div className={s.scroller}>
 							<div className={s.form}>
 								<div className={s.input}>
-								<RichText name={'content'}/>
+								<RichText name={'content'} label={'Текст записи'}/>
 								</div>
 								<div className={s.input}>
 										<div className={s.filePreviews}>{renderFilePreviews()}</div>

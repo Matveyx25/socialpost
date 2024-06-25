@@ -11,11 +11,13 @@ import { useFormik } from "formik";
 import { useCampaignById } from '../../../../hooks/useCampaignById';
 import { DashboardCard } from '../dashboard-card';
 import { usePostsByCampaign } from '../../../../hooks/usePostsByCampaign';
+import { Tabs } from '../../../Shared/Tabs/Tabs';
 
 export const AdvertisingCompany = () => {
 	const [allChecked, setAllChecked] = useState(false)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
+  const [tab, setTab] = useState(0);
 	const {companyId} = useParams()
 
 	const navigate = useNavigate()
@@ -37,6 +39,14 @@ export const AdvertisingCompany = () => {
       console.log(values);
     }
 	})
+
+
+	const tabs = [
+		{label: 'Активные', count: 1, value: 'DECLINED', id: 0},
+		{label: 'На проверке', count: 2, value: 'MODERATING', id: 1},
+		{label: 'Отклоненные', count: 48, value: 'NOT_MODERATED', id: 2},
+		{label: 'Архивные', count: 0, value: 'ACCEPTED', id: 3}
+	]
 
   return (
     <div className={s.grid}>
@@ -80,7 +90,9 @@ export const AdvertisingCompany = () => {
 			</DashboardCard>
       <div className={s.tableCard}>
         <div className={s.filters}>
-          
+					<span className={s.title}>
+					Рекламные записи  
+					</span>
           <Button
             label="Создать запись"
             leftIcon={<IconPlus size={20} />}
@@ -90,6 +102,9 @@ export const AdvertisingCompany = () => {
             }}
           />
         </div>
+				<div className={s.tabsWrapper}>
+					<Tabs {...{tabs, tab, setTab}}/>
+				</div>
         <div className={s.tableWrapper}>
           <table className={s.table}>
             <thead>
@@ -98,12 +113,13 @@ export const AdvertisingCompany = () => {
                 <th>Тип</th>
                 <th>Текущие заявки</th>
                 <th>Выполненные заявки</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {isFetched ?
                   posts?.data.map((el) => (
-										<tr key={el.id} onClick={() => navigate('/advertising-company/' + el.id)}>
+										<tr key={el.id} onClick={() => navigate('/advertising-company/' + companyId + '/' + el.id)}>
 											<td>
 												<div className={s.center}>{el?.name}</div>
 											</td>
@@ -132,6 +148,9 @@ export const AdvertisingCompany = () => {
 														}[el.status]
 													}
 												</div>
+											</td>
+											<td>
+
 											</td>
 										</tr>
 									)) : (

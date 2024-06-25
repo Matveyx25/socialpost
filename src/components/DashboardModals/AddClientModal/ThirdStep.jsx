@@ -31,7 +31,7 @@ export const ThirdStep = () => {
 					<div className={s.subtitle}>Рекламодатель</div>
 					<div className={s.input}>
 						<Field name="agencyInfo.advertiserType">
-							{({ field: { value }, form: { setFieldValue } }) => (
+							{({ field: { value, name }, form: { setFieldValue } }) => (
 								<Select
 									label={"Тип рекламодателя"}
 									id="agencyInfo.advertiserType"
@@ -42,9 +42,10 @@ export const ThirdStep = () => {
 									fullWidth={true}
 									value={value}
 									isMulti={false}
-									setSelectedOption={(v) =>
+									setSelectedOption={(v) => {
+										console.log(name);
 										setFieldValue("agencyInfo.advertiserType", v.value)
-									}
+									}}
 								/>
 							)}
 						</Field>

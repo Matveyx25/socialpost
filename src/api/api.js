@@ -231,6 +231,15 @@ export const advertiser = {
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)
 	},
+	getRequests(id, params) {
+		return instance.get('/campaigns/posts/' + id + '/requests', {params})
+	},
+	createRequests(id, data) {
+		return instance.post('/campaigns/posts/' + id + '/requests', data)
+	},
+	createModeration(id) {
+		return instance.post('/campaigns/posts/' + id + '/moderate')
+	},
 	createCampaign(data) {
 		return instance.post('/campaigns/my', data)
 	},

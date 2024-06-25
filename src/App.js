@@ -36,6 +36,8 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import { AdvertisingCompanies } from "./components/pages/dashboard/advertising-companies/advertising-companies";
 import { MyClients } from "./components/pages/dashboard/my-clients/my-clients";
 import { AdvertisingCompany } from "./components/pages/dashboard/advertising-company/advertising-company";
+import { PostByAdvertiser } from "./components/pages/dashboard/post-by-advertiser/post-by-advertiser";
+import { AdvertiserCreateRequest } from "./components/pages/dashboard/advertiser-create-request/advertiser-create-request";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -94,6 +96,12 @@ function App() {
 									crumb: () => 'Клиенты',
 								}}/>
 								<Route path="/advertising-company/:companyId" element={<AdvertisingCompany/>} handle={{
+									crumb: (companyId) => 'Рекламные кампании',
+								}}/>
+								<Route path="/advertising-company/:companyId/:postId" element={<PostByAdvertiser/>} handle={{
+									crumb: (companyId) => 'Рекламные кампании',
+								}}/>
+								<Route path="/advertising-company/:companyId/:postId/create-request" element={<AdvertiserCreateRequest/>} handle={{
 									crumb: (companyId) => 'Рекламные кампании',
 								}}/>
 							</>

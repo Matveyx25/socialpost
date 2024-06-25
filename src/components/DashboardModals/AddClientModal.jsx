@@ -14,7 +14,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
   const { mutate: createClient } = useAddClient();
 
   const handleSubmit = (values) => {
-    createClient(values);
+    createClient({...values, agencyInfo: values.role === 'AGENCY' ? values.agencyInfo : null});
     setOpen();
     setCurrentStep(0);
   };
@@ -46,6 +46,20 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
           conclusionDate: "",
           recognizedByNDS: false,
           moneyAmount: "",
+					agencyInfo: {
+						advertiserType: '',
+						advertiserInn: '',
+						advertiserPhone: '',
+						executorType: '',
+						executorInn: '',
+						executorPhone: '',
+						contractNumber: '',
+						contractSubject: '',
+						description: '',
+						conclusionDate: '',
+						recognizedByNDS: false,
+						moneyAmount: '',
+					}
         }}
         onSubmit={(values) => {
           handleSubmit(values);
@@ -55,11 +69,12 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
         setStep={setCurrentStep}
       >
 				<FirstStep {...{setRole}} validationSchema={Yup.object().shape({
-				role: Yup.string().required("Выберите роль клиента"),
-				type: Yup.string().required("Выберите тип клиента"),
-				name: Yup.string().required("Заполните поле"),
-			})}/>
-        <SecondStep validationSchema={Yup.object().shape({
+					role: Yup.string().required("Выберите роль клиента"),
+					type: Yup.string().required("Выберите тип клиента"),
+					name: Yup.string().required("Заполните поле"),
+				})}/>
+        <SecondStep 
+				validationSchema={Yup.object().shape({
 						inn: Yup.string().when("type", (type, field) =>
 							type.includes("IE") || type.includes("OOO")
 								? field.required("Введите ИНН")
@@ -87,19 +102,21 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 					})}/>
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
-        "agencyInfo.advertiserType": Yup.string().required(),
-        "agencyInfo.advertiserInn": Yup.string().required(),
-        "agencyInfo.advertiserPhone": Yup.string().required(),
-        "agencyInfo.executorType": Yup.string().required(),
-        "agencyInfo.executorInn": Yup.string().required(),
-        "agencyInfo.executorPhone": Yup.string().required(),
-        "agencyInfo.contractNumber": Yup.string().required(),
-        "agencyInfo.contractSubject": Yup.string().required(),
-        "agencyInfo.description": Yup.string(),
-        "agencyInfo.conclusionDate": Yup.string().required(),
-        "agencyInfo.recognizedByNDS": Yup.boolean().oneOf([true], 'Признак НДС должен быть выбран'),
-        "agencyInfo.moneyAmount": Yup.string(),
-      })}/> : null}
+					agencyInfo: Yup.object().shape({
+						advertiserType: Yup.string().required(),
+						advertiserInn: Yup.string().required(),
+						advertiserPhone: Yup.string().required(),
+						executorType: Yup.string().required(),
+						executorInn: Yup.string().required(),
+						executorPhone: Yup.string().required(),
+						contractNumber: Yup.string().required(),
+						contractSubject: Yup.string().required(),
+						description: Yup.string(),
+						conclusionDate: Yup.string().required(),
+						recognizedByNDS: Yup.boolean().oneOf([true], 'Признак НДС должен быть выбран'),
+						moneyAmount: Yup.string(),
+					})
+      	})}/> : null}
       </FormikStepper>
     </Modal>
   );

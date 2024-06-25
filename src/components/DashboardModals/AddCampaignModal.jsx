@@ -135,7 +135,7 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 						<div className={s.form}>
 							<div className={s.input}>
 								<div className={s.radiosWrapper}>
-									<Radio disabled name={'type'} title={'Размещение рекламных постов'} 
+									<Radio name={'type'} title={'Размещение рекламных постов'} 
 									text={'Небольшое описание на несколько строк, предпологаемое их количество – примерно 2, но может быть и 3'}
 									 icon={<IconPhotoDollar size={24} color="rgba(105, 138, 255, 1)"/>} value={'AD_POST'}/>
 									<Radio name={'type'} title={'Размещение нативных постов'} 
@@ -144,9 +144,6 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 									<Radio disabled name={'type'} title={'Кампания с фиксированным СРМ'} 
 									text={'Небольшое описание на несколько строк, предпологаемое их количество – примерно 2, но может быть и 3'}
 									 icon={<IconGraph size={24} color="rgba(105, 138, 255, 1)"/>} value={'FIXED_CPM'}/>
-									<Radio disabled name={'type'} title={'Продвижение через чат-бота'} 
-									text={'Небольшое описание на несколько строк, предпологаемое их количество – примерно 2, но может быть и 3'}
-									 icon={<IconRobot size={24} color="rgba(105, 138, 255, 1)"/>} value={'CHAT_BOT_PROMOTION'}/>
 								</div>
 							</div>
 						</div>

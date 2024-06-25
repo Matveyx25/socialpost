@@ -7,6 +7,8 @@
 	overflow-x: auto;
 	-ms-overflow-style: none; 
   scrollbar-width: none;
+	max-width: 100%;
+	overflow-x: auto;
 	&::-webkit-scrollbar {
 		display: none;
 	}
