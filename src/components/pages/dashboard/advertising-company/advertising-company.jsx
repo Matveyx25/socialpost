@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { Loader } from "../../../Shared/Loader/Loader";
 import { IconPlus, IconRefresh, IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
@@ -15,10 +15,10 @@ import { Tabs } from '../../../Shared/Tabs/Tabs';
 
 export const AdvertisingCompany = () => {
 	const tabs = [
-		{label: 'Активные', value: 'NOT_MODERATED', id: 0},
-		{label: 'На проверке', value: 'MODERATING', id: 1},
-		{label: 'Отклоненные', value: 'DECLINED', id: 2},
-		{label: 'Архивные', value: 'ACCEPTED', id: 3}
+		{label: 'Активные', count: 0, value: 'NOT_MODERATED', id: 0},
+		{label: 'На проверке', count: 0, value: 'MODERATING', id: 1},
+		{label: 'Отклоненные', count: 0, value: 'DECLINED', id: 2},
+		{label: 'Архивные', count: 0, value: 'ACCEPTED', id: 3}
 	]
 
 	const [allChecked, setAllChecked] = useState(false)
@@ -63,12 +63,12 @@ export const AdvertisingCompany = () => {
 						<div className={s.infoBlock}>
 							<div className={s.infoTitle}>Тип</div>
 							<div className={s.infoValue}> {
-                          {
-                            AD_POST: "Размещение рекламных постов",
-                            NATIVE_POST: "Размещение нативных постов",
-                            FIXED_CPM: "Кампания с фиксированным СРМ",
-                          }[company?.type]
-                        }</div>
+								{
+									AD_POST: "Размещение рекламных постов",
+									NATIVE_POST: "Размещение нативных постов",
+									FIXED_CPM: "Кампания с фиксированным СРМ",
+								}[company?.type]
+							}</div>
 						</div>
 						<div className={s.infoBlock}>
 							<div className={s.infoTitle}>Активные посты</div>
@@ -103,7 +103,7 @@ export const AdvertisingCompany = () => {
           />
         </div>
 				<div className={s.tabsWrapper}>
-					<Tabs {...{tabs, tab, setTab}}/>
+					<Tabs {...{tab, setTab, tabs}}/>
 				</div>
         <div className={s.tableWrapper}>
           <table className={s.table}>

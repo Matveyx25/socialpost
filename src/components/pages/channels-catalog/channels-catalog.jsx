@@ -73,7 +73,7 @@ export const ChannelsCatalog = () => {
 					Каталог каналов
 				</h2>
 				<p className={s.subtitle}>
-					{(channels?.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
+					{(channels?.headers['x-total-count'] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')} каналов
 				</p>
 				<div className={s.flex}>
 					{isMobile || <Filters onFilterSubmit={onFilterSubmit} maxSubscribersNumber={100000}/>}
@@ -82,10 +82,10 @@ export const ChannelsCatalog = () => {
 							{isMobile && <button className={s.filterBtn} onClick={() => setModalIsOpen('filter-modal')}>Фильтры</button>}
 							<Select defaultValue={options[0]} options={options} setSelectedOption={setSelectedOption}/>
 							<span>
-								Найдено: {(channels?.length + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
+								Найдено: {(channels?.headers['x-total-count'] + '').replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1,')}
 							</span>
 						</div>
-						{isFetched ? channels?.map(channel =>{
+						{isFetched ? channels?.data?.map(channel =>{
 						const formats = [
 							{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'NATIVE_POST_PRICE', price: channel?.nativePostPrice},
 							{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'POST_1_FOR_24', price: channel?.post1For24Price},

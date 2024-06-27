@@ -5,7 +5,7 @@ export const useAddPostRequest = () => {
 	const queryClient = useQueryClient()
 
 	return useMutation({
-		mutationFn: (id, data) => advertiser.createRequests(id, data),
+		mutationFn: (data) => advertiser.createRequests(data.id, data.data),
 		onSuccess: (data) => {
       queryClient.invalidateQueries(['post', data.id])
     }, 

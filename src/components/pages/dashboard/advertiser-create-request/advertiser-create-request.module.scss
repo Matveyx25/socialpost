@@ -19,6 +19,32 @@
 		gap: 0.5rem;
 		margin-left: auto;
 	}
+	.infoFlex{
+		display: flex;
+		gap: 24px;
+	}
+	.infoBlock{
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+	.infoValue{
+		font-family: 'SF Semibold';
+		font-size: 24px;
+		font-weight: 700;
+		line-height: 32px;
+		letter-spacing: 0.02em;
+		text-align: left;
+		color: $gray-800;
+	}
+	.infoLabel{
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 24px;
+		letter-spacing: 0.02em;
+		text-align: left;
+		color: $gray-500;
+	}
 }
 .colSm{
 	display: flex;
@@ -26,14 +52,15 @@
 	gap: 1.25rem;
 	min-width: 28.4375rem;
 	max-width: 28.4375rem;
+	height: fit-content;
 }
 .colLg{
 	display: flex;
 	flex-direction: column;
 	gap: 1.25rem;
 	flex-grow: 1;
-	height: fit-content;
 	overflow-x: hidden;
+	height: fit-content;
 }
 
 .grid{
@@ -46,7 +73,6 @@
 	width: 100%;
 	height: 1px;
 	background: $gray-100;
-	margin: 1rem 0;
 }
 
 .preview{
@@ -124,5 +150,141 @@
 	}
 	&:not(:last-child){
 		margin-bottom: 1rem;
+	}
+}
+
+
+.tableCard{
+	height: fit-content;
+	border-radius: 1rem;
+	border: 1px solid $gray-100;
+	background: #FFF;
+	display: flex;
+	flex-direction: column;
+	.cardHeader{
+		padding: 1rem;
+	}
+	.tableWrapper{
+		width: 100%;
+		height: 100%;
+	}
+	.checkbox{
+		width: fit-content;
+	}
+	.mainInfo{
+		display: flex;
+		gap: 10px;
+		align-items: center;
+		.img{
+			width: 32px;
+			height: 32px;
+			border-radius: 32px;
+			overflow: hidden;
+			position: relative;
+			img{
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+	}
+	table{
+		height: fit-content;
+		width: 100%;
+		box-sizing: border-box;
+		background: #FFF;
+		overflow: hidden;
+		thead th{
+			text-align: left;
+			padding: 0.75rem 1rem;
+			color: $gray-500;
+			background: #F4F8FE;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem;
+			letter-spacing: 0.02rem;
+			.flex{
+				display: flex;
+				align-items: center;
+				gap: 0.625rem;
+			}
+			&:nth-child(1){
+				width: calc(350/1088 * 100%);
+			}
+			&:nth-child(2){
+				width: calc(120/1088 * 100%);
+			}
+			&:nth-child(3){
+				width: calc(123/1088 * 100%);
+			}
+			&:nth-child(4){
+				width: calc(123/1088 * 100%);
+			}
+			&:nth-child(5){
+				width: calc(113/1088 * 100%);
+			}
+		}
+		tbody td{
+			color: $gray-800;
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 1.5rem; /* 150% */
+			letter-spacing: 0.02rem;
+			padding: 0.75rem 1rem;
+			vertical-align: middle;
+			.center{
+				display: flex;
+				align-items: center;
+			}
+			.end{
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
+		}
+		tbody tr{
+			display: table;
+			width: 100%;
+			transition: .3s;
+			cursor: pointer;
+			&:hover{
+				background: #F4F8FE;
+			}
+			&:not(:first-child){
+				border-top: 1px solid $gray-100;
+			}
+			td{
+				&:nth-child(1){
+					width: calc(350/1088 * 100%);
+				}
+				&:nth-child(2){
+					width: calc(120/1088 * 100%);
+				}
+				&:nth-child(3){
+					width: calc(123/1088 * 100%);
+				}
+				&:nth-child(4){
+					width: calc(123/1088 * 100%);
+				}
+				&:nth-child(5){
+					width: calc(113/1088 * 100%);
+				}
+			}
+		}
+		thead{
+			border-bottom: 1px solid $gray-100;
+			display: table;
+			width: 100%;
+		}
+		tbody{
+			width: 100%;
+			overflow-y: auto;
+			display: block;
+			max-height: calc(100% - 80px);
+			height: fit-content;
+			overflow: auto;
+		}
 	}
 }

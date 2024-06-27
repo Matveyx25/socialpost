@@ -4,12 +4,13 @@ import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import { IconCalendar } from '@tabler/icons-react';
 import { CalendarHeader } from '../RangeCalendar/CalendarHeader';
+import classNames from 'classnames';
 
-export const Calendar = ({placeholder, className, label, disabled, value, onChange}) => {
+export const Calendar = ({placeholder, className, label, disabled, inputClassName, value, onChange, ...props}) => {
 	const calendar = useRef(null)
 
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-		<div className={s.inputsWrapper} onClick={onClick} ref={ref}>
+		<div className={classNames(s.inputsWrapper, inputClassName)} onClick={onClick} ref={ref}>
 			<IconCalendar className={s.icon} color='#919396'/>
 			<input value={value} placeholder={placeholder}/>
 		</div>
@@ -37,6 +38,7 @@ export const Calendar = ({placeholder, className, label, disabled, value, onChan
 					renderCustomHeader={CalendarHeader}
 					calendarContainer={MyContainer}
 					disabled={disabled}
+					{...props}
 				/>
 		</div>
 	)

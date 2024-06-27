@@ -165,6 +165,19 @@
 		background-color: #436CFF;
 		color: #fff;
 	}
+	:global(.react-datepicker__day.react-datepicker__day--disabled){
+		opacity: 0.4;
+		&:hover{
+			background: none;
+			color: $gray-800;
+		}
+	}
+	:global(.react-datepicker-time__header){
+		display: none !important;
+	}
+	:global(.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list){
+		height: 348px !important;
+	}
 	.btns{
 		display: flex;
 		justify-content: space-between;

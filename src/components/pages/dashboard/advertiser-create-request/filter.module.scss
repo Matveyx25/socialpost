@@ -1,0 +1,175 @@
+@import '~/src/styles/variables.scss';
+
+.slider{
+	margin-top: 3rem;
+	margin-bottom: 0.75rem;
+	padding: 0 10px !important;
+	border: none !important;
+	box-shadow: none !important;
+	:global{
+		.bar-inner{
+			background-color: var(--blue-900, #436CFF) !important;
+			border: none !important;
+			box-shadow: none !important;
+		}
+		.thumb::before{
+			width: 16px !important;
+			height: 16px !important;
+			box-sizing: border-box;
+			border: 4px solid $main-blue-color !important;
+			box-shadow: none !important;
+			margin: -6px -6px !important;
+		}
+		.caption{
+			display: flex !important;
+			bottom: 25px !important;
+			span{
+				border: none !important;
+				box-shadow: none !important;
+				border-radius: 0.25rem !important;
+				background: $gray-800 !important;
+				min-width: auto !important;
+				height: auto !important; 
+				line-height: 1.57 !important;
+				padding: 0rem 0.25rem !important;
+				font-size: 0.875rem !important;
+			}
+		}
+		.bar-right, .bar-left{
+			background-color: #EDF1FF !important;
+			border: none !important;
+			box-shadow: none !important;
+			padding: 2px 0 !important;
+		}
+	}
+}
+
+.inputsWrapper{
+	display: flex;
+	align-items: center;
+	border-radius: 0.5rem;
+	border: 1px solid $gray-100;
+	background: $white-color;
+	margin-top: 0.5rem;
+	input{
+		border: none;
+		width: 100%;
+		display: flex;
+		padding: 0.75rem 1rem;
+		flex-direction: column;
+		justify-content: center;
+		align-items: flex-start;
+		gap: 0.625rem;
+		flex: 1 0 0;
+		font-size: 1rem;
+		font-style: normal;
+		line-height: 1.5rem; /* 150% */
+		outline: none !important;
+	}
+	span{
+		font-size: 1rem;
+		font-style: normal;
+		line-height: 1.5rem; /* 150% */
+		color: $gray-500;
+		background: #F3F3F3;
+		padding: 0.75rem 1rem;
+	}
+}
+
+.inputsGroup{
+	h5{
+		color: $gray-800;
+		font-size: 0.875rem;
+		font-style: normal;
+		line-height: 1.375rem; /* 157.143% */
+		font-weight: 400;
+		margin: 0;
+		padding: 0;
+		span{
+			color: $gray-500;
+		}
+	}
+}
+.calendarsWrapper{
+	display: flex;
+	align-items: center;
+	border-radius: 0.5rem;
+	border: 1px solid $gray-100;
+	margin-top: 0.5rem;
+	padding-right: 12px;
+	.firstCalendar{
+		border: none !important;
+	}
+	.secondCalendar{
+		border: none !important;
+	}
+}
+
+.wrapper{
+	display: flex;
+	width: 100%;
+	height: fit-content;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+	h2{
+		color: $gray-900;
+		font-size: 1.25rem;
+		font-weight: 500;
+		line-height: normal;
+		margin: 0;
+		padding: 0;
+	}
+}
+.btns{
+	display: flex;
+	gap: 0.5rem;
+	width: 100%;
+}
+.line{
+	width: 100%;
+	height: 1px;
+	background: $gray-100;
+	display: block;
+}
+.select{
+	width: 100%;
+}
+.btn{
+	width: auto !important;
+	flex-grow: 1;
+}
+.resetBtn{
+	width: auto !important;
+	padding: 1rem 3.125rem !important;
+	flex-grow: 1;
+}
+.inputWrapper{
+	margin-top: 0.5rem;
+}
+.inputsRow{
+	width: 100%;
+	display: flex;
+	gap: 0.5rem;
+}
+.input{
+	width: 100%;
+}
+.calendarInputs{
+	input{
+		width: 50% !important;
+	}
+}
+.graphLines{
+	display: flex;
+	width: 100%;
+	height: 2.25rem;
+	margin-bottom: -3.25rem;
+	justify-content: space-between;
+	align-items: flex-end;
+	span{
+		width: 0.125rem;
+		display: block;
+		background: #D9E2FF;
+	}
+}

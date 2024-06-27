@@ -1,12 +1,13 @@
-import React, { forwardRef, useRef, useState } from 'react'
+import React, { forwardRef, useRef } from 'react'
 import s from "./RangeCalendar.module.scss"
 import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-import { IconCalendarUp, IconChevronRight, IconChevronDown, IconCalendarDown, IconChevronUp } from '@tabler/icons-react';
+import { IconCalendarUp, IconChevronRight, IconCalendarDown, IconChevronUp } from '@tabler/icons-react';
 import { CalendarHeader } from './CalendarHeader';
 import { Button } from '../Button/Button';
+import classNames from 'classnames';
 
-export const RangeCalendar = ({dateRange, setDateRange}) => {
+export const RangeCalendar = ({dateRange, setDateRange, inputsWrapperClassName, ...props}) => {
   const [startDate, endDate] = dateRange;
 
 	const calendar = useRef(null)
@@ -21,7 +22,7 @@ export const RangeCalendar = ({dateRange, setDateRange}) => {
 	}
 
 	const ExampleCustomInput = forwardRef(({ value, onClick, isOpen }, ref) => (
-    <div className={s.inputsWrapper} onClick={onClick} ref={ref}>
+    <div className={classNames(s.inputsWrapper, inputsWrapperClassName)} onClick={onClick} ref={ref}>
 			<IconCalendarUp size={20} color='#919396'/>
       <input value={value?.split('-')[0] || value} placeholder='От'/>
 			<IconCalendarDown size={20} color='#919396'/>
@@ -45,6 +46,7 @@ export const RangeCalendar = ({dateRange, setDateRange}) => {
 	return (
 		<div>
 			 <ReactDatePicker
+			 		{...props}
 					selectsRange={true}
 					startDate={startDate}
 					endDate={endDate}

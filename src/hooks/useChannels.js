@@ -5,6 +5,6 @@ export const useChannels = (params) => {
 	return useQuery({
 		queryKey: ['channels', params], 
 		queryFn: () => channels.getAllChannels(params), 
-		select: data => data.data
+		select: data => ({ data: data.data, headers: data.headers }),
 	})
 }
