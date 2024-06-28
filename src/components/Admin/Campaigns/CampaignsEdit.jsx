@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField } from "react-admin";
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField } from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
 
 const renderType = (record) => ( {

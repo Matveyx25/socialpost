@@ -1,8 +1,7 @@
 import * as React from "react";
-import { Admin, AppBar, Layout, ListGuesser, Resource, TitlePortal, fetchUtils } from "react-admin";
+import { Admin, AppBar, Layout, Resource, TitlePortal, fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./User/UserList";
-import { UserEdit } from "./User/UserEdit";
 import { ChannelsList } from './Channel/ChannelsList';
 import { ChannelEdit } from "./Channel/ChannelEdit";
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -11,16 +10,16 @@ import Link from '@mui/material/Link';
 import { OperationsList } from './Operations/OperationsList';
 import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
-import { Route, useNavigate } from "react-router-dom";
-import { Requisites } from "./User/Requisites";
+import { useNavigate } from "react-router-dom";
 import { UserTabs } from "./User/UserTabs";
-import { IconBadgeAd, IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
-import { IconFileDots } from "@tabler/icons-react";
+import { IconBadgeAd, IconFileDots, IconClipboardList, IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { CampaignsList } from "./Campaigns/CampaignsList";
 import { CampaignsEdit } from "./Campaigns/CampaignsEdit";
+import { AdvertiserClientsList } from "./AdvertiserClients/AdvertiserClientsList";
+import { AdvertiserClientsEdit } from './AdvertiserClients/AdvertiserClientsEdit';
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -101,6 +100,7 @@ const AdminPanel = () => (
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
     <Resource name="users/publishers/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
+    <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
   </Admin>
 );
 
