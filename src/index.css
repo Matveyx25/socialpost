@@ -94,3 +94,7 @@ code {
 	font-weight: bold;
 	color: #436CFF !important;
 }
+
+.RaLayout-appFrame{
+	width: 100%;
+}

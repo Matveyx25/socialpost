@@ -12,7 +12,7 @@ import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
 import { useNavigate } from "react-router-dom";
 import { UserTabs } from "./User/UserTabs";
-import { IconBadgeAd, IconFileDots, IconClipboardList, IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
+import { IconBadgeAd, IconFileDots, IconClipboardList, IconLogout, IconMoneybag, IconSpeakerphone, IconUser, IconDeviceMobileMessage } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
 import { Button } from "@mui/material";
@@ -20,6 +20,8 @@ import { CampaignsList } from "./Campaigns/CampaignsList";
 import { CampaignsEdit } from "./Campaigns/CampaignsEdit";
 import { AdvertiserClientsList } from "./AdvertiserClients/AdvertiserClientsList";
 import { AdvertiserClientsEdit } from './AdvertiserClients/AdvertiserClientsEdit';
+import { AdvertiserPostsList } from "./AdvertiserPosts/AdvertiserPostsList";
+import { AdvertiserPostsEdit } from "./AdvertiserPosts/AdvertiserPostsEdit";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -91,7 +93,7 @@ export const MyAppBar = () => (
 	</AppBar>
 );
 
-export const MyLayout = props => <Layout {...props} style={{width: '100%'}} appBar={MyAppBar} />;
+export const MyLayout = props => <Layout {...props} appBar={MyAppBar} />;
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs} layout={MyLayout}>
@@ -101,7 +103,7 @@ const AdminPanel = () => (
     <Resource name="users/publishers/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
-    <Resource name="campaigns/posts" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
+    <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Посты' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );
 
