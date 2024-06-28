@@ -14,11 +14,13 @@ import { OperationEdit } from "./Operations/OperationEdit";
 import { Route, useNavigate } from "react-router-dom";
 import { Requisites } from "./User/Requisites";
 import { UserTabs } from "./User/UserTabs";
-import { IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
+import { IconBadgeAd, IconLogout, IconMoneybag, IconSpeakerphone, IconUser } from "@tabler/icons-react";
 import { IconFileDots } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
 import { Box, Button } from "@mui/material";
+import { CampaignsList } from "./Campaigns/CampaignsList";
+import { CampaignsEdit } from "./Campaigns/CampaignsEdit";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -98,6 +100,7 @@ const AdminPanel = () => (
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
     <Resource name="users/publishers/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
+    <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
   </Admin>
 );
 
