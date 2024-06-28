@@ -6,7 +6,7 @@ const renderType = (record) => ( {
 	AD_POST: "Размещение рекламных постов",
 	NATIVE_POST: "Размещение нативных постов",
 	FIXED_CPM: "Кампания с фиксированным СРМ",
-}[record.typee])
+}[record.type])
 
 const renderStatus = (record) => ({
 	ACTIVE: "Активная",

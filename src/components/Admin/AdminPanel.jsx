@@ -91,7 +91,7 @@ export const MyAppBar = () => (
 	</AppBar>
 );
 
-export const MyLayout = props => <Layout {...props} appBar={MyAppBar} />;
+export const MyLayout = props => <Layout {...props} style={{width: '100%'}} appBar={MyAppBar} />;
 
 const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs} layout={MyLayout}>
@@ -101,6 +101,7 @@ const AdminPanel = () => (
     <Resource name="users/publishers/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
+    <Resource name="campaigns/posts" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
   </Admin>
 );
 
