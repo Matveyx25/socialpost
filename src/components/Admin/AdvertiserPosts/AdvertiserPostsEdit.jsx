@@ -71,10 +71,10 @@ export const AdvertiserPostsEdit = (props) => (
 								label="Статус"
 								source="status"
 								choices={[
-									{ id: "NOT_MODERATED", name: "Активный" },
+									{ id: "NOT_MODERATED", name: "Новый" },
 									{ id: "MODERATING", name: "На проверке" },
 									{ id: "DECLINED", name: "Отклоненный" },
-									{ id: "ACCEPTED", name: "Архивный" },
+									{ id: "ACCEPTED", name: "Активный" },
 								]}
 								fullWidth
 							/>
