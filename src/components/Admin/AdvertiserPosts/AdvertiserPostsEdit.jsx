@@ -42,6 +42,12 @@ export const AdvertiserPostsEdit = (props) => (
         <PrevNextButtons />
       </TopToolbar>
     }
+		transform={data => ({
+			status: data?.status,
+			declineReason: data?.declineReason,
+			postUploadsIds: data?.uploads?.map(el => el.id),
+			content: data?.content
+		})}
   >
     <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 			<PostContent/>
