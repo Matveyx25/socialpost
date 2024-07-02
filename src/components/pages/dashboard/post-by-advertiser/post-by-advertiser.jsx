@@ -11,6 +11,8 @@ import { usePostRequests } from '../../../../hooks/usePostRequests';
 import {ImageGrid} from "react-fb-image-video-grid"
 import DOMPurify from 'dompurify';
 import remarkGfm from 'remark-gfm';
+import { IconAlertTriangle, IconClockHour4 } from '@tabler/icons-react';
+import { useAddModeratePost } from '../../../../hooks/useAddModeratePost';
 
 export const PostByAdvertiser = () => {
 	const [setModal] = useOutletContext()
@@ -20,10 +22,9 @@ export const PostByAdvertiser = () => {
 
 	const {data: post} = usePost(postId)
 	const {data: requests} = usePostRequests(postId)
-
+	const {mutate: moderate} = useAddModeratePost()
 
 	const tabs = [
-		{label: 'Все', count: 4, id: 5},
 		{label: 'Ожидают публикации', count: 2, id: 6},
 		{label: 'Активные', count: 1, id: 7},
 		{label: 'Выполненные', count: 14, id: 8},
@@ -57,11 +58,43 @@ export const PostByAdvertiser = () => {
 				</DashboardCard>
 			</div>
 			<div className={s.colLg}>
+				{{
+					'NOT_MODERATED':  null,
+					'MODERATING':  <DashboardCard className={s.card}>
+						<div className={s.alertWrapper}>
+							<IconClockHour4 color='#436CFF' size={24}/>
+							<div className={s.alertContent}>
+								<div className={s.alertTitle}>Рекламная запись на модерации</div>
+							</div>
+						</div>
+					</DashboardCard>,
+					'DECLINED':  <DashboardCard className={s.card}>
+						<div className={s.alertWrapper}>
+							<IconAlertTriangle color='#F46262' size={24}/>
+							<div className={s.alertContent}>
+								<div className={s.alertTitle}>Рекламная запись не прошла модерацию</div>
+								<div className={s.alertText}>{post?.declineReason}</div>
+							</div>
+						</div>
+					</DashboardCard>,
+					'ACCEPTED':  null,
+				}[post?.status]}
 				<DashboardCard className={s.card}>
 					<div className={s.cardHeader}>
 						Информация
 						<div className={s.btns}>
-							<Button label={'Создать заявку'} size='small' onClick={() => navigate('./create-request')}/> 
+							{{
+								'NOT_MODERATED':  <Button label={'Отправить на модерацию'} size='small' onClick={() => {
+									// setModal('add-post-to-moderation', {postId})
+									moderate(postId)
+								}}/> ,
+								'MODERATING':  null ,
+								'DECLINED':  <Button label={'Отправить на модерацию'} size='small' onClick={() => {
+									// setModal('add-post-to-moderation', {postId})
+									moderate(postId)
+								}}/> ,
+								'ACCEPTED':  <Button label={'Разместить пост'} size='small' onClick={() => navigate('./create-request')}/> ,
+							}[post?.status]}
 						</div>
 					</div>
 					<div className={s.line}></div>

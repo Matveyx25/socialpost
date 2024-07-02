@@ -8,8 +8,10 @@ const renderType = (record) => ( {
 }[record.type])
 
 const renderStatus = (record) => ({
-	ACTIVE: "Активная",
-	COMPLETED: "Завершенная",
+	NOT_MODERATED: "Активные",
+	MODERATING: "На проверке",
+	DECLINED: "Отклоненные",
+	ACCEPTED: "Архивные",
 }[record.status])
 
 export const AdvertiserPostsList = (props) => (

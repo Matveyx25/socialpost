@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField } from "react-admin";
@@ -24,6 +24,9 @@ export const AdvertiserClientsEdit = (props) => (
 			</TopToolbar>
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
+				<Typography variant="h5" gutterBottom>
+						Клиенты
+				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled>

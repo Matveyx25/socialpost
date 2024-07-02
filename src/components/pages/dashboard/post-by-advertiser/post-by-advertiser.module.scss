@@ -132,3 +132,30 @@
 		margin-bottom: 1rem;
 	}
 }
+
+.alertWrapper{
+	display: flex;
+	gap: 16px;
+	width: 100%;
+	.alertContent{
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		flex-grow: 1;
+	}
+	.alertTitle{
+		font-family: 'SF Medium';
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 24px;
+		letter-spacing: 0.02em;
+		color: $gray-800;
+	}
+	.alertText{
+		font-size: 14px;
+		font-weight: 400;
+		line-height: 22px;
+		letter-spacing: 0.02em;
+		color: #7B7D81;
+	}
+}
