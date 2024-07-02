@@ -237,8 +237,8 @@ export const advertiser = {
 	createRequests(id, data) {
 		return instance.post('/campaigns/posts/' + id + '/requests', data)
 	},
-	createModeration(id) {
-		return instance.post('/campaigns/posts/' + id + '/moderate')
+	createModeration(data) {
+		return instance.post('/campaigns/posts/' + data.id + '/moderate', data.data)
 	},
 	createCampaign(data) {
 		return instance.post('/campaigns/my', data)

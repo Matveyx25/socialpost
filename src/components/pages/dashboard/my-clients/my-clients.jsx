@@ -31,7 +31,7 @@ export const MyClients = () => {
         <div className={s.filters}>
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
-						placeholder={'Найти компанию'} value={search} onChange={setSearch}/>
+						placeholder={'Найти клиента'} value={search} onChange={setSearch}/>
 						Найдено клиентов: {clients?.headers['x-total-count']}
 					</div>
           

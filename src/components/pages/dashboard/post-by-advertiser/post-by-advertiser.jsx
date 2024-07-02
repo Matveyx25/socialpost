@@ -22,7 +22,6 @@ export const PostByAdvertiser = () => {
 
 	const {data: post} = usePost(postId)
 	const {data: requests} = usePostRequests(postId)
-	const {mutate: moderate} = useAddModeratePost()
 
 	const tabs = [
 		{label: 'Ожидают публикации', count: 2, id: 6},
@@ -85,13 +84,11 @@ export const PostByAdvertiser = () => {
 						<div className={s.btns}>
 							{{
 								'NOT_MODERATED':  <Button label={'Отправить на модерацию'} size='small' onClick={() => {
-									// setModal('add-post-to-moderation', {postId})
-									moderate(postId)
+									setModal('add-post-to-moderation', {postId})
 								}}/> ,
 								'MODERATING':  null ,
 								'DECLINED':  <Button label={'Отправить на модерацию'} size='small' onClick={() => {
-									// setModal('add-post-to-moderation', {postId})
-									moderate(postId)
+									setModal('add-post-to-moderation', {postId})
 								}}/> ,
 								'ACCEPTED':  <Button label={'Разместить пост'} size='small' onClick={() => navigate('./create-request')}/> ,
 							}[post?.status]}

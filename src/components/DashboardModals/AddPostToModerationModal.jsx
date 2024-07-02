@@ -12,11 +12,11 @@ import { useAddModeratePost } from '../../hooks/useAddModeratePost';
 		 <Modal {...{isOpen, setOpen}} title={'Отправить на модеарцию'} name={'add-post-to-moderation'}>
 			 <Formik
 				 initialValues={{
-					comment: ''
+					moderationComment: ''
 				 }}
 				 onSubmit={(values) => {
 					 moderate({data: {
-							comment: values.comment
+							moderationComment: values.moderationComment
 					 }, id: modalParams?.postId})
 					 setOpen()
 				 }}
@@ -25,12 +25,12 @@ import { useAddModeratePost } from '../../hooks/useAddModeratePost';
 					 <Form>
 						 <div className={s.form}>
 							 <div className={s.input}>
-								 <Field name='comment'>
+								 <Field name='moderationComment'>
 								 {({ field: { value }, form: { setFieldValue } }) =>
 								  <Textarea
 										label={'Комментарий'}
 										value={value}
-										onChange={v => setFieldValue('comment', v)}
+										onChange={v => setFieldValue('moderationComment', v.target.value)}
 									/>}
 								 </Field>
 							 </div>

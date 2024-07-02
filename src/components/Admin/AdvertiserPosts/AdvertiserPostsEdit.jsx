@@ -1,5 +1,4 @@
 import { Box } from "@mui/material";
-import { IconCheck, IconX } from "@tabler/icons-react";
 import DOMPurify from "dompurify";
 import * as React from "react";
 import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext } from "react-admin";
