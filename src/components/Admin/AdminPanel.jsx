@@ -103,7 +103,7 @@ const AdminPanel = () => (
     <Resource name="users/publishers/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
-    <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Посты' }} icon={IconDeviceMobileMessage}/>
+    <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );
 

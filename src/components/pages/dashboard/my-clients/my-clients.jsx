@@ -11,14 +11,12 @@ import { useMyClients } from '../../../../hooks/useMyClients'
 import { Input } from '../../../Shared/Input/Input'
 
 export const MyClients = () => {
-	const [option, setOption] = useState()
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
 	const [search, setSearch] = useState('')
 
-	const {data: profile} = useProfile()
 	const {data: clients, isFetched} = useMyClients({
-		type: option?.value,
+		name: search,
 		_start: (page - 1) * 30,
 		_end: page * 30,
 	})
@@ -31,7 +29,7 @@ export const MyClients = () => {
         <div className={s.filters}>
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
-						placeholder={'Найти клиента'} value={search} onChange={setSearch}/>
+						placeholder={'Найти клиента'} value={search} onChange={(v) => setSearch(v.target.value)}/>
 						Найдено клиентов: {clients?.headers['x-total-count']}
 					</div>
           

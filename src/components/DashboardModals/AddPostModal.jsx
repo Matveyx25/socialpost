@@ -17,6 +17,7 @@ import { Node, Text } from "slate";
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [files, setFiles] = useState([]);
+  const [type, setType] = useState();
 
 	const onUpload = (files) => {
     setFiles(files)
@@ -57,8 +58,21 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const { mutate: createPost } = useAddPost();
 
   const handleSubmit = (values) => {
-		const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
-		createPost({...values, content: markdownContent, files});
+		let data = null
+
+		debugger
+		if(type === 'REPOST'){
+			data = {
+				name: values?.name,
+				type: values?.type,
+				telegramPostUrl: values?.telegramPostUrl,
+				id: modalParams
+			}
+		}else{
+			const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
+			data = {...values, content: markdownContent, files}
+		}
+		createPost(data);
     setOpen();
     setCurrentStep(0);
   };
@@ -108,7 +122,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 					name: "",
 					type: "",
 					content: '',
-					// telegramPostUrl: "",
+					telegramPostUrl: "",
 					id: modalParams
         }}
         onSubmit={(values) => {
@@ -146,13 +160,35 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 											fullWidth={true}
 											value={value}
 											isMulti={false}
-											setSelectedOption={(v) => setFieldValue("type", v.value)}
+											setSelectedOption={(v) => {
+												setFieldValue("type", v.value)
+												setType(v.value)
+											}}
 										/>
 									)}
 								</Field>
 							</div>
 						</div>
 				</FormikStep>
+				{type === 'REPOST' ? <FormikStep validationSchema={Yup.object().shape({
+					telegramPostUrl: Yup.string()
+					.matches(/^https:\/\/t\.me\/[a-zA-Z0-9]+\/\d+$/, "Ссылка на пост не валидна")
+					.required("Заполните поле"),
+				})}>
+						<div className={s.scroller}>
+							<div className={s.form}>
+								<div className={s.input}>
+									<InputField
+										label={"Ссылка на пост"}
+										required
+										placeholder={"https://t.me/channel_username/post_id"}
+										id="telegramPostUrl"
+										name="telegramPostUrl"
+									/>
+								</div>
+							</div>
+						</div>
+				</FormikStep> :
 				<FormikStep validationSchema={Yup.object().shape({
 					content: Yup.mixed().test(
 						'is-empty',
@@ -171,7 +207,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 								</div>
 							</div>
 						</div>
-				</FormikStep>
+				</FormikStep>}
       </FormikStepper>
     </Modal>
   );

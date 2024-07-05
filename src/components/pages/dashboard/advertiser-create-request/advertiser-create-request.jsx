@@ -17,6 +17,24 @@ export const AdvertiserCreateRequest = () => {
   const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
 
+	// {
+	// 	"channelId": 0,
+	// 	"publishStartTime": {
+	// 		"hour": 0,
+	// 		"minute": 0,
+	// 		"second": 0,
+	// 		"nano": 0
+	// 	},
+	// 	"publishEndTime": {
+	// 		"hour": 0,
+	// 		"minute": 0,
+	// 		"second": 0,
+	// 		"nano": 0
+	// 	},
+	// 	"publishStartDate": "2024-07-03",
+	// 	"publishEndDate": "2024-07-03"
+	// }
+
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
 

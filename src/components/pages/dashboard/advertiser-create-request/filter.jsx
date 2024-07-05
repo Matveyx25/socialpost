@@ -7,6 +7,7 @@ import { InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar';
 
 export const filterSubsScales = [
 	{value: 1256},
@@ -159,27 +160,7 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber, dateRange, setDat
             />
             <div className={s.inputsGroup}>
               <h5>Диапазон размещения</h5>
-              <div className={s.calendarsWrapper}>
-                <Calendar
-                  value={dateRange[0]}
-                  placeholder={"От"}
-                  minDate={new Date()}
-                  showTimeSelect
-                  filterTime={filterPassedTime}
-									inputClassName={s.firstCalendar}
-                  onChange={(v) => setDateRange((prev) => [v, prev[1]])}
-                />
-                <Calendar
-                  value={dateRange[1]}
-                  placeholder={"До"}
-                  minDate={new Date()}
-                  showTimeSelect
-                  filterTime={filterPassedTime}
-									inputClassName={s.secondCalendar}
-                  onChange={(v) => setDateRange((prev) => [prev[0], v])}
-                />
-								<IconChevronRight size={18} color='#919396'/>
-              </div>
+							<RangeCalendar {...{dateRange, setDateRange}}/>
             </div>
             <span className={s.line}></span>
             <div className={s.btns}>

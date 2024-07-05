@@ -212,21 +212,33 @@ export const advertiser = {
 		return instance.get('/campaigns/' + id + '/posts',  {params})
 	},
 	async createPost(data) {
-		let uploadPromises = data?.files?.map(file => {
-				const formData = new FormData();
-				formData.append('upload', file);
-				return instance.post('/uploads', formData);
-		});
+		let requestData = null
 
-		const uploadResponses = await Promise.all(uploadPromises);
-		const fileIds = uploadResponses?.map(response => response.data.id);
+		if(data.type === 'REPOST'){
+			requestData = {
+				"name": data.name,
+				"type": data.type,
+				"telegramPostUrl": data.telegramPostUrl,
+			}
+		}else{
+			let uploadPromises = data?.files?.map(file => {
+					const formData = new FormData();
+					formData.append('upload', file);
+					return instance.post('/uploads', formData);
+			});
+	
+			const uploadResponses = await Promise.all(uploadPromises);
+			const fileIds = uploadResponses?.map(response => response.data.id);
 
-		return instance.post('/campaigns/' + data.id + '/posts', {
-			"name": data.name,
-			"type": data.type,
-			"content": data.content,
-			"postUploadsIds": fileIds
-		})
+			requestData = {
+				"name": data.name,
+				"type": data.type,
+				"content": data.content,
+				"postUploadsIds": fileIds
+			}
+		}
+
+		return instance.post('/campaigns/' + data.id + '/posts', requestData)
 	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)
