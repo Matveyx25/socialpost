@@ -1,18 +1,28 @@
 @import '~/src/styles/variables.scss';
 
 .breadcrumbs{
-	display: flex;
-	flex-shrink: 0;
-	a{
-		text-decoration: none;
-		color: $gray-800;
-		font-size: 1rem;
-		font-style: normal;
-		font-weight: 500;
-		line-height: 1.5rem; /* 150% */
-		letter-spacing: 0.02rem;
-		&:not(:last-child)::after{
-			content: '/';
+	ol{
+		display: flex;
+		flex-shrink: 0;
+		a{
+			text-decoration: none;
+			font-family: 'SF Medium';
+			font-size: 1rem;
+			font-style: normal;
+			font-weight: 500;
+			line-height: 1.5rem; /* 150% */
+			letter-spacing: 0.02rem;
+			color: $gray-800;
+		}
+		li:not(:last-child){
+			a{
+				color: $gray-500;
+			}
+			&::after{
+			content: ' / ';
+			color: $gray-500;
+
+			}
 		}
 	}
 }

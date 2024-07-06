@@ -69,47 +69,21 @@ function App() {
 						<Route element={<DashboardLayout/>}>
 							{profile?.roles?.includes('PUBLISHER') ? 
 							<>
-								<Route path="/dashboard" element={<MainDashboard/>} handle={{
-									crumb: () => 'Дашборд',
-								}}/>
-								<Route path="/my-channels" element={<MyChannels/>} handle={{
-									crumb: () => 'Мои каналы',
-								}}/>
-								<Route path="/placement-appointments" element={<Reports/>} handle={{
-									crumb: () => 'Заявки на размещение',
-								}}/>
-								<Route path="/appointment" element={<Report/>} handle={{
-									crumb: () => 'Заявки на размещение',
-								}}/>
-								<Route path="/payments" element={<Payments/>} handle={{
-									crumb: () => 'Кошелек',
-								}}/>
-								<Route path="/requisites" element={<Requisites/>} handle={{
-									crumb: () => 'Реквизиты',
-								}}/>
+								<Route path="/dashboard" element={<MainDashboard/>}/>
+								<Route path="/my-channels" element={<MyChannels/>}/>
+								<Route path="/placement-appointments" element={<Reports/>}/>
+								<Route path="/appointment" element={<Report/>}/>
+								<Route path="/payments" element={<Payments/>}/>
+								<Route path="/requisites" element={<Requisites/>}/>
 							</> :
 							<>
-								<Route path="/dashboard" element={<AdvertisingCompanies/>} handle={{
-									crumb: () => 'Рекламные кампании',
-								}}/>
-								<Route path="/clients" element={<MyClients/>} handle={{
-									crumb: () => 'Клиенты',
-								}}/>
-								<Route path="/requisites" element={<Requisites/>} handle={{
-									crumb: () => 'Реквизиты',
-								}}/>
-								<Route path="/payments" element={<Payments/>} handle={{
-									crumb: () => 'Кошелек',
-								}}/>
-								<Route path="/advertising-company/:companyId" element={<AdvertisingCompany/>} handle={{
-									crumb: (companyId) => 'Рекламные кампании',
-								}}/>
-								<Route path="/advertising-company/:companyId/:postId" element={<PostByAdvertiser/>} handle={{
-									crumb: (companyId) => 'Рекламные кампании',
-								}}/>
-								<Route path="/advertising-company/:companyId/:postId/create-request" element={<AdvertiserCreateRequest/>} handle={{
-									crumb: (companyId) => 'Рекламные кампании',
-								}}/>
+								<Route path="/dashboard" element={<AdvertisingCompanies/>}/>
+								<Route path="/clients" element={<MyClients/>}/>
+								<Route path="/requisites" element={<Requisites/>}/>
+								<Route path="/payments" element={<Payments/>}/>
+								<Route path="/dashboard/:companyId" element={<AdvertisingCompany/>}/>
+								<Route path="/dashboard/:companyId/:postId" element={<PostByAdvertiser/>}/>
+								<Route path="/dashboard/:companyId/:postId/create-request" element={<AdvertiserCreateRequest/>}/>
 							</>
 							}
 							<Route path="/profile" element={<Profile/>} handle={{

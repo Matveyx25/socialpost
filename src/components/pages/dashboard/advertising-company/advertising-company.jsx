@@ -120,7 +120,7 @@ export const AdvertisingCompany = () => {
             <tbody>
               {isFetched ?
                   posts?.data.map((el) => (
-										<tr key={el.id} onClick={() => navigate('/advertising-company/' + companyId + '/' + el.id)}>
+										<tr key={el.id} onClick={() => navigate('./' + el.id)}>
 											<td>
 												<div className={s.center}>{el?.name}</div>
 											</td>
