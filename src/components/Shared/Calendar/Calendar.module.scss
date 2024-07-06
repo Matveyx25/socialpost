@@ -172,11 +172,15 @@
 			color: $gray-800;
 		}
 	}
-	:global(.react-datepicker-time__header){
+	:global(.react-datepicker__time-list-item--disabled){
 		display: none !important;
 	}
-	:global(.react-datepicker__time-container .react-datepicker__time .react-datepicker__time-box ul.react-datepicker__time-list){
-		height: 348px !important;
+	:global(.react-datepicker__time-list-item--selected){
+		background-color: #436CFF !important;
+		color: #fff !important;
+	}
+	:global(.react-datepicker-time__header){
+		display: none !important;
 	}
 	.btns{
 		display: flex;

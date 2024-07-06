@@ -16,24 +16,7 @@ export const AdvertiserCreateRequest = () => {
   const { postId } = useParams();
   const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
-
-	// {
-	// 	"channelId": 0,
-	// 	"publishStartTime": {
-	// 		"hour": 0,
-	// 		"minute": 0,
-	// 		"second": 0,
-	// 		"nano": 0
-	// 	},
-	// 	"publishEndTime": {
-	// 		"hour": 0,
-	// 		"minute": 0,
-	// 		"second": 0,
-	// 		"nano": 0
-	// 	},
-	// 	"publishStartDate": "2024-07-03",
-	// 	"publishEndDate": "2024-07-03"
-	// }
+  const [timeRange, setTimeRange] = useState([new Date().setHours(9, 0, 0), new Date().setHours(18, 0, 0)]);
 
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
@@ -54,12 +37,32 @@ export const AdvertiserCreateRequest = () => {
   };
 
   const request = (id) => {
+		const startTime = new Date(timeRange[0]);
+		const endTime = new Date(timeRange[1]);
+	
+		const startHour = startTime.getHours();
+		const startMinute = startTime.getMinutes();
+	
+		const endHour = endTime.getHours();
+		const endMinute = endTime.getMinutes();
+
+		const formatTime = (time) => {
+			const hours = String(time.getHours()).padStart(2, '0'); // Pad single digit hours with leading zero
+			const minutes = String(time.getMinutes()).padStart(2, '0'); // Pad single digit minutes with leading zero
+			return `${hours}:${minutes}`;
+		};
+	
+		const publishStartTime = formatTime(startTime);
+		const publishEndTime = formatTime(endTime);
+
     createRequest({
       id: postId,
       data: {
         channelId: id,
-        publishStartTime: new Date(dateRange[0]).toISOString(),
-        publishEndTime: new Date(dateRange[1]).toISOString(),
+        publishStartDate: new Date(dateRange[0]).toISOString()?.slice(0, 10),
+        publishEndDate: new Date(dateRange[1]).toISOString()?.slice(0, 10),
+				publishStartTime,
+				publishEndTime
       },
     });
   };
@@ -71,7 +74,7 @@ export const AdvertiserCreateRequest = () => {
           <Filters
             onFilterSubmit={onFilterSubmit}
             maxSubscribersNumber={100000}
-            {...{ dateRange, setDateRange }}
+            {...{ dateRange, setDateRange, timeRange, setTimeRange }}
           />
         </DashboardCard>
       </div>

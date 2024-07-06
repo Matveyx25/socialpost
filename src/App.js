@@ -95,6 +95,12 @@ function App() {
 								<Route path="/clients" element={<MyClients/>} handle={{
 									crumb: () => 'Клиенты',
 								}}/>
+								<Route path="/requisites" element={<Requisites/>} handle={{
+									crumb: () => 'Реквизиты',
+								}}/>
+								<Route path="/payments" element={<Payments/>} handle={{
+									crumb: () => 'Кошелек',
+								}}/>
 								<Route path="/advertising-company/:companyId" element={<AdvertisingCompany/>} handle={{
 									crumb: (companyId) => 'Рекламные кампании',
 								}}/>

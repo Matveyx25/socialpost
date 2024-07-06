@@ -14,13 +14,6 @@ import { usePostsByCampaign } from '../../../../hooks/usePostsByCampaign';
 import { Tabs } from '../../../Shared/Tabs/Tabs';
 
 export const AdvertisingCompany = () => {
-	const tabs = [
-		{label: 'Активные', count: 0, value: 'NOT_MODERATED', id: 0},
-		{label: 'На проверке', count: 0, value: 'MODERATING', id: 1},
-		{label: 'Отклоненные', count: 0, value: 'DECLINED', id: 2},
-		{label: 'Архивные', count: 0, value: 'ACCEPTED', id: 3}
-	]
-
 	const [allChecked, setAllChecked] = useState(false)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
@@ -28,8 +21,16 @@ export const AdvertisingCompany = () => {
 	const {companyId} = useParams()
 
 	const navigate = useNavigate()
+	
+	const { data: company } = useCampaignById(companyId);
 
-  const { data: company } = useCampaignById(companyId);
+	const tabs = [
+		{label: 'Новые', count: company?.notModeratedPostsCount, value: 'NOT_MODERATED', id: 0},
+		{label: 'Активные', count: company?.activePostsCount, value: 'ACCEPTED', id: 1},
+		{label: 'На проверке', count: company?.moderatingPostsCount, value: 'MODERATING', id: 2},
+		{label: 'Отклоненные', count: company?.declinedPostsCount, value: 'DECLINED', id: 3},
+		{label: 'Архивные', count: company?.archivedPostsCount, value: 'ARCHIVED', id: 4}
+	]
 
   const { data: posts, isFetched } = usePostsByCampaign(companyId, {
 		status: tabs[tab].value,

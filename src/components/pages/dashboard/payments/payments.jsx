@@ -34,7 +34,7 @@ export const Payments = () => {
 
 	return (
     <div className={s.grid}>
-      <DashboardCard className={s.balance} >
+      <DashboardCard className={s.balance}>
         <div>
           <p>{priceSeparator(profile?.balance)} ₽</p>
           <span className={s.label}>Баланс кабинета</span>
@@ -46,50 +46,68 @@ export const Payments = () => {
         />
       </DashboardCard>
       <div className={s.tableCard}>
-				<div className={s.cardHeader}>
-						<span>История операций</span>
-				</div>
+        <div className={s.cardHeader}>
+          <span>История операций</span>
+        </div>
         <div className={s.filters}>
-          <RangeCalendar {...{dateRange, setDateRange}}/>
-					<Select
-						options={[
-							{label: 'Все операции', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET', 'INCOME']},
-							{label: 'Поступления', value: ["INCOME"]},
-							{label: 'Списания', value: ['WITHDRAWAL_SELF_EMPLOYED', 'WITHDRAWAL_IE', 'WITHDRAWAL_LEGAL_ENTITY', 'WITHDRAWAL_CRYPTO_WALLET']},
-						]}
-						required={true}
-						placeholder={'Все операции'}
-						setSelectedOption={setOption}
-						value={option}
-						fullWidth={true}
-						isMulti={false}
-					/>
-          Найдено выплат: {operations?.headers['x-total-count']}
-					<div className={s.channels}>
-						{(channels && option?.value[0] === "INCOME") && 
-						<Select
-							options={[
-								{label: 'Все каналы', value: null},
-								...channels?.map(el => ({label: el.name, value: el.id}))
-							]}
-							required={true}
-							placeholder={'Все каналы'}
-							setSelectedOption={setChannels}
-							value={channel}
-							fullWidth={true}
-							isMulti={false}
-						/>}
-					</div>
+          <RangeCalendar {...{ dateRange, setDateRange }} />
+          <Select
+            options={[
+              {
+                label: "Все операции",
+                value: [
+                  "WITHDRAWAL_SELF_EMPLOYED",
+                  "WITHDRAWAL_IE",
+                  "WITHDRAWAL_LEGAL_ENTITY",
+                  "WITHDRAWAL_CRYPTO_WALLET",
+                  "INCOME",
+                ],
+              },
+              { label: "Поступления", value: ["INCOME"] },
+              {
+                label: "Списания",
+                value: [
+                  "WITHDRAWAL_SELF_EMPLOYED",
+                  "WITHDRAWAL_IE",
+                  "WITHDRAWAL_LEGAL_ENTITY",
+                  "WITHDRAWAL_CRYPTO_WALLET",
+                ],
+              },
+            ]}
+            required={true}
+            placeholder={"Все операции"}
+            setSelectedOption={setOption}
+            value={option}
+            fullWidth={true}
+            isMulti={false}
+          />
+          Найдено выплат: {operations?.headers["x-total-count"]}
+          <div className={s.channels}>
+            {channels && option?.value[0] === "INCOME" && (
+              <Select
+                options={[
+                  { label: "Все каналы", value: null },
+                  ...channels?.map((el) => ({ label: el.name, value: el.id })),
+                ]}
+                required={true}
+                placeholder={"Все каналы"}
+                setSelectedOption={setChannels}
+                value={channel}
+                fullWidth={true}
+                isMulti={false}
+              />
+            )}
+          </div>
           <Button
             label="Сбросить"
             leftIcon={<IconRefresh />}
             theme="secondary"
             className={s.refreshBtn}
-						onClick={() => {
-							setChannels()
-							setDateRange([null, null])
-							setOption()
-						}}
+            onClick={() => {
+              setChannels();
+              setDateRange([null, null]);
+              setOption();
+            }}
           />
         </div>
         <div className={s.tableWrapper}>
@@ -99,14 +117,10 @@ export const Payments = () => {
                 <th>Тип</th>
                 <th>Статус</th>
                 <th>
-                  <div className={s.flex}>
-                    Дата
-                  </div>
+                  <div className={s.flex}>Дата</div>
                 </th>
                 <th>
-                  <div className={s.flex}>
-                    Сумма
-                  </div>
+                  <div className={s.flex}>Сумма</div>
                 </th>
               </tr>
             </thead>
@@ -123,13 +137,15 @@ export const Payments = () => {
                             WITHDRAWAL_IE: "Вывод у ИП",
                             WITHDRAWAL_LEGAL_ENTITY: "Вывод у ЮЛ",
                             WITHDRAWAL_CRYPTO_WALLET: "Вывод с криптокошелька",
+                            CAMPAIGN_POST_REQUEST_INCOME: "Доход по запросу от кампании",
+                            CAMPAIGN_POST_REQUEST_PAYMENT: "Оплата по запросу от кампании",
                           }[el.type]
                         }
                       </div>
                     </td>
                     <td>
                       <div className={s.center}>
-												{
+                        {
                           {
                             PENDING: "В обработке",
                             EXECUTED: "Исполнено",
@@ -139,7 +155,11 @@ export const Payments = () => {
                       </div>
                     </td>
                     <td>
-                      <div className={s.center}>{(new Date(el.dateTime)).toLocaleDateString('ru-RU', {dateStyle: 'medium'})}</div>
+                      <div className={s.center}>
+                        {new Date(el.dateTime).toLocaleDateString("ru-RU", {
+                          dateStyle: "medium",
+                        })}
+                      </div>
                     </td>
                     <td>
                       <div className={s.center}>{el.amount}₽</div>
@@ -152,14 +172,15 @@ export const Payments = () => {
             </tbody>
           </table>
         </div>
-        {operations?.headers['x-total-count'] && 
-				<Pagination
-          currentPage={page}
-          totalCount={+operations?.headers['x-total-count']}
-          pageSize={size}
-          setSize={setSize}
-          onPageChange={(page) => setPage(page)}
-        />}
+        {operations?.headers["x-total-count"] && (
+          <Pagination
+            currentPage={page}
+            totalCount={+operations?.headers["x-total-count"]}
+            pageSize={size}
+            setSize={setSize}
+            onPageChange={(page) => setPage(page)}
+          />
+        )}
       </div>
     </div>
   );
