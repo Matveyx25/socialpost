@@ -234,7 +234,8 @@ export const advertiser = {
 				"name": data.name,
 				"type": data.type,
 				"content": data.content,
-				"postUploadsIds": fileIds
+				"postUploadsIds": fileIds,
+				"markingType": data.markingType
 			}
 		}
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { PublisherContent } from "./components/PublisherContent/PublisherContent";
 import { SellerContent } from './components/SellerContent/SellerContent';
 import { Route, Routes } from "react-router";
@@ -20,7 +20,6 @@ import { Payments } from "./components/pages/dashboard/payments/payments";
 import { FAQ } from "./components/pages/dashboard/faq/faq";
 import { Requisites } from "./components/pages/dashboard/requisites/requisites";
 import { ScrollToTop } from "./components/ScrollToTop/ScrollToTop";
-import { Channel } from "./components/pages/channel/channel";
 import { Helmet,HelmetProvider } from "react-helmet-async";
 import { SwitchWrapper } from "./components/SwitchWrapper/SwitchWrapper";
 import { Outlet } from 'react-router-dom';

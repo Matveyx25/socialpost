@@ -12,6 +12,7 @@ import { RichText } from "../Shared/RichText/RichText";
 import { IconX } from "@tabler/icons-react";
 import { Upload } from "../Shared/Upload/Upload";
 import { Node, Text } from "slate";
+import { useCampaignById } from "../../hooks/useCampaignById";
 
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
@@ -56,11 +57,11 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 	}
 
   const { mutate: createPost } = useAddPost();
+  const { data: post } = useCampaignById(modalParams);
 
   const handleSubmit = (values) => {
 		let data = null
 
-		debugger
 		if(type === 'REPOST'){
 			data = {
 				name: values?.name,
@@ -87,6 +88,13 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const typeOptions = [
 		{value: 'NEW_POST', label: "Новая запись",},
 		{value: 'REPOST', label: 'Репост'}
+  ];
+
+  const markingOptions = [
+		{value: 'NONE', label: "Не размещать",},
+		{value: 'IN_TEXT', label: 'В тексте записи'},
+		{value: 'IN_VIDEO', label: 'В видео'},
+		{value: 'IN_PHOTO', label: 'На фотографиях'}
   ];
 
 	const renderFilePreviews = () => {
@@ -123,6 +131,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 					type: "",
 					content: '',
 					telegramPostUrl: "",
+					markingType: 'NONE',
 					id: modalParams
         }}
         onSubmit={(values) => {
@@ -168,6 +177,27 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 									)}
 								</Field>
 							</div>
+							{console.log(post)}
+							{post?.client?.type !== 'PHYSICAL_ENTITY' ? <div className={s.input}>
+								<Field name="markingType">
+									{({ field: { value }, form: { setFieldValue } }) => (
+										<Select
+											label={"Где разместить маркировку"}
+											id="markingType"
+											name="markingType"
+											options={markingOptions}
+											placeholder={"Маркировка"}
+											fullWidth={true}
+											value={value}
+											isMulti={false}
+											defaultValue={'NONE'}
+											setSelectedOption={(v) => {
+												setFieldValue("markingType", v.value)
+											}}
+										/>
+									)}
+								</Field>
+							</div> : null}
 						</div>
 				</FormikStep>
 				{type === 'REPOST' ? <FormikStep validationSchema={Yup.object().shape({
