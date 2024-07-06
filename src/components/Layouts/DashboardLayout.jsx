@@ -5,7 +5,7 @@ import s from './Layouts.module.scss'
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { Dropdown } from '../Shared/Dropdown/Dropdown';
 import { DashboardModals } from "../DashboardModals/DashboardModals";
-import { auth, profile } from "../../api/api";
+import { auth } from "../../api/api";
 import { useProfile } from "../../hooks/useProfile";
 import { Breadcrumbs } from "../Shared/Breadcrunbs/Breadcrumbs";
 
@@ -33,7 +33,6 @@ export const DashboardLayout = ({}) => {
 				<Sidebar/>
 				<div className={s.content}>
 					<div className={s.header}>
-						{/* {routesTitle[pathname] || routesTitle[pathname + '/']} */}
 						<Breadcrumbs/>
 						<Dropdown 
 							options={dropdown} label={<img src={profile?.photoUrl ? profile?.photoUrl : '/images/user-without-image.svg'}/>}

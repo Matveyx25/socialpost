@@ -151,7 +151,44 @@ export const AdvertisingCompany = () => {
 												</div>
 											</td>
 											<td>
-
+												<div className={s.end}>
+														{{
+														NOT_MODERATED: (
+															<Button
+																label={"Отправить на модерацию"}
+																size="small"
+																theme="secondary"
+																onClick={(event) => {
+																	event.stopPropagation()
+																	setModal("add-post-to-moderation", { postId: el.id });
+																}}
+															/>
+														),
+														MODERATING: null,
+														DECLINED: (
+															<Button
+																label={"Отправить на модерацию"}
+																size="small"
+																theme="secondary"
+																onClick={(event) => {
+																	event.stopPropagation()
+																	setModal("add-post-to-moderation", { postId: el.id });
+																}}
+															/>
+														),
+														ACCEPTED: (
+															<Button
+																label={"Разместить запись"}
+																size="small"
+																theme="secondary"
+																onClick={(event) => {
+																	event.stopPropagation()
+																	navigate("./" + el.id + "/create-request")
+																}}
+															/>
+														),
+													}[el?.status]}
+												</div>
 											</td>
 										</tr>
 									)) : (

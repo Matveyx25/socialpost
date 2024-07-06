@@ -26,19 +26,14 @@ export const PostByAdvertiser = () => {
   const [tab, setTab] = useState(0);
 	const navigate = useNavigate()
 	
-	
-	// "totalRequestsCount": 2,
-	// "activeRequestsCount": 0,
-	// "completedRequestsCount": 0
-	
 	const {data: post} = usePost(postId)
 
 	const tabs = [
-		{label: 'Ожидают публикации', count: null, value: 'PENDING', id: 0},
+		{label: 'Ожидают публикации', value: 'PENDING', id: 0},
 		{label: 'Активные', count: post?.activeRequestsCount, value: 'ACTIVE', id: 1},
 		{label: 'Выполненные', count: post?.completedRequestsCount, value: '', id: 2},
-		{label: 'Отклоненные', count: null, value: 'DECLINED', id: 3},
-		{label: 'Просроченные', count: null, value: 'EXPIRED', id: 4}
+		{label: 'Отклоненные', value: 'DECLINED', id: 3},
+		{label: 'Просроченные', value: 'EXPIRED', id: 4}
 	]
 
 	const {data: requests, isFetched} = usePostRequests(postId, {
@@ -192,15 +187,6 @@ export const PostByAdvertiser = () => {
             <table className={s.table}>
               <thead>
                 <tr>
-                 {/* - При выборе кнопки статуса "Ожидают
-                  публикации" в списке у заявок вместо столбца "Ссылка" будет
-                  столбец "Отменить" с кнопочками в виде крестиков, при отмене
-                  (нажатии на крестик) должен появляться попап с полем ввода
-                  комментария и подтверждения отмены (такой же как попап при
-                  отправке на модерацию). 
-									После отмены заявка попадает в
-                  "Отклоненные".
-									*/}
                   <th>Название канала</th>
 									{tabs[tab].value === 'DECLINED' ||
 										tabs[tab].value === 'EXPIRED' ? null : 

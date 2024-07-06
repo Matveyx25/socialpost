@@ -9,6 +9,7 @@ import { Filters } from "./filter";
 import { Loader } from "../../../Shared/Loader/Loader";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
+import { usePostRequests } from "../../../../hooks/usePostRequests";
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
@@ -20,6 +21,8 @@ export const AdvertiserCreateRequest = () => {
 
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
+
+	const {data: requests } = usePostRequests(postId)
 
   const onFilterSubmit = (f) => {
     setFilters({
@@ -39,12 +42,6 @@ export const AdvertiserCreateRequest = () => {
   const request = (id) => {
 		const startTime = new Date(timeRange[0]);
 		const endTime = new Date(timeRange[1]);
-	
-		const startHour = startTime.getHours();
-		const startMinute = startTime.getMinutes();
-	
-		const endHour = endTime.getHours();
-		const endMinute = endTime.getMinutes();
 
 		const formatTime = (time) => {
 			const hours = String(time.getHours()).padStart(2, '0'); // Pad single digit hours with leading zero
@@ -94,6 +91,13 @@ export const AdvertiserCreateRequest = () => {
                     "₽"}
                 </div>
                 <div className={s.infoLabel}>Общая стоимость</div>
+              </div>
+              <div className={s.infoBlock}>
+                <div className={s.infoValue}>
+									{/* "Общая стоимость" / "Общий охват" * 1000. */}
+                  {(+priceSeparator(channels?.headers["x-price-sum"]) / +priceSeparator(channels?.headers["x-reach-sum"]) * 1000) || 0}
+                </div>
+                <div className={s.infoLabel}>Средний CPM</div>
               </div>
             </div>
             <div className={s.btns}>
@@ -166,6 +170,7 @@ export const AdvertiserCreateRequest = () => {
                           <Button
                             size="small"
                             theme="secondary"
+														disabled={requests?.data?.findIndex(r => r.channelId === el.id) !== -1}
                             label={"Разместить"}
                             onClick={(e) => {
                               e.preventDefault();
