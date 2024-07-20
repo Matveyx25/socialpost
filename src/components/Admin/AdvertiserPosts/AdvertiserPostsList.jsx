@@ -1,6 +1,7 @@
 import * as React from "react";
 import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
+import { useParams } from "react-router-dom";
 
 const renderType = (record) => ( {
 	NEW_POST: "Новая запись",
@@ -14,8 +15,11 @@ const renderStatus = (record) => ({
 	ACCEPTED: "Активный",
 }[record.status])
 
-export const AdvertiserPostsList = (props) => (
-  <List {...props} filter={props.id ? {owner_id: props.id} : null} empty={<CustomEmpty message={'Постов нет'}/>}>
+export const AdvertiserPostsList = (props) => {
+	const { id } = useParams()
+
+	return (
+  <List {...props} filter={{owner_id: id}} empty={<CustomEmpty message={'Постов нет'}/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название записи"/>
@@ -25,4 +29,4 @@ export const AdvertiserPostsList = (props) => (
 			<FunctionField label="Статус" source="status" render={renderStatus}/>
     </Datagrid>
   </List>
-);
+)};

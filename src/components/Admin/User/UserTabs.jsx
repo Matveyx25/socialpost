@@ -39,10 +39,10 @@ export const UserTabs = () => {
 					<Requisites/>
 				</TabPanel>
 				<TabPanel value={3}>
-					<CampaignsList id={id}/>
+					<CampaignsList/>
 				</TabPanel>
 				<TabPanel value={4}>
-					<AdvertiserPostsList id={id}/>
+					<AdvertiserPostsList/>
 				</TabPanel>
 			</TabContext>
 		</Card>
