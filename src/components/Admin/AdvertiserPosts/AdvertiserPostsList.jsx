@@ -15,7 +15,7 @@ const renderStatus = (record) => ({
 }[record.status])
 
 export const AdvertiserPostsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Постов нет'}/>}>
+  <List {...props} filter={props.id ? {owner_id: props.id} : null} empty={<CustomEmpty message={'Постов нет'}/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название записи"/>

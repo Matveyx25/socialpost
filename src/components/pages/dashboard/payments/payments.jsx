@@ -61,6 +61,8 @@ export const Payments = () => {
                   "WITHDRAWAL_LEGAL_ENTITY",
                   "WITHDRAWAL_CRYPTO_WALLET",
                   "INCOME",
+									"CAMPAIGN_POST_REQUEST_INCOME",
+									"CAMPAIGN_POST_REQUEST_PAYMENT",
                 ],
               },
               { label: "Поступления", value: ["INCOME"] },
@@ -104,9 +106,9 @@ export const Payments = () => {
             theme="secondary"
             className={s.refreshBtn}
             onClick={() => {
-              setChannels();
+              setChannels(null);
               setDateRange([null, null]);
-              setOption();
+              setOption(null);
             }}
           />
         </div>

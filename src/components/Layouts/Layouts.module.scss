@@ -57,4 +57,14 @@
 	letter-spacing: 0.02rem;
 	background: #fff;
 	border-bottom: 1px solid $gray-100;
+	.userFlex{
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		.balance{
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+	}
 }

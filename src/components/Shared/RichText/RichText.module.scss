@@ -50,6 +50,12 @@
 			gap: 5px;
 			padding-right: 10px;
 			border-right: 1px solid lightgrey;
+			span{
+				max-width: 300px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
 		}
 		button {
 			border: none;
@@ -111,6 +117,22 @@
 	overflow: hidden;
 	&:focus, &:has(:focus){
 		border: 1px solid rgba(161, 182, 255, 1)
+	}
+	::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: none;
+	}
+	 
+	::-webkit-scrollbar-thumb {
+		background: #D3D4D5; 
+		border-radius: 10px;
+	}
+	
+	::-webkit-scrollbar-thumb:hover {
+		background: #D3D4D5; 
 	}
 }
 

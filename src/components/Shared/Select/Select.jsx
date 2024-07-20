@@ -12,7 +12,7 @@ const CustomMenu = (props) => (
 		</components.MenuList >
 	)
 
-export const Select = ({styles, headerClassName, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
+export const Select = ({styles, headerClassName, value, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={classNames(headerClassName, s.header)}>
 			<span>{label}{required && <span className={s.star}>*</span>}</span>
@@ -26,6 +26,7 @@ export const Select = ({styles, headerClassName, lastElement, label, required, c
 			isSearchable={false}
 			isMulti={isMulti}
 			isDisabled={disabled}
+			value={value}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
 				DropdownIndicator: () => <IconChevronDown className={s.icon}/>,

@@ -14,7 +14,7 @@ const renderStatus = (record) => ({
 }[record.status])
 
 export const CampaignsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Рекламных компаний нет'}/>}>
+  <List {...props} filter={props.id ? {owner_id: props.id} : null} empty={<CustomEmpty message={'Рекламных компаний нет'}/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField label="Клиент" source="client.name"/>

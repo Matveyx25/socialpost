@@ -166,6 +166,15 @@ export const PostByAdvertiser = () => {
               <p>Выполненных заявок</p>
               <span>{post?.completedRequestsCount}</span>
             </div>
+            <div>
+              <p>Маркировка рекламы</p>
+              <span>{{
+								'NONE': "Отсутствует",
+								'IN_TEXT': 'В тексте записи',
+								'IN_VIDEO': 'В видео',
+								'IN_PHOTO': 'На фотографиях'
+							}[post?.markingType]}</span>
+            </div>
           </div>
           <div className={s.info}>
             <div>
@@ -174,7 +183,7 @@ export const PostByAdvertiser = () => {
             </div>
             <div>
               <p>Потрачено</p>
-              <span>{post?.moneyBlocked}₽</span>
+              <span>{post?.totalMoneySpent}₽</span>
             </div>
           </div>
         </DashboardCard>
@@ -266,21 +275,23 @@ export const PostByAdvertiser = () => {
                           <div className={s.center}>{el.price + "₽"}</div>
                         </div>
                       </td>
-                      <td>
 												{
 													tabs[tab].value === 'DECLINED' ||
 													tabs[tab].value === 'EXPIRED' ? null : 
 													tabs[tab].value === 'PENDING' ? 
+													<td>
 													<div className={s.center}>
 														<IconX className={s.decline} onClick={() => {}}/>
-													</div> : 
+													</div>
+													</td> : 
+													<td>
 														<div className={s.center}>
 														<NavLink to={el.telegramUrl} className={s.link}>
 															<IconExternalLink />
 														</NavLink>
 													</div> 
+                      	</td>
 													}
-                      </td>
                       <td>
                         <div className={s.end}></div>
                       </td>

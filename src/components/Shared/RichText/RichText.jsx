@@ -6,7 +6,6 @@ import { IconBold, IconInfoCircleFilled, IconItalic, IconLink, IconStrikethrough
 import isHotkey from 'is-hotkey'
 import { useField } from 'formik'
 import { insertLink } from '../../../utils/rich-text-link'
-import { Link } from './Elements/Link'
 import { withLinks } from './Plugins/withLinks';
 import { Menu } from './Elements/Menu'
 import { toggleMark } from './Utils/toggleMark';

@@ -85,6 +85,18 @@ export const AdvertisingCompanies = () => {
               fullWidth={true}
               isMulti={false}
             />
+						<Button
+							label="Сбросить"
+							leftIcon={<IconRefresh />}
+							theme="secondary"
+							className={s.refreshBtn}
+							disabled={!client && !type && !status}
+							onClick={() => {
+								setClient(null);
+								setType(null);
+								setStatus(null);
+							}}
+						/>
           </div>
           <Button
             label="Создать кампанию"
@@ -100,6 +112,7 @@ export const AdvertisingCompanies = () => {
             <thead>
               <tr>
                 <th>Клиент</th>
+                <th>Название РК</th>
                 <th>Тип</th>
                 <th>Общий лимит трат</th>
                 <th>Всего потрачено</th>
@@ -112,6 +125,9 @@ export const AdvertisingCompanies = () => {
                   <tr key={el.id} onClick={() => navigate('./' + el.id)}>
                     <td>
                       <div className={s.center}>{el?.client?.name}</div>
+                    </td>
+                    <td>
+                      <div className={s.center}>{el?.name}</div>
                     </td>
                     <td>
                       <div className={s.center}>

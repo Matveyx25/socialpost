@@ -4,6 +4,9 @@ import { UserEdit } from './UserEdit'
 import { Requisites } from './Requisites';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Channels } from './Channels';
+import { AdvertiserPostsList } from '../AdvertiserPosts/AdvertiserPostsList';
+import { CampaignsList } from '../Campaigns/CampaignsList';
+import { useParams } from 'react-router-dom';
 
 export const UserTabs = () => {
 	const [value, setValue] = React.useState(0);
@@ -11,6 +14,8 @@ export const UserTabs = () => {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+	const {id} = useParams()
 
 	return (
 		<Card>
@@ -21,7 +26,7 @@ export const UserTabs = () => {
 						<Tab label="Каналы" value={1} />
 						<Tab label="Реквизиты" value={2} />
 						<Tab label="Рекламные кампании" value={3} />
-						<Tab label="Посты" value={4} />
+						<Tab label="Рекламные записи" value={4} />
 					</TabList>
 				</Box>
 				<TabPanel value={0}>
@@ -34,10 +39,10 @@ export const UserTabs = () => {
 					<Requisites/>
 				</TabPanel>
 				<TabPanel value={3}>
-				Рекламные кампании
+					<CampaignsList id={id}/>
 				</TabPanel>
 				<TabPanel value={4}>
-				Посты
+					<AdvertiserPostsList id={id}/>
 				</TabPanel>
 			</TabContext>
 		</Card>

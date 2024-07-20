@@ -17,7 +17,7 @@ export const Link = ({ attributes, element, children }) => {
         <div className={s.popup} contentEditable={false}>
           <a href={element.href} rel="noreferrer" target="_blank">
             <IconExternalLink/>
-            {element.href}
+            <span>{element.href}</span>
           </a>
           <button onClick={() => removeLink(editor)}>
             <IconUnlink/>
