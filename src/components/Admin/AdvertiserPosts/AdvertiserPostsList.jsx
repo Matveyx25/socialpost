@@ -19,7 +19,7 @@ export const AdvertiserPostsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} filter={{owner_id: id}} empty={<CustomEmpty message={'Постов нет'}/>}>
+  <List {...props} filter={{owner_id: id}} resource="campaigns/posts" empty={<CustomEmpty message={'Постов нет'}/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название записи"/>
