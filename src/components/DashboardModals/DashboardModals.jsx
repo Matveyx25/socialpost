@@ -10,6 +10,8 @@ import { AddCampaignModal } from './AddCampaignModal'
 import { AddClientModal } from './AddClientModal'
 import { AddPostModal } from './AddPostModal'
 import { AddPostToModerationModal } from './AddPostToModerationModal';
+import { RefillModal } from './RefillModal'
+import { DeclinePostRequestModal } from './DeclinePostRequestModal';
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -31,6 +33,8 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<AddClientModal {...{isOpen, setOpen}}/>
 			<AddPostModal {...{isOpen, setOpen, modalParams}}/>
 			<AddPostToModerationModal {...{isOpen, setOpen, modalParams}}/>
+			<DeclinePostRequestModal {...{isOpen, setOpen, modalParams}}/>
+			<RefillModal {...{isOpen, setOpen}}/>
 		</div>
 	)
 }

@@ -109,7 +109,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
 								placeholder={'Выберите роль'}
 								setSelectedOption={(selectedOption) => setFieldValue('role', selectedOption.value)}
 								onBlur={() => setFieldTouched('role')}
-								value={values?.role}
+								defaultValue={values?.role}
 								fullWidth={true}
 								isMulti={false}
 							/>

@@ -7,7 +7,7 @@ import { useMyChannelById } from "../../hooks/useMyChannelById";
 export const RemoveChannelModal = ({isOpen, setOpen, modalParams}) => {
 
 	const {mutate: removeChannel} = useRemoveChannel()
-	const {data: channel} = useMyChannelById(modalParams)
+	const {data: channel} = useMyChannelById(modalParams?.channelId)
 
   return (
 		<Modal {...{isOpen, setOpen}} title={'Убрать канал'} name={'remove-channel'}>
@@ -23,7 +23,7 @@ export const RemoveChannelModal = ({isOpen, setOpen, modalParams}) => {
 					}}/>
 					<Button label="Убрать канал" className={s.btnHalf} onClick={(e) => {
 						e.preventDefault()
-						removeChannel(modalParams)
+						removeChannel(modalParams?.channelId)
 						setOpen()
 					}}/>
 				</div>

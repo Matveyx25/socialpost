@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, Labeled } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, Labeled, ArrayInput, SimpleFormIterator } from "react-admin";
 
 export const ChannelEdit = (props) => (
 		<Edit {...props}  actions={
@@ -39,7 +39,11 @@ export const ChannelEdit = (props) => (
 							<Typography variant="h6" gutterBottom>
 								Тэги
 							</Typography>
-							<TextInput source="tag" label="Тэги" fullWidth/>
+							<ArrayInput source="tags">
+								<SimpleFormIterator>
+									<TextInput />
+								</SimpleFormIterator>
+							</ArrayInput>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>

@@ -99,7 +99,7 @@ export const AdvertisingCompany = () => {
             leftIcon={<IconPlus size={20} />}
             className={s.addBtn}
             onClick={() => {
-              setModal("add-post", company?.id);
+              setModal("add-post", {campaignId: company?.id});
             }}
           />
         </div>

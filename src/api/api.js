@@ -150,6 +150,9 @@ export const profile = {
 	},
 	withdrawalBalance(data) {
 		return instance.post("/balance_operations/withdrawal", data)
+	},
+	refillBalance(data) {
+		return instance.post("/balance_operations/replenishment", data)
 	}
 }
 
@@ -214,19 +217,13 @@ export const advertiser = {
 	async createPost(data) {
 		let requestData = null
 
-		if(data.type === 'REPOST'){
-			requestData = {
-				"name": data.name,
-				"type": data.type,
-				"telegramPostUrl": data.telegramPostUrl,
-			}
-		}else{
+		if(data?.cpmBudget){
 			let uploadPromises = data?.files?.map(file => {
-					const formData = new FormData();
-					formData.append('upload', file);
-					return instance.post('/uploads', formData);
+				const formData = new FormData();
+				formData.append('upload', file);
+				return instance.post('/uploads', formData);
 			});
-	
+
 			const uploadResponses = await Promise.all(uploadPromises);
 			const fileIds = uploadResponses?.map(response => response.data.id);
 
@@ -235,7 +232,38 @@ export const advertiser = {
 				"type": data.type,
 				"content": data.content,
 				"postUploadsIds": fileIds,
-				"markingType": data.markingType
+				"markingType": data.markingType,
+				"cpmTags": data?.cpmTags,
+				"cpmStartDate": data?.cpmStartDate,
+				"cpmEndDate": data?.cpmEndDate,
+				"cpmChannelPostsLimit": data?.cpmChannelPostsLimit,
+				"cpmBudget": data?.cpmBudget,
+				"cpmValue": data?.cpmValue,
+			}
+		}else{
+			if(data.type === 'REPOST'){
+				requestData = {
+					"name": data.name,
+					"type": data.type,
+					"telegramPostUrl": data.telegramPostUrl,
+				}
+			}else{
+				let uploadPromises = data?.files?.map(file => {
+						const formData = new FormData();
+						formData.append('upload', file);
+						return instance.post('/uploads', formData);
+				});
+		
+				const uploadResponses = await Promise.all(uploadPromises);
+				const fileIds = uploadResponses?.map(response => response.data.id);
+
+				requestData = {
+					"name": data.name,
+					"type": data.type,
+					"content": data.content,
+					"postUploadsIds": fileIds,
+					"markingType": data.markingType
+				}
 			}
 		}
 
@@ -265,11 +293,27 @@ export const advertiser = {
 	createClient(data) {
 		return instance.post('/campaigns/clients/my', data)
 	},
+	getCanPublishChannels(params) {
+		return instance.get('/channels/can_publish_in', {
+			params: {
+				ids: params
+			},
+			paramsSerializer: {
+				indexes: null
+			}
+		})
+	},
+	declinePostRequest(data) {
+		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})
+	}
 }
 
 export const channels = {
 	getAllChannels(params) {
 		return instance.get('/channels', {params})
+	},
+	getAllTags() {
+		return instance.get('/channels/tags')
 	},
 	getChannelById(id) {
 		return instance.get(`/channels/${id}`)

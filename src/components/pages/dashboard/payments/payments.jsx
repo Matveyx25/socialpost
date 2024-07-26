@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import s from './payments.module.scss'
-import { IconRefresh, IconSortDescending } from '@tabler/icons-react'
+import { IconRefresh } from '@tabler/icons-react'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
@@ -39,11 +39,15 @@ export const Payments = () => {
           <p>{priceSeparator(profile?.balance)} ₽</p>
           <span className={s.label}>Баланс кабинета</span>
         </div>
-        <Button
+        {profile?.roles?.includes('PUBLISHER') ? <Button
           label={"Вывести"}
           className={s.btn}
           onClick={() => setModal("withdraw-modal")}
-        />
+        /> : <Button
+					label={"Пополнить"}
+					className={s.btn}
+					onClick={() => setModal("refill-modal")}
+				/>}
       </DashboardCard>
       <div className={s.tableCard}>
         <div className={s.cardHeader}>
@@ -63,9 +67,10 @@ export const Payments = () => {
                   "INCOME",
 									"CAMPAIGN_POST_REQUEST_INCOME",
 									"CAMPAIGN_POST_REQUEST_PAYMENT",
+									"REPLENISHMENT_REQUEST"
                 ],
               },
-              { label: "Поступления", value: ["INCOME"] },
+              { label: "Поступления", value: ["INCOME", "CAMPAIGN_POST_REQUEST_INCOME", "REPLENISHMENT_REQUEST"] },
               {
                 label: "Списания",
                 value: [
@@ -73,6 +78,7 @@ export const Payments = () => {
                   "WITHDRAWAL_IE",
                   "WITHDRAWAL_LEGAL_ENTITY",
                   "WITHDRAWAL_CRYPTO_WALLET",
+									"CAMPAIGN_POST_REQUEST_PAYMENT",
                 ],
               },
             ]}
@@ -135,12 +141,13 @@ export const Payments = () => {
                         {
                           {
                             INCOME: "Поступление",
+                            REPLENISHMENT_REQUEST: "Поступление",
                             WITHDRAWAL_SELF_EMPLOYED: "Вывод у самозанятого",
                             WITHDRAWAL_IE: "Вывод у ИП",
                             WITHDRAWAL_LEGAL_ENTITY: "Вывод у ЮЛ",
                             WITHDRAWAL_CRYPTO_WALLET: "Вывод с криптокошелька",
-                            CAMPAIGN_POST_REQUEST_INCOME: "Доход по запросу от кампании",
-                            CAMPAIGN_POST_REQUEST_PAYMENT: "Оплата по запросу от кампании",
+                            CAMPAIGN_POST_REQUEST_INCOME: "Поступление",
+                            CAMPAIGN_POST_REQUEST_PAYMENT: "Списание",
                           }[el.type]
                         }
                       </div>

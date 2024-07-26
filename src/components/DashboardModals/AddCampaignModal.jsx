@@ -112,7 +112,7 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 											required={true}
 											placeholder={'Выберите тип'}
 											fullWidth={true}
-											value={value}
+											defaultValue={value}
 											isMulti={false}
 											setSelectedOption={(v) =>
 												setFieldValue("clientId", v.value)
@@ -141,7 +141,7 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 									<Radio name={'type'} title={'Размещение нативных постов'} 
 									text={'Небольшое описание на несколько строк, предпологаемое их количество – примерно 2, но может быть и 3'}
 									 icon={<IconPhotoStar size={24} color="rgba(105, 138, 255, 1)"/>} value={'NATIVE_POST'}/>
-									<Radio disabled name={'type'} title={'Кампания с фиксированным СРМ'} 
+									<Radio name={'type'} title={'Кампания с фиксированным СРМ'} 
 									text={'Небольшое описание на несколько строк, предпологаемое их количество – примерно 2, но может быть и 3'}
 									 icon={<IconGraph size={24} color="rgba(105, 138, 255, 1)"/>} value={'FIXED_CPM'}/>
 								</div>

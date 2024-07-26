@@ -13,6 +13,9 @@ import { IconX } from "@tabler/icons-react";
 import { Upload } from "../Shared/Upload/Upload";
 import { Node, Text } from "slate";
 import { useCampaignById } from "../../hooks/useCampaignById";
+import { useAllChannelsTags } from '../../hooks/useAllChannelsTags';
+import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
+import { differenceInDays } from "date-fns";
 
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
@@ -57,22 +60,42 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 	}
 
   const { mutate: createPost } = useAddPost();
-  const { data: post } = useCampaignById(modalParams);
+  const { data: post } = useCampaignById(modalParams?.campaignId);
+  const { data: tags } = useAllChannelsTags();
 
   const handleSubmit = (values) => {
 		let data = null
 
-		if(type === 'REPOST'){
+		if(post?.type === 'FIXED_CPM'){
+			const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
 			data = {
 				name: values?.name,
 				type: values?.type,
 				telegramPostUrl: values?.telegramPostUrl,
-				id: modalParams
+				id: modalParams?.campaignId,
+				cpmTags: values?.cpmTags?.map(el => el.label),
+				cpmStartDate: (new Date(values?.dateRange[0])).toISOString(),
+				cpmEndDate: (new Date(values?.dateRange[1])).toISOString(),
+				cpmChannelPostsLimit: 0,
+				cpmBudget: 0,
+				cpmValue: 0,
+				content: markdownContent, 
+				files
 			}
 		}else{
-			const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
-			data = {...values, content: markdownContent, files}
+			if(type === 'REPOST'){
+				data = {
+					name: values?.name,
+					type: values?.type,
+					telegramPostUrl: values?.telegramPostUrl,
+					id: modalParams?.campaignId,
+				}
+			}else{
+				const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
+				data = {...values, content: markdownContent, files}
+			}
 		}
+
 		createPost(data);
     setOpen();
     setCurrentStep(0);
@@ -122,17 +145,21 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={ `Создать запись ${currentStep + 1}/2` }
+      title={`Создать запись ${currentStep + 1}/${post?.type === 'FIXED_CP' ? 3 : 2}`}
       name={"add-post"}
     >
       <FormikStepper
         initialValues={{
-					name: "",
-					type: "",
-					content: '',
-					telegramPostUrl: "",
-					markingType: 'NONE',
-					id: modalParams
+          name: "",
+          type: "",
+          content: "",
+          telegramPostUrl: "",
+          markingType: "NONE",
+          id: modalParams?.campaignId,
+					dateRange: [null, null],
+					cpmBudget: '',
+					cpmValue: '',
+					cpmChannelPostsLimit: '',
         }}
         onSubmit={(values) => {
           handleSubmit(values);
@@ -141,103 +168,207 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
         step={currentStep}
         setStep={setCurrentStep}
       >
-				<FormikStep validationSchema={Yup.object().shape({
-					id: Yup.string().required("Выберите РК"),
-					type: Yup.string().required("Выберите тип клиента"),
-					name: Yup.string().required("Заполните поле"),
-				})}>
-						<div className={s.form}>
-							<div className={s.input}>
-								<InputField
-									label={"Название"}
-									required
-									placeholder={"Название"}
-									id="name"
-									name="name"
-								/>
-							</div>
-							<div className={s.input}>
-								<Field name="type">
-									{({ field: { value }, form: { setFieldValue } }) => (
-										<Select
-											label={"Тип"}
-											id="type"
-											name="type"
-											options={typeOptions}
-											required={true}
-											placeholder={"Тип записи"}
-											fullWidth={true}
+        <FormikStep
+          validationSchema={Yup.object().shape({
+            id: Yup.string().required("Выберите РК"),
+            type: Yup.string().required("Выберите тип клиента"),
+            name: Yup.string().required("Заполните поле"),
+						...(post?.type === 'FIXED_CPM' && {
+							dateRange: Yup.array()
+								.test(
+									'is-date-range-valid',
+									'Разница между датами должна быть не менее 3 дней',
+									(value) => {
+										if (!value || !value[0] || !value[1]) return false;
+										const diffDays = differenceInDays(new Date(value[1]), new Date(value[0]));
+										return diffDays >= 3;
+									}
+								)
+								.required('Выберите диапазон дат'),
+						})
+					})}
+        >
+          <div className={s.form}>
+            <div className={s.input}>
+              <InputField
+                label={"Название"}
+                required
+                placeholder={"Название"}
+                id="name"
+                name="name"
+              />
+            </div>
+            {post?.type === "FIXED_CPM" ? (
+              <div className={s.input}>
+                <Field name="cpmTags">
+                  {({ field: { value }, form: { setFieldValue } }) => (
+                    <Select
+                      className={s.select}
+                      options={tags?.map((el, index) => ({value: index, label: el}))}
+                      setSelectedOption={(v) => {
+                        setFieldValue("cpmTags", v.value);
+                        setType(v.value);
+                      }}
+                      isMulti
 											value={value}
-											isMulti={false}
-											setSelectedOption={(v) => {
-												setFieldValue("type", v.value)
-												setType(v.value)
-											}}
-										/>
-									)}
-								</Field>
-							</div>
-							{console.log(post)}
-							{post?.client?.type !== 'PHYSICAL_ENTITY' ? <div className={s.input}>
-								<Field name="markingType">
-									{({ field: { value }, form: { setFieldValue } }) => (
-										<Select
-											label={"Где разместить маркировку"}
-											id="markingType"
-											name="markingType"
-											options={markingOptions}
-											placeholder={"Маркировка"}
-											fullWidth={true}
-											value={value}
-											isMulti={false}
-											defaultValue={'NONE'}
-											setSelectedOption={(v) => {
-												setFieldValue("markingType", v.value)
-											}}
-										/>
-									)}
-								</Field>
-							</div> : null}
-						</div>
-				</FormikStep>
-				{type === 'REPOST' ? <FormikStep validationSchema={Yup.object().shape({
-					telegramPostUrl: Yup.string()
-					.matches(/^https:\/\/t\.me\/[a-zA-Z0-9]+\/\d+$/, "Ссылка на пост не валидна")
-					.required("Заполните поле"),
-				})}>
-						<div className={s.scroller}>
-							<div className={s.form}>
-								<div className={s.input}>
-									<InputField
-										label={"Ссылка на пост"}
-										required
-										placeholder={"https://t.me/channel_username/post_id"}
-										id="telegramPostUrl"
-										name="telegramPostUrl"
-									/>
-								</div>
-							</div>
-						</div>
-				</FormikStep> :
-				<FormikStep validationSchema={Yup.object().shape({
-					content: Yup.mixed().test(
-						'is-empty',
-						'Заполните поле',
-						value => slateValueValidator(value)
-					),
-				})}>
-						<div className={s.scroller}>
-							<div className={s.form}>
-								<div className={s.input}>
-								<RichText name={'content'} label={'Текст записи'}/>
-								</div>
-								<div className={s.input}>
-										<div className={s.filePreviews}>{renderFilePreviews()}</div>
-										<Upload {...{files, onUpload}}/>
-								</div>
-							</div>
-						</div>
-				</FormikStep>}
+                      closeMenuOnSelect={false}
+                      fullWidth
+                      placeholder="Тематика канала"
+                    />
+                  )}
+                </Field>
+              </div>
+            ) : null}
+            {post?.type !== "FIXED_CPM" ? (
+              <div className={s.input}>
+                <Field name="type">
+                  {({ field: { value }, form: { setFieldValue } }) => (
+                    <Select
+                      label={"Тип"}
+                      id="type"
+                      name="type"
+                      options={typeOptions}
+                      required={true}
+                      placeholder={"Тип записи"}
+                      fullWidth={true}
+                      defaultValue={value}
+                      isMulti={false}
+                      setSelectedOption={(v) => {
+                        setFieldValue("type", v.value);
+                        setType(v.value);
+                      }}
+                    />
+                  )}
+                </Field>
+              </div>
+            ) : null}
+            {post?.client?.type !== "PHYSICAL_ENTITY" ? (
+              <div className={s.input}>
+                <Field name="markingType">
+                  {({ field: { value }, form: { setFieldValue } }) => (
+                    <Select
+                      label={"Где разместить маркировку"}
+                      id="markingType"
+                      name="markingType"
+                      options={markingOptions}
+                      placeholder={"Маркировка"}
+                      fullWidth={true}
+                      value={value}
+                      isMulti={false}
+                      defaultValue={"NONE"}
+                      setSelectedOption={(v) => {
+                        setFieldValue("markingType", v.value);
+                      }}
+                    />
+                  )}
+                </Field>
+              </div>
+            ) : null}
+          </div>
+					<div className={s.input}>
+						<Field name="dateRange">
+							{({ field: { value,error }, form: { setFieldValue } }) => (
+								<>
+									<RangeCalendar dateRange={value} setDateRange={(v) => setFieldValue('dateRange', v)}/>
+										{error}
+								</>
+							)}
+						</Field>
+					</div>
+        </FormikStep>
+				{post?.type === "FIXED_CPM" ? (
+					<FormikStep
+            validationSchema={Yup.object().shape({
+              cpmBudget: Yup.string()
+							.matches(/^\d+$/, "Можно вводить только цифры")
+							.required("Заполните поле"),
+              cpmValue: Yup.string()
+							.matches(/^\d+$/, "Можно вводить только цифры")
+							.required("Заполните поле"),
+              cpmChannelPostsLimit: Yup.string()
+							.matches(/^\d+$/, "Можно вводить только цифры")
+							.required("Заполните поле"),
+            })}
+          >
+            <div className={s.scroller}>
+              <div className={s.form}>
+                <div className={s.input}>
+                  <InputField
+                    label={"Бюджет"}
+                    required
+                    placeholder={"0,00 ₽"}
+                    id="cpmBudget"
+                    name="cpmBudget"
+                  />
+                </div>
+                <div className={s.input}>
+                  <InputField
+                    label={"CPM"}
+                    required
+                    placeholder={"0,00 ₽"}
+                    id="cpmValue"
+                    name="cpmValue"
+                  />
+                </div>
+                <div className={s.input}>
+                  <InputField
+                    label={"Ограничение на количество размещений в одном канале"}
+                    required
+                    placeholder={"120"}
+                    id="cpmChannelPostsLimit"
+                    name="cpmChannelPostsLimit"
+                  />
+                </div>
+              </div>
+            </div>
+          </FormikStep>
+				) : null}
+        {type === "REPOST" ? (
+          <FormikStep
+            validationSchema={Yup.object().shape({
+              telegramPostUrl: Yup.string()
+                .matches(
+                  /^https:\/\/t\.me\/[a-zA-Z0-9]+\/\d+$/,
+                  "Ссылка на пост не валидна"
+                )
+                .required("Заполните поле"),
+            })}
+          >
+            <div className={s.scroller}>
+              <div className={s.form}>
+                <div className={s.input}>
+                  <InputField
+                    label={"Ссылка на пост"}
+                    required
+                    placeholder={"https://t.me/channel_username/post_id"}
+                    id="telegramPostUrl"
+                    name="telegramPostUrl"
+                  />
+                </div>
+              </div>
+            </div>
+          </FormikStep>
+        ) : (
+          <FormikStep
+            validationSchema={Yup.object().shape({
+              content: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
+                slateValueValidator(value)
+              ),
+            })}
+          >
+            <div className={s.scroller}>
+              <div className={s.form}>
+                <div className={s.input}>
+                  <RichText name={"content"} label={"Текст записи"} />
+                </div>
+                <div className={s.input}>
+                  <div className={s.filePreviews}>{renderFilePreviews()}</div>
+                  <Upload {...{ files, onUpload }} />
+                </div>
+              </div>
+            </div>
+          </FormikStep>
+        )}
       </FormikStepper>
     </Modal>
   );

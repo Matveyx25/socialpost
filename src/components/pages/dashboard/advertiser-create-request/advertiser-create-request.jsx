@@ -9,7 +9,7 @@ import { Filters } from "./filter";
 import { Loader } from "../../../Shared/Loader/Loader";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
-import { usePostRequests } from "../../../../hooks/usePostRequests";
+import { useChannelsCanPublishIn } from '../../../../hooks/useChannelsCanPublishIn';
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
@@ -17,12 +17,12 @@ export const AdvertiserCreateRequest = () => {
   const { postId } = useParams();
   const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
-  const [timeRange, setTimeRange] = useState([new Date().setHours(9, 0, 0), new Date().setHours(18, 0, 0)]);
+  const [timeRange, setTimeRange] = useState([null, null]);
 
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
 
-	const {data: requests } = usePostRequests(postId)
+	const {data: canPublishIds } = useChannelsCanPublishIn(channels?.data?.map(el => el.id))
 
   const onFilterSubmit = (f) => {
     setFilters({
@@ -124,7 +124,7 @@ export const AdvertiserCreateRequest = () => {
               </thead>
               <tbody>
                 {isFetched ? (
-                  channels?.data.map((el) => (
+                  channels?.data.map((el, index) => (
                     <tr key={el.id}>
                       <td>
                         <div className={s.center}>
@@ -167,17 +167,17 @@ export const AdvertiserCreateRequest = () => {
                       </td>
                       <td>
                         <div className={s.end}>
-                          <Button
+                          {canPublishIds && <Button
                             size="small"
                             theme="secondary"
-														disabled={requests?.data?.findIndex(r => r.channelId === el.id) !== -1}
+														disabled={!canPublishIds[index]}
                             label={"Разместить"}
                             onClick={(e) => {
                               e.preventDefault();
                               e.stopPropagation();
                               request(el.id);
                             }}
-                          />
+                          />}
                         </div>
                       </td>
                     </tr>

@@ -29,11 +29,11 @@ export const PostByAdvertiser = () => {
 	const {data: post} = usePost(postId)
 
 	const tabs = [
-		{label: 'Ожидают публикации', value: 'PENDING', id: 0},
+		{label: 'Ожидают публикации', count: post?.pendingRequestsCount, value: 'PENDING', id: 0},
 		{label: 'Активные', count: post?.activeRequestsCount, value: 'ACTIVE', id: 1},
 		{label: 'Выполненные', count: post?.completedRequestsCount, value: '', id: 2},
-		{label: 'Отклоненные', value: 'DECLINED', id: 3},
-		{label: 'Просроченные', value: 'EXPIRED', id: 4}
+		{label: 'Отклоненные', count: post?.declinedRequestsCount, value: 'DECLINED', id: 3},
+		{label: 'Просроченные', count: post?.expiredRequestsCount, value: 'EXPIRED', id: 4}
 	]
 
 	const {data: requests, isFetched} = usePostRequests(postId, {
@@ -281,7 +281,7 @@ export const PostByAdvertiser = () => {
 													tabs[tab].value === 'PENDING' ? 
 													<td>
 													<div className={s.center}>
-														<IconX className={s.decline} onClick={() => {}}/>
+														<IconX className={s.decline} onClick={() => setModal('decline-post-request-modal', {postId: el.id})}/>
 													</div>
 													</td> : 
 													<td>

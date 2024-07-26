@@ -82,7 +82,6 @@ export const useUpdateCryptoWallet = () => {
 	})
 }
 
-
 export const useBalanceOperations = (params) => {
 	return useQuery({
 		queryKey: ['balance-operations', params],

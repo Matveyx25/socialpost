@@ -10,7 +10,11 @@ export const Calendar = ({placeholder, className, label, disabled, inputClassNam
 	const calendar = useRef(null)
 
 	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
-		<div className={classNames(s.inputsWrapper, inputClassName)} onClick={onClick} ref={ref}>
+		<div className={classNames(s.inputsWrapper, inputClassName)} onClick={(e) => {
+			e.stopPropagation()
+			e.preventDefault()
+			onClick()
+		}} ref={ref}>
 			<IconCalendar className={s.icon} color='#919396'/>
 			<input value={value} placeholder={placeholder}/>
 		</div>

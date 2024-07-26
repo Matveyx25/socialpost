@@ -7,6 +7,7 @@ import { InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar';
 import { Calendar } from '../../../Shared/Calendar/Calendar';
+import { RangeCalendarWithTime } from '../../../Shared/RangeCalendar/RangeCalendarWithTime';
 
 export const filterSubsScales = [
 	{value: 1256},
@@ -51,8 +52,17 @@ export const filterSubsScales = [
 	{value: 1000},
 ]
 
-export const Filters = ({onFilterSubmit, maxSubscribersNumber, timeRange, setTimeRange, dateRange, setDateRange}) => {
+export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, setDateRange}) => {
 	const [isSended, set_isSended] = useState(false)
+
+	const isMoreThanFiveHoursLeft = () => {
+		const now = new Date();
+		const fiveHoursFromNow = new Date();
+		fiveHoursFromNow.setHours(now.getHours() + 5);
+		return now < fiveHoursFromNow;
+	};
+
+	const minDate = isMoreThanFiveHoursLeft() ? new Date() : new Date().setDate(new Date().getDate() + 1);
 
 	const submitHandler = (values) => {
 		set_isSended(true)
@@ -116,38 +126,10 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber, timeRange, setTim
 					/>
 					<div className={s.inputsGroup}>
 						<h5 className={s.calendarLabel}>Диапазон размещения</h5>
-						<RangeCalendar {...{dateRange, setDateRange}} inputsWrapperClassName={s.calendarInputs}/>
-					</div>
-					<div className={s.inputsGroup}>
-						<div className={s.calendarsWrapper}>
-							<Calendar
-								value={timeRange[0]}
-								placeholder={"От"}
-								minDate={new Date()}
-								showTimeSelect
-								showTimeSelectOnly
-								inputClassName={s.firstCalendar}
-								minTime={new Date().setHours(9, 0, 0)}
-								maxTime={new Date().setHours(18, 0, 0)}
-								timeFormat="HH:mm"
-      					dateFormat="HH:mm"
-								onChange={(v) => setTimeRange((prev) => [v, prev[1]])}
-							/>
-							<Calendar
-								value={timeRange[1]}
-								placeholder={"До"}
-								minDate={new Date()}
-								showTimeSelect
-								showTimeSelectOnly
-								inputClassName={s.secondCalendar}
-								minTime={new Date().setHours(9, 0, 0)}
-								maxTime={new Date().setHours(18, 0, 0)}
-								timeFormat="HH:mm"
-      					dateFormat="HH:mm"
-								onChange={(v) => setTimeRange((prev) => [prev[0], v])}
-							/>
-							<IconChevronRight size={18} color='#919396'/>
-						</div>
+						
+						<RangeCalendarWithTime {...{dateRange, setDateRange, timeRange, setTimeRange}}
+						minDate={minDate}
+						inputsWrapperClassName={s.calendarInputs}/>
 					</div>
 					<span className={s.line}></span>
 					<div className={s.btns}>

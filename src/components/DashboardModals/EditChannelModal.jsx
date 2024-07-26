@@ -20,10 +20,10 @@ const validator = Yup.object().shape({
 
  export const EditChannelModal = ({isOpen, setOpen, modalParams}) => {
 	const {mutate: updateChannel} = useUpdateChannel()
-	const {data: channel, isFetching, refetch} = useMyChannelById(modalParams)
+	const {data: channel, isFetching, refetch} = useMyChannelById(modalParams?.channelId)
 
 	useEffect(() => {
-		if(isOpen && modalParams){
+		if(isOpen && modalParams?.channelId){
 			refetch()
 		}
 	}, [isOpen])
@@ -52,7 +52,7 @@ const validator = Yup.object().shape({
 							post1For24PriceEnabled: values?.post1For24PriceEnabled,
 							post1For48PriceEnabled: values?.post1For48PriceEnabled,
 							post2For48PriceEnabled: values?.post2For48PriceEnabled,
-					 }, id: modalParams})
+					 }, id: modalParams?.channelId})
 					 setOpen()
 				 }}
 			 >

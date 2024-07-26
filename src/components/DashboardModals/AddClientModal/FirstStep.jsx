@@ -31,7 +31,7 @@ export const FirstStep = ({setRole}) => {
 									required={true}
 									placeholder={"Выберите тип"}
 									fullWidth={true}
-									value={value}
+									defaultValue={value}
 									isMulti={false}
 									setSelectedOption={(v) => setFieldValue("type", v.value)}
 								/>
@@ -50,7 +50,7 @@ export const FirstStep = ({setRole}) => {
 									placeholder={"Выберите роль"}
 									fullWidth={true}
 									isMulti={false}
-									value={value}
+									defaultValue={value}
 									setSelectedOption={(v) => {
 										setFieldValue("role", v.value)
 										setRole(v.value)

@@ -1,6 +1,6 @@
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { List, Datagrid, TextField, ImageField, BooleanField, FunctionField, ChipField, UrlField } from "react-admin";
+import { List, Datagrid, TextField, FunctionField, ChipField, UrlField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
 
 const renderTags = (record) => {
@@ -8,9 +8,9 @@ const renderTags = (record) => {
 		return null; 
 	}
 
-	const tags = record?.tag.split(';');
+	const tags = record?.tags;
 	
-	return tags.map((tag, index) => (
+	return tags?.map((tag, index) => (
 				<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < tags?.length - 1 ? 1 : 0, marginBottom: 1  }}/>
 		))
 };
