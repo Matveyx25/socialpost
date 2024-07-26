@@ -207,6 +207,50 @@
 			height: calc(100% - 80px);
 			overflow: auto;
 		}
+		&.cpmTable{
+			thead th{
+				&:nth-child(1){
+					width: calc(260/1563 * 100%);
+				}
+				&:nth-child(2){
+					width: calc(200/1563 * 100%);
+				}
+				&:nth-child(3){
+					width: calc(200/1563 * 100%);
+				}
+				&:nth-child(4){
+					width: calc(200/1563 * 100%);
+				}
+				&:nth-child(5){
+					width: calc(150/1563 * 100%);
+				}
+				&:nth-child(6){
+					width: calc(200/1563 * 100%);
+				}
+			}
+			tbody tr{
+				td{
+					&:nth-child(1){
+						width: calc(260/1563 * 100%);
+					}
+					&:nth-child(2){
+						width: calc(200/1563 * 100%);
+					}
+					&:nth-child(3){
+						width: calc(200/1563 * 100%);
+					}
+					&:nth-child(4){
+						width: calc(200/1563 * 100%);
+					}
+					&:nth-child(5){
+						width: calc(150/1563 * 100%);
+					}
+					&:nth-child(6){
+						width: calc(200/1563 * 100%);
+					}
+				}
+			}
+		}
 	}
 }
 

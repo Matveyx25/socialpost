@@ -123,6 +123,9 @@
 .attachmentBtn{
 	width: 100%;
 }
+.input{
+	width: 100%;
+}
 .form{
 	padding: 1rem 0;
 	display: flex;
@@ -131,11 +134,36 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 1rem;
+	.rangeWrapper{
+		input{
+			 width: auto !important;
+			 max-width: 100%;
+		}
+		margin-top: 8px;
+	}
 	.inputFlexHeader{
+		width: 100%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		width: 100%;
+		font-size: 0.875rem;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.375rem;
+		letter-spacing: 0.0175rem;
+		color: $gray-800;
+		svg{
+			width: 1.125rem;
+			height: 1.125rem;
+		}
+		@media (max-width: 1260px) {
+				font-size: 0.625rem;
+				line-height: 0.625rem;
+		}
+		@media (max-width: 768px) {
+				font-size: 1rem;
+				line-height: 1.25rem;
+		}
 	}
 	.errorMessage{
 		color: $main-red-color;

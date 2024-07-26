@@ -16,6 +16,7 @@ import { useCampaignById } from "../../hooks/useCampaignById";
 import { useAllChannelsTags } from '../../hooks/useAllChannelsTags';
 import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
 import { differenceInDays } from "date-fns";
+import e from "cors";
 
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
@@ -68,6 +69,9 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 
 		if(post?.type === 'FIXED_CPM'){
 			const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
+
+			console.log(values?.cpmTags);
+
 			data = {
 				name: values?.name,
 				type: values?.type,
@@ -76,9 +80,10 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				cpmTags: values?.cpmTags?.map(el => el.label),
 				cpmStartDate: (new Date(values?.dateRange[0])).toISOString(),
 				cpmEndDate: (new Date(values?.dateRange[1])).toISOString(),
-				cpmChannelPostsLimit: 0,
-				cpmBudget: 0,
-				cpmValue: 0,
+				markingType: values?.markingType,
+				cpmChannelPostsLimit: values.cpmChannelPostsLimit,
+				cpmBudget: values.cpmBudget,
+				cpmValue: values.cpmValue,
 				content: markdownContent, 
 				files
 			}
@@ -145,13 +150,13 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={`Создать запись ${currentStep + 1}/${post?.type === 'FIXED_CP' ? 3 : 2}`}
+      title={`Создать запись ${currentStep + 1}/${post?.type === 'FIXED_CPM' ? 3 : 2}`}
       name={"add-post"}
     >
       <FormikStepper
         initialValues={{
           name: "",
-          type: "",
+          type: "NEW_POST",
           content: "",
           telegramPostUrl: "",
           markingType: "NONE",
@@ -160,6 +165,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 					cpmBudget: '',
 					cpmValue: '',
 					cpmChannelPostsLimit: '',
+					cpmTags: []
         }}
         onSubmit={(values) => {
           handleSubmit(values);
@@ -171,9 +177,8 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
         <FormikStep
           validationSchema={Yup.object().shape({
             id: Yup.string().required("Выберите РК"),
-            type: Yup.string().required("Выберите тип клиента"),
             name: Yup.string().required("Заполните поле"),
-						...(post?.type === 'FIXED_CPM' && {
+						...(post?.type === 'FIXED_CPM' ? {
 							dateRange: Yup.array()
 								.test(
 									'is-date-range-valid',
@@ -185,7 +190,8 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 									}
 								)
 								.required('Выберите диапазон дат'),
-						})
+							cpmTags: Yup.array()
+						} : {type: Yup.string().required("Выберите тип клиента")})
 					})}
         >
           <div className={s.form}>
@@ -199,49 +205,61 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
               />
             </div>
             {post?.type === "FIXED_CPM" ? (
-              <div className={s.input}>
-                <Field name="cpmTags">
-                  {({ field: { value }, form: { setFieldValue } }) => (
-                    <Select
-                      className={s.select}
-                      options={tags?.map((el, index) => ({value: index, label: el}))}
-                      setSelectedOption={(v) => {
-                        setFieldValue("cpmTags", v.value);
-                        setType(v.value);
-                      }}
-                      isMulti
-											value={value}
-                      closeMenuOnSelect={false}
-                      fullWidth
-                      placeholder="Тематика канала"
-                    />
-                  )}
-                </Field>
-              </div>
-            ) : null}
-            {post?.type !== "FIXED_CPM" ? (
-              <div className={s.input}>
-                <Field name="type">
-                  {({ field: { value }, form: { setFieldValue } }) => (
-                    <Select
-                      label={"Тип"}
-                      id="type"
-                      name="type"
-                      options={typeOptions}
-                      required={true}
-                      placeholder={"Тип записи"}
-                      fullWidth={true}
-                      defaultValue={value}
-                      isMulti={false}
-                      setSelectedOption={(v) => {
-                        setFieldValue("type", v.value);
-                        setType(v.value);
-                      }}
-                    />
-                  )}
-                </Field>
-              </div>
-            ) : null}
+							<>
+								<div className={s.input}>
+									<Field name="cpmTags">
+										{({ field: { value }, form: { setFieldValue } }) => (
+											<Select
+												label={"Тематика канала"}
+												className={s.select}
+												options={tags?.map((el, index) => ({value: index, label: el}))}
+												setSelectedOption={(v) => {
+													setFieldValue("cpmTags", v);
+												}}
+												isMulti
+												value={value}
+												closeMenuOnSelect={false}
+												fullWidth
+												placeholder="Тематика канала"
+											/>
+										)}
+									</Field>
+								</div>
+								<div className={s.input}>
+									<Field name="dateRange">
+										{({ field: { value }, form: { setFieldValue }, meta }) => (
+											<>
+											<div className={s.inputFlexHeader}>
+												Период размещения
+											</div>
+												<RangeCalendar minDate={new Date()} inputsWrapperClassName={s.rangeWrapper} dateRange={value} setDateRange={(v) => setFieldValue('dateRange', v)}/>
+												{meta.error && (<div className={s.errorMessage}>{meta.error}</div>)}
+											</>
+										)}
+									</Field>
+								</div>
+							</>
+            ) :  <div className={s.input}>
+						<Field name="type">
+							{({ field: { value }, form: { setFieldValue } }) => (
+								<Select
+									label={"Тип"}
+									id="type"
+									name="type"
+									options={typeOptions}
+									required={true}
+									placeholder={"Тип записи"}
+									fullWidth={true}
+									defaultValue={value}
+									isMulti={false}
+									setSelectedOption={(v) => {
+										setFieldValue("type", v.value);
+										setType(v.value);
+									}}
+								/>
+							)}
+						</Field>
+					</div>}
             {post?.client?.type !== "PHYSICAL_ENTITY" ? (
               <div className={s.input}>
                 <Field name="markingType">
@@ -253,9 +271,8 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
                       options={markingOptions}
                       placeholder={"Маркировка"}
                       fullWidth={true}
-                      value={value}
                       isMulti={false}
-                      defaultValue={"NONE"}
+                      defaultValue={value}
                       setSelectedOption={(v) => {
                         setFieldValue("markingType", v.value);
                       }}
@@ -265,16 +282,6 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
               </div>
             ) : null}
           </div>
-					<div className={s.input}>
-						<Field name="dateRange">
-							{({ field: { value,error }, form: { setFieldValue } }) => (
-								<>
-									<RangeCalendar dateRange={value} setDateRange={(v) => setFieldValue('dateRange', v)}/>
-										{error}
-								</>
-							)}
-						</Field>
-					</div>
         </FormikStep>
 				{post?.type === "FIXED_CPM" ? (
 					<FormikStep

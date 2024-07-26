@@ -44,23 +44,21 @@ export const RangeCalendar = ({dateRange, setDateRange, inputsWrapperClassName, 
   };
 
 	return (
-		<div>
-			 <ReactDatePicker
-			 		{...props}
-					selectsRange={true}
-					startDate={startDate}
-					endDate={endDate}
-					ref={calendar}
-					onChange={(update) => {
-						setDateRange(update);
-					}}
-					locale="ru"
-					customInput={<ExampleCustomInput />}
-					calendarClassName={s.wrapper}
-					renderCustomHeader={CalendarHeader}
-					calendarContainer={MyContainer}
-					shouldCloseOnSelect={false}
-				/>
-		</div>
+			<ReactDatePicker
+				{...props}
+				selectsRange={true}
+				startDate={startDate}
+				endDate={endDate}
+				ref={calendar}
+				onChange={(update) => {
+					setDateRange(update);
+				}}
+				locale="ru"
+				customInput={<ExampleCustomInput />}
+				calendarClassName={s.wrapper}
+				renderCustomHeader={CalendarHeader}
+				calendarContainer={MyContainer}
+				shouldCloseOnSelect={false}
+			/>
 	)
 }
