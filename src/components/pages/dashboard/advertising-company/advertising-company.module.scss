@@ -207,6 +207,14 @@
 			height: calc(100% - 80px);
 			overflow: auto;
 		}
+		.btns{
+			display: flex;
+			gap: 8px;
+			align-items: center;
+			.active{
+				color: #436CFF;
+			}
+		}
 		&.cpmTable{
 			thead th{
 				&:nth-child(1){

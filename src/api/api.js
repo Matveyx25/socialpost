@@ -275,6 +275,9 @@ export const advertiser = {
 	getRequests(id, params) {
 		return instance.get('/campaigns/posts/' + id + '/requests', {params})
 	},
+	getCPMChannels(id, params) {
+		return instance.get('/campaigns/posts/cpm/' + id + '/channels', {params})
+	},
 	createRequests(id, data) {
 		return instance.post('/campaigns/posts/' + id + '/requests', data)
 	},
@@ -305,7 +308,16 @@ export const advertiser = {
 	},
 	declinePostRequest(data) {
 		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})
-	}
+	},
+	startCPM(id) {
+		return instance.post(`/campaigns/posts/cpm/${id}/start`)
+	},
+	stopCPM(id) {
+		return instance.post(`/campaigns/posts/cpm/${id}/stop`)
+	},
+	pauseCPM(id) {
+		return instance.post(`/campaigns/posts/cpm/${id}/pause`)
+	},
 }
 
 export const channels = {

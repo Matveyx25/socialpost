@@ -1,57 +1,43 @@
-import React, { useState } from 'react'
-import { DashboardCard } from '../dashboard-card'
-import { Button } from '../../../Shared/Button/Button';
-import { NavLink, useNavigate, useOutletContext, useParams } from 'react-router-dom'
-import s from './post-by-advertiser.module.scss'
-import { usePost } from '../../../../hooks/usePost';
-import { Tabs } from '../../../Shared/Tabs/Tabs'
-import { usePostRequests } from '../../../../hooks/usePostRequests';
-import {ImageGrid} from "react-fb-image-video-grid"
-import DOMPurify from 'dompurify';
-import { IconAlertTriangle, IconClockHour4, IconExternalLink, IconX } from '@tabler/icons-react';
+import React from "react";
+import { DashboardCard } from "../dashboard-card";
+import { Button } from "../../../Shared/Button/Button";
+import {
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom";
+import s from "./post-by-advertiser.module.scss";
+import { usePost } from "../../../../hooks/usePost";
+import { ImageGrid } from "react-fb-image-video-grid";
+import {
+  IconAlertTriangle,
+  IconClockHour4,
+  IconPlayerPauseFilled,
+  IconPlayerPlayFilled,
+  IconX,
+} from "@tabler/icons-react";
 
-import Markdown from 'react-markdown'
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeRaw from 'rehype-raw';
-import remarkGfm from 'remark-gfm';
-import { Pagination } from '../../../Shared/Pagination/Pagination';
-import { Loader } from '../../../Shared/Loader/Loader';
+import Markdown from "react-markdown";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
+import { priceSeparator } from "../../../../helpers/priceSeparator";
+import { useStartCPM } from "../../../../hooks/useStartCPM";
+import { usePauseCPM } from "../../../../hooks/usePauseCPM";
+import { DefaultRequests } from "./DefaultRequests";
+import { CPMRequests } from "./CPMRequests";
 
 export const PostByAdvertiser = () => {
-	const [setModal] = useOutletContext()
-	const {postId} = useParams()
-	const [page, setPage] = useState(1);
-  const [size, setSize] = useState(30);
-  const [tab, setTab] = useState(0);
-	const navigate = useNavigate()
-	
-	const {data: post} = usePost(postId)
+  const [setModal] = useOutletContext();
+  const { postId } = useParams();
+  const navigate = useNavigate();
 
-	const tabs = [
-		{label: 'Ожидают публикации', count: post?.pendingRequestsCount, value: 'PENDING', id: 0},
-		{label: 'Активные', count: post?.activeRequestsCount, value: 'ACTIVE', id: 1},
-		{label: 'Выполненные', count: post?.completedRequestsCount, value: '', id: 2},
-		{label: 'Отклоненные', count: post?.declinedRequestsCount, value: 'DECLINED', id: 3},
-		{label: 'Просроченные', count: post?.expiredRequestsCount, value: 'EXPIRED', id: 4}
-	]
+  const { data: post } = usePost(postId);
+  const { mutate: start } = useStartCPM();
+  const { mutate: pause } = usePauseCPM();
 
-	const {data: requests, isFetched} = usePostRequests(postId, {
-		status: tabs[tab].value,
-		_start: (page - 1) * 30,
-		_end: page * 30,
-	})
-
-	function formatDate(input) {
-		if(!input){
-			return '-'
-		}
-		const date = new Date(input);
-	
-		return date.toLocaleTimeString('ru-RU', {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false });
-	}
-
-	return (
+  return (
     <div className={s.grid}>
       <div className={s.colSm}>
         <DashboardCard>
@@ -138,11 +124,69 @@ export const PostByAdvertiser = () => {
                     />
                   ),
                   ACCEPTED: (
-                    <Button
-                      label={"Разместить пост"}
-                      size="small"
-                      onClick={() => navigate("./create-request")}
-                    />
+                    <>
+                      {post?.cpmStatus ? (
+                        <div className={s.btns}>
+                          <Button
+                            label={
+                              <IconPlayerPlayFilled
+                                size={18}
+                                style={{ "margin-top": 3 }}
+                              />
+                            }
+                            size="small"
+                            disabled={post?.cpmStatus === "ACTIVE"}
+                            className={
+                              post?.cpmStatus === "ACTIVE" ? s.active : ""
+                            }
+                            theme={"secondary"}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              start(post.id);
+                            }}
+                          />
+                          <Button
+                            label={
+                              <IconPlayerPauseFilled
+                                size={18}
+                                style={{ "margin-top": 3 }}
+                              />
+                            }
+                            size="small"
+                            disabled={post?.cpmStatus === "PAUSED"}
+                            className={
+                              post?.cpmStatus === "PAUSED" ? s.active : ""
+                            }
+                            theme={"secondary"}
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              pause(post.id);
+                            }}
+                          />
+                          <Button
+                            label={
+                              <IconX
+                                color={"#EE1F1F"}
+                                size={18}
+                                style={{ "margin-top": 3 }}
+                              />
+                            }
+                            size="small"
+                            theme="secondary"
+                            onClick={(event) => {
+                              event.stopPropagation();
+                              setModal("stop-cpm", { postId: post.id });
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        <Button
+                          label={"Разместить пост"}
+                          size="small"
+                          onClick={() => navigate("./create-request")}
+                        />
+                      )}
+                    </>
                   ),
                 }[post?.status]
               }
@@ -154,168 +198,89 @@ export const PostByAdvertiser = () => {
               <p>Название записи</p>
               <span>{post?.name}</span>
             </div>
-            <div>
-              <p>Всего заявок</p>
-              <span>{post?.totalRequestsCount}</span>
-            </div>
-            <div>
-              <p>Активных заявок</p>
-              <span>{post?.activeRequestsCount}</span>
-            </div>
-            <div>
-              <p>Выполненных заявок</p>
-              <span>{post?.completedRequestsCount}</span>
-            </div>
+            {post?.cpmStatus ? (
+              <>
+                <div>
+                  <p>Тематика каналов</p>
+                  <span>{post?.cpmTags.join(", ")}</span>
+                </div>
+                <div>
+                  <p>Период размещения</p>
+                  <span>
+                    {new Date(post?.cpmStartDate).toLocaleDateString("ru-RU", {
+                      formatMatcher: "basic",
+                    }) +
+                      " - " +
+                      new Date(post?.cpmEndDate).toLocaleDateString("ru-RU", {
+                        formatMatcher: "basic",
+                      })}
+                  </span>
+                </div>
+                <div>
+                  <p>CPM</p>
+                  <span>{priceSeparator(post?.cpmValue)}₽</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div>
+                  <p>Всего заявок</p>
+                  <span>{post?.totalRequestsCount}</span>
+                </div>
+                <div>
+                  <p>Активных заявок</p>
+                  <span>{post?.activeRequestsCount}</span>
+                </div>
+                <div>
+                  <p>Выполненных заявок</p>
+                  <span>{post?.completedRequestsCount}</span>
+                </div>
+              </>
+            )}
             <div>
               <p>Маркировка рекламы</p>
-              <span>{{
-								'NONE': "Отсутствует",
-								'IN_TEXT': 'В тексте записи',
-								'IN_VIDEO': 'В видео',
-								'IN_PHOTO': 'На фотографиях'
-							}[post?.markingType]}</span>
+              <span>
+                {
+                  {
+                    NONE: "Отсутствует",
+                    IN_TEXT: "В тексте записи",
+                    IN_VIDEO: "В видео",
+                    IN_PHOTO: "На фотографиях",
+                  }[post?.markingType]
+                }
+              </span>
             </div>
           </div>
-          <div className={s.info}>
-            <div>
-              <p>Заблокированно</p>
-              <span>{post?.moneyBlocked}₽</span>
+          {post?.cpmStatus ? (
+            <div className={s.info}>
+              <div>
+                <p>Всего показов</p>
+                <span>{post?.cpmViews}</span>
+              </div>
+              <div>
+                <p>Лимит трат</p>
+                <span>{post?.cpmChannelPostsLimit}₽</span>
+              </div>
+              <div>
+                <p>Потрачено</p>
+                <span>{post?.totalMoneySpent}₽</span>
+              </div>
             </div>
-            <div>
-              <p>Потрачено</p>
-              <span>{post?.totalMoneySpent}₽</span>
+          ) : (
+            <div className={s.info}>
+              <div>
+                <p>Заблокированно</p>
+                <span>{post?.moneyBlocked}₽</span>
+              </div>
+              <div>
+                <p>Потрачено</p>
+                <span>{post?.totalMoneySpent}₽</span>
+              </div>
             </div>
-          </div>
-        </DashboardCard>
-        <div className={s.tableCard}>
-          <div className={s.cardHeader}>
-            <span>Заявки</span>
-          </div>
-          <div className={s.line}></div>
-          <div className={s.tabsWrapper}>
-            <Tabs {...{ tabs, tab, setTab }} />
-          </div>
-          <div className={s.tableWrapper}>
-            <table className={s.table}>
-              <thead>
-                <tr>
-                  <th>Название канала</th>
-									{tabs[tab].value === 'DECLINED' ||
-										tabs[tab].value === 'EXPIRED' ? null : 
-										<>
-											<th>Дата публикации</th>
-											<th>Дата выполнения</th>
-										</>}
-                  {tabs[tab].value === 'DECLINED' ? 
-									<>
-										<th>Отклонивший</th>
-										<th>Комментарий отклонившего</th>
-									</> : ''}
-                  <th>Стоимость размещения</th>
-                    {
-										tabs[tab].value === 'DECLINED' ||
-										tabs[tab].value === 'EXPIRED' ? null : 
-											tabs[tab].value === 'PENDING' ? <th>Отменить</th> : <th>Ссылка</th> 
-										}
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {isFetched ? (
-									requests?.headers['x-total-count'] > 0 ?
-                  requests?.data.map((el) => (
-                    <tr key={el.id}>
-                      <td>
-                        <div className={s.center}>
-                          <div className={s.mainInfo}>
-                            <div className={s.img}>
-                              <img
-                                src={
-                                  el?.channelImageUrl
-                                    ? el?.channelImageUrl
-                                    : "/images/channel-without-image.svg"
-                                }
-                                alt=""
-                              />
-                            </div>
-                            {el.channelName}
-                          </div>
-                        </div>
-                      </td>
-												{tabs[tab].value === 'DECLINED' ? 
-													<>
-														<td>
-															<div className={s.center}>
-																-
-															</div>
-														</td>
-														<td>
-															<div className={s.center}>
-																{el.declineReason}
-															</div>
-														</td>
-													</>
-													: null}
-												{tabs[tab].value === 'DECLINED' ||
-													tabs[tab].value === 'EXPIRED' ? null : 
-													<>
-														<td>
-															<div className={s.center}>
-																{formatDate(el.publishTime)}
-															</div>
-														</td>
-														<td>
-															<div className={s.center}>
-																{formatDate(el.completionTime)}
-															</div>
-														</td>
-													</>}
-                      <td>
-                        <div className={s.center}>
-                          <div className={s.center}>{el.price + "₽"}</div>
-                        </div>
-                      </td>
-												{
-													tabs[tab].value === 'DECLINED' ||
-													tabs[tab].value === 'EXPIRED' ? null : 
-													tabs[tab].value === 'PENDING' ? 
-													<td>
-													<div className={s.center}>
-														<IconX className={s.decline} onClick={() => setModal('decline-post-request-modal', {postId: el.id})}/>
-													</div>
-													</td> : 
-													<td>
-														<div className={s.center}>
-														<NavLink to={el.telegramUrl} className={s.link}>
-															<IconExternalLink />
-														</NavLink>
-													</div> 
-                      	</td>
-													}
-                      <td>
-                        <div className={s.end}></div>
-                      </td>
-                    </tr>
-                  )) : <div className={s.emptyMessage}>
-										Заявок с таким статусом пока нет
-									</div>
-                ) : (
-                  <Loader />
-                )}
-              </tbody>
-            </table>
-          </div>
-          {requests?.headers["x-total-count"] && (
-            <Pagination
-              currentPage={page}
-              totalCount={+requests?.headers["x-total-count"]}
-              pageSize={size}
-              setSize={setSize}
-              onPageChange={(page) => setPage(page)}
-            />
           )}
-        </div>
+        </DashboardCard>
+        {post?.cpmStatus ? <CPMRequests {...{postId}}/> : <DefaultRequests {...{post, postId}}/>}
       </div>
     </div>
   );
-}
+};

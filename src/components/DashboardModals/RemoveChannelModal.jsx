@@ -17,7 +17,7 @@ export const RemoveChannelModal = ({isOpen, setOpen, modalParams}) => {
 				<strong>{channel?.name}</strong> из списка каналов?
 				</p>
 				<div className={s.rowBtns}>
-					<Button label="Отменить" theme="secondary" className={s.btnHalf} nClick={(e) => {
+					<Button label="Отменить" theme="secondary" className={s.btnHalf} onClick={(e) => {
 						e.preventDefault()
 						setOpen()
 					}}/>
