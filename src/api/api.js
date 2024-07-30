@@ -201,7 +201,31 @@ export const publisher = {
 	},
 	requestWithdraw(data){
 		return instance.post(`/users/current/withdraw_balance`, data)
-	}
+	},
+	getPublishersRequests(params){
+		return instance.get(`/campaigns/posts/requests/my`, {params})
+	},
+	getPublishersRequestById(id){
+		return instance.get(`/campaigns/posts/requests/` + id)
+	},
+	getPublishersCPMs(params){
+		return instance.get(`/campaigns/posts/cpm/my`, {params})
+	},
+	getPublishersCPMChannels(id, params){
+		return instance.get(`/campaigns/posts/cpm/` + id + '/channels/my', {params})
+	},
+	getPublishersCPMById(id){
+		return instance.get(`/campaigns/posts/cpm/` + id)
+	},
+	declineRequest(data){
+		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})
+	},
+	acceptRequest(id){
+		return instance.post(`/campaigns/posts/requests/${id}/accept`)
+	},
+	publishCPM(data){
+		return instance.post(`/campaigns/posts/cpm/${data.id}/publish`, {channel_id: data.channel_id})
+	},
 }
 
 export const advertiser = {

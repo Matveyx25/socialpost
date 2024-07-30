@@ -30,12 +30,10 @@ export const RangeCalendarWithTime = ({dateRange, setDateRange, timeRange, setTi
 		today.setHours(0, 0, 0, 0);
 		const selectedDate = date ? new Date(date) : new Date();
 		selectedDate.setHours(0, 0, 0, 0);
-		return selectedDate.getTime() === today.getTime() || !date;
+		return selectedDate.getTime() === today.getTime();
 	};
 
-	const minEndDate = startDate ? addDays(startDate, 2) : null; // Ensure endDate is at least 2 days after startDate
-
-	const minTimeForFirstCalendar = isTodayOrNotSet(startDate) ? new Date().setHours(new Date().getHours() + 5) : new Date();
+	const minTimeForFirstCalendar = isTodayOrNotSet(startDate) ? new Date().setHours(new Date().getHours() + 5) : new Date().setHours(new Date().getHours() + 1);
 
 	const ExampleCustomInput = forwardRef(({ value, onClick, isOpen }, ref) => (
     <div className={classNames(s.inputsWrapper, inputsWrapperClassName)} onClick={onClick} ref={ref}>

@@ -1,15 +1,18 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './DashboardModals.module.scss'
-import { InputField } from '../Shared/Input/Input';
 import { Button } from '../Shared/Button/Button';
-import { Form, Formik } from "formik";
+import { Form, Formik, Field } from "formik";
 import * as Yup from 'yup';
+import { usePublisherDeclineRequest } from "../../hooks/usePublisherDeclineRequest";
+import { Textarea } from '../Shared/Textarea/Textarea';
 
 const validator = Yup.object().shape({
- desc: Yup.string().required("Укажите причину отклонения"),
+ desc: Yup.string(),
 });
 
-export const RemoveReportModal = ({isOpen, setOpen}) => {
+export const RemoveReportModal = ({isOpen, setOpen, modalParams}) => {
+	const {mutate: remove} = usePublisherDeclineRequest()
+
   return (
 		<Modal {...{isOpen, setOpen}} title={'Отклонить заявку'} name={'remove-report'}>
 			<Formik
@@ -18,25 +21,29 @@ export const RemoveReportModal = ({isOpen, setOpen}) => {
 				}}
 				validationSchema={validator}
 				onSubmit={(values) => {
-					console.log(values); // Здесь вы можете обработать отправку формы
-					setOpen(); // Закрываем модальное окно после успешной отправки
+					remove({
+						id: modalParams.requestId,
+						data: values?.desc
+					})
+					setOpen(); 
 				}}
 			>
 				{({ dirty, isValid }) => (
 					<Form>
 						<div className={s.form}>
 							<div className={s.input}>
-								<InputField
-									label={'Причина отклонения'}
-									required
-									placeholder={'Причина удаления'}
-									id="desc"
-									name="desc"
-								/>
+									<Field name='desc'>
+										{({ field: { value }, form: { setFieldValue } }) =>
+											<Textarea
+												label={'Комментарий'}
+												value={value}
+												onChange={v => setFieldValue('desc', v.target.value)}
+											/>}
+								 </Field>
 							</div>
 							<div className={s.rowBtns}>
 								<Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
-								<Button label="Отклонить" className={s.btnHalf} disabled={!dirty || !isValid} type="submit"/>
+								<Button label="Отклонить" className={s.btnHalf} type="submit"/>
 							</div>
 						</div>
 					</Form>

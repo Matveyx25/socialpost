@@ -3,7 +3,6 @@ import { AddChannelModal } from './AddChannelModal'
 import { RemoveChannelModal } from './RemoveChannelModal'
 import { EditChannelModal } from './EditChannelModal'
 import { RemoveReportModal } from './RemoveReportModal'
-import { ApproveReportModal } from './ApproveReportModal'
 import { WithdrawModal } from './WithdrawModal'
 import { EmailModal } from './ConnectEmailModal'
 import { AddCampaignModal } from './AddCampaignModal'
@@ -13,6 +12,7 @@ import { AddPostToModerationModal } from './AddPostToModerationModal';
 import { RefillModal } from './RefillModal'
 import { DeclinePostRequestModal } from './DeclinePostRequestModal';
 import { StopCPMPostModal } from './StopCPMPostModal'
+import { DeclinePublisherRequestModal } from './DeclinePublisherRequestModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -26,8 +26,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<AddChannelModal {...{isOpen, setOpen}}/>
 			<RemoveChannelModal {...{isOpen, setOpen, modalParams}}/>
 			<EditChannelModal {...{isOpen, setOpen, modalParams}}/>
-			<RemoveReportModal {...{isOpen, setOpen}}/>
-			<ApproveReportModal {...{isOpen, setOpen}}/>
+			<RemoveReportModal {...{isOpen, setOpen, modalParams}}/>
 			<WithdrawModal {...{isOpen, setOpen}}/>
 			<EmailModal {...{isOpen, setOpen}}/>
 			<AddCampaignModal {...{isOpen, setOpen}}/>
@@ -35,6 +34,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<AddPostModal {...{isOpen, setOpen, modalParams}}/>
 			<AddPostToModerationModal {...{isOpen, setOpen, modalParams}}/>
 			<DeclinePostRequestModal {...{isOpen, setOpen, modalParams}}/>
+			<DeclinePublisherRequestModal {...{isOpen, setOpen, modalParams}}/>
 			<StopCPMPostModal {...{isOpen, setOpen, modalParams}}/>
 			<RefillModal {...{isOpen, setOpen}}/>
 		</div>

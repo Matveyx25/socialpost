@@ -71,7 +71,7 @@ function App() {
 								<Route path="/dashboard" element={<MainDashboard/>}/>
 								<Route path="/my-channels" element={<MyChannels/>}/>
 								<Route path="/placement-appointments" element={<Reports/>}/>
-								<Route path="/appointment" element={<Report/>}/>
+								<Route path="/placement-appointments/:requestId" element={<Report/>}/>
 								<Route path="/payments" element={<Payments/>}/>
 								<Route path="/requisites" element={<Requisites/>}/>
 							</> :

@@ -48,10 +48,9 @@ const Radio = ({name, value, title, text, icon, disabled}) => {
 	)
 }
 
-export const AddCampaignModal = ({isOpen, setOpen}) => {
+const Content = ({setOpen, currentStep, setCurrentStep}) => {
 	const {data: clients} = useMyClients()
 	const {mutate: createCompany} = useAddCampaign()
-	const [currentStep, setCurrentStep] = useState(0)
 
   const handleSubmit = (values) => {
 		createCompany(values)
@@ -65,9 +64,8 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 		}
 	}, [])
 
-  return (
-		<Modal {...{isOpen, setOpen}} title={`Создать рекламную кампанию ${currentStep + 1}/3`} name={'add-campaign'}>
-			 <FormikStepper
+	return (
+<FormikStepper
 					initialValues={{
 						name: "",
 						type: "NATIVE_POST",
@@ -149,6 +147,15 @@ export const AddCampaignModal = ({isOpen, setOpen}) => {
 						</div>
 					</FormikStep>
 				</FormikStepper>
+	)
+}
+
+export const AddCampaignModal = ({isOpen, setOpen}) => {
+	const [currentStep, setCurrentStep] = useState(0)
+
+  return (
+		<Modal {...{isOpen, setOpen}} title={`Создать рекламную кампанию ${currentStep + 1}/3`} name={'add-campaign'}>
+			 <Content {...{setOpen, currentStep, setCurrentStep}}/>
 		</Modal>
   );
 };

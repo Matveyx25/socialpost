@@ -4,13 +4,13 @@ import { Button } from '../Shared/Button/Button';
 import { Field, Form, Formik } from "formik";
 import { Textarea } from '../Shared/Textarea/Textarea';
 import * as Yup from 'yup';
-import { useDeclinePostRequest } from '../../hooks/useDeclinePostRequest';
+import { usePublisherDeclineRequest } from '../../hooks/usePublisherDeclineRequest';
 
- export const DeclinePostRequestModal = ({isOpen, setOpen, modalParams}) => {
-	const {mutate: decline} = useDeclinePostRequest()
+ export const DeclinePublisherRequestModal = ({isOpen, setOpen, modalParams}) => {
+	const {mutate: decline} = usePublisherDeclineRequest()
  
 	return (
-		 <Modal {...{isOpen, setOpen}} title={'Отменить запрос'} name={'decline-post-request-modal'}>
+		 <Modal {...{isOpen, setOpen}} title={'Отклонить заявку'} name={'decline-publisher-request-modal'}>
 			 <Formik
 				 initialValues={{
 					declineComment: ''
@@ -30,7 +30,7 @@ import { useDeclinePostRequest } from '../../hooks/useDeclinePostRequest';
 								 <Field name='declineComment'>
 									{({ field: { value }, form: { setFieldValue } }) =>
 										<Textarea
-											label={'Комментарий'}
+											label={'Причина отклонения'}
 											value={value}
 											onChange={v => setFieldValue('declineComment', v.target.value)}
 										/>}
@@ -38,7 +38,7 @@ import { useDeclinePostRequest } from '../../hooks/useDeclinePostRequest';
 							 </div>
 							 <div className={s.rowBtns}>
 								 <Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
-								 <Button label="Отправить" className={s.btnHalf} type="submit"/>
+								 <Button label="Оклонить" className={s.btnHalf} type="submit"/>
 							 </div>
 						 </div>
 					 </Form>

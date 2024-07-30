@@ -2,94 +2,47 @@ import React, { useState } from 'react'
 import s from './reports.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Tabs } from '../../../Shared/Tabs/Tabs'
-import { IconExternalLink, IconRefresh, IconSortDescending } from '@tabler/icons-react'
+import { IconExternalLink, IconRefresh } from '@tabler/icons-react'
 import { Select } from '../../../Shared/Select/Select';
-import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
 import { useNavigate } from 'react-router-dom'
-import channelsJson from '../../../../data/channels.json'
+import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
+import { priceSeparator } from '../../../../helpers/priceSeparator';
+import { useMyChannels } from '../../../../hooks/useMyChannels'
+import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 
 const tabs = [
-	{label: 'Запросы', count: 4, id: 5},
-	{label: 'Ожидают публикации', count: 2, id: 6},
-	{label: 'Активные', count: 1, id: 7},
-	{label: 'Выполненные', count: 14, id: 8},
-	{label: 'Отклоненные', count: 48, id: 9},
-	{label: 'Невыполненные', count: 0, id: 10}
+	{label: 'Ожидают публикации', id: 0, value: 'PENDING'},
+	{label: 'Активные', id: 1, value: 'ACTIVE'},
+	{label: 'Выполненные', id: 2, value: 'COMPLETED'},
+	{label: 'Отклоненные', id: 3, value: 'DECLINED'},
+	{label: 'Невыполненные', id: 4, value: 'EXPIRED'}
 ]
-
-const reports = [
-	{
-		img: '/images/post-preview.jpeg', 
-		desc: '5 дней дизайн-прокачки.\n 4 интересные UX‑задач...',
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		datePublic: '25.10.2023 в 12:30',
-		price: '2400',
-	},
-	{
-		img: '/images/post-preview.jpeg', 
-		desc: '5 дней дизайн-прокачки.\n 4 интересные UX‑задач...',
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		datePublic: '25.10.2023 в 12:30',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-		link: 'https://t.me/joinchat/AAAAAFFULXy6e3n0dWtLwg'
-	},
-	{
-		img: '/images/post-preview.jpeg', 
-		desc: '5 дней дизайн-прокачки.\n 4 интересные UX‑задач...',
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		datePublic: '25.10.2023 в 12:30',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-		link: 'https://t.me/joinchat/AAAAAFFULXy6e3n0dWtLwg'
-	},
-	{
-		img: '/images/post-preview.jpeg', 
-		desc: '5 дней дизайн-прокачки.\n 4 интересные UX‑задач...',
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		datePublic: '25.10.2023 в 12:30',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-		link: 'https://t.me/joinchat/AAAAAFFULXy6e3n0dWtLwg'
-	},
-	{
-		img: '/images/post-preview.jpeg', 
-		desc: '5 дней дизайн-прокачки.\n 4 интересные UX‑задач...',
-		nameOfAd: 'Онлайн-Школа “Импульс”',
-		nameOfPost: 'Бесплатный урок',
-		channel: 'Marvel/DC',
-		datePublic: '25.10.2023 в 12:30',
-		dateDone: '25.10.2023 в 12:30',
-		price: '2400',
-		link: 'https://t.me/joinchat/AAAAAFFULXy6e3n0dWtLwg'
-	},
-]
-
-const channels = [{label: 'Все каналы', value: 'all'} ,...channelsJson.map(el => ({label: el.title, value: el.id}))]
-
-const options = [
-  { value: 'all', label: 'Все' },
-];
-
 
 export const Reports = () => {
 	const [tab, setTab] = useState(tabs[0].id)
-	const [selectedChannel, setSelectedChannel] = useState()
-	const [selectedOption, setSelectedOption] = useState()
+	const [selectedChannel, setSelectedChannel] = useState(null)
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
+	const [dateRange, setDateRange] = useState([null, null])
 
-	const navigation = useNavigate()
+
+	const {data: requests} = usePublishersRequests({
+    _start: (page - 1) * 30,
+    _end: page * 30,
+		start_publish_time: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
+		end_publish_time: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
+		status: tabs[tab].value,
+		channel_id: selectedChannel?.value
+	})
+	const {data: channels} = useMyChannels()
+	const navigate = useNavigate()
+
+	const reset = () => {
+		setSelectedChannel(null)
+		setDateRange([null, null])
+	}
 
 	return (
 		<div className={s.grid}>
@@ -98,11 +51,21 @@ export const Reports = () => {
 			</DashboardCard>
 			<div className={s.tableCard}>
 				<div className={s.filters}>
-					<Select options={channels} defaultValue={channels[0]} setSelectedOption={setSelectedChannel}/>
-					<Select options={options} defaultValue={options[0]} setSelectedOption={setSelectedOption}/>
-					<RangeCalendar/>
-					Найдено заявок: 12
-					<Button label='Сбросить' leftIcon={<IconRefresh/>} theme='secondary' className={s.refreshBtn}/>
+					{channels && <Select
+						options={[
+							{ label: "Все каналы", value: null },
+							...channels?.map((el) => ({ label: el.name, value: el.id })),
+						]}
+						required={true}
+						placeholder={"Все каналы"}
+						setSelectedOption={setSelectedChannel}
+						value={selectedChannel}
+						fullWidth={true}
+						isMulti={false}
+					/>}
+					<RangeCalendar {...{ dateRange, setDateRange }} />
+					Найдено заявок: {requests?.headers["x-total-count"]}
+					<Button label='Сбросить' leftIcon={<IconRefresh/>} theme='secondary' onClick={reset} className={s.refreshBtn}/>
 				</div>
 				<div className={s.tableWrapper}>
 					<table className={s.table}>
@@ -114,74 +77,70 @@ export const Reports = () => {
 									<th>
 										<div className={s.flex}>
 											Канал публикации
-											<IconSortDescending size={18}/>
 										</div>
 									</th>
 									<th>
 										<div className={s.flex}>
 											Дата публикации
-											<IconSortDescending size={18}/>
 										</div>
 									</th>
 									<th>
 										<div className={s.flex}>
 											Дата выполнения
-											<IconSortDescending size={18}/>
 										</div>
 									</th>
 									<th>
 										<div className={s.flex}>
 											Стоимость
-											<IconSortDescending size={18}/>
 										</div>
 									</th>
 									<th>Ссылка</th>
 								</tr>
 						</thead>
 						<tbody>
-								{[...reports, ...reports, ...reports].map(el => (
-									<tr>
+								{requests?.data?.map(el => (
+									<tr onClick={() => navigate('./' + el.id)}>
 										<td>
 											<div className={s.preview}>
-												<div className={s.img}>
-													<img src={el.img} alt="" />
-												</div>
-												<p>{el.desc}</p>
+												{el?.postThumbnailsUrls ? <div className={s.img}>
+													<img src={el.postThumbnailsUrls[0]} alt="" />
+												</div> : ''}
+												<p>{el?.postContent?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')}</p>
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.nameOfAd}
+												{el?.campaignName}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.nameOfPost}
+												{el.postName}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.channel}
+												{el.channelName}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.datePublic}
+												{el.publishStartDate}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.dateDone ? 'Выполнено' : '-'}
+												{el.completionTime ? 'Выполнено' : '-'}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.price}₽
+												{priceSeparator(el.price)}₽
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.link ? <IconExternalLink color='#436CFF' size={24} onClick={() => navigation('/appointment')}/> : '-'}
+												{el.link ? <IconExternalLink color='#436CFF' size={24}/> : '-'}
 											</div>
 										</td>
 									</tr>
@@ -189,12 +148,15 @@ export const Reports = () => {
 						</tbody>
 					</table>
 				</div>
-				<Pagination 
-				currentPage={page}
-        totalCount={300}
-        pageSize={size}
-				setSize={setSize}
-        onPageChange={page => setPage(page)}/>
+				{requests?.headers["x-total-count"] && (
+            <Pagination
+              currentPage={page}
+              totalCount={+requests?.headers["x-total-count"]}
+              pageSize={size}
+              setSize={setSize}
+              onPageChange={(page) => setPage(page)}
+            />
+          )}
 			</div>
 		</div>
 	)

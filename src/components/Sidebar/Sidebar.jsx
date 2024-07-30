@@ -5,9 +5,11 @@ import { SidebarItem } from './SidebarItem'
 import { IconBuildingBank, IconDashboard, IconGraph, IconHelp, IconLifebuoy, IconList, IconMoneybag, IconPointerQuestion, IconSettings, IconUserFilled, IconUsers } from '@tabler/icons-react'
 import { useMyChannels } from '../../hooks/useMyChannels'
 import { useProfile } from '../../hooks/useProfile';
+import { usePublishersRequests } from '../../hooks/usePublishersRequests'
 
 export const Sidebar = () => {
 	const {data: channels} = useMyChannels()
+	const {data: requests} = usePublishersRequests()
 	const {data: profile} = useProfile()
 
 	return (
@@ -21,7 +23,7 @@ export const Sidebar = () => {
 			<div className={s.itemList}>
 				<SidebarItem label="Дашборд" icon={<IconDashboard/>} to={'/dashboard'} end/>
 				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/my-channels'} count={channels?.length || ''}/>
-				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/placement-appointments'} count={4}/>
+				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/placement-appointments'} count={requests?.headers['x-total-count']}/>
 				<SidebarItem label="Кошелек" icon={<IconMoneybag/>} to={'/payments'}/>
 				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/requisites'}/>
 				<SidebarItem label="Профиль" icon={<IconUserFilled/>} to={'/profile'}/>
