@@ -9,7 +9,7 @@
 	border-radius: 0.5rem;
 	border: 1px solid $gray-100;
 	background: #FFF;
-	input{
+	.calendarInput{
 		font-size: 1rem;
 		font-style: normal;
 		font-weight: 400;
@@ -31,13 +31,21 @@
 		padding-right: 0.5rem;
 		border-right: 1px solid $gray-100;
 		border-radius: 0;
+		display: flex;
 		gap: 0px !important;
-		svg{
+		button{
 			display: none;
 		}
-		input{
-			width: 3rem !important;
+		:global(.react-time-picker__wrapper){
+			border: 0;
 		}
+		:global(.react-time-picker__inputGroup){
+			display: flex;
+			min-width: 100%;
+		}
+		// :global(){
+		// 	padding-left:(1px + 0.54em);
+		// }
 	}
 }
 
