@@ -305,6 +305,9 @@ export const advertiser = {
 	createRequests(id, data) {
 		return instance.post('/campaigns/posts/' + id + '/requests', data)
 	},
+	createRequestForAll(data) {
+		return instance.post('/channels/requests', null, {params: data})
+	},
 	createModeration(data) {
 		return instance.post('/campaigns/posts/' + data.id + '/moderate', data.data)
 	},

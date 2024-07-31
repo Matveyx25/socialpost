@@ -10,6 +10,7 @@ import { Loader } from "../../../Shared/Loader/Loader";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
 import { useChannelsCanPublishIn } from '../../../../hooks/useChannelsCanPublishIn';
+import { useAddPostAllRequests } from '../../../../hooks/useAddPostAllRequests';
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
@@ -21,6 +22,7 @@ export const AdvertiserCreateRequest = () => {
 
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
+  const { mutate: createRequestsAll } = useAddPostAllRequests();
 
 	const {data: canPublishIds } = useChannelsCanPublishIn(channels?.data?.map(el => el.id))
 
@@ -38,6 +40,19 @@ export const AdvertiserCreateRequest = () => {
     });
     refetch();
   };
+
+	const onSubmitRequestToAll = () => {
+		if(dateRange[0] && dateRange[1] && timeRange[0] && timeRange[1]){
+			createRequestsAll({
+				...filters,
+				post_id: postId,
+				publish_start_time: timeRange[0],
+				publish_end_time: timeRange[1],
+				publish_start_date: new Date(dateRange[0]).toISOString()?.slice(0, 10),
+				publish_end_date: new Date(dateRange[1]).toISOString()?.slice(0, 10)
+			})
+		}
+	}
 
   const request = (id) => {
 		const startTime = new Date(timeRange[0]);
@@ -94,14 +109,13 @@ export const AdvertiserCreateRequest = () => {
               </div>
               <div className={s.infoBlock}>
                 <div className={s.infoValue}>
-									{/* "Общая стоимость" / "Общий охват" * 1000. */}
                   {(+priceSeparator(channels?.headers["x-price-sum"]) / +priceSeparator(channels?.headers["x-reach-sum"]) * 1000) || 0}
                 </div>
                 <div className={s.infoLabel}>Средний CPM</div>
               </div>
             </div>
             <div className={s.btns}>
-              <Button label={"Разместить во всех"} />
+              <Button label={"Разместить во всех"} className={s.allBtn} onClick={onSubmitRequestToAll} disabled={!dateRange[0] || !dateRange[1] || !timeRange[0] || !timeRange[1] || canPublishIds?.findIndex(true) === -1}/>
             </div>
           </div>
         </DashboardCard>
