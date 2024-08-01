@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { DashboardCard } from "../dashboard-card";
 import { Button } from "../../../Shared/Button/Button";
 import { useParams } from "react-router-dom";
@@ -52,7 +52,8 @@ export const AdvertiserCreateRequest = () => {
   const [allChecked, setAllChecked] = useState(false);
   const [dateRange, setDateRange] = useState([null, null]);
   const [timeRange, setTimeRange] = useState([null, null]);
-
+	const [channelsIdsForPublish, setChannelsIdsForPublish] = useState()
+	
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
   const { mutate: createRequestsAll } = useAddPostAllRequests();
@@ -76,6 +77,16 @@ export const AdvertiserCreateRequest = () => {
     refetch();
   };
 
+	useEffect(() => {
+		if(canPublishIds?.length && channels?.data?.length){
+			setChannelsIdsForPublish([...channels.data].map((el, i) => {
+				if(canPublishIds[i] === true){
+					return el.id
+				}
+			}))
+		}
+	}, [canPublishIds, channels])
+
   const onSubmitRequestToAll = () => {
     if (dateRange[0] && dateRange[1] && timeRange[0] && timeRange[1]) {
       createRequestsAll({
@@ -90,26 +101,14 @@ export const AdvertiserCreateRequest = () => {
   };
 
   const request = (id) => {
-    const startTime = new Date(timeRange[0]);
-    const endTime = new Date(timeRange[1]);
-
-    const formatTime = (time) => {
-      const hours = String(time.getHours()).padStart(2, "0"); // Pad single digit hours with leading zero
-      const minutes = String(time.getMinutes()).padStart(2, "0"); // Pad single digit minutes with leading zero
-      return `${hours}:${minutes}`;
-    };
-
-    const publishStartTime = formatTime(startTime);
-    const publishEndTime = formatTime(endTime);
-
     createRequest({
       id: postId,
       data: {
         channelId: id,
         publishStartDate: new Date(dateRange[0]).toISOString()?.slice(0, 10),
         publishEndDate: new Date(dateRange[1]).toISOString()?.slice(0, 10),
-        publishStartTime,
-        publishEndTime,
+        publishStartTime: timeRange[0],
+        publishEndTime: timeRange[1],
       },
     });
   };
@@ -161,7 +160,7 @@ export const AdvertiserCreateRequest = () => {
                   !dateRange[1] ||
                   !timeRange[0] ||
                   !timeRange[1] ||
-                  canPublishIds?.findIndex(true) === -1
+                  channelsIdsForPublish?.length <= 0
                 }
               />
             </div>
@@ -183,6 +182,26 @@ export const AdvertiserCreateRequest = () => {
           >
             {({ values, setFieldValue }) => (
               <Form>
+								{values.checkboxes?.length > 0 &&
+									<div className={s.actions}>
+										<Button
+												size="small"
+												theme="secondary"
+												disabled={values.checkboxes?.findIndex(el => channelsIdsForPublish?.includes(el)) === -1}
+												label={"Разместить в выбранных"}
+												onClick={(e) => {
+													e.preventDefault();
+													e.stopPropagation();
+													values.checkboxes.forEach(el => {
+														if(channelsIdsForPublish?.includes(el)){
+															request(el)
+														}
+													})
+													setFieldValue("checkboxes", []);
+												}}
+											/>
+									</div>
+								}
                 <div className={s.tableWrapper}>
                   <table className={s.table}>
                     <thead>
