@@ -11,45 +11,15 @@ import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
 import { useChannelsCanPublishIn } from "../../../../hooks/useChannelsCanPublishIn";
 import { useAddPostAllRequests } from "../../../../hooks/useAddPostAllRequests";
-import {
-  IconSquare,
-  IconSquareCheckFilled,
-  IconSquareMinusFilled,
-} from "@tabler/icons-react";
 import { Field, Form, Formik } from "formik";
-
-const CheckboxField = ({field, form, initValue}) => {
-	return (
-			<div className={s.checkWrapper}>
-				<label>
-					<input {...field} type="checkbox" 
-					checked={field.value.find(_ => _ === initValue)}
-					onChange={() => {
-						if (field.value.find(_ => _ === initValue)) {
-							form.setFieldValue(field.name, field.value.filter((_) => _ !== initValue));
-						} else {
-							form.setFieldValue(field.name, [...field.value, initValue]);
-						}
-					}}/>
-					<span className={s.checkLabel}>
-						<IconSquare
-							className={s.checkboxIconEmpty}
-						/>
-						<IconSquareCheckFilled
-							className={s.checkboxIconFill}
-						/>
-					</span>
-				</label>
-			</div>
-	)
-}
+import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
+import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
   const { postId } = useParams();
   const [filters, setFilters] = useState(null);
-  const [allChecked, setAllChecked] = useState(false);
   const [dateRange, setDateRange] = useState([null, null]);
   const [timeRange, setTimeRange] = useState([null, null]);
 	const [channelsIdsForPublish, setChannelsIdsForPublish] = useState()
@@ -175,10 +145,6 @@ export const AdvertiserCreateRequest = () => {
             initialValues={{
               checkboxes: [],
             }}
-            onSubmit={(values) => {
-              console.log(values);
-            }}
-            enableReinitialize
           >
             {({ values, setFieldValue }) => (
               <Form>
@@ -207,31 +173,7 @@ export const AdvertiserCreateRequest = () => {
                     <thead>
                       <tr>
                         <th className={s.checkTh}>
-                          <div className={s.checkWrapper}>
-                            <label>
-                              <input
-                                name="all"
-                                type="checkbox"
-																checked={values.checkboxes?.length > 0}
-                                onChange={() => {
-                                  if (values.checkboxes?.length > 0) {
-                                    setFieldValue("checkboxes", []);
-                                  } else {
-                                    setFieldValue(
-                                      "checkboxes",
-                                      channels?.data.map((el) => el.id)
-                                    );
-                                  }
-                                }}
-                              />
-                              <span className={s.checkLabel}>
-                                <IconSquare className={s.checkboxIconEmpty} />
-                                <IconSquareMinusFilled
-                                  className={s.checkboxIconFill}
-                                />
-                              </span>
-                            </label>
-                          </div>
+                         <CheckedAll name={'checkboxes'} ids={channels?.data?.map(el => el.id)}/>
                         </th>
                         <th>Название канала</th>
                         <th>CPM</th>

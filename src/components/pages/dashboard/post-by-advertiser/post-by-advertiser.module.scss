@@ -174,6 +174,13 @@
 	.cardHeader{
 		padding: 1rem;
 	}
+	.actions{
+		padding: 1rem;
+		display: flex;
+		gap: 12px;
+		align-items: center;
+		border-bottom: 1px solid $gray-100;
+	}
 	.tableWrapper{
 		width: 100%;
 		height: 100%;
@@ -229,20 +236,22 @@
 				align-items: center;
 				gap: 0.625rem;
 			}
-			&:nth-child(1){
-				width: calc(240/1088 * 100%);
-			}
-			&:nth-child(2){
-				width: calc(200/1088 * 100%);
-			}
-			&:nth-child(3){
-				width: calc(200/1088 * 100%);
-			}
-			&:nth-child(4){
-				width: calc(260/1088 * 100%);
-			}
-			&:nth-child(5){
-				width: calc(88/1088 * 100%);
+			&.th{
+				&1{
+					width: calc(240/1088 * 100%);
+				}
+				&2{
+					width: calc(200/1088 * 100%);
+				}
+				&3{
+					width: calc(200/1088 * 100%);
+				}
+				&4{
+					width: calc(260/1088 * 100%);
+				}
+				&5{
+					width: calc(88/1088 * 100%);
+				}
 			}
 		}
 		tbody td{
@@ -278,20 +287,20 @@
 			&:not(:first-child){
 				border-top: 1px solid $gray-100;
 			}
-			td{
-				&:nth-child(1){
+			.td{
+				&1{
 					width: calc(240/1088 * 100%);
 				}
-				&:nth-child(2){
+				&2{
 					width: calc(200/1088 * 100%);
 				}
-				&:nth-child(3){
+				&3{
 					width: calc(200/1088 * 100%);
 				}
-				&:nth-child(4){
+				&4{
 					width: calc(260/1088 * 100%);
 				}
-				&:nth-child(5){
+				&5{
 					width: calc(88/1088 * 100%);
 				}
 			}
@@ -316,4 +325,11 @@
 			color: $gray-500;
 		}
 	}
+}
+
+.checkTh{
+	width: 56px !important;
+}
+.checkTd{
+	width: 56px !important;
 }
