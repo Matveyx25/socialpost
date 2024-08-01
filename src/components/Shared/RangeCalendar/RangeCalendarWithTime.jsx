@@ -63,7 +63,6 @@ export const RangeCalendarWithTime = ({
         className={s.timeInput}
 				onClick={e => e.stopPropagation()}
         onChange={(v) => v && setTimeRange((prev) =>  [v, prev[1]])}
-				autoFocus
 				minTime={minTimeForFirstCalendar}
         value={timeRange[0]}
       />
@@ -76,7 +75,6 @@ export const RangeCalendarWithTime = ({
 				onClick={e => e.stopPropagation()}
         className={s.timeInput}
         onChange={(v) => v && setTimeRange((prev) => [prev[0], v])}
-				autoFocus
 				minTime={timeRange[0]}
         value={timeRange[1]}
       />
