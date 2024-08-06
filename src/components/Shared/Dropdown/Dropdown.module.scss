@@ -65,7 +65,7 @@
   visibility: hidden;
   transition: 0.3s;
 	overflow: hidden;
-	
+	z-index: 100;
 	&.active {
 		opacity: 1;
 		visibility: visible;

@@ -40,18 +40,19 @@ export const RichText = ({name, label, required, withInfo}) => {
 				{withInfo && <IconInfoCircleFilled color='#BDBEC0' />}
 			</div>
 			<div className={s.wrapper}>
-				<Slate editor={editor} value={value}
+				<Slate 	editor={editor} 
+								value={value}
 								name={name}
 								onChange={(v) => setValue(v)} 
-								initialValue={[{
+								initialValue={value || [{
 									type: 'paragraph',
 									children: [{ text: '' }],
 								}]}>
 						<Menu>
-							<MarkButton format="strikethrough" icon={<IconStrikethrough size={16} stroke={3}/>} />
+							<MarkButton format="strikeThrough" icon={<IconStrikethrough size={16} stroke={3}/>} />
 							<MarkButton format="underline" icon={<IconUnderline size={16} stroke={3}/>}/>
-							<MarkButton format="italic" icon={<IconItalic size={16} stroke={3}/>}/>
-							<MarkButton format="bold" icon={<IconBold size={16} stroke={3}/>} />
+							<MarkButton format="emphasis" icon={<IconItalic size={16} stroke={3}/>}/>
+							<MarkButton format="strong" icon={<IconBold size={16} stroke={3}/>} />
 							<button className={s.menuItem} onClick={event => {
 								event.preventDefault()
 								const url = window.prompt('Введите URL:')
@@ -86,6 +87,6 @@ export const RichText = ({name, label, required, withInfo}) => {
 
 const HOTKEYS = {
   'mod+b': 'bold',
-  'mod+i': 'italic',
+  'mod+i': 'emphasis',
   'mod+u': 'underline',
 }

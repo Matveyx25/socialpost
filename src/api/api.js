@@ -293,6 +293,28 @@ export const advertiser = {
 
 		return instance.post('/campaigns/' + data.id + '/posts', requestData)
 	},
+	async updatePost(data) {
+		let uploadPromises = data?.files?.map(file => {
+				if(!file?.id){
+					const formData = new FormData();
+					formData.append('upload', file);
+					return instance.post('/uploads', formData);
+				}else{
+					return ({data: {id: file?.id}})
+				}
+		});
+
+		const uploadResponses = await Promise.all(uploadPromises);
+		const fileIds = uploadResponses?.map(response => response.data.id);
+
+		let requestData = {
+			"name": data.name,
+			"content": data.content,
+			"postUploadsIds": fileIds,
+		}
+
+		return instance.put('/campaigns/posts/' + data.id , requestData)
+	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)
 	},

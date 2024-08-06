@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import s from './profile.module.scss'
 import { DashboardCard } from '../dashboard/dashboard-card'
 import { Form, Formik } from 'formik'
@@ -96,7 +96,7 @@ export const Profile = () => {
 								<div className={s.line}></div>
 								<div className={s.btns}>
 									<Button label="Изменить данные" theme='secondary' className={s.btn} leftIcon={<IconEdit/>} 
-									disabled={(!dirty && !isValid) || !newValues(values) && (!values?.password || !values?.secondPassword)}/> 
+									disabled={((!dirty && !isValid) && (!values?.password || !values?.secondPassword)) || !newValues(values)}/> 
 								</div>
 							</Form>)}
 					</Formik>

@@ -6,6 +6,7 @@ import { useProfile } from "../../../hooks/useProfile";
 import s from './Breadcrumbs.module.scss'
 import { useCampaignById } from "../../../hooks/useCampaignById";
 import { usePost } from '../../../hooks/usePost';
+import { usePublishersRequestById } from "../../../hooks/usePublishersRequestById";
 
 const DynamicCampaign = ({ match }) => {
 	const {data} = useCampaignById(match.params.companyId)
@@ -21,18 +22,26 @@ const DynamicPost = ({ match }) => {
   	<span>{data?.name}</span>
 	)
 };
-
+const DynamicRequest = ({ match }) => {
+	const {data} = usePublishersRequestById(match.params.requestId)
+	
+	return (
+  	<span>{data?.postName}</span>
+	)
+};
 
 const publisherRoutes = [
 	{path: '/profile/', breadcrumb: 'Профиль'},
 	{path: '/dashboard/', breadcrumb: 'Дашборд'},
 	{path: '/my-channels/', breadcrumb: 'Мои каналы'},
 	{path: '/placement-appointments/', breadcrumb: 'Заявки на размещение'},
-	{path: '/appointment/', breadcrumb: 'Заявки на размещение / Бесплатный урок'},
+	{path: '/placement-appointments/:requestId', breadcrumb: DynamicRequest},
 	{path: '/payments/', breadcrumb: 'Кошелек'},
 	{path: '/requisites/', breadcrumb: 'Реквизиты'},
 	{path: '/faq/', breadcrumb: 'FAQ'},
 	{path: '/support/', breadcrumb: 'Поддержка'},
+	{path: '/fixed-cpm-campaigns/', breadcrumb: 'Кампании с фиксированным CRM'},
+	{path: '/fixed-cpm-campaigns/:companyId', breadcrumb: DynamicCampaign},
 ]
 
 const advertiserRoutes = [

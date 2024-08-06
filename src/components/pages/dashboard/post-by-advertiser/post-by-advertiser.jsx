@@ -14,7 +14,6 @@ import {
   IconClockHour4,
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
-  IconX,
 } from "@tabler/icons-react";
 
 import Markdown from "react-markdown";
@@ -27,6 +26,8 @@ import { useStartCPM } from "../../../../hooks/useStartCPM";
 import { usePauseCPM } from "../../../../hooks/usePauseCPM";
 import { DefaultRequests } from "./DefaultRequests";
 import { CPMRequests } from "./CPMRequests";
+import { Dropdown } from '../../../Shared/Dropdown/Dropdown';
+import { IconPlayerStopFilled } from "@tabler/icons-react";
 
 export const PostByAdvertiser = () => {
   const [setModal] = useOutletContext();
@@ -41,7 +42,9 @@ export const PostByAdvertiser = () => {
     <div className={s.grid}>
       <div className={s.colSm}>
         <DashboardCard>
-          <div className={s.cardHeader}>{post?.name}</div>
+          <div className={s.cardHeader}>{post?.name}
+						<Button label={'Редактировать'} onClick={() => setModal('edit-post-modal', {editPostId: postId})} theme="secondary" size="small"/>
+					</div>
           <div className={s.line}></div>
           {post?.uploads.length ? (
             <div className={s.preview}>
@@ -126,59 +129,76 @@ export const PostByAdvertiser = () => {
                   ACCEPTED: (
                     <>
                       {post?.cpmStatus ? (
-                        <div className={s.btns}>
-                          <Button
-                            label={
-                              <IconPlayerPlayFilled
-                                size={18}
-                                style={{ "margin-top": 3 }}
-                              />
-                            }
-                            size="small"
-                            disabled={post?.cpmStatus === "ACTIVE"}
-                            className={
-                              post?.cpmStatus === "ACTIVE" ? s.active : ""
-                            }
-                            theme={"secondary"}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              start(post.id);
-                            }}
-                          />
-                          <Button
-                            label={
-                              <IconPlayerPauseFilled
-                                size={18}
-                                style={{ "margin-top": 3 }}
-                              />
-                            }
-                            size="small"
-                            disabled={post?.cpmStatus === "PAUSED"}
-                            className={
-                              post?.cpmStatus === "PAUSED" ? s.active : ""
-                            }
-                            theme={"secondary"}
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              pause(post.id);
-                            }}
-                          />
-                          <Button
-                            label={
-                              <IconX
-                                color={"#EE1F1F"}
-                                size={18}
-                                style={{ "margin-top": 3 }}
-                              />
-                            }
-                            size="small"
-                            theme="secondary"
-                            onClick={(event) => {
-                              event.stopPropagation();
-                              setModal("stop-cpm", { postId: post.id });
-                            }}
-                          />
-                        </div>
+                         <div className={s.btns}>
+												 <Dropdown
+														className={s.dropdown}
+														menuClassName={s.menu}
+															label={
+																{
+																	ACTIVE: 
+																		<div className={s.statusItem}>
+																			<IconPlayerPlayFilled
+																				size={18}
+																			/>
+																			Показы запущенны
+																		</div>,
+																	PAUSED: 
+																		<div className={s.statusItem}>
+																			<IconPlayerPauseFilled
+																				size={18}
+																			/>
+																			Показы приостановлены
+																		</div>,
+																	STOPPED: 
+																		<div className={s.statusItem}>
+																			<IconPlayerStopFilled
+																				size={18}
+																			/>
+																			Показы завершены
+																		</div>,
+																	INACTIVE: <div className={s.statusItem}>Показы не запущенны</div>,
+																}[post?.cpmStatus]
+															}
+															options={[
+																<div
+																	className={s.statusButton}
+																	onClick={(event) => {
+																		event.stopPropagation();
+																		start(post.id);
+																	}}
+																>
+																	<IconPlayerPlayFilled
+																		size={18}
+																	/>
+																	Запустить показы
+																</div>,
+																<div
+																	className={s.statusButton}
+																	onClick={(event) => {
+																		event.stopPropagation();
+																		pause(post.id);
+																	}}
+																>
+																	<IconPlayerPauseFilled
+																		size={18}
+																	/>
+																	Приостановить показы
+																</div>,
+																<div
+																	className={s.statusButton}
+																	onClick={(event) => {
+																		event.stopPropagation();
+																		setModal("stop-cpm", { postId: post.id });
+																	}}
+																>
+																	<IconPlayerStopFilled
+																		size={18}
+																	/>
+																	Завершить показы
+																</div>,
+															]}
+														/>
+													</div>
                       ) : (
                         <Button
                           label={"Разместить пост"}
@@ -279,7 +299,7 @@ export const PostByAdvertiser = () => {
             </div>
           )}
         </DashboardCard>
-        {post?.cpmStatus ? <CPMRequests {...{postId}}/> : <DefaultRequests {...{post, postId}}/>}
+				{post?.cpmStatus ? <CPMRequests {...{postId}}/> : <DefaultRequests {...{post, postId}}/>}
       </div>
     </div>
   );

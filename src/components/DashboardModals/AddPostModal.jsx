@@ -16,8 +16,7 @@ import { useCampaignById } from "../../hooks/useCampaignById";
 import { useAllChannelsTags } from '../../hooks/useAllChannelsTags';
 import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
 import { differenceInDays } from "date-fns";
-import e from "cors";
-
+import { serializeNodes } from "../../helpers/serializeNodes";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -27,38 +26,6 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 	const onUpload = (files) => {
     setFiles(files)
   }
-
-	const serializeNodes = node => {
-		if (Text.isText(node)) {
-			let string = Node.string(node)
-			if(!string){
-				return string
-			}
-			if (node.bold) {
-				string = `**${string}**`
-			}
-			if (node.italic){
-				string = `*${string}*`
-			}
-			if(node.underline){
-				string = `<ins>${string}</ins>`
-			}
-			if(node.strikethrough){
-				string = `~~${string}~~`
-			}
-			return string
-		}
-	
-		const children = node.children?.map(n => serializeNodes(n)).join('')
-	
-		switch (node.type) {
-			case 'link':
-				const url = node.href;
-				return `[${children}](${url})`;
-			default:
-				return children
-		}
-	}
 
   const { mutate: createPost } = useAddPost();
   const { data: post } = useCampaignById(modalParams?.campaignId);

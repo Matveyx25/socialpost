@@ -31,7 +31,7 @@ export const AdvertisingCompany = () => {
 	]
 
   const { data: posts, isFetched } = usePostsByCampaign(companyId, {
-		status: tabs[tab].value,
+		status: company?.type === 'FIXED_CPM' ? '' : tabs[tab].value,
 		_start: (page - 1) * 30,
     _end: page * 30,
 	});
@@ -77,9 +77,13 @@ export const AdvertisingCompany = () => {
 									}}
 								/>
 						</div>
-						: <div className={s.tabsWrapper}>
-							<Tabs {...{tab, setTab, tabs}}/>
-						</div>}
+						: 
+						<>
+							{company?.type === 'FIXED_CPM' ? '' :  <div className={s.tabsWrapper}>
+								<Tabs {...{tab, setTab, tabs}}/>
+							</div>}
+						</>
+						}
 						<div className={s.tableWrapper}>
 							{company?.type === 'FIXED_CPM' ? <CPMTable {...{posts, isFetched}}/> : <DefaultTable {...{posts, isFetched, tabs, tab}}/>}
 						</div>

@@ -223,47 +223,69 @@
 			}
 		}
 		&.cpmTable{
-			thead th{
-				&:nth-child(1){
+			thead .th{
+				&1{
 					width: calc(260/1563 * 100%);
 				}
-				&:nth-child(2){
+				&2{
 					width: calc(200/1563 * 100%);
 				}
-				&:nth-child(3){
+				&3{
 					width: calc(200/1563 * 100%);
 				}
-				&:nth-child(4){
+				&4{
 					width: calc(200/1563 * 100%);
 				}
-				&:nth-child(5){
+				&5{
 					width: calc(150/1563 * 100%);
 				}
-				&:nth-child(6){
+				&6{
 					width: calc(200/1563 * 100%);
 				}
 			}
 			tbody tr{
-				td{
-					&:nth-child(1){
+				.td{
+					&1{
 						width: calc(260/1563 * 100%);
 					}
-					&:nth-child(2){
+					&2{
 						width: calc(200/1563 * 100%);
 					}
-					&:nth-child(3){
+					&3{
 						width: calc(200/1563 * 100%);
 					}
-					&:nth-child(4){
+					&4{
 						width: calc(200/1563 * 100%);
 					}
-					&:nth-child(5){
+					&5{
 						width: calc(150/1563 * 100%);
 					}
-					&:nth-child(6){
+					&6{
 						width: calc(200/1563 * 100%);
 					}
 				}
+			}
+			.dropdown{
+				width: fit-content;
+				border: 0;
+				position: relative;
+				z-index: 0;
+				.statusItem{
+					display: flex;
+					align-items: center;
+					gap: 0.25rem;
+				}
+			}
+			.menu{
+				width: 12rem;
+			}
+			.statusButton{
+				display: flex;
+				align-items: center;
+				gap: 0.25rem;
+				font-size: .75rem;
+				white-space: nowrap;
+				width: 100%;
 			}
 		}
 	}

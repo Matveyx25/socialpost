@@ -1,7 +1,6 @@
 import React from "react";
 import s from "./requisites.module.scss";
 import { DashboardCard } from "../dashboard-card";
-import { Select } from "../../../Shared/Select/Select";
 import { InputField } from "../../../Shared/Input/Input";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -11,13 +10,7 @@ import {
   useSelfEmployed,
   useUpdateSelfEmployed,
 } from "../../../../hooks/publisherBalance";
-import { Loader } from "../../../Shared/Loader/Loader";
 import classNames from "classnames";
-
-const counties = [
-  { value: "belarus", label: "Беларусь" },
-  { value: "Russia", label: "Россия" },
-];
 
 export const SelfEmployed = () => {
   const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/;

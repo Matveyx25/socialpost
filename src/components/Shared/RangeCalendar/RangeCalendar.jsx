@@ -24,9 +24,9 @@ export const RangeCalendar = ({dateRange, setDateRange, inputsWrapperClassName, 
 	const ExampleCustomInput = forwardRef(({ value, onClick, isOpen }, ref) => (
     <div className={classNames(s.inputsWrapper, inputsWrapperClassName)} onClick={onClick} ref={ref}>
 			<IconCalendarUp size={20} color='#919396'/>
-      <input value={value?.split('-')[0] || value} placeholder='От'/>
+      <input value={value?.split('-')[0] || value} placeholder='От' className={s.calendarInput}/>
 			<IconCalendarDown size={20} color='#919396'/>
-      <input value={value?.split('-')[1]} placeholder='До'/>
+      <input value={value?.split('-')[1]} placeholder='До' className={s.calendarInput}/>
 			{!calendar.current?.state.open ? <IconChevronRight size={18} color='#919396'/> : <IconChevronUp size={18} color='#919396'/>}
     </div>
   ));

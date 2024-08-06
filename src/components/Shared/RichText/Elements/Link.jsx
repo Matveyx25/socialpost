@@ -10,14 +10,14 @@ export const Link = ({ attributes, element, children }) => {
 
   return (
     <div className={s['element-link']}>
-      <a {...attributes} href={element.href}>
+      <a {...attributes} href={element.link}>
         {children}
       </a>
       {selected && focused && (
         <div className={s.popup} contentEditable={false}>
-          <a href={element.href} rel="noreferrer" target="_blank">
+          <a href={element.link} rel="noreferrer" target="_blank">
             <IconExternalLink/>
-            <span>{element.href}</span>
+            <span>{element.link}</span>
           </a>
           <button onClick={() => removeLink(editor)}>
             <IconUnlink/>

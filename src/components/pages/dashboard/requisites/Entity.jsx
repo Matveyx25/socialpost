@@ -10,7 +10,6 @@ import {
   useLegalEntity,
   useUpdateLegalEntity,
 } from "../../../../hooks/publisherBalance";
-import { Loader } from "../../../Shared/Loader/Loader";
 import classNames from "classnames";
 
 const tax = [

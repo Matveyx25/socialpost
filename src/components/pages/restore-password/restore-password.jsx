@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import s from './restore-password.module.scss'
 import { auth } from '../../../api/api'
 import * as Yup from 'yup'
@@ -31,11 +31,11 @@ export const RestorePassword = () => {
         }
       })
       .catch((err) => {
-        if (err.response.status == 401) {
+        if (+err.response.status === 401) {
           set_error("Пароль или почта введены неверно");
-        } else if (err.response.status == 400) {
+        } else if (+err.response.status === 400) {
           set_error("Данные невалидны");
-        } else if (err.response.status == 409) {
+        } else if (+err.response.status === 409) {
           set_error("Пользователь с такой почтой уже существует");
         }
       });

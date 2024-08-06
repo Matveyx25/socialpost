@@ -25,6 +25,7 @@ export const Sidebar = () => {
 				<SidebarItem label="Мои каналы" icon={<IconList/>} to={'/my-channels'} count={channels?.length || ''}/>
 				<SidebarItem label="Заявки на размещение" icon={<IconPointerQuestion/>} to={'/placement-appointments'} count={requests?.headers['x-total-count']}/>
 				<SidebarItem label="Кошелек" icon={<IconMoneybag/>} to={'/payments'}/>
+				<SidebarItem label="Кампании с фикс. CRM" icon={<IconGraph/>} to={'/fixed-cpm-campaigns'}/>
 				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/requisites'}/>
 				<SidebarItem label="Профиль" icon={<IconUserFilled/>} to={'/profile'}/>
 				<SidebarItem label="FAQ" icon={<IconHelp/>} to={'/faq'}/>

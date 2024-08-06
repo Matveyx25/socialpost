@@ -2,9 +2,9 @@ import { Editor, Element, Path, Range, Transforms } from "slate";
 import { ReactEditor } from "slate-react";
 import { createParagraphNode } from "./rich-text-paragraph";
 
-export const createLinkNode = (href, text) => ({
+export const createLinkNode = (link, text) => ({
   type: "link",
-  href,
+  link,
   children: [{ text }]
 });
 
