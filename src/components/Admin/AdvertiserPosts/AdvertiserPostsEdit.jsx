@@ -1,7 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext } from "react-admin";
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, ArrayInput, SimpleFormIterator } from "react-admin";
 import { ImageGrid } from 'react-fb-image-video-grid';
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
@@ -85,6 +85,18 @@ export const AdvertiserPostsEdit = (props) => (
 							<TextInput label="Причина отказа" source="declineReason" fullWidth/>
 						</Labeled>
 					</Box>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1}>
+							<Typography variant="h6" gutterBottom>
+								Тэги CPM
+							</Typography>
+							<ArrayInput source="cpmTags">
+								<SimpleFormIterator>
+									<TextInput />
+								</SimpleFormIterator>
+							</ArrayInput>
+						</Box>
 				</Box>
 			</SimpleForm>
 		</Box>

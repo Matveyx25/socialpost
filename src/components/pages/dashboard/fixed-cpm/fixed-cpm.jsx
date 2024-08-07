@@ -13,11 +13,11 @@ export const FixedCPM = () => {
 	const [size, setSize] = useState(30)
 	const [search, setSearch] = useState('')
 
-	// const {data: clients, isFetched} = usePublishersCPMs({
-	// 	campaign_name: search,
-	// 	_start: (page - 1) * 30,
-	// 	_end: page * 30,
-	// })
+	const {data: campaigns, isFetched} = usePublishersCPMs({
+		campaign_name: search,
+		_start: (page - 1) * 30,
+		_end: page * 30,
+	})
 	
 	const [setModal] = useOutletContext()
 
@@ -34,18 +34,10 @@ export const FixedCPM = () => {
         <div className={s.filters}>
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
-						placeholder={'Найти клиента'} value={search} onChange={(v) => setSearch(v.target.value)}/>
-						{/* Найдено клиентов: {clients?.headers['x-total-count']} */}
+						placeholder={'Найти кампанию'} value={search} onChange={(v) => setSearch(v.target.value)}/>
+						Найдено кампаний: {campaigns?.headers['x-total-count']}
 					</div>
           
-          <Button
-            label="Добавить клиента"
-            leftIcon={<IconPlus size={20}/>}
-            className={s.addBtn}
-						onClick={() => {
-							setModal('add-my-client')
-						}}
-          />
         </div>
         <div className={s.tableWrapper}>
           <table className={s.table}>
@@ -74,22 +66,16 @@ export const FixedCPM = () => {
                 </th>
               </tr>
             </thead>
-						<tbody>
 						{/* {
+							"id": 0,
+							"name": "string",
 							"type": "NEW_POST",
 							"status": "NOT_MODERATED",
 							"cpmStatus": "INACTIVE",
 							"campaignId": 0,
-							"content": "string",
-							"uploads": [
-								{
-									"id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-									"fileUrl": "string",
-									"thumbnailUrl": "string",
-									"mediaType": "string"
-								}
-							],
 							"markingType": "NONE",
+							"cpmStartDate": "2024-08-06",
+							"cpmEndDate": "2024-08-06",
 							"cpmTags": [
 								"string"
 							],
@@ -110,112 +96,54 @@ export const FixedCPM = () => {
 							"declinedRequestsCount": 0,
 							"expiredRequestsCount": 0
 						} */}
-							<tr>
-								<td>
-									<div className={s.center}>
-										{'el.name'}
-									</div>
-								</td>
-								<td>
-									<div className={s.center}>
-											{/* {new Date(post?.cpmStartDate).toLocaleDateString("ru-RU", {
-												formatMatcher: "basic",
-											}) +
-												" - " +
-												new Date(post?.cpmEndDate).toLocaleDateString("ru-RU", {
+							
+						<tbody>
+							{isFetched ? (
+								campaigns?.data.map((el) => (
+									<tr key={el.id}>
+										<td>
+											<div className={s.center}>{el.name}</div>
+										</td>
+										<td>
+												{new Date(el.cpmStartDate).toLocaleDateString("ru-RU", {
 													formatMatcher: "basic",
-												})} */}
-											{new Date().toLocaleDateString("ru-RU", {
-												formatMatcher: "basic",
-											}) +
-												" - " +
-												new Date().toLocaleDateString("ru-RU", {
+												}) +
+														" - " +
+												new Date(el.cpmEndDate).toLocaleDateString("ru-RU", {
 													formatMatcher: "basic",
 												})}
-									</div>
-								</td>
-								<td>
-									<div className={s.center}>
-										{'el.name'}
-									</div>
-								</td>
-								<td>
-									<div className={s.center}>
-										{'el.cpmViews'}
-									</div>
-								</td>
-								<td>
-									<div className={s.center}>
-										{'el.name'}
-									</div>
-								</td>
-								<td>
-									<div className={s.center}>
-										{'el.name'}
-									</div>
-								</td>
-							</tr>
+										</td>
+										<td>
+											<div className={s.center}>{el.cpmChannelPostsLimit - el.cpmViews}</div>
+										</td>
+										<td>
+											<div className={s.center}>{el.cpmViews}</div>
+										</td>
+										<td>
+											<div className={s.center}>-</div>
+										</td>
+										<td>
+											<div className={s.center}>{el.cpmValue}</div>
+										</td>
+										<td>
+											<div className={s.center}></div>
+										</td>
+									</tr>
+								))
+							) : (
+								<Loader />
+							)}
 						</tbody>
-            {/* <tbody>
-              {isFetched ? (
-                clients?.data.map((el) => (
-                  <tr key={el.id}>
-                    <td>
-                      <div className={s.center}>
-                        {
-                          {
-                            PHYSICAL_ENTITY: "Физическое лицо",
-                            IE: "ИП",
-                            OOO: "Юридическое лицо",
-                          }[el.type]
-                        }
-                      </div>
-                    </td>
-                    <td>
-                      <div className={s.center}>
-												{
-                          {
-                            AGENCY: "Агентство",
-                            ADVERTISER: "Рекламодатель",
-                          }[el.role]
-                        }
-                      </div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.name}</div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.inn ? el.inn : '-'}</div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.phone ? el.phone : '-'}</div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.contractNumber ? '№' + el.contractNumber  : '-'}</div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.contractSubject ? el.contractSubject : '-'}</div>
-											
-                    </td>
-                    <td>
-                      <div className={s.center}>{(new Date(el.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div>
-                    </td>
-                  </tr>
-                ))
-              ) : (
-                <Loader />
-              )}
-            </tbody> */}
           </table>
         </div>
-        {/* {clients?.headers['x-total-count'] && 
+        {campaigns?.headers['x-total-count'] && 
 				<Pagination
           currentPage={page}
-          totalCount={+clients?.headers['x-total-count']}
+          totalCount={+campaigns?.headers['x-total-count']}
           pageSize={size}
           setSize={setSize}
           onPageChange={(page) => setPage(page)}
-        />} */}
+        />}
       </div>
     </div>
   );
