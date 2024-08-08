@@ -12,34 +12,12 @@ import { usePost } from "../../hooks/usePost";
 
 import {unified} from 'unified';
 import markdown from 'remark-parse';
-import gfm from 'remark-gfm'
-import { useUpdatePost } from '../../hooks/useUpdatePost';
+import { useUpdatePostContent } from '../../hooks/useUpdatePostContent';
 import { Button } from "../Shared/Button/Button";
-import { serializeNodes } from "../../helpers/serializeNodes";
-import { remarkToSlate } from "remark-slate-transformer";
-import { visit } from "unist-util-visit";
+import slate, { serialize } from '@st.matthew/remark-slate';
+import deserialize from '../../helpers/deserialize'
 
-function underlinePlugin() {
-	return (tree) => {
-		visit(tree, 'text', (node, index, parent) => {
-			const match = node.value.match(/||/g);
-			if (match && match.length === 2) {
-				// Wrap the text with an underline node
-				parent.children.splice(index, 1, {
-					type: 'underline',
-					children: [{ type: 'text', value: node.value }],
-				});
-			}
-		});
-	};
-}
-
-
-const processor = unified()
-	.use(underlinePlugin) // Add the custom plugin here
-	.use(markdown, { commonmark: true })
-	.use(gfm)
-	.use(remarkToSlate);
+const processor = unified().use(markdown).use(deserialize).use(slate)
 
 export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [files, setFiles] = useState([]);
@@ -48,14 +26,14 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
     setFiles(files)
   }
 
-  const { mutate: updatePost } = useUpdatePost();
+  const { mutate: updatePost } = useUpdatePostContent();
   const { data: post } = usePost(modalParams?.editPostId);
 
   const handleSubmit = (values) => {
 		let data = null
 		
-		const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
-		data = {id: modalParams?.editPostId, name: values?.name, content: markdownContent, files}
+		const markdownContent = values.text.map(el => serialize(el)).join('')
+		data = {id: modalParams?.editPostId, name: values?.name, text: markdownContent, files}
 
 		updatePost(data);
     setOpen();
@@ -96,11 +74,10 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
       title={`Редактировать запись`}
       name={"edit-post-modal"}
     >
-			{console.log(processor.processSync(post?.content).result)}
      <Formik
         initialValues={{
           name: post?.name,
-          content: post?.content ? processor.processSync(post?.content).result : '',
+          text: post?.text ? processor.processSync(post?.text).result : '',
           markingType: "NONE",
           id: modalParams?.editPostId,
         }}
@@ -111,7 +88,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 				validationSchema={Yup.object().shape({
 					id: Yup.string().required("Выберите РК"),
 					name: Yup.string().required("Заполните поле"),
-					content: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
+					text: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
 						slateValueValidator(value)
 					)
 				})}
@@ -129,7 +106,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 									/>
 								</div>
                 <div className={s.input}>
-                  <RichText name={"content"} label={"Текст записи"} />
+                  <RichText name={"text"} label={"Текст записи"} />
                 </div>
                 <div className={s.input}>
                   <div className={s.filePreviews}>{renderFilePreviews()}</div>

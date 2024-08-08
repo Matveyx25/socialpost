@@ -11,12 +11,11 @@ import { useAddPost } from '../../hooks/useAddPost';
 import { RichText } from "../Shared/RichText/RichText";
 import { IconX } from "@tabler/icons-react";
 import { Upload } from "../Shared/Upload/Upload";
-import { Node, Text } from "slate";
 import { useCampaignById } from "../../hooks/useCampaignById";
 import { useAllChannelsTags } from '../../hooks/useAllChannelsTags';
 import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
 import { differenceInDays } from "date-fns";
-import { serializeNodes } from "../../helpers/serializeNodes";
+import { serialize } from "@st.matthew/remark-slate";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -35,7 +34,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let data = null
 
 		if(post?.type === 'FIXED_CPM'){
-			const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
+			const markdownContent = values.text.map((v) => serialize(v)).join('')
 
 			console.log(values?.cpmTags);
 
@@ -51,7 +50,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				cpmChannelPostsLimit: values.cpmChannelPostsLimit,
 				cpmBudget: values.cpmBudget,
 				cpmValue: values.cpmValue,
-				content: markdownContent, 
+				text: markdownContent, 
 				files
 			}
 		}else{
@@ -63,8 +62,8 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 					id: modalParams?.campaignId,
 				}
 			}else{
-				const markdownContent = values.content.map(el => serializeNodes(el)).join('<br/>')
-				data = {...values, content: markdownContent, files}
+				const markdownContent = values.text.map(el => serialize(el)).join('')
+				data = {...values, text: markdownContent, files}
 			}
 		}
 
@@ -124,7 +123,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
         initialValues={{
           name: "",
           type: "NEW_POST",
-          content: "",
+          text: "",
           telegramPostUrl: "",
           markingType: "NONE",
           id: modalParams?.campaignId,
@@ -325,7 +324,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
         ) : (
           <FormikStep
             validationSchema={Yup.object().shape({
-              content: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
+              text: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
                 slateValueValidator(value)
               ),
             })}
@@ -333,7 +332,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
             <div className={s.scroller}>
               <div className={s.form}>
                 <div className={s.input}>
-                  <RichText name={"content"} label={"Текст записи"} />
+                  <RichText name={"text"} label={"Текст записи"} />
                 </div>
                 <div className={s.input}>
                   <div className={s.filePreviews}>{renderFilePreviews()}</div>

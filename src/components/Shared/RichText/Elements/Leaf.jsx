@@ -1,5 +1,5 @@
 export const Leaf = ({ attributes, children, leaf }) => {
-  if (leaf.strong) {
+  if (leaf.bold) {
     children = <strong>{children}</strong>
   }
 
@@ -7,7 +7,7 @@ export const Leaf = ({ attributes, children, leaf }) => {
     children = <code>{children}</code>
   }
 
-  if (leaf.emphasis) {
+  if (leaf.italic) {
     children = <em>{children}</em>
   }
 

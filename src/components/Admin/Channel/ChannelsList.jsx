@@ -36,7 +36,7 @@ export const ChannelsList = (props) => (
       <TextField source="averagePostReach" label="Средний охват поста"/>
 			<FunctionField label="Фото" source="imageUrl" render={renderPhoto}/>
     	<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
-			<FunctionField label="Тэг" source="tag" render={renderTags}/>
+			<FunctionField label="Тэг" source="tags" render={renderTags}/>
 			<UrlField label="Ссылка" source="telegramUrl"/>
     </Datagrid>
   </List>

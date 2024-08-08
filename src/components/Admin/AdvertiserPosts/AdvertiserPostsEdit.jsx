@@ -28,7 +28,7 @@ const PostContent = () => {
 		</div> : ''}
 		<div className={s.content}>
 			<Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-				{DOMPurify.sanitize(post?.content)}
+				{DOMPurify.sanitize(post?.text)}
 			</Markdown>
 		</div>
 	</div>
@@ -46,7 +46,7 @@ export const AdvertiserPostsEdit = (props) => (
 			status: data?.status,
 			declineReason: data?.declineReason,
 			postUploadsIds: data?.uploads?.map(el => el.id),
-			content: data?.content
+			text: data?.text
 		})}
   >
     <Box display={{ xs: "block", sm: "flex", width: "100%" }}>

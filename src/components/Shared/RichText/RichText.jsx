@@ -13,7 +13,6 @@ import { MarkButton } from './Elements/MarkButton';
 import { Leaf } from './Elements/Leaf';
 import { Element } from './Elements/Element';
 
-
 export const RichText = ({name, label, required, withInfo}) => {
 	const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
@@ -51,8 +50,8 @@ export const RichText = ({name, label, required, withInfo}) => {
 						<Menu>
 							<MarkButton format="strikeThrough" icon={<IconStrikethrough size={16} stroke={3}/>} />
 							<MarkButton format="underline" icon={<IconUnderline size={16} stroke={3}/>}/>
-							<MarkButton format="emphasis" icon={<IconItalic size={16} stroke={3}/>}/>
-							<MarkButton format="strong" icon={<IconBold size={16} stroke={3}/>} />
+							<MarkButton format="italic" icon={<IconItalic size={16} stroke={3}/>}/>
+							<MarkButton format="bold" icon={<IconBold size={16} stroke={3}/>} />
 							<button className={s.menuItem} onClick={event => {
 								event.preventDefault()
 								const url = window.prompt('Введите URL:')

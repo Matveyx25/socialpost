@@ -254,7 +254,7 @@ export const advertiser = {
 			requestData = {
 				"name": data.name,
 				"type": data.type,
-				"content": data.content,
+				"text": data.text,
 				"postUploadsIds": fileIds,
 				"markingType": data.markingType,
 				"cpmTags": data?.cpmTags,
@@ -284,7 +284,7 @@ export const advertiser = {
 				requestData = {
 					"name": data.name,
 					"type": data.type,
-					"content": data.content,
+					"text": data.text,
 					"postUploadsIds": fileIds,
 					"markingType": data.markingType
 				}
@@ -293,7 +293,7 @@ export const advertiser = {
 
 		return instance.post('/campaigns/' + data.id + '/posts', requestData)
 	},
-	async updatePost(data) {
+	async updatePostContent(data) {
 		let uploadPromises = data?.files?.map(file => {
 				if(!file?.id){
 					const formData = new FormData();
@@ -308,12 +308,12 @@ export const advertiser = {
 		const fileIds = uploadResponses?.map(response => response.data.id);
 
 		let requestData = {
-			"name": data.name,
-			"content": data.content,
+			"text": data.text,
 			"postUploadsIds": fileIds,
+			"moderationComment": 'f'
 		}
 
-		return instance.put('/campaigns/posts/' + data.id , requestData)
+		return instance.put('/campaigns/posts/' + data.id + '/content' , requestData)
 	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)

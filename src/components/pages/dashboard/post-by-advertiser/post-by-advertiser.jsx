@@ -64,7 +64,7 @@ export const PostByAdvertiser = () => {
               remarkPlugins={[remarkGfm]}
               rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}
             >
-              {post?.content}
+              {post?.text}
             </Markdown>
           </div>
         </DashboardCard>
