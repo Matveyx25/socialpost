@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo } from 'react'
 import { Editable, Slate, withReact } from 'slate-react'
 import { createEditor } from 'slate'
 import s from './RichText.module.scss'
-import { IconBold, IconInfoCircleFilled, IconItalic, IconLink, IconStrikethrough, IconUnderline } from "@tabler/icons-react";
+import { IconBold, IconEyeFilled, IconInfoCircleFilled, IconItalic, IconLink, IconStrikethrough, IconUnderline } from "@tabler/icons-react";
 import isHotkey from 'is-hotkey'
 import { useField } from 'formik'
 import { insertLink } from '../../../utils/rich-text-link'
@@ -52,6 +52,7 @@ export const RichText = ({name, label, required, withInfo}) => {
 							<MarkButton format="underline" icon={<IconUnderline size={16} stroke={3}/>}/>
 							<MarkButton format="italic" icon={<IconItalic size={16} stroke={3}/>}/>
 							<MarkButton format="bold" icon={<IconBold size={16} stroke={3}/>} />
+							<MarkButton format="spoiler" icon={<IconEyeFilled size={16} stroke={3}/>} />
 							<button className={s.menuItem} onClick={event => {
 								event.preventDefault()
 								const url = window.prompt('Введите URL:')

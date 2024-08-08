@@ -2,17 +2,13 @@ import React from 'react'
 import s from './report.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { IconChevronLeft, IconExternalLink } from '@tabler/icons-react'
-import Markdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import { Button } from '../../../Shared/Button/Button';
 import { NavLink, useOutletContext, useParams } from 'react-router-dom'
 import { usePublishersRequestById } from '../../../../hooks/usePublishersRequestById';
 import { ImageGrid } from 'react-fb-image-video-grid';
-import rehypeSlug from 'rehype-slug'
-import rehypeAutolinkHeadings from 'rehype-autolink-headings'
-import rehypeRaw from 'rehype-raw'
 import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { usePublisherAcceptRequest } from '../../../../hooks/usePublisherAcceptRequest';
+import { PostContent } from '../../../Shared/PostContent/PostContent'
 
 export const Report = () => {
 	const {requestId} = useParams()
@@ -44,14 +40,7 @@ export const Report = () => {
           ) : (
             ""
           )}
-          <div className={s.content}>
-            <Markdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}
-            >
-              {request?.postContent}
-            </Markdown>
-          </div>
+					<PostContent text={request?.postContent}/> 
 				</DashboardCard>
 			</div>
 				<DashboardCard>

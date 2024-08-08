@@ -16,11 +16,6 @@ import {
   IconPlayerPlayFilled,
 } from "@tabler/icons-react";
 
-import Markdown from "react-markdown";
-import rehypeSlug from "rehype-slug";
-import rehypeAutolinkHeadings from "rehype-autolink-headings";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
 import { useStartCPM } from "../../../../hooks/useStartCPM";
 import { usePauseCPM } from "../../../../hooks/usePauseCPM";
@@ -28,6 +23,7 @@ import { DefaultRequests } from "./DefaultRequests";
 import { CPMRequests } from "./CPMRequests";
 import { Dropdown } from '../../../Shared/Dropdown/Dropdown';
 import { IconPlayerStopFilled } from "@tabler/icons-react";
+import { PostContent } from "../../../Shared/PostContent/PostContent";
 
 export const PostByAdvertiser = () => {
   const [setModal] = useOutletContext();
@@ -59,14 +55,7 @@ export const PostByAdvertiser = () => {
           ) : (
             ""
           )}
-          <div className={s.content}>
-            <Markdown
-              remarkPlugins={[remarkGfm]}
-              rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}
-            >
-              {post?.text}
-            </Markdown>
-          </div>
+           <PostContent text={post?.text}/>
         </DashboardCard>
       </div>
       <div className={s.colLg}>
