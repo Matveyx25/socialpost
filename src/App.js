@@ -38,6 +38,7 @@ import { AdvertisingCompany } from "./components/pages/dashboard/advertising-com
 import { PostByAdvertiser } from "./components/pages/dashboard/post-by-advertiser/post-by-advertiser";
 import { AdvertiserCreateRequest } from "./components/pages/dashboard/advertiser-create-request/advertiser-create-request";
 import { FixedCPM } from "./components/pages/dashboard/fixed-cpm/fixed-cpm";
+import { PostByPublisher } from "./components/pages/dashboard/post-by-publisher/post-by-publisher";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -74,7 +75,7 @@ function App() {
 								<Route path="/placement-appointments" element={<Reports/>}/>
 								<Route path="/placement-appointments/:requestId" element={<Report/>}/>
 								<Route path="/fixed-cpm-campaigns" element={<FixedCPM/>}/>
-								<Route path="/fixed-cpm-campaigns/:campaignId" element={<FixedCPM/>}/>
+								<Route path="/fixed-cpm-campaigns/:postId" element={<PostByPublisher/>}/>
 								<Route path="/payments" element={<Payments/>}/>
 								<Route path="/requisites" element={<Requisites/>}/>
 							</> :

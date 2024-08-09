@@ -1,4 +1,3 @@
-import { Spoiler } from 'react-spoiler-tag';
 import { visit } from 'unist-util-visit';
 
 function isSpoilers(string) {

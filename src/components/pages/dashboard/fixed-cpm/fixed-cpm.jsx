@@ -3,7 +3,7 @@ import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Loader } from '../../../Shared/Loader/Loader'
 import { IconPlus, IconRefresh, IconSearch } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
-import { useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import s from './fixed-cpm.module.scss'
 import { Input } from '../../../Shared/Input/Input'
 import { usePublishersCPMs } from '../../../../hooks/usePublishersCPMs'
@@ -20,13 +20,7 @@ export const FixedCPM = () => {
 	})
 	
 	const [setModal] = useOutletContext()
-
-	// Название кампании
-	// Сроки
-	// Оставшиеся показы
-	// Показов всего
-	// Участники
-	// Ставка CPM
+	const navigate = useNavigate()
 
 	return (
     <div className={s.grid}>
@@ -43,68 +37,37 @@ export const FixedCPM = () => {
           <table className={s.table}>
             <thead>
               <tr>
-                <th>
+                <th className={s.th1}>
 									Название кампании
 								</th>
-                <th>
+                <th className={s.th2}>
 									Сроки
                 </th>
-                <th>
+                <th className={s.th3}>
 									Оставшиеся показы
                 </th>
-                <th>
-									Показов всего
+                <th className={s.th4}>
+									Показов всег
                 </th>
-                <th>
+                <th className={s.th5}>
 									Участники
                 </th>
-                <th>
+                <th className={s.th6}>
 									Ставка CPM
                 </th>
-                <th>
+                <th className={s.th7}>
 									
                 </th>
               </tr>
             </thead>
-						{/* {
-							"id": 0,
-							"name": "string",
-							"type": "NEW_POST",
-							"status": "NOT_MODERATED",
-							"cpmStatus": "INACTIVE",
-							"campaignId": 0,
-							"markingType": "NONE",
-							"cpmStartDate": "2024-08-06",
-							"cpmEndDate": "2024-08-06",
-							"cpmTags": [
-								"string"
-							],
-							"cpmChannelPostsLimit": 0,
-							"telegramPostUrl": "string",
-							"moderationComment": "string",
-							"declineReason": "string",
-							"cancelReason": "string",
-							"moneyBlocked": 0,
-							"totalMoneySpent": 0,
-							"cpmBudget": 0,
-							"cpmValue": 0,
-							"cpmViews": 0,
-							"totalRequestsCount": 0,
-							"pendingRequestsCount": 0,
-							"activeRequestsCount": 0,
-							"completedRequestsCount": 0,
-							"declinedRequestsCount": 0,
-							"expiredRequestsCount": 0
-						} */}
-							
 						<tbody>
 							{isFetched ? (
 								campaigns?.data.map((el) => (
 									<tr key={el.id}>
-										<td>
+										<td className={s.td1}>
 											<div className={s.center}>{el.name}</div>
 										</td>
-										<td>
+										<td className={s.td2}>
 												{new Date(el.cpmStartDate).toLocaleDateString("ru-RU", {
 													formatMatcher: "basic",
 												}) +
@@ -113,20 +76,29 @@ export const FixedCPM = () => {
 													formatMatcher: "basic",
 												})}
 										</td>
-										<td>
+										<td className={s.td3}>
 											<div className={s.center}>{el.cpmChannelPostsLimit - el.cpmViews}</div>
 										</td>
-										<td>
+										<td className={s.td4}>
 											<div className={s.center}>{el.cpmViews}</div>
 										</td>
-										<td>
+										<td className={s.td5}>
 											<div className={s.center}>-</div>
 										</td>
-										<td>
+										<td className={s.td6}>
 											<div className={s.center}>{el.cpmValue}</div>
 										</td>
-										<td>
-											<div className={s.center}></div>
+										<td className={s.td7}>
+											<div className={s.end}>
+													<Button
+														label={"Принять участие"}
+														size="small"
+														onClick={(event) => {
+															event.stopPropagation();
+															navigate("./" + el.id);
+														}}
+													/>
+											</div>
 										</td>
 									</tr>
 								))

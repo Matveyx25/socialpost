@@ -5,13 +5,13 @@ import { useParams } from "react-router-dom";
 import { CustomEmpty } from "../CustomEmpty";
 
 const renderTags = (record) => {
-	if (!record?.tag || record?.tag === '') {
+	if (!record?.tags || record?.tags?.length <= 0) {
 		return null; 
 	}
 
-	const tags = record?.tag.split(';');
+	const tags = record?.tags;
 	
-	return tags.map((tag, index) => (
+	return tags?.map((tag, index) => (
 				<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < tags?.length - 1 ? 1 : 0, marginBottom: 1  }}/>
 		))
 };
@@ -40,7 +40,7 @@ export const Channels = () => {
 			 <TextField source="averagePostReach" label="Средний охват поста"/>
 			 <FunctionField label="Фото" source="imageUrl" render={renderPhoto}/>
 			 <FunctionField label="Подтвержден" source="status" render={renderStatus}/>
-			 <FunctionField label="Тэг" source="tag" render={renderTags}/>
+			 <FunctionField label="Тэги" source="tags" render={renderTags}/>
 			 <UrlField label="Ссылка" source="telegramUrl"/>
 		 </Datagrid>
 	 </List>

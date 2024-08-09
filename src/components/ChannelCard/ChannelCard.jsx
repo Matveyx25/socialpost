@@ -15,7 +15,6 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
   const {
     name,
     id,
-    tag,
     description,
     subscribersCount,
     averagePostReach,
@@ -77,8 +76,8 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
                 {name}
               </NavLink>
               <h2>
-  							{channel?.tag && 
-  								channel?.tag.split(';').map(el => 
+  							{channel?.tags && 
+  								channel?.tags?.map(el => 
   								<span>{el}</span>)}
   						</h2>
             </div>

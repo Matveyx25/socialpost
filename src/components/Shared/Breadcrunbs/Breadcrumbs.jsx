@@ -41,7 +41,7 @@ const publisherRoutes = [
 	{path: '/faq/', breadcrumb: 'FAQ'},
 	{path: '/support/', breadcrumb: 'Поддержка'},
 	{path: '/fixed-cpm-campaigns/', breadcrumb: 'Кампании с фиксированным CRM'},
-	{path: '/fixed-cpm-campaigns/:companyId', breadcrumb: DynamicCampaign},
+	{path: '/fixed-cpm-campaigns/:postId', breadcrumb: DynamicCampaign},
 ]
 
 const advertiserRoutes = [
