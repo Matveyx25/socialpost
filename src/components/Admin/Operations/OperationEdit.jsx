@@ -11,6 +11,9 @@ const renderType = (record) => {
 		'WITHDRAWAL_SELF_EMPLOYED': 'Вывод у самозанятого',
 		'WITHDRAWAL_IE': 'Вывод у ИП',
 		'WITHDRAWAL_LEGAL_ENTITY': 'Вывод у ЮЛ',
+		"CAMPAIGN_POST_REQUEST_INCOME": 'Запрос на поступление от РК',
+		"CAMPAIGN_POST_REQUEST_PAYMENT": 'Запрос на оплату РК',
+		"REPLENISHMENT_REQUEST": 'Запрос на пополнение',
 	}
 
 	return <TextField record={{type: types[type]}} source="type"/>

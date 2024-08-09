@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import * as React from "react";
 import {
   Create,
+  ReferenceInput,
   SelectInput,
   SimpleForm,
   TextInput,
@@ -9,15 +10,12 @@ import {
 } from "react-admin";
 
 export const OperationCreate = () => (
-  <Create>
+  <Create title={'Создание выплаты'}>
     <SimpleForm sx={{ maxWidth: 300 }}>
 			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-				<TextInput
-					source="userId"
-					validate={[required()]}
-					fullWidth
-					label="ID пользователя"
-				/>
+				<ReferenceInput source="userId" reference="users" label="ID пользователя" fullWidth>
+					<SelectInput placeholder="Пользователь"/>
+				</ReferenceInput>
 			</Box>
 			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 				<SelectInput
@@ -29,6 +27,9 @@ export const OperationCreate = () => (
 						{ id: "WITHDRAWAL_SELF_EMPLOYED", name: "Вывод у самозанятого" },
 						{ id: "WITHDRAWAL_IE", name: "Вывод у ИП" },
 						{ id: "WITHDRAWAL_LEGAL_ENTITY", name: "Вывод у ЮЛ" },
+						{ id: "CAMPAIGN_POST_REQUEST_INCOME", name: "Запрос на поступление от РК" },
+						{ id: "CAMPAIGN_POST_REQUEST_PAYMENT", name: "Запрос на оплату РК" },
+						{ id: "REPLENISHMENT_REQUEST", name: "Запрос на пополнение" },
 					]}
 				/>
 			</Box>

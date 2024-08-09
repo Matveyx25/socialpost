@@ -4,7 +4,7 @@ import { List, Datagrid, TextField, FunctionField, ChipField, UrlField } from "r
 import { CustomEmpty } from '../CustomEmpty';
 
 const renderTags = (record) => {
-	if (!record?.tag || record?.tag === '') {
+	if (!record?.tags || record?.tags?.length <= 0) {
 		return null; 
 	}
 
@@ -36,7 +36,7 @@ export const ChannelsList = (props) => (
       <TextField source="averagePostReach" label="Средний охват поста"/>
 			<FunctionField label="Фото" source="imageUrl" render={renderPhoto}/>
     	<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
-			<FunctionField label="Тэг" source="tags" render={renderTags}/>
+			<FunctionField label="Тэги" source="tags" render={renderTags}/>
 			<UrlField label="Ссылка" source="telegramUrl"/>
     </Datagrid>
   </List>
