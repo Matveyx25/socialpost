@@ -345,16 +345,6 @@ export const advertiser = {
 	createClient(data) {
 		return instance.post('/campaigns/clients/my', data)
 	},
-	getCanPublishChannels(params) {
-		return instance.get('/channels/can_publish_in', {
-			params: {
-				ids: params
-			},
-			paramsSerializer: {
-				indexes: null
-			}
-		})
-	},
 	declinePostRequest(data) {
 		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})
 	},

@@ -9,7 +9,6 @@ import { Filters } from "./filter";
 import { Loader } from "../../../Shared/Loader/Loader";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { priceSeparator } from "../../../../helpers/priceSeparator";
-import { useChannelsCanPublishIn } from "../../../../hooks/useChannelsCanPublishIn";
 import { useAddPostAllRequests } from "../../../../hooks/useAddPostAllRequests";
 import { Field, Form, Formik } from "formik";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
@@ -22,15 +21,10 @@ export const AdvertiserCreateRequest = () => {
   const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [timeRange, setTimeRange] = useState([null, null]);
-	const [channelsIdsForPublish, setChannelsIdsForPublish] = useState()
 	
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();
   const { mutate: createRequestsAll } = useAddPostAllRequests();
-
-  const { data: canPublishIds } = useChannelsCanPublishIn(
-    channels?.data?.map((el) => el.id)
-  );
 
   const onFilterSubmit = (f) => {
     setFilters({
@@ -46,16 +40,6 @@ export const AdvertiserCreateRequest = () => {
     });
     refetch();
   };
-
-	useEffect(() => {
-		if(canPublishIds?.length && channels?.data?.length){
-			setChannelsIdsForPublish([...channels.data].map((el, i) => {
-				if(canPublishIds[i] === true){
-					return el.id
-				}
-			}))
-		}
-	}, [canPublishIds, channels])
 
   const onSubmitRequestToAll = () => {
     if (dateRange[0] && dateRange[1] && timeRange[0] && timeRange[1]) {
@@ -129,8 +113,7 @@ export const AdvertiserCreateRequest = () => {
                   !dateRange[0] ||
                   !dateRange[1] ||
                   !timeRange[0] ||
-                  !timeRange[1] ||
-                  channelsIdsForPublish?.length <= 0
+                  !timeRange[1]
                 }
               />
             </div>
@@ -153,15 +136,12 @@ export const AdvertiserCreateRequest = () => {
 										<Button
 												size="small"
 												theme="secondary"
-												disabled={values.checkboxes?.findIndex(el => channelsIdsForPublish?.includes(el)) === -1}
 												label={"Разместить в выбранных"}
 												onClick={(e) => {
 													e.preventDefault();
 													e.stopPropagation();
 													values.checkboxes.forEach(el => {
-														if(channelsIdsForPublish?.includes(el)){
-															request(el)
-														}
+														request(el)
 													})
 													setFieldValue("checkboxes", []);
 												}}
@@ -242,11 +222,9 @@ export const AdvertiserCreateRequest = () => {
                             </td>
                             <td>
                               <div className={s.end}>
-                                {canPublishIds && (
                                   <Button
                                     size="small"
                                     theme="secondary"
-                                    disabled={!canPublishIds[index]}
                                     label={"Разместить"}
                                     onClick={(e) => {
                                       e.preventDefault();
@@ -254,7 +232,6 @@ export const AdvertiserCreateRequest = () => {
                                       request(el.id);
                                     }}
                                   />
-                                )}
                               </div>
                             </td>
                           </tr>
