@@ -53,12 +53,12 @@ export const RangeCalendar = ({dateRange, setDateRange, inputsWrapperClassName, 
 				onChange={(update) => {
 					setDateRange(update);
 				}}
-				locale="ru"
 				customInput={<ExampleCustomInput />}
 				calendarClassName={s.wrapper}
 				renderCustomHeader={CalendarHeader}
 				calendarContainer={MyContainer}
 				shouldCloseOnSelect={false}
+				dateFormat={'dd.MM.yyyy'}
 			/>
 	)
 }

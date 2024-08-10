@@ -26,7 +26,7 @@ export const Select = ({styles, headerClassName, value, lastElement, label, requ
 			isSearchable={false}
 			isMulti={isMulti}
 			isDisabled={disabled}
-			value={value}
+			value={options?.find(_ => _.value === value)}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
 				DropdownIndicator: () => <IconChevronDown className={s.icon}/>,

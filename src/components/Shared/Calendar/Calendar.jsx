@@ -42,6 +42,7 @@ export const Calendar = ({placeholder, className, label, disabled, inputClassNam
 					renderCustomHeader={CalendarHeader}
 					calendarContainer={MyContainer}
 					disabled={disabled}
+					dateFormat={'dd.MM.yyyy'}
 					{...props}
 				/>
 		</div>

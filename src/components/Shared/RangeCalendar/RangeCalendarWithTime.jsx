@@ -1,6 +1,6 @@
 import React, { forwardRef, useRef, useState } from "react";
 import s from "./RangeCalendar.module.scss";
-import ReactDatePicker, { CalendarContainer } from "react-datepicker";
+import ReactDatePicker, { CalendarContainer, registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   IconCalendarUp,
@@ -11,7 +11,6 @@ import {
 import { CalendarHeader } from "./CalendarHeader";
 import { Button } from "../Button/Button";
 import classNames from "classnames";
-import { ru } from "date-fns/locale";
 import { add, min, startOfDay, endOfDay, isToday, isValid, addHours, isEqual, subDays } from "date-fns";
 import TimePicker from "react-time-picker";
 import "react-time-picker/dist/TimePicker.css";
@@ -136,7 +135,7 @@ export const RangeCalendarWithTime = ({
         renderCustomHeader={CalendarHeader}
         calendarContainer={MyContainer}
         shouldCloseOnSelect={false}
-        locale={ru}
+        dateFormat={'dd.MM.yyyy'}
       />
     </div>
   );

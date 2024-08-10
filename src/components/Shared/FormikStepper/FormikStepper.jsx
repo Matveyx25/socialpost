@@ -33,7 +33,7 @@ const MyForm = ({currentChild, isLastStep, ...props}) => {
 						}}}
 				/>
 				<Button
-					label={isLastStep() ? "Создать кампанию" : "Далее"}
+					label={isLastStep() ? props?.btnLabel : "Далее"}
 					className={s.btnHalf}
 					disabled={!dirty || !isValid}
 					type="submit"

@@ -33,7 +33,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let data = null
 		
 		const markdownContent = values.text.map(el => serialize(el)).join('')
-		data = {id: modalParams?.editPostId, name: values?.name, text: markdownContent, files}
+		data = {id: modalParams?.editPostId, text: markdownContent, files}
 
 		updatePost(data);
     setOpen();
@@ -57,7 +57,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 								<IconX size={20}/>
 							</button>
 						</div>
-						<img src={file?.fileUrl ? file?.fileUrl : URL?.createObjectURL(file)} alt={`preview-${index}`} style={{ width: '100px', height: 'auto' }} />
+						<img src={file?.fileUrl ? file?.fileUrl : URL?.createObjectURL(file)} alt={`preview-${index}`}/>
 					</div>
 			));
 	};
@@ -76,7 +76,6 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
     >
      <Formik
         initialValues={{
-          name: post?.name,
           text: post?.text ? processor.processSync(post?.text).result : '',
           markingType: "NONE",
           id: modalParams?.editPostId,
@@ -87,7 +86,6 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
         }}
 				validationSchema={Yup.object().shape({
 					id: Yup.string().required("Выберите РК"),
-					name: Yup.string().required("Заполните поле"),
 					text: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
 						slateValueValidator(value)
 					)
@@ -96,15 +94,6 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 				<Form>
             <div className={s.scroller}>
               <div className={s.form}>
-								<div className={s.input}>
-									<InputField
-										label={"Название"}
-										required
-										placeholder={"Название"}
-										id="name"
-										name="name"
-									/>
-								</div>
                 <div className={s.input}>
                   <RichText name={"text"} label={"Текст записи"} />
                 </div>

@@ -33,7 +33,7 @@ export const DefaultRequests = ({ post, postId }) => {
     {
       label: "Выполненные",
       count: post?.completedRequestsCount,
-      value: "",
+      value: "COMPLETED",
       id: 2,
     },
     {

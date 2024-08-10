@@ -20,10 +20,10 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
   };
 
   useEffect(() => {
-    return () => {
-      setCurrentStep(0);
-    };
-  }, []);
+		if(isOpen !== "add-my-client"){
+			setCurrentStep(0);
+		}
+  }, [isOpen]);
 
   return (
     <Modal
@@ -34,6 +34,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
       name={"add-my-client"}
     >
       <FormikStepper
+				btnLabel="Создать клиента"
         initialValues={{
           name: "",
           type: "",

@@ -98,3 +98,14 @@ code {
 .RaLayout-appFrame{
 	width: 100%;
 }
+
+.spoiler-text{
+	padding: 0.125rem;
+	border-radius: 4px;
+	background: #4F5157;	
+	color: #4F5157;
+}
+.spoiler-text:hover{
+	background: #E9EAEA;
+	transition: .3s;
+}

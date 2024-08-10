@@ -40,7 +40,7 @@ export const Report = () => {
           ) : (
             ""
           )}
-					<PostContent text={request?.postContent}/> 
+					<PostContent text={request?.postText}/> 
 				</DashboardCard>
 			</div>
 				<DashboardCard>

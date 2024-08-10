@@ -102,16 +102,18 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 								<IconX size={20}/>
 							</button>
 						</div>
-						<img src={URL.createObjectURL(file)} alt={`preview-${index}`} style={{ width: '100px', height: 'auto' }} />
+						<img src={URL.createObjectURL(file)} alt={`preview-${index}`}/>
 					</div>
 			));
 	};
 
+  
   useEffect(() => {
-    return () => {
-      setCurrentStep(0);
-    };
-  }, []);
+		if(isOpen !== "add-post"){
+			setCurrentStep(0);
+			setFiles([])
+		}
+  }, [isOpen]);
 
   return (
     <Modal
@@ -120,9 +122,10 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
       name={"add-post"}
     >
       <FormikStepper
+				btnLabel='Создать запись'
         initialValues={{
           name: "",
-          type: "NEW_POST",
+          type: post?.type === 'FIXED_CPM' ? "NEW_POST" : '',
           text: "",
           telegramPostUrl: "",
           markingType: "NONE",
@@ -157,7 +160,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 								)
 								.required('Выберите диапазон дат'),
 							cpmTags: Yup.array()
-						} : {type: Yup.string().required("Выберите тип клиента")})
+						} : {type: Yup.string().required("Выберите тип записи")})
 					})}
         >
           <div className={s.form}>
@@ -216,7 +219,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 									required={true}
 									placeholder={"Тип записи"}
 									fullWidth={true}
-									defaultValue={value}
+									value={value}
 									isMulti={false}
 									setSelectedOption={(v) => {
 										setFieldValue("type", v.value);
@@ -238,7 +241,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
                       placeholder={"Маркировка"}
                       fullWidth={true}
                       isMulti={false}
-                      defaultValue={value}
+                      value={value}
                       setSelectedOption={(v) => {
                         setFieldValue("markingType", v.value);
                       }}

@@ -19,7 +19,7 @@ export const Leaf = ({ attributes, children, leaf }) => {
   }
   
 	if (leaf.spoiler) {
-    children = <Spoiler>{children}</Spoiler>
+    children = <span className={'spoiler-text'}>{children}</span>
   }
 
   if (leaf.strikeThrough) {

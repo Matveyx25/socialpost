@@ -14,7 +14,7 @@ export const OperationCreate = () => (
     <SimpleForm sx={{ maxWidth: 300 }}>
 			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
 				<ReferenceInput source="userId" reference="users" label="ID пользователя" fullWidth>
-					<SelectInput placeholder="Пользователь"/>
+					<SelectInput placeholder="Пользователь" optionText="firstName"/>
 				</ReferenceInput>
 			</Box>
 			<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>

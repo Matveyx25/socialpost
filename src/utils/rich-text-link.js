@@ -12,7 +12,7 @@ export const insertLink = (editor, url) => {
   if (!url) return;
 
   const { selection } = editor;
-  const link = createLinkNode(url, "New Link");
+  const link = createLinkNode(url, url);
 
   ReactEditor.focus(editor);
 
