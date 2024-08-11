@@ -11,6 +11,7 @@ import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
 import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
+import { formatDate } from 'date-fns'
 
 const tabs = [
 	{label: 'Ожидают публикации', id: 0, value: 'PENDING'},
@@ -125,12 +126,12 @@ export const Reports = () => {
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.publishStartDate}
+												{formatDate(el.publishTime)}
 											</div>
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.completionTime ? 'Выполнено' : '-'}
+												{formatDate(el.completionTime)}
 											</div>
 										</td>
 										<td>

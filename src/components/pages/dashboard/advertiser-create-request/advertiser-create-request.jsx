@@ -20,7 +20,7 @@ export const AdvertiserCreateRequest = () => {
   const { postId } = useParams();
   const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
-  const [timeRange, setTimeRange] = useState([null, null]);
+  const [timeRange, setTimeRange] = useState(["00:00", "00:00"]);
 	
   const { data: channels, isFetched, refetch } = useChannels({ ...filters });
   const { mutate: createRequest } = useAddPostRequest();

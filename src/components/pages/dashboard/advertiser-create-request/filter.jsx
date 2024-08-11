@@ -1,56 +1,10 @@
 import React, { useState } from 'react'
 import s from './filter.module.scss'
-import { IconChevronRight, IconReload, IconSearch } from '@tabler/icons-react';
-import {  RangeInputsField } from '../../../Filters/RangeInputs';
+import { IconReload, IconSearch } from '@tabler/icons-react';
 import { Button } from '../../../Shared/Button/Button';
 import { InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
-import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar';
-import { Calendar } from '../../../Shared/Calendar/Calendar';
 import { RangeCalendarWithTime } from '../../../Shared/RangeCalendar/RangeCalendarWithTime';
-
-export const filterSubsScales = [
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-	{value: 1000},
-	{value: 1200},
-	{value: 1420},
-	{value: 1620},
-	{value: 1620},
-	{value: 1420},
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-	{value: 1000},
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-	{value: 1000},
-	{value: 1200},
-	{value: 1420},
-	{value: 1620},
-	{value: 1620},
-	{value: 1420},
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-	{value: 1140},
-	{value: 1000},
-	{value: 1000},
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-	{value: 1000},
-	{value: 1200},
-	{value: 1420},
-	{value: 1620},
-	{value: 1620},
-	{value: 1420},
-	{value: 1256},
-	{value: 1140},
-	{value: 1000},
-]
 
 export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, setDateRange}) => {
 	const [isSended, set_isSended] = useState(false)

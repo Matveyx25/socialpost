@@ -1,12 +1,42 @@
 import { Box, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, ArrayInput, SimpleFormIterator } from "react-admin";
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, ArrayInput, SimpleFormIterator, SelectArrayInput } from "react-admin";
 import { ImageGrid } from 'react-fb-image-video-grid';
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import s from './style.module.scss'
+import { useEffect } from "react";
+import { channels } from "../../../api/api";
+import { useState } from "react";
+
+
+const CpmTags = () => {
+	const [tags, setTags] = useState([])
+	const record = useRecordContext()
+
+	useEffect(() => {
+		channels.getAllTags().then(res => {
+			setTags(res.data.data.map(el => ({name: el, id: el})))
+		})
+	}, [])
+
+	if(!record?.cpmStatus){
+		return null
+	}
+
+	return (
+		<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+				<Box flex={1}>
+					<Typography variant="h6" gutterBottom>
+						Тэги CPM
+					</Typography>
+					<SelectArrayInput fullWidth label="Тэги CPM" source="cpmTags" choices={tags} />
+				</Box>
+		</Box>
+	)
+}
 
 const renderType = (record) => ({
 	NEW_POST: "Новая запись",
@@ -86,18 +116,7 @@ export const AdvertiserPostsEdit = (props) => (
 						</Labeled>
 					</Box>
 				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1}>
-							<Typography variant="h6" gutterBottom>
-								Тэги CPM
-							</Typography>
-							<ArrayInput source="cpmTags">
-								<SimpleFormIterator>
-									<TextInput />
-								</SimpleFormIterator>
-							</ArrayInput>
-						</Box>
-				</Box>
+				<CpmTags/>
 			</SimpleForm>
 		</Box>
   </Edit>
