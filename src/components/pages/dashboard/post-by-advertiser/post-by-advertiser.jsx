@@ -46,9 +46,9 @@ export const PostByAdvertiser = () => {
             <div className={s.preview}>
               <ImageGrid showModal={false}>
                 {post?.uploads?.map((img) => (
-                  <div>
+                  <a href={img.fileUrl} target="_blank">
                     <img src={img.thumbnailUrl} alt="" />
-                  </div>
+                  </a>
                 ))}
               </ImageGrid>
             </div>

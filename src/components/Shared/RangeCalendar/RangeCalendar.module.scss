@@ -9,22 +9,6 @@
 	border-radius: 0.5rem;
 	border: 1px solid $gray-100;
 	background: #FFF;
-	&.withTime{
-		.calendarInput{
-			width: 6rem !important;
-		}
-		.timeInput{
-			font-size: 1rem;
-			font-style: normal;
-			font-weight: 400;
-			padding: 0;
-			letter-spacing: 0.02rem;
-			border: 0;
-			background: none;
-			outline: none;
-			width: 3rem;
-		}
-	}
 	.calendarInput{
 		font-size: 1rem;
 		font-style: normal;
@@ -34,10 +18,10 @@
 		border: 0;
 		background: none;
 		outline: none;
-		width: 4.8125rem !important;
+		width: 4.8125rem;
 	}
-	.timeInputWrapper{
-
+	&.timeRangeWrapper{
+		margin-top: 1rem;
 	}
 	.calendarGroupTimeInput{
 		gap: 0 !important;

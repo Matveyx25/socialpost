@@ -4,7 +4,8 @@ import { IconReload, IconSearch } from '@tabler/icons-react';
 import { Button } from '../../../Shared/Button/Button';
 import { InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
-import { RangeCalendarWithTime } from '../../../Shared/RangeCalendar/RangeCalendarWithTime';
+import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar';
+import { TimeRange } from '../../../Shared/RangeCalendar/TimeRange';
 
 export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, setDateRange}) => {
 	const [isSended, set_isSended] = useState(false)
@@ -80,9 +81,10 @@ export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, set
 					/>
 					<div className={s.inputsGroup}>
 						<h5 className={s.calendarLabel}>Диапазон размещения</h5>
-						
-						<RangeCalendarWithTime {...{dateRange, setDateRange, timeRange, setTimeRange}}
+						<RangeCalendar {...{dateRange, setDateRange}}
 						minDate={minDate}
+						inputsWrapperClassName={s.calendarInputs}/>
+						<TimeRange {...{dateRange, timeRange, setTimeRange}}
 						inputsWrapperClassName={s.calendarInputs}/>
 					</div>
 					<span className={s.line}></span>
