@@ -306,14 +306,14 @@ export const advertiser = {
 
 		const uploadResponses = await Promise.all(uploadPromises);
 		const fileIds = uploadResponses?.map(response => response.data.id);
+		
+		debugger
 
-		let requestData = {
+		return instance.put('/campaigns/posts/' + data.id + '/content' , {
 			"text": data.text,
 			"postUploadsIds": fileIds,
-			"moderationComment": 'f'
-		}
-
-		return instance.put('/campaigns/posts/' + data.id + '/content' , requestData)
+			"moderationComment": ' '
+		})
 	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)

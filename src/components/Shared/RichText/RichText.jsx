@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { memo, useCallback, useEffect, useMemo } from 'react'
 import { Editable, Slate, withReact } from 'slate-react'
 import { createEditor } from 'slate'
 import s from './RichText.module.scss'
@@ -13,7 +13,7 @@ import { MarkButton } from './Elements/MarkButton';
 import { Leaf } from './Elements/Leaf';
 import { Element } from './Elements/Element';
 
-export const RichText = ({name, label, required, withInfo}) => {
+export const RichText = memo(({name, label, required, withInfo}) => {
 	const renderElement = useCallback(props => <Element {...props} />, [])
   const renderLeaf = useCallback(props => <Leaf {...props} />, [])
 
@@ -24,12 +24,14 @@ export const RichText = ({name, label, required, withInfo}) => {
   const { setValue } = helpers;
 
   useEffect(() => {
-    setValue([
-      {
-        type: "paragraph",
-        children: [{ text: "Type something ..." }],
-      },
-    ]);
+		if(!value){
+			setValue([
+				{
+					type: "paragraph",
+					children: [{ text: "Type something ..." }],
+				},
+			]);
+		}
   }, []);
 	
 	return (
@@ -83,7 +85,7 @@ export const RichText = ({name, label, required, withInfo}) => {
 			</div>
 		</div>
 	)
-}
+})
 
 const HOTKEYS = {
   'mod+b': 'bold',

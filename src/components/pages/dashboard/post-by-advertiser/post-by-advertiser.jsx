@@ -39,7 +39,7 @@ export const PostByAdvertiser = () => {
       <div className={s.colSm}>
         <DashboardCard>
           <div className={s.cardHeader}>{post?.name}
-						<Button label={'Редактировать'} onClick={() => setModal('edit-post-modal', {editPostId: postId})} theme="secondary" size="small"/>
+						{post?.status !== 'MODERATING' && <Button label={'Редактировать'} onClick={() => setModal('edit-post-modal', {editPostId: postId})} theme="secondary" size="small"/>}
 					</div>
           <div className={s.line}></div>
           {post?.uploads.length ? (
