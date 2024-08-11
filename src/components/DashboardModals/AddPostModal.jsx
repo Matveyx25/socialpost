@@ -304,7 +304,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
             validationSchema={Yup.object().shape({
               telegramPostUrl: Yup.string()
                 .matches(
-                  /^https:\/\/t\.me\/[a-zA-Z0-9]+\/\d+$/,
+                  /^https:\/\/t\.me\/[\w]+\/\w+(\/*\w+)?$/,
                   "Ссылка на пост не валидна"
                 )
                 .required("Заполните поле"),
