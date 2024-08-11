@@ -1,6 +1,6 @@
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, memo, useMemo, useRef } from "react";
 import s from "./RangeCalendar.module.scss";
-import ReactDatePicker, { CalendarContainer, registerLocale } from "react-datepicker";
+import ReactDatePicker, { CalendarContainer } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
   IconCalendarUp,
@@ -11,9 +11,7 @@ import {
 import { CalendarHeader } from "./CalendarHeader";
 import { Button } from "../Button/Button";
 import classNames from "classnames";
-import { add, min, startOfDay, endOfDay, isToday, isValid, addHours, isEqual, subDays } from "date-fns";
-import TimePicker from "react-time-picker";
-import "react-time-picker/dist/TimePicker.css";
+import { add, min, startOfDay, endOfDay, isValid, addHours, isEqual, subDays } from "date-fns";
 
 export const RangeCalendarWithTime = ({
   dateRange,
@@ -45,40 +43,50 @@ export const RangeCalendarWithTime = ({
 
   const minTimeForFirstCalendar = isTodayOrNotSet(startDate)
     ? addHours(new Date(), 5).toTimeString().split(' ')[0]
-    : "00:00:00";
+    : "00:00";
+
+	const TimeInput = memo(({value, setValue}) => {
+		return (
+			<input
+				type="time"
+				value={value}
+				onChange={(e) => {
+					if(e?.target?.value){
+						setValue(e.target.value)
+					}
+				}}
+				onClick={(e) => e.stopPropagation()}
+				className={s.timeInput}
+			/>
+		)
+	})
 
   const ExampleCustomInput = forwardRef(({ value, onClick, isOpen }, ref) => (
     <div
-      className={classNames(s.inputsWrapper, inputsWrapperClassName)}
-      onClick={onClick}
+      className={classNames(
+        s.inputsWrapper,
+        s.withTime,
+        inputsWrapperClassName
+      )}
       ref={ref}
+			onClick={onClick}
     >
       <IconCalendarUp size={20} color="#919396" />
-      <input value={value?.split("-")[0] || value} placeholder="От" className={s.calendarInput}/>
-      <TimePicker
-				maxDetail="minute"
-        disableClock
-        format="HH:mm"
-        className={s.timeInput}
-				onClick={e => e.stopPropagation()}
-        onChange={(v) => v && setTimeRange((prev) =>  [v, prev[1]])}
-				minTime={minTimeForFirstCalendar}
-        value={timeRange[0]}
+      <input
+        value={value?.split("-")[0] || value}
+        placeholder="От"
+        className={s.calendarInput}
       />
+      <TimeInput value={timeRange[0]} setValue={(v) => setTimeRange(prev => [v, prev[1]])}/> 
       <IconCalendarDown size={20} color="#919396" />
-      <input value={value?.split("-")[1]} placeholder="До" className={s.calendarInput}/>
-      <TimePicker
-				maxDetail="minute"
-        disableClock
-        format="HH:mm"
-				onClick={e => e.stopPropagation()}
-        className={s.timeInput}
-        onChange={(v) => v && setTimeRange((prev) => [prev[0], v])}
-				minTime={timeRange[0]}
-        value={timeRange[1]}
+      <input
+        value={value?.split("-")[1]}
+        placeholder="До"
+        className={s.calendarInput}
       />
+			<TimeInput value={timeRange[1]} setValue={(v) => setTimeRange(prev => [prev[0], v])}/> 
       {!calendar.current?.state.open ? (
-        <IconChevronRight size={18} color="#919396" />
+        <IconChevronRight onClick={onClick} size={18} color="#919396" />
       ) : (
         <IconChevronUp size={18} color="#919396" />
       )}
