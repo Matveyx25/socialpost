@@ -11,7 +11,6 @@ import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
 import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
-import { formatDate } from 'date-fns'
 
 const tabs = [
 	{label: 'Ожидают публикации', id: 0, value: 'PENDING'},
@@ -44,6 +43,24 @@ export const Reports = () => {
 		setSelectedChannel(null)
 		setDateRange([null, null])
 	}
+
+
+  function formatDate(input) {
+    if (!input) {
+      return "-";
+    }
+    const date = new Date(input);
+
+    return date.toLocaleTimeString("ru-RU", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  }
+
 
 	return (
 		<div className={s.grid}>
