@@ -322,6 +322,9 @@ export const advertiser = {
 			cpmValue: data.cpmValue,
 		})
 	},
+	getRequestsStats(){
+		return instance.get('/campaigns/posts/requests/my_stats')
+	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)
 	},

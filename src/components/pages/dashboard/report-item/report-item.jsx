@@ -1,14 +1,15 @@
 import React from 'react'
 import s from './report-item.module.scss'
 import { IconPointerQuestion } from '@tabler/icons-react'
+import { NavLink } from 'react-router-dom'
 
-export const ReportItem = ({title, link}) => {
+export const ReportItem = ({request}) => {
 	return (
-		<div className={s.wrapper}>
+		<NavLink className={s.wrapper} to={'./placement-appointments/' + request?.id}>
 			<div className={s.icon}>
 				<IconPointerQuestion/>
 			</div>
-			{title}
-		</div>
+			{request?.postName}
+		</NavLink>
 	)
 }

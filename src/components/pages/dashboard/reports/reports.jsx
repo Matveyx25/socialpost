@@ -11,22 +11,24 @@ import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
 import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
-
-const tabs = [
-	{label: 'Ожидают публикации', id: 0, value: 'PENDING'},
-	{label: 'Активные', id: 1, value: 'ACTIVE'},
-	{label: 'Выполненные', id: 2, value: 'COMPLETED'},
-	{label: 'Отклоненные', id: 3, value: 'DECLINED'},
-	{label: 'Невыполненные', id: 4, value: 'EXPIRED'}
-]
+import { useRequestsStats } from '../../../../hooks/useRequestsStats'
 
 export const Reports = () => {
-	const [tab, setTab] = useState(tabs[0].id)
 	const [selectedChannel, setSelectedChannel] = useState(null)
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
 	const [dateRange, setDateRange] = useState([null, null])
+	const {data: requestsStats} = useRequestsStats()
 
+	const tabs = [
+		{label: 'Ожидают публикации', id: 0, count: requestsStats?.pendingCount, value: 'PENDING'},
+		{label: 'Активные', id: 1, count: requestsStats?.activeCount, value: 'ACTIVE'},
+		{label: 'Выполненные', id: 2, count: requestsStats?.completedCount, value: 'COMPLETED'},
+		{label: 'Отклоненные', id: 3, count: requestsStats?.declinedCount, value: 'DECLINED'},
+		{label: 'Невыполненные', id: 4, count: requestsStats?.expiredCount, value: 'EXPIRED'}
+	]
+
+	const [tab, setTab] = useState(tabs[0].id)
 
 	const {data: requests} = usePublishersRequests({
     _start: (page - 1) * 30,

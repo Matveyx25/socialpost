@@ -6,26 +6,34 @@ import { IconPlus } from '@tabler/icons-react';
 import { ChannelItem } from './channel-item';
 import { Tabs } from '../../Shared/Tabs/Tabs';
 import { ReportItem } from './report-item/report-item';
-import { useOutletContext } from 'react-router-dom';
+import { useNavigate, useOutletContext } from 'react-router-dom';
 import { useMyChannels } from '../../../hooks/useMyChannels';
 import { useProfile } from '../../../hooks/useProfile';
 import { priceSeparator } from '../../../helpers/priceSeparator';
-
-const tabs = [
-	{label: 'Запросы', count: 4, id: 5},
-	{label: 'Ожидают публикации', count: 2, id: 6},
-	{label: 'Активные', count: 1, id: 7},
-	{label: 'Выполненные', count: 14, id: 8},
-	{label: 'Отклоненные', count: 48, id: 9},
-	{label: 'Невыполненные', count: 0, id: 10}
-]
+import { usePublishersRequests } from '../../../hooks/usePublishersRequests';
+import { useRequestsStats } from '../../../hooks/useRequestsStats';
 
 export const MainDashboard = () => {
-	const [tab, setTab] = useState(tabs[0].id)
-
 	const [setModal] = useOutletContext()
 	const {data: channels} = useMyChannels()
 	const {data: profile} = useProfile()
+	const {data: requestsStats} = useRequestsStats()
+
+	const tabs = [
+		{label: 'Ожидают публикации', id: 0, count: requestsStats?.pendingCount, value: 'PENDING'},
+		{label: 'Активные', id: 1, count: requestsStats?.activeCount, value: 'ACTIVE'},
+		{label: 'Выполненные', id: 2, count: requestsStats?.completedCount, value: 'COMPLETED'},
+		{label: 'Отклоненные', id: 3, count: requestsStats?.declinedCount, value: 'DECLINED'},
+		{label: 'Невыполненные', id: 4, count: requestsStats?.expiredCount, value: 'EXPIRED'}
+	]
+
+	const [tab, setTab] = useState(tabs[0].id)
+
+	const {data: requests} = usePublishersRequests({
+    _start: 0,
+    _end: 30,
+		status: tabs[tab].value,
+	})
 
 	return (
 		<div className={s.grid}>
@@ -56,11 +64,9 @@ export const MainDashboard = () => {
 				<div className={s.line}></div>
 				<Tabs {...{tabs, tab, setTab}}/>
 				<div className={s.reports}>
-					<ReportItem title={'Реклама кроссовок'}/>
-					<ReportItem title={'Реклама кроссовок'}/>
-					<ReportItem title={'Реклама кроссовок'}/>
-					<ReportItem title={'Реклама кроссовок'}/>
-					<ReportItem title={'Реклама кроссовок'}/>
+					{requests?.data?.map(el => (
+						<ReportItem request={el}/>
+					))}
 				</div>
 			</DashboardCard>
 		</div>

@@ -14,6 +14,7 @@
 	font-weight: 500;
 	line-height: 1.5rem; /* 150% */
 	letter-spacing: 0.02rem;
+	text-decoration: none;
 	.icon{
 		display: flex;
 		width: 3rem;
@@ -22,10 +23,12 @@
 		align-items: center;
 		border-radius: 7.6875rem;
 		background: #F3F3F3;
+		text-decoration: none;
 		svg{
 			width: 1.125rem;
 			height: 1.125rem;
 			color: $gray-500;
+			text-decoration: none;
 		}
 	}
 }
