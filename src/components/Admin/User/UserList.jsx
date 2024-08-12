@@ -28,7 +28,7 @@ const renderPhoto = (record) => {
 const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> : <IconX/>
 
 export const UserList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Пользователей нет'}/>} pagination={PostPagination}>
+  <List {...props} empty={<CustomEmpty message={'Пользователей нет'}/>} pagination={<PostPagination/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>

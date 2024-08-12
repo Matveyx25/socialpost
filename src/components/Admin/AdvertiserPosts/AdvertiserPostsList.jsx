@@ -20,7 +20,7 @@ export const AdvertiserPostsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} filter={{owner_id: id}} resource="campaigns/posts" empty={<CustomEmpty message={'Постов нет'}/>} pagination={PostPagination} bulkActionButtons={false}>
+  <List {...props} filter={{owner_id: id}} resource="campaigns/posts" empty={<CustomEmpty message={'Постов нет'}/>} pagination={<PostPagination/>} bulkActionButtons={false}>
     <Datagrid rowClick="edit" bulkActionButtons={false}>
       <TextField source="id" />
       <TextField source="name" label="Название записи"/>

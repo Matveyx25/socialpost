@@ -33,7 +33,7 @@ const renderType = (record) => {
 };
 
 export const OperationsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>} pagination={PostPagination}>
+  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>} pagination={<PostPagination/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <FunctionField label="Тип операции" source="type" render={renderType}/>
