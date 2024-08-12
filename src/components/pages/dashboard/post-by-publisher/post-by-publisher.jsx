@@ -63,11 +63,11 @@ export const PostByPublisher = () => {
             <div>
               <p>Сроки</p>
               <span>
-								{new Date(post.cpmStartDate).toLocaleDateString("ru-RU", {
+								{new Date(post?.cpmStartDate).toLocaleDateString("ru-RU", {
 										formatMatcher: "basic",
 									}) +
 											" - " +
-									new Date(post.cpmEndDate).toLocaleDateString("ru-RU", {
+									new Date(post?.cpmEndDate).toLocaleDateString("ru-RU", {
 										formatMatcher: "basic",
 									})}
 							</span>
