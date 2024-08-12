@@ -14,39 +14,20 @@ function isUnderline(string) {
 
 export function deserializeToHTML() {
 	return (tree) => {
-    visit(tree, 'text', (node, index, parent) => {
-      if(isSpoilers(node.value) || isUnderline(node.value)){
-				const parts = node.value.split(' ')
-				
-				parts.forEach((part, partIndex) => {
-					const trimmedPart = part.trim();
+			visit(tree, 'text', (node, index, parent) => {
+					if(isSpoilers(node.value) || isUnderline(node.value)){
+							let newValue = node.value.replace(/\|\|([^|\n]+)\|\|/g, '<span class="spoiler">$1</span>');
+							newValue = newValue.replace(/\+\+([^+\n]+)\+\+/g, '<u>$1</u>');
 
-					if (/^\|\|/i.test(trimmedPart)) {
-						const newNode = {
-								type: 'html', 
-								value: `<span className="spoiler">${trimmedPart.replaceAll('||', '') }</span>`
-						};
-						parent.children.splice(index, 1, newNode);
-						index += 1;
-					}else if (/^\+\+/i.test(trimmedPart)) {
-						const newNode = {
-								type: 'html', 
-								value: `<u>${trimmedPart.replaceAll('++', '') }</u>`
-						};
-						parent.children.splice(index, 1, newNode);
-						index += 1;
+							const newNode = {
+									type: 'html',
+									value: newValue
+							};
+
+							parent.children.splice(index, 1, newNode);
 					}
-					else {
-						parent.children.splice(index + partIndex, 0, {
-							type: 'text',
-							value: trimmedPart === '' ? ' ' : trimmedPart,
-						});
-						index += 1;
-					}
-				})
-			}
-    });
-  };
+			});
+	};
 }
 
 function underlinePlugin() {

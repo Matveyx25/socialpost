@@ -109,3 +109,10 @@ code {
 	background: #E9EAEA;
 	transition: .3s;
 }
+.spoiler-text a{
+	color: #4F5157;
+	text-decoration: none;
+}
+.spoiler-text:hover a{
+	color: #436CFF;
+}

@@ -2,7 +2,6 @@ import { Modal } from "../Shared/Modal/Modal";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
-import { InputField } from "../Shared/Input/Input";
 import s from './DashboardModals.module.scss'
 import { RichText } from "../Shared/RichText/RichText";
 import { IconX } from "@tabler/icons-react";

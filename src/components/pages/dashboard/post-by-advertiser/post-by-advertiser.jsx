@@ -24,6 +24,7 @@ import { CPMRequests } from "./CPMRequests";
 import { Dropdown } from '../../../Shared/Dropdown/Dropdown';
 import { IconPlayerStopFilled } from "@tabler/icons-react";
 import { PostContent } from "../../../Shared/PostContent/PostContent";
+import classNames from "classnames";
 
 export const PostByAdvertiser = () => {
   const [setModal] = useOutletContext();
@@ -119,75 +120,71 @@ export const PostByAdvertiser = () => {
                     <>
                       {post?.cpmStatus ? (
                          <div className={s.btns}>
-												 <Dropdown
+													<Dropdown
 														className={s.dropdown}
 														menuClassName={s.menu}
-															label={
-																{
-																	ACTIVE: 
-																		<div className={s.statusItem}>
-																			<IconPlayerPlayFilled
-																				size={18}
-																			/>
-																			Показы запущенны
-																		</div>,
-																	PAUSED: 
-																		<div className={s.statusItem}>
-																			<IconPlayerPauseFilled
-																				size={18}
-																			/>
-																			Показы приостановлены
-																		</div>,
-																	STOPPED: 
-																		<div className={s.statusItem}>
-																			<IconPlayerStopFilled
-																				size={18}
-																			/>
-																			Показы завершены
-																		</div>,
-																	INACTIVE: <div className={s.statusItem}>Показы не запущенны</div>,
-																}[post?.cpmStatus]
-															}
-															options={[
-																<div
-																	className={s.statusButton}
-																	onClick={(event) => {
-																		event.stopPropagation();
-																		start(post.id);
-																	}}
-																>
-																	<IconPlayerPlayFilled
-																		size={18}
-																	/>
-																	Запустить показы
-																</div>,
-																<div
-																	className={s.statusButton}
-																	onClick={(event) => {
-																		event.stopPropagation();
-																		pause(post.id);
-																	}}
-																>
-																	<IconPlayerPauseFilled
-																		size={18}
-																	/>
-																	Приостановить показы
-																</div>,
-																<div
-																	className={s.statusButton}
-																	onClick={(event) => {
-																		event.stopPropagation();
-																		setModal("stop-cpm", { postId: post.id });
-																	}}
-																>
-																	<IconPlayerStopFilled
-																		size={18}
-																	/>
-																	Завершить показы
-																</div>,
-															]}
-														/>
-													</div>
+														disableArrows
+														label={
+															{
+																ACTIVE: (
+																	<div className={classNames(s.statusItem, s.play)}>
+																		<IconPlayerPlayFilled size={18}/>
+																		Показы запущенны
+																	</div>
+																),
+																PAUSED: (
+																	<div className={classNames(s.statusItem, s.pause)}>
+																		<IconPlayerPauseFilled size={18}/>
+																		Показы приостановлены
+																	</div>
+																),
+																STOPPED: (
+																	<div className={classNames(s.statusItem, s.stop)}>
+																		<IconPlayerStopFilled size={18}/>
+																		Показы завершены
+																	</div>
+																),
+																INACTIVE: (
+																	<div className={s.statusItem}>
+																		Показы не запущенны
+																	</div>
+																),
+															}[post?.cpmStatus]
+														}
+														options={[
+															<div
+																className={classNames(s.statusButton, s.play)}
+																onClick={(event) => {
+																	event.stopPropagation();
+																	start(post.id);
+																}}
+															>
+																<IconPlayerPlayFilled size={18}/>
+																Запустить показы
+															</div>,
+															<div
+																className={classNames(s.statusButton, s.pause)}
+																onClick={(event) => {
+																	event.stopPropagation();
+																	pause(post.id);
+																}}
+															>
+																<IconPlayerPauseFilled size={18}/>
+																Приостановить показы
+															</div>,
+															<div
+																className={classNames(s.statusButton, s.stop)}
+																onClick={(event) => {
+																	event.stopPropagation();
+																	setModal("stop-cpm", { postId: post.id });
+																}}
+															>
+																<IconPlayerStopFilled size={18}/>
+																Завершить показы
+															</div>,
+														]}
+													/>
+												</div>
                       ) : (
                         <Button
                           label={"Разместить пост"}

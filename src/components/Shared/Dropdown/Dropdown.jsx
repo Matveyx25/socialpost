@@ -5,7 +5,7 @@ import { IconChevronUp } from '@tabler/icons-react';
 import { IconChevronDown } from '@tabler/icons-react';
 import classNames from 'classnames';
 
-export const Dropdown = ({label, options, className, menuClassName}) => {
+export const Dropdown = ({label, options, className, menuClassName, disableArrows}) => {
 	const [isOpen, setOpen] = useState(false);
   const menuRef = useRef(null);
   useClickOutside(menuRef, () => {
@@ -22,8 +22,8 @@ export const Dropdown = ({label, options, className, menuClassName}) => {
 				<div className={classNames(s.circle, className)}>
 					{label}
 				</div>
-				<IconChevronDown size={18} className={s.arrowDown}/>
-				<IconChevronUp size={18} className={s.arrowUp}/>
+				{!disableArrows && <IconChevronDown size={18} className={s.arrowDown}/>}
+				{!disableArrows && <IconChevronUp size={18} className={s.arrowUp}/>}
       </button>
       <nav className={classNames(s.menu, menuClassName, isOpen ? s.active : "")}>
         <ul className={s.list}>

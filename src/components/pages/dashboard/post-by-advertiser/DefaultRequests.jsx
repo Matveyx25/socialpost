@@ -131,7 +131,7 @@ export const DefaultRequests = ({ post, postId }) => {
 										{tabs[tab].value === "DECLINED" ? (
 											<>
 												<th className={s.th2}>Отклонивший</th>
-												<th>className={s.th3}Комментарий отклонившего</th>
+												<th className={s.th3}>Комментарий отклонившего</th>
 											</>
 										) : (
 											""

@@ -30,6 +30,21 @@
 			display: flex;
 			align-items: center;
 			gap: 0.25rem;
+			&.play{
+				svg{
+					color: green;
+				}						
+			}
+			&.pause{
+				svg{
+					color: #436CFF;
+				}						
+			}
+			&.stop{
+				svg{
+					color: #EE1F1F;
+				}							
+			}
 		}
 	}
 	.menu{
@@ -42,6 +57,21 @@
 		font-size: .75rem;
 		white-space: nowrap;
 		width: 100%;
+		&.play{
+			svg{
+				color: green;
+			}						
+		}
+		&.pause{
+			svg{
+				color: #436CFF;
+			}						
+		}
+		&.stop{
+			svg{
+				color: #EE1F1F;
+			}							
+		}
 	}
 }
 .colSm{

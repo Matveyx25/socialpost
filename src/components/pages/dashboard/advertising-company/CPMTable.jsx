@@ -14,6 +14,7 @@ import { Dropdown } from "../../../Shared/Dropdown/Dropdown";
 import { Field } from "formik";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
+import classNames from "classnames";
 
 export const CPMTable = ({ isFetched, posts }) => {
   const navigate = useNavigate();
@@ -96,23 +97,24 @@ export const CPMTable = ({ isFetched, posts }) => {
 											<Dropdown
 												className={s.dropdown}
 												menuClassName={s.menu}
+												disableArrows
 												label={
 													{
 														ACTIVE: (
-															<div className={s.statusItem}>
-																<IconPlayerPlayFilled size={18} />
+															<div className={classNames(s.statusItem, s.play)}>
+																<IconPlayerPlayFilled size={18}/>
 																Показы запущенны
 															</div>
 														),
 														PAUSED: (
-															<div className={s.statusItem}>
-																<IconPlayerPauseFilled size={18} />
+															<div className={classNames(s.statusItem, s.pause)}>
+																<IconPlayerPauseFilled size={18}/>
 																Показы приостановлены
 															</div>
 														),
 														STOPPED: (
-															<div className={s.statusItem}>
-																<IconPlayerStopFilled size={18} />
+															<div className={classNames(s.statusItem, s.stop)}>
+																<IconPlayerStopFilled size={18}/>
 																Показы завершены
 															</div>
 														),
@@ -125,33 +127,33 @@ export const CPMTable = ({ isFetched, posts }) => {
 												}
 												options={[
 													<div
-														className={s.statusButton}
+														className={classNames(s.statusButton, s.play)}
 														onClick={(event) => {
 															event.stopPropagation();
 															start(el.id);
 														}}
 													>
-														<IconPlayerPlayFilled size={18} />
+														<IconPlayerPlayFilled size={18}/>
 														Запустить показы
 													</div>,
 													<div
-														className={s.statusButton}
+														className={classNames(s.statusButton, s.pause)}
 														onClick={(event) => {
 															event.stopPropagation();
 															pause(el.id);
 														}}
 													>
-														<IconPlayerPauseFilled size={18} />
+														<IconPlayerPauseFilled size={18}/>
 														Приостановить показы
 													</div>,
 													<div
-														className={s.statusButton}
+														className={classNames(s.statusButton, s.stop)}
 														onClick={(event) => {
 															event.stopPropagation();
 															setModal("stop-cpm", { postId: el.id });
 														}}
 													>
-														<IconPlayerStopFilled size={18} />
+														<IconPlayerStopFilled size={18}/>
 														Завершить показы
 													</div>,
 												]}

@@ -100,6 +100,10 @@
 			letter-spacing: 0.02rem;
 			white-space: nowrap;
 		}
+		a{
+			text-decoration: none;
+			color: inherit;
+		}
 	}
 	&:not(:last-child){
 		margin-bottom: 1rem;

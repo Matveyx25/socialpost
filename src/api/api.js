@@ -253,8 +253,8 @@ export const advertiser = {
 
 			requestData = {
 				"name": data.name,
-				"type": data.type,
-				"text": data.text,
+				"type": "NEW_POST",
+				"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 				"postUploadsIds": fileIds,
 				"markingType": data.markingType,
 				"cpmTags": data?.cpmTags,
@@ -284,7 +284,7 @@ export const advertiser = {
 				requestData = {
 					"name": data.name,
 					"type": data.type,
-					"text": data.text,
+					"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 					"postUploadsIds": fileIds,
 					"markingType": data.markingType
 				}
@@ -306,11 +306,9 @@ export const advertiser = {
 
 		const uploadResponses = await Promise.all(uploadPromises);
 		const fileIds = uploadResponses?.map(response => response.data.id);
-		
-		debugger
 
 		return instance.put('/campaigns/posts/' + data.id + '/content' , {
-			"text": data.text,
+			"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 			"postUploadsIds": fileIds,
 			"moderationComment": ' '
 		})
@@ -356,6 +354,15 @@ export const advertiser = {
 	},
 	pauseCPM(id) {
 		return instance.post(`/campaigns/posts/cpm/${id}/pause`)
+	},
+	startAllCPM(id) {
+		return instance.post(`/campaigns/cpm/${id}/start`)
+	},
+	stopAllCPM(id) {
+		return instance.post(`/campaigns/cpm/${id}/stop`)
+	},
+	pauseAllCPM(id) {
+		return instance.post(`/campaigns/cpm/${id}/pause`)
 	},
 }
 

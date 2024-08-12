@@ -81,7 +81,7 @@ export const Report = () => {
 						</div>
 						<div>
 							<p>Ссылка</p>
-							<IconExternalLink size={16} color='#436CFF'/>
+							<NavLink to={request?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink>
 						</div>
 					</div>
 				</DashboardCard>
