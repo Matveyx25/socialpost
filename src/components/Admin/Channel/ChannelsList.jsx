@@ -2,6 +2,7 @@ import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { List, Datagrid, TextField, FunctionField, ChipField, UrlField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
+import { PostPagination } from "../PostPagination";
 
 const renderTags = (record) => {
 	if (!record?.tags || record?.tags?.length <= 0) {
@@ -26,7 +27,7 @@ const renderPhoto = (record) => {
 const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
 
 export const ChannelsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Каналов нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Каналов нет'}/>} pagination={PostPagination}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название"/>

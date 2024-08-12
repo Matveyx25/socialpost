@@ -1,6 +1,7 @@
 import * as React from "react";
 import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
+import { PostPagination } from '../PostPagination';
 
 const renderRole = (record) => ({
 	AGENCY: "Агентство",
@@ -8,7 +9,7 @@ const renderRole = (record) => ({
 }[record.role])
 
 export const AdvertiserClientsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Клиентов нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={PostPagination}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>

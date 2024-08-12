@@ -313,6 +313,15 @@ export const advertiser = {
 			"moderationComment": ' '
 		})
 	},
+	updatePostCpm(data) {
+		return instance.put('/campaigns/posts/' + data.id + '/cpm', {
+			cpmTags: data?.cpmTags,
+			cpmStartDate: data?.cpmStartDate,
+			cpmEndDate: data?.cpmEndDate,
+			cpmChannelPostsLimit: data.cpmChannelPostsLimit,
+			cpmValue: data.cpmValue,
+		})
+	},
 	getPostById(id) {
 		return instance.get('/campaigns/posts/' + id)
 	},

@@ -2,6 +2,7 @@ import * as React from "react";
 import { List, Datagrid, TextField, FunctionField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
 import { useParams } from "react-router-dom";
+import { PostPagination } from '../PostPagination';
 
 const renderType = (record) => ( {
 	AD_POST: "Размещение рекламных постов",
@@ -18,7 +19,7 @@ export const CampaignsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} filter={{owner_id: id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных компаний нет'}/>}>
+  <List {...props} filter={{owner_id: id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных компаний нет'}/>} pagination={PostPagination}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField label="Клиент" source="client.name"/>

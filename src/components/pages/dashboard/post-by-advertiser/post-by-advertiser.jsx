@@ -95,6 +95,13 @@ export const PostByAdvertiser = () => {
           <div className={s.cardHeader}>
             Информация
             <div className={s.btns}>
+						{post?.cpmStatus ?  <Button
+                      label={"Редактировать"}
+                      size="small"
+                      onClick={() => {
+                        setModal("edit-post-cpm-modal", { editCpmPostId: postId });
+                      }}
+                    /> : null}
               {
                 {
                   NOT_MODERATED: (

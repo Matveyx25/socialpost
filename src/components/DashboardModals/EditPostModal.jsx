@@ -100,8 +100,9 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
                   <div className={s.filePreviews}>{renderFilePreviews()}</div>
                   <Upload {...{ files, onUpload }} />
                 </div>
-								<div className={s.input}>
-									<Button label={'Сохранить'} type="submit"/>
+								<div className={s.rowBtns}>
+									<Button label="Отменить" theme="secondary" className={s.btnHalf} type="button" onClick={() => setOpen()}/>
+									<Button label={'Сохранить'} type="submit" className={s.btnHalf}/>
 								</div>
               </div>
             </div>

@@ -1,8 +1,9 @@
 import { Chip } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { List, Datagrid, TextField, EmailField, ImageField, BooleanField, ChipField, FunctionField } from "react-admin";
+import { List, Datagrid, TextField, EmailField, ChipField, FunctionField } from "react-admin";
 import { CustomEmpty } from "../CustomEmpty";
+import { PostPagination } from '../PostPagination';
 
 const renderRoles = (record) => {
 	if (!record?.roles || record?.roles.length === 0) {
@@ -27,7 +28,7 @@ const renderPhoto = (record) => {
 const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> : <IconX/>
 
 export const UserList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Пользователей нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Пользователей нет'}/>} pagination={PostPagination}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>

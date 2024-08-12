@@ -1,8 +1,9 @@
 import { IconDownload } from "@tabler/icons-react";
 import * as React from "react";
-import { List, Datagrid, TextField, DateField, FunctionField, ReferenceField, ShowButton } from "react-admin";
+import { List, Datagrid, TextField, DateField, FunctionField, ReferenceField, ShowButton, Pagination } from "react-admin";
 import { admin } from '../../../api/api';
 import { CustomEmpty } from '../CustomEmpty';
+import { PostPagination } from "../PostPagination";
 
 const renderType = (record) => {
 	const type = record.type
@@ -32,9 +33,8 @@ const renderDownload = (record) => {
 	return <IconDownload onClick={onClick} color="blue" size={20}/>
 }
 
-
 export const DocumentsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Документов нет'}/>} bulkActionButtons={false}>
+  <List {...props} empty={<CustomEmpty message={'Документов нет'}/>} bulkActionButtons={false} pagination={PostPagination}>
     <Datagrid rowClick="edit" bulkActionButtons={false}>
       <TextField source="id" />
       <DateField source="conclusionDateTime" label="Дата" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>

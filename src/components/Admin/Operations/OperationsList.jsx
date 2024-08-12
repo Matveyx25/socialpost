@@ -1,6 +1,7 @@
 import * as React from "react";
 import { List, Datagrid, TextField, DateField, ReferenceField, FunctionField } from "react-admin";
 import { CustomEmpty } from "../CustomEmpty";
+import { PostPagination } from "../PostPagination";
 
 
 const renderStatus = (record) => {
@@ -32,7 +33,7 @@ const renderType = (record) => {
 };
 
 export const OperationsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>}>
+  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>} pagination={PostPagination}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <FunctionField label="Тип операции" source="type" render={renderType}/>

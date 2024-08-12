@@ -1,7 +1,8 @@
 import * as React from "react";
-import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin";
+import { List, Datagrid, TextField, FunctionField } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
 import { useParams } from "react-router-dom";
+import { PostPagination } from '../PostPagination';
 
 const renderType = (record) => ( {
 	NEW_POST: "Новая запись",
@@ -19,7 +20,7 @@ export const AdvertiserPostsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} filter={{owner_id: id}} resource="campaigns/posts" empty={<CustomEmpty message={'Постов нет'}/>} bulkActionButtons={false}>
+  <List {...props} filter={{owner_id: id}} resource="campaigns/posts" empty={<CustomEmpty message={'Постов нет'}/>} pagination={PostPagination} bulkActionButtons={false}>
     <Datagrid rowClick="edit" bulkActionButtons={false}>
       <TextField source="id" />
       <TextField source="name" label="Название записи"/>

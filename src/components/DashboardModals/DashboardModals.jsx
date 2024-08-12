@@ -14,6 +14,7 @@ import { DeclinePostRequestModal } from './DeclinePostRequestModal';
 import { StopCPMPostModal } from './StopCPMPostModal'
 import { DeclinePublisherRequestModal } from './DeclinePublisherRequestModal'
 import { EditPostModal } from './EditPostModal'
+import { EditPostCpmModal } from './EditPostCpmModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -34,6 +35,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<AddClientModal {...{isOpen, setOpen}}/>
 			<AddPostModal {...{isOpen, setOpen, modalParams}}/>
 			<EditPostModal {...{isOpen, setOpen, modalParams}}/>
+			<EditPostCpmModal {...{isOpen, setOpen, modalParams}}/>
 			<AddPostToModerationModal {...{isOpen, setOpen, modalParams}}/>
 			<DeclinePostRequestModal {...{isOpen, setOpen, modalParams}}/>
 			<DeclinePublisherRequestModal {...{isOpen, setOpen, modalParams}}/>
