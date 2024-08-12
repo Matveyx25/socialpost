@@ -224,7 +224,9 @@ export const publisher = {
 		return instance.post(`/campaigns/posts/requests/${id}/accept`)
 	},
 	publishCPM(data){
-		return instance.post(`/campaigns/posts/cpm/${data.id}/publish`, {channel_id: data.channel_id})
+		console.log(data);
+		
+		return instance.post(`/campaigns/posts/cpm/${data.id}/publish`, null, {params: {channel_id: data.channel_id}})
 	},
 }
 

@@ -5,14 +5,13 @@ import { useParams } from "react-router-dom";
 import s from "./post-by-publisher.module.scss";
 import { ImageGrid } from "react-fb-image-video-grid";
 
-import { useStartCPM } from "../../../../hooks/useStartCPM";
 import { usePauseCPM } from "../../../../hooks/usePauseCPM";
 import { PostContent } from "../../../Shared/PostContent/PostContent";
 import { usePublishersCPMChannels } from "../../../../hooks/usePublishersCPMChannels";
 import { usePublishersCPMById } from "../../../../hooks/usePublishersCPMById";
 import { Loader } from "../../../Shared/Loader/Loader";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
-import { IconPlayerPauseFilled, IconPlus } from "@tabler/icons-react";
+import { IconPlus } from "@tabler/icons-react";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { Field, Formik } from "formik";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
@@ -126,7 +125,7 @@ export const PostByPublisher = () => {
                         <th className={s.checkTh}>
                           <CheckedAll
                             name={"checkboxes"}
-                            ids={channels?.data.map((el) => el.id)}
+                            ids={channels?.data.map((el) => el.channelId)}
                           />
                         </th>
                         <th className={s.th1}>Название канала</th>
@@ -147,7 +146,7 @@ export const PostByPublisher = () => {
                                   component={({ field, form }) => (
                                     <CheckboxField
                                       {...{ field, form }}
-                                      initValue={el.id}
+                                      initValue={el.channelId}
                                     />
                                   )}
                                 />
@@ -185,7 +184,7 @@ export const PostByPublisher = () => {
                                     size="small"
                                     onClick={(event) => {
                                       event.stopPropagation();
-																			start({id: postId, channel_id: el.id})
+																			start({id: postId, channel_id: el.channelId})
                                     }}
                                   />
                                 </div>
