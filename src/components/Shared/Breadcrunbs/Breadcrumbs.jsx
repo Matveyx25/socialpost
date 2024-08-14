@@ -46,7 +46,7 @@ const publisherRoutes = [
 
 const advertiserRoutes = [
 	{path: '/profile/', breadcrumb: 'Настройки'},
-	{path: '/dashboard/', breadcrumb: 'Рекламные компании'},
+	{path: '/dashboard/', breadcrumb: 'Рекламные кампании'},
 	{path: '/dashboard/:companyId', breadcrumb: DynamicCampaign},
 	{path: '/dashboard/:companyId/:postId', breadcrumb: DynamicPost},
 	{path: '/dashboard/:companyId/:postId/create-request', breadcrumb: 'Разместить запись'},

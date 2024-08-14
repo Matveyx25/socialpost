@@ -99,7 +99,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 							"Введите дату заключения договора"
 						),
 						recognizedByNDS: Yup.boolean(),
-						moneyAmount: Yup.number().nullable(),
+						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})}/>
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
@@ -115,7 +115,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 						description: Yup.string(),
 						conclusionDate: Yup.string().required(),
 						recognizedByNDS: Yup.boolean().oneOf([true], 'Признак НДС должен быть выбран'),
-						moneyAmount: Yup.string(),
+						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})
       	})}/> : null}
       </FormikStepper>

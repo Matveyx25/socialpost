@@ -101,7 +101,7 @@ const AdminPanel = () => (
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
-    <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные компании' }} icon={IconBadgeAd}/>
+    <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
