@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 import s from "./post-by-advertiser.module.scss";
 import { usePost } from "../../../../hooks/usePost";
-import { ImageGrid } from "react-fb-image-video-grid";
 import {
   IconAlertTriangle,
   IconClockHour4,
@@ -25,6 +24,7 @@ import { Dropdown } from '../../../Shared/Dropdown/Dropdown';
 import { IconPlayerStopFilled } from "@tabler/icons-react";
 import { PostContent } from "../../../Shared/PostContent/PostContent";
 import classNames from "classnames";
+import { PostAttachments } from "../../../Shared/PostAttachments/PostAttachments";
 
 export const PostByAdvertiser = () => {
   const [setModal] = useOutletContext();
@@ -43,20 +43,8 @@ export const PostByAdvertiser = () => {
 						{post?.status !== 'MODERATING' && <Button label={'Редактировать'} onClick={() => setModal('edit-post-modal', {editPostId: postId})} theme="secondary" size="small"/>}
 					</div>
           <div className={s.line}></div>
-          {post?.uploads.length ? (
-            <div className={s.preview}>
-              <ImageGrid showModal={false}>
-                {post?.uploads?.map((img) => (
-                  <a href={img.fileUrl} target="_blank">
-                    <img src={img.thumbnailUrl} alt="" />
-                  </a>
-                ))}
-              </ImageGrid>
-            </div>
-          ) : (
-            ""
-          )}
-           <PostContent text={post?.text}/>
+					<PostAttachments attachments={post?.uploads}/>
+          <PostContent text={post?.text}/>
         </DashboardCard>
       </div>
       <div className={s.colLg}>
@@ -98,6 +86,7 @@ export const PostByAdvertiser = () => {
 						{post?.cpmStatus ?  <Button
                       label={"Редактировать"}
                       size="small"
+											disabled={post?.status === 'MODERATING'}
                       onClick={() => {
                         setModal("edit-post-cpm-modal", { editCpmPostId: postId });
                       }}

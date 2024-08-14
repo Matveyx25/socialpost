@@ -3,8 +3,6 @@ import { DashboardCard } from "../dashboard-card";
 import { Button } from "../../../Shared/Button/Button";
 import { useParams } from "react-router-dom";
 import s from "./post-by-publisher.module.scss";
-import { ImageGrid } from "react-fb-image-video-grid";
-
 import { usePauseCPM } from "../../../../hooks/usePauseCPM";
 import { PostContent } from "../../../Shared/PostContent/PostContent";
 import { usePublishersCPMChannels } from "../../../../hooks/usePublishersCPMChannels";
@@ -16,6 +14,7 @@ import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { Field, Formik } from "formik";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 import { usePublishCPM } from '../../../../hooks/usePublishCPM';
+import { PostAttachments } from "../../../Shared/PostAttachments/PostAttachments";
 
 export const PostByPublisher = () => {
   const { postId } = useParams();
@@ -38,19 +37,7 @@ export const PostByPublisher = () => {
         <DashboardCard>
           <div className={s.cardHeader}>{post?.name}</div>
           <div className={s.line}></div>
-          {post?.uploads.length ? (
-            <div className={s.preview}>
-              <ImageGrid showModal={false}>
-                {post?.uploads?.map((img) => (
-                  <div>
-                    <img src={img.thumbnailUrl} alt="" />
-                  </div>
-                ))}
-              </ImageGrid>
-            </div>
-          ) : (
-            ""
-          )}
+					<PostAttachments attachments={post?.uploads}/>
           <PostContent text={post?.text} />
         </DashboardCard>
       </div>

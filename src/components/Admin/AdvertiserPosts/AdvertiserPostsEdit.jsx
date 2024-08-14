@@ -1,8 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, ArrayInput, SimpleFormIterator, SelectArrayInput } from "react-admin";
-import { ImageGrid } from 'react-fb-image-video-grid';
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, SelectArrayInput } from "react-admin";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -10,6 +9,8 @@ import s from './style.module.scss'
 import { useEffect } from "react";
 import { channels } from "../../../api/api";
 import { useState } from "react";
+import { PostAttachments } from "../../Shared/PostAttachments/PostAttachments";
+import { PostContent as PostContentText } from '../../Shared/PostContent/PostContent';
 
 
 const CpmTags = () => {
@@ -68,15 +69,8 @@ const PostContent = () => {
 	const post = useRecordContext()
 
 	return <div className={s.post}>
-		{post?.uploads.length ? <div className={s.preview}>
-				<ImageGrid showModal={false}>
-					{post?.uploads?.map(img => 
-						<div>
-							<img src={img.thumbnailUrl} alt="" />
-						</div>
-					)}
-				</ImageGrid>
-		</div> : ''}
+		<PostAttachments attachments={post?.uploads}/>
+		<PostContentText text={post?.text}/>
 		<div className={s.content}>
 			<Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
 				{DOMPurify.sanitize(post?.text)}

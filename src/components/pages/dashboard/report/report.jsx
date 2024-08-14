@@ -5,10 +5,10 @@ import { IconChevronLeft, IconExternalLink } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button';
 import { NavLink, useOutletContext, useParams } from 'react-router-dom'
 import { usePublishersRequestById } from '../../../../hooks/usePublishersRequestById';
-import { ImageGrid } from 'react-fb-image-video-grid';
 import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { usePublisherAcceptRequest } from '../../../../hooks/usePublisherAcceptRequest';
 import { PostContent } from '../../../Shared/PostContent/PostContent'
+import { PostAttachments } from '../../../Shared/PostAttachments/PostAttachments';
 
 export const Report = () => {
 	const {requestId} = useParams()
@@ -27,19 +27,7 @@ export const Report = () => {
 						{request?.postName}
 					</div>
 					<div className={s.line}></div>
-					{request?.postThumbnailsUrls.length ? (
-            <div className={s.preview}>
-              <ImageGrid showModal={false}>
-                {request?.postThumbnailsUrls?.map((img) => (
-                  <div>
-                    <img src={img} alt="" />
-                  </div>
-                ))}
-              </ImageGrid>
-            </div>
-          ) : (
-            ""
-          )}
+					<PostAttachments attachments={request?.uploads}/>
 					<PostContent text={request?.postText}/> 
 				</DashboardCard>
 			</div>
