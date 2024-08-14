@@ -17,13 +17,10 @@ COPY ./.env ./.env
 RUN npm run build
 
 
-FROM node:14 AS run
+FROM nginx:1.27 AS run
 
-RUN npm install --global http-server
-
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /app/build /app/build
-
-CMD ["http-server", "/app/build", "-p 80"]
 
 
 FROM install AS dev
