@@ -12,6 +12,7 @@ import { Loader } from '../../../Shared/Loader/Loader';
 import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { Select } from '../../../Shared/Select/Select'
 import { useMyChannels } from '../../../../hooks/useMyChannels';
+import { formatToISO } from '../../../../helpers/formatToISO'
 
 export const Payments = () => {
 	const [dateRange, setDateRange] = useState([null, null])
@@ -22,8 +23,8 @@ export const Payments = () => {
 
 	const {data: profile} = useProfile()
 	const {data: operations, isFetched: isOperationsFetched} = useBalanceOperations({
-		start_date: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
-		end_date: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
+		start_date: dateRange[0] ? formatToISO(dateRange[0])?.slice(0, 10) : null,
+		end_date: dateRange[1] ? formatToISO(dateRange[1])?.slice(0, 10) : null,
 		type: option?.value,
 		_start: (page - 1) * 30,
 		_end: page * 30,
@@ -67,10 +68,11 @@ export const Payments = () => {
                   "INCOME",
 									"CAMPAIGN_POST_REQUEST_INCOME",
 									"CAMPAIGN_POST_REQUEST_PAYMENT",
+									"CPM_CAMPAIGN_POST_INCOME",
 									"REPLENISHMENT_REQUEST"
                 ],
               },
-              { label: "Поступления", value: ["INCOME", "CAMPAIGN_POST_REQUEST_INCOME", "REPLENISHMENT_REQUEST"] },
+              { label: "Поступления", value: ["INCOME", "CPM_CAMPAIGN_POST_INCOME", "CAMPAIGN_POST_REQUEST_INCOME", "REPLENISHMENT_REQUEST"] },
               {
                 label: "Списания",
                 value: [
@@ -147,6 +149,7 @@ export const Payments = () => {
                             WITHDRAWAL_LEGAL_ENTITY: "Вывод у ЮЛ",
                             WITHDRAWAL_CRYPTO_WALLET: "Вывод с криптокошелька",
                             CAMPAIGN_POST_REQUEST_INCOME: "Поступление",
+                            CPM_CAMPAIGN_POST_INCOME: "Поступление",
                             CAMPAIGN_POST_REQUEST_PAYMENT: "Списание",
                           }[el.type]
                         }

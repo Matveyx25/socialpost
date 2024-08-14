@@ -11,7 +11,7 @@ export const StopCPMPostModal = ({isOpen, setOpen, modalParams}) => {
 		<Modal {...{isOpen, setOpen}} title={'Завершить показы'} name={'stop-cpm'}>
 			<form className={s.form}>
 				<p className={s.removeText}>
-				Вы уверены, что хотите завершить показы <br/>
+				Вы уверены, что хотите завершить показы? <br/>
 				</p>
 				<div className={s.rowBtns}>
 					<Button label="Отменить" theme="secondary" className={s.btnHalf} onClick={(e) => {

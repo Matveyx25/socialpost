@@ -12,6 +12,7 @@ import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { useRequestsStats } from '../../../../hooks/useRequestsStats'
+import { formatToISO } from '../../../../helpers/formatToISO'
 
 export const Reports = () => {
 	const [selectedChannel, setSelectedChannel] = useState(null)
@@ -33,8 +34,8 @@ export const Reports = () => {
 	const {data: requests} = usePublishersRequests({
     _start: (page - 1) * 30,
     _end: page * 30,
-		start_publish_time: dateRange[0] ? (new Date(dateRange[0])).toISOString() : null,
-		end_publish_time: dateRange[1] ? (new Date(dateRange[1])).toISOString() : null,
+		start_publish_time: dateRange[0] ? formatToISO(dateRange[0])?.slice(0, 10) : null,
+		end_publish_time: dateRange[1] ? formatToISO(dateRange[1])?.slice(0, 10) : null,
 		status: tabs[tab].value,
 		channel_id: selectedChannel?.value
 	})

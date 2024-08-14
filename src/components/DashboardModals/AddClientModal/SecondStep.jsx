@@ -4,6 +4,7 @@ import s from "../DashboardModals.module.scss";
 import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
 import { Checkbox } from "../../Shared/Checkbox/checkbox";
 import { Calendar } from "../../Shared/Calendar/Calendar";
+import { formatToISO } from "../../../helpers/formatToISO";
 
 export const SecondStep = () => {
   return (
@@ -65,7 +66,7 @@ export const SecondStep = () => {
 									value={value}
 									required
 									onChange={(v) =>
-										setFieldValue("conclusionDate", v.toISOString())
+										setFieldValue("conclusionDate", formatToISO(v))
 									}
 								/>
 							)}

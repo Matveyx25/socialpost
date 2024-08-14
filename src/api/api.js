@@ -355,7 +355,9 @@ export const advertiser = {
 		return instance.get('/campaigns/clients/' + id)
 	},
 	createClient(data) {
-		return instance.post('/campaigns/clients/my', data)
+		console.log(data);
+		
+		// return instance.post('/campaigns/clients/my', data)
 	},
 	declinePostRequest(data) {
 		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})

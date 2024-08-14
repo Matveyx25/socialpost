@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 
 export const ReportItem = ({request}) => {
 	return (
-		<NavLink className={s.wrapper} to={'./placement-appointments/' + request?.id}>
+		<NavLink className={s.wrapper} to={'/placement-appointments/' + request?.id}>
 			<div className={s.icon}>
 				<IconPointerQuestion/>
 			</div>

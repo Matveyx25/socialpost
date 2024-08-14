@@ -11,6 +11,7 @@ import {
   useUpdateSelfEmployed,
 } from "../../../../hooks/publisherBalance";
 import classNames from "classnames";
+import { formatToISO } from "../../../../helpers/formatToISO";
 
 export const SelfEmployed = () => {
   const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/;
@@ -135,7 +136,7 @@ export const SelfEmployed = () => {
                         className={s.calendar}
                         value={value}
                         onChange={(v) =>
-                          setFieldValue("passportIssueDate", v.toISOString())
+                          setFieldValue("passportIssueDate", formatToISO(v))
                         }
                         disabled={
                           selfEmployed?.status &&
@@ -154,7 +155,7 @@ export const SelfEmployed = () => {
                         className={s.calendar}
                         value={value}
                         onChange={(v) =>
-                          setFieldValue("birthDate", v.toISOString())
+                          setFieldValue("birthDate", formatToISO(v))
                         }
                         disabled={
                           selfEmployed?.status &&

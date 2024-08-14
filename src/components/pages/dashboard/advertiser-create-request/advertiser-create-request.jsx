@@ -13,6 +13,7 @@ import { useAddPostAllRequests } from "../../../../hooks/useAddPostAllRequests";
 import { Field, Form, Formik } from "formik";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
+import { formatToISO } from "../../../../helpers/formatToISO";
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
@@ -48,8 +49,8 @@ export const AdvertiserCreateRequest = () => {
         post_id: postId,
         publish_start_time: timeRange[0],
         publish_end_time: timeRange[1],
-        publish_start_date: new Date(dateRange[0]).toISOString()?.slice(0, 10),
-        publish_end_date: new Date(dateRange[1]).toISOString()?.slice(0, 10),
+        publish_start_date: formatToISO(dateRange[0])?.slice(0, 10),
+        publish_end_date: formatToISO(dateRange[1])?.slice(0, 10),
       });
     }
   };
@@ -59,8 +60,8 @@ export const AdvertiserCreateRequest = () => {
       id: postId,
       data: {
         channelId: id,
-        publishStartDate: new Date(dateRange[0]).toISOString()?.slice(0, 10),
-        publishEndDate: new Date(dateRange[1]).toISOString()?.slice(0, 10),
+        publishStartDate: formatToISO(dateRange[0])?.slice(0, 10),
+        publishEndDate: formatToISO(dateRange[1])?.slice(0, 10),
         publishStartTime: timeRange[0],
         publishEndTime: timeRange[1],
       },

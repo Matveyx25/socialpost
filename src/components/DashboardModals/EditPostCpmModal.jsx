@@ -10,6 +10,7 @@ import { Select } from "../Shared/Select/Select";
 import { useAllChannelsTags } from "../../hooks/useAllChannelsTags";
 import { InputField } from "../Shared/Input/Input";
 import { differenceInDays } from "date-fns";
+import { formatToISO } from "../../helpers/formatToISO";
 
 export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
   const { mutate: updatePost } = useUpdatePostCpm();
@@ -20,8 +21,8 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 		updatePost({
 			id: modalParams?.editCpmPostId,
 			cpmTags: values?.cpmTags?.map(el => el.label),
-			cpmStartDate: (new Date(values?.dateRange[0])).toISOString(),
-			cpmEndDate: (new Date(values?.dateRange[1])).toISOString(),
+			cpmStartDate: formatToISO(values?.dateRange[0]),
+			cpmEndDate: formatToISO(values?.dateRange[0]),
 			cpmChannelPostsLimit: values.cpmChannelPostsLimit,
 			cpmValue: values.cpmValue,
 		});

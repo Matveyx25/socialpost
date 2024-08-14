@@ -1,0 +1,43 @@
+.wrapper {
+  position: relative;
+  color: #000;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.wrapper .label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.wrapper .checkboxIconEmpty {
+  display: block;
+  color: #A7AEB8;
+}
+.wrapper .checkboxIconFill {
+  display: none;
+  color: #436CFF;
+}
+.wrapper:hover {
+  transition: 0.4s color;
+  color: #67696b;
+}
+.wrapper:hover .checkboxIconEmpty {
+  transition: 0.4s color;
+  color: #d9dde2;
+}
+.wrapper:hover .checkboxIconFill {
+  transition: 0.4s color;
+  color: #436CFF;
+}
+.wrapper input {
+  display: none;
+}
+.wrapper input:checked + .label .checkboxIconFill {
+  display: block;
+}
+.wrapper input:checked + .label .checkboxIconEmpty {
+  display: none;
+}/*# sourceMappingURL=checkbox.module.css.map */

@@ -5,6 +5,7 @@ import { Select } from "../../Shared/Select/Select";
 import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
 import { Checkbox } from "../../Shared/Checkbox/checkbox";
 import { Calendar } from "../../Shared/Calendar/Calendar";
+import { formatToISO } from "../../../helpers/formatToISO";
 
 export const ThirdStep = () => {
   const typeOptions = [
@@ -164,7 +165,7 @@ export const ThirdStep = () => {
 									value={value}
 									required
 									onChange={(v) =>
-										setFieldValue("agencyInfo.conclusionDate", v.toISOString())
+										setFieldValue("agencyInfo.conclusionDate", formatToISO(v))
 									}
 								/>
 							)}

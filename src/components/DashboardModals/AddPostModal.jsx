@@ -16,6 +16,7 @@ import { useAllChannelsTags } from '../../hooks/useAllChannelsTags';
 import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
 import { differenceInDays } from "date-fns";
 import { serialize } from "@st.matthew/remark-slate";
+import { formatToISO } from "../../helpers/formatToISO";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -44,8 +45,8 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				telegramPostUrl: values?.telegramPostUrl,
 				id: modalParams?.campaignId,
 				cpmTags: values?.cpmTags?.map(el => el.label),
-				cpmStartDate: (new Date(values?.dateRange[0])).toISOString(),
-				cpmEndDate: (new Date(values?.dateRange[1])).toISOString(),
+				cpmStartDate: formatToISO(values?.dateRange[0]),
+				cpmEndDate: formatToISO(values?.dateRange[1]),
 				markingType: values?.markingType,
 				cpmChannelPostsLimit: values.cpmChannelPostsLimit,
 				cpmBudget: values.cpmBudget,
