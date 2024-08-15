@@ -1,12 +1,25 @@
 import React from 'react'
 import s from './advertising-company.module.scss'
 import { DashboardCard } from '../dashboard-card'
+import { Button } from '../../../Shared/Button/Button';
+import { useOutletContext } from 'react-router-dom';
 
 export const DefaultInfo = ({company}) => {
+	const [setModal] = useOutletContext()
+
 	return (
     <DashboardCard>
       <div className={s.cardHeader}>
         <span>{company?.name}</span>
+				<div className={s.btns}>
+					<Button
+						label={"Редактировать"}
+						size="small"
+						onClick={() => {
+							setModal('edit-campaign', {editCampaignId: company?.id})
+						}}
+					/>
+				</div>
       </div>
       <div className={s.line}></div>
       <div className={s.companyInfoWrapper}>

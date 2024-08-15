@@ -27,7 +27,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
     setFiles(files)
   }
 
-  const { mutate: createPost } = useAddPost();
+  const { mutate: createPost } = useAddPost(modalParams?.campaignId);
   const { data: post } = useCampaignById(modalParams?.campaignId);
   const { data: tags } = useAllChannelsTags();
 
@@ -164,7 +164,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 						} : {type: Yup.string().required("Выберите тип записи")})
 					})}
         >
-          <div className={s.form}>
+         <div className={s.form}>
             <div className={s.input}>
               <InputField
                 label={"Название"}
@@ -230,7 +230,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 							)}
 						</Field>
 					</div>}
-            {post?.client?.type !== "PHYSICAL_ENTITY" ? (
+            {type !== 'REPOST' && post?.client?.type !== "PHYSICAL_ENTITY" ? (
               <div className={s.input}>
                 <Field name="markingType">
                   {({ field: { value }, form: { setFieldValue } }) => (

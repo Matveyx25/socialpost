@@ -24,6 +24,13 @@ export const CPMInfo = ({company}) => {
         <span>{company?.name}</span>
 				{company?.status === 'ACTIVE' && 
 				<div className={s.btns}>
+						<Button
+								label={"Редактировать"}
+								size="small"
+								onClick={() => {
+									setModal('edit-campaign', {editCampaignId: company?.id})
+								}}
+							/>
 						<Dropdown
 							className={s.dropdown}
 							menuClassName={s.menu}

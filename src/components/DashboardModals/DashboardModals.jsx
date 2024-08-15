@@ -15,6 +15,7 @@ import { StopCPMPostModal } from './StopCPMPostModal'
 import { DeclinePublisherRequestModal } from './DeclinePublisherRequestModal'
 import { EditPostModal } from './EditPostModal'
 import { EditPostCpmModal } from './EditPostCpmModal'
+import { EditCampaignName } from './EditCampaignName';
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -41,6 +42,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<DeclinePublisherRequestModal {...{isOpen, setOpen, modalParams}}/>
 			<StopCPMPostModal {...{isOpen, setOpen, modalParams}}/>
 			<RefillModal {...{isOpen, setOpen}}/>
+			<EditCampaignName {...{isOpen, setOpen, modalParams}}/>
 		</div>
 	)
 }

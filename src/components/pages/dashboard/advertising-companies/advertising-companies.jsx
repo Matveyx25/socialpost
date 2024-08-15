@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { Loader } from "../../../Shared/Loader/Loader";
-import { IconPlus, IconRefresh, IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
+import { IconPlus, IconRefresh } from "@tabler/icons-react";
 import { Button } from "../../../Shared/Button/Button";
 import { Select } from "../../../Shared/Select/Select";
 import { useNavigate, useOutletContext } from "react-router-dom";
@@ -9,13 +9,11 @@ import { useMyCampaign } from "../../../../hooks/useMyCampaign";
 import s from "./advertising-companies.module.scss";
 import { useMyClients } from "../../../../hooks/useMyClients";
 import classNames from "classnames";
-import { useFormik } from "formik";
 
 export const AdvertisingCompanies = () => {
   const [type, setType] = useState();
   const [status, setStatus] = useState();
   const [client, setClient] = useState();
-	const [allChecked, setAllChecked] = useState(false)
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
 	const navigate = useNavigate()
@@ -31,15 +29,6 @@ export const AdvertisingCompanies = () => {
   const { data: clients } = useMyClients();
 
   const [setModal] = useOutletContext();
-
-	const formik = useFormik({
-		initialValues: {
-			clientIds: []
-		},
-		onSubmit: (values) => {
-      console.log(values);
-    }
-	})
 
   return (
     <div className={s.grid}>

@@ -30,7 +30,7 @@ export const AdvertisingCompany = () => {
 		{label: 'Архивные', count: company?.archivedPostsCount, value: 'ARCHIVED', id: 4}
 	]
 
-  const { data: posts, isFetched } = usePostsByCampaign(companyId, {
+  const { data: posts, isFetched, isFetching } = usePostsByCampaign(companyId, {
 		status: company?.type === 'FIXED_CPM' ? '' : tabs[tab].value,
 		_start: (page - 1) * 30,
     _end: page * 30,
@@ -63,13 +63,14 @@ export const AdvertisingCompany = () => {
 								}}
 							/>
 						</div>
+						{isFetching && <div className={s.lineLoader}></div>}
 						{values.checkboxes.length > 0 ? 
 						<div className={s.actions}>
 								<Button
 									label={"Отправить на модерацию"}
 									size="small"
 									theme="secondary"
-									onClick={(event) => {
+									onClick={() => {
 										values.checkboxes.forEach(el => {
 											moderate({id: el, data: {moderationComment: ''}})
 										})

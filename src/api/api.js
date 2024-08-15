@@ -315,6 +315,9 @@ export const advertiser = {
 			"moderationComment": ' '
 		})
 	},
+	updateCampaign(data) {
+		return instance.put('/campaigns/' + data.id, {name: data.name})
+	},
 	updatePostCpm(data) {
 		return instance.put('/campaigns/posts/' + data.id + '/cpm', {
 			cpmTags: data?.cpmTags,
