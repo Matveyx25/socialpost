@@ -9,7 +9,7 @@ const renderRole = (record) => ({
 }[record.role])
 
 export const AdvertiserClientsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>

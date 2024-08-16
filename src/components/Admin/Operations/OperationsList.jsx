@@ -33,16 +33,16 @@ const renderType = (record) => {
 };
 
 export const OperationsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Операций нет'}/>} pagination={<PostPagination/>}>
-    <Datagrid rowClick="edit">
-      <TextField source="id" />
-      <FunctionField label="Тип операции" source="type" render={renderType}/>
-      <FunctionField label="Статус" source="status" render={renderStatus}/>
-      <DateField source="dateTime" label="Дата операции" locales="ru-RU" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
-			<TextField source="amount" label="Сумма" />
-			<ReferenceField source="userId" reference="users" label="Пользователь" />
-			<TextField source="userFirstName" label="Имя" />
-			<TextField source="userLastName" label="Фамилия" />
-    </Datagrid>
-  </List>
+	<List {...props} exporter={false} empty={<CustomEmpty message={'Операций нет'}/>} pagination={<PostPagination/>}>
+			<Datagrid rowClick="edit" >
+				<TextField source="id" />
+				<FunctionField label="Тип операции" source="type" render={renderType}/>
+				<FunctionField label="Статус" source="status" render={renderStatus}/>
+				<DateField source="dateTime" label="Дата операции" locales="ru-RU" options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
+				<TextField source="amount" label="Сумма" />
+				<ReferenceField source="userId" reference="users" label="Пользователь" />
+				<TextField source="userFirstName" label="Имя" />
+				<TextField source="userLastName" label="Фамилия" />
+			</Datagrid>
+		</List>
 );

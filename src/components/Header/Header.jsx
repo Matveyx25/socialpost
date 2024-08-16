@@ -25,7 +25,7 @@ export const Header = ({role, setRole, onModalOpen}) => {
 	const {data: profile, isSuccess: profileSuccess} = useProfile()
 
 	const dropdown = [
-		<NavLink to="/profile">Профиль</NavLink>,
+		<NavLink to="/dashboard">Профиль</NavLink>,
 		profile?.roles?.includes('MAIN_ADMIN') ? <NavLink to="/admin">Админ-панель</NavLink> : null,
 		<span onClick={() => auth.logout()}>Выйти</span>,
 	]

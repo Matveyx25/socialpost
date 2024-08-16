@@ -27,7 +27,7 @@ const renderPhoto = (record) => {
 const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
 
 export const ChannelsList = (props) => (
-  <List {...props} empty={<CustomEmpty message={'Каналов нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} empty={<CustomEmpty message={'Каналов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название"/>

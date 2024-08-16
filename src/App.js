@@ -89,12 +89,8 @@ function App() {
 								<Route path="/dashboard/:companyId/:postId/create-request" element={<AdvertiserCreateRequest/>}/>
 							</>
 							}
-							<Route path="/profile" element={<Profile/>} handle={{
-									crumb: () => <p>{'Профиль'}</p>,
-								}}/>
-							<Route path="/faq" element={<FAQ/>} handle={{
-									crumb: () => <p>{'FAQ'}</p>,
-								}}/>
+							<Route path="/profile" element={<Profile/>}/>
+							<Route path="/faq" element={<FAQ/>}/>
 						</Route> 
 						:	<Route path="*" element={<div style={{height: '100vh', width: '100vw'}}><Loader/></div>}/>
 						: null}

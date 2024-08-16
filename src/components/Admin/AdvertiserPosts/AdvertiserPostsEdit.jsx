@@ -102,11 +102,6 @@ const PostContent = () => {
 	return <div className={s.post}>
 		<PostAttachments attachments={post?.uploads}/>
 		<PostContentText text={post?.text}/>
-		<div className={s.content}>
-			<Markdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]}>
-				{DOMPurify.sanitize(post?.text)}
-			</Markdown>
-		</div>
 	</div>
 }
 

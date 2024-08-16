@@ -9,16 +9,24 @@ export const ChannelEdit = (props) => (
 			</TopToolbar>
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
-				<TextField source="name" label="Имя"/>
+				<TextInput source="name" label="Имя" fullWidth/>
+				<Labeled>
+					<TextInput source="description" label="Описание" fullWidth/>
+				</Labeled>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled>
-								<TextField source="telegramUsername" label="telegramUsername"/>
+								<TextInput source="telegramUsername" label="telegramUsername"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
-								<TextField source="telegramId" label="telegramId"/>
+								<TextInput source="telegramId" label="telegramId"/>
+							</Labeled>
+						</Box>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+							<Labeled>
+								<TextInput source="telegramUrl" label="telegramUrl"/>
 							</Labeled>
 						</Box>
 				</Box>
@@ -31,6 +39,11 @@ export const ChannelEdit = (props) => (
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled>
 								<TextField source="engagementRate" label="ER"/>
+							</Labeled>
+						</Box>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+							<Labeled>
+								<TextInput source="costPerView" label="CPM"/>
 							</Labeled>
 						</Box>
 				</Box>

@@ -230,7 +230,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 							)}
 						</Field>
 					</div>}
-            {type !== 'REPOST' && post?.client?.type !== "PHYSICAL_ENTITY" ? (
+            {type !== 'REPOST' ? (
               <div className={s.input}>
                 <Field name="markingType">
                   {({ field: { value }, form: { setFieldValue } }) => (

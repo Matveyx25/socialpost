@@ -28,9 +28,10 @@ export const CampaignsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} filter={{owner_id: id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных кампаний нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} filter={{owner_id: id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных кампаний нет'}/>} pagination={<PostPagination/>}>
     <Datagrid rowClick="edit">
       <TextField source="id" />
+			<TextField source="name" label="Название РК"/>
       <TextField label="Клиент" source="client.name"/>
 			<FunctionField label="Тип" source="type" render={renderType}/>
 			<FunctionField label="Кол-во записей" render={renderCount}/>
