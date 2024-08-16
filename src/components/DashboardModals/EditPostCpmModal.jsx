@@ -22,7 +22,7 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 			id: modalParams?.editCpmPostId,
 			cpmTags: values?.cpmTags?.map(el => el.label),
 			cpmStartDate: formatToISO(values?.dateRange[0]),
-			cpmEndDate: formatToISO(values?.dateRange[0]),
+			cpmEndDate: formatToISO(values?.dateRange[1]),
 			cpmChannelPostsLimit: values.cpmChannelPostsLimit,
 			cpmValue: values.cpmValue,
 			cpmBudget: values.cpmBudget,
