@@ -6,12 +6,14 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Channels } from './Channels';
 import { AdvertiserPostsList } from '../AdvertiserPosts/AdvertiserPostsList';
 import { CampaignsList } from '../Campaigns/CampaignsList';
-import { useRecordContext } from 'react-admin';
+import { useGetOne, useRecordContext, useResourceContext } from 'react-admin';
+import { useParams } from 'react-router-dom';
 
 export const UserTabs = () => {
 	const [value, setValue] = React.useState(0);
+	const {id} = useParams()
 	
-	const record = useRecordContext()
+	const { data: user } = useGetOne('users', {id})
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -23,7 +25,7 @@ export const UserTabs = () => {
 				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 					<TabList onChange={handleChange} aria-label="basic tabs example">
 						<Tab label="Общее" value={0} />
-						{record?.roles.include('PUBLISHER') && <Tab label="Каналы" value={1} />}
+						{user?.roles.includes('PUBLISHER') && <Tab label="Каналы" value={1} />}
 						<Tab label="Реквизиты" value={2} />
 						<Tab label="Рекламные кампании" value={3} />
 						<Tab label="Рекламные записи" value={4} />
@@ -32,7 +34,7 @@ export const UserTabs = () => {
 				<TabPanel value={0}>
 					<UserEdit/>
 				</TabPanel>
-				{record?.roles.include('PUBLISHER') && 
+				{user?.roles.includes('PUBLISHER') && 
 					<TabPanel value={1}>
 						<Channels/>
 					</TabPanel>
@@ -41,10 +43,10 @@ export const UserTabs = () => {
 					<Requisites/>
 				</TabPanel>
 				<TabPanel value={3}>
-					<CampaignsList/>
+					<CampaignsList publisher_id={user?.roles.includes('PUBLISHER') ? user?.id : null}/>
 				</TabPanel>
 				<TabPanel value={4}>
-					<AdvertiserPostsList/>
+					<AdvertiserPostsList publisher_id={user?.roles.includes('PUBLISHER') ? user?.id : null}/>
 				</TabPanel>
 			</TabContext>
 		</Card>

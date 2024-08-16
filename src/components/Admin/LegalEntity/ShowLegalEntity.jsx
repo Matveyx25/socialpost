@@ -8,12 +8,12 @@ export const ShowLegalEntity = () => {
       <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
         <Box sx={{ maxWidth: 500, sm: "flex" }} ml={{ xs: 0, sm: '0.5em' }}>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="inn" label="ИНН" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<SelectField
 								source="taxSystem"
 								choices={[
@@ -25,17 +25,17 @@ export const ShowLegalEntity = () => {
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="ogrn" label="ОГРН" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="legalAddress" label="Юридический адрес" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField
 								source="correspondenceAddress"
 								label="Адрес для корреспонденции"
@@ -45,7 +45,7 @@ export const ShowLegalEntity = () => {
         </Box>
         <Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField
 								source="bankDetails.checkingAccount"
 								label="Расчетный счет"
@@ -53,17 +53,17 @@ export const ShowLegalEntity = () => {
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="bankDetails.bank" label="Банк" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="bankDetails.bik" label="БИК" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField
 								source="bankDetails.correspondentAccount"
 								label="Корреспондентский счет"

@@ -41,12 +41,12 @@ const Cpm = () => {
 			</Typography>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<DateInput source="cpmStartDate" label="Дата начала"  fullWidth/>
 						</Labeled>
 					</Box>
 					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled>
+						<Labeled fullWidth>
 							<DateInput source="cpmEndDate" label="Дата конца" fullWidth/>
 						</Labeled>
 					</Box>
@@ -58,17 +58,17 @@ const Cpm = () => {
 			</Box>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextInput source="cpmChannelPostsLimit" label="Лимит показов"  fullWidth/>
 						</Labeled>
 					</Box>
 					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextInput source="cpmBudget" label="Бюджет" fullWidth/>
 						</Labeled>
 					</Box>
 					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextInput source="cpmValue" label="CPM" fullWidth/>
 						</Labeled>
 					</Box>
@@ -139,19 +139,21 @@ export const AdvertiserPostsEdit = (props) => (
 			<SimpleForm sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: "0.5em" }}>
 				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 					<Box flex={1}>
-						<Labeled>
-							<TextInput source="name" label="Название" fullWidth/>
-						</Labeled>
-					</Box>
-					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled>
-							<FunctionField source="type" label="Тип" render={renderType} />
+						<Labeled fullWidth>
+							<FunctionField source="type" label="Тип" render={renderType} fullWidth/>
 						</Labeled>
 					</Box>
 				</Box>
 				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
+							<TextInput source="name" label="Название" fullWidth/>
+						</Labeled>
+					</Box>
+				</Box>
+				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
+					<Box flex={1}>
+						<Labeled fullWidth>
 							<SelectInput
 								label="Статус"
 								source="status"
@@ -167,7 +169,7 @@ export const AdvertiserPostsEdit = (props) => (
 						</Labeled>
 					</Box>
 					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextInput label="Причина отказа" source="declineReason" fullWidth/>
 						</Labeled>
 					</Box>

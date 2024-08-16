@@ -29,17 +29,17 @@ const Form = () => {
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="userFirstName" label="Имя"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="userLastName" label="Фамилия"/>
 							</Labeled>
 						</Box>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="userBalance" label="Баланс пользователя"/>
 							</Labeled>
 						</Box>
@@ -50,17 +50,17 @@ const Form = () => {
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Тип операции" source="type" render={renderType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="amount" label="Сумма"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<Labeled>
+								<Labeled fullWidth>
 									<DateField source="dateTime" label="Дата операции" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 								</Labeled>
 						</Box>

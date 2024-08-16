@@ -38,24 +38,24 @@ export const CampaignsEdit = (props) => (
 				<TextField source="name" label="Название"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Тип" source="type" render={renderType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Статус" source="status" render={renderStatus}/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Общий лимит трат" source="moneyBlocked"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Всего потрачено" source="totalMoneySpent"/>
 							</Labeled>
 						</Box>
@@ -67,63 +67,63 @@ export const CampaignsEdit = (props) => (
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.name" label="Имя"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.description" label="Описание"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.moneyAmount" label="Сумма договора"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Тип" source="client.type" render={renderClientType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Роль" source="client.status" render={renderClientRole}/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="ИНН" source="client.inn"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Телефон" source="client.phone"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Номер договора" source="client.contractNumber"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Объект договора" source="client.contractSubject"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<DateField label="Дата заключения договора" source="client.conclusionDate"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Признак НДС" source="client.recognizedByNDS" render={renderRecognizedByNDS}/>
 							</Labeled>
 						</Box>

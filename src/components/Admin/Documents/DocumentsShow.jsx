@@ -29,13 +29,13 @@ const Content = () => {
 	return (
 		<>		
 			<SimpleShowLayout>
-				<Labeled>
+				<Labeled fullWidth>
 					<TextField label="Номер документа" source="id"/>
 				</Labeled>
-				<Labeled>
+				<Labeled fullWidth>
 					<DateField label="Дата заклюючения" source="conclusionDateTime" locales="ru-RU"  options={{dateStyle: 'short', format: 'dd.MM.yyyy'}}/>
 				</Labeled>
-				<Labeled>
+				<Labeled fullWidth>
 					<FunctionField label="Статус реквизитов"  source="type" render={renderType}/>
 				</Labeled>
 			</SimpleShowLayout>

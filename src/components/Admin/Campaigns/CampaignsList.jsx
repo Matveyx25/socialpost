@@ -28,7 +28,7 @@ export const CampaignsList = (props) => {
 	const { id } = useParams()
 
 	return (
-  <List {...props} exporter={false} filter={{owner_id: id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных кампаний нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} filter={props?.publisher_id ?  {publisher_id: id} : {owner_id:  id}} resource={'campaigns'} empty={<CustomEmpty message={'Рекламных кампаний нет'}/>} pagination={<PostPagination/>}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
 			<TextField source="name" label="Название РК"/>

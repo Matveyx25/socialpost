@@ -10,39 +10,39 @@ export const ChannelEdit = (props) => (
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<TextInput source="name" label="Имя" fullWidth/>
-				<Labeled>
+				<Labeled fullWidth>
 					<TextInput source="description" label="Описание" fullWidth/>
 				</Labeled>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextInput source="telegramUsername" label="telegramUsername"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextInput source="telegramId" label="telegramId"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextInput source="telegramUrl" label="telegramUrl"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="subscribersCount" label="Подписчики"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="engagementRate" label="ER"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextInput source="costPerView" label="CPM"/>
 							</Labeled>
 						</Box>

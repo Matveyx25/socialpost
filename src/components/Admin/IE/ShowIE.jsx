@@ -8,12 +8,12 @@ export const ShowIE = () => {
       <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
         <Box sx={{ maxWidth: 500, sm: "flex" }} mr={{ xs: 0, sm: '0.5em' }}>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="inn" label="ИНН" />
 						</Labeled>
 					</Box>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<SelectField
 								source="taxSystem"
 								choices={[
@@ -25,19 +25,19 @@ export const ShowIE = () => {
 						</Labeled>
 					</Box>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="ogrn" label="ОГРН" />
 						</Labeled>
 					</Box>
 					<Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="address" label="Адрес" />
 						</Labeled>
 					</Box>
         </Box>
         <Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField
 								source="bankDetails.checkingAccount"
 								label="Расчетный счет"
@@ -45,17 +45,17 @@ export const ShowIE = () => {
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="bankDetails.bank" label="Банк" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField source="bankDetails.bik" label="БИК" />
 						</Labeled>
 					</Box>
           <Box flex={1}>
-						<Labeled>
+						<Labeled fullWidth>
 							<TextField
 								source="bankDetails.correspondentAccount"
 								label="Корреспондентский счет"

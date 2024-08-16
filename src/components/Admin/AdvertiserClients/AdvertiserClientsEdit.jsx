@@ -29,63 +29,63 @@ export const AdvertiserClientsEdit = (props) => (
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="name" label="Имя"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="description" label="Описание"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="moneyAmount" label="Сумма договора"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Тип" source="type" render={renderClientType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Роль" source="status" render={renderClientRole}/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="ИНН" source="inn"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Телефон" source="phone"/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Номер договора" source="contractNumber"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Объект договора" source="contractSubject"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<DateField label="Дата заключения договора" source="conclusionDate"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Признак НДС" source="recognizedByNDS" render={renderRecognizedByNDS}/>
 							</Labeled>
 						</Box>

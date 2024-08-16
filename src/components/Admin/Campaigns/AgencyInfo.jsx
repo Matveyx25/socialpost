@@ -28,17 +28,17 @@ export const AgencyInfo = () =>{
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField source="client.agencyInfo.advertiserType" label="Тип рекламодателя" render={renderAdvertiserType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.advertiserInn" label="ИНН рекламодателя"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.advertiserPhone" label="Телефон рекламодателя"/>
 							</Labeled>
 						</Box>
@@ -48,17 +48,17 @@ export const AgencyInfo = () =>{
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField source="client.agencyInfo.executorType" label="Тип исполнителя" render={renderAdvertiserType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.executorInn" label="ИНН исполнителя"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.executorPhone" label="Телефон исполнителя"/>
 							</Labeled>
 						</Box>
@@ -66,34 +66,34 @@ export const AgencyInfo = () =>{
 			
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Номер договора" source="client.agencyInfo.contractNumber"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField label="Объект договора" source="client.agencyInfo.contractSubject"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<DateField label="Дата заключения договора" source="client.agencyInfo.conclusionDate"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<FunctionField label="Признак НДС" source="client.agencyInfo.recognizedByNDS" render={renderRecognizedByNDS}/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.description" label="Описание"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled>
+							<Labeled fullWidth>
 								<TextField source="client.agencyInfo.moneyAmount" label="Сумма договора"/>
 							</Labeled>
 						</Box>
