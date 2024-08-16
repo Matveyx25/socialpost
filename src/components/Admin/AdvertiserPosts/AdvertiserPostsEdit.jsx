@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import DOMPurify from "dompurify";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, SelectArrayInput } from "react-admin";
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, SelectArrayInput, DateField, DateInput } from "react-admin";
 import Markdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
@@ -13,13 +13,13 @@ import { PostAttachments } from "../../Shared/PostAttachments/PostAttachments";
 import { PostContent as PostContentText } from '../../Shared/PostContent/PostContent';
 
 
-const CpmTags = () => {
+const Cpm = () => {
 	const [tags, setTags] = useState([])
 	const record = useRecordContext()
 
 	useEffect(() => {
 		channels.getAllTags().then(res => {
-			setTags(res?.data?.data?.map(el => ({name: el, id: el})))
+			setTags(res?.data?.map(el => ({name: el, id: el})))
 		})
 	}, [])
 
@@ -28,14 +28,45 @@ const CpmTags = () => {
 	}
 
 	return (
-		<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<Box flex={1}>
-					<Typography variant="h6" gutterBottom>
-						Тэги CPM
-					</Typography>
-					<SelectArrayInput fullWidth label="Тэги CPM" source="cpmTags" choices={tags} />
-				</Box>
-		</Box>
+		<>
+			<Typography variant="h6" gutterBottom>
+				CPM
+			</Typography>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+					<Box flex={1}>
+						<Labeled>
+							<DateInput source="cpmStartDate" label="Дата начала"  fullWidth/>
+						</Labeled>
+					</Box>
+					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
+						<Labeled>
+							<DateInput source="cpmEndDate" label="Дата конца" fullWidth/>
+						</Labeled>
+					</Box>
+			</Box>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+					<Box flex={1}>
+						<SelectArrayInput fullWidth label="Тэги CPM" source="cpmTags" choices={tags} />
+					</Box>
+			</Box>
+			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+					<Box flex={1}>
+						<Labeled>
+							<TextInput source="cpmChannelPostsLimit" label="Лимит показов"  fullWidth/>
+						</Labeled>
+					</Box>
+					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
+						<Labeled>
+							<TextInput source="cpmBudget" label="Бюджет" fullWidth/>
+						</Labeled>
+					</Box>
+					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
+						<Labeled>
+							<TextInput source="cpmValue" label="CPM" fullWidth/>
+						</Labeled>
+					</Box>
+			</Box>
+		</>
 	)
 }
 
@@ -91,7 +122,14 @@ export const AdvertiserPostsEdit = (props) => (
 			status: data?.status,
 			declineReason: data?.declineReason,
 			postUploadsIds: data?.uploads?.map(el => el.id),
-			text: data?.text
+			text: data?.text,
+			name: data?.name,
+			...(data?.cpmValue ? {cpmStartDate: data?.cpmStartDate,
+			cpmEndDate: data?.cpmEndDate,
+			cpmTags: data?.cpmTags,
+			cpmChannelPostsLimit: data?.cpmChannelPostsLimit,
+			cpmBudget: data?.cpmBudget,
+			cpmValue: data?.cpmValue} : null)
 		})}
   >
     <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
@@ -100,7 +138,7 @@ export const AdvertiserPostsEdit = (props) => (
 				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 					<Box flex={1}>
 						<Labeled>
-							<TextField source="name" label="Название" />
+							<TextInput source="name" label="Название" fullWidth/>
 						</Labeled>
 					</Box>
 					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
@@ -132,7 +170,7 @@ export const AdvertiserPostsEdit = (props) => (
 					</Box>
 				</Box>
 				<ModerateComment/>
-				<CpmTags/>
+				<Cpm/>
 			</SimpleForm>
 		</Box>
   </Edit>

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Create, SimpleForm, useDataProvider, useNotify, useRedirect, useRefresh } from "react-admin";
+import { Create, SimpleForm, useDataProvider, useNotify, useRefresh } from "react-admin";
 
 export const CustomCreateController = ({ resource, id, children }) => {
 	const [record, setRecord] = useState({});

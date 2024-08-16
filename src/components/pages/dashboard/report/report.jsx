@@ -8,7 +8,7 @@ import { usePublishersRequestById } from '../../../../hooks/usePublishersRequest
 import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { usePublisherAcceptRequest } from '../../../../hooks/usePublisherAcceptRequest';
 import { PostContent } from '../../../Shared/PostContent/PostContent'
-import { PostAttachments } from '../../../Shared/PostAttachments/PostAttachments';
+import {ImageGrid} from "react-fb-image-video-grid"
 
 export const Report = () => {
 	const {requestId} = useParams()
@@ -27,7 +27,14 @@ export const Report = () => {
 						{request?.postName}
 					</div>
 					<div className={s.line}></div>
-					<PostAttachments attachments={request?.uploads}/>
+					{request?.postThumbnailsUrls?.length > 0 && 
+						<div className={s.preview}>
+							<ImageGrid showModal={false}>
+								{request?.postThumbnailsUrls?.map((img) => (
+										<img src={img} alt="" />
+								))}
+							</ImageGrid>
+						</div>}
 					<PostContent text={request?.postText}/> 
 				</DashboardCard>
 			</div>

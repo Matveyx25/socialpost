@@ -260,8 +260,8 @@ export const PostByAdvertiser = () => {
                 <span>{post?.cpmViews}</span>
               </div>
               <div>
-                <p>Лимит трат</p>
-                <span>{post?.cpmChannelPostsLimit}₽</span>
+                <p>Бюджет</p>
+                <span>{post?.cpmBudget}₽</span>
               </div>
               <div>
                 <p>Потрачено</p>

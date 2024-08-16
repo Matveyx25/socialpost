@@ -1,10 +1,9 @@
-import { Box, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import { Typography } from '@mui/material';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { CreateSelfEmployed } from './CreateSelfEmployed';
 import { EditSelfEmployed } from './EditSelfEmpoloyed';
-import { useDataProvider, useNotify } from 'react-admin';
-import axios from 'axios';
+import { useNotify } from 'react-admin';
 import { admin } from '../../../api/api';
 
 export const SelfEmployed = (props) => {

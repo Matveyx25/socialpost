@@ -30,8 +30,11 @@ export const AdvertisingCompany = () => {
 		{label: 'Архивные', count: company?.archivedPostsCount, value: 'ARCHIVED', id: 4}
 	]
 
-  const { data: posts, isFetched, isFetching } = usePostsByCampaign(companyId, {
-		status: company?.type === 'FIXED_CPM' ? '' : tabs[tab].value,
+  const { data: posts, isFetched, isFetching } = usePostsByCampaign(companyId, company?.type === 'FIXED_CPM' ? {
+		_start: (page - 1) * 30,
+    _end: page * 30,
+	} : {
+		status: tabs[tab].value,
 		_start: (page - 1) * 30,
     _end: page * 30,
 	});

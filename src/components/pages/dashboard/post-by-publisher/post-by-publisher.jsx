@@ -13,7 +13,7 @@ import { IconPlus } from "@tabler/icons-react";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { Field, Formik } from "formik";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
-import { usePublishCPM } from '../../../../hooks/usePublishCPM';
+import { usePublishCPM } from "../../../../hooks/usePublishCPM";
 import { PostAttachments } from "../../../Shared/PostAttachments/PostAttachments";
 
 export const PostByPublisher = () => {
@@ -37,7 +37,7 @@ export const PostByPublisher = () => {
         <DashboardCard>
           <div className={s.cardHeader}>{post?.name}</div>
           <div className={s.line}></div>
-					<PostAttachments attachments={post?.uploads}/>
+          <PostAttachments attachments={post?.uploads} />
           <PostContent text={post?.text} />
         </DashboardCard>
       </div>
@@ -49,14 +49,14 @@ export const PostByPublisher = () => {
             <div>
               <p>Сроки</p>
               <span>
-								{new Date(post?.cpmStartDate).toLocaleDateString("ru-RU", {
-										formatMatcher: "basic",
-									}) +
-											" - " +
-									new Date(post?.cpmEndDate).toLocaleDateString("ru-RU", {
-										formatMatcher: "basic",
-									})}
-							</span>
+                {new Date(post?.cpmStartDate).toLocaleDateString("ru-RU", {
+                  formatMatcher: "basic",
+                }) +
+                  " - " +
+                  new Date(post?.cpmEndDate).toLocaleDateString("ru-RU", {
+                    formatMatcher: "basic",
+                  })}
+              </span>
             </div>
             <div>
               <p>Ставка СРМ</p>
@@ -85,39 +85,53 @@ export const PostByPublisher = () => {
             {({ values, setFieldValue }) => (
               <>
                 <div className={s.cardHeader}>
-                  <span>Каналы для размещения кампании</span>
+                  <span>
+                    Каналы для размещения кампании{" "}
+                    <span className={s.count}>
+                      {channels?.headers["x-total-count"]}
+                    </span>
+                  </span>
                 </div>
                 <div className={s.line}></div>
-								{values.checkboxes?.length > 0 ?
-								<div className={s.actions}>
-									<Button
-											size="small"
-											theme="secondary"
-											rightIcon={<IconPlus size={20}/>}
-											label={"Разместить в выбранных"}
-											onClick={(e) => {
-												e.preventDefault();
-												e.stopPropagation();
-												values.checkboxes.forEach(el => {
-													start({id: postId, channel_id: el})
-												})
-												setFieldValue("checkboxes", []);
-											}}
-										/>
-								</div> : <></>}
+                {values.checkboxes?.length > 0 ? (
+                  <div className={s.actions}>
+                    <Button
+                      size="small"
+                      theme="secondary"
+                      rightIcon={<IconPlus size={20} />}
+                      label={"Разместить в выбранных"}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        values.checkboxes.forEach((el) => {
+                          start({ id: postId, channel_id: el });
+                        });
+                        setFieldValue("checkboxes", []);
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <div className={s.tableWrapper}>
                   <table className={s.table}>
                     <thead>
                       <tr>
                         <th className={s.checkTh}>
-                          <CheckedAll
-                            name={"checkboxes"}
-                            ids={channels?.data.map((el) => el.channelId)}
-                          />
+													<CheckedAll
+														name={"checkboxes"}
+														ids={channels?.data.map((el) => el.channelId)}
+													/>
                         </th>
-                        <th className={s.th1}>Название канала</th>
-                        <th className={s.th2}>Кол-во показов</th>
-                        <th className={s.th3}>Активных записей</th>
+                        <th className={s.th1}>
+                          <div className={s.center}>Название канала</div>
+                        </th>
+                        <th className={s.th2}>
+                          <div className={s.center}>Кол-во показов</div> 
+                        </th>
+                        <th className={s.th3}>
+                          <div className={s.center}>Активных записей</div>
+                        </th>
                         <th className={s.th4}></th>
                       </tr>
                     </thead>
@@ -171,7 +185,10 @@ export const PostByPublisher = () => {
                                     size="small"
                                     onClick={(event) => {
                                       event.stopPropagation();
-																			start({id: postId, channel_id: el.channelId})
+                                      start({
+                                        id: postId,
+                                        channel_id: el.channelId,
+                                      });
                                     }}
                                   />
                                 </div>

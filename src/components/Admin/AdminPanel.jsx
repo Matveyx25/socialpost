@@ -96,7 +96,7 @@ export const MyAppBar = () => (
 export const MyLayout = props => <Layout {...props} appBar={MyAppBar} />;
 
 const AdminPanel = () => (
-  <Admin dataProvider={dataProvider} basename="/admin" title={CustomBreadcrumbs} layout={MyLayout}>
+  <Admin dataProvider={dataProvider} basename="/admin" title={<CustomBreadcrumbs/>} layout={MyLayout}>
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>

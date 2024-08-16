@@ -15,6 +15,15 @@ const renderStatus = (record) => ({
 	COMPLETED: "Завершенная",
 }[record.status])
 
+const renderCount = (record) => {
+	return (+record?.activePostsCount +
+					+record?.notModeratedPostsCount +
+					+record?.moderatingPostsCount +
+					+record?.acceptedPostsCount +
+					+record?.declinedPostsCount +
+					+record?.archivedPostsCount)
+}
+
 export const CampaignsList = (props) => {
 	const { id } = useParams()
 
@@ -24,6 +33,7 @@ export const CampaignsList = (props) => {
       <TextField source="id" />
       <TextField label="Клиент" source="client.name"/>
 			<FunctionField label="Тип" source="type" render={renderType}/>
+			<FunctionField label="Кол-во записей" render={renderCount}/>
       <TextField label="Общий лимит трат" source="moneyBlocked"/>
       <TextField label="Всего потрачено" source="totalMoneySpent"/>
 			<FunctionField label="Статус" source="status" render={renderStatus}/>

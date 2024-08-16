@@ -41,6 +41,7 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 					dateRange: [new Date(post?.cpmStartDate), new Date(post?.cpmEndDate)],
 					cpmTags: post?.cpmTags.map((el, index) => ({value: index, label: el})),
 					cpmValue: post?.cpmValue,
+					cpmBudget: post?.cpmBudget,
 					cpmChannelPostsLimit: post?.cpmChannelPostsLimit
         }}
 				enableReinitialize
@@ -54,6 +55,13 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 					cpmChannelPostsLimit: Yup.string()
 							.matches(/^\d+$/, "Можно вводить только цифры")
 							.required("Заполните поле"),
+					cpmBudget: Yup.string()
+							.matches(/^\d+$/, "Можно вводить только цифры")
+							.required("Заполните поле")
+							.test('is-increase-only', 'Бюджет можно только увеличивать', function (value) {
+									const currentBudget = post?.cpmBudget;
+									return Number(value) >= Number(currentBudget);
+							}),
 					dateRange: Yup.array()
 						.test(
 							'is-date-range-valid',
@@ -119,6 +127,15 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
                     placeholder={"120"}
                     id="cpmChannelPostsLimit"
                     name="cpmChannelPostsLimit"
+                  />
+                </div>
+                <div className={s.input}>
+                  <InputField
+                    label={"Бюджет"}
+                    required
+                    placeholder={"120"}
+                    id="cpmBudget"
+                    name="cpmBudget"
                   />
                 </div>
 								<div className={s.rowBtns}>
