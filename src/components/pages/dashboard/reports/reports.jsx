@@ -6,7 +6,7 @@ import { IconExternalLink, IconRefresh } from '@tabler/icons-react'
 import { Select } from '../../../Shared/Select/Select';
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
 import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
@@ -123,8 +123,8 @@ export const Reports = () => {
 									<tr onClick={() => navigate('./' + el.id)}>
 										<td>
 											<div className={s.preview}>
-												{el?.postThumbnailsUrls ? <div className={s.img}>
-													<img src={el.postThumbnailsUrls[0]} alt="" />
+												{el?.postUpload ? <div className={s.img}>
+													<img src={el?.postUpload[0]?.thumbnailUrl} alt="" />
 												</div> : ''}
 												<p>{el?.postContent?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')}</p>
 											</div>
@@ -161,7 +161,7 @@ export const Reports = () => {
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.link ? <IconExternalLink color='#436CFF' size={24}/> : '-'}
+												{el?.telegramUrl ? <NavLink to={el?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink> : '-'}
 											</div>
 										</td>
 									</tr>

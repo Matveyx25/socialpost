@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { DashboardCard } from "../dashboard-card";
 import { Button } from "../../../Shared/Button/Button";
 import { useParams } from "react-router-dom";
@@ -98,9 +98,9 @@ export const AdvertiserCreateRequest = () => {
               </div>
               <div className={s.infoBlock}>
                 <div className={s.infoValue}>
-                  {(+priceSeparator(channels?.headers["x-price-sum"]) /
-                    +priceSeparator(channels?.headers["x-reach-sum"])) *
-                    1000 || 0}
+                  {(1 / (+channels?.headers["x-price-sum"] /
+                    +channels?.headers["x-reach-sum"]) *
+                    1000) || 0}
                 </div>
                 <div className={s.infoLabel}>Средний CPM</div>
               </div>

@@ -9,6 +9,7 @@ import { priceSeparator } from '../../../../helpers/priceSeparator'
 import { usePublisherAcceptRequest } from '../../../../hooks/usePublisherAcceptRequest';
 import { PostContent } from '../../../Shared/PostContent/PostContent'
 import {ImageGrid} from "react-fb-image-video-grid"
+import { PostAttachments } from '../../../Shared/PostAttachments/PostAttachments';
 
 export const Report = () => {
 	const {requestId} = useParams()
@@ -27,14 +28,7 @@ export const Report = () => {
 						{request?.postName}
 					</div>
 					<div className={s.line}></div>
-					{request?.postThumbnailsUrls?.length > 0 && 
-						<div className={s.preview}>
-							<ImageGrid showModal={false}>
-								{request?.postThumbnailsUrls?.map((img) => (
-										<img src={img} alt="" />
-								))}
-							</ImageGrid>
-						</div>}
+					<PostAttachments attachments={request?.postUpload}/>
 					<PostContent text={request?.postText}/> 
 				</DashboardCard>
 			</div>
@@ -76,7 +70,7 @@ export const Report = () => {
 						</div>
 						<div>
 							<p>Ссылка</p>
-							<NavLink to={request?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink>
+							{request?.telegramUrl ? <NavLink to={request?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink> : '-'}
 						</div>
 					</div>
 				</DashboardCard>

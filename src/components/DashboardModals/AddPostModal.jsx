@@ -17,6 +17,7 @@ import { RangeCalendar } from '../Shared/RangeCalendar/RangeCalendar';
 import { differenceInDays } from "date-fns";
 import { serialize } from "@st.matthew/remark-slate";
 import { formatToISO } from "../../helpers/formatToISO";
+import { MultiSelect } from "../Shared/MultiSelect/MultiSelect";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -179,27 +180,16 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 								<div className={s.input}>
 									<Field name="cpmTags">
 										{({ field: { value }, form: { setFieldValue } }) => (
-											<Select
+											<MultiSelect 
 												label={"Тематика канала"}
 												className={s.select}
 												options={tags?.map((el, index) => ({value: index, label: el}))}
-												setSelectedOption={(v) => {
+												onChange={(v) => {
 													setFieldValue("cpmTags", v);
 												}}
-												isMulti
 												value={value}
-												closeMenuOnSelect={false}
-												// firstElement={
-												// 	<button
-												// 		className={s.checkAll}
-												// 		onClick={() => {
-												// 			setFieldValue("cpmTags", tags?.map((el, index) => ({value: index, label: el})));
-												// 		}}
-												// 	>
-												// 		Выбрать все
-												// 	</button>}
-												fullWidth
 												placeholder="Тематика канала"
+												fullWidth
 											/>
 										)}
 									</Field>
