@@ -186,7 +186,7 @@ export const DefaultRequests = ({ post, postId }) => {
 													{tabs[tab].value === "DECLINED" ? (
 														<>
 															<td className={s.td2}>
-																<div className={s.center}>-</div>
+																<div className={s.center}>{el.declineUserName || 'Система'}</div>
 															</td>
 															<td className={s.td3}>
 																<div className={s.center}>{el.declineReason}</div>
