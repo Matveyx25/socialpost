@@ -189,6 +189,15 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 												isMulti
 												value={value}
 												closeMenuOnSelect={false}
+												// firstElement={
+												// 	<button
+												// 		className={s.checkAll}
+												// 		onClick={() => {
+												// 			setFieldValue("cpmTags", tags?.map((el, index) => ({value: index, label: el})));
+												// 		}}
+												// 	>
+												// 		Выбрать все
+												// 	</button>}
 												fullWidth
 												placeholder="Тематика канала"
 											/>

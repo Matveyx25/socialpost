@@ -120,6 +120,31 @@
 	margin-bottom: -4px;
 	margin-top: 8px;
 }
+.checkAll{
+	border: none;
+	padding: 0.5rem 0.75rem;
+	color: #4F5157;
+	font-family: 'SF Regular';
+	font-size: 1rem;
+	line-height: 1.5rem;
+	min-width: fit-content;
+	background: none; 
+	width: 100%;
+	text-align: left;
+	cursor: pointer;
+	&:hover {
+		background: rgba(237, 241, 255, 1);
+	}
+	@media (max-width: 1260px) {
+		font-size: 12;
+	}
+	@media (max-width: 820px) {
+		font-size: 16;
+	}
+	@media (max-width: 420px) {
+		font-size: 14;
+	}
+}
 .attachmentBtn{
 	width: 100%;
 }

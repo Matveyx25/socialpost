@@ -7,12 +7,13 @@ import classNames from 'classnames';
 
 const CustomMenu = (props) => (
 		<components.MenuList  {...props}>
+				{props.firstElement}
 				{props.children}
 				{props.lastElement}
 		</components.MenuList >
 	)
 
-export const Select = ({styles, headerClassName, value, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
+export const Select = ({styles, headerClassName, value, firstElement, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={classNames(headerClassName, s.header)}>
 			<span>{label}{required && <span className={s.star}>*</span>}</span>
@@ -30,7 +31,7 @@ export const Select = ({styles, headerClassName, value, lastElement, label, requ
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
 				DropdownIndicator: () => <IconChevronDown className={s.icon}/>,
-				MenuList: (props) => <CustomMenu {...props} lastElement={lastElement}/>
+				MenuList: (props) => <CustomMenu {...props} lastElement={lastElement} firstElement={firstElement}/>
 			}}
 			styles={{
 				...styles,

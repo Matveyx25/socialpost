@@ -325,6 +325,7 @@ export const advertiser = {
 			cpmEndDate: data?.cpmEndDate,
 			cpmChannelPostsLimit: data.cpmChannelPostsLimit,
 			cpmValue: data.cpmValue,
+			cpmBudget: data.cpmBudget,
 		})
 	},
 	getRequestsStats(){

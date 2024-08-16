@@ -25,6 +25,7 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 			cpmEndDate: formatToISO(values?.dateRange[0]),
 			cpmChannelPostsLimit: values.cpmChannelPostsLimit,
 			cpmValue: values.cpmValue,
+			cpmBudget: values.cpmBudget,
 		});
     setOpen();
   };
