@@ -144,9 +144,7 @@ export const profile = {
 	getBalanceOperations(params) {
 		return instance.get("/balance_operations/my", {params, paramsSerializer: {
 			indexes: null
-		}}).then(res => {
-			return res
-		})
+		}})
 	},
 	withdrawalBalance(data) {
 		return instance.post("/balance_operations/withdrawal", data)
@@ -238,7 +236,9 @@ export const advertiser = {
 		return instance.get('/campaigns/' + id)
 	},
 	getPostsByCampaign(id, params) {
-		return instance.get('/campaigns/' + id + '/posts',  {params})
+		return instance.get('/campaigns/' + id + '/posts',  {params, paramsSerializer: {
+			indexes: null
+		}})
 	},
 	async createPost(data) {
 		let requestData = null

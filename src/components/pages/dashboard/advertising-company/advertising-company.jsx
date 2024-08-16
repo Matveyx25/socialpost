@@ -25,7 +25,7 @@ export const AdvertisingCompany = () => {
 	const tabs = [
 		{label: 'Новые', count: company?.notModeratedPostsCount, value: 'NOT_MODERATED', id: 0},
 		{label: 'Активные', count: company?.activePostsCount, value: 'ACCEPTED', id: 1},
-		{label: 'На проверке', count: company?.moderatingPostsCount, value: 'MODERATING', id: 2},
+		{label: 'На проверке', count: company?.moderatingPostsCount, value: ['MODERATING', 'MODERATING_MARKING'], id: 2},
 		{label: 'Отклоненные', count: company?.declinedPostsCount, value: 'DECLINED', id: 3},
 		{label: 'Архивные', count: company?.archivedPostsCount, value: 'ARCHIVED', id: 4}
 	]
