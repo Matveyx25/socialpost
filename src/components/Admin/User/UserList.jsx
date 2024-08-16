@@ -29,7 +29,7 @@ const renderTelegramStatus = (record) => !!record?.telegramData ? <IconCheck/> :
 
 export const UserList = (props) => (
   <List exporter={false} {...props} empty={<CustomEmpty message={'Пользователей нет'}/>} pagination={<PostPagination/>}>
-    <Datagrid rowClick="edit">
+    <Datagrid rowClick="edit"  bulkActionButtons={false}>
       <TextField source="id" />
       <TextField source="firstName" label="Имя"/>
       <TextField source="lastName" label="Фамилия"/>

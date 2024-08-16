@@ -28,7 +28,7 @@ const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : 
 
 export const ChannelsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Каналов нет'}/>} pagination={<PostPagination/>}>
-    <Datagrid rowClick="edit">
+    <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
       <TextField source="name" label="Название"/>
       <TextField source="subscribersCount" label="Подписчики"/>

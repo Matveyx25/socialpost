@@ -31,7 +31,7 @@ export const Channels = () => {
 
 	return (
 	 <List exporter={false} resource={'channels'} filter={{owner_id: id}} empty={<CustomEmpty message={'Каналов нет'}/>}>
-		 <Datagrid rowClick="edit">
+		 <Datagrid rowClick="edit"  bulkActionButtons={false}>
 			 <TextField source="id" />
 			 <TextField source="name" label="Название"/>
 			 <TextField source="subscribersCount" label="Подписчики"/>

@@ -1,10 +1,17 @@
 import { Box, Typography } from "@mui/material";
-import DOMPurify from "dompurify";
-import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, SelectInput, TextInput, useRecordContext, SelectArrayInput, DateField, DateInput } from "react-admin";
-import Markdown from "react-markdown";
-import rehypeRaw from "rehype-raw";
-import remarkGfm from "remark-gfm";
+import {
+    Edit,
+    SimpleForm,
+    TopToolbar,
+    PrevNextButtons,
+    Labeled,
+    FunctionField,
+    SelectInput,
+    TextInput,
+    useRecordContext,
+    SelectArrayInput,
+    DateInput,
+} from "react-admin";
 import s from './style.module.scss'
 import { useEffect } from "react";
 import { channels } from "../../../api/api";
@@ -150,6 +157,7 @@ export const AdvertiserPostsEdit = (props) => (
 								source="status"
 								choices={[
 									{ id: "NOT_MODERATED", name: "Новый" },
+									{ id: "MODERATING_MARKING", name: "На проверке маркировки" },
 									{ id: "MODERATING", name: "На проверке" },
 									{ id: "DECLINED", name: "Отклоненный" },
 									{ id: "ACCEPTED", name: "Активный" },

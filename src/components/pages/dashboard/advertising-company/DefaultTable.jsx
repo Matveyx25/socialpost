@@ -102,6 +102,7 @@ export const DefaultTable = ({ isFetched, posts, tab, tabs }) => {
                         />
                       ),
                       MODERATING: null,
+                      MODERATING_MARKING: null,
                       DECLINED: (
                         <Button
                           label={"Отправить на модерацию"}

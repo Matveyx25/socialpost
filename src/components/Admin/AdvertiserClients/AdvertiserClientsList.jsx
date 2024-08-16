@@ -10,7 +10,7 @@ const renderRole = (record) => ({
 
 export const AdvertiserClientsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
-    <Datagrid rowClick="edit">
+    <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>
       <TextField label="Наименование клиента" source="name"/>

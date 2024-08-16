@@ -63,6 +63,18 @@ export const PostByAdvertiser = () => {
                 </div>
               </DashboardCard>
             ),
+            MODERATING_MARKING: (
+              <DashboardCard className={s.card}>
+                <div className={s.alertWrapper}>
+                  <IconClockHour4 color="#436CFF" size={24} />
+                  <div className={s.alertContent}>
+                    <div className={s.alertTitle}>
+                      Рекламная запись на модерации
+                    </div>
+                  </div>
+                </div>
+              </DashboardCard>
+            ),
             DECLINED: (
               <DashboardCard className={s.card}>
                 <div className={s.alertWrapper}>
@@ -103,6 +115,7 @@ export const PostByAdvertiser = () => {
                     />
                   ),
                   MODERATING: null,
+                  MODERATING_MARKING: null,
                   DECLINED: (
                     <Button
                       label={"Отправить на модерацию"}
