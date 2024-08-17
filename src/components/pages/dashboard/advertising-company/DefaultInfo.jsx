@@ -46,7 +46,7 @@ export const DefaultInfo = ({company}) => {
         </div>
         <div className={s.infoBlock}>
           <div className={s.infoTitle}>Выполненных заявок</div>
-          <div className={s.infoValue}>{company?.acceptedPostsCount}</div>
+          <div className={s.infoValue}>{company?.completedRequestsCount}</div>
         </div>
         <div className={s.infoBlock}>
           <div className={s.infoTitle}>Заблокировано</div>
