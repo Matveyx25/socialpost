@@ -6,7 +6,6 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import s from './PostContent.module.scss'
 import {deserializeToHTML} from '../../../helpers/deserialize'
-import DOMPurify from 'dompurify'
 
 export const PostContent = ({text}) => {
 	return (

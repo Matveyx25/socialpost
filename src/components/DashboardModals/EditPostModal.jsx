@@ -38,12 +38,15 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
     setOpen();
   };
 
-	const slateValueValidator = (value) => {
-		if (!value || value.document?.nodes?.isEmpty()) {
-			return false;
+	function slateValueValidator(content) {
+		let plainText
+
+		if(content?.length){
+			plainText = content?.map(n => Node.isNode(n) ? Node.string(n) : '').join('\n')
 		}
-		return true;
-	};
+		
+		return !!plainText?.trim();
+	}
 
 	const renderFilePreviews = () => {
 			return files.map((file, index) => (

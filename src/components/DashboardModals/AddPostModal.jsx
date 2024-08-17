@@ -18,6 +18,7 @@ import { differenceInDays } from "date-fns";
 import { serialize } from "@st.matthew/remark-slate";
 import { formatToISO } from "../../helpers/formatToISO";
 import { MultiSelect } from "../Shared/MultiSelect/MultiSelect";
+import { Node } from "slate";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -74,12 +75,15 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
     setCurrentStep(0);
   };
 
-	const slateValueValidator = (value) => {
-		if (!value || value.document?.nodes?.isEmpty()) {
-			return false;
+	function slateValueValidator(content) {
+		let plainText
+
+		if(content?.length){
+			plainText = content?.map(n => Node.isNode(n) ? Node.string(n) : '').join('\n')
 		}
-		return true;
-	};
+		
+		return !!plainText?.trim();
+	}
 
   const typeOptions = [
 		{value: 'NEW_POST', label: "Новая запись",},
@@ -327,9 +331,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
         ) : (
           <FormikStep
             validationSchema={Yup.object().shape({
-              text: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
-                slateValueValidator(value)
-              ),
+              text: Yup.mixed().test("is-empty", "Заполните поле", (value) => slateValueValidator(value)),
             })}
           >
             <div className={s.scroller}>
