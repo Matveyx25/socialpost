@@ -28,7 +28,7 @@ export const RichText = memo(({name, label, required, withInfo}) => {
 			setValue([
 				{
 					type: "paragraph",
-					children: [{ text: "Type something ..." }],
+					children: [{ text: "" }],
 				},
 			]);
 		}
