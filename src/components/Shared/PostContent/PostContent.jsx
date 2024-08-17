@@ -6,6 +6,7 @@ import rehypeSlug from 'rehype-slug'
 import remarkGfm from 'remark-gfm'
 import s from './PostContent.module.scss'
 import {deserializeToHTML} from '../../../helpers/deserialize'
+import DOMPurify from 'dompurify'
 
 export const PostContent = ({text}) => {
 	return (
@@ -14,7 +15,7 @@ export const PostContent = ({text}) => {
 				remarkPlugins={[remarkGfm, deserializeToHTML]}
 				rehypePlugins={[rehypeSlug, rehypeAutolinkHeadings, rehypeRaw]}
 			>
-				{text}
+				{text?.replace(/\n/g, '<br/>')}
 			</Markdown>
 		</div>
 	)
