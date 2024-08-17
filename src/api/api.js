@@ -247,7 +247,20 @@ export const advertiser = {
 			let uploadPromises = data?.files?.map(file => {
 				const formData = new FormData();
 				formData.append('upload', file);
-				return instance.post('/uploads', formData);
+				
+				let toastId = null
+				return instance.post('/uploads', formData, {
+					onUploadProgress: (processEvent) => {
+						const {loaded, total} = processEvent
+						let progress = Math.floor((loaded / total) * 100)
+
+						if (toastId === null) {
+							toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+						} else {
+							toast.update(toastId, { progress });
+						}
+					}
+				}).finally(() => toast.done(toastId));
 			});
 
 			const uploadResponses = await Promise.all(uploadPromises);
@@ -277,7 +290,21 @@ export const advertiser = {
 				let uploadPromises = data?.files?.map(file => {
 						const formData = new FormData();
 						formData.append('upload', file);
-						return instance.post('/uploads', formData);
+
+						let toastId = null
+
+						return instance.post('/uploads', formData, {
+							onUploadProgress: (processEvent) => {
+								const {loaded, total} = processEvent
+								let progress = Math.floor((loaded / total) * 100)
+
+								if (toastId === null) {
+									toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+								} else {
+									toast.update(toastId, { progress });
+								}
+							}
+						}).finally(() => toast.done(toastId));
 				});
 		
 				const uploadResponses = await Promise.all(uploadPromises);
@@ -300,7 +327,20 @@ export const advertiser = {
 				if(!file?.id){
 					const formData = new FormData();
 					formData.append('upload', file);
-					return instance.post('/uploads', formData);
+					let toastId = null
+					
+					return instance.post('/uploads', formData, {
+						onUploadProgress: (processEvent) => {
+							const {loaded, total} = processEvent
+							let progress = Math.floor((loaded / total) * 100)
+
+							if (toastId === null) {
+								toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+							} else {
+								toast.update(toastId, { progress });
+							}
+						}
+					}).finally(() => toast.done(toastId));
 				}else{
 					return ({data: {id: file?.id}})
 				}
