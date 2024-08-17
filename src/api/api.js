@@ -252,12 +252,15 @@ export const advertiser = {
 				return instance.post('/uploads', formData, {
 					onUploadProgress: (processEvent) => {
 						const {loaded, total} = processEvent
-						let progress = Math.floor((loaded / total) * 100)
+						let progress = loaded / total
+						let percents = Math.floor(progress * 100)
 
 						if (toastId === null) {
-							toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+							toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
 						} else {
-							toast.update(toastId, { progress });
+							console.log(loaded, total, 'Загрузка файла ' + percents + '%');
+							
+							toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 						}
 					}
 				}).finally(() => toast.done(toastId));
@@ -296,12 +299,15 @@ export const advertiser = {
 						return instance.post('/uploads', formData, {
 							onUploadProgress: (processEvent) => {
 								const {loaded, total} = processEvent
-								let progress = Math.floor((loaded / total) * 100)
+								let progress = loaded / total
+								let percents = Math.floor(progress * 100)
 
 								if (toastId === null) {
-									toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+									toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
 								} else {
-									toast.update(toastId, { progress });
+									console.log(loaded, total, 'Загрузка файла ' + percents + '%');
+									
+									toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 								}
 							}
 						}).finally(() => toast.done(toastId));
@@ -332,12 +338,15 @@ export const advertiser = {
 					return instance.post('/uploads', formData, {
 						onUploadProgress: (processEvent) => {
 							const {loaded, total} = processEvent
-							let progress = Math.floor((loaded / total) * 100)
+							let progress = loaded / total
+							let percents = Math.floor(progress * 100)
 
 							if (toastId === null) {
-								toastId = toast('Загрузка файла ' + progress + '%', { type: 'info', progress, isLoading: true });
+								toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
 							} else {
-								toast.update(toastId, { progress });
+								console.log(loaded, total, 'Загрузка файла ' + percents + '%');
+								
+								toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 							}
 						}
 					}).finally(() => toast.done(toastId));
