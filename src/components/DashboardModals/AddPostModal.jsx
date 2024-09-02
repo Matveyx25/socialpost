@@ -79,10 +79,10 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let plainText
 
 		if(content?.length){
-			plainText = content?.map(n => Node.isNode(n) ? Node.string(n) : '').join('\n')
+			plainText = content?.map(n => Node?.isNode(n) ? Node?.string(n) : '').join('\n')
 		}
 		
-		return !!plainText?.trim();
+		return !!plainText?.trim() || !!files?.length;
 	}
 
   const typeOptions = [
@@ -267,7 +267,10 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 							.required("Заполните поле"),
               cpmChannelPostsLimit: Yup.string()
 							.matches(/^\d+$/, "Можно вводить только цифры")
-							.required("Заполните поле"),
+							.required("Заполните поле")
+							.test('is-not-zero', 'Введите численное значение больше 0', function (value) {
+								return Number(value) > 0;
+							}),
             })}
           >
             <div className={s.scroller}>

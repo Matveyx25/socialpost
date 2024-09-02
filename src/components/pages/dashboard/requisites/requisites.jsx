@@ -2,14 +2,12 @@ import React, { useState } from 'react'
 import s from './requisites.module.scss';
 import { DashboardCard } from '../dashboard-card';
 import { Tabs } from '../../../Shared/Tabs/Tabs';
-import { SelfEmployed } from './SelfEmployed';
 import { IndividualEntrepreneur } from './IndividualEntrepreneur';
 import { Entity } from './Entity';
 
 const tabs = [
-	{label: 'Самозанятый', id: 1},
-	{label: 'Индивидуальный предприниматель', id: 2},
-	{label: 'Юридическое лицо', id: 3},
+	{label: 'Индивидуальный предприниматель', id: 1},
+	{label: 'Юридическое лицо', id: 2},
 ]
 
 export const Requisites = () => {
@@ -20,9 +18,9 @@ export const Requisites = () => {
 			<DashboardCard>
 				<Tabs {...{tabs, tab, setTab}}/>
 			</DashboardCard>
-			{{1: <SelfEmployed/>,
-			 2: <IndividualEntrepreneur/>, 
-			 3: <Entity/>, 
+			{{
+			 1: <IndividualEntrepreneur/>, 
+			 2: <Entity/>, 
 			 }[tab]}
 		</div>
 	)

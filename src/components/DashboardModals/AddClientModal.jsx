@@ -77,7 +77,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
         <SecondStep 
 				validationSchema={Yup.object().shape({
 						inn: Yup.string().when("type", (type, field) =>
-							type.includes("IE") || type.includes("OOO")
+							type.includes("IE") || type.includes("LEGAL_ENTITY")
 								? field.required("Введите ИНН")
 								: field.when("phone", (phone, phoneField) =>
 										phone + "" ? phoneField : phoneField.required("Введите ИНН")

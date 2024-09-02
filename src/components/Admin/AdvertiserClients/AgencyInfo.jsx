@@ -5,8 +5,9 @@ import { TextField, Labeled, FunctionField, DateField, useRecordContext } from "
 
 const renderAdvertiserType = (record) => ({
 	PHYSICAL_ENTITY: "Физическое лицо",
+	SELF_EMPLOYED: "Самозанятый",
 	IE: "ИП",
-	OOO: "Юридическое лицо",
+	LEGAL_ENTITY: "Юридическое лицо",
 }[record.agencyInfo.renderAdvertiserType])
 
 const renderRecognizedByNDS = (record) => !!record.agencyInfo.recognizedByNDS === true ? <IconCheck/> : <IconX/>

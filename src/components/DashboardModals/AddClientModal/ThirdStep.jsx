@@ -10,8 +10,9 @@ import { formatToISO } from "../../../helpers/formatToISO";
 export const ThirdStep = () => {
   const typeOptions = [
     { value: "PHYSICAL_ENTITY", label: "Физ. лицо" },
+    { value: "SELF_EMPLOYED", label: "Самозанятый" },
     { value: "IE", label: "ИП" },
-    { value: "OOO", label: "ООО" },
+    { value: "LEGAL_ENTITY", label: "Юр. лицо" },
   ];
 
   const subjectOptions = [

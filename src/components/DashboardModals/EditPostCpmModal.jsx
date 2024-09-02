@@ -11,6 +11,7 @@ import { useAllChannelsTags } from "../../hooks/useAllChannelsTags";
 import { InputField } from "../Shared/Input/Input";
 import { differenceInDays } from "date-fns";
 import { formatToISO } from "../../helpers/formatToISO";
+import { MultiSelect } from '../Shared/MultiSelect/MultiSelect';
 
 export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
   const { mutate: updatePost } = useUpdatePostCpm();
@@ -82,19 +83,16 @@ export const EditPostCpmModal = ({ isOpen, setOpen, modalParams }) => {
 							<div className={s.input}>
 									<Field name="cpmTags">
 										{({ field: { value }, form: { setFieldValue } }) => (
-											<Select
+											<MultiSelect
 												label={"Тематика канала"}
 												className={s.select}
 												options={tags?.map((el, index) => ({value: index, label: el}))}
-												setSelectedOption={(v) => {
+												onChange={(v) => {
 													setFieldValue("cpmTags", v);
 												}}
-												isMulti
 												value={value}
-												defaultValue={value}
-												closeMenuOnSelect={false}
-												fullWidth
 												placeholder="Тематика канала"
+												fullWidth
 											/>
 										)}
 									</Field>

@@ -15,6 +15,7 @@ import { useUpdatePostContent } from '../../hooks/useUpdatePostContent';
 import { Button } from "../Shared/Button/Button";
 import slate, { serialize } from '@st.matthew/remark-slate';
 import deserialize from '../../helpers/deserialize'
+import { Node } from "slate";
 
 const processor = unified().use(markdown).use(deserialize).use(slate)
 
@@ -42,7 +43,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let plainText
 
 		if(content?.length){
-			plainText = content?.map(n => Node.isNode(n) ? Node.string(n) : '').join('\n')
+			plainText = content?.map(n => Node?.isNode(n) ? Node?.string(n) : '').join('\n')
 		}
 		
 		return !!plainText?.trim();

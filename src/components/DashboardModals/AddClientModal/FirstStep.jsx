@@ -12,8 +12,9 @@ export const FirstStep = ({setRole}) => {
 
   const typeOptions = [
     { value: "PHYSICAL_ENTITY", label: "Физ. лицо" },
+    { value: "SELF_EMPLOYED", label: "Самозанятый" },
     { value: "IE", label: "ИП" },
-    { value: "OOO", label: "ООО" },
+    { value: "LEGAL_ENTITY", label: "Юр. лицо" },
   ];
 
   return (

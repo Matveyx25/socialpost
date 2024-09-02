@@ -93,7 +93,7 @@ export const PostByAdvertiser = () => {
         }
         <DashboardCard className={s.card}>
           <div className={s.cardHeader}>
-            Информация
+						{post?.cpmStatus ?  "Параметры РК" : "Информация"}
             <div className={s.btns}>
 						{post?.cpmStatus ?  <Button
                       label={"Редактировать"}
@@ -279,6 +279,14 @@ export const PostByAdvertiser = () => {
               <div>
                 <p>Потрачено</p>
                 <span>{post?.totalMoneySpent}₽</span>
+              </div>
+              <div>
+                <p>Лимит показов</p>
+                <span>{(+post?.cpmBudget / +post?.cpmValue) * 1000}</span>
+              </div>
+              <div>
+                <p>Ограничение на количество размещений в одном канале</p>
+                <span>{post?.cpmChannelPostsLimit}</span>
               </div>
             </div>
           ) : (

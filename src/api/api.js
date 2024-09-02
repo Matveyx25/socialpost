@@ -256,10 +256,8 @@ export const advertiser = {
 						let percents = Math.floor(progress * 100)
 
 						if (toastId === null) {
-							toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
+							toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
 						} else {
-							console.log(loaded, total, 'Загрузка файла ' + percents + '%');
-							
 							toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 						}
 					}
@@ -303,10 +301,8 @@ export const advertiser = {
 								let percents = Math.floor(progress * 100)
 
 								if (toastId === null) {
-									toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
+									toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
 								} else {
-									console.log(loaded, total, 'Загрузка файла ' + percents + '%');
-									
 									toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 								}
 							}
@@ -342,10 +338,8 @@ export const advertiser = {
 							let percents = Math.floor(progress * 100)
 
 							if (toastId === null) {
-								toastId = toast('Загрузка файла ' + percents + '%', { type: 'info', progress, isLoading: true, autoClose: false });
+								toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
 							} else {
-								console.log(loaded, total, 'Загрузка файла ' + percents + '%');
-								
 								toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 							}
 						}

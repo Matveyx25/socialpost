@@ -79,8 +79,9 @@ export const MyClients = () => {
                         {
                           {
                             PHYSICAL_ENTITY: "Физическое лицо",
-                            IE: "ИП",
-                            OOO: "Юридическое лицо",
+														SELF_EMPLOYED: "Самозанятый",
+														IE: "ИП",
+														LEGAL_ENTITY: "Юридическое лицо",
                           }[el.type]
                         }
                       </div>

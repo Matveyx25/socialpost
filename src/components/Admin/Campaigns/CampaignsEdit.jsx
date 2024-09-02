@@ -17,8 +17,9 @@ const renderClientRole = (record) => ({
 
 const renderClientType = (record) => ({
 	PHYSICAL_ENTITY: "Физическое лицо",
+	SELF_EMPLOYED: "Самозанятый",
 	IE: "ИП",
-	OOO: "Юридическое лицо",
+	LEGAL_ENTITY: "Юридическое лицо",
 }[record.client.type])
 
 const renderStatus = (record) => ({
