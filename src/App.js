@@ -81,7 +81,7 @@ function App() {
 							</> :
 							<>
 								<Route path="/dashboard" element={<AdvertisingCompanies/>}/>
-								<Route path="/clients" element={<MyClients/>}/>
+								{profile?.isAgency ? <Route path="/clients" element={<MyClients/>}/> : null}
 								<Route path="/requisites" element={<Requisites/>}/>
 								<Route path="/payments" element={<Payments/>}/>
 								<Route path="/dashboard/:companyId" element={<AdvertisingCompany/>}/>

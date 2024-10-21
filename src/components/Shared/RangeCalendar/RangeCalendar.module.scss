@@ -20,9 +20,9 @@
 		outline: none;
 		width: 4.8125rem;
 		font-family: 'SF Regular' !important;
-		&[type="time"] {
-			background:transparent url(/assets/images/clock.png)  97% 50% no-repeat !important;
-		}
+		// &[type="time"] {
+		// 	background:transparent url(/assets/images/clock.png)  97% 50% no-repeat !important;
+		// }
 		&[type="time"]::-webkit-inner-spin-button {
 			display: none;
 		}

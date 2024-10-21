@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm } from "react-admin";
+import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm, BooleanInput } from "react-admin";
 
 export const UserEdit = (props) => {
 	return (
@@ -30,6 +30,7 @@ export const UserEdit = (props) => {
 								<SelectArrayInput fullWidth label="роли" source="roles" choices={[
 										{ id: 'PUBLISHER', name: 'Паблишер' },
 										{ id: 'ADVERTISER', name: 'Рекламодатель' }]} />
+								<BooleanInput label="Является агенством" source="isAgency"/>
 							</Box>
 					</Box>
 					<hr />

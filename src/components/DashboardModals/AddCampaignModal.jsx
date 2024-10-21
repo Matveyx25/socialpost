@@ -18,9 +18,9 @@ import {
   IconPhotoDollar,
   IconPhotoStar,
   IconPlus,
-  IconRobot,
 } from "@tabler/icons-react";
 import classNames from "classnames";
+import { useProfile } from "../../hooks/useProfile";
 
 const Radio = ({ name, value, title, text, icon, disabled }) => {
   return (
@@ -68,11 +68,12 @@ const Radio = ({ name, value, title, text, icon, disabled }) => {
 };
 
 const Content = ({ setOpen, currentStep, setCurrentStep }) => {
+	const { data: profile } = useProfile()
   const { data: clients } = useMyClients();
   const { mutate: createCompany } = useAddCampaign();
 
   const handleSubmit = (values) => {
-    createCompany(values);
+    createCompany(profile?.isAgency ? values : {...values, clientId: null});
     setOpen();
     setCurrentStep(0);
   };
@@ -109,7 +110,7 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
           </div>
         </div>
       </FormikStep>
-      <FormikStep
+      {profile?.isAgency ? <FormikStep
         validationSchema={Yup.object().shape({
           clientId: Yup.string().required("Заполните поле"),
         })}
@@ -154,7 +155,7 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
             )}
           </div>
         </div>
-      </FormikStep>
+      </FormikStep> : null}
       <FormikStep
         validationSchema={Yup.object().shape({
           type: Yup.string().required("Заполните поле"),
@@ -204,7 +205,8 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
 
 export const AddCampaignModal = ({ isOpen, setOpen }) => {
   const [currentStep, setCurrentStep] = useState(0);
-
+	const { data: profile } = useProfile()
+ 
   useEffect(() => {
 		if(isOpen !== "add-campaign"){
 			setCurrentStep(0);
@@ -214,7 +216,7 @@ export const AddCampaignModal = ({ isOpen, setOpen }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={`Создать рекламную кампанию ${currentStep + 1}/3`}
+      title={`Создать рекламную кампанию ${currentStep + 1}/${profile?.isAgency ? 3 : 2}`}
       name={"add-campaign"}
     >
       <Content {...{ setOpen, isOpen, currentStep, setCurrentStep }} />
