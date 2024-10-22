@@ -18,6 +18,8 @@ const tax = [
 ];
 
 export const IndividualEntrepreneur = () => {
+	const nameRegExp = /^([\S]+)\s([\S]+)\s([\S]+)?$/;
+
   const { data: IE } = useIE();
   const { mutate: updateIE } = useUpdateIE();
 
@@ -27,6 +29,9 @@ export const IndividualEntrepreneur = () => {
       .required("Введите ОГРН"),
     address: Yup.string().required("Введите адрес"),
     taxSystem: Yup.string().required("Выберите систему налогообложения"),
+    fullName: Yup.string()
+      .matches(nameRegExp, "Введите ФИО верно")
+      .required("Введите ФИО"),
     inn: Yup.string()
       .matches(/^\d+$/, "ИНН должен содержать только цифры")
       .required("Введите ИНН"),
@@ -47,6 +52,7 @@ export const IndividualEntrepreneur = () => {
 			enableReinitialize={true}	
 			initialValues={{
 				inn: IE?.inn,
+				fullName: IE?.fullName,
 				OGRN: IE?.ogrn,
 				address: IE?.address,
 				taxSystem: IE?.taxSystem,
@@ -58,6 +64,7 @@ export const IndividualEntrepreneur = () => {
 			validationSchema={validator}
 			onSubmit={(values) => {
 				updateIE({
+					fullName: values?.fullName,
 					inn: values?.inn,
 					ogrn: values?.OGRN,
 					address: values?.address,
@@ -78,6 +85,15 @@ export const IndividualEntrepreneur = () => {
 							<div className={s.formCard}>
 								<div className={s.cardHeader}>Личные данные</div>
 								<div className={s.line}></div>
+								<div className={s.formRow}>
+									<InputField
+										label={"ФИО"}
+										name="fullName"
+										placeholder="Иванов Иван Иванович"
+										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
+									/>
+								</div>
 								<div className={s.formRow}>
 									<InputField
 										label={"ИНН"}

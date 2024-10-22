@@ -30,6 +30,8 @@ export const Entity = () => {
       "Введите адрес для корреспонденции"
     ),
     taxSystem: Yup.string().required("Выберите систему налогообложения"),
+    name: Yup.string()
+      .required("Введите ИНН"),
     inn: Yup.string()
       .matches(/^\d+$/, "ИНН должен содержать только цифры")
       .required("Введите ИНН"),
@@ -49,6 +51,7 @@ export const Entity = () => {
 		<Formik
 			enableReinitialize={true}
 			initialValues={{
+				name: LegalEntity?.name,
 				inn: LegalEntity?.inn,
 				OGRN: LegalEntity?.ogrn,
 				correspondentAddress: LegalEntity?.correspondenceAddress,
@@ -63,6 +66,7 @@ export const Entity = () => {
 			validationSchema={validator}
 			onSubmit={(values) => {
 				updateLegalEntity({
+					name: values?.name,
 					inn: values?.inn,
 					taxSystem: values?.taxSystem,
 					ogrn: values?.OGRN,
@@ -84,6 +88,15 @@ export const Entity = () => {
 							<div className={s.formCard}>
 								<div className={s.cardHeader}>Личные данные</div>
 								<div className={s.line}></div>
+								<div className={s.formRow}>
+									<InputField
+										label={"Название"}
+										name="name"
+										placeholder="ООО 'ООО'"
+										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
+									/>
+								</div>
 								<div className={s.formRow}>
 									<InputField
 										label={"ИНН"}
