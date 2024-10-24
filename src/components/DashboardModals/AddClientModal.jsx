@@ -39,14 +39,16 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
           name: "",
           type: "",
           role: "",
-          inn: "",
-          phone: "",
-          contractNumber: "",
-          contractSubject: "",
-          description: "",
-          conclusionDate: "",
-          recognizedByNDS: false,
-          moneyAmount: "",
+					advertiserInfo: {
+						inn: "",
+						phone: "",
+						contractNumber: "",
+						contractSubject: "",
+						description: "",
+						conclusionDate: "",
+						recognizedByNDS: false,
+						moneyAmount: "",
+					},
 					agencyInfo: {
 						advertiserType: '',
 						advertiserInn: '',
@@ -76,6 +78,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 				})}/>
         <SecondStep 
 				validationSchema={Yup.object().shape({
+					advertiserInfo:  Yup.object().shape({
 						inn: Yup.string().when("type", (type, field) =>
 							type.includes("IE") || type.includes("LEGAL_ENTITY")
 								? field.required("Введите ИНН")
@@ -100,6 +103,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 						),
 						recognizedByNDS: Yup.boolean(),
 						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
+					})
 					})}/>
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({

@@ -16,8 +16,8 @@ export const SecondStep = () => {
 							label={"ИНН"}
 							required
 							placeholder={"Введите ИНН"}
-							id="inn"
-							name="inn"
+							id="advertiserInfo.inn"
+							name="advertiserInfo.inn"
 						/>
 					</div>
 					<div className={s.input}>
@@ -26,8 +26,8 @@ export const SecondStep = () => {
 							label={"Номер телефона"}
 							required
 							placeholder={"Введите номер телефона"}
-							id="phone"
-							name="phone"
+							id="advertiserInfo.phone"
+							name="advertiserInfo.phone"
 						/>
 					</div>
 					<div className={s.input}>
@@ -35,8 +35,8 @@ export const SecondStep = () => {
 							label={"Номер договора клиента"}
 							required
 							placeholder={"Введите номер договора"}
-							id="contractNumber"
-							name="contractNumber"
+							id="advertiserInfo.contractNumber"
+							name="advertiserInfo.contractNumber"
 						/>
 					</div>
 					<div className={s.input}>
@@ -44,20 +44,20 @@ export const SecondStep = () => {
 							label={"Предмет договора"}
 							required
 							placeholder={"Введите предмет договора"}
-							id="contractSubject"
-							name="contractSubject"
+							id="advertiserInfo.contractSubject"
+							name="advertiserInfo.contractSubject"
 						/>
 					</div>
 					<div className={s.input}>
 						<InputField
 							label={"Краткое описание"}
 							placeholder={"Введите краткое описание"}
-							id="description"
-							name="description"
+							id="advertiserInfo.description"
+							name="advertiserInfo.description"
 						/>
 					</div>
 					<div className={s.input}>
-						<Field name="conclusionDate">
+						<Field name="advertiserInfo.conclusionDate">
 							{({ field: { value }, form: { setFieldValue } }) => (
 								<Calendar
 									placeholder={"11.08.1998"}
@@ -66,7 +66,7 @@ export const SecondStep = () => {
 									value={value}
 									required
 									onChange={(v) =>
-										setFieldValue("conclusionDate", formatToISO(v))
+										setFieldValue("advertiserInfo.conclusionDate", formatToISO(v))
 									}
 								/>
 							)}
@@ -76,12 +76,12 @@ export const SecondStep = () => {
 						<InputField
 							label={"Сумма договора"}
 							placeholder={"Введите сумму договора"}
-							id="moneyAmount"
-							name="moneyAmount"
+							id="advertiserInfo.moneyAmount"
+							name="advertiserInfo.moneyAmount"
 						/>
 					</div>
 					<div className={s.input}>
-						<Checkbox name="recognizedByNDS" label={"Признак НДС"} />
+						<Checkbox name="advertiserInfo.recognizedByNDS" label={"Признак НДС"} />
 					</div>
 				</div>
 			</div>
