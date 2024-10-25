@@ -28,9 +28,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={role === 'AGENCY' ? 
-				(currentStep === 2 ? `Данные договора с рекламодателем ${currentStep + 1}/3` : `Добавить клиента ${currentStep + 1}/3`)
-				: `Добавить клиента ${currentStep + 1}/2` }
+      title={(currentStep === 2 ? `Данные договора с рекламодателем ${currentStep + 1}/2` : `Добавить клиента ${currentStep + 1}/2`)}
       name={"add-my-client"}
     >
       <FormikStepper
@@ -76,7 +74,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 					type: Yup.string().required("Выберите тип клиента"),
 					name: Yup.string().required("Заполните поле"),
 				})}/>
-        <SecondStep 
+        {role !== 'AGENCY' ? <SecondStep 
 				validationSchema={Yup.object().shape({
 					advertiserInfo:  Yup.object().shape({
 						inn: Yup.string().when("type", (type, field) =>
@@ -104,7 +102,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 						recognizedByNDS: Yup.boolean(),
 						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})
-					})}/>
+					})}/> : null}
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
 					agencyInfo: Yup.object().shape({
