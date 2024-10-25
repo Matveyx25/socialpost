@@ -100,20 +100,20 @@ export const MyClients = () => {
                       <div className={s.center}>{el.name}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.inn ? el.inn : '-'}</div>
+                      <div className={s.center}>{el?.advertiserInfo.inn ? el?.advertiserInfo.inn : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.phone ? el.phone : '-'}</div>
+                      <div className={s.center}>{el?.advertiserInfo.phone ? el?.advertiserInfo.phone : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.contractNumber ? '№' + el.contractNumber  : '-'}</div>
+                      <div className={s.center}>{el?.advertiserInfo.contractNumber ? '№' + el?.advertiserInfo.contractNumber  : '-'}</div>
                     </td>
 										<td>
-                      <div className={s.center}>{el.contractSubject ? el.contractSubject : '-'}</div>
+                      <div className={s.center}>{el?.advertiserInfo.contractSubject ? el?.advertiserInfo.contractSubject : '-'}</div>
 											
                     </td>
                     <td>
-                      <div className={s.center}>{(new Date(el.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div>
+                      <div className={s.center}>{(new Date(el?.advertiserInfo.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div>
                     </td>
                   </tr>
                 ))
