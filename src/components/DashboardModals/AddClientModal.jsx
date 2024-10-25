@@ -14,7 +14,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
   const { mutate: createClient } = useAddClient();
 
   const handleSubmit = (values) => {
-    createClient({...values, agencyInfo: values.role === 'AGENCY' ? values.agencyInfo : null});
+    createClient({...values, agencyInfo: values.role === 'AGENCY' ? values.agencyInfo : null,  advertiserInfo: values.role !== 'AGENCY' ? values.advertiserInfo : null});
     setOpen();
     setCurrentStep(0);
   };
