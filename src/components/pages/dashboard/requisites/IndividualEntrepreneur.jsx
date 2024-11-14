@@ -28,6 +28,7 @@ export const IndividualEntrepreneur = () => {
       .matches(/^\d+$/, "ОГРН должен содержать только цифры")
       .required("Введите ОГРН"),
     address: Yup.string().required("Введите адрес"),
+		okved: Yup.string().required("Введите ОКВЭД"),
     taxSystem: Yup.string().required("Выберите систему налогообложения"),
     fullName: Yup.string()
       .matches(nameRegExp, "Введите ФИО верно")
@@ -56,6 +57,7 @@ export const IndividualEntrepreneur = () => {
 				OGRN: IE?.ogrn,
 				address: IE?.address,
 				taxSystem: IE?.taxSystem,
+				okved: IE?.okved,
 				accountNumber: IE?.bankDetails?.checkingAccount,
 				bank: IE?.bankDetails?.bank,
 				bic: IE?.bankDetails?.bik,
@@ -69,6 +71,7 @@ export const IndividualEntrepreneur = () => {
 					ogrn: values?.OGRN,
 					address: values?.address,
 					taxSystem: values?.taxSystem,
+					okved: values?.okved,
 					bankDetails: {
 						checkingAccount: values?.accountNumber,
 						bank: values?.bank,
@@ -121,6 +124,15 @@ export const IndividualEntrepreneur = () => {
 											/>
 										)}
 									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"ОКВЭД"}
+										name="okved"
+										placeholder="62.09"
+										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
+									/>
 								</div>
 								<div className={s.formRow}>
 									<InputField

@@ -26,6 +26,7 @@ export const Entity = () => {
       .matches(/^\d+$/, "ОГРН должен содержать только цифры")
       .required("Введите ОГРН"),
     entityAddress: Yup.string().required("Введите юридический адрес"),
+		okved: Yup.string().required("Введите ОКВЭД"),
     correspondentAddress: Yup.string().required(
       "Введите адрес для корреспонденции"
     ),
@@ -54,6 +55,7 @@ export const Entity = () => {
 				name: LegalEntity?.name,
 				inn: LegalEntity?.inn,
 				OGRN: LegalEntity?.ogrn,
+				okved: LegalEntity?.okved,
 				correspondentAddress: LegalEntity?.correspondenceAddress,
 				entityAddress: LegalEntity?.legalAddress,
 				taxSystem: LegalEntity?.taxSystem,
@@ -72,6 +74,7 @@ export const Entity = () => {
 					ogrn: values?.OGRN,
 					legalAddress: values?.entityAddress,
 					correspondenceAddress: values?.correspondentAddress,
+					okved: values?.okved,
 					bankDetails: {
 						checkingAccount: values?.accountNumber,
 						bank: values?.bank,
@@ -124,6 +127,15 @@ export const Entity = () => {
 											/>
 										)}
 									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"ОКВЭД"}
+										name="okved"
+										placeholder="62.09"
+										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
+									/>
 								</div>
 								<div className={s.formRow}>
 									<InputField

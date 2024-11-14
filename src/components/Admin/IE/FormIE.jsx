@@ -10,11 +10,13 @@ export const FormIE = () => {
 			</Typography>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 				<Box sx={{ maxWidth: 500, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>
-					<TextInput source="inn" label='ИНН' isRequired fullWidth />
+				<TextInput source="okved" label='ОКВЭД' isRequired fullWidth />
+					<TextInput source="fullName" label='ФИО' isRequired fullWidth />
 					<SelectInput source="taxSystem" choices={[
 						{ id: 'OSN', name: 'ОСН' },
 						{ id: 'USN', name: 'УСН' }
 					]} label='Система налогообложения' isRequired fullWidth />
+					<TextInput source="okved" label='ОКВЭД' isRequired fullWidth />
 					<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
 					<TextInput source="address" label='Адрес' isRequired fullWidth />
 				</Box>
