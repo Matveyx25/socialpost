@@ -159,7 +159,14 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
                 )}
               </Field>
             )}
-            {contracts && (
+						</div>
+						{(client && !contracts?.data.length) ? 
+						<p className={s.errorMessage}>
+							У этого клиента нет договоров
+						</p>
+						 : null}
+						<div className={s.input}>
+            {contracts?.data.length > 0 && (
               <Field name="clientContractId">
                 {({ field: { value }, form: { setFieldValue } }) => (
                   <Select
