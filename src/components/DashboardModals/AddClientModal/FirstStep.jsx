@@ -22,25 +22,25 @@ export const FirstStep = ({setRole}) => {
 			<div className={s.scroller}>
 				<div className={s.form}>
 					<div className={s.input}>
-						<Field name="type">
+						<Field name="advertiserInfo.type">
 							{({ field: { value }, form: { setFieldValue } }) => (
 								<Select
 									label={"Тип клиента"}
-									id="type"
-									name="type"
+									id="advertiserInfo.type"
+									name="advertiserInfo.type"
 									options={typeOptions}
 									required={true}
-									placeholder={"Выберите тип"}
+									placeholder={"Физ. лицо, Самозанятый, ИП, Юр. лицо"}
 									fullWidth={true}
 									value={value}
 									isMulti={false}
-									setSelectedOption={(v) => setFieldValue("type", v.value)}
+									setSelectedOption={(v) => setFieldValue("advertiserInfo.type", v.value)}
 								/>
 							)}
 						</Field>
 					</div>
 					<div className={s.input}>
-						<Field name="type">
+						<Field name="role">
 							{({ field: { value }, form: { setFieldValue } }) => (
 								<Select
 									label={"Роль клиента"}

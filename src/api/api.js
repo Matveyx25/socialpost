@@ -401,8 +401,17 @@ export const advertiser = {
 	getClientById(id) {
 		return instance.get('/campaigns/clients/' + id)
 	},
+	getClientContractsId(id) {
+		return instance.get('/campaigns/clients/' + id + '/contracts')
+	},
 	createClient(data) {
 		return instance.post('/campaigns/clients/my', data)
+	},
+	createClientContract(data) {
+		const newData = {...data}
+		delete newData.id
+
+		return instance.post(`/campaigns/clients/${data.id}/contracts`, newData)
 	},
 	declinePostRequest(data) {
 		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})

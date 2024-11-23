@@ -16,6 +16,7 @@ import { DeclinePublisherRequestModal } from './DeclinePublisherRequestModal'
 import { EditPostModal } from './EditPostModal'
 import { EditPostCpmModal } from './EditPostCpmModal'
 import { EditCampaignName } from './EditCampaignName';
+import { AddClientContractModal } from './AddClientContractModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -43,6 +44,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<StopCPMPostModal {...{isOpen, setOpen, modalParams}}/>
 			<RefillModal {...{isOpen, setOpen}}/>
 			<EditCampaignName {...{isOpen, setOpen, modalParams}}/>
+			<AddClientContractModal {...{isOpen, setOpen, modalParams}}/>
 		</div>
 	)
 }

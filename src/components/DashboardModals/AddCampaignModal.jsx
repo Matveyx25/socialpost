@@ -21,6 +21,7 @@ import {
 } from "@tabler/icons-react";
 import classNames from "classnames";
 import { useProfile } from "../../hooks/useProfile";
+import { useMyClientContracts } from "../../hooks/useMyClientContracts";
 
 const Radio = ({ name, value, title, text, icon, disabled }) => {
   return (
@@ -71,12 +72,15 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
 	const { data: profile } = useProfile()
   const { data: clients } = useMyClients();
   const { mutate: createCompany } = useAddCampaign();
+	const [client, setClient] = useState(null)
 
   const handleSubmit = (values) => {
     createCompany(profile?.isAgency ? values : {...values, clientId: null});
     setOpen();
     setCurrentStep(0);
   };
+
+	const { data: contracts } = useMyClientContracts(client);
 
   return (
     <FormikStepper
@@ -113,6 +117,7 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
       {profile?.isAgency ? <FormikStep
         validationSchema={Yup.object().shape({
           clientId: Yup.string().required("Заполните поле"),
+          clientContractId: Yup.string().required("Заполните поле"),
         })}
       >
         <div className={s.form}>
@@ -133,9 +138,10 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
                     fullWidth={true}
                     value={value}
                     isMulti={false}
-                    setSelectedOption={(v) =>
+                    setSelectedOption={(v) => {
                       setFieldValue("clientId", v.value)
-                    }
+											setClient(v.value)
+										}}
                     lastElement={
                       <NavLink
                         to={"/clients"}
@@ -147,6 +153,42 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
                       >
                         <IconPlus size={18} />
                         Добавить клиента
+                      </NavLink>
+                    }
+                  />
+                )}
+              </Field>
+            )}
+            {contracts && (
+              <Field name="clientContractId">
+                {({ field: { value }, form: { setFieldValue } }) => (
+                  <Select
+                    label={"Выберите договор"}
+                    id="clientContractId"
+                    name="clientContractId"
+                    options={contracts?.data.map((c) => ({
+                      value: c.id,
+                      label: c.contractNumber,
+                    }))}
+                    required={true}
+                    placeholder={"Выберите по номеру договора"}
+                    fullWidth={true}
+                    value={value}
+                    isMulti={false}
+                    setSelectedOption={(v) =>
+                      setFieldValue("clientContractId", v.value)
+                    }
+                    lastElement={
+                      <NavLink
+                        to={"/clients/" + client}
+                        className={s.addOption}
+                        onClick={() => {
+                          setOpen();
+                          setCurrentStep(0);
+                        }}
+                      >
+                        <IconPlus size={18} />
+                        Добавить договор
                       </NavLink>
                     }
                   />

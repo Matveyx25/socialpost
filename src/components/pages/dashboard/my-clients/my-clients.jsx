@@ -3,7 +3,7 @@ import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Loader } from '../../../Shared/Loader/Loader'
 import { IconPlus, IconRefresh, IconSearch } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
-import { useOutletContext } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import s from './my-clients.module.scss'
 import { useMyClients } from '../../../../hooks/useMyClients'
 import { Input } from '../../../Shared/Input/Input'
@@ -20,6 +20,7 @@ export const MyClients = () => {
 	})
 	
 	const [setModal] = useOutletContext()
+	const navigate = useNavigate()
 
 	return (
     <div className={s.grid}>
@@ -59,30 +60,27 @@ export const MyClients = () => {
                 <th>
 									Номер телефона
                 </th>
-                <th>
-									№ договора с клиентом
-                </th>
-                <th>
-									Предмет договора									
-                </th>
-                <th>
-									Дата заключения договора
-                </th>
               </tr>
             </thead>
             <tbody>
               {isFetched ? (
                 clients?.data.map((el) => (
-                  <tr key={el.id}>
+                  <tr key={el.id} onClick={() => navigate('./' + el.id)}>
                     <td>
                       <div className={s.center}>
-                        {
+                        {el?.advertiserInfo ? 
                           {
                             PHYSICAL_ENTITY: "Физическое лицо",
 														SELF_EMPLOYED: "Самозанятый",
 														IE: "ИП",
 														LEGAL_ENTITY: "Юридическое лицо",
-                          }[el.type]
+                          }[el?.advertiserInfo.type] :
+                          {
+                            PHYSICAL_ENTITY: "Физическое лицо",
+														SELF_EMPLOYED: "Самозанятый",
+														IE: "ИП",
+														LEGAL_ENTITY: "Юридическое лицо",
+                          }[el?.agencyInfo.advertiserType]
                         }
                       </div>
                     </td>
@@ -111,28 +109,6 @@ export const MyClients = () => {
 												<div className={s.center}>{el?.agencyInfo?.advertiserPhone ? el?.agencyInfo?.advertiserPhone : '-'}</div> 
 												: 
 												<div className={s.center}>{el?.advertiserInfo?.phone ? el?.advertiserInfo?.phone : '-'}</div> 
-											}
-                    </td>
-										<td>
-                      {el?.role === 'AGENCY' ? 
-												<div className={s.center}>{el?.agencyInfo?.contractNumber ? '№' + el?.agencyInfo?.contractNumber  : '-'}</div> 
-												: 
-												<div className={s.center}>{el?.advertiserInfo?.contractNumber ? '№' + el?.advertiserInfo?.contractNumber  : '-'}</div> 
-											}
-                    </td>
-										<td>
-                      {el?.role === 'AGENCY' ? 
-												<div className={s.center}>{el?.agencyInfo?.contractSubject ? el?.agencyInfo?.contractSubject : '-'}</div> 
-												: 
-												<div className={s.center}>{el?.advertiserInfo?.contractSubject ? el?.advertiserInfo?.contractSubject : '-'}</div> 
-											}
-											
-                    </td>
-                    <td>
-                      {el?.role === 'AGENCY' ? 
-												<div className={s.center}>{(new Date(el?.agencyInfo?.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div> 
-												: 
-												<div className={s.center}>{(new Date(el?.advertiserInfo?.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div> 
 											}
                     </td>
                   </tr>

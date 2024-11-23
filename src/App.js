@@ -39,6 +39,7 @@ import { PostByAdvertiser } from "./components/pages/dashboard/post-by-advertise
 import { AdvertiserCreateRequest } from "./components/pages/dashboard/advertiser-create-request/advertiser-create-request";
 import { FixedCPM } from "./components/pages/dashboard/fixed-cpm/fixed-cpm";
 import { PostByPublisher } from "./components/pages/dashboard/post-by-publisher/post-by-publisher";
+import { AdvertiserClient } from './components/pages/dashboard/advertiser-client/advertiser-client';
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -82,6 +83,7 @@ function App() {
 							<>
 								<Route path="/dashboard" element={<AdvertisingCompanies/>}/>
 								{profile?.isAgency ? <Route path="/clients" element={<MyClients/>}/> : null}
+								{profile?.isAgency ? <Route path="/clients/:clientId" element={<AdvertiserClient/>}/> : null}
 								<Route path="/requisites" element={<Requisites/>}/>
 								<Route path="/payments" element={<Payments/>}/>
 								<Route path="/dashboard/:companyId" element={<AdvertisingCompany/>}/>

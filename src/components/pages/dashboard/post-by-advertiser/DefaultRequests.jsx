@@ -128,14 +128,6 @@ export const DefaultRequests = ({ post, postId }) => {
 												<th className={s.th3}>Дата выполнения</th>
 											</>
 										)}
-										{tabs[tab].value === "DECLINED" ? (
-											<>
-												<th className={s.th2}>Отклонивший</th>
-												<th className={s.th3}>Комментарий отклонившего</th>
-											</>
-										) : (
-											""
-										)}
 										<th className={s.th4}>Стоимость размещения</th>
 										{tabs[tab].value === "DECLINED" ||
 										tabs[tab].value === "EXPIRED" ? null : tabs[tab].value ===
@@ -183,16 +175,6 @@ export const DefaultRequests = ({ post, postId }) => {
 															</div>
 														</div>
 													</td>
-													{tabs[tab].value === "DECLINED" ? (
-														<>
-															<td className={s.td2}>
-																<div className={s.center}>{el.declineUserName || 'Система'}</div>
-															</td>
-															<td className={s.td3}>
-																<div className={s.center}>{el.declineReason}</div>
-															</td>
-														</>
-													) : null}
 													{tabs[tab].value === "DECLINED" ||
 													tabs[tab].value === "EXPIRED" ? null : (
 														<>

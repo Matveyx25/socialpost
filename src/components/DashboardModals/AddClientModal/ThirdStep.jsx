@@ -32,6 +32,15 @@ export const ThirdStep = () => {
 				<div className={s.form}>
 					<div className={s.subtitle}>Рекламодатель</div>
 					<div className={s.input}>
+						<InputField
+							label={"Имя"}
+							required
+							placeholder={"ФИО или наименование"}
+							id="agencyInfo.advertiserName"
+							name="agencyInfo.advertiserName"
+						/>
+					</div>
+					<div className={s.input}>
 						<Field name="agencyInfo.advertiserType">
 							{({ field: { value, name }, form: { setFieldValue } }) => (
 								<Select
@@ -74,6 +83,15 @@ export const ThirdStep = () => {
 
 					<div className={s.subtitle}>Данные исполнителя</div>
 
+					<div className={s.input}>
+						<InputField
+							label={"Имя"}
+							required
+							placeholder={"ФИО или наименование"}
+							id="agencyInfo.executorName"
+							name="agencyInfo.executorName"
+						/>
+					</div>
 					<div className={s.input}>
 						<Field name="agencyInfo.executorType">
 							{({ field: { value }, form: { setFieldValue } }) => (

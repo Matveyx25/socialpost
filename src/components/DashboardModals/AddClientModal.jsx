@@ -35,17 +35,11 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 				btnLabel="Создать клиента"
         initialValues={{
           name: "",
-          type: "",
           role: "",
 					advertiserInfo: {
+						type: "",
 						inn: "",
 						phone: "",
-						contractNumber: "",
-						contractSubject: "",
-						description: "",
-						conclusionDate: "",
-						recognizedByNDS: false,
-						moneyAmount: "",
 					},
 					agencyInfo: {
 						advertiserType: '',
@@ -71,20 +65,22 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
       >
 				<FirstStep {...{setRole}} validationSchema={Yup.object().shape({
 					role: Yup.string().required("Выберите роль клиента"),
-					type: Yup.string().required("Выберите тип клиента"),
+					advertiserInfo:  Yup.object().shape({
+						type: Yup.string().required("Выберите тип клиента"),
+					}),
 					name: Yup.string().required("Заполните поле"),
 				})}/>
         {role !== 'AGENCY' ? <SecondStep 
 				validationSchema={Yup.object().shape({
 					advertiserInfo:  Yup.object().shape({
-						inn: Yup.string().when("type", (type, field) =>
+						inn: Yup.string().when("advertiserInfo.type", (type, field) =>
 							type.includes("IE") || type.includes("LEGAL_ENTITY")
 								? field.required("Введите ИНН")
 								: field.when("phone", (phone, phoneField) =>
 										phone + "" ? phoneField : phoneField.required("Введите ИНН")
 									)
 						),
-						phone: Yup.string().when("type", (type, field) =>
+						phone: Yup.string().when("advertiserInfo.type", (type, field) =>
 							type.includes("PHYSICAL_ENTITY")
 								? field.when("inn", (inn, innField) =>
 										inn + ""
@@ -93,23 +89,17 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 									)
 								: field.required("Введите номер телефона")
 						),
-						contractNumber: Yup.string().required("Введите номер договора"),
-						contractSubject: Yup.string().required("Введите предмет договора"),
-						description: Yup.string(),
-						conclusionDate: Yup.string().required(
-							"Введите дату заключения договора"
-						),
-						recognizedByNDS: Yup.boolean(),
-						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})
 					})}/> : null}
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
 					agencyInfo: Yup.object().shape({
+						advertiserName: Yup.string().required(),
 						advertiserType: Yup.string().required(),
 						advertiserInn: Yup.string().required(),
 						advertiserPhone: Yup.string().required(),
 						executorType: Yup.string().required(),
+						executorName: Yup.string().required(),
 						executorInn: Yup.string().required(),
 						executorPhone: Yup.string().required(),
 						contractNumber: Yup.string().required(),

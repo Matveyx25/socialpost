@@ -7,6 +7,7 @@ import s from './Breadcrumbs.module.scss'
 import { useCampaignById } from "../../../hooks/useCampaignById";
 import { usePost } from '../../../hooks/usePost';
 import { usePublishersRequestById } from "../../../hooks/usePublishersRequestById";
+import { useMyClientById } from "../../../hooks/useMyClientById";
 
 const DynamicCampaign = ({ match }) => {
 	const {data} = useCampaignById(match.params.companyId)
@@ -22,6 +23,15 @@ const DynamicPost = ({ match }) => {
   	<span>{data?.name}</span>
 	)
 };
+
+const DynamicClient = ({ match }) => {
+	const {data} = useMyClientById(match.params.clientId)
+	
+	return (
+  	<span>{data?.name}</span>
+	)
+};
+
 const DynamicRequest = ({ match }) => {
 	const {data} = usePublishersRequestById(match.params.requestId)
 	
@@ -51,6 +61,7 @@ const advertiserRoutes = [
 	{path: '/dashboard/:companyId/:postId', breadcrumb: DynamicPost},
 	{path: '/dashboard/:companyId/:postId/create-request', breadcrumb: 'Разместить запись'},
 	{path: '/clients/', breadcrumb: 'Клиенты'},
+	{path: '/clients/:clientId', breadcrumb: DynamicClient},
 	{path: '/placement-appointments/', breadcrumb: 'Заявки на размещение'},
 	{path: '/appointment/', breadcrumb: 'Заявки на размещение / Бесплатный урок'},
 	{path: '/payments/', breadcrumb: 'Кошелек'},
