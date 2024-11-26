@@ -28,18 +28,18 @@ const renderClientType = (record) => ({
 }[record.type])
 
 const renderInn = (record) => ({
-	AGENCY: record.agencyInfo.advertiserInn,
-	ADVERTISER: record.advertiserInfo.inn,
+	AGENCY: record?.agencyInfo?.advertiserInn,
+	ADVERTISER: record?.advertiserInfo?.inn,
 }[getRole(record)])
 
 const renderPhone = (record) => ({
-	AGENCY: record.agencyInfo.advertiserPhone,
-	ADVERTISER: record.advertiserInfo.phone,
+	AGENCY: record?.agencyInfo?.advertiserPhone,
+	ADVERTISER: record?.advertiserInfo?.phone,
 }[getRole(record)])
 
 const renderType = (record) => ({
-	AGENCY: renderClientType(record.agencyInfo.advertiserType),
-	ADVERTISER: renderClientType(record.advertiserInfo.type),
+	AGENCY: renderClientType(record?.agencyInfo?.advertiserType),
+	ADVERTISER: renderClientType(record?.advertiserInfo?.type),
 }[getRole(record)])
 
 export const AdvertiserClientsEdit = (props) => (
