@@ -1,12 +1,8 @@
-import * as React from "react";
 import { Admin, AppBar, Layout, Resource, TitlePortal, fetchUtils } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./User/UserList";
 import { ChannelsList } from './Channel/ChannelsList';
 import { ChannelEdit } from "./Channel/ChannelEdit";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-import Typography from '@mui/material/Typography';
-import Link from '@mui/material/Link';
 import { OperationsList } from './Operations/OperationsList';
 import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
@@ -19,35 +15,9 @@ import { Button } from "@mui/material";
 import { CampaignsList } from "./Campaigns/CampaignsList";
 import { CampaignsEdit } from "./Campaigns/CampaignsEdit";
 import { AdvertiserClientsList } from "./AdvertiserClients/AdvertiserClientsList";
-import { AdvertiserClientsEdit } from './AdvertiserClients/AdvertiserClientsEdit';
 import { AdvertiserPostsList } from "./AdvertiserPosts/AdvertiserPostsList";
 import { AdvertiserPostsEdit } from "./AdvertiserPosts/AdvertiserPostsEdit";
 import { AdvertiserClientsTabs } from "./AdvertiserClients/AdvertiserClientTabs";
-
-const CustomBreadcrumbs = ({ location }) => {
-	const pathnames = location.pathname.split('/').filter(x => x);
-
-	return (
-			<Breadcrumbs>
-					{pathnames.map((value, index) => {
-							const last = index === pathnames.length - 1;
-							const to = `/${pathnames.slice(0, index + 1).join('/')}`;
-
-							return last ? (
-									<Typography key={to}>{value}</Typography>
-							) : (
-									<Link underline="hover"
-												color="inherit"
-												key={to}
-												href={to}>
-											{value}
-									</Link>
-							);
-					})}
-			</Breadcrumbs>
-	);
-};
-
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -97,7 +67,7 @@ export const MyAppBar = () => (
 export const MyLayout = props => <Layout {...props} appBar={MyAppBar} />;
 
 const AdminPanel = () => (
-  <Admin dataProvider={dataProvider} basename="/admin" title={<CustomBreadcrumbs/>} layout={MyLayout}>
+  <Admin dataProvider={dataProvider} basename="/admin" layout={MyLayout}>
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
