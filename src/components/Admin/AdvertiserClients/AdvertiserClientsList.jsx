@@ -36,9 +36,9 @@ export const AdvertiserClientsList = (props) => (
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>
       <TextField label="Наименование клиента" source="name"/>
-			<FunctionField label="ИНН" render={renderInn}/>
-			<FunctionField label="Номер телефона" render={renderPhone}/>
-			<FunctionField label="Тип" render={renderType}/>
+			<FunctionField label="ИНН"  source="agencyInfo" render={renderInn}/>
+			<FunctionField label="Номер телефона" source="agencyInfo" render={renderPhone}/>
+			<FunctionField label="Тип" source="agencyInfo" render={renderType}/>
     </Datagrid>
   </List>
 );

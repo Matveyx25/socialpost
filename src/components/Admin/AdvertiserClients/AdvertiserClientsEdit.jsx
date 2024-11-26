@@ -70,12 +70,12 @@ export const AdvertiserClientsEdit = (props) => (
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled fullWidth>
-								<FunctionField label="ИНН" render={renderInn}/>
+								<FunctionField label="ИНН" source="agencyInfo" render={renderInn}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<FunctionField label="Телефон" render={renderPhone}/>
+								<FunctionField label="Телефон" source="agencyInfo" render={renderPhone}/>
 							</Labeled>
 						</Box>
 				</Box>
