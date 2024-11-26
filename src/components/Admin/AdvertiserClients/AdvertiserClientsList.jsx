@@ -3,6 +3,10 @@ import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin
 import { CustomEmpty } from '../CustomEmpty';
 import { PostPagination } from '../PostPagination';
 
+const getRole = (record) => {
+	return record.agencyInfo ? 'AGENCY' : 'ADVERTISER'
+}
+
 const renderRole = (record) => ({
 	AGENCY: "Агентство",
 	ADVERTISER: "Рекламодатель",
@@ -18,17 +22,17 @@ const renderClientType = (type) => ({
 const renderInn = (record) => ({
 	AGENCY: record.agencyInfo.advertiserInn,
 	ADVERTISER: record.advertiserInfo.inn,
-}[record.role])
+}[getRole(record)])
 
 const renderPhone = (record) => ({
 	AGENCY: record.agencyInfo.advertiserPhone,
 	ADVERTISER: record.advertiserInfo.phone,
-}[record.role])
+}[getRole(record)])
 
 const renderType = (record) => ({
 	AGENCY: renderClientType(record.agencyInfo.advertiserType),
 	ADVERTISER: renderClientType(record.advertiserInfo.type),
-}[record.role])
+}[getRole(record)])
 
 export const AdvertiserClientsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>

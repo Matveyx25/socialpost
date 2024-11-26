@@ -11,6 +11,10 @@ import {
 } from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
 
+const getRole = (record) => {
+	return record.agencyInfo ? 'AGENCY' : 'ADVERTISER'
+}
+
 const renderClientRole = (record) => ({
 	AGENCY: "Агентство",
 	ADVERTISER: "Рекламодатель",
@@ -26,17 +30,17 @@ const renderClientType = (record) => ({
 const renderInn = (record) => ({
 	AGENCY: record.agencyInfo.advertiserInn,
 	ADVERTISER: record.advertiserInfo.inn,
-}[record.role])
+}[getRole(record)])
 
 const renderPhone = (record) => ({
 	AGENCY: record.agencyInfo.advertiserPhone,
 	ADVERTISER: record.advertiserInfo.phone,
-}[record.role])
+}[getRole(record)])
 
 const renderType = (record) => ({
 	AGENCY: renderClientType(record.agencyInfo.advertiserType),
 	ADVERTISER: renderClientType(record.advertiserInfo.type),
-}[record.role])
+}[getRole(record)])
 
 export const AdvertiserClientsEdit = (props) => (
 		<Edit {...props}  actions={
