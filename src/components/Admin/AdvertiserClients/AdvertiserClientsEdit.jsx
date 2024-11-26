@@ -1,7 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
-import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField } from "react-admin";
+import {
+    Edit,
+    SimpleForm,
+    TextField,
+    TopToolbar,
+    PrevNextButtons,
+    Labeled,
+    FunctionField,
+} from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
 
 const renderClientRole = (record) => ({
@@ -16,7 +23,20 @@ const renderClientType = (record) => ({
 	LEGAL_ENTITY: "Юридическое лицо",
 }[record.type])
 
-const renderRecognizedByNDS = (record) => !!record.recognizedByNDS === true ? <IconCheck/> : <IconX/>
+const renderInn = (record) => ({
+	AGENCY: record.agencyInfo.advertiserInn,
+	ADVERTISER: record.advertiserInfo.inn,
+}[record.role])
+
+const renderPhone = (record) => ({
+	AGENCY: record.agencyInfo.advertiserPhone,
+	ADVERTISER: record.advertiserInfo.phone,
+}[record.role])
+
+const renderType = (record) => ({
+	AGENCY: renderClientType(record.agencyInfo.advertiserType),
+	ADVERTISER: renderClientType(record.advertiserInfo.type),
+}[record.role])
 
 export const AdvertiserClientsEdit = (props) => (
 		<Edit {...props}  actions={
@@ -26,7 +46,7 @@ export const AdvertiserClientsEdit = (props) => (
 	}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<Typography variant="h5" gutterBottom>
-						Клиенты
+						Клиент
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
@@ -34,60 +54,28 @@ export const AdvertiserClientsEdit = (props) => (
 								<TextField source="name" label="Имя"/>
 							</Labeled>
 						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+				</Box>
+				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+						<Box flex={1}>
 							<Labeled fullWidth>
-								<TextField source="description" label="Описание"/>
+								<FunctionField label="Тип" source="type" render={renderType}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<TextField source="moneyAmount" label="Сумма договора"/>
+								<FunctionField label="Роль" source="role" render={renderClientRole}/>
 							</Labeled>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled fullWidth>
-								<FunctionField label="Тип" source="type" render={renderClientType}/>
+								<FunctionField label="ИНН" render={renderInn}/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<FunctionField label="Роль" source="status" render={renderClientRole}/>
-							</Labeled>
-						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1}>
-							<Labeled fullWidth>
-								<TextField label="ИНН" source="inn"/>
-							</Labeled>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField label="Телефон" source="phone"/>
-							</Labeled>
-						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1}>
-							<Labeled fullWidth>
-								<TextField label="Номер договора" source="contractNumber"/>
-							</Labeled>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField label="Объект договора" source="contractSubject"/>
-							</Labeled>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<DateField label="Дата заключения договора" source="conclusionDate"/>
-							</Labeled>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<FunctionField label="Признак НДС" source="recognizedByNDS" render={renderRecognizedByNDS}/>
+								<FunctionField label="Телефон" render={renderPhone}/>
 							</Labeled>
 						</Box>
 				</Box>

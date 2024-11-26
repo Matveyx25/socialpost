@@ -8,17 +8,37 @@ const renderRole = (record) => ({
 	ADVERTISER: "Рекламодатель",
 }[record.role])
 
+const renderClientType = (type) => ({
+	PHYSICAL_ENTITY: "Физическое лицо",
+	SELF_EMPLOYED: "Самозанятый",
+	IE: "ИП",
+	LEGAL_ENTITY: "Юридическое лицо",
+}[type])
+
+const renderInn = (record) => ({
+	AGENCY: record.agencyInfo.advertiserInn,
+	ADVERTISER: record.advertiserInfo.inn,
+}[record.role])
+
+const renderPhone = (record) => ({
+	AGENCY: record.agencyInfo.advertiserPhone,
+	ADVERTISER: record.advertiserInfo.phone,
+}[record.role])
+
+const renderType = (record) => ({
+	AGENCY: renderClientType(record.agencyInfo.advertiserType),
+	ADVERTISER: renderClientType(record.advertiserInfo.type),
+}[record.role])
+
 export const AdvertiserClientsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>
       <TextField label="Наименование клиента" source="name"/>
-      <TextField label="ИНН" source="inn"/>
-      <TextField label="Номер телефона" source="phone"/>
-      <TextField label="№ договора с клиентом" source="contractNumber"/>
-      <TextField label="Предмет договора" source="contractSubject"/>
-      <DateField label="Дата заключения договора" source="conclusionDate"/>
+			<FunctionField label="ИНН" render={renderInn}/>
+			<FunctionField label="Номер телефона" render={renderPhone}/>
+			<FunctionField label="Тип" render={renderType}/>
     </Datagrid>
   </List>
 );

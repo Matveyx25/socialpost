@@ -22,6 +22,7 @@ import { AdvertiserClientsList } from "./AdvertiserClients/AdvertiserClientsList
 import { AdvertiserClientsEdit } from './AdvertiserClients/AdvertiserClientsEdit';
 import { AdvertiserPostsList } from "./AdvertiserPosts/AdvertiserPostsList";
 import { AdvertiserPostsEdit } from "./AdvertiserPosts/AdvertiserPostsEdit";
+import { AdvertiserClientsTabs } from "./AdvertiserClients/AdvertiserClientTabs";
 
 const CustomBreadcrumbs = ({ location }) => {
 	const pathnames = location.pathname.split('/').filter(x => x);
@@ -102,7 +103,7 @@ const AdminPanel = () => (
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
-    <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsEdit} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
+    <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );
