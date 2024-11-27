@@ -9,7 +9,7 @@ export const AdvertiserClientsContracts = () => {
 	const { id } = useParams();
 
 	return (
-	 <List exporter={false} resource={'/clients/' + id + '/contracts'} empty={<CustomEmpty message={'Договоров нет'}/>}>
+	 <List exporter={false} resource={'сampaigns/clients/' + id + '/contracts'} empty={<CustomEmpty message={'Договоров нет'}/>}>
 		 <Datagrid rowClick="edit"  bulkActionButtons={false}>
 		 		<TextField source="id" />
 				<TextField label="№ договора с клиентом" source="contractNumber"/>

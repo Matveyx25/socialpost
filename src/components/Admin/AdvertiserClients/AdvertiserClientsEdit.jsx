@@ -1,5 +1,4 @@
 import { Box, Typography } from "@mui/material";
-import { IconCheck, IconX } from "@tabler/icons-react";
 import {
     Edit,
     SimpleForm,
