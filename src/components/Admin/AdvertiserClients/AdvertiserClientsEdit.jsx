@@ -35,11 +35,7 @@ const renderType = (record) => {
 }
 
 export const AdvertiserClientsEdit = (props) => (
-		<Edit {...props}  actions={
-			<TopToolbar>
-					<PrevNextButtons />
-			</TopToolbar>
-	}>
+		<Edit {...props} >
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<Typography variant="h5" gutterBottom>
 						Клиент
