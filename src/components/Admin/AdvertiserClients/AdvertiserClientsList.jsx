@@ -19,20 +19,17 @@ const renderClientType = (type) => ({
 	LEGAL_ENTITY: "Юридическое лицо",
 }[type])
 
-const renderInn = (record) => ({
-	AGENCY: record.agencyInfo.advertiserInn,
-	ADVERTISER: record.advertiserInfo.inn,
-}[getRole(record)])
+const renderInn = (record) => {
+	return record?.agencyInfo ? record?.agencyInfo?.advertiserInn : record?.advertiserInfo?.inn
+}
 
-const renderPhone = (record) => ({
-	AGENCY: record.agencyInfo.advertiserPhone,
-	ADVERTISER: record.advertiserInfo.phone,
-}[getRole(record)])
+const renderPhone = (record) => {
+	return record?.agencyInfo ? record?.agencyInfo?.advertiserPhone : record?.advertiserInfo?.phone
+}
 
-const renderType = (record) => ({
-	AGENCY: renderClientType(record.agencyInfo.advertiserType),
-	ADVERTISER: renderClientType(record.advertiserInfo.type),
-}[getRole(record)])
+const renderType = (record) => {
+	return record?.agencyInfo ? renderClientType(record?.agencyInfo?.advertiserType) : renderClientType(record?.advertiserInfo?.type)
+}
 
 export const AdvertiserClientsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
