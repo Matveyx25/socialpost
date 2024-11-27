@@ -3,10 +3,6 @@ import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin
 import { CustomEmpty } from '../CustomEmpty';
 import { PostPagination } from '../PostPagination';
 
-const getRole = (record) => {
-	return record.agencyInfo ? 'AGENCY' : 'ADVERTISER'
-}
-
 const renderRole = (record) => ({
 	AGENCY: "Агентство",
 	ADVERTISER: "Рекламодатель",
