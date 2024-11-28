@@ -74,8 +74,8 @@ const AdminPanel = () => (
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
-    <Resource name="Клиенты" list={AdvertiserClientsList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
-    <Resource name="Контрагенты" list={AdvertiserContrAgentList} edit={AdvertiserClientsTabs} options={{ label: 'Контрагенты' }} icon={IconContrast}/>
+    <Resource name="clients" list={AdvertiserClientsList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
+    <Resource name="contragent" list={AdvertiserContrAgentList} edit={AdvertiserClientsTabs} options={{ label: 'Контрагенты' }} icon={IconContrast}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );

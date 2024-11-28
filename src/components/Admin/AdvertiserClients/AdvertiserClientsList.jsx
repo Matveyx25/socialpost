@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin";
+import { List, Datagrid, TextField, FunctionField, DateField, SelectInput } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
 import { PostPagination } from '../PostPagination';
 
@@ -28,7 +28,14 @@ const renderType = (record) => {
 }
 
 export const AdvertiserClientsList = (props) => (
-  <List {...props} exporter={false} resource={'campaigns/clients/'} filter={{isSelfPromoted: false}} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} resource={'campaigns/clients'} filters={[ <SelectInput
+		label="Роль"
+		source="role"
+		choices={[
+			{ id: "AGENCY", name: "Агентство" },
+			{ id: "ADVERTISER", name: "Рекламодатель" },
+		]}
+	/> ]} filter={{isSelfPromoted: false}} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>
