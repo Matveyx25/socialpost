@@ -8,7 +8,7 @@ import { OperationCreate } from "./Operations/OperationCreate";
 import { OperationEdit } from "./Operations/OperationEdit";
 import { useNavigate } from "react-router-dom";
 import { UserTabs } from "./User/UserTabs";
-import { IconBadgeAd, IconFileDots, IconClipboardList, IconLogout, IconMoneybag, IconSpeakerphone, IconUser, IconDeviceMobileMessage } from "@tabler/icons-react";
+import { IconBadgeAd, IconFileDots, IconClipboardList, IconLogout, IconMoneybag, IconSpeakerphone, IconUser, IconDeviceMobileMessage, IconContrast } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
 import { Button } from "@mui/material";
@@ -18,6 +18,7 @@ import { AdvertiserClientsList } from "./AdvertiserClients/AdvertiserClientsList
 import { AdvertiserPostsList } from "./AdvertiserPosts/AdvertiserPostsList";
 import { AdvertiserPostsEdit } from "./AdvertiserPosts/AdvertiserPostsEdit";
 import { AdvertiserClientsTabs } from "./AdvertiserClients/AdvertiserClientTabs";
+import { AdvertiserContrAgentList } from "./AdvertiserClients/AdvertiserContrAgentList";
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -74,6 +75,7 @@ const AdminPanel = () => (
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
+    <Resource name="campaigns/clients" list={AdvertiserContrAgentList} edit={AdvertiserClientsTabs} options={{ label: 'Контрагенты' }} icon={IconContrast}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );
