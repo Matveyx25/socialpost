@@ -3,8 +3,6 @@ import {
     Edit,
     SimpleForm,
     TextField,
-    TopToolbar,
-    PrevNextButtons,
     Labeled,
     FunctionField,
 } from "react-admin";
