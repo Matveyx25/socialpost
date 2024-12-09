@@ -28,7 +28,7 @@ const renderType = (record) => {
 }
 
 export const AdvertiserContrAgentList = (props) => (
-  <List {...props} exporter={false} resource={'campaigns/clients'} filter={{isSelfPromoted: true}} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
+  <List {...props} exporter={false} resource={'campaigns/clients'} filter={{isSelfPromoted: true, role: 'AGENCY'}} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
 			<FunctionField label="Роль" source="role" render={renderRole}/>
