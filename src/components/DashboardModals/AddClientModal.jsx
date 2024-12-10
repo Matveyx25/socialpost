@@ -94,7 +94,6 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
 					agencyInfo: Yup.object().shape({
-						advertiserName: Yup.string().required(),
 						advertiserType: Yup.string().required(),
 						advertiserInn: Yup.string().required(),
 						advertiserPhone: Yup.string().required(),

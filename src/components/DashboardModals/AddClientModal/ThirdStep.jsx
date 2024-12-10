@@ -32,15 +32,6 @@ export const ThirdStep = () => {
 				<div className={s.form}>
 					<div className={s.subtitle}>Рекламодатель</div>
 					<div className={s.input}>
-						<InputField
-							label={"Имя"}
-							required
-							placeholder={"ФИО или наименование"}
-							id="agencyInfo.advertiserName"
-							name="agencyInfo.advertiserName"
-						/>
-					</div>
-					<div className={s.input}>
 						<Field name="agencyInfo.advertiserType">
 							{({ field: { value, name }, form: { setFieldValue } }) => (
 								<Select
