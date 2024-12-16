@@ -256,12 +256,16 @@ export const advertiser = {
 						let percents = Math.floor(progress * 100)
 
 						if (toastId === null) {
-							toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
+							toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100 });
 						} else {
 							toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 						}
 					}
-				}).finally(() => toast.done(toastId));
+				}).finally(() => {
+					if (toastId !== null) {
+						toast.dismiss(toastId);
+					}
+				});
 			});
 
 			const uploadResponses = await Promise.all(uploadPromises);
@@ -301,12 +305,16 @@ export const advertiser = {
 								let percents = Math.floor(progress * 100)
 
 								if (toastId === null) {
-									toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
+									toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100});
 								} else {
 									toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 								}
 							}
-						}).finally(() => toast.done(toastId));
+						}).finally(() => {
+							if (toastId !== null) {
+								toast.dismiss(toastId);
+							}
+						});
 				});
 		
 				const uploadResponses = await Promise.all(uploadPromises);
@@ -338,12 +346,16 @@ export const advertiser = {
 							let percents = Math.floor(progress * 100)
 
 							if (toastId === null) {
-								toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100, autoClose: true });
+								toastId = toast('Загрузка файла ' + percents + '%', { type: 'success', progress, isLoading: percents < 100});
 							} else {
 								toast.update(toastId, { render: 'Загрузка файла ' + percents + '%', progress });
 							}
 						}
-					}).finally(() => toast.done(toastId));
+					}).finally(() => {
+						if (toastId !== null) {
+							toast.dismiss(toastId);
+						}
+					});
 				}else{
 					return ({data: {id: file?.id}})
 				}

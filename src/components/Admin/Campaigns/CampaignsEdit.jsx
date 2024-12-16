@@ -27,8 +27,6 @@ const renderStatus = (record) => ({
 	COMPLETED: "Завершенная",
 }[record.status])
 
-const renderRecognizedByNDS = (record) => !!record.client.recognizedByNDS === true ? <IconCheck/> : <IconX/>
-
 export const CampaignsEdit = (props) => (
 		<Edit {...props}  actions={
 			<TopToolbar>
@@ -121,11 +119,6 @@ export const CampaignsEdit = (props) => (
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
 								<DateField label="Дата заключения договора" source="client.conclusionDate"/>
-							</Labeled>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<FunctionField label="Признак НДС" source="client.recognizedByNDS" render={renderRecognizedByNDS}/>
 							</Labeled>
 						</Box>
 				</Box>
