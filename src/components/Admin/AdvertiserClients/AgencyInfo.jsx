@@ -1,16 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import { IconCheck, IconX } from "@tabler/icons-react";
-import * as React from "react";
-import { TextField, Labeled, FunctionField, DateField, useRecordContext } from "react-admin";
-
-const renderAdvertiserType = (record) => ({
-	PHYSICAL_ENTITY: "Физическое лицо",
-	SELF_EMPLOYED: "Самозанятый",
-	IE: "ИП",
-	LEGAL_ENTITY: "Юридическое лицо",
-}[record.agencyInfo.renderAdvertiserType])
-
-const renderRecognizedByNDS = (record) => !!record.agencyInfo.recognizedByNDS === true ? <IconCheck/> : <IconX/>
+import { useRecordContext, SelectInput, TextInput, DateInput, BooleanInput } from "react-admin";
 
 export const AgencyInfo = () =>{
 	const record = useRecordContext()
@@ -29,19 +18,23 @@ export const AgencyInfo = () =>{
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled fullWidth>
-								<FunctionField source="agencyInfo.advertiserType" label="Тип рекламодателя" render={renderAdvertiserType}/>
-							</Labeled>
+							<SelectInput
+									label="Тип рекламодателя"
+									source="agencyInfo.advertiserType"
+									choices={[
+										{ id: "PHYSICAL_ENTITY", name: "Физическое лицо" },
+										{ id: "SELF_EMPLOYED", name: "Самозанятый" },
+										{ id: "IE", name: "ИП" },
+										{ id: "LEGAL_ENTITY", name: "Юридическое лицо" },
+									]}
+									fullWidth
+								/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.advertiserInn" label="ИНН рекламодателя"/>
-							</Labeled>
+							<TextInput source='agencyInfo.advertiserInn' label="ИНН рекламодателя" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.advertiserPhone" label="Телефон рекламодателя"/>
-							</Labeled>
+							 <TextInput source='agencyInfo.advertiserPhone' label="Телефон рекламодателя" fullWidth/>
 						</Box>
 				</Box>
 				<Typography variant="h6" gutterBottom>
@@ -49,54 +42,46 @@ export const AgencyInfo = () =>{
 				</Typography>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled fullWidth>
-								<FunctionField source="agencyInfo.executorType" label="Тип исполнителя" render={renderAdvertiserType}/>
-							</Labeled>
+						<SelectInput
+									label="Тип исполнителя"
+									source="agencyInfo.executorType"
+									choices={[
+										{ id: "PHYSICAL_ENTITY", name: "Физическое лицо" },
+										{ id: "SELF_EMPLOYED", name: "Самозанятый" },
+										{ id: "IE", name: "ИП" },
+										{ id: "LEGAL_ENTITY", name: "Юридическое лицо" },
+									]}
+									fullWidth
+								/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.executorInn" label="ИНН исполнителя"/>
-							</Labeled>
+							<TextInput source='agencyInfo.executorInn' label="ИНН исполнителя" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.executorPhone" label="Телефон исполнителя"/>
-							</Labeled>
+							 <TextInput source='agencyInfo.executorPhone' label="Телефон исполнителя" fullWidth/>
 						</Box>
 				</Box>
 			
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
-							<Labeled fullWidth>
-								<TextField label="Номер договора" source="agencyInfo.contractNumber"/>
-							</Labeled>
+							<TextInput label="Номер договора" source="agencyInfo.contractNumber" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField label="Объект договора" source="agencyInfo.contractSubject"/>
-							</Labeled>
+							<TextInput label="Объект договора" source="agencyInfo.contractSubject" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<DateField label="Дата заключения договора" source="agencyInfo.conclusionDate"/>
-							</Labeled>
+							<DateInput label="Дата заключения договора" source="agencyInfo.conclusionDate" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<FunctionField label="Признак НДС" source="agencyInfo.recognizedByNDS" render={renderRecognizedByNDS}/>
-							</Labeled>
+							<BooleanInput label="Признак НДС" source="agencyInfo.recognizedByNDS"/>
 						</Box>
 				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.description" label="Описание"/>
-							</Labeled>
+							<TextInput label="Описание" source="agencyInfo.description" fullWidth/>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField source="agencyInfo.moneyAmount" label="Сумма договора"/>
-							</Labeled>
+							<TextInput label="Сумма договора" source="agencyInfo.moneyAmount" fullWidth/>
 						</Box>
 				</Box>
 		</>
