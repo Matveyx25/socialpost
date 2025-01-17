@@ -2,7 +2,6 @@ import { Box, Typography } from "@mui/material";
 import {
     Edit,
     SimpleForm,
-    TextField,
     Labeled,
     FunctionField,
 		TextInput,
@@ -10,34 +9,18 @@ import {
 } from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
 
-const renderClientRole = (record) => ({
-	AGENCY: "Агентство",
-	ADVERTISER: "Рекламодатель",
-}[record.role])
-
-const renderClientType = (record) => ({
-	PHYSICAL_ENTITY: "Физическое лицо",
-	SELF_EMPLOYED: "Самозанятый",
-	IE: "ИП",
-	LEGAL_ENTITY: "Юридическое лицо",
-}[record])
-
 const renderInn = (record) => {
-	return record?.agencyInfo ? record?.agencyInfo?.advertiserInn : record?.advertiserInfo?.inn
+	return <TextInput source={record?.agencyInfo ? 'agencyInfo.advertiserInn' : 'advertiserInfo.inn'} label="Имя"/>
 }
 
 const renderPhone = (record) => {
-	return record?.agencyInfo ? record?.agencyInfo?.advertiserPhone : record?.advertiserInfo?.phone
+	return <TextInput source={record?.agencyInfo ? 'agencyInfo.advertiserPhone' : 'advertiserInfo.phone'} label="Телефон"/>
 }
-
-// const renderType = (record) => {
-// 	return record?.agencyInfo ? renderClientType(record?.agencyInfo?.advertiserType) : renderClientType(record?.advertiserInfo?.type)
-// }
 
 const renderType = (record) => {
 	return <SelectInput
 			label="Тип"
-			source={record?.agencyInfo ? "agencyInfo.advertiserType" : "advertiserInfo?.type"}
+			source={record?.agencyInfo ? "agencyInfo.advertiserType" : "advertiserInfo.type"}
 			choices={[
 				{ id: "PHYSICAL_ENTITY", name: "Физическое лицо" },
 				{ id: "SELF_EMPLOYED", name: "Самозанятый" },
@@ -69,7 +52,15 @@ export const AdvertiserClientsEdit = (props) => (
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<FunctionField label="Роль" source="role" render={renderClientRole}/>
+								<SelectInput
+									label="Роль"
+									source='role'
+									choices={[
+										{ id: "AGENCY", name: "Агентство" },
+										{ id: "ADVERTISER", name: "Рекламодатель" },
+									]}
+									fullWidth
+								/>
 							</Labeled>
 						</Box>
 				</Box>
