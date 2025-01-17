@@ -5,6 +5,8 @@ import {
     TextField,
     Labeled,
     FunctionField,
+		TextInput,
+		SelectInput,
 } from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
 
@@ -18,7 +20,7 @@ const renderClientType = (record) => ({
 	SELF_EMPLOYED: "Самозанятый",
 	IE: "ИП",
 	LEGAL_ENTITY: "Юридическое лицо",
-}[record.type])
+}[record])
 
 const renderInn = (record) => {
 	return record?.agencyInfo ? record?.agencyInfo?.advertiserInn : record?.advertiserInfo?.inn
@@ -28,8 +30,22 @@ const renderPhone = (record) => {
 	return record?.agencyInfo ? record?.agencyInfo?.advertiserPhone : record?.advertiserInfo?.phone
 }
 
+// const renderType = (record) => {
+// 	return record?.agencyInfo ? renderClientType(record?.agencyInfo?.advertiserType) : renderClientType(record?.advertiserInfo?.type)
+// }
+
 const renderType = (record) => {
-	return record?.agencyInfo ? renderClientType(record?.agencyInfo?.advertiserType) : renderClientType(record?.advertiserInfo?.type)
+	return <SelectInput
+			label="Тип"
+			source={record?.agencyInfo ? "agencyInfo.advertiserType" : "advertiserInfo?.type"}
+			choices={[
+				{ id: "PHYSICAL_ENTITY", name: "Физическое лицо" },
+				{ id: "SELF_EMPLOYED", name: "Самозанятый" },
+				{ id: "IE", name: "ИП" },
+				{ id: "LEGAL_ENTITY", name: "Юридическое лицо" },
+			]}
+			fullWidth
+		/>
 }
 
 export const AdvertiserClientsEdit = (props) => (
@@ -41,7 +57,7 @@ export const AdvertiserClientsEdit = (props) => (
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled fullWidth>
-								<TextField source="name" label="Имя"/>
+								<TextInput source="name" label="Имя"/>
 							</Labeled>
 						</Box>
 				</Box>
