@@ -17,7 +17,7 @@ export const CustomCreateController = ({ resource, id, children }) => {
 	};
 
 	return (
-			<Create {...{ resource }} title="">
+			<Create {...{ resource, id }}>
 					<SimpleForm  record={record} onSubmit={save}>
 							{children}
 					</SimpleForm>
