@@ -33,7 +33,7 @@ export const Sidebar = () => {
 			</div> :
 			<div className={s.itemList}>
 				<SidebarItem label="Рекламные кампании" icon={<IconGraph/>} to={'/dashboard'} end/>
-				{profile?.isAgency ? <SidebarItem label="Клиенты" icon={<IconUsers/>} to={'/clients'}/> : null}
+				{profile?.isAgency ? <SidebarItem label="Рекламодатели" icon={<IconUsers/>} to={'/clients'}/> : null}
 				<SidebarItem label="Кошелек" icon={<IconMoneybag/>} to={'/payments'}/>
 				<SidebarItem label="Реквизиты" icon={<IconBuildingBank/>} to={'/requisites'}/>
 				<SidebarItem label="Настройки" icon={<IconSettings/>} to={'/profile'}/>

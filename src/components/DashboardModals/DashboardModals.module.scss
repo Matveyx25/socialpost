@@ -109,6 +109,9 @@
 	max-height: 80svh;
 	box-sizing: border-box;
 	overflow-y: auto;
+	width: fit-content;
+	overflow-x: none;
+	padding: 0 5px;
 }
 .subtitle{
 	font-size: 14px;
@@ -151,6 +154,22 @@
 .input{
 	width: 100%;
 }
+.row{
+	width: 100%;
+	display: flex;
+	gap: 1rem;
+	&:not(:last-child){
+		border-bottom: 1px solid #eee;
+		padding-bottom: 1rem;
+	}
+}
+.col{
+	display: flex;
+	width: 28.4375rem;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 1rem;
+}
 .form{
 	padding: 1rem 0;
 	display: flex;
@@ -159,6 +178,9 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 1rem;
+	&.wide{
+		width: fit-content;
+	}
 	.rangeWrapper{
 		input{
 			 width: 10.5rem !important;

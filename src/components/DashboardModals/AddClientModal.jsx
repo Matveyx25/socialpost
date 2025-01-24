@@ -28,7 +28,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={(currentStep === 2 ? `Данные договора с рекламодателем ${currentStep + 1}/2` : `Добавить клиента ${currentStep + 1}/2`)}
+      title={(currentStep === 2 ? `Данные договора с рекламодателем ${currentStep + 1}/2` : `Добавить ${currentStep + 1}/2`)}
       name={"add-my-client"}
     >
       <FormikStepper
@@ -64,14 +64,11 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
         setStep={setCurrentStep}
       >
 				<FirstStep {...{setRole}} validationSchema={Yup.object().shape({
-					role: Yup.string().required("Выберите роль клиента"),
-					advertiserInfo:  Yup.object().shape({
-						type: Yup.string().required("Выберите тип клиента"),
-					}),
-					name: Yup.string().required("Заполните поле"),
+					role: Yup.string().required("Выберите роль"),
 				})}/>
         {role !== 'AGENCY' ? <SecondStep 
 				validationSchema={Yup.object().shape({
+					name: Yup.string().required("Заполните поле"),
 					advertiserInfo:  Yup.object().shape({
 						inn: Yup.string().when("advertiserInfo.type", (type, field) =>
 							type.includes("IE") || type.includes("LEGAL_ENTITY")
@@ -80,6 +77,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 										phone + "" ? phoneField : phoneField.required("Введите ИНН")
 									)
 						),
+						type: Yup.string().required("Выберите тип"),
 						phone: Yup.string().when("advertiserInfo.type", (type, field) =>
 							type.includes("PHYSICAL_ENTITY")
 								? field.when("inn", (inn, innField) =>
@@ -93,6 +91,7 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 					})}/> : null}
 				{role === 'AGENCY' ? <ThirdStep 
 				{...{role}} validationSchema={Yup.object().shape({
+					name: Yup.string().required("Заполните поле"),
 					agencyInfo: Yup.object().shape({
 						advertiserType: Yup.string().required(),
 						advertiserInn: Yup.string().required(),
@@ -105,7 +104,6 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 						contractSubject: Yup.string().required(),
 						description: Yup.string(),
 						conclusionDate: Yup.string().required(),
-						recognizedByNDS: Yup.boolean().oneOf([true], 'Признак НДС должен быть выбран'),
 						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})
       	})}/> : null}

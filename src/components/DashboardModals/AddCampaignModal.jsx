@@ -134,7 +134,7 @@ const Content = ({ setOpen, currentStep, setCurrentStep }) => {
                       label: c.name,
                     }))}
                     required={true}
-                    placeholder={"Выберите тип"}
+                    placeholder={"Выберите клиента"}
                     fullWidth={true}
                     value={value}
                     isMulti={false}

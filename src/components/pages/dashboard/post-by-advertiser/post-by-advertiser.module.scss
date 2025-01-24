@@ -4,6 +4,26 @@
 	height: 100%;
 }
 
+.editButton{
+	padding: 0 10px;
+	height: 100%;
+	width: fit-content;
+	border: none;
+	background: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #436CFF;
+	cursor: pointer;
+	&:disabled{
+		opacity: .4;
+		cursor: default;
+	}
+}
+.companyName{
+	display: flex;
+	align-items: center;
+}
 .cardHeader{
 	display: flex;
 	align-items: center;

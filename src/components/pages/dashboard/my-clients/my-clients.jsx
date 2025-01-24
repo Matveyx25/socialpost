@@ -28,14 +28,13 @@ export const MyClients = () => {
         <div className={s.filters}>
 					<div className={s.selects}>
 						<Input leftIcon={<IconSearch/>} 
-						placeholder={'Найти клиента'} value={search} onChange={(v) => setSearch(v.target.value)}/>
-						Найдено клиентов: {clients?.headers['x-total-count']}
+						placeholder={'Поиск'} value={search} onChange={(v) => setSearch(v.target.value)}/>
 					</div>
           
           <Button
-            label="Добавить клиента"
-            leftIcon={<IconPlus size={20}/>}
+            label={<IconPlus size={20}/>}
             className={s.addBtn}
+						size='small'
 						onClick={() => {
 							setModal('add-my-client')
 						}}

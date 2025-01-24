@@ -8,6 +8,18 @@ import { formatToISO } from "../../helpers/formatToISO";
 import { Checkbox } from "../Shared/Checkbox/checkbox";
 import { useAddClientContract } from "../../hooks/useAddClientContract";
 import { Button } from "../Shared/Button/Button";
+import { Select } from "../Shared/Select/Select";
+
+const subjectOptions = [
+	{ value: "Представительство", label: "Представительство" },
+	{ value: "Распространение рекламы", label: "Распространение рекламы" },
+	{
+		value: "Организация Распространение рекламы",
+		label: "Организация Распространение рекламы",
+	},
+	{ value: "Посредничество", label: "Посредничество" },
+	{ value: "Иное", label: "Иное" },
+];
 
 export const AddClientContractModal = ({ isOpen, setOpen, modalParams }) => {
   const { mutate: createClientContract } = useAddClientContract();
@@ -64,13 +76,24 @@ export const AddClientContractModal = ({ isOpen, setOpen, modalParams }) => {
 										/>
 									</div>
 									<div className={s.input}>
-										<InputField
-											label={"Предмет договора"}
-											required
-											placeholder={"Введите предмет договора"}
-											id="contractSubject"
-											name="contractSubject"
-										/>
+										<Field name="contractSubject">
+												{({ field: { value }, form: { setFieldValue } }) => (
+													<Select
+														label={"Предмет договора"}
+														id="contractSubject"
+														name="contractSubject"
+														options={subjectOptions}
+														required={true}
+														placeholder={"Выберите предмет договора"}
+														fullWidth={true}
+														value={value}
+														isMulti={false}
+														setSelectedOption={(v) =>
+															setFieldValue("contractSubject", v.value)
+														}
+													/>
+												)}
+											</Field>
 									</div>
 									<div className={s.input}>
 										<InputField
@@ -105,7 +128,7 @@ export const AddClientContractModal = ({ isOpen, setOpen, modalParams }) => {
 										/>
 									</div>
 									<div className={s.input}>
-										<Checkbox name="recognizedByNDS" label={"Признак НДС"} />
+										<Checkbox name="recognizedByNDS" label={"с НДС"} />
 									</div>
 									<Button label="Добавить" disabled={!dirty || !isValid} />
 								</div>

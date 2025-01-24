@@ -1,12 +1,47 @@
 import { FormikStep } from "../../Shared/FormikStepper/FormikStepper";
 import s from "../DashboardModals.module.scss";
 import { InputField, InputFieldMasked } from "../../Shared/Input/Input";
+import { Select } from "../../Shared/Select/Select";
+import { Field } from 'formik';
+
+const typeOptions = [
+	{ value: "PHYSICAL_ENTITY", label: "Физ. лицо" },
+	{ value: "SELF_EMPLOYED", label: "Самозанятый" },
+	{ value: "IE", label: "ИП" },
+	{ value: "LEGAL_ENTITY", label: "Юр. лицо" },
+];
 
 export const SecondStep = () => {
   return (
     <FormikStep>
-			<div className={s.scroller}>
-				<div className={s.form}>
+			<div className={s.form}>
+				<div className={s.input}>
+						<Field name="advertiserInfo.type">
+							{({ field: { value }, form: { setFieldValue } }) => (
+								<Select
+									label={"Тип клиента"}
+									id="advertiserInfo.type"
+									name="advertiserInfo.type"
+									options={typeOptions}
+									required={true}
+									placeholder={"Физ. лицо, Самозанятый, ИП, Юр. лицо"}
+									fullWidth={true}
+									value={value}
+									isMulti={false}
+									setSelectedOption={(v) => setFieldValue("advertiserInfo.type", v.value)}
+								/>
+							)}
+						</Field>
+					</div>
+					<div className={s.input}>
+						<InputField
+							label={"Наименование клиента"}
+							required
+							placeholder={"Наименование"}
+							id="name"
+							name="name"
+						/>
+					</div>
 					<div className={s.input}>
 						<InputField
 							label={"ИНН"}
@@ -27,7 +62,6 @@ export const SecondStep = () => {
 						/>
 					</div>
 				</div>
-			</div>
     </FormikStep>
   );
 };

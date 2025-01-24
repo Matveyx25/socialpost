@@ -3,6 +3,7 @@ import s from './advertising-company.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Button } from '../../../Shared/Button/Button';
 import { useOutletContext } from 'react-router-dom';
+import { IconPencil } from '@tabler/icons-react';
 
 export const DefaultInfo = ({company}) => {
 	const [setModal] = useOutletContext()
@@ -10,16 +11,13 @@ export const DefaultInfo = ({company}) => {
 	return (
     <DashboardCard>
       <div className={s.cardHeader}>
-        <span>{company?.name}</span>
-				<div className={s.btns}>
-					<Button
-						label={"Редактировать"}
-						size="small"
-						onClick={() => {
+				<span className={s.companyName}>{company?.name}
+					<button className={s.editButton} onClick={() => {
 							setModal('edit-campaign', {editCampaignId: company?.id})
-						}}
-					/>
-				</div>
+						}}>
+							<IconPencil size={16}/>
+					</button>
+				</span>
       </div>
       <div className={s.line}></div>
       <div className={s.companyInfoWrapper}>

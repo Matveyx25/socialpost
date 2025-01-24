@@ -29,6 +29,7 @@ export const Select = ({styles, headerClassName, value, firstElement, lastElemen
 			isSearchable={false}
 			isMulti={isMulti}
 			isDisabled={disabled}
+
 			value={options?.find(_ => _.value === value)}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{

@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef } from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 import s from "./Calendar.module.scss"
 import ReactDatePicker, { CalendarContainer } from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
@@ -9,16 +9,16 @@ import classNames from 'classnames';
 export const Calendar = ({placeholder, className, label, disabled, inputClassName, value, onChange, ...props}) => {
 	const calendar = useRef(null)
 
-	const ExampleCustomInput = forwardRef(({ value, onClick }, ref) => (
+	const ExampleCustomInput = forwardRef(({ onClick, ...props }, ref) => 
 		<div className={classNames(s.inputsWrapper, inputClassName)} onClick={(e) => {
 			e.stopPropagation()
 			e.preventDefault()
 			onClick()
 		}} ref={ref}>
 			<IconCalendar className={s.icon} color='#919396'/>
-			<input value={value} placeholder={placeholder}/>
+			<input {...props}/>
 		</div>
-  ));
+  );
 
 	const MyContainer = ({ className, children }) => {
     return (

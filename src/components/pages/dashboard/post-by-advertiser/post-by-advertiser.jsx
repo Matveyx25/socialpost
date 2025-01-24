@@ -11,6 +11,7 @@ import { usePost } from "../../../../hooks/usePost";
 import {
   IconAlertTriangle,
   IconClockHour4,
+  IconPencil,
   IconPlayerPauseFilled,
   IconPlayerPlayFilled,
 } from "@tabler/icons-react";
@@ -93,16 +94,19 @@ export const PostByAdvertiser = () => {
         }
         <DashboardCard className={s.card}>
           <div className={s.cardHeader}>
-						{post?.cpmStatus ?  "Параметры РК" : "Информация"}
+						<span className={s.companyName}>{post?.cpmStatus ?  "Параметры РК" : "Информация"}
+							{post?.cpmStatus ? 
+								<button className={s.editButton} disabled={post?.status === 'MODERATING'} onClick={() => {
+										if(post?.status !== 'MODERATING'){
+											setModal("edit-post-cpm-modal", { editCpmPostId: postId });
+										}
+									}}>
+									<IconPencil size={16}/>
+								</button> : null
+							}
+						</span>
+						
             <div className={s.btns}>
-						{post?.cpmStatus ?  <Button
-                      label={"Редактировать"}
-                      size="small"
-											disabled={post?.status === 'MODERATING'}
-                      onClick={() => {
-                        setModal("edit-post-cpm-modal", { editCpmPostId: postId });
-                      }}
-                    /> : null}
               {
                 {
                   NOT_MODERATED: (

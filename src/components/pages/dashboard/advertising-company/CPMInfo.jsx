@@ -5,7 +5,7 @@ import { Button } from '../../../Shared/Button/Button';
 import { useOutletContext } from 'react-router-dom';
 import { Dropdown } from '../../../Shared/Dropdown/Dropdown';
 import classNames from 'classnames';
-import { IconPlayerPlayFilled, IconPlayerStopFilled } from '@tabler/icons-react';
+import { IconPencil, IconPlayerPlayFilled, IconPlayerStopFilled } from '@tabler/icons-react';
 import { IconPlayerPauseFilled } from '@tabler/icons-react';
 import { useStartAllCPM } from '../../../../hooks/useStartAllCPM';
 import { usePauseAllCPM } from '../../../../hooks/usePauseAllCPM';
@@ -21,16 +21,15 @@ export const CPMInfo = ({company}) => {
 	return (
     <DashboardCard>
       <div className={s.cardHeader}>
-        <span>{company?.name}</span>
+        <span className={s.companyName}>{company?.name}
+					<button className={s.editButton} onClick={() => {
+							setModal('edit-campaign', {editCampaignId: company?.id})
+						}}>
+							<IconPencil size={16}/>
+					</button>
+				</span>
 				{company?.status === 'ACTIVE' && 
 				<div className={s.btns}>
-						<Button
-								label={"Редактировать"}
-								size="small"
-								onClick={() => {
-									setModal('edit-campaign', {editCampaignId: company?.id})
-								}}
-							/>
 						<Dropdown
 							className={s.dropdown}
 							menuClassName={s.menu}
