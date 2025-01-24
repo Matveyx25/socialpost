@@ -5,26 +5,13 @@ import { IconPlus } from '@tabler/icons-react';
 import { Button } from '../../../Shared/Button/Button'
 import { useOutletContext, useParams } from 'react-router-dom'
 import s from './advertiser-client.module.scss'
-import { useMyClients } from '../../../../hooks/useMyClients'
 import { useMyClientContracts } from '../../../../hooks/useMyClientContracts';
-
-// [{
-// 	"id": 52,
-// 	"description": "41234",
-// 	"contractNumber": "1234123",
-// 	"contractSubject": "2134",
-// 	"conclusionDate": "2024-10-28",
-// 	"recognizedByNDS": true,
-// 	"moneyAmount": 1000.00
-// }]
-
+import { contractSubjectsDecode } from '../../../../options/contractSubjects';
 
 export const AdvertiserClient = () => {
 	const [page, setPage] = useState(1)
 	const [size, setSize] = useState(30)
 	const { clientId } = useParams();
-
-	const {data: client} = useMyClients(clientId)
 	const {data: contracts, isFetched} = useMyClientContracts(clientId)
 	
 	const [setModal] = useOutletContext()
@@ -72,7 +59,7 @@ export const AdvertiserClient = () => {
 											<div className={s.center}>{el?.contractNumber ? '№' + el?.contractNumber  : '-'}</div> 
                     </td>
 										<td>
-											<div className={s.center}>{el?.contractSubject ? el?.contractSubject : '-'}</div> 
+											<div className={s.center}>{el?.contractSubject ? contractSubjectsDecode[el?.contractSubject] : '-'}</div> 
                     </td>
                     <td>
 											<div className={s.center}>{(new Date(el?.conclusionDate)).toLocaleDateString('ru-RU', {dateStyle: 'short'})}</div> 

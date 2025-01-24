@@ -29,12 +29,15 @@ export const Select = ({styles, headerClassName, value, firstElement, lastElemen
 			isSearchable={false}
 			isMulti={isMulti}
 			isDisabled={disabled}
-
+			
 			value={options?.find(_ => _.value === value)}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
 				DropdownIndicator: () => <IconChevronDown className={s.icon}/>,
-				MenuList: (props) => <CustomMenu {...props} lastElement={lastElement} firstElement={firstElement}/>
+				MenuList: (props) => <CustomMenu {...props} lastElement={lastElement} firstElement={firstElement}/>,
+				NoOptionsMessage: (props) => <components.NoOptionsMessage {...props}>
+				<span className="custom-css-class">Нет доступных вариантов</span> 
+			</components.NoOptionsMessage>
 			}}
 			styles={selectStyles({styles, fullWidth})}
 		/>

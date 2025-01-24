@@ -79,7 +79,7 @@ const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" layout={MyLayout}>
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
-    <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Выплаты' }} icon={IconMoneybag}/>
+    <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Финансовые операции' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsMainList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>

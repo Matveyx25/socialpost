@@ -35,7 +35,7 @@ export const SecondStep = () => {
 					</div>
 					<div className={s.input}>
 						<InputField
-							label={"Наименование клиента"}
+							label={"Наименование конечного рекламодателя"}
 							required
 							placeholder={"Наименование"}
 							id="name"

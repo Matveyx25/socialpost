@@ -7,6 +7,7 @@ import { Checkbox } from "../../Shared/Checkbox/checkbox";
 import { Calendar } from "../../Shared/Calendar/Calendar";
 import { formatToISO } from "../../../helpers/formatToISO";
 import classNames from "classnames";
+import { contractSubjectsOptions } from "../../../options/contractSubjects";
 
 export const ThirdStep = () => {
   const typeOptions = [
@@ -15,18 +16,7 @@ export const ThirdStep = () => {
     { value: "IE", label: "ИП" },
     { value: "LEGAL_ENTITY", label: "Юр. лицо" },
   ];
-
-  const subjectOptions = [
-    { value: "Представительство", label: "Представительство" },
-    { value: "Распространение рекламы", label: "Распространение рекламы" },
-    {
-      value: "Организация Распространение рекламы",
-      label: "Организация Распространение рекламы",
-    },
-    { value: "Посредничество", label: "Посредничество" },
-    { value: "Иное", label: "Иное" },
-  ];
-
+	
   return (
     <FormikStep>
 			<div className={s.scroller}>
@@ -36,7 +26,7 @@ export const ThirdStep = () => {
 							<div className={s.subtitle}>Данные рекламодателя</div>
 							<div className={s.input}>
 								<InputField
-									label={"Наименование клиента"}
+									label={"Наименование конечного рекламодателя"}
 									required
 									placeholder={"Наименование"}
 									id="name"
@@ -159,7 +149,7 @@ export const ThirdStep = () => {
 											label={"Предмет договора"}
 											id="agencyInfo.contractSubject"
 											name="agencyInfo.contractSubject"
-											options={subjectOptions}
+											options={contractSubjectsOptions}
 											required={true}
 											placeholder={"Выберите предмет договора"}
 											fullWidth={true}

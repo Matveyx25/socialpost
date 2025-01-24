@@ -44,14 +44,11 @@ export const MyClients = () => {
           <table className={s.table}>
             <thead>
               <tr>
-                <th>
-									Тип
-								</th>
-                <th>
-									Роль
+								<th>
+									Рекламодатель
                 </th>
-                <th>
-									Наименование клиента
+								<th>
+									Роль
                 </th>
                 <th>
 									ИНН
@@ -59,6 +56,9 @@ export const MyClients = () => {
                 <th>
 									Номер телефона
                 </th>
+                <th>
+									Тип
+								</th>
               </tr>
             </thead>
             <tbody>
@@ -66,6 +66,33 @@ export const MyClients = () => {
                 clients?.data.map((el) => (
                   <tr key={el.id} onClick={() => navigate('./' + el.id)}>
                     <td>
+                      <div className={s.center}>{el.name}</div>
+                    </td>
+										<td>
+                      <div className={s.center}>
+												{
+                          {
+                            AGENCY: "Агентство",
+                            ADVERTISER: "Рекламодатель",
+                          }[el.role]
+                        }
+                      </div>
+                    </td>
+										<td>
+                      {el?.role === 'AGENCY' ? 
+												<div className={s.center}>{el?.agencyInfo?.advertiserInn ? el?.agencyInfo?.advertiserInn : '-'}</div> 
+												: 
+												<div className={s.center}>{el?.advertiserInfo?.inn ? el?.advertiserInfo?.inn : '-'}</div> 
+											}
+                    </td>
+										<td>
+                      {el?.role === 'AGENCY' ? 
+												<div className={s.center}>{el?.agencyInfo?.advertiserPhone ? el?.agencyInfo?.advertiserPhone : '-'}</div> 
+												: 
+												<div className={s.center}>{el?.advertiserInfo?.phone ? el?.advertiserInfo?.phone : '-'}</div> 
+											}
+                    </td>
+										<td>
                       <div className={s.center}>
                         {el?.advertiserInfo ? 
                           {
@@ -82,33 +109,6 @@ export const MyClients = () => {
                           }[el?.agencyInfo.advertiserType]
                         }
                       </div>
-                    </td>
-                    <td>
-                      <div className={s.center}>
-												{
-                          {
-                            AGENCY: "Агентство",
-                            ADVERTISER: "Рекламодатель",
-                          }[el.role]
-                        }
-                      </div>
-                    </td>
-										<td>
-                      <div className={s.center}>{el.name}</div>
-                    </td>
-										<td>
-                      {el?.role === 'AGENCY' ? 
-												<div className={s.center}>{el?.agencyInfo?.advertiserInn ? el?.agencyInfo?.advertiserInn : '-'}</div> 
-												: 
-												<div className={s.center}>{el?.advertiserInfo?.inn ? el?.advertiserInfo?.inn : '-'}</div> 
-											}
-                    </td>
-										<td>
-                      {el?.role === 'AGENCY' ? 
-												<div className={s.center}>{el?.agencyInfo?.advertiserPhone ? el?.agencyInfo?.advertiserPhone : '-'}</div> 
-												: 
-												<div className={s.center}>{el?.advertiserInfo?.phone ? el?.advertiserInfo?.phone : '-'}</div> 
-											}
                     </td>
                   </tr>
                 ))

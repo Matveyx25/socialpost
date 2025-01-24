@@ -9,17 +9,7 @@ import { Checkbox } from "../Shared/Checkbox/checkbox";
 import { useAddClientContract } from "../../hooks/useAddClientContract";
 import { Button } from "../Shared/Button/Button";
 import { Select } from "../Shared/Select/Select";
-
-const subjectOptions = [
-	{ value: "Представительство", label: "Представительство" },
-	{ value: "Распространение рекламы", label: "Распространение рекламы" },
-	{
-		value: "Организация Распространение рекламы",
-		label: "Организация Распространение рекламы",
-	},
-	{ value: "Посредничество", label: "Посредничество" },
-	{ value: "Иное", label: "Иное" },
-];
+import { contractSubjectsOptions } from '../../options/contractSubjects';
 
 export const AddClientContractModal = ({ isOpen, setOpen, modalParams }) => {
   const { mutate: createClientContract } = useAddClientContract();
@@ -82,7 +72,7 @@ export const AddClientContractModal = ({ isOpen, setOpen, modalParams }) => {
 														label={"Предмет договора"}
 														id="contractSubject"
 														name="contractSubject"
-														options={subjectOptions}
+														options={contractSubjectsOptions}
 														required={true}
 														placeholder={"Выберите предмет договора"}
 														fullWidth={true}

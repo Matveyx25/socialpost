@@ -93,17 +93,17 @@ export const AddClientModal = ({ isOpen, setOpen }) => {
 				{...{role}} validationSchema={Yup.object().shape({
 					name: Yup.string().required("Заполните поле"),
 					agencyInfo: Yup.object().shape({
-						advertiserType: Yup.string().required(),
-						advertiserInn: Yup.string().required(),
-						advertiserPhone: Yup.string().required(),
-						executorType: Yup.string().required(),
-						executorName: Yup.string().required(),
-						executorInn: Yup.string().required(),
-						executorPhone: Yup.string().required(),
-						contractNumber: Yup.string().required(),
-						contractSubject: Yup.string().required(),
+						advertiserType: Yup.string().required("Заполните поле"),
+						advertiserInn: Yup.string().required("Заполните поле"),
+						advertiserPhone: Yup.string().required("Заполните поле"),
+						executorType: Yup.string().required("Заполните поле"),
+						executorName: Yup.string().required("Заполните поле"),
+						executorInn: Yup.string().required("Заполните поле"),
+						executorPhone: Yup.string().required("Заполните поле"),
+						contractNumber: Yup.string().required("Заполните поле"),
+						contractSubject: Yup.string().required("Заполните поле"),
 						description: Yup.string(),
-						conclusionDate: Yup.string().required(),
+						conclusionDate: Yup.string().required("Заполните поле"),
 						moneyAmount: Yup.string().matches(/^\d+$/, "Можно вводить только цифры"),
 					})
       	})}/> : null}
