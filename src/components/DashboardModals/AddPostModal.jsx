@@ -19,6 +19,7 @@ import { serialize } from "@st.matthew/remark-slate";
 import { formatToISO } from "../../helpers/formatToISO";
 import { MultiSelect } from "../Shared/MultiSelect/MultiSelect";
 import { Node } from "slate";
+import { kktuOptions } from "../../options/kktu";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -39,11 +40,10 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 		if(post?.type === 'FIXED_CPM'){
 			const markdownContent = values.text.map((v) => serialize(v)).join('')
 
-			console.log(values?.cpmTags);
-
 			data = {
 				name: values?.name,
 				type: values?.type,
+				kktu: values?.kktu,
 				telegramPostUrl: values?.telegramPostUrl,
 				id: modalParams?.campaignId,
 				cpmTags: values?.cpmTags?.map(el => el.label),
@@ -61,6 +61,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				data = {
 					name: values?.name,
 					type: values?.type,
+					kktu: values?.kktu,
 					telegramPostUrl: values?.telegramPostUrl,
 					id: modalParams?.campaignId,
 				}
@@ -131,6 +132,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				btnLabel='Создать запись'
         initialValues={{
           name: "",
+          kktu: "",
           type: post?.type === 'FIXED_CPM' ? "NEW_POST" : '',
           text: "",
           telegramPostUrl: "",
@@ -153,6 +155,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
           validationSchema={Yup.object().shape({
             id: Yup.string().required("Выберите РК"),
             name: Yup.string().required("Заполните поле"),
+            kktu: Yup.string().required("Заполните поле"),
 						...(post?.type === 'FIXED_CPM' ? {
 							dateRange: Yup.array()
 								.test(
@@ -254,6 +257,27 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
                 </Field>
               </div>
             ) : null}
+					<div className={s.input}>
+						<Field name="kktu">
+							{({ field: { value }, form: { setFieldValue } }) => (
+								<Select
+									label={"ККТУ"}
+									id="kktu"
+									name="kktu"
+									options={kktuOptions}
+									placeholder={"ККТУ"}
+									fullWidth
+									isMulti={false}
+									value={value}
+									isSearchable
+									required
+									setSelectedOption={(v) => {
+										setFieldValue("kktu", v.value);
+									}}
+								/>
+							)}
+						</Field>
+					</div>
           </div>
         </FormikStep>
 				{post?.type === "FIXED_CPM" ? (

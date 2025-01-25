@@ -274,7 +274,8 @@ export const advertiser = {
 			requestData = {
 				"name": data.name,
 				"type": "NEW_POST",
-				"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
+				"kktu": data.kktu,
+				"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 				"postUploadsIds": fileIds,
 				"markingType": data.markingType,
 				"cpmTags": data?.cpmTags,
@@ -289,6 +290,7 @@ export const advertiser = {
 				requestData = {
 					"name": data.name,
 					"type": data.type,
+					"kktu": data.kktu,
 					"telegramPostUrl": data.telegramPostUrl,
 				}
 			}else{
@@ -323,7 +325,8 @@ export const advertiser = {
 				requestData = {
 					"name": data.name,
 					"type": data.type,
-					"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
+					"kktu": data.kktu,
+					"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 					"postUploadsIds": fileIds,
 					"markingType": data.markingType
 				}
@@ -338,7 +341,7 @@ export const advertiser = {
 					const formData = new FormData();
 					formData.append('upload', file);
 					let toastId = null
-					
+
 					return instance.post('/uploads', formData, {
 						onUploadProgress: (processEvent) => {
 							const {loaded, total} = processEvent
@@ -365,8 +368,10 @@ export const advertiser = {
 		const fileIds = uploadResponses?.map(response => response.data.id);
 
 		return instance.put('/campaigns/posts/' + data.id + '/content' , {
-			"text": data.text.replaceAll('<br>', '\n').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
+			"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 			"postUploadsIds": fileIds,
+			"markingType": data.markingType,
+			"kktu": data.kktu,
 			"moderationComment": ' '
 		})
 	},

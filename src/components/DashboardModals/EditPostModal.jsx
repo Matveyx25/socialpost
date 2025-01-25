@@ -1,7 +1,7 @@
 import { Modal } from "../Shared/Modal/Modal";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import s from './DashboardModals.module.scss'
 import { RichText } from "../Shared/RichText/RichText";
 import { IconX } from "@tabler/icons-react";
@@ -16,6 +16,8 @@ import { Button } from "../Shared/Button/Button";
 import slate, { serialize } from '@st.matthew/remark-slate';
 import deserialize from '../../helpers/deserialize'
 import { Node } from "slate";
+import { Select } from "../Shared/Select/Select";
+import { kktuOptions } from "../../options/kktu";
 
 const processor = unified().use(markdown).use(deserialize).use(slate)
 
@@ -33,7 +35,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let data = null
 		
 		const markdownContent = values.text.map(el => serialize(el)).join('')
-		data = {id: modalParams?.editPostId, text: markdownContent, files}
+		data = {id: modalParams?.editPostId, text: markdownContent, files, kktu: values.kktu, markingType: values.markingType}
 
 		updatePost(data);
     setOpen();
@@ -77,17 +79,20 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
       title={`Редактировать запись`}
       name={"edit-post-modal"}
     >
+			{post?.text ? console.log(post?.text, processor.processSync(post?.text)) : ''}
      <Formik
         initialValues={{
           text: post?.text ? processor.processSync(post?.text).result : '',
-          markingType: "NONE",
+          markingType: post?.markingType ? post.markingType : '',
           id: modalParams?.editPostId,
+					kktu: post?.kktu ? post.kktu : ''
         }}
 				enableReinitialize
         onSubmit={(values) => {
           handleSubmit(values);
         }}
 				validationSchema={Yup.object().shape({
+					kktu: Yup.string().required("Заполните поле"),
 					id: Yup.string().required("Выберите РК"),
 					text: Yup.mixed().test("is-empty", "Заполните поле", (value) =>
 						slateValueValidator(value)
@@ -97,6 +102,27 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 				<Form>
             <div className={s.scroller}>
               <div className={s.form}>
+                <div className={s.input}>
+									<Field name="kktu">
+											{({ field: { value }, form: { setFieldValue } }) => (
+												<Select
+													label={"ККТУ"}
+													id="kktu"
+													name="kktu"
+													options={kktuOptions}
+													placeholder={"ККТУ"}
+													fullWidth
+													isMulti={false}
+													value={value}
+													isSearchable
+													required
+													setSelectedOption={(v) => {
+														setFieldValue("kktu", v.value);
+													}}
+												/>
+											)}
+										</Field>
+								</div>
                 <div className={s.input}>
                   <RichText name={"text"} label={"Текст записи"} />
                 </div>

@@ -14,7 +14,7 @@ const CustomMenu = (props) => (
 		</components.MenuList >
 	)
 
-export const Select = ({styles, headerClassName, value, firstElement, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder, ...props}) => {
+export const Select = ({styles, headerClassName, value, firstElement, lastElement, label, required, closeMenuOnSelect, className, isMulti, withInfo, fullWidth, options, setSelectedOption, defaultValue, disabled, placeholder, isSearchable = false, ...props}) => {
 	return <div className={`${className} ${s.selectGroup}`}>
 		{label && <div className={classNames(headerClassName, s.header)}>
 			<span>{label}{required && <span className={s.star}>*</span>}</span>
@@ -26,10 +26,9 @@ export const Select = ({styles, headerClassName, value, firstElement, lastElemen
 			onChange={setSelectedOption}
 			options={options}
 			placeholder={placeholder ? placeholder : 'Выбрать...'}
-			isSearchable={false}
+			isSearchable={isSearchable}
 			isMulti={isMulti}
 			isDisabled={disabled}
-			
 			value={options?.find(_ => _.value === value)}
 			closeMenuOnSelect={closeMenuOnSelect}
 			components={{
