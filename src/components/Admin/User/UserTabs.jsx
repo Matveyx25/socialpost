@@ -20,7 +20,7 @@ export const UserTabs = () => {
   };
 
 	return (
-		<Card>
+		<Card title={'Пользователь'}>
 			<TabContext value={value}>
 				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 					<TabList onChange={handleChange} aria-label="basic tabs example">
