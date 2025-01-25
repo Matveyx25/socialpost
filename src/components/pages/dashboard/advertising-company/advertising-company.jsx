@@ -22,8 +22,10 @@ export const AdvertisingCompany = () => {
 	
 	const { data: company } = useCampaignById(companyId);
 
+	const allCount =  company?.activePostsCount + company?.completedRequestsCount + company?.notModeratedPostsCount + company?.moderatingPostsCount + company?.acceptedPostsCount + company?.declinedPostsCount
+
 	const tabs = [
-		{label: 'Новые', count: company?.notModeratedPostsCount, value: 'NOT_MODERATED', id: 0},
+		{label: 'Все', count: allCount, value: null, id: 0},
 		{label: 'Активные', count: company?.activePostsCount, value: 'ACCEPTED', id: 1},
 		{label: 'На проверке', count: company?.moderatingPostsCount, value: ['MODERATING', 'MODERATING_MARKING'], id: 2},
 		{label: 'Отклоненные', count: company?.declinedPostsCount, value: 'DECLINED', id: 3},
