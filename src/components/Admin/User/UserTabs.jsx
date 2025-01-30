@@ -6,7 +6,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { Channels } from './Channels';
 import { AdvertiserPostsList } from '../AdvertiserPosts/AdvertiserPostsList';
 import { CampaignsList } from '../Campaigns/CampaignsList';
-import { useGetOne, useRecordContext, useResourceContext } from 'react-admin';
+import { useGetOne } from 'react-admin';
 import { useParams } from 'react-router-dom';
 
 export const UserTabs = () => {

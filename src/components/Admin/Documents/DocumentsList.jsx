@@ -7,6 +7,7 @@ import { PostPagination } from "../PostPagination";
 
 const renderType = (record) => {
 	const type = record.type
+	const name = record?.name
 
 	const types = {
 		'INDIVIDUAL_ENTREPRENEUR': 'ИП',
@@ -14,7 +15,7 @@ const renderType = (record) => {
 		'LEGAL_ENTITY': 'Юр. Лицо',
 	}
 
-	return <TextField record={{type: types[type]}} source="type"/>
+	return <TextField record={{type: types[type] + (name ? '«' + name + '»' : '')}} source="type"/>
 };
 
 const renderDownload = (record) => {

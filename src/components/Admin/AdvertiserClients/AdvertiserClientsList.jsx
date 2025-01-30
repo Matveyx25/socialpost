@@ -4,8 +4,8 @@ import { CustomEmpty } from '../CustomEmpty';
 import { PostPagination } from '../PostPagination';
 
 const renderRole = (record) => ({
-	AGENCY: "Агентство",
-	ADVERTISER: "Рекламодатель",
+	AGENCY: "Нет",
+	ADVERTISER: "Да",
 }[record.role])
 
 const renderClientType = (type) => ({
@@ -29,16 +29,16 @@ const renderType = (record) => {
 
 export const AdvertiserClientsList = (props) => (
   <List {...props} exporter={false} resource={'campaigns/clients'} filters={[ <SelectInput
-		label="Роль"
+		label="Прямой рекламодатель"
 		source="role"
 		choices={[
-			{ id: "AGENCY", name: "Агентство" },
-			{ id: "ADVERTISER", name: "Рекламодатель" },
+			{ id: "AGENCY", name: "Нет" },
+			{ id: "ADVERTISER", name: "Да" },
 		]}
 	/> ]} filter={{isSelfPromoted: false}} empty={<CustomEmpty message={'Клиентов нет'}/>} pagination={<PostPagination/>}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
       <TextField source="id" />
-			<FunctionField label="Роль" source="role" render={renderRole}/>
+			<FunctionField label="Прямой рекламодатель" source="role" render={renderRole}/>
       <TextField label="Наименование клиента" source="name"/>
 			<FunctionField label="ИНН"  source="agencyInfo" render={renderInn}/>
 			<FunctionField label="Номер телефона" source="agencyInfo" render={renderPhone}/>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Loader } from '../../../Shared/Loader/Loader'
-import { IconPlus, IconRefresh, IconSearch } from '@tabler/icons-react'
+import { IconCheck, IconMinus, IconPlus, IconRefresh, IconSearch } from '@tabler/icons-react'
 import { Button } from '../../../Shared/Button/Button'
 import { useNavigate, useOutletContext } from 'react-router-dom'
 import s from './my-clients.module.scss'
@@ -48,7 +48,7 @@ export const MyClients = () => {
 									Рекламодатель
                 </th>
 								<th>
-									Роль
+									Прямой рекламодатель
                 </th>
                 <th>
 									ИНН
@@ -72,8 +72,8 @@ export const MyClients = () => {
                       <div className={s.center}>
 												{
                           {
-                            AGENCY: "Агентство",
-                            ADVERTISER: "Рекламодатель",
+                            AGENCY: <IconMinus/>,
+                            ADVERTISER: <IconCheck/>,
                           }[el.role]
                         }
                       </div>

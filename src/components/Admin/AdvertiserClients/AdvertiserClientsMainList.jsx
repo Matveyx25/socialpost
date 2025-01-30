@@ -16,7 +16,7 @@ export const AdvertiserClientsMainList = (props) => {
 		<TabContext value={value}>
 			<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
 				<TabList onChange={handleChange} aria-label="basic tabs example">
-					<Tab label="Клиенты (Агентств)" value={0} />
+					<Tab label="Рекламодатели" value={0} />
 					<Tab label="Контрагенты" value={1} />
 				</TabList>
 			</Box>
