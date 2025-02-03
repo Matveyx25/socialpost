@@ -32,19 +32,12 @@ export const RequestsEdit = (props) => (
 								<TextField source="channelName" label="Канал"/>
 							</Labeled>
 						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1}>
+						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
 								<TextField label="Цена" source="price"/>
 							</Labeled>
 						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<Labeled fullWidth>
-								<TextField label="Всего потрачено" source="totalMoneySpent"/>
-							</Labeled>
-						</Box>
-				</Box>	
+				</Box>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
 							<Labeled fullWidth>
