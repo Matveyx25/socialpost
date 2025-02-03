@@ -1,8 +1,12 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Card, Tab, Typography } from "@mui/material";
 import { IconCheck, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField } from "react-admin";
+import { Edit, SimpleForm, TextField, TopToolbar, PrevNextButtons, Labeled, FunctionField, DateField, useGetOne } from "react-admin";
 import { AgencyInfo } from "./AgencyInfo";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
+import { useState } from "react";
+import { AdvertiserPostsList } from "../AdvertiserPosts/AdvertiserPostsList";
+import { useParams } from "react-router-dom";
 
 const renderType = (record) => ( {
 	AD_POST: "Размещение рекламных постов",
@@ -27,12 +31,41 @@ const renderStatus = (record) => ({
 	COMPLETED: "Завершенная",
 }[record.status])
 
-export const CampaignsEdit = (props) => (
-		<Edit {...props}  actions={
+export const CampaignsEdit = (props) => {
+	const {id} = useParams()
+	const [value, setValue] = useState(0)
+	const { data: campaign } = useGetOne('campaigns', {id})
+
+	const handleChange = (event, newValue) => {
+		setValue(newValue);
+	};
+		
+	
+	return (
+		<Card>
+			<TabContext value={value}>
+				<Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+					<TabList onChange={handleChange} aria-label="basic tabs example">
+						<Tab label="ОБЩЕЕ" value={0} />
+						<Tab label="Рекламные записи" value={1} />
+					</TabList>
+				</Box>
+				<TabPanel value={0}>
+					<Main {...props}/>
+				</TabPanel>
+				<TabPanel value={1}>
+					<AdvertiserPostsList campaign_id={campaign?.id}/>
+				</TabPanel>
+			</TabContext>
+		</Card>
+)};
+
+const Main = ({props}) => {
+	return <Edit {...props}  actions={
 			<TopToolbar>
 					<PrevNextButtons />
 			</TopToolbar>
-	}>
+		}>
 			<SimpleForm sx={{ maxWidth: 500 }}>
 				<TextField source="name" label="Название"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
@@ -125,5 +158,5 @@ export const CampaignsEdit = (props) => (
 				<hr />
 				<AgencyInfo/>			
 		</SimpleForm>
-  </Edit>
-);
+	</Edit>
+}
