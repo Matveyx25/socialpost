@@ -37,10 +37,10 @@ export const AdvertisingCompanies = () => {
           <div className={s.selects}>
             {clients?.data && (
               <Select
-                options={clients?.data.map((el) => ({
+                options={[{value: 12, label: 'ООО "asdfasdfasdf"'}, ...clients?.data?.map((el) => ({
                   value: el.id,
                   label: el.name,
-                }))}
+                }))]}
                 required={true}
                 placeholder={"Клиент"}
                 setSelectedOption={setClient}

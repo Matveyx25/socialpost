@@ -5,8 +5,8 @@ import { Select } from "../../Shared/Select/Select";
 
 export const FirstStep = ({setRole}) => {
   const roleOptions = [
-    { value: "AGENCY", label: "Агентство" },
-    { value: "ADVERTISER", label: "Прямой рекламодатель" },
+    { value: "AGENCY", label: "Нет" },
+    { value: "ADVERTISER", label: "Да" },
   ];
 
   return (
@@ -16,12 +16,12 @@ export const FirstStep = ({setRole}) => {
 					<Field name="role">
 						{({ field: { value }, form: { setFieldValue } }) => (
 							<Select
-								label={"Роль"}
+								label={"Прямой рекламодатель"}
 								id="role"
 								name="role"
 								options={roleOptions}
 								required={true}
-								placeholder={"Выберите роль"}
+								placeholder={"Выберите"}
 								fullWidth={true}
 								isMulti={false}
 								value={value}

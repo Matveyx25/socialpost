@@ -64,6 +64,7 @@ export const selectStyles = ({styles, fullWidth}) => ({
 		fontSize: '1rem',
 		lineHeight: '1.5rem',
 		minWidth: 'fit-content',
+		whiteSpace: 'nowrap',
 		background: isSelected ? 'rgba(237, 241, 255, 1)' : 'none', 
 		"&:hover": {
 			background: 'rgba(237, 241, 255, 1)'
