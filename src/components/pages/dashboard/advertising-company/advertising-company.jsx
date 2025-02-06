@@ -22,7 +22,7 @@ export const AdvertisingCompany = () => {
 	
 	const { data: company } = useCampaignById(companyId);
 
-	const allCount =  company?.activePostsCount + company?.completedRequestsCount + company?.notModeratedPostsCount + company?.moderatingPostsCount + company?.acceptedPostsCount + company?.declinedPostsCount
+	const allCount = company?.notModeratedPostsCount + company?.moderatingPostsCount + company?.acceptedPostsCount + company?.declinedPostsCount
 
 	const tabs = [
 		{label: 'Все', count: allCount, value: null, id: 0},

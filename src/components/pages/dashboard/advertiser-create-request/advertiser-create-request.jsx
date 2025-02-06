@@ -68,6 +68,12 @@ export const AdvertiserCreateRequest = () => {
     });
   };
 
+	const disabled =  !dateRange[0] ||
+	!dateRange[1] ||
+	!timeRange[0] ||
+	!timeRange[1] || 
+	+(timeRange[0].replace(':', '')) > +(timeRange[1].replace(':', ''))
+
   return (
     <div className={s.grid}>
       <div className={s.colSm}>
@@ -110,12 +116,7 @@ export const AdvertiserCreateRequest = () => {
                 label={"Разместить во всех"}
                 className={s.allBtn}
                 onClick={onSubmitRequestToAll}
-                disabled={
-                  !dateRange[0] ||
-                  !dateRange[1] ||
-                  !timeRange[0] ||
-                  !timeRange[1]
-                }
+                disabled={disabled}
               />
             </div>
           </div>
@@ -138,6 +139,7 @@ export const AdvertiserCreateRequest = () => {
 												size="small"
 												theme="secondary"
 												label={"Разместить в выбранных"}
+												disabled={disabled}
 												onClick={(e) => {
 													e.preventDefault();
 													e.stopPropagation();
@@ -227,6 +229,7 @@ export const AdvertiserCreateRequest = () => {
                                     size="small"
                                     theme="secondary"
                                     label={"Разместить"}
+																		disabled={disabled}
                                     onClick={(e) => {
                                       e.preventDefault();
                                       e.stopPropagation();

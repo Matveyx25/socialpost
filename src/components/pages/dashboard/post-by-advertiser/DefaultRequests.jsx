@@ -19,34 +19,40 @@ export const DefaultRequests = ({ post, postId }) => {
 
   const tabs = [
     {
+      label: "Все",
+      count: post?.totalRequestsCount,
+      value: null,
+      id: 0,
+    },
+    {
       label: "Ожидают публикации",
       count: post?.pendingRequestsCount,
       value: "PENDING",
-      id: 0,
+      id: 1,
     },
     {
       label: "Активные",
       count: post?.activeRequestsCount,
       value: "ACTIVE",
-      id: 1,
+      id: 2,
     },
     {
       label: "Выполненные",
       count: post?.completedRequestsCount,
       value: "COMPLETED",
-      id: 2,
+      id: 3,
     },
     {
       label: "Отклоненные",
       count: post?.declinedRequestsCount,
       value: "DECLINED",
-      id: 3,
+      id: 4,
     },
     {
       label: "Просроченные",
       count: post?.expiredRequestsCount,
       value: "EXPIRED",
-      id: 4,
+      id: 5,
     },
   ];
 
@@ -140,8 +146,9 @@ export const DefaultRequests = ({ post, postId }) => {
 									</tr>
 								</thead>
 								<tbody>
+									
 									{isFetched ? (
-										requests?.headers["x-total-count"] > 0 ? (
+										requests?.data?.length > 0 ? (
 											requests?.data.map((el) => (
 												<tr key={el.id}>
 													{tabs[tab].value === "PENDING" ? (
