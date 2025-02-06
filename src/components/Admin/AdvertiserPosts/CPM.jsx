@@ -13,10 +13,6 @@ export const Cpm = () => {
 		})
 	}, [])
 
-	if(!record?.cpmStatus){
-		return null
-	}
-
 	return (record?.cpmStatus ?
 		<>
 			<Typography variant="h6" gutterBottom>
