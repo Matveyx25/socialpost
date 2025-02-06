@@ -1,5 +1,5 @@
 import * as React from "react";
-import { List, Datagrid, TextField, FunctionField, DateField } from "react-admin";
+import { List, Datagrid, TextField, FunctionField, DateField, SelectInput } from "react-admin";
 import { CustomEmpty } from '../CustomEmpty';
 
 const renderStatus = (record) => ({
@@ -13,7 +13,18 @@ const renderStatus = (record) => ({
 
 export const RequestsList = (props) => {
 	return (
-  <List {...props} exporter={false} empty={<CustomEmpty message={'Заявок нет'}/>}>
+  <List {...props} exporter={false} empty={<CustomEmpty message={'Заявок нет'}/>} filters={[ <SelectInput
+		label="Статус"
+		source="status"
+		choices={[
+			{ id: "PENDING", name: "Ожидают публикации" },
+			{ id: "ACCEPTED", name: "Подтвержденные" },
+			{ id: "ACTIVE", name: "Активные" },
+			{ id: "COMPLETED", name: "Выполненные" },
+			{ id: "DECLINED", name: "Отклоненные" },
+			{ id: "EXPIRED", name: "Просроченные" },
+		]}
+	/> ]}>
     <Datagrid  bulkActionButtons={false} rowClick="edit">
 			<TextField source="id" />
 			<TextField source="channelName" label="Название канала"/>

@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import {
     Edit,
     SimpleForm,
@@ -8,109 +8,20 @@ import {
     FunctionField,
     SelectInput,
     TextInput,
-    useRecordContext,
-    SelectArrayInput,
-    DateInput,
 } from "react-admin";
-import s from './style.module.scss'
-import { useEffect } from "react";
-import { channels } from "../../../api/api";
-import { useState } from "react";
-import { PostAttachments } from "../../Shared/PostAttachments/PostAttachments";
-import { PostContent as PostContentText } from '../../Shared/PostContent/PostContent';
+import { Cpm } from "./CPM";
+import { ModerateComment } from "./ModerateComment";
+import { PostContent } from "./PostContent";
 
-
-const Cpm = () => {
-	const [tags, setTags] = useState([])
-	const record = useRecordContext()
-
-	useEffect(() => {
-		channels.getAllTags().then(res => {
-			setTags(res?.data?.map(el => ({name: el, id: el})))
-		})
-	}, [])
-
-	if(!record?.cpmStatus){
-		return null
-	}
-
-	return (
-		<>
-			<Typography variant="h6" gutterBottom>
-				CPM
-			</Typography>
-			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-					<Box flex={1}>
-						<Labeled fullWidth>
-							<DateInput source="cpmStartDate" label="Дата начала"  fullWidth/>
-						</Labeled>
-					</Box>
-					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled fullWidth>
-							<DateInput source="cpmEndDate" label="Дата конца" fullWidth/>
-						</Labeled>
-					</Box>
-			</Box>
-			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-					<Box flex={1}>
-						<SelectArrayInput fullWidth label="Тэги CPM" source="cpmTags" choices={tags} />
-					</Box>
-			</Box>
-			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-					<Box flex={1}>
-						<Labeled fullWidth>
-							<TextInput source="cpmChannelPostsLimit" label="Лимит показов"  fullWidth/>
-						</Labeled>
-					</Box>
-					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled fullWidth>
-							<TextInput source="cpmBudget" label="Бюджет" fullWidth/>
-						</Labeled>
-					</Box>
-					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
-						<Labeled fullWidth>
-							<TextInput source="cpmValue" label="CPM" fullWidth/>
-						</Labeled>
-					</Box>
-			</Box>
-		</>
-	)
-}
-
-const ModerateComment = () => {
-	const record = useRecordContext()
-
-	if(!record?.moderationComment){
-		return null
-	}
-
-	return (
-		<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-			<Box flex={1}>
-				<Typography variant="h6">
-					Комментарий рекламодателя
-				</Typography>
-				<Typography variant="p" gutterBottom>
-					{record?.moderationComment}
-				</Typography>
-			</Box>
-		</Box>
-	)
-}
+// "type": "NEW_POST",
+// "campaignName": "РК 1",
+// "campaignType": "AD_POST",
+// "kktu": "7.1.1",
 
 const renderType = (record) => ({
 	NEW_POST: "Новая запись",
 	REPOST: "Репост",
 }[record.type])
-
-const PostContent = () => {
-	const post = useRecordContext()
-
-	return <div className={s.post}>
-		<PostAttachments attachments={post?.uploads}/>
-		<PostContentText text={post?.text}/>
-	</div>
-}
 
 export const AdvertiserPostsEdit = (props) => (
   <Edit
@@ -141,6 +52,16 @@ export const AdvertiserPostsEdit = (props) => (
 					<Box flex={1}>
 						<Labeled fullWidth>
 							<FunctionField source="type" label="Тип" render={renderType} fullWidth/>
+						</Labeled>
+					</Box>
+					<Box flex={1} ml={{ xs: 0, sm: "0.5em" }}>
+						<Labeled fullWidth>
+							<SelectInput label="Маркировка" source="markingType" fullWidth choices={[
+								{id: 'NONE', name: 'Не размещать'},
+								{id: 'IN_TEXT', name: 'В тексте записи'},
+								{id: 'IN_VIDEO', name: 'В видео'},
+								{id: 'IN_PHOTO', name: 'На фотография'},
+								]}/>
 						</Labeled>
 					</Box>
 				</Box>
