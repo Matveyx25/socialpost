@@ -13,7 +13,7 @@ export const CryptoWallet = (props) => {
 
 	return (
 		<Edit {...props} id={''} resource={'users/' + id + '/crypto_wallet_details'}>
-			<Box sx={{ maxWidth: 500 }}>
+			<Box sx={{ maxWidth: 800 }}>
 				<SelectInput source="type" choices={[
 					{ id: 'USDT', name: 'USDT' },
 					{ id: 'Bitcoin', name: 'Bitcoin' },

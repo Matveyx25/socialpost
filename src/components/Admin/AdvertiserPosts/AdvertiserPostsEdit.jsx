@@ -47,7 +47,7 @@ export const AdvertiserPostsEdit = (props) => (
   >
     <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 			<PostContent/>
-			<SimpleForm sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: "0.5em" }}>
+			<SimpleForm sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: "0.5em" }}>
 				<Box display={{ xs: "block", sm: "flex", width: "100%" }}>
 					<Box flex={1}>
 						<Labeled fullWidth>

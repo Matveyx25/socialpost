@@ -10,7 +10,7 @@ export const UserEdit = (props) => {
 			</TopToolbar>
 		}>
 			<SimpleForm>
-				<Box sx={{ maxWidth: 500 }}>
+				<Box sx={{ maxWidth: 800 }}>
 					<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1} mr={{ xs: 0, sm: '0.5em' }}>

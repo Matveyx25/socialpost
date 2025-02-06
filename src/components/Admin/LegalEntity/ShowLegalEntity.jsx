@@ -6,7 +6,7 @@ export const ShowLegalEntity = () => {
   return (
     <>
       <Box display={{ xs: "block", sm: "flex", width: "100%" }}>
-        <Box sx={{ maxWidth: 500, sm: "flex" }} ml={{ xs: 0, sm: '0.5em' }}>
+        <Box sx={{ maxWidth: 800, sm: "flex" }} ml={{ xs: 0, sm: '0.5em' }}>
 					<Box flex={1}>
 						<Labeled fullWidth>
 							<TextField source="inn" label="ИНН" />
@@ -43,7 +43,7 @@ export const ShowLegalEntity = () => {
 						</Labeled>
 					</Box>
         </Box>
-        <Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
+        <Box sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: '0.5em' }}>
           <Box flex={1}>
 						<Labeled fullWidth>
 							<TextField

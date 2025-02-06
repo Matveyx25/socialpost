@@ -10,7 +10,7 @@ export const FormSelfEmployed = () => {
 					Самозанятый
 			</Typography>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<Box sx={{ maxWidth: 500, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>
+				<Box sx={{ maxWidth: 800, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1}>
 									<TextInput source="fullName" label="ФИО" isRequired fullWidth />
@@ -45,7 +45,7 @@ export const FormSelfEmployed = () => {
 							</Box>
 					</Box>
 				</Box>
-				<Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
+				<Box sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: '0.5em' }}>
 					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
 					<TextInput source="bankDetails.bank" label='Банк' isRequired fullWidth />
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />

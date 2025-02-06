@@ -61,29 +61,6 @@ export const AgencyInfo = () =>{
 							 <TextInput source='agencyInfo.executorPhone' label="Телефон исполнителя" fullWidth/>
 						</Box>
 				</Box>
-			
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1}>
-							<TextInput label="Номер договора" source="agencyInfo.contractNumber" fullWidth/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<TextInput label="Объект договора" source="agencyInfo.contractSubject" fullWidth/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<DateInput label="Дата заключения договора" source="agencyInfo.conclusionDate" fullWidth/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<BooleanInput label="Признак НДС" source="agencyInfo.recognizedByNDS"/>
-						</Box>
-				</Box>
-				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<TextInput label="Описание" source="agencyInfo.description" fullWidth/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-							<TextInput label="Сумма договора" source="agencyInfo.moneyAmount" fullWidth/>
-						</Box>
-				</Box>
 		</>
 	);
 }

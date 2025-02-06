@@ -32,7 +32,7 @@ const renderType = (record) => {
 
 export const AdvertiserClientsEdit = (props) => (
 		<Edit {...props} >
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<SimpleForm sx={{ maxWidth: 800 }}>
 				<Typography variant="h5" gutterBottom>
 						Клиент
 				</Typography>

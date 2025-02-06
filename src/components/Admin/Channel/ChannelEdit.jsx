@@ -8,7 +8,7 @@ export const ChannelEdit = (props) => (
 					<PrevNextButtons />
 			</TopToolbar>
 	}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<SimpleForm sx={{ maxWidth: 800 }}>
 				<TextInput source="name" label="Имя" fullWidth/>
 				<Labeled fullWidth>
 					<TextInput source="description" label="Описание" fullWidth/>

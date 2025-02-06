@@ -9,7 +9,7 @@ export const FormIE = () => {
 				ИП
 			</Typography>
 			<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
-				<Box sx={{ maxWidth: 500, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>
+				<Box sx={{ maxWidth: 800, sm: 'flex' }} mr={{ xs: 0, sm: '0.5em' }}>
 				<TextInput source="okved" label='ОКВЭД' isRequired fullWidth />
 					<TextInput source="fullName" label='ФИО' isRequired fullWidth />
 					<SelectInput source="taxSystem" choices={[
@@ -20,7 +20,7 @@ export const FormIE = () => {
 					<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
 					<TextInput source="address" label='Адрес' isRequired fullWidth />
 				</Box>
-				<Box sx={{ maxWidth: 500 }} ml={{ xs: 0, sm: '0.5em' }}>
+				<Box sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: '0.5em' }}>
 					<TextInput source="bankDetails.checkingAccount" label='Расчетный счет' isRequired fullWidth />
 					<TextInput source="bankDetails.bank" label='Банк' isRequired fullWidth />
 					<TextInput source="bankDetails.bik" label='БИК' isRequired fullWidth />

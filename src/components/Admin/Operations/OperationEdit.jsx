@@ -23,7 +23,7 @@ const Form = () => {
 	const record = useRecordContext()
 
 	return (
-		<SimpleForm sx={{ maxWidth: 500 }}>
+		<SimpleForm sx={{ maxWidth: 800 }}>
 				<Typography variant="h6" gutterBottom>
 					Пользователь №{record.id}
 				</Typography>

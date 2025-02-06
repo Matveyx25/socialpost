@@ -17,7 +17,7 @@ export const RequestsEdit = (props) => (
 					<PrevNextButtons />
 			</TopToolbar>
 	}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<SimpleForm sx={{ maxWidth: 800 }}>
 				<Labeled fullWidth>
 					<TextField source="postName" label="Пост"/>
 				</Labeled>

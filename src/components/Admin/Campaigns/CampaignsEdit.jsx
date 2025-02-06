@@ -66,7 +66,7 @@ const Main = ({props}) => {
 					<PrevNextButtons />
 			</TopToolbar>
 		}>
-			<SimpleForm sx={{ maxWidth: 500 }}>
+			<SimpleForm sx={{ maxWidth: 800 }}>
 				<TextField source="name" label="Название"/>
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1}>
