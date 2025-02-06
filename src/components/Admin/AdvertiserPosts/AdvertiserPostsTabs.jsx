@@ -26,7 +26,7 @@ export const AdvertiserPostsTabs = (props) => {
 					<AdvertiserPostsEdit {...props}/>
 				</TabPanel>
 				<TabPanel value={1}>
-					<RequestsList filter={{campaign_post_id: id}}/>
+					<RequestsList resource={'campaigns/posts/requests'} filter={{campaign_post_id: id}}/>
 				</TabPanel>
 			</TabContext>
 		</Card>
