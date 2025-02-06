@@ -30,6 +30,7 @@ import { AdvertiserClientsTabs } from "./AdvertiserClients/AdvertiserClientTabs"
 import { AdvertiserClientsMainList } from "./AdvertiserClients/AdvertiserClientsMainList";
 import { RequestsList } from "./Requests/RequestsList";
 import { RequestsEdit } from "./Requests/RequestsEdit";
+import { AdvertiserPostsTabs } from './AdvertiserPosts/AdvertiserPostsTabs';
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -87,7 +88,7 @@ const AdminPanel = () => (
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
     <Resource name="campaigns/posts/requests" list={RequestsList} edit={RequestsEdit} options={{ label: 'Заявки на размещение' }} icon={IconBell}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsMainList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
-    <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsEdit} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
+    <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsTabs} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
   </Admin>
 );
 

@@ -13,11 +13,6 @@ import { Cpm } from "./CPM";
 import { ModerateComment } from "./ModerateComment";
 import { PostContent } from "./PostContent";
 
-// "type": "NEW_POST",
-// "campaignName": "РК 1",
-// "campaignType": "AD_POST",
-// "kktu": "7.1.1",
-
 const renderType = (record) => ({
 	NEW_POST: "Новая запись",
 	REPOST: "Репост",
