@@ -1,5 +1,4 @@
-import React from 'react';
-import { Field, useField, useFormikContext } from 'formik';
+import { Field } from 'formik';
 import s from './checkbox.module.scss';
 import { IconSquare, IconSquareCheckFilled } from '@tabler/icons-react';
 

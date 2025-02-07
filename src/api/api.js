@@ -116,6 +116,9 @@ export const profile = {
 	me() {
 		return instance.get("/users/current")
 	},
+	getSettings() {
+		return instance.get("/settings")
+	},
 	getCart() {
 		return instance.get("/users/current/cart")
 	},

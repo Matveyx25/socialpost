@@ -20,6 +20,7 @@ import { formatToISO } from "../../helpers/formatToISO";
 import { MultiSelect } from "../Shared/MultiSelect/MultiSelect";
 import { Node } from "slate";
 import { kktuOptions } from "../../options/kktu";
+import { useSettings } from '../../hooks/useSettings';
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -30,9 +31,15 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
     setFiles(files)
   }
 
-  const { mutate: createPost } = useAddPost(modalParams?.campaignId);
+  const { mutate: createPost } = useAddPost({
+		onSuccess: () => {
+			setOpen();
+    	setCurrentStep(0);
+		}
+	});
   const { data: post } = useCampaignById(modalParams?.campaignId);
   const { data: tags } = useAllChannelsTags();
+	const { data: settings } = useSettings()
 
   const handleSubmit = (values) => {
 		let data = null
@@ -72,8 +79,6 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 		}
 
 		createPost(data);
-    setOpen();
-    setCurrentStep(0);
   };
 
 	function slateValueValidator(content) {
@@ -287,8 +292,11 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 							.matches(/^\d+$/, "Можно вводить только цифры")
 							.required("Заполните поле"),
               cpmValue: Yup.string()
+							.required("Заполните поле")
 							.matches(/^\d+$/, "Можно вводить только цифры")
-							.required("Заполните поле"),
+							.test("price", "Минимальное значение " + settings?.cpmMinValue, function (f) {
+								return +f >= +settings?.cpmMinValue;
+							}),
               cpmChannelPostsLimit: Yup.string()
 							.matches(/^\d+$/, "Можно вводить только цифры")
 							.required("Заполните поле")
