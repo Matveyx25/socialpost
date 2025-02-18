@@ -286,7 +286,7 @@ export const PostByAdvertiser = () => {
               </div>
               <div>
                 <p>Лимит показов</p>
-                <span>{(+post?.cpmBudget / +post?.cpmValue) * 1000}</span>
+                <span>{Math.floor((+post?.cpmBudget / +post?.cpmValue) * 1000)}</span>
               </div>
               <div>
                 <p>Ограничение на количество размещений в одном канале</p>

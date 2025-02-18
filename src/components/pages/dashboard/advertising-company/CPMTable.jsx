@@ -62,7 +62,7 @@ export const CPMTable = ({ isFetched, posts }) => {
 								<div className={s.center}>{el?.name}</div>
 							</td>
 							<td className={s.td2} onClick={() => navigate("./" + el.id)}>
-								<div className={s.center}>{(+el?.cpmBudget / +el?.cpmValue) * 1000}</div>
+								<div className={s.center}>{Math.floor((+el?.cpmBudget / +el?.cpmValue) * 1000)}</div>
 							</td>
 							<td className={s.td3} onClick={() => navigate("./" + el.id)}>
 								<div className={s.center}>{el?.cpmViews}</div>

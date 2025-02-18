@@ -21,6 +21,7 @@ import { MultiSelect } from "../Shared/MultiSelect/MultiSelect";
 import { Node } from "slate";
 import { kktuOptions } from "../../options/kktu";
 import { useSettings } from '../../hooks/useSettings';
+import { useQueryClient } from "@tanstack/react-query";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -31,10 +32,13 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
     setFiles(files)
   }
 
+	const queryClient = useQueryClient()
+
   const { mutate: createPost } = useAddPost({
 		onSuccess: () => {
 			setOpen();
     	setCurrentStep(0);
+			queryClient.invalidateQueries(['posts'])
 		}
 	});
   const { data: post } = useCampaignById(modalParams?.campaignId);
