@@ -9,7 +9,7 @@ import { formatToISO } from "../../../helpers/formatToISO";
 import classNames from "classnames";
 import { contractSubjectsOptions } from "../../../options/contractSubjects";
 
-export const ThirdStep = () => {
+export const ThirdStep = ({isEdit}) => {
   const typeOptions = [
     { value: "PHYSICAL_ENTITY", label: "Физ. лицо" },
     { value: "SELF_EMPLOYED", label: "Самозанятый" },
@@ -83,6 +83,7 @@ export const ThirdStep = () => {
 									placeholder={"ФИО или наименование"}
 									id="agencyInfo.executorName"
 									name="agencyInfo.executorName"
+									disabled={isEdit}
 								/>
 							</div>
 							<div className={s.input}>
@@ -98,6 +99,7 @@ export const ThirdStep = () => {
 											fullWidth={true}
 											value={value}
 											isMulti={false}
+											disabled={isEdit}
 											setSelectedOption={(v) =>
 												setFieldValue("agencyInfo.executorType", v.value)
 											}
@@ -110,6 +112,7 @@ export const ThirdStep = () => {
 									label={"ИНН исполнителя"}
 									required
 									placeholder={"Введите ИНН"}
+									disabled={isEdit}
 									id="agencyInfo.executorInn"
 									name="agencyInfo.executorInn"
 								/>
@@ -119,6 +122,7 @@ export const ThirdStep = () => {
 									mask={'+7 (999) 999-99-99'}
 									label={"Номер телефона исполнителя"}
 									required
+									disabled={isEdit}
 									placeholder={"Введите номер телефона"}
 									id="agencyInfo.executorPhone"
 									name="agencyInfo.executorPhone"

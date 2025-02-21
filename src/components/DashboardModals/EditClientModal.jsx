@@ -69,7 +69,8 @@ export const EditClientModal = ({ isOpen, setOpen, modalParams }) => {
 						),
 					})
 					})}/> : null}
-				{client?.role === 'AGENCY' ? <ThirdStep 
+				{client?.role === 'AGENCY' ? <ThirdStep
+				isEdit={true}
 				role={client?.role} validationSchema={Yup.object().shape({
 					name: Yup.string().required("Заполните поле"),
 					agencyInfo: Yup.object().shape({
