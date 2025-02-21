@@ -424,6 +424,15 @@ export const advertiser = {
 	getClientContractsId(id) {
 		return instance.get('/campaigns/clients/' + id + '/contracts')
 	},
+	getContract(id) {
+		return instance.get('/campaigns/clients/contracts/' + id)
+	},
+	editContract(data, id) {
+		return instance.put('/campaigns/clients/contracts/' + id, data) 
+	},
+	editClient(data, id) {
+		return instance.put('/campaigns/clients/' + id, data) 
+	},
 	createClient(data) {
 		return instance.post('/campaigns/clients/my', data)
 	},

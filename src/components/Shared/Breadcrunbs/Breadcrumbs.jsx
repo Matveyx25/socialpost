@@ -60,7 +60,7 @@ const advertiserRoutes = [
 	{path: '/dashboard/:companyId', breadcrumb: DynamicCampaign},
 	{path: '/dashboard/:companyId/:postId', breadcrumb: DynamicPost},
 	{path: '/dashboard/:companyId/:postId/create-request', breadcrumb: 'Разместить запись'},
-	{path: '/clients/', breadcrumb: 'Клиенты'},
+	{path: '/clients/', breadcrumb: 'Рекламодатели'},
 	{path: '/clients/:clientId', breadcrumb: DynamicClient},
 	{path: '/placement-appointments/', breadcrumb: 'Заявки на размещение'},
 	{path: '/appointment/', breadcrumb: 'Заявки на размещение / Бесплатный урок'},
