@@ -130,7 +130,6 @@ export const ThirdStep = ({isEdit}) => {
 							</div>
 						</div>
 					</div>
-
 					<div className={s.subtitle}>
 						Данные изначального договора с рекламодателем
 					</div>
