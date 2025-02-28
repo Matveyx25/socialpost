@@ -79,7 +79,6 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
       title={`Редактировать запись`}
       name={"edit-post-modal"}
     >
-			{post?.text ? console.log(post?.text, processor.processSync(post?.text)) : ''}
      <Formik
         initialValues={{
           text: post?.text ? processor.processSync(post?.text).result : '',

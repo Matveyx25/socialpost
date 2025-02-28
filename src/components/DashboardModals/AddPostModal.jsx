@@ -83,6 +83,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 		}
 
 		createPost(data);
+		
   };
 
 	function slateValueValidator(content) {

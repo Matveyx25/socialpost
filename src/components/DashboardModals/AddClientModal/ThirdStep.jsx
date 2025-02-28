@@ -47,7 +47,6 @@ export const ThirdStep = ({isEdit}) => {
 											value={value}
 											isMulti={false}
 											setSelectedOption={(v) => {
-												console.log(name);
 												setFieldValue("agencyInfo.advertiserType", v.value)
 											}}
 										/>

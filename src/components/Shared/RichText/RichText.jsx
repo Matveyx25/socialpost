@@ -44,7 +44,7 @@ export const RichText = memo(({name, label, required, withInfo}) => {
 				<Slate 	editor={editor} 
 								value={value}
 								name={name}
-								onChange={(v) => console.log(v) || setValue(v)} 
+								onChange={(v) => setValue(v)} 
 								initialValue={value || [{
 									type: 'paragraph',
 									children: [{ text: '' }],

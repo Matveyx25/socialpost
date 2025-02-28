@@ -25,7 +25,7 @@ export const EditClientContractModal = ({ isOpen, setOpen, modalParams }) => {
   return (
     <Modal
       {...{ isOpen, setOpen }}
-      title={`Редактировать договор ` + contract?.id}
+      title={`Редактировать договор`}
       name={"edit-client-contract"}
     >
 			{isFetching ? 

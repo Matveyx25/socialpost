@@ -39,8 +39,6 @@ export const FilterModal = ({isOpen, setOpen, onFilterSubmit, maxSubscribersNumb
 		const price = +el.price.replace(/\s/g, '');
 		const type = el.type;
 
-		console.log(selectedTypes, type, selectedTypes.findIndex(i => i.value === type) !== -1);
-
 		return (
 			(minSubscribers === undefined || subscribers >= +minSubscribers) &&
 			(maxSubscribers === undefined || subscribers <= +maxSubscribers) &&
