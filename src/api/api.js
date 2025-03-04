@@ -277,6 +277,7 @@ export const advertiser = {
 				"type": "NEW_POST",
 				"kktu": data.kktu,
 				"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
+				"content": data?.content,
 				"postUploadsIds": fileIds,
 				"markingType": data.markingType,
 				"cpmTags": data?.cpmTags,
@@ -327,6 +328,7 @@ export const advertiser = {
 					"name": data.name,
 					"type": data.type,
 					"kktu": data.kktu,
+					"content": data?.content,
 					"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
 					"postUploadsIds": fileIds,
 					"markingType": data.markingType
@@ -370,6 +372,7 @@ export const advertiser = {
 
 		return instance.put('/campaigns/posts/' + data.id + '/content' , {
 			"text": data.text.replaceAll('<br>', '').replaceAll('&lt;', '<').replaceAll('&gt;', '>'),
+			"content": data?.content,
 			"postUploadsIds": fileIds,
 			"markingType": data.markingType,
 			"kktu": data.kktu,

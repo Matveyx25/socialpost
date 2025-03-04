@@ -78,7 +78,7 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
 				}
 			}else{
 				const markdownContent = values.text.map(el => serialize(el)).join('')
-				data = {...values, text: markdownContent, files}
+				data = {...values, text: markdownContent, content: values.text, files}
 			}
 		}
 

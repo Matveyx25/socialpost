@@ -9,17 +9,13 @@ import { Upload } from "../Shared/Upload/Upload";
 
 import { usePost } from "../../hooks/usePost";
 
-import {unified} from 'unified';
-import markdown from 'remark-parse';
 import { useUpdatePostContent } from '../../hooks/useUpdatePostContent';
 import { Button } from "../Shared/Button/Button";
-import slate, { serialize } from '@st.matthew/remark-slate';
-import deserialize from '../../helpers/deserialize'
+import { serialize } from '@st.matthew/remark-slate';
 import { Node } from "slate";
 import { Select } from "../Shared/Select/Select";
 import { kktuOptions } from "../../options/kktu";
 
-const processor = unified().use(markdown).use(deserialize).use(slate)
 
 export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [files, setFiles] = useState([]);
@@ -35,7 +31,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 		let data = null
 		
 		const markdownContent = values.text.map(el => serialize(el)).join('')
-		data = {id: modalParams?.editPostId, text: markdownContent, files, kktu: values.kktu, markingType: values.markingType}
+		data = {id: modalParams?.editPostId, text: markdownContent, content: values.text, files, kktu: values.kktu, markingType: values.markingType}
 
 		updatePost(data);
     setOpen();
@@ -81,7 +77,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
     >
      <Formik
         initialValues={{
-          text: post?.text ? processor.processSync(post?.text).result : '',
+          text: post?.content ? post?.content : '',
           markingType: post?.markingType ? post.markingType : '',
           id: modalParams?.editPostId,
 					kktu: post?.kktu ? post.kktu : ''

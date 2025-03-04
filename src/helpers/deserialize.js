@@ -33,6 +33,13 @@ export function deserializeToHTML() {
 function underlinePlugin() {
   return (tree) => {
     visit(tree, 'text', (node, index, parent) => {
+			if(!node?.type){
+				const newNode = {
+					type: 'paragraph',
+					children: [{ text: node.value }],
+				};
+				parent.children.splice(index, 1, newNode);
+			}
       if(isSpoilers(node.value) || isUnderline(node.value)){
 				const parts = node.value.split(' ')
 				
