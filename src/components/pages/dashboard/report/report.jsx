@@ -17,6 +17,23 @@ export const Report = () => {
 	const {data: request} = usePublishersRequestById(requestId)
 	const {mutate: accept} = usePublisherAcceptRequest()
 
+
+  function formatDate(input) {
+    if (!input) {
+      return "-";
+    }
+    const date = new Date(input);
+
+    return date.toLocaleTimeString("ru-RU", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+  }
+
 	return (
 		<div className={s.grid}>
 			<div className={s.colSm}>
@@ -58,7 +75,7 @@ export const Report = () => {
 						</div>
 						<div>
 							<p>Дата публикации</p>
-							<span>{request?.publishStartDate}</span>
+							<span>{formatDate(request?.publishTime)}</span>
 						</div>
 						<div>
 							<p>Дата выполнения</p>

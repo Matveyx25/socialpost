@@ -22,6 +22,7 @@ import { Node } from "slate";
 import { kktuOptions } from "../../options/kktu";
 import { useSettings } from '../../hooks/useSettings';
 import { useQueryClient } from "@tanstack/react-query";
+import { markingOptions } from "../../options/markingOptions";
 
 export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -99,13 +100,6 @@ export const AddPostModal = ({ isOpen, setOpen, modalParams }) => {
   const typeOptions = [
 		{value: 'NEW_POST', label: "Новая запись",},
 		{value: 'REPOST', label: 'Репост'}
-  ];
-
-  const markingOptions = [
-		{value: 'NONE', label: "Не размещать",},
-		{value: 'IN_TEXT', label: 'В тексте записи'},
-		{value: 'IN_VIDEO', label: 'В видео'},
-		{value: 'IN_PHOTO', label: 'На фотографиях'}
   ];
 
 	const renderFilePreviews = () => {

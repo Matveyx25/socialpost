@@ -15,12 +15,46 @@ import { serialize } from '@st.matthew/remark-slate';
 import { Node } from "slate";
 import { Select } from "../Shared/Select/Select";
 import { kktuOptions } from "../../options/kktu";
+import { markingOptions } from "../../options/markingOptions";
 
+const filterMarkingOptions = (files) => {
+  if (!files || files.length === 0) return [
+		{value: 'NONE', label: "Не размещать",},
+		{value: 'IN_TEXT', label: 'В тексте записи'},
+	];
+
+  const hasImage = files.some(file => file.type.includes('image'));
+  const hasVideo = files.some(file => file.type.includes('video'));
+
+  if (hasImage) {
+		if(hasVideo){
+			return markingOptions;
+		}
+		return [
+      {value: 'NONE', label: "Не размещать",},
+      {value: 'IN_TEXT', label: 'В тексте записи'},
+      {value: 'IN_PHOTO', label: 'На фотографиях'},
+    ];
+  } else if (hasVideo) {
+    return [
+      {value: 'NONE', label: "Не размещать",},
+      {value: 'IN_TEXT', label: 'В тексте записи'},
+      {value: 'IN_VIDEO', label: 'В видео'},
+    ];
+  } else {
+    return [
+      {value: 'NONE', label: "Не размещать",},
+      {value: 'IN_TEXT', label: 'В тексте записи'},
+    ];
+  }
+};
 
 export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [files, setFiles] = useState([]);
 
 	const onUpload = (files) => {
+		console.log(files);
+		
     setFiles(files)
   }
 
@@ -63,6 +97,9 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 			));
 	};
 
+	const hasImage = files.some(file => file.type.includes('image'));
+	const hasVideo = files.some(file => file.type.includes('video'));
+
 	useEffect(() => {
 		if(post?.uploads){
 			setFiles(post.uploads)
@@ -78,7 +115,7 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
      <Formik
         initialValues={{
           text: post?.content ? post?.content : '',
-          markingType: post?.markingType ? post.markingType : '',
+          markingType: post?.markingType || 'NONE',
           id: modalParams?.editPostId,
 					kktu: post?.kktu ? post.kktu : ''
         }}
@@ -118,6 +155,29 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 											)}
 										</Field>
 								</div>
+                {files && <div className={s.input}>
+									<Field name="markingType">
+										{({ field: { value }, form: { setFieldValue } }) => (
+											<Select
+												label={"Где разместить маркировку"}
+												id="markingType"
+												name="markingType"
+												options={markingOptions.filter(o => {
+													if(o.value === "IN_TEXT" || o.value === 'NONE') return o
+													if(o.value === "IN_PHOTO" && hasImage) return o
+													if(o.value === "IN_VIDEO" && hasVideo) return o
+												})}
+												placeholder={"Маркировка"}
+												fullWidth={true}
+												isMulti={false}
+												value={value}
+												setSelectedOption={(v) => {
+													setFieldValue("markingType", v.value);
+												}}
+											/>
+										)}
+									</Field>
+								</div>}
                 <div className={s.input}>
                   <RichText name={"text"} label={"Текст записи"} />
                 </div>

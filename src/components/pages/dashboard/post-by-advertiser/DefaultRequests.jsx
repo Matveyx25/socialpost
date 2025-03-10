@@ -25,34 +25,40 @@ export const DefaultRequests = ({ post, postId }) => {
       id: 0,
     },
     {
-      label: "Ожидают публикации",
+      label: "Ожидают подтверждения",
       count: post?.pendingRequestsCount,
       value: "PENDING",
       id: 1,
     },
     {
+      label: "Ожидают публикации",
+      count: post?.acceptedRequestsCount,
+      value: "ACCEPTED",
+      id: 2,
+    },
+    {
       label: "Активные",
       count: post?.activeRequestsCount,
       value: "ACTIVE",
-      id: 2,
+      id: 3,
     },
     {
       label: "Выполненные",
       count: post?.completedRequestsCount,
       value: "COMPLETED",
-      id: 3,
+      id: 4,
     },
     {
       label: "Отклоненные",
       count: post?.declinedRequestsCount,
       value: "DECLINED",
-      id: 4,
+      id: 5,
     },
     {
       label: "Просроченные",
       count: post?.expiredRequestsCount,
       value: "EXPIRED",
-      id: 5,
+      id: 6,
     },
   ];
 
