@@ -17,38 +17,6 @@ import { Select } from "../Shared/Select/Select";
 import { kktuOptions } from "../../options/kktu";
 import { markingOptions } from "../../options/markingOptions";
 
-const filterMarkingOptions = (files) => {
-  if (!files || files.length === 0) return [
-		{value: 'NONE', label: "Не размещать",},
-		{value: 'IN_TEXT', label: 'В тексте записи'},
-	];
-
-  const hasImage = files.some(file => file.type.includes('image'));
-  const hasVideo = files.some(file => file.type.includes('video'));
-
-  if (hasImage) {
-		if(hasVideo){
-			return markingOptions;
-		}
-		return [
-      {value: 'NONE', label: "Не размещать",},
-      {value: 'IN_TEXT', label: 'В тексте записи'},
-      {value: 'IN_PHOTO', label: 'На фотографиях'},
-    ];
-  } else if (hasVideo) {
-    return [
-      {value: 'NONE', label: "Не размещать",},
-      {value: 'IN_TEXT', label: 'В тексте записи'},
-      {value: 'IN_VIDEO', label: 'В видео'},
-    ];
-  } else {
-    return [
-      {value: 'NONE', label: "Не размещать",},
-      {value: 'IN_TEXT', label: 'В тексте записи'},
-    ];
-  }
-};
-
 export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
   const [files, setFiles] = useState([]);
 
@@ -97,14 +65,16 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 			));
 	};
 
-	const hasImage = files.some(file => file.type.includes('image'));
-	const hasVideo = files.some(file => file.type.includes('video'));
-
 	useEffect(() => {
 		if(post?.uploads){
 			setFiles(post.uploads)
 		}
 	}, [post])
+
+
+	const hasType = (type) => {
+		files.some(file => file?.type?.includes(type));
+	}
 
   return (
     <Modal
@@ -164,8 +134,8 @@ export const EditPostModal = ({ isOpen, setOpen, modalParams }) => {
 												name="markingType"
 												options={markingOptions.filter(o => {
 													if(o.value === "IN_TEXT" || o.value === 'NONE') return o
-													if(o.value === "IN_PHOTO" && hasImage) return o
-													if(o.value === "IN_VIDEO" && hasVideo) return o
+													if(o.value === "IN_PHOTO" && hasType('image')) return o
+													if(o.value === "IN_VIDEO" && hasType('video')) return o
 												})}
 												placeholder={"Маркировка"}
 												fullWidth={true}
