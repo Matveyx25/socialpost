@@ -84,6 +84,13 @@ export const ChannelEdit = (props) => (
 				</Typography>
 				<SelectInput label="Статус" source="status" choices={[{ id: 'NOT_CONFIRMED', name: 'НЕ ПОДТВЕРЖДЕН' },{ id: 'CONFIRMED', name: 'ПОДТВЕРЖДЕН' }]} fullWidth/>
 				<hr />
+				<Typography variant="h6" gutterBottom>
+						ОРД
+				</Typography>
+				<Labeled fullWidth>
+					<TextField label="ОРД ID" source="ordPadId"/>
+				</Labeled>
+				<BooleanInput label="ОРД подтверждено" source="isOrdConfirmed"/>
 		</SimpleForm>
   </Edit>
 );

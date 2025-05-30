@@ -50,7 +50,7 @@ export const UserEdit = (props) => {
 								<TextInput disabled source="balance" fullWidth label="Баланс"/>
 							</Box>
 					</Box>
-					{!!user?.email && <>
+					{!!user?.emailData && <>
 						<hr />
 						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 								<Box flex={1}>
@@ -58,7 +58,7 @@ export const UserEdit = (props) => {
 											e.preventDefault()
 											e.stopPropagation()
 
-											auth.restorePassword({email: user?.email})
+											auth.restorePassword({email: user?.emailData.email})
 										}}/>
 								</Box>
 						</Box>

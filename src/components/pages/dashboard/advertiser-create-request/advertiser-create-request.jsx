@@ -14,16 +14,19 @@ import { Field, Form, Formik } from "formik";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 import { formatToISO } from "../../../../helpers/formatToISO";
+import { usePost } from '../../../../hooks/usePost';
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
   const { postId } = useParams();
-  const [filters, setFilters] = useState(null);
   const [dateRange, setDateRange] = useState([null, null]);
   const [timeRange, setTimeRange] = useState(["00:00", "00:00"]);
+	const {data: post} = usePost(postId)
+
+	const [filters, setFilters] = useState(null);
 	
-  const { data: channels, isFetched, refetch } = useChannels({ ...filters });
+  const { data: channels, isFetched, refetch } = useChannels({ ...filters, price_type: post?.campaignType });
   const { mutate: createRequest } = useAddPostRequest();
   const { mutate: createRequestsAll } = useAddPostAllRequests();
 
