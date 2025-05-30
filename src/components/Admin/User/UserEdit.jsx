@@ -1,8 +1,14 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm, BooleanInput } from "react-admin";
+import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm, BooleanInput, Button, useGetOne, email } from "react-admin";
+import { auth } from "../../../api/api";
+import { useParams } from "react-router-dom";
 
 export const UserEdit = (props) => {
+	const {id} = useParams()
+		
+		const { data: user } = useGetOne('users', {id})
+
 	return (
 		<Edit {...props} actions={
 			<TopToolbar>
@@ -21,6 +27,8 @@ export const UserEdit = (props) => {
 							</Box>
 					</Box>
 					<TextInput type="email" source="emailData.email" isRequired fullWidth label="Почта"/>
+					<hr />
+
 					<hr />
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1}>
@@ -42,6 +50,19 @@ export const UserEdit = (props) => {
 								<TextInput disabled source="balance" fullWidth label="Баланс"/>
 							</Box>
 					</Box>
+					{!!user?.email && <>
+						<hr />
+						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
+								<Box flex={1}>
+										<Button label="Сбросить пароль" onClick={(e) => {
+											e.preventDefault()
+											e.stopPropagation()
+
+											auth.restorePassword({email: user?.email})
+										}}/>
+								</Box>
+						</Box>
+					</>}
 				</Box>
 			</SimpleForm>
 		</Edit>
