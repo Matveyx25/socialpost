@@ -3,11 +3,13 @@ import * as React from "react";
 import { Edit, TextInput, SelectArrayInput, TopToolbar, PrevNextButtons, SimpleForm, BooleanInput, Button, useGetOne, email } from "react-admin";
 import { auth } from "../../../api/api";
 import { useParams } from "react-router-dom";
+import { Modal } from '../../Shared/Modal/Modal';
 
 export const UserEdit = (props) => {
-	const {id} = useParams()
-		
-		const { data: user } = useGetOne('users', {id})
+	const {id} = useParams()	
+	const { data: user } = useGetOne('users', {id})
+
+	const [isOpen, setIsOpen] = React.useState(null)
 
 	return (
 		<Edit {...props} actions={
@@ -15,6 +17,23 @@ export const UserEdit = (props) => {
 					<PrevNextButtons />
 			</TopToolbar>
 		}>
+			<Modal isOpen={isOpen} name="confirm" setOpen={setIsOpen}>
+					<Typography variant="h4" gutterBottom>
+								Вы точно хотите сбросить пароль у пользователя?
+						</Typography>
+					<Box sx={{ maxWidth: 800 }}>
+						<Button label="Отмена" onClick={(e) => {
+							setIsOpen(null)
+						}}/>
+						<Button label="Сбросить" onClick={(e) => {
+							e.preventDefault()
+							e.stopPropagation()
+
+							auth.restorePassword({email: user?.emailData.email})
+							setIsOpen(null)
+						}}/>
+					</Box>
+			</Modal>
 			<SimpleForm>
 				<Box sx={{ maxWidth: 800 }}>
 					<TextInput source="photoUrl" fullWidth label="Аватар пользователя"/>
@@ -57,7 +76,7 @@ export const UserEdit = (props) => {
 											e.preventDefault()
 											e.stopPropagation()
 
-											auth.restorePassword({email: user?.emailData.email})
+											setIsOpen('confirm')
 										}}/>
 								</Box>
 						</Box>
