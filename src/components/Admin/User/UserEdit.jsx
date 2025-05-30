@@ -28,8 +28,6 @@ export const UserEdit = (props) => {
 					</Box>
 					<TextInput type="email" source="emailData.email" isRequired fullWidth label="Почта"/>
 					<hr />
-
-					<hr />
 					<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 							<Box flex={1}>
 								<Typography variant="h6" gutterBottom>
@@ -50,6 +48,7 @@ export const UserEdit = (props) => {
 								<TextInput disabled source="balance" fullWidth label="Баланс"/>
 							</Box>
 					</Box>
+					{console.log(user?.emailData)}
 					{!!user?.emailData && <>
 						<hr />
 						<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
