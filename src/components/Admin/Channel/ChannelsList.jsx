@@ -25,6 +25,7 @@ const renderPhoto = (record) => {
 };
 
 const renderStatus = (record) => record.status === 'CONFIRMED' ? <IconCheck/> : <IconX/>
+const renderOrdStatus = (record) => record.isOrdConfirmed ? <IconCheck/> : <IconX/>
 
 export const ChannelsList = (props) => (
   <List {...props} exporter={false} empty={<CustomEmpty message={'Каналов нет'}/>} pagination={<PostPagination/>}>
@@ -37,6 +38,7 @@ export const ChannelsList = (props) => (
       <TextField source="averagePostReach" label="Средний охват поста"/>
 			<FunctionField label="Фото" source="imageUrl" render={renderPhoto}/>
     	<FunctionField label="Подтвержден" source="status" render={renderStatus}/>
+    	<FunctionField label="ОРД подтвержден" source="isOrdConfirmed" render={renderOrdStatus}/>
 			<FunctionField label="Тэги" source="tags" render={renderTags}/>
 			<UrlField label="Ссылка" source="telegramUrl"/>
     </Datagrid>
