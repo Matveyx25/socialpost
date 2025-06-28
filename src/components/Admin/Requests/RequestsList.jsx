@@ -25,7 +25,7 @@ export const RequestsList = (props) => {
 			{ id: "EXPIRED", name: "Просроченные" },
 		]}
 	/> ]}>
-    <Datagrid  bulkActionButtons={false} rowClick="edit">
+    <Datagrid  bulkActionButtons={true} rowClick="edit">
 			<TextField source="id" />
 			<TextField source="channelName" label="Название канала"/>
 			<TextField source="postName" label="Пост"/>

@@ -18,6 +18,7 @@ import {
     IconUser,
     IconDeviceMobileMessage,
 		IconBell,
+		IconClock,
 } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
@@ -31,6 +32,9 @@ import { AdvertiserClientsMainList } from "./AdvertiserClients/AdvertiserClients
 import { RequestsList } from "./Requests/RequestsList";
 import { RequestsEdit } from "./Requests/RequestsEdit";
 import { AdvertiserPostsTabs } from './AdvertiserPosts/AdvertiserPostsTabs';
+import { DurationsList } from "./Durations/DurationsList";
+import { DurationEdit } from './Durations/DurationEdit';
+import { DurationCreate } from './Durations/DurationCreate';
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -89,6 +93,7 @@ const AdminPanel = () => (
     <Resource name="campaigns/posts/requests" list={RequestsList} edit={RequestsEdit} options={{ label: 'Заявки на размещение' }} icon={IconBell}/>
     <Resource name="campaigns/clients" list={AdvertiserClientsMainList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsTabs} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
+    <Resource name="campaigns/posts/durations" list={DurationsList} edit={DurationEdit} create={DurationCreate} options={{ label: 'Типы размещения' }} icon={IconClock}/>
   </Admin>
 );
 

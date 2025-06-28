@@ -492,3 +492,18 @@ export const admin = {
 		return instance.get('/users/' + userId + types[type] + 'agreement', { responseType: 'blob' })
 	}
 }
+
+export const durations = {
+	getAll() {
+		return instance.get('/campaigns/posts/durations')
+	},
+	create(data) {
+		return instance.post('/campaigns/posts/durations', data)
+	},
+	getById(id) {
+		return instance.get('/campaigns/posts/durations/' + id)
+	},
+	update(id, data) {
+		return instance.put('/campaigns/posts/durations/' + id, data)
+	}
+}
