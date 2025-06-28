@@ -2,8 +2,9 @@ import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@mui/material';
 import Inbox from '@mui/icons-material/Inbox';
+import { CreateButton } from 'react-admin';
 
-export const CustomEmpty = ({message}) => {
+export const CustomEmpty = ({message, createBtn}) => {
 
     return (
         <Root>
@@ -12,6 +13,7 @@ export const CustomEmpty = ({message}) => {
                 <Typography variant="h4" paragraph>
                     {message}
                 </Typography>
+								{createBtn ? <CreateButton label={createBtn}/> : ''}
             </div>
         </Root>
     );
