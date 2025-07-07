@@ -468,11 +468,7 @@ export const advertiser = {
 
 export const channels = {
 	getAllChannels(params) {
-		return instance.get('/channels', {params}).then(res => {
-			console.log(res.headers['x-total-count']);
-			
-			return res
-		})
+		return instance.get('/channels', {params})
 	},
 	getAllTags() {
 		return instance.get('/channels/tags')

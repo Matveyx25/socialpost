@@ -45,6 +45,10 @@
 	}
 }
 
+.card{
+	max-height: fit-content;
+}
+
 .cardHeader{
 	display: flex;
 	align-items: center;
@@ -105,7 +109,7 @@
 	gap: 1.25rem;
 	flex-grow: 1;
 	overflow-x: hidden;
-	height: fit-content;
+	// height: fit-content;
 }
 
 .grid{
@@ -245,7 +249,7 @@
 		width: 100%;
 		box-sizing: border-box;
 		background: #FFF;
-		overflow: hidden;
+		// overflow: hidden;
 		thead th{
 			text-align: left;
 			padding: 0.75rem 1rem;
@@ -332,11 +336,11 @@
 		}
 		tbody{
 			width: 100%;
-			overflow-y: auto;
+			// overflow-y: auto;
 			display: block;
 			max-height: calc(100% - 80px);
 			height: fit-content;
-			overflow: auto;
+			// overflow: auto;
 		}
 	}
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { DashboardCard } from "../dashboard-card";
 import { Button } from "../../../Shared/Button/Button";
 import { useParams } from "react-router-dom";
@@ -21,6 +21,15 @@ import Dropdown from 'react-dropdown';
 import { useAllDurations } from "../../../../hooks/durations";
 import { transformDuration } from '../../../../helpers/transformDuratuin';
 
+function removeNullAttributes(obj) {
+  return Object.entries(obj).reduce((acc, [key, value]) => {
+    if (value !== null) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
+}
+
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(30);
@@ -31,6 +40,7 @@ export const AdvertiserCreateRequest = () => {
 	const {data: durations} = useAllDurations()
 
   const [selectedFormat, setSelectedFormat] = useState();
+  const [channelSelectedFormat, setChannelSelectedFormat] = useState([]);
 
 	const [filters, setFilters] = useState(null);
 	
@@ -38,7 +48,7 @@ export const AdvertiserCreateRequest = () => {
   const { mutate: createRequest } = useAddPostRequest();
   const { mutate: createRequestsAll } = useAddPostAllRequests();
 
-  const onFilterSubmit = (f) => {
+  const onFilterSubmit = (f) => {		
     setFilters({
       subscribers_min: f?.minSubscribers,
       subscribers_max: f?.maxSubscribers,
@@ -49,7 +59,7 @@ export const AdvertiserCreateRequest = () => {
       price_min: f?.minPrice,
       price_max: f?.maxPrice,
       name: f?.search,
-			durations_ids: selectedFormat?.map(_ => _.value) || []
+			durations_ids: selectedFormat?.value
     });
     refetch();
   };
@@ -63,11 +73,12 @@ export const AdvertiserCreateRequest = () => {
         publish_end_time: timeRange[1],
         publish_start_date: formatToISO(dateRange[0])?.slice(0, 10),
         publish_end_date: formatToISO(dateRange[1])?.slice(0, 10),
+				durationId: selectedFormat?.value
       });
     }
   };
 
-  const request = (id) => {
+  const request = (id, durationId) => {
     createRequest({
       id: postId,
       data: {
@@ -76,6 +87,7 @@ export const AdvertiserCreateRequest = () => {
         publishEndDate: formatToISO(dateRange[1])?.slice(0, 10),
         publishStartTime: timeRange[0],
         publishEndTime: timeRange[1],
+				durationId
       },
     });
   };
@@ -84,7 +96,7 @@ export const AdvertiserCreateRequest = () => {
 	!dateRange[1] ||
 	!timeRange[0] ||
 	!timeRange[1] || 
-	+(timeRange[0].replace(':', '')) > +(timeRange[1].replace(':', ''))
+	+(timeRange[0].replace(':', '')) > +(timeRange[1].replace(':', '')) || !selectedFormat
 
   return (
     <div className={s.grid}>
@@ -156,8 +168,9 @@ export const AdvertiserCreateRequest = () => {
 													e.preventDefault();
 													e.stopPropagation();
 													values.checkboxes.forEach(el => {
-														request(el)
+														request(el, channelSelectedFormat?.find(_ => _.id === el)?.value)
 													})
+													
 													setFieldValue("checkboxes", []);
 												}}
 											/>
@@ -181,7 +194,7 @@ export const AdvertiserCreateRequest = () => {
                     <tbody>
                       {isFetched ? (
                         channels?.data.map((el, index) => (
-                          <Channel {...{el, index, disabled, request}}/>
+                          <Channel {...{el, index, disabled, request, setChannelSelectedFormat, channelSelectedFormat}} formatId={selectedFormat ? selectedFormat.value : null}/>
                         ))
                       ) : (
                         <Loader />
@@ -208,7 +221,7 @@ export const AdvertiserCreateRequest = () => {
 };
 
 
-const Channel = ({el, index, disabled, request, formatId = 2}) => {
+const Channel = ({el, index, disabled, request, formatId = 2, setChannelSelectedFormat, channelSelectedFormat}) => {
 	const prices = el?.prices?.map((el) => ({
 		enabled: true,
 		label: `${transformDuration(el?.duration)} - ${priceSeparator(el.price)}руб.`,
@@ -220,13 +233,34 @@ const Channel = ({el, index, disabled, request, formatId = 2}) => {
 		{enabled: el?.nativePostPriceEnabled, label: `Нативный - ${priceSeparator(el?.nativePostPrice)}руб.`, value: null, price: el?.nativePostPrice},
 		...prices
 	] : []
-
+	
 	const [defaultFormat] = useState(formatId ? (formats?.find(_ => _.value === formatId) || null) : null)
 
 	const [selectedFormat, setSelectedFormat] = useState(
 		defaultFormat ? { value: defaultFormat?.value, label: defaultFormat?.label } :
 		{ value: formats[0]?.value, label: formats[0]?.label }
 	);
+
+	useEffect(() => {
+		if(!channelSelectedFormat?.find(_ => _.id === el.id) && formats){
+			setChannelSelectedFormat(prev =>  prev?.length ? [...prev, {id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}] : [{id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}])
+		}
+	}, [defaultFormat, formats])
+	
+	const update = (v) => {
+		setSelectedFormat(v)
+		setChannelSelectedFormat(prev => {
+			if(prev.find(_ => _.id === el.id)){
+				return prev.map(_ => {
+					if(_.id === el.id){
+						return {id: el.id, value: v.value}
+					}
+					return _
+				})
+			}
+			return prev?.length ? [...prev, {id: el.id, value: v.value}] : [{id: el.id, value: v.value}]
+		})
+	}
 
 	return (
 		<tr key={el.id}>
@@ -283,7 +317,7 @@ const Channel = ({el, index, disabled, request, formatId = 2}) => {
 									label: _.label,
 								}))}
 								className={s.formats}
-								onChange={setSelectedFormat}
+								onChange={update}
 								arrowClosed={<IconChevronDown size={18} />}
 								arrowOpen={<IconChevronUp size={18} />}
 							/>
@@ -299,7 +333,7 @@ const Channel = ({el, index, disabled, request, formatId = 2}) => {
 							onClick={(e) => {
 								e.preventDefault();
 								e.stopPropagation();
-								request(el.id);
+								request(el.id, selectedFormat?.value);
 							}}
 						/>
 				</div>

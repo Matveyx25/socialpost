@@ -69,17 +69,23 @@ export const Filters = ({onFilterSubmit, timeRange, setTimeRange, selectedFormat
 							className={s.input}
 						/>
 					</div>
-					{durations?.length > 0 && <Dropdown
-						value={selectedFormat}
-						options={durations?.map((_) => ({
-							value: _.id,
-							label: transformDuration(_),
-						}))}
-						className={s.formats}
-						onChange={setSelectedFormat}
-						arrowClosed={<IconChevronDown size={18} />}
-						arrowOpen={<IconChevronUp size={18} />}
-					/>}
+					{durations?.length > 0 && <div className={s.dropdownWrapper}>
+							<span className={s.label}>
+								Формат размещения
+							</span>
+							<Dropdown
+								value={selectedFormat}
+								options={durations?.map((_) => ({
+									value: _.id,
+									label: transformDuration(_),
+								}))}
+								placeholder={'Выберите формат...'}
+								className={s.formats}
+								onChange={setSelectedFormat}
+								arrowClosed={<IconChevronDown size={18} />}
+								arrowOpen={<IconChevronUp size={18} />}
+							/>
+					</div>}
 					<InputField
 						placeholder={"0"}
 						label={"Подписчиков, от"}
