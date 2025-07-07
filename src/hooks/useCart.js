@@ -21,7 +21,8 @@ const token = localStorage.getItem('token');
 			if (!token) {
 				return data
 			}
-			return data.data.map(el => ({id: el.channelId, count: el.count, price: el.price, format: el.format}))
+			
+			return data.data.map(el => ({id: el.channelId, count: el.count, price: el?.price, format: el?.duration?.id}))
 		}
  })
 }

@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import * as React from "react";
-import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, Labeled, ArrayInput, SimpleFormIterator, BooleanInput } from "react-admin";
+import { Edit, SimpleForm, TextInput, TextField, SelectInput, TopToolbar, PrevNextButtons, ShowButton, Labeled, ArrayInput, SimpleFormIterator, BooleanInput, useRecordContext } from "react-admin";
+import { transformDuration } from "../../../helpers/transformDuratuin";
 
 export const ChannelEdit = (props) => (
 		<Edit {...props}  actions={
@@ -8,7 +9,15 @@ export const ChannelEdit = (props) => (
 					<PrevNextButtons />
 			</TopToolbar>
 	}>
-			<SimpleForm sx={{ maxWidth: 800 }}>
+		<Form/>
+  </Edit>
+);
+
+const Form = (props) => {
+	const record = useRecordContext()
+
+	return (
+		<SimpleForm sx={{ maxWidth: 800 }}>
 				<TextInput source="name" label="Имя" fullWidth/>
 				<Labeled fullWidth>
 					<TextInput source="description" label="Описание" fullWidth/>
@@ -64,18 +73,11 @@ export const ChannelEdit = (props) => (
 								<TextInput source="nativePostPrice" placeholder="0" label="Нативное размещение" fullWidth />
 								<BooleanInput label="Показывать" source="nativePostPriceEnabled"/>
 						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post1For24Price" placeholder="0" label="1/24" fullWidth />
-								<BooleanInput label="Показывать" source="post1For24PriceEnabled"/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post1For48Price" placeholder="0" label="1/48" fullWidth />
-								<BooleanInput label="Показывать" source="post1For48PriceEnabled"/>
-						</Box>
-						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
-								<TextInput source="post2For48Price" placeholder="0" label="2/48" fullWidth />
-								<BooleanInput label="Показывать" source="post2For48PriceEnabled"/>
-						</Box>
+						{record?.prices?.map((price, index) => (
+							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+									<TextInput source={`prices[${index}].price`} placeholder="0" label={transformDuration(price?.duration)} fullWidth />
+							</Box>
+						))}
 				</Box>
 				<hr />
 				
@@ -92,5 +94,5 @@ export const ChannelEdit = (props) => (
 				</Labeled>
 				<BooleanInput label="ОРД подтверждено" source="isOrdConfirmed"/>
 		</SimpleForm>
-  </Edit>
-);
+	)
+}

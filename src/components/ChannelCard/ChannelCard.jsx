@@ -29,15 +29,15 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
   const [selectedFormat, setSelectedFormat] = useState(
     inCart
       ? {
-          value: inCart.format,
-          label: formats.find((el) => el.value === inCart.format)?.label,
+          value: inCart.format || null,
+          label: inCart.format ? formats.find((el) => el.value === inCart.format)?.label : 'Нативный',
         }
       : { value: formats[0]?.value, label: formats[0]?.label }
   );
 
   const addToCart = () => {
     set_inCart(true);
-    updateCart([...cart, { id, count: 1, format: selectedFormat.value, price: formats.find((el) => el.value === selectedFormat.value)?.price}]);
+    updateCart([...(cart || []), { id, count: 1, format: selectedFormat.value, price: formats.find((el) => el.value === selectedFormat.value)?.price}]);
   };
 
   const removeFromCart = () => {
@@ -50,12 +50,14 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
   }, [cart]);
 
   useEffect(() => {
+		// updateCart([]);
     setSelectedFormat(
       inCart
-        ? {
-            value: inCart.format,
-            label: formats.find((el) => el.value === inCart.format)?.label,
-          }
+        ? (console.log(inCart.format, formats) ||
+					{
+            value: inCart.format || null,
+          label: inCart.format ? formats.find((el) => el.value === inCart.format)?.label : 'Нативный',
+          })
         : { value: formats[0]?.value, label: formats[0]?.label }
     );
   }, [inCart]);

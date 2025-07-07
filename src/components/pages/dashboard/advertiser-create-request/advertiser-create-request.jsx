@@ -15,6 +15,11 @@ import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 import { formatToISO } from "../../../../helpers/formatToISO";
 import { usePost } from '../../../../hooks/usePost';
+import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronUp } from "@tabler/icons-react";
+import Dropdown from 'react-dropdown';
+import { useAllDurations } from "../../../../hooks/durations";
+import { transformDuration } from '../../../../helpers/transformDuratuin';
 
 export const AdvertiserCreateRequest = () => {
   const [page, setPage] = useState(1);
@@ -23,6 +28,9 @@ export const AdvertiserCreateRequest = () => {
   const [dateRange, setDateRange] = useState([null, null]);
   const [timeRange, setTimeRange] = useState(["00:00", "00:00"]);
 	const {data: post} = usePost(postId)
+	const {data: durations} = useAllDurations()
+
+  const [selectedFormat, setSelectedFormat] = useState();
 
 	const [filters, setFilters] = useState(null);
 	
@@ -41,6 +49,7 @@ export const AdvertiserCreateRequest = () => {
       price_min: f?.minPrice,
       price_max: f?.maxPrice,
       name: f?.search,
+			durations_ids: selectedFormat?.map(_ => _.value) || []
     });
     refetch();
   };
@@ -84,7 +93,7 @@ export const AdvertiserCreateRequest = () => {
           <Filters
             onFilterSubmit={onFilterSubmit}
             maxSubscribersNumber={100000}
-            {...{ dateRange, setDateRange, timeRange, setTimeRange }}
+            {...{ dateRange, setDateRange, timeRange, setTimeRange, durations, selectedFormat, setSelectedFormat }}
           />
         </DashboardCard>
       </div>
@@ -172,76 +181,7 @@ export const AdvertiserCreateRequest = () => {
                     <tbody>
                       {isFetched ? (
                         channels?.data.map((el, index) => (
-                          <tr key={el.id}>
-                            <td className={s.checkTd}>
-                              <Field
-                                name="checkboxes"
-                                type="checkbox"
-                                component={({ field, form }) => (
-                                  <CheckboxField
-                                    {...{ field, form }}
-                                    initValue={el.id}
-                                  />
-                                )}
-                              />
-                            </td>
-                            <td>
-                              <div className={s.center}>
-                                <div className={s.mainInfo}>
-                                  <div className={s.img}>
-                                    <img
-                                      src={
-                                        el?.imageUrl
-                                          ? el?.imageUrl
-                                          : "/images/channel-without-image.svg"
-                                      }
-                                      alt=""
-                                    />
-                                  </div>
-                                  {el.name}
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <div className={s.center}>
-                                {el.costPerView ? el.costPerView + "₽" : "-"}
-                              </div>
-                            </td>
-                            <td>
-                              <div className={s.center}>
-                                {el.subscribersCount}
-                              </div>
-                            </td>
-                            <td>
-                              <div className={s.center}>
-                                {el.averagePostReach || "-"}
-                              </div>
-                            </td>
-                            <td>
-                              <div className={s.center}>
-                                {el.nativePrice || el.basePrice
-                                  ? el.nativePrice
-                                    ? el.nativePrice + "₽"
-                                    : el.basePrice + "₽"
-                                  : "-"}
-                              </div>
-                            </td>
-                            <td>
-                              <div className={s.end}>
-                                  <Button
-                                    size="small"
-                                    theme="secondary"
-                                    label={"Разместить"}
-																		disabled={disabled}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      e.stopPropagation();
-                                      request(el.id);
-                                    }}
-                                  />
-                              </div>
-                            </td>
-                          </tr>
+                          <Channel {...{el, index, disabled, request}}/>
                         ))
                       ) : (
                         <Loader />
@@ -266,3 +206,104 @@ export const AdvertiserCreateRequest = () => {
     </div>
   );
 };
+
+
+const Channel = ({el, index, disabled, request, formatId = 2}) => {
+	const prices = el?.prices?.map((el) => ({
+		enabled: true,
+		label: `${transformDuration(el?.duration)} - ${priceSeparator(el.price)}руб.`,
+		value: el.duration.id,
+		price: el.price,
+	}));
+
+	const formats = el ? [
+		{enabled: el?.nativePostPriceEnabled, label: `Нативный - ${priceSeparator(el?.nativePostPrice)}руб.`, value: null, price: el?.nativePostPrice},
+		...prices
+	] : []
+
+	const [defaultFormat] = useState(formatId ? (formats?.find(_ => _.value === formatId) || null) : null)
+
+	const [selectedFormat, setSelectedFormat] = useState(
+		defaultFormat ? { value: defaultFormat?.value, label: defaultFormat?.label } :
+		{ value: formats[0]?.value, label: formats[0]?.label }
+	);
+
+	return (
+		<tr key={el.id}>
+			<td className={s.checkTd}>
+				<Field
+					name="checkboxes"
+					type="checkbox"
+					component={({ field, form }) => (
+						<CheckboxField
+							{...{ field, form }}
+							initValue={el.id}
+						/>
+					)}
+				/>
+			</td>
+			<td>
+				<div className={s.center}>
+					<div className={s.mainInfo}>
+						<div className={s.img}>
+							<img
+								src={
+									el?.imageUrl
+										? el?.imageUrl
+										: "/images/channel-without-image.svg"
+								}
+								alt=""
+							/>
+						</div>
+						{el.name}
+					</div>
+				</div>
+			</td>
+			<td>
+				<div className={s.center}>
+					{el.costPerView ? el.costPerView + "₽" : "-"}
+				</div>
+			</td>
+			<td>
+				<div className={s.center}>
+					{el.subscribersCount}
+				</div>
+			</td>
+			<td>
+				<div className={s.center}>
+					{el.averagePostReach || "-"}
+				</div>
+			</td>
+			<td>
+				<div className={s.center}>
+							<Dropdown
+								value={selectedFormat}
+								options={formats.map((_) => ({
+									value: _.value,
+									label: _.label,
+								}))}
+								className={s.formats}
+								onChange={setSelectedFormat}
+								arrowClosed={<IconChevronDown size={18} />}
+								arrowOpen={<IconChevronUp size={18} />}
+							/>
+				</div>
+			</td>
+			<td>
+				<div className={s.end}>
+						<Button
+							size="small"
+							theme="secondary"
+							label={"Разместить"}
+							disabled={disabled}
+							onClick={(e) => {
+								e.preventDefault();
+								e.stopPropagation();
+								request(el.id);
+							}}
+						/>
+				</div>
+			</td>
+		</tr>
+	)
+}

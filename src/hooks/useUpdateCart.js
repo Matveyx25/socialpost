@@ -12,7 +12,7 @@ export const useUpdateCart = () => {
 				 queryClient.invalidateQueries(['cart'])
 				 return
 			 }
-			 return profile.updateCart(data.map(el => ({format: el.format, channelId: el.id, count: el.count})));
+			 return profile.updateCart(data.map(el => ({durationId: el.format, channelId: el.id, count: el.count})));
 		},
 		onSuccess: () => {
       queryClient.invalidateQueries(['cart'])

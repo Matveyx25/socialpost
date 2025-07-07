@@ -64,7 +64,7 @@ export const auth = {
 				const pendingCartUpdate = localStorage.getItem('cart');
 				if (pendingCartUpdate) {
 					const cartData = JSON.parse(pendingCartUpdate);
-					profile.updateCart(cartData.map(el => ({format: el.format, channelId: el.id, count: el.count})))
+					profile.updateCart(cartData.map(el => ({durationId: el.format, channelId: el.id, count: el.count})))
 						.then(() => {
 							localStorage.removeItem('cart');
 						})
@@ -468,7 +468,11 @@ export const advertiser = {
 
 export const channels = {
 	getAllChannels(params) {
-		return instance.get('/channels', {params})
+		return instance.get('/channels', {params}).then(res => {
+			console.log(res.headers['x-total-count']);
+			
+			return res
+		})
 	},
 	getAllTags() {
 		return instance.get('/channels/tags')

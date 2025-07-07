@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
 import s from './filter.module.scss'
-import { IconReload, IconSearch } from '@tabler/icons-react';
+import { IconChevronDown, IconChevronUp, IconReload, IconSearch } from '@tabler/icons-react';
 import { Button } from '../../../Shared/Button/Button';
 import { InputField } from '../../../Shared/Input/Input';
 import { Form, Formik } from 'formik';
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar';
 import { TimeRange } from '../../../Shared/RangeCalendar/TimeRange';
+import Dropdown from 'react-dropdown';
+import { transformDuration } from '../../../../helpers/transformDuratuin';
 
-export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, setDateRange}) => {
+export const Filters = ({onFilterSubmit, timeRange, setTimeRange, selectedFormat, durations, setSelectedFormat, dateRange, setDateRange}) => {
 	const [isSended, set_isSended] = useState(false)
 
 	const isMoreThanFiveHoursLeft = () => {
@@ -67,6 +69,17 @@ export const Filters = ({onFilterSubmit, timeRange, setTimeRange, dateRange, set
 							className={s.input}
 						/>
 					</div>
+					{durations?.length > 0 && <Dropdown
+						value={selectedFormat}
+						options={durations?.map((_) => ({
+							value: _.id,
+							label: transformDuration(_),
+						}))}
+						className={s.formats}
+						onChange={setSelectedFormat}
+						arrowClosed={<IconChevronDown size={18} />}
+						arrowOpen={<IconChevronUp size={18} />}
+					/>}
 					<InputField
 						placeholder={"0"}
 						label={"Подписчиков, от"}

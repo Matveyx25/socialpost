@@ -6,17 +6,23 @@ import { Counter } from '../../Shared/Counter/Counter'
 import { Loader } from '../../Shared/Loader/Loader'
 import { useUpdateCart } from '../../../hooks/useUpdateCart'
 import { useCart } from '../../../hooks/useCart'
+import { transformDuration } from '../../../helpers/transformDuratuin'
 
 export const CartChannelCard = ({el, removeFromCart}) => {
 	const {data: channel, isFetched} = useChannelById(el.id)
 	const {data: cart} = useCart()
 	const {mutate: updateCart} = useUpdateCart()
 
+	const prices = channel?.prices?.map((el) => ({
+		enabled: true,
+		label: transformDuration(el?.duration),
+		value: el.duration.id,
+		price: el.price,
+	}));
+
 	const formats = channel ? [
-		{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: 'NATIVE_POST_PRICE', price: channel?.nativePostPrice},
-		{enabled: channel?.post1For24PriceEnabled, label: '1/24', value: 'POST_1_FOR_24', price: channel?.post1For24Price},
-		{enabled: channel?.post1For48PriceEnabled, label: '1/48', value: 'POST_1_FOR_48', price: channel?.post1For48Price},
-		{enabled: channel?.post2For48PriceEnabled, label: '2/48', value: 'POST_2_FOR_48', price: channel?.post2For48Price},
+		{enabled: channel?.nativePostPriceEnabled, label: 'Нативный', value: null, price: channel?.nativePostPrice},
+		...prices
 	] : []
 
 	if(!isFetched){
@@ -30,11 +36,11 @@ export const CartChannelCard = ({el, removeFromCart}) => {
 			</div>
 			<div className={s.productFormat}>
 				<span>Формат размещения</span>
-				{formats.find(f => f.value === el.format)?.label}
+				{formats.find(f => f.value == el.format)?.label}
 			</div>
 				<div className={s.productPrice}>
 					<span>Общая стоимость</span>
-					{(formats.find(f => f.value === el.format)?.price * +el.count + '₽') }
+					{(formats.find(f => f.value == el.format)?.price * +el.count + '₽') }
 				</div>
 				<div className={s.productBtns}>
 					<button className={s.removeBtn}>
