@@ -7,6 +7,7 @@ import {
     PrevNextButtons,
     Labeled,
     BooleanInput,
+		TextField,
 } from "react-admin";
 
 export const DurationEdit = (props) => (
@@ -19,12 +20,12 @@ export const DurationEdit = (props) => (
 				<Box display={{ xs: 'block', sm: 'flex', width: '100%' }}>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<TextInput source="publishDays" label="Длительность публикации(дней)"/>
+								<TextField source="publishDays" label="Длительность публикации(дней)"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 							<Labeled fullWidth>
-								<TextInput source="retentionHours" label="Время удержания(часов)"/>
+								<TextField source="retentionHours" label="Время удержания(часов)"/>
 							</Labeled>
 						</Box>
 						<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
