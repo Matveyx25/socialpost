@@ -1,0 +1,49 @@
+.checkWrapper {
+  position: relative;
+  color: #000;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 24px;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.checkWrapper .checkLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.checkWrapper .checkboxIconEmpty {
+  display: block;
+  color: #A7AEB8;
+}
+.checkWrapper .checkboxIconFill {
+  display: none;
+  color: #436CFF;
+}
+.checkWrapper:hover {
+  transition: 0.4s color;
+  color: #67696b;
+}
+.checkWrapper:hover .checkboxIconEmpty {
+  transition: 0.4s color;
+  color: #d9dde2;
+}
+.checkWrapper:hover .checkboxIconFill {
+  transition: 0.4s color;
+  color: #436CFF;
+}
+.checkWrapper input {
+  display: none;
+}
+.checkWrapper input:checked + .checkLabel .checkboxIconFill {
+  display: block;
+}
+.checkWrapper input:checked + .checkLabel .checkboxIconEmpty {
+  display: none;
+}/*# sourceMappingURL=CheckedAll.module.css.map */

@@ -5,6 +5,14 @@
 	flex-direction: column;
 	gap: 16px;
 }
+.error{
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background: rgba($main-red-color, .2);
+	border: 1px solid $main-red-color;
+	margin-top: 0.5rem;
+	color: $main-red-color;
+}
 .radioItem{
 	input{
 		display: none;

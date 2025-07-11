@@ -26,7 +26,7 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
       /^\d+$/,
       "Можно вводить только цифры"
     )
-  });
+  })
 
   useEffect(() => {
     if (isOpen && modalParams?.channelId) {
@@ -54,13 +54,30 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
             }, {}) || {}),
           }}
           validationSchema={validator}
+					validate={(values) => {
+							const { nativePostPrice, nativePostPriceEnabled, ...rest } = values;
+							
+							const filledFieldsCount = Object.values(rest).filter(
+								value => value !== "" && value !== undefined && value !== null
+							).length;							
+
+							if (filledFieldsCount > 5) {
+								return { _error: "Можно заполнить не более 5 полей" };
+							}
+
+							return 
+					}}
           onSubmit={(values) => {
             const prices = Object.entries(values)
-              .filter(([key]) => key.startsWith("price")) // Выбираем только поля, начинающиеся с 'price'
-              .map(([key, price]) => console.log(price) || ({
-                durationId: parseInt(key.replace("price", ""), 10), // Извлекаем durationId из имени поля
-                price: typeof +price === "number" ? +price : 0, // Если price не число, ставим 0
-              }));
+              .filter(([key]) => key.startsWith("price"))
+              .map(([key, price]) => {
+								if(+price > 0) {
+									return {
+										durationId: parseInt(key.replace("price", ""), 10),
+										price: typeof +price === "number" ? +price : 0, 
+									}
+								}
+							}).filter(_ => {if(_) return _});
 
             updateChannel({
               data: {
@@ -76,9 +93,10 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
             setOpen();
           }}
         >
-          {({ dirty, isValid, values, touched }) => (
+          {({ dirty, isValid, values, touched, errors }) => (
             <Form>
               <div className={s.form}>
+								{errors._error && <div className={s.error}>{errors._error}</div>}
                 <div className={s.input}>
                   <InputField
                     label={
@@ -123,7 +141,7 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
                   <Button
                     label="Применить"
                     className={s.btnHalf}
-                    disabled={!dirty || !isValid}
+                    disabled={!dirty || !isValid || errors?.length > 0}
                     type="submit"
                   />
                 </div>

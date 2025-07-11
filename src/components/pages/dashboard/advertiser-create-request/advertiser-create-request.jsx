@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { DashboardCard } from "../dashboard-card";
 import { Button } from "../../../Shared/Button/Button";
 import { useParams } from "react-router-dom";
@@ -40,15 +40,17 @@ export const AdvertiserCreateRequest = () => {
 	const {data: durations} = useAllDurations()
 
   const [selectedFormat, setSelectedFormat] = useState();
+  const [submitedFormat, setSubmitedFormat] = useState();
   const [channelSelectedFormat, setChannelSelectedFormat] = useState([]);
 
 	const [filters, setFilters] = useState(null);
 	
-  const { data: channels, isFetched, refetch } = useChannels({ ...filters, price_type: post?.campaignType });
+  const { data: channels, isFetched, refetch } = useChannels({ ...filters, price_type: post?.campaignType }, submitedFormat);
   const { mutate: createRequest } = useAddPostRequest();
   const { mutate: createRequestsAll } = useAddPostAllRequests();
 
   const onFilterSubmit = (f) => {		
+		setSubmitedFormat(selectedFormat?.value)
     setFilters({
       subscribers_min: f?.minSubscribers,
       subscribers_max: f?.maxSubscribers,
@@ -194,7 +196,7 @@ export const AdvertiserCreateRequest = () => {
                     <tbody>
                       {isFetched ? (
                         channels?.data.map((el, index) => (
-                          <Channel {...{el, index, disabled, request, setChannelSelectedFormat, channelSelectedFormat}} formatId={selectedFormat ? selectedFormat.value : null}/>
+                          <Channel key={'channel-' + el?.id + submitedFormat} {...{el, index, disabled, request, setChannelSelectedFormat, channelSelectedFormat}} formatId={submitedFormat}/>
                         ))
                       ) : (
                         <Loader />
@@ -221,16 +223,20 @@ export const AdvertiserCreateRequest = () => {
 };
 
 
-const Channel = ({el, index, disabled, request, formatId = 2, setChannelSelectedFormat, channelSelectedFormat}) => {
+const Channel = ({el, index, disabled, request, formatId, setChannelSelectedFormat, channelSelectedFormat}) => {
+	const dropdown = useRef()
+	const [isOpen, setIsOpen] = useState(false)
+	
 	const prices = el?.prices?.map((el) => ({
 		enabled: true,
-		label: `${transformDuration(el?.duration)} - ${priceSeparator(el.price)}руб.`,
+		label: `${transformDuration(el?.duration)} | ${priceSeparator(el.price)} ₽`,
 		value: el.duration.id,
 		price: el.price,
 	}));
 
 	const formats = el ? [
-		{enabled: el?.nativePostPriceEnabled, label: `Нативный - ${priceSeparator(el?.nativePostPrice)}руб.`, value: null, price: el?.nativePostPrice},
+		// {enabled: el?.nativePostPriceEnabled, label: `<span class="Dropdown-text-color">Нативный</span> <span class="Dropdown-horizontal-line">|</span> <span class="Dropdown-mute-color">${priceSeparator(el?.nativePostPrice)} ₽</span>`, value: null, price: el?.nativePostPrice},
+		{enabled: el?.nativePostPriceEnabled, label: `Нативный | ${priceSeparator(el?.nativePostPrice)} ₽`, value: null, price: el?.nativePostPrice},
 		...prices
 	] : []
 	
@@ -245,7 +251,7 @@ const Channel = ({el, index, disabled, request, formatId = 2, setChannelSelected
 		if(!channelSelectedFormat?.find(_ => _.id === el.id) && formats){
 			setChannelSelectedFormat(prev =>  prev?.length ? [...prev, {id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}] : [{id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}])
 		}
-	}, [defaultFormat, formats])
+	}, [formatId])
 	
 	const update = (v) => {
 		setSelectedFormat(v)
@@ -261,6 +267,45 @@ const Channel = ({el, index, disabled, request, formatId = 2, setChannelSelected
 			return prev?.length ? [...prev, {id: el.id, value: v.value}] : [{id: el.id, value: v.value}]
 		})
 	}
+	
+		const toHtmlPlaceholder = useCallback(() => {
+			if(dropdown?.current){
+				const root = dropdown?.current?.dropdownRef?.current
+				let placeholder = root?.querySelector('.Dropdown-placeholder')
+				let newString = placeholder?.innerHTML?.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
+				placeholder.innerHTML = newString
+			}
+		}, []);
+
+		const toHtmlOption = useCallback(() => {
+			if(dropdown?.current){
+				const root = dropdown?.current?.dropdownRef?.current
+				const options = root?.querySelectorAll('.Dropdown-option')
+				
+				for (let index = 0; index < options?.length; index++) {
+					const el = options[index];
+					
+					let newString = el?.innerHTML?.replaceAll('&lt;', '<').replaceAll('&gt;', '>')
+					el.innerHTML = `<span>${newString}</span>`
+				}
+			}
+		}, []);
+
+		useEffect(() => {
+			if (dropdown?.current) {
+				toHtmlPlaceholder();
+				toHtmlOption();
+			}
+		}, [dropdown, selectedFormat, toHtmlPlaceholder, toHtmlOption]);
+		
+		useEffect(() => {
+			if (dropdown?.current) {
+				toHtmlPlaceholder();
+				setTimeout(() => {
+					toHtmlOption();
+				}, 1)
+			}
+		}, [isOpen, selectedFormat, toHtmlPlaceholder, toHtmlOption]);
 
 	return (
 		<tr key={el.id}>
@@ -310,17 +355,23 @@ const Channel = ({el, index, disabled, request, formatId = 2, setChannelSelected
 			</td>
 			<td>
 				<div className={s.center}>
-							<Dropdown
-								value={selectedFormat}
-								options={formats.map((_) => ({
-									value: _.value,
-									label: _.label,
-								}))}
-								className={s.formats}
-								onChange={update}
-								arrowClosed={<IconChevronDown size={18} />}
-								arrowOpen={<IconChevronUp size={18} />}
-							/>
+					<Dropdown
+						value={selectedFormat}
+						ref={dropdown}
+						options={formats.map((_) => ({
+							value: _.value,
+							label: _.label,
+						}))}
+						className={s.formats}
+						onChange={update}
+						onFocus={() => {
+							toHtmlPlaceholder()
+							toHtmlOption()
+							setIsOpen(dropdown?.current?.state?.isOpen)
+						}}
+						arrowClosed={<IconChevronDown size={18} />}
+						arrowOpen={<IconChevronUp size={18} />}
+					/>
 				</div>
 			</td>
 			<td>
