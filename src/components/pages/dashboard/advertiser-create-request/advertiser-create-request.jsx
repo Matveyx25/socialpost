@@ -68,8 +68,9 @@ export const AdvertiserCreateRequest = () => {
 
   const onSubmitRequestToAll = () => {
     if (dateRange[0] && dateRange[1] && timeRange[0] && timeRange[1]) {
+			const {durations_ids, ...localFilters} = filters
       createRequestsAll({
-        ...filters,
+        ...localFilters,
         post_id: postId,
         publish_start_time: timeRange[0],
         publish_end_time: timeRange[1],
@@ -172,7 +173,7 @@ export const AdvertiserCreateRequest = () => {
 													values.checkboxes.forEach(el => {
 														request(el, channelSelectedFormat?.find(_ => _.id === el)?.value)
 													})
-													
+
 													setFieldValue("checkboxes", []);
 												}}
 											/>
@@ -248,10 +249,22 @@ const Channel = ({el, index, disabled, request, formatId, setChannelSelectedForm
 	);
 
 	useEffect(() => {
-		if(!channelSelectedFormat?.find(_ => _.id === el.id) && formats){
-			setChannelSelectedFormat(prev =>  prev?.length ? [...prev, {id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}] : [{id: el.id, value: defaultFormat ? defaultFormat?.value : formats[0]?.value}])
+		if(!channelSelectedFormat?.find(_ => _.id === el.id)){
+			setChannelSelectedFormat(prev => [...prev, {id: el.id, value: selectedFormat ? selectedFormat?.value : formats[0]?.value}])
+		}else{
+			setChannelSelectedFormat(prev => {
+				if(prev.find(_ => _.id === el.id)){
+					return prev.map(_ => {
+						if(_.id === el.id){
+							return {id: el.id, value: selectedFormat.value}
+						}
+						return _
+					})
+				}
+				return prev?.length ? [...prev, {id: el.id, value: selectedFormat.value}] : [{id: el.id, value: selectedFormat.value}]
+			})
 		}
-	}, [formatId])
+	}, [formatId, selectedFormat])
 	
 	const update = (v) => {
 		setSelectedFormat(v)
