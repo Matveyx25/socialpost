@@ -76,7 +76,7 @@ export const AdvertiserCreateRequest = () => {
         publish_end_time: timeRange[1],
         publish_start_date: formatToISO(dateRange[0])?.slice(0, 10),
         publish_end_date: formatToISO(dateRange[1])?.slice(0, 10),
-				durationId: selectedFormat?.value
+				duration_id: selectedFormat?.value
       });
     }
   };
