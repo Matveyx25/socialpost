@@ -90,10 +90,10 @@ const AdminPanel = () => (
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Финансовые операции' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
-    <Resource name="campaigns/posts/requests" list={RequestsList} edit={RequestsEdit} options={{ label: 'Заявки на размещение' }} icon={IconBell}/>
-    <Resource name="campaigns/clients" list={AdvertiserClientsMainList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
     <Resource name="campaigns/posts" list={AdvertiserPostsList} edit={AdvertiserPostsTabs} options={{ label: 'Рекламные записи' }} icon={IconDeviceMobileMessage}/>
+    <Resource name="campaigns/posts/requests" list={RequestsList} edit={RequestsEdit} options={{ label: 'Заявки на размещение' }} icon={IconBell}/>
     <Resource name="campaigns/posts/durations" list={DurationsList} edit={DurationEdit} create={DurationCreate} options={{ label: 'Типы размещения' }} icon={IconClock}/>
+    <Resource name="campaigns/clients" list={AdvertiserClientsMainList} edit={AdvertiserClientsTabs} options={{ label: 'Клиенты' }} icon={IconClipboardList}/>
   </Admin>
 );
 
