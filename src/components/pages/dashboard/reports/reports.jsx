@@ -13,6 +13,7 @@ import { useMyChannels } from '../../../../hooks/useMyChannels'
 import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { useRequestsStats } from '../../../../hooks/useRequestsStats'
 import { formatToISO } from '../../../../helpers/formatToISO'
+import { transformDuration } from '../../../../helpers/transformDuratuin'
 
 export const Reports = () => {
 	const [selectedChannel, setSelectedChannel] = useState(null)
@@ -21,13 +22,42 @@ export const Reports = () => {
 	const [dateRange, setDateRange] = useState([null, null])
 	const {data: requestsStats} = useRequestsStats()
 
-	const tabs = [
-		{label: 'Ожидают публикации', id: 0, count: requestsStats?.pendingCount, value: 'PENDING'},
-		{label: 'Активные', id: 1, count: requestsStats?.activeCount, value: 'ACTIVE'},
-		{label: 'Выполненные', id: 2, count: requestsStats?.completedCount, value: 'COMPLETED'},
-		{label: 'Отклоненные', id: 3, count: requestsStats?.declinedCount, value: 'DECLINED'},
-		{label: 'Невыполненные', id: 4, count: requestsStats?.expiredCount, value: 'EXPIRED'}
-	]
+	const tabs =   [{
+      label: "Все",
+      count: requestsStats?.totalRequestsCount,
+      value: null,
+      id: 0,
+    },
+		{
+      label: "Ожидают подтверждения",
+      count: requestsStats?.pendingRequestsCount,
+      value: "PENDING",
+      id: 1,
+    },
+    {
+      label: "Ожидают публикации",
+      count: requestsStats?.acceptedRequestsCount,
+      value: "ACCEPTED",
+      id: 2,
+    },
+    {
+      label: "Активные",
+      count: requestsStats?.activeRequestsCount,
+      value: "ACTIVE",
+      id: 3,
+    },
+    {
+      label: "Выполненные",
+      count: requestsStats?.completedRequestsCount,
+      value: "COMPLETED",
+      id: 4,
+    },
+    {
+      label: "Отклоненные",
+      count: requestsStats?.declinedRequestsCount,
+      value: "DECLINED",
+      id: 5,
+    }]
 
 	const [tab, setTab] = useState(tabs[0].id)
 
@@ -112,6 +142,11 @@ export const Reports = () => {
 									</th>
 									<th>
 										<div className={s.flex}>
+											Тип размещения
+										</div>
+									</th>
+									<th>
+										<div className={s.flex}>
 											Стоимость
 										</div>
 									</th>
@@ -123,10 +158,10 @@ export const Reports = () => {
 									<tr onClick={() => navigate('./' + el.id)}>
 										<td>
 											<div className={s.preview}>
-												{el?.postUpload ? <div className={s.img}>
-													<img src={el?.postUpload[0]?.thumbnailUrl} alt="" />
+												{el?.requestsStatsUpload ? <div className={s.img}>
+													<img src={el?.requestsStatsUpload[0]?.thumbnailUrl} alt="" />
 												</div> : ''}
-												<p>{el?.postContent?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')}</p>
+												<p>{el?.requestsStatsContent?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')}</p>
 											</div>
 										</td>
 										<td>
@@ -136,7 +171,7 @@ export const Reports = () => {
 										</td>
 										<td>
 											<div className={s.center}>
-												{el.postName}
+												{el.requestsStatsName}
 											</div>
 										</td>
 										<td>
@@ -152,6 +187,11 @@ export const Reports = () => {
 										<td>
 											<div className={s.center}>
 												{formatDate(el.completionTime)}
+											</div>
+										</td>
+										<td>
+											<div className={s.center}>
+												{transformDuration(el?.duration)}
 											</div>
 										</td>
 										<td>

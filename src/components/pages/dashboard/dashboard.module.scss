@@ -38,8 +38,14 @@
 .fullHeight{
 	height: 100%;
 }
+
+.reports{
+	max-height: calc(100% - 108px);
+	overflow-y: auto;
+}
 .reportsCard{
 	height: 100%;
+	overflow: hidden;
 	max-width: calc(100% - 29.6875rem);
 }
 .cardHeader{

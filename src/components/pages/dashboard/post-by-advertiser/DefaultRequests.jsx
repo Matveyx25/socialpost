@@ -11,6 +11,7 @@ import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
 import { CheckboxField } from "../../../Shared/CheckboxField/CheckboxField";
 import { Button } from "../../../Shared/Button/Button";
 import { useDeclinePostRequest } from "../../../../hooks/useDeclinePostRequest";
+import { transformDuration } from "../../../../helpers/transformDuratuin";
 
 export const DefaultRequests = ({ post, postId }) => {
   const [page, setPage] = useState(1);
@@ -140,6 +141,7 @@ export const DefaultRequests = ({ post, postId }) => {
 												<th className={s.th3}>Дата выполнения</th>
 											</>
 										)}
+										<th>Тип размещения</th>
 										<th className={s.th4}>Стоимость размещения</th>
 										{tabs[tab].value === "DECLINED" ||
 										tabs[tab].value === "EXPIRED" ? null : tabs[tab].value ===
@@ -203,6 +205,11 @@ export const DefaultRequests = ({ post, postId }) => {
 															</td>
 														</>
 													)}
+													<td className={s.td4}>
+														<div className={s.center}>
+															{transformDuration(el?.duration)}
+														</div>
+													</td>
 													<td className={s.td4}>
 														<div className={s.center}>
 															<div className={s.center}>{el.price + "₽"}</div>

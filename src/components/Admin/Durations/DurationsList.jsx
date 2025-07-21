@@ -1,7 +1,7 @@
-import { IconCheck, IconX } from "@tabler/icons-react";
+import { IconEyeOff } from "@tabler/icons-react";
 import { List, Datagrid, TextField, FunctionField } from "react-admin";
-import { CustomEmpty } from '../CustomEmpty';
 import { PostPagination } from "../PostPagination";
+import { IconEyeFilled } from "@tabler/icons-react";
 
 
 export const DurationsList = (props) => (
@@ -11,7 +11,7 @@ export const DurationsList = (props) => (
       <TextField source="id" />
       <TextField source="retentionHours" label="Время удержания(часов)"/>
       <TextField source="publishDays" label="Длительность публикации(дней)"/>
-			<FunctionField label="Скрыто" source="isHidden" render={(record) => record.isHidden ? <IconCheck/> : <IconX/>}/>
+			<FunctionField label="Скрыто" source="isHidden" render={(record) => record.isHidden ? <IconEyeOff/> : <IconEyeFilled/>}/>
     </Datagrid>
   </List>
 );

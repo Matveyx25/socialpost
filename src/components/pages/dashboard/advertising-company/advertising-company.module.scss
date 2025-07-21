@@ -286,6 +286,11 @@
 			display: block;
 			height: calc(100% - 80px);
 			overflow: auto;
+			.end{
+				display: flex;
+				align-items: center;
+				justify-content: flex-end;
+			}
 		}
 		.btns{
 			display: flex;
