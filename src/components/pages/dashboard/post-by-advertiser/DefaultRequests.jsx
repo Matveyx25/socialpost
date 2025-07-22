@@ -4,7 +4,7 @@ import { Tabs } from "../../../Shared/Tabs/Tabs";
 import s from "./post-by-advertiser.module.scss";
 import { usePostRequests } from "../../../../hooks/usePostRequests";
 import { NavLink, useOutletContext } from "react-router-dom";
-import { IconExternalLink, IconX } from "@tabler/icons-react";
+import { IconExternalLink, IconGrid3x3, IconX } from "@tabler/icons-react";
 import { Pagination } from "../../../Shared/Pagination/Pagination";
 import { Field, Formik } from "formik";
 import { CheckedAll } from "../../../Shared/CheckedAll/CheckedAll";
@@ -150,6 +150,7 @@ export const DefaultRequests = ({ post, postId }) => {
 										) : (
 											<th className={s.th5}>Ссылка</th>
 										)}
+										<th className={s.th5}>Статистика</th>
 										<th></th>
 									</tr>
 								</thead>
@@ -239,6 +240,15 @@ export const DefaultRequests = ({ post, postId }) => {
 															</div>
 														</td>
 													)}
+													<td>
+														<div className={s.end}>
+															<NavLink onClick={() => setModal("request-statistic-modal", {
+																			requestId: el.id,
+																		})} className={s.link}>
+																<IconGrid3x3 />
+															</NavLink>
+														</div>
+													</td>
 													<td>
 														<div className={s.end}></div>
 													</td>

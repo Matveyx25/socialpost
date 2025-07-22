@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import s from './reports.module.scss'
 import { DashboardCard } from '../dashboard-card'
 import { Tabs } from '../../../Shared/Tabs/Tabs'
-import { IconExternalLink, IconRefresh } from '@tabler/icons-react'
+import { IconExternalLink, IconGrid3x3, IconRefresh } from '@tabler/icons-react'
 import { Select } from '../../../Shared/Select/Select';
 import { Pagination } from '../../../Shared/Pagination/Pagination'
 import { Button } from '../../../Shared/Button/Button'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate, useOutletContext } from 'react-router-dom'
 import { usePublishersRequests } from '../../../../hooks/usePublishersRequests';
 import { priceSeparator } from '../../../../helpers/priceSeparator';
 import { useMyChannels } from '../../../../hooks/useMyChannels'
@@ -71,6 +71,7 @@ export const Reports = () => {
 	})
 	const {data: channels} = useMyChannels()
 	const navigate = useNavigate()
+	const [setModal] = useOutletContext();
 
 	const reset = () => {
 		setSelectedChannel(null)
@@ -151,6 +152,7 @@ export const Reports = () => {
 										</div>
 									</th>
 									<th>Ссылка</th>
+									<th>Статистика</th>
 								</tr>
 						</thead>
 						<tbody>
@@ -202,6 +204,17 @@ export const Reports = () => {
 										<td>
 											<div className={s.center}>
 												{el?.telegramUrl ? <NavLink to={el?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink> : '-'}
+											</div>
+										</td>
+										<td>
+											<div className={s.center}>
+												<div className={s.end}>
+													<NavLink onClick={() => setModal("request-statistic-modal", {
+																	requestId: el.id,
+																})} className={s.link}>
+														<IconGrid3x3 />
+													</NavLink>
+												</div>
 											</div>
 										</td>
 									</tr>

@@ -19,6 +19,7 @@ import { EditCampaignName } from './EditCampaignName';
 import { AddClientContractModal } from './AddClientContractModal'
 import { EditClientContractModal } from './EditClientContractModal'
 import { EditClientModal } from './EditClientModal'
+import { RequestStatisticModal } from './RequestStatisticModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -49,6 +50,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<EditClientModal {...{isOpen, setOpen, modalParams}}/>
 			<EditClientContractModal {...{isOpen, setOpen, modalParams}}/>
 			<AddClientContractModal {...{isOpen, setOpen, modalParams}}/>
+			<RequestStatisticModal {...{isOpen, setOpen, modalParams}}/>
 		</div>
 	)
 }

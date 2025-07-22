@@ -131,6 +131,25 @@
 	margin-bottom: -4px;
 	margin-top: 8px;
 }
+.statisticFlex{
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+.statisticLabel{
+	font-size: 0.875rem;
+	font-style: normal;
+	font-weight: 400;
+	line-height: 1.375rem;
+	letter-spacing: 0.0175rem;
+	color: $gray-400;
+}
+.statisticValue{
+	font-size: 1rem;
+	font-style: normal;
+	font-weight: 700;
+	color: $gray-900;
+}
 .checkAll{
 	border: none;
 	padding: 0.5rem 0.75rem;
