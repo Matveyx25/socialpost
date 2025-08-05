@@ -14,6 +14,7 @@ import { RangeCalendar } from '../../../Shared/RangeCalendar/RangeCalendar'
 import { useRequestsStats } from '../../../../hooks/useRequestsStats'
 import { formatToISO } from '../../../../helpers/formatToISO'
 import { transformDuration } from '../../../../helpers/transformDuratuin'
+import classNames from 'classnames'
 
 export const Reports = () => {
 	const [selectedChannel, setSelectedChannel] = useState(null)
@@ -123,9 +124,21 @@ export const Reports = () => {
 					<table className={s.table}>
 						<thead>
 								<tr>
-									<th>Превью поста</th>
-									<th>Название РК</th>
-									<th>Название обьявления</th>
+									<th>
+										<div className={s.flex}>
+											Превью поста
+										</div>
+									</th>
+									<th>
+										<div className={s.flex}>
+											Название РК
+										</div>
+									</th>
+									<th>
+										<div className={s.flex}>
+											Название обьявления
+										</div>
+									</th>
 									<th>
 										<div className={s.flex}>
 											Канал публикации
@@ -143,7 +156,7 @@ export const Reports = () => {
 									</th>
 									<th>
 										<div className={s.flex}>
-											Тип размещения
+											Размещение
 										</div>
 									</th>
 									<th>
@@ -151,74 +164,85 @@ export const Reports = () => {
 											Стоимость
 										</div>
 									</th>
-									<th>Ссылка</th>
-									<th>Статистика</th>
+									<th>
+										<div className={s.flex}>
+											Ссылка
+										</div>
+										</th>
+									<th>
+										{/* <div className={s.flex}>
+											Статистика
+										</div> */}
+									</th>
 								</tr>
 						</thead>
 						<tbody>
-								{requests?.data?.map(el => (
-									<tr onClick={() => navigate('./' + el.id)}>
-										<td>
-											<div className={s.preview}>
-												{el?.requestsStatsUpload ? <div className={s.img}>
-													<img src={el?.requestsStatsUpload[0]?.thumbnailUrl} alt="" />
-												</div> : ''}
-												<p>{el?.requestsStatsContent?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')}</p>
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el?.campaignName}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el.requestsStatsName}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el.channelName}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{formatDate(el.publishTime)}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{formatDate(el.completionTime)}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{transformDuration(el?.duration)}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{priceSeparator(el.price)}₽
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
-												{el?.telegramUrl ? <NavLink to={el?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink> : '-'}
-											</div>
-										</td>
-										<td>
-											<div className={s.center}>
+								{requests?.data?.map(el => {
+									const maxLength = 60
+									const replacedText = el?.postText?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')
+									const splicedText = replacedText?.slice(0, maxLength).concat(replacedText?.length > maxLength ? '...' : '')
+
+									return (
+										<tr onClick={() => navigate('./' + el.id)}>
+											<td>
+												<div className={s.preview}>
+													{el?.postUpload?.length > 0 ? <div className={s.img}>
+														<img src={el?.postUpload[0]?.thumbnailUrl} alt="" />
+													</div> : ''}
+													<p>{splicedText}</p>
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{el?.campaignName}
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{el?.postName}
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{el?.channelName}
+												</div>
+											</td>
+											<td>
+												<div className={classNames(s.center, s.ellipsised)}>
+													{formatDate(el.publishTime)}
+												</div>
+											</td>
+											<td>
+												<div className={classNames(s.center, s.ellipsised)}>
+													{formatDate(el.completionTime)}
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{transformDuration(el?.duration)}
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{priceSeparator(el.price)}₽
+												</div>
+											</td>
+											<td>
+												<div className={s.center}>
+													{el?.telegramUrl ? <NavLink to={el?.telegramUrl}><IconExternalLink size={16} color='#436CFF'/></NavLink> : '-'}
+												</div>
+											</td>
+											<td>
 												<div className={s.end}>
 													<NavLink onClick={() => setModal("request-statistic-modal", {
 																	requestId: el.id,
 																})} className={s.link}>
-														<IconGrid3x3 />
+														<IconGrid3x3 size={16} color='#436CFF'/>
 													</NavLink>
 												</div>
-											</div>
-										</td>
-									</tr>
-								))}
+											</td>
+										</tr>
+								)})}
 						</tbody>
 					</table>
 				</div>

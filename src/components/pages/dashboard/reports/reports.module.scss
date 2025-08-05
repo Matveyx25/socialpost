@@ -83,34 +83,43 @@
 			font-weight: 400;
 			line-height: 1.5rem;
 			letter-spacing: 0.02rem;
+			overflow: hidden;
 			.flex{
 				display: flex;
 				align-items: center;
 				gap: 0.625rem;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				width: 100%;
+				white-space: nowrap;
 			}
 			&:nth-child(1){
-				width: calc(340/1563 * 100%);
+				width: calc(300/1563 * 100%);
 			}
 			&:nth-child(2){
 				width: calc(220/1563 * 100%);
 			}
 			&:nth-child(3){
-				width: calc(194/1563 * 100%);
+				width: calc(190/1563 * 100%);
 			}
 			&:nth-child(4){
-				width: calc(200/1563 * 100%);
+				width: calc(170/1563 * 100%);
 			}
 			&:nth-child(5){
-				width: calc(190/1563 * 100%);
+				width: calc(160/1563 * 100%);
 			}
 			&:nth-child(6){
-				width: calc(190/1563 * 100%);
+				width: calc(154/1563 * 100%);
 			}
 			&:nth-child(7){
-				width: calc(141/1563 * 100%);
+				width: calc(112/1563 * 100%);
 			}
 			&:nth-child(8){
 				width: calc(88/1563 * 100%);
+			}
+			&:nth-child(9){
+				// width: calc(80/1563 * 100%);
+				width: auto;
 			}
 		}
 		tbody td{
@@ -126,6 +135,16 @@
 				display: flex;
 				align-items: center;
 			}
+			.end{
+				display: flex;
+				align-items: flex-end;
+			}
+			.ellipsised{
+				width: 100%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
 		}
 		tbody tr{
 			display: table;
@@ -139,29 +158,35 @@
 				border-top: 1px solid $gray-100;
 			}
 			td{
+				overflow-x: hidden;
+				text-overflow: ellipsis;
 				&:nth-child(1){
-					width: calc(340/1563 * 100%);
+					width: calc(300/1563 * 100%);
 				}
 				&:nth-child(2){
 					width: calc(220/1563 * 100%);
 				}
 				&:nth-child(3){
-					width: calc(194/1563 * 100%);
+					width: calc(190/1563 * 100%);
 				}
 				&:nth-child(4){
-					width: calc(200/1563 * 100%);
+					width: calc(170/1563 * 100%);
 				}
 				&:nth-child(5){
-					width: calc(190/1563 * 100%);
+					width: calc(160/1563 * 100%);
 				}
 				&:nth-child(6){
-					width: calc(190/1563 * 100%);
+					width: calc(154/1563 * 100%);
 				}
 				&:nth-child(7){
-					width: calc(141/1563 * 100%);
+					width: calc(112/1563 * 100%);
 				}
 				&:nth-child(8){
 					width: calc(88/1563 * 100%);
+				}
+				&:nth-child(9){
+					// width: calc(80/1563 * 100%);
+					width: auto;
 				}
 			}
 		}
