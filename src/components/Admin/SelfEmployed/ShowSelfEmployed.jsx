@@ -59,6 +59,11 @@ export const ShowSelfEmployed = () => {
 										<TextField source="inn" label="ИНН"/>
 									</Labeled>
 							</Box>
+							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+									<Labeled fullWidth>
+										<TextField source="vatRate" label="НДС"/>
+									</Labeled>
+							</Box>
 					</Box>
 				</Box>
         <Box sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: '0.5em' }}>

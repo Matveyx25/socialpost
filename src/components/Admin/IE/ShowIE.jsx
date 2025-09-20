@@ -14,6 +14,11 @@ export const ShowIE = () => {
 					</Box>
 					<Box flex={1}>
 						<Labeled fullWidth>
+							<TextField source="vatRate" label="НДС" />
+						</Labeled>
+					</Box>
+					<Box flex={1}>
+						<Labeled fullWidth>
 							<SelectField
 								source="taxSystem"
 								choices={[

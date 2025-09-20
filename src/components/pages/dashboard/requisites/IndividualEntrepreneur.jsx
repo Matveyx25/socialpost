@@ -36,6 +36,7 @@ export const IndividualEntrepreneur = () => {
     inn: Yup.string()
       .matches(/^\d+$/, "ИНН должен содержать только цифры")
       .required("Введите ИНН"),
+
 		accountNumber: Yup.string()
       .matches(/^\d+$/, "Расчетный счет должен содержать только цифры")
       .required("Введите рассчетный счет"),
@@ -43,6 +44,9 @@ export const IndividualEntrepreneur = () => {
     bic: Yup.string()
       .matches(/^\d+$/, "БИК должен содержать только цифры")
       .required("Введите БИК"),
+    vatRate: Yup.string()
+      .matches(/^\d+$/, "НДС должен содержать только цифры")
+      .required("Введите НДС"),
     correspondentAccount: Yup.string()
       .matches(/^\d+$/, "Корреспондентский счет должен содержать только цифры")
       .required("Введите корреспондентский счет"),
@@ -58,6 +62,7 @@ export const IndividualEntrepreneur = () => {
 				address: IE?.address,
 				taxSystem: IE?.taxSystem,
 				okved: IE?.okved,
+				vatRate: IE?.vatRate,
 				accountNumber: IE?.bankDetails?.checkingAccount,
 				bank: IE?.bankDetails?.bank,
 				bic: IE?.bankDetails?.bik,
@@ -72,6 +77,7 @@ export const IndividualEntrepreneur = () => {
 					address: values?.address,
 					taxSystem: values?.taxSystem,
 					okved: values?.okved,
+					vatRate: values?.vatRate,
 					bankDetails: {
 						checkingAccount: values?.accountNumber,
 						bank: values?.bank,
@@ -124,6 +130,15 @@ export const IndividualEntrepreneur = () => {
 											/>
 										)}
 									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"НДС"}
+										name="vatRate"
+										placeholder="20"
+										className={s.input}
+										disabled={IE?.status && IE?.status !== 'DECLINES'}
+									/>
 								</div>
 								<div className={s.formRow}>
 									<InputField

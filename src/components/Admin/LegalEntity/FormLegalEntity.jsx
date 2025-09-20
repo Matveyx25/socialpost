@@ -17,6 +17,7 @@ export const FormLegalEntity = () => {
 						{ id: 'USN', name: 'УСН' }
 					]} label='Система налогообложения' isRequired fullWidth />
 					<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
+					<TextInput source="vatRate" label='НДС' isRequired fullWidth />
 					<TextInput source="okved" label='ОКВЭД' isRequired fullWidth />
 					<TextInput source="legalAddress" label='Юридический адрес' isRequired fullWidth />
 					<TextInput source="correspondenceAddress" label='Адрес для корреспонденции' isRequired fullWidth />

@@ -43,6 +43,9 @@ export const FormSelfEmployed = () => {
 							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
 									<TextInput source="inn" label="ИНН" isRequired fullWidth />
 							</Box>
+							<Box flex={1} ml={{ xs: 0, sm: '0.5em' }}>
+									<TextInput source="vatRate" label="НДС" isRequired fullWidth />
+							</Box>
 					</Box>
 				</Box>
 				<Box sx={{ maxWidth: 800 }} ml={{ xs: 0, sm: '0.5em' }}>

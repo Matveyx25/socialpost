@@ -17,6 +17,7 @@ export const FormIE = () => {
 						{ id: 'USN', name: 'УСН' }
 					]} label='Система налогообложения' isRequired fullWidth />
 					<TextInput source="okved" label='ОКВЭД' isRequired fullWidth />
+					<TextInput source="vatRate" label='НДС' isRequired fullWidth />
 					<TextInput source="ogrn" label='ОГРН' isRequired fullWidth />
 					<TextInput source="address" label='Адрес' isRequired fullWidth />
 				</Box>

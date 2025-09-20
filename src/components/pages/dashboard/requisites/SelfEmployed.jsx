@@ -44,6 +44,9 @@ export const SelfEmployed = () => {
     bic: Yup.string()
       .matches(/^\d+$/, "БИК должен содержать только цифры")
       .required("Введите БИК"),
+    vatRate: Yup.string()
+      .matches(/^\d+$/, "НДС должен содержать только цифры")
+      .required("Введите НДС"),
     correspondentAccount: Yup.string()
       .matches(/^\d+$/, "Корреспондентский счет должен содержать только цифры")
       .required("Введите корреспондентский счет"),
@@ -61,6 +64,7 @@ export const SelfEmployed = () => {
         address: selfEmployed?.address,
         snils: selfEmployed?.snils,
         inn: selfEmployed?.inn,
+        vatRate: selfEmployed?.vatRate,
         passportIssueDate: selfEmployed?.passportIssueDate,
         accountNumber: selfEmployed?.bankDetails?.checkingAccount,
         bank: selfEmployed?.bankDetails?.bank,
@@ -79,6 +83,7 @@ export const SelfEmployed = () => {
           address: values?.address,
           snils: values?.snils,
           inn: values?.inn,
+          vatRate: values?.vatRate,
           bankDetails: {
             checkingAccount: values?.accountNumber,
             bank: values?.bank,
@@ -209,6 +214,15 @@ export const SelfEmployed = () => {
                     }
                   />
                 </div>
+								<div className={s.formRow}>
+									<InputField
+										label={"НДС"}
+										name="vatRate"
+										placeholder="20"
+										className={s.input}
+										disabled={selfEmployed?.status && selfEmployed?.status !== 'DECLINES'}
+									/>
+								</div>
               </div>
               <div className={s.formCard}>
                 <div className={s.cardHeader}>Банковские реквизиты</div>

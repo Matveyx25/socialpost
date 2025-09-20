@@ -46,6 +46,9 @@ export const Entity = () => {
     correspondentAccount: Yup.string()
       .matches(/^\d+$/, "Корреспондентский счет должен содержать только цифры")
       .required("Введите корреспондентский счет"),
+    vatRate: Yup.string()
+      .matches(/^\d+$/, "НДС должен содержать только цифры")
+      .required("Введите НДС"),
   });
 
   return (
@@ -62,6 +65,7 @@ export const Entity = () => {
 				accountNumber: LegalEntity?.bankDetails?.checkingAccount,
 				bank: LegalEntity?.bankDetails?.bank,
 				bic: LegalEntity?.bankDetails?.bik,
+				vatRate: LegalEntity?.vatRate,
 				correspondentAccount:
 					LegalEntity?.bankDetails?.correspondentAccount,
 			}}
@@ -75,6 +79,7 @@ export const Entity = () => {
 					legalAddress: values?.entityAddress,
 					correspondenceAddress: values?.correspondentAddress,
 					okved: values?.okved,
+					vatRate: values?.vatRate,
 					bankDetails: {
 						checkingAccount: values?.accountNumber,
 						bank: values?.bank,
@@ -127,6 +132,15 @@ export const Entity = () => {
 											/>
 										)}
 									</Field>
+								</div>
+								<div className={s.formRow}>
+									<InputField
+										label={"НДС"}
+										name="vatRate"
+										placeholder="20"
+										className={s.input}
+										disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
+									/>
 								</div>
 								<div className={s.formRow}>
 									<InputField

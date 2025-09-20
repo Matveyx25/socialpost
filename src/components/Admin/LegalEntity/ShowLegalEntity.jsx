@@ -12,6 +12,11 @@ export const ShowLegalEntity = () => {
 							<TextField source="inn" label="ИНН" />
 						</Labeled>
 					</Box>
+					<Box flex={1}>
+						<Labeled fullWidth>
+							<TextField source="vatRate" label="НДС" />
+						</Labeled>
+					</Box>
           <Box flex={1}>
 						<Labeled fullWidth>
 							<SelectField
