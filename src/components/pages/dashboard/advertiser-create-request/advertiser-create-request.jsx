@@ -20,6 +20,7 @@ import { IconChevronUp } from "@tabler/icons-react";
 import Dropdown from 'react-dropdown';
 import { useAllDurations } from "../../../../hooks/durations";
 import { transformDuration } from '../../../../helpers/transformDuratuin';
+import classNames from "classnames";
 
 function removeNullAttributes(obj) {
   return Object.entries(obj).reduce((acc, [key, value]) => {
@@ -28,6 +29,15 @@ function removeNullAttributes(obj) {
     }
     return acc;
   }, {});
+}
+
+const checkTimeRange = (timeRange) => {
+	let a = timeRange[0].replace(':', '')
+	let b = timeRange[1].replace(':', '')
+	a = +a === 0  ? 24 : +a
+	b = +b === 0  ? 24 : +b
+
+	return a > b
 }
 
 export const AdvertiserCreateRequest = () => {
@@ -50,7 +60,9 @@ export const AdvertiserCreateRequest = () => {
   const { mutate: createRequestsAll } = useAddPostAllRequests();
 
   const onFilterSubmit = (f) => {		
-		setSubmitedFormat(selectedFormat?.value)
+		if(post?.campaignType !== 'NATIVE_POST'){
+			setSubmitedFormat(selectedFormat?.value)
+		}
     setFilters({
       subscribers_min: f?.minSubscribers,
       subscribers_max: f?.maxSubscribers,
@@ -99,7 +111,7 @@ export const AdvertiserCreateRequest = () => {
 	!dateRange[1] ||
 	!timeRange[0] ||
 	!timeRange[1] || 
-	+(timeRange[0].replace(':', '')) > +(timeRange[1].replace(':', '')) || !selectedFormat
+	checkTimeRange(timeRange) || (!selectedFormat && (post?.campaignType !== 'NATIVE_POST'))
 
   return (
     <div className={s.grid}>
@@ -108,12 +120,13 @@ export const AdvertiserCreateRequest = () => {
           <Filters
             onFilterSubmit={onFilterSubmit}
             maxSubscribersNumber={100000}
+						campaignType={post?.campaignType}
             {...{ dateRange, setDateRange, timeRange, setTimeRange, durations, selectedFormat, setSelectedFormat }}
           />
         </DashboardCard>
       </div>
       <div className={s.colLg}>
-        <DashboardCard className={s.card}>
+        <DashboardCard className={classNames(s.card, s.cardStats)}>
           <div className={s.cardHeader}>
             <div className={s.infoFlex}>
               <div className={s.infoBlock}>

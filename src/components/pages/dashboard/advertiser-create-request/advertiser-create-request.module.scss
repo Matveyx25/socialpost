@@ -62,6 +62,9 @@
 .card{
 	max-height: fit-content;
 }
+.cardStats{
+	flex-grow: 0;
+}
 
 .cardHeader{
 	display: flex;

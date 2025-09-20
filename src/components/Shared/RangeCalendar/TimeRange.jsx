@@ -60,7 +60,6 @@ export const TimeRange = ({
 				onClick={(e) => e.stopPropagation()}
 				className={s.calendarInput}
 			/>
-      <IconChevronRight size={18} color="#919396" />
     </div>
   );
 };

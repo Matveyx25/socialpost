@@ -9,7 +9,7 @@ import { TimeRange } from '../../../Shared/RangeCalendar/TimeRange';
 import Dropdown from 'react-dropdown';
 import { transformDuration } from '../../../../helpers/transformDuratuin';
 
-export const Filters = ({onFilterSubmit, timeRange, setTimeRange, selectedFormat, durations, setSelectedFormat, dateRange, setDateRange}) => {
+export const Filters = ({onFilterSubmit, timeRange, setTimeRange, selectedFormat, campaignType, durations, setSelectedFormat, dateRange, setDateRange}) => {
 	const [isSended, set_isSended] = useState(false)
 
 	const isMoreThanFiveHoursLeft = () => {
@@ -69,7 +69,7 @@ export const Filters = ({onFilterSubmit, timeRange, setTimeRange, selectedFormat
 							className={s.input}
 						/>
 					</div>
-					{durations?.length > 0 && <div className={s.dropdownWrapper}>
+					{(durations?.length > 0 && campaignType !== 'NATIVE_POST') && <div className={s.dropdownWrapper}>
 							<span className={s.label}>
 								Формат размещения
 							</span>

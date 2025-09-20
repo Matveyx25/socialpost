@@ -178,19 +178,18 @@ export const Reports = () => {
 						</thead>
 						<tbody>
 								{requests?.data?.map(el => {
-									const maxLength = 60
-									const replacedText = el?.postText?.replaceAll('<br/>', ' ').replace(/<[^>]*>?/gm, '').replaceAll('*', '')
-									const splicedText = replacedText?.slice(0, maxLength).concat(replacedText?.length > maxLength ? '...' : '')
-
 									return (
 										<tr onClick={() => navigate('./' + el.id)}>
 											<td>
-												<div className={s.preview}>
-													{el?.postUpload?.length > 0 ? <div className={s.img}>
-														<img src={el?.postUpload[0]?.thumbnailUrl} alt="" />
-													</div> : ''}
-													<p>{splicedText}</p>
-												</div>
+												<NavLink onClick={(e) => {
+													e.preventDefault()
+													e.stopPropagation()
+													setModal("post-modal", {postId: el.postId})}
+												} className={classNames(s.preview, s.link)}>
+													<div className={s.img}>
+														<img src={el?.postUpload?.length > 0 ? el?.postUpload[0]?.thumbnailUrl : "/images/illustration/plug-attachments.png"} alt="" />
+													</div>
+												</NavLink>
 											</td>
 											<td>
 												<div className={s.center}>

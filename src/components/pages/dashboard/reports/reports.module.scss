@@ -94,7 +94,7 @@
 				white-space: nowrap;
 			}
 			&:nth-child(1){
-				width: calc(300/1563 * 100%);
+				width: 8rem;
 			}
 			&:nth-child(2){
 				width: calc(220/1563 * 100%);
@@ -161,7 +161,7 @@
 				overflow-x: hidden;
 				text-overflow: ellipsis;
 				&:nth-child(1){
-					width: calc(300/1563 * 100%);
+					width: 8rem;
 				}
 				&:nth-child(2){
 					width: calc(220/1563 * 100%);
