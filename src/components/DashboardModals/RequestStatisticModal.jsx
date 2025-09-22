@@ -30,6 +30,14 @@ export const RequestStatisticModal = ({ isOpen, setOpen, modalParams }) => {
 							{stat?.channelName}
 						</span>
 					</div>
+					<div className={s.statisticFlex}>
+						<span className={s.statisticLabel}>
+							Кол-во показов
+						</span>
+						<span className={s.statisticValue}>
+							{+stat?.viewsCount}
+						</span>
+					</div>
 				</div>
 			</div>
     </Modal>
