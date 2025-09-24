@@ -15,8 +15,6 @@ export const Report = () => {
 	const {requestId} = useParams()
 	const [setModal] = useOutletContext()
 	const {data: request} = usePublishersRequestById(requestId)
-	const {mutate: accept} = usePublisherAcceptRequest()
-
 
   function formatDate(input) {
     if (!input) {
@@ -54,7 +52,7 @@ export const Report = () => {
 						Информация
 						{request?.status === 'PENDING' ? <div className={s.btns}>
 							<Button label={'Отклонить'} theme='secondary' size='small' onClick={() => setModal('remove-report', {requestId})}/> 
-							<Button label={'Подтвердить'} size='small' onClick={() => accept(requestId)}/> 
+							<Button label={'Подтвердить'} size='small' onClick={() => setModal('request-approve-modal', {requestId})}/> 
 						</div> : ''}
 					</div>
 					<div className={s.line}></div>

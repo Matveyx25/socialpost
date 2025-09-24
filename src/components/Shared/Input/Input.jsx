@@ -8,6 +8,7 @@ import ReactInputMask from 'react-input-mask'
 export const Input = ({type = 'text', className, rightIcon, leftIcon, label, placeholder, value, onChange, error, disabled, required, withInfo}) => {
 	const [localType, set_localType] = useState(type)
 	
+	
 	return (
 		<div className={`${className} ${s.inputGroup} ${error && s.error} ${disabled && s.disabled}`}>
 			<div className={s.header}>

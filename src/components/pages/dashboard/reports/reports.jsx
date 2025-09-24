@@ -15,6 +15,7 @@ import { useRequestsStats } from '../../../../hooks/useRequestsStats'
 import { formatToISO } from '../../../../helpers/formatToISO'
 import { transformDuration } from '../../../../helpers/transformDuratuin'
 import classNames from 'classnames'
+import { format } from 'date-fns'
 
 export const Reports = () => {
 	const [selectedChannel, setSelectedChannel] = useState(null)
@@ -81,20 +82,10 @@ export const Reports = () => {
 
 
   function formatDate(input) {
-    if (!input) {
-      return "-";
-    }
-    const date = new Date(input);
-
-    return date.toLocaleTimeString("ru-RU", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false,
-    });
+    return !input ? "-" : format(new Date(input), 'dd.MM.yyyy, HH:mm');
   }
+
+
 
 
 	return (
@@ -207,12 +198,12 @@ export const Reports = () => {
 												</div>
 											</td>
 											<td>
-												<div className={classNames(s.center, s.ellipsised)}>
-													{formatDate(el.publishTime)}
+												<div className={classNames(s.center)}>
+													{el?.publishTime ? formatDate(el.publishTime) : `${format(el.publishStartDate, 'dd.MM')}, ${el.publishStartTime.split(':')[0]}:${el.publishStartTime.split(':')[1]} - ${format(el.publishEndDate, 'dd.MM')}, ${el.publishEndTime.split(':')[0]}:${el.publishEndTime.split(':')[1]}`}
 												</div>
 											</td>
 											<td>
-												<div className={classNames(s.center, s.ellipsised)}>
+												<div className={classNames(s.center)}>
 													{formatDate(el.completionTime)}
 												</div>
 											</td>

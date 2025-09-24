@@ -21,6 +21,7 @@ import { EditClientContractModal } from './EditClientContractModal'
 import { EditClientModal } from './EditClientModal'
 import { RequestStatisticModal } from './RequestStatisticModal'
 import { PostModal } from './PostModal'
+import { RequestApproveModal } from './RequestAproveModal'
 
 export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) => {
 	useEffect(() => {
@@ -53,6 +54,7 @@ export const DashboardModals = ({isOpen, setOpen, setModalParams, modalParams}) 
 			<AddClientContractModal {...{isOpen, setOpen, modalParams}}/>
 			<RequestStatisticModal {...{isOpen, setOpen, modalParams}}/>
 			<PostModal {...{isOpen, setOpen, modalParams}}/>
+			<RequestApproveModal {...{isOpen, setOpen, modalParams}}/>
 		</div>
 	)
 }

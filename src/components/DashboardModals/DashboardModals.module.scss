@@ -205,6 +205,9 @@
 	align-items: flex-start;
 	justify-content: center;
 	gap: 1rem;
+	.timeInput{
+		margin-top: 0 !important;
+	}
 	&.wide{
 		width: fit-content;
 	}
@@ -342,6 +345,7 @@
 		padding-right: 0;
 	}
 }
+
 .postContent{
 	width: 100%;
 	max-width: 28.4375rem;

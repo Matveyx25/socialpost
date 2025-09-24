@@ -221,8 +221,8 @@ export const publisher = {
 	declineRequest(data){
 		return instance.post(`/campaigns/posts/requests/${data.id}/decline`, data.data + '', { headers: { "Content-Type": "text/plain" }})
 	},
-	acceptRequest(id){
-		return instance.post(`/campaigns/posts/requests/${id}/accept`)
+	acceptRequest(data){
+		return instance.post(`/campaigns/posts/requests/${data.id}/accept`, {publishTime: data?.publishTime})
 	},
 	publishCPM(data){
 		return instance.post(`/campaigns/posts/cpm/${data.id}/publish`, null, {params: {channel_id: data.channel_id}})
