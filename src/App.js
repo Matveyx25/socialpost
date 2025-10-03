@@ -40,6 +40,7 @@ import { AdvertiserCreateRequest } from "./components/pages/dashboard/advertiser
 import { FixedCPM } from "./components/pages/dashboard/fixed-cpm/fixed-cpm";
 import { PostByPublisher } from "./components/pages/dashboard/post-by-publisher/post-by-publisher";
 import { AdvertiserClient } from './components/pages/dashboard/advertiser-client/advertiser-client';
+import { Agreement } from "./components/pages/agreement/agreement";
 
 function App() {
 	const [role, setRole] = useState('publisher')
@@ -109,6 +110,7 @@ function App() {
 							<Route path="/confirm-email/:token" element={<ConfirmEmail/>}/>
 							<Route path="/restore-password/:token" element={<RestorePassword/>}/>
 							<Route path="/policy" element={<Policy/>}/>
+							<Route path="/agreement" element={<Agreement/>}/>
 							<Route path="/contact" element={<Contacts/>}/>
 							<Route path="/channels-catalog" element={<ChannelsCatalog/>}/>
 							{/* <Route path="/channel/:channelId" element={<Channel/>}/> */}

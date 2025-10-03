@@ -1,0 +1,67 @@
+.wrapper {
+		margin-top: 5.5rem;
+		margin-bottom: 5.5rem;
+		max-width: 800px;
+		margin-left: auto;
+		margin-right: auto;
+		padding: 0 2rem;
+}
+
+.wrapper h1 {
+		margin-bottom: 3rem;
+		font-size: 2.4rem;
+		text-align: center;
+		font-weight: bold;
+}
+
+.wrapper h2 {
+		margin-bottom: 3rem;
+		margin-top: 4rem;
+		font-size: 2.4rem;
+}
+
+.wrapper p + p {
+		margin-top: 2.3rem;
+}
+
+.wrapper .documentHeader {
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: 3rem;
+}
+
+.wrapper .documentHeader .left {
+		text-align: left;
+}
+
+.wrapper .documentHeader .right {
+		text-align: right;
+}
+
+.wrapper .documentContent {
+		line-height: 1.6;
+		font-size: 1.1rem;
+}
+
+.wrapper .documentContent p {
+		margin-bottom: 1.5rem;
+		text-align: justify;
+}
+
+.wrapper .documentContent .underline {
+		border-bottom: 1px solid #000;
+		display: inline-block;
+		min-width: 200px;
+		text-align: center;
+}
+
+.wrapper .documentContent .blank {
+		display: inline-block;
+		min-width: 300px;
+		border-bottom: 1px solid #000;
+		margin: 0 5px;
+}
+
+.wrapper strong {
+		font-weight: bold;
+}

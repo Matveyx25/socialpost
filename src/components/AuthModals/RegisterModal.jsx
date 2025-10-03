@@ -7,9 +7,10 @@ import { Button } from "../Shared/Button/Button";
 import { auth } from "../../api/api";
 import TelegramLoginButton from "telegram-login-button";
 import * as Yup from "yup";
-import { Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { Select } from '../Shared/Select/Select';
 import classNames from "classnames";
+import { IconSquare, IconSquareCheckFilled } from "@tabler/icons-react";
 
 export const RegisterModal = ({ isOpen, setOpen }) => {
   const [error, set_error] = useState(null);
@@ -78,6 +79,7 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
     lastName: Yup.string()
       .matches(/^[a-zA-Zа-яА-Я\s]+$/, "Фамилия должна содержать только буквы")
       .notRequired(),
+		policy: Yup.bool().oneOf([true], 'Необходимо выбрать согласие на обработку персональных данных')
   });
 
   return (
@@ -90,7 +92,9 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
           secondPassword: "",
           name: "",
           lastName: "",
-					role: ""
+					role: "",
+					news: false,
+					policy: false,
         }}
         validationSchema={validator}
         onSubmit={(values) => {
@@ -147,6 +151,31 @@ export const RegisterModal = ({ isOpen, setOpen }) => {
                 id="secondPassword"
                 name="secondPassword"
               />
+							 <Field name="policy">
+                {({ field: { value }, form: { setFieldValue } }) => (
+									<div className={s.checkbox}>
+										<input type="checkbox" name="policy" id="policy" checked={value} onChange={(e) => {
+											setFieldValue('policy', e.target.checked)
+											console.log(e.target.checked);
+										}}/>
+										<label htmlFor="policy">
+											<IconSquareCheckFilled className={s.checkboxIcon} />
+											<IconSquare className={s.checkboxIcon} />
+											<p>
+												Даю свою <NavLink to="/agreement">согласие</NavLink> на обработку персональных данных в соответствии с <NavLink to="/policy">Политикой конфиденциальности и обработки персональных данных</NavLink>
+											</p>
+										</label>
+									</div>
+								)}
+							</Field>
+							<div className={s.checkbox}>
+								<input type="checkbox" name="news" id="news" />
+								<label htmlFor="news">
+									<IconSquareCheckFilled className={s.checkboxIcon} />
+									<IconSquare className={s.checkboxIcon} />
+									<p>Даю согласие на получение рекламной и информационной рассылки</p>
+								</label>
+							</div>
               <Button
                 label="Зарегистрироваться"
                 disabled={!dirty || !isValid || !values.role}
