@@ -83,8 +83,8 @@ export const LoginModal = ({ isOpen, setOpen }) => {
 								<div className={s.checkbox}>
 									<input type="checkbox" name="rememberMe" id="rememberMe" />
 									<label htmlFor="rememberMe">
-										<IconSquare className={s.checkboxIcon} />
 										<IconSquareCheckFilled className={s.checkboxIcon} />
+										<IconSquare className={s.checkboxIcon} />
 										Запомнить меня
 									</label>
 								</div>
