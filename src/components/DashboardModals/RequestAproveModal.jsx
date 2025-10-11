@@ -14,14 +14,29 @@ export const RequestApproveModal = ({ isOpen, setOpen, modalParams }) => {
 	const {data: request} = usePublishersRequestById(modalParams?.requestId)
 	const {mutate: accept} = usePublisherAcceptRequest()
 
+	function isTimeInRange(time, min, max) {
+		if (!time) return true; // пустое значение не валидируем
+
+		const toSeconds = (t) => {
+			const [h, m = 0, s = 0] = t.split(":").map(Number);
+			return h * 3600 + m * 60 + s;
+		};
+
+		const t = toSeconds(time);
+		const tMin = min ? toSeconds(min) : 0;
+		const tMax = max ? toSeconds(max) : 86399;
+
+		return t >= tMin && t <= tMax;
+	}
+
 	const validator = Yup.object().shape({
 		time: Yup.string().required('Обязательное поле')
 		.test('max-min-time',  `Время должно быть в промежутке ${request?.publishStartTime} - ${request?.publishEndTime}`, (value) => {
       const minTime = request?.publishStartTime
 			const maxTime = request?.publishEndTime
 
-			if(value && (value > maxTime || value > minTime)){
-				return false
+			if(value){
+				return isTimeInRange(value, minTime, maxTime)
       }
 
       return true
@@ -43,7 +58,7 @@ export const RequestApproveModal = ({ isOpen, setOpen, modalParams }) => {
 							}}
 							validationSchema={validator}
 							onSubmit={(values) => {
-								const res = `${(new Date(values.date)).toISOString().split('T')[0]}T${values.time}.000Z`;
+								const res = `${(new Date(values.date)).toISOString().split('T')[0]}T${values.time}.000`;
 								accept({id: modalParams?.requestId, publishTime: res})
 								setOpen()
 							}}
@@ -76,6 +91,7 @@ export const RequestApproveModal = ({ isOpen, setOpen, modalParams }) => {
 										 (
 											<TimeInput 
 												setTime={(v) =>{
+													console.log(v);	
 													setFieldValue("time", v)
 												}}
 												inputsWrapperClassName={s.timeInput}

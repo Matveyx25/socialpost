@@ -64,6 +64,11 @@
 		border-color: $main-red-color;
 	}
 }
+.timeInputComponent{
+	border: none;
+	padding: 0;
+	font-size: 0.75rem;
+}
 .error{
 	margin-top: 4px;
 	color: $main-red-color;

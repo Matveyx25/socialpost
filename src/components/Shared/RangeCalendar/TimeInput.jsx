@@ -6,6 +6,7 @@ import {
 } from "@tabler/icons-react";
 import classNames from "classnames";
 import { useField } from "formik";
+import TimeInputComponent from '../TimeInput/index';
 
 export const TimeInput = ({
   time,
@@ -27,15 +28,7 @@ export const TimeInput = ({
 				)}
 			>
 				<IconClockUp size={20} color="#919396" />
-				<input
-					type="time"
-					value={time}
-					onChange={(e) => {
-						setTime(e.target.value)
-					}}
-					onClick={(e) => e.stopPropagation()}
-					className={s.calendarInput}
-				/>
+				<TimeInputComponent value={time} onChange={setTime} withSeconds={false} className={s.timeInputComponent}/>
 			</div>
 			{(meta.touched && meta.error) && <span className={s.error}>{meta.error[name]}</span>}
 		</>
