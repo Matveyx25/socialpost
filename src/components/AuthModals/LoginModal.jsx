@@ -104,7 +104,7 @@ export const LoginModal = ({ isOpen, setOpen }) => {
                   className={s.tgBtnWrapper}
                 />
               </div>
-              <div className={s.footer}>
+              {/* <div className={s.footer}>
                 <p>
                   Ещё нет аккаунта?
                   <NavLink onClick={() => setOpen("register")}>
@@ -112,7 +112,7 @@ export const LoginModal = ({ isOpen, setOpen }) => {
                     Зарегистрироваться
                   </NavLink>
                 </p>
-              </div>
+              </div> */}
             </div>
           </Form>
         )}
