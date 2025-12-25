@@ -9,7 +9,9 @@ RUN npm install
 FROM install AS builder
 
 ARG API_URL
+ARG TG_BOT_NAME
 ENV REACT_APP_API_URL=$API_URL
+ENV REACT_APP_TG_BOT_NAME=$TG_BOT_NAME
 
 COPY ./public ./public
 COPY ./src ./src
