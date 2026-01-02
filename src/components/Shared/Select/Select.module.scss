@@ -1,5 +1,8 @@
 @import '~/src/styles/variables.scss';
 
+.input{
+	width: 100%;
+}
 .selectGroup{
 	display: flex;
 	flex-direction: column;

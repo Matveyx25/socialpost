@@ -127,6 +127,7 @@ export const Entity = () => {
 												setSelectedOption={(v) =>
 													setFieldValue("taxSystem", v.value)
 												}
+												disabledValue={value ? tax.find((e) => e.value === value)?.label : null}
 												className={s.select}
 												disabled={LegalEntity?.status && LegalEntity?.status !== 'DECLINES'}
 											/>

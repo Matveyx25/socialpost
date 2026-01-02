@@ -122,6 +122,7 @@ export const IndividualEntrepreneur = () => {
 												defaultValue={
 													value ? tax.find((e) => e.value === value) : null
 												}
+												disabledValue={value ? tax.find((e) => e.value === value)?.label : null}
 												setSelectedOption={(v) =>
 													setFieldValue("taxSystem", v.value)
 												}

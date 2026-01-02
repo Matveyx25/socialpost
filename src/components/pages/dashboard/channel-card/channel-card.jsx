@@ -31,7 +31,7 @@ export const ChannelCard = ({channel}) => {
 					</h2>
 					<p dangerouslySetInnerHTML={{__html: channel?.description}}></p>
 				</div>
-				{channel?.status === 'CONFIRMED' && <>
+				{(channel?.status === 'CONFIRMED' && channel?.isOrdConfirmed) && <>
 						<Button className={s.editBtn} label={'Редактировать'} leftIcon={<IconEdit />} theme='secondary' onClick={() => setModal('edit-channel', {channelId: channel?.id})}/>
 						<Button className={s.removeBtn} label={<IconTrash color='#F78F8F'/>} theme='secondary' onClick={() => setModal('remove-channel', {channelId: channel?.id})}/>
 					</>}
