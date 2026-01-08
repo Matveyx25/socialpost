@@ -49,9 +49,10 @@ export const ChannelCard = ({channel}) => {
 					<span>ER</span>
 					<p>{priceSeparator(channel?.engagementRate)}%</p>
 				</div> : null}
-				{channel?.costPerView ? <div>
+				{/* { ? <p>-</p> :  <p>{(Math.min(...formats?.map(item => item?.price))/averagePostReach).toFixed(2)}₽</p>} */}
+				{(channel?.prices?.length > 0 && channel?.averagePostReach) ? <div>
 					<span>CPV</span>
-					<p>{priceSeparator(channel?.costPerView)}</p>
+					<p>{priceSeparator((Math.min(...channel?.prices?.map(item => item?.price))/channel?.averagePostReach).toFixed(2))}₽</p>
 				</div> : null}
 				{typeof +channel?.nativePostPrice === 'number' && <div>
 					<span>Нативное размещение</span>

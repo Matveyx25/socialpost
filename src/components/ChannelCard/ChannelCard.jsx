@@ -133,7 +133,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
           <span>Средний охват поста</span>
 					{!averagePostReach ? <p>-</p> :  <p>{(averagePostReach + "")
 						?.replace(/\s/g, "")
-						?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}₽</p>}
+						?.replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, "$1,")}</p>}
         </div>
         <div>
           <span>ER</span>
@@ -141,7 +141,7 @@ export const ChannelCard = ({ key, updateCart, cart, channel, formats }) => {
         </div>
         <div>
           <span>CPV</span>
-          {!costPerView ? <p>-</p> :  <p>{costPerView}₽</p>}
+          {(formats?.length <= 0 || !averagePostReach) ? <p>-</p> :  <p>{(Math.min(...formats?.map(item => item?.price))/averagePostReach).toFixed(2)}₽</p>}
         </div>
       </div>
     </div>
