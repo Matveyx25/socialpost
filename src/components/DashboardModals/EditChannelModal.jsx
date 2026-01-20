@@ -47,7 +47,6 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
               typeof channel?.nativePostPrice === "number"
                 ? channel?.nativePostPrice
                 : "",
-            nativePostPriceEnabled: channel?.nativePostPriceEnabled,
             ...(channel?.prices?.reduce((acc, el) => {
               acc[`price${el.duration.id}`] = el?.price;
               return acc;
@@ -55,7 +54,7 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
           }}
           validationSchema={validator}
 					validate={(values) => {
-							const { nativePostPrice, nativePostPriceEnabled, ...rest } = values;
+							const { nativePostPrice, ...rest } = values;
 							
 							const filledFieldsCount = Object.values(rest).filter(
 								value => value !== "" && value !== undefined && value !== null
@@ -85,8 +84,8 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
                   typeof +values.nativePostPrice === "number"
                     ? +values.nativePostPrice
                     : 0,
-                nativePostPriceEnabled: values.nativePostPriceEnabled,
-                prices, // Добавляем массив prices
+                nativePostPriceEnabled: true,
+                prices,
               },
               id: modalParams?.channelId,
             });
@@ -102,10 +101,6 @@ export const EditChannelModal = ({ isOpen, setOpen, modalParams }) => {
                     label={
                       <div className={s.inputFlexHeader}>
                         Нативное размещение
-                        <Checkbox
-                          name={"nativePostPriceEnabled"}
-                          label={"Показывать"}
-                        />
                       </div>
                     }
                     id="nativePostPrice"

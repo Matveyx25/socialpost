@@ -83,6 +83,8 @@ export const ChannelsCatalog = () => {
       cost_per_view_max: f?.maxCPV,
       price_min: f?.minPrice,
       price_max: f?.maxPrice,
+			tags: f?.selectedTypes,
+			duration_id: f?.selectedDurations
     });
     refetch();
   };
