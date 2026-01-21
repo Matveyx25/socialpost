@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import s from './Filters.module.scss'
 import { RangeInputs } from './RangeInputs';
 import { Button } from '../Shared/Button/Button';
@@ -80,6 +80,12 @@ export const Filters = ({onFilterSubmit, maxSubscribersNumber}) => {
 	const [selectedDurations, set_selectedDurations] = useState([])
 	const {data: tags} = useAllChannelsTags()
 	const {data: durations} = useAllDurations()
+
+	useEffect(() => {
+		if(maxSubscribersNumber){
+			set_maxSubscribers(maxSubscribersNumber)
+		}
+	}, [maxSubscribersNumber])
 
 	const reset = () => {
 		set_minSubscribers(0)

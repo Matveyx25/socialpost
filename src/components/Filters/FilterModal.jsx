@@ -1,6 +1,6 @@
 import { Modal } from "../Shared/Modal/Modal";
 import s from './Filters.module.scss'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from '../Shared/Button/Button';
 import { RangeSlider } from "./RangeSlider";
 import { RangeInputs } from "./RangeInputs";
@@ -20,6 +20,12 @@ export const FilterModal = ({isOpen, setOpen, onFilterSubmit, maxSubscribersNumb
 
 	const [isSended, set_isSended] = useState(false)
 	const [selectedTypes, set_selectedTypes] = useState([])
+
+	useEffect(() => {
+		if(maxSubscribersNumber){
+			set_maxSubscribers(maxSubscribersNumber)
+		}
+	}, [maxSubscribersNumber])
 
 	const reset = () => {
 		set_minSubscribers(0)
