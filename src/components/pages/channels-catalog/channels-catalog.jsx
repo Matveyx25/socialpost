@@ -112,7 +112,7 @@ export const ChannelsCatalog = () => {
           {isMobile || (
             <Filters
               onFilterSubmit={onFilterSubmit}
-              maxSubscribersNumber={100000}
+              maxSubscribersNumber={channels?.headers?.["x-subscribers-max"]}
             />
           )}
           <div className={s.content}>
