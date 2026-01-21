@@ -91,14 +91,14 @@ export const ChannelsCatalog = () => {
 
   return (
     <div className={s.wrapper}>
-      {isMobile && (
+      {isFetched ? isMobile && (
         <FilterModal
           isOpen={modalIsOpen}
           setOpen={setModalIsOpen}
           onFilterSubmit={onFilterSubmit}
-          maxSubscribersNumber={100000}
+          maxSubscribersNumber={channels?.headers?.["x-subscribers-max"]}
         />
-      )}
+      ) : ''}
       <div className="container">
         <h2 className={s.title}>Каталог каналов</h2>
         <p className={s.subtitle}>
@@ -109,12 +109,11 @@ export const ChannelsCatalog = () => {
           каналов
         </p>
         <div className={s.flex}>
-          {isMobile || (
+         {isFetched ? (isMobile || 
             <Filters
               onFilterSubmit={onFilterSubmit}
               maxSubscribersNumber={channels?.headers?.["x-subscribers-max"]}
-            />
-          )}
+            />) : ''}
           <div className={s.content}>
             <div className={s.header}>
               {isMobile && (
