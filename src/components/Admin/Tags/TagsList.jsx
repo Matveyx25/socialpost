@@ -1,4 +1,5 @@
-import { ChipField, FunctionField, Show, Labeled, List } from "react-admin";
+import { Card } from "@mui/material";
+import { ChipField, FunctionField, Show, Labeled, List, ListBase, Title, Loading } from "react-admin";
 
 
 const renderTags = (record) => {
@@ -14,9 +15,18 @@ const renderTags = (record) => {
 };
 
 export const TagsShow = (props) => (
-  <List {...props} exporter={false}>
-		<Labeled>
-    	<FunctionField label="Теги" source="." render={renderTags}/>
-		</Labeled>
-  </List>
+  // <List {...props} exporter={false}>
+	// 	<Labeled>
+  //   	<FunctionField label="Теги" source="." render={renderTags}/>
+	// 	</Labeled>
+  // </List>
+	 <ListBase {...props} render={({ data, total, isPending }) => (
+        <Card>
+            <Title title="Теги" />
+						{isPending ? <Loading/> : 
+							data?.map(((tag,index) => (
+							<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < total - 1 ? 1 : 0, marginBottom: 1  }}/>
+						)))}
+        </Card>
+    )} />
 );
