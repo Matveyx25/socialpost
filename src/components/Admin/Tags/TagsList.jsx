@@ -1,4 +1,4 @@
-import { ChipField, FunctionField, Show, Labeled } from "react-admin";
+import { ChipField, FunctionField, Show, Labeled, List } from "react-admin";
 
 
 const renderTags = (record) => {
@@ -14,9 +14,9 @@ const renderTags = (record) => {
 };
 
 export const TagsShow = (props) => (
-  <Show {...props} exporter={false}>
+  <List {...props} exporter={false}>
 		<Labeled>
     	<FunctionField label="Теги" source="." render={renderTags}/>
 		</Labeled>
-  </Show>
+  </List>
 );
