@@ -19,6 +19,7 @@ import {
     IconDeviceMobileMessage,
 		IconBell,
 		IconClock,
+		IconTag,
 } from "@tabler/icons-react";
 import { DocumentsList } from "./Documents/DocumentsList";
 import { DocumentsShow } from "./Documents/DocumentsShow";
@@ -35,6 +36,7 @@ import { AdvertiserPostsTabs } from './AdvertiserPosts/AdvertiserPostsTabs';
 import { DurationsList } from "./Durations/DurationsList";
 import { DurationEdit } from './Durations/DurationEdit';
 import { DurationCreate } from './Durations/DurationCreate';
+import { TagsShow } from "./Tags/TagsList";
 
 const fetchJson = (url, options = {}) => {
 	options.user = {
@@ -87,6 +89,7 @@ const AdminPanel = () => (
   <Admin dataProvider={dataProvider} basename="/admin" layout={MyLayout}>
 		<Resource name="users" list={UserList} edit={UserTabs} options={{ label: 'Пользователи' }} icon={IconUser}/>
     <Resource name="channels" list={ChannelsList} edit={ChannelEdit} options={{ label: 'Каналы' }} icon={IconSpeakerphone}/>
+    <Resource name="channels/tags" list={TagsShow} options={{ label: 'Каналы' }} icon={IconTag}/>
     <Resource name="balance_operations" list={OperationsList} create={OperationCreate} edit={OperationEdit} options={{ label: 'Финансовые операции' }} icon={IconMoneybag}/>
     <Resource name="users/agreements" list={DocumentsList} show={DocumentsShow} options={{ label: 'Договоры' }} icon={IconFileDots}/>
     <Resource name="campaigns" list={CampaignsList} edit={CampaignsEdit} options={{ label: 'Рекламные кампании' }} icon={IconBadgeAd}/>
