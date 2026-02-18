@@ -15,11 +15,11 @@ const renderTags = (record) => {
 };
 
 export const TagsShow = (props) => (
-  <List {...props} exporter={false}>
-		{/* <Labeled> */}
-    	{/* <FunctionField label="Теги" source="." render={renderTags}/> */}
-		{/* </Labeled> */}
-		<ListBase  render={({ data, total, isPending }) => console.log(data, total, isPending) || (
+  // <List {...props} exporter={false}>
+		// <Labeled>
+    	// <FunctionField label="Теги" source="." render={renderTags}/>
+		// </Labeled>
+		<ListBase render={({ data, total, isPending }) => console.log(data, total, isPending) || (
 			<Card>
 							<Title title="Теги" />
 							{isPending ? <Loading/> : 
@@ -28,5 +28,5 @@ export const TagsShow = (props) => (
 								)))}
 					</Card>
 			)} />
-	 </List>
+	//  </List>
 );
