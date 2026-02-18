@@ -29,11 +29,15 @@ const CardWithChips = () => {
   
   if (isLoading) return <div>Loading...</div>;
   
-  return (
-    <Stack spacing={2} sx={{ p: 2 }}>
-      {data.map((record, index) => (
-        <Chip label={record} variant="outlined"  sx={{ marginRight: index < total - 1 ? 1 : 0, marginBottom: 1  }}/>
-      ))}
-    </Stack>
-  );
+  return <div style={{
+		display: "flex",
+		flexDirection: "row",
+		flexWrap: "wrap",
+		gap: 8,
+		padding: 20
+	}}>
+		{data?.map((record, index) => (
+				<Chip label={record} variant="outlined" style={{maxWidth: 'fit-content'}}/>
+			))};
+	</div>
 };
