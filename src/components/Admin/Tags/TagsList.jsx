@@ -19,7 +19,7 @@ export const TagsShow = (props) => (
 		{/* <Labeled> */}
     	{/* <FunctionField label="Теги" source="." render={renderTags}/> */}
 		{/* </Labeled> */}
-		<ListBase {...props} render={({ data, total, isPending }) => (
+		<ListBase  render={({ data, total, isPending }) => console.log(data, total, isPending) || (
 			<Card>
 							<Title title="Теги" />
 							{isPending ? <Loading/> : 
