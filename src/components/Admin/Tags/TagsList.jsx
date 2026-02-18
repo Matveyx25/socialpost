@@ -1,5 +1,5 @@
-import { Card } from "@mui/material";
-import { ChipField, FunctionField, Show, Labeled, List, ListBase, Title, Loading } from "react-admin";
+import { Card, CardContent, Chip, Stack, Typography } from "@mui/material";
+import { ChipField, FunctionField, Show, Labeled, List, ListBase, Title, Loading, useListContext } from "react-admin";
 
 
 const renderTags = (record) => {
@@ -15,18 +15,25 @@ const renderTags = (record) => {
 };
 
 export const TagsShow = (props) => (
-  // <List {...props} exporter={false}>
-		// <Labeled>
-    	// <FunctionField label="Теги" source="." render={renderTags}/>
-		// </Labeled>
-		<ListBase render={({ data, total, isPending }) => console.log(data, total, isPending) || (
-			<Card>
-							<Title title="Теги" />
-							{isPending ? <Loading/> : 
-								data?.map(((tag,index) => (
-									<ChipField key={index} record={{tag}} source="tag" sx={{ marginRight: index < total - 1 ? 1 : 0, marginBottom: 1  }}/>
-								)))}
-					</Card>
-			)} />
-	//  </List>
+  <List {...props} exporter={false}>
+			{/* <Labeled>
+			 <FunctionField label="Теги" source="." render={renderTags}/>
+			</Labeled> */}
+			<CardWithChips/>
+	 </List>
 );
+
+
+const CardWithChips = () => {
+  const { data, isLoading, total } = useListContext();
+  
+  if (isLoading) return <div>Loading...</div>;
+  
+  return (
+    <Stack spacing={2} sx={{ p: 2 }}>
+      {data.map((record, index) => (
+        <Chip label={record} variant="outlined"  sx={{ marginRight: index < total - 1 ? 1 : 0, marginBottom: 1  }}/>
+      ))}
+    </Stack>
+  );
+};
